@@ -1,0 +1,104 @@
+<div class="channel">
+    <div class="channel__cover" ng-style="{'background-image': 'url(' + currentUser.cover + ')'}">
+        <img class="channel__ava" ng-src="{{ currentUser.avatar }}" alt="avatar"/>
+    </div>
+</div>
+
+<!-- content -->
+<div class="content" autoscroll='true'>
+    <div class="row">
+
+
+        <!-- exclusive page header -->
+        <div class="block block--header">
+            <div class="col-xs-12">
+                <div class="channel__head">
+                    <div class="clearfix">
+                        <h2 class="block__title">{{ content.name }}</h2>
+                    </div>
+                    <p class="block__subtitle">{{ content.description }}
+                        <a class="toggler" ng-click="descActive = !descActive" ng-class="{'active':descActive}">
+                            <span class="toggler__text">Читать далее</span>
+                            <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                        </a>
+                    </p>
+                    <div class="toggler__block">
+                        <div class="toggler__content" ng-class="{'active':descActive}">
+                            <p class="block__subtitle">2nd part of description here - {{ content.description }}2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="tabs">
+                        <a ui-sref="history.viewed" ui-sref-active="active">Просмотренные</a>
+                        <a ui-sref="history.liked" ui-sref-active="active">Понравившиеся</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="block__hr">
+        </div>
+
+        <!-- slider block -->
+        <div class="block block--white">
+            <div class="col-xs-12">
+                <h2 class="block__title block__title--left">Новые видео</h2>
+                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
+            </div>
+            <!-- slider visible desktop only -->
+            <slider info='videos' type="videos" class="hidden-phone hidden-tablet"></slider>
+            <!-- slider replaced by simple block on mob and tablet -->
+            <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in videos | limitTo: 3">
+                <div class="thumb row">
+                    <div class="col-xs-7 col-sm-12">
+                        <a ui-sref="video({ url: videos[$index].url })">
+                            <div class="thumb__img">
+                                <span class="thumb__length">{{ video.length }}</span>
+                                <img ng-src="{{ video.img }}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-5 col-sm-12">
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__info hidden-phone">
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- slider block -->
+        <div class="block block--white">
+            <div class="col-xs-12">
+                <h2 class="block__title block__title--left">Популярные видео</h2>
+                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
+            </div>
+            <!-- slider visible desktop only -->
+            <slider info='videos' type="videos" class="hidden-phone hidden-tablet"></slider>
+            <!-- slider replaced by simple block on mob and tablet -->
+            <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in videos | limitTo: 3">
+                <div class="thumb row">
+                    <div class="col-xs-7 col-sm-12">
+                        <a ui-sref="video({ url: videos[$index].url })">
+                            <div class="thumb__img">
+                                <span class="thumb__length">{{ video.length }}</span>
+                                <img ng-src="{{ video.img }}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-5 col-sm-12">
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__info hidden-phone">
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,319 @@
+<div class="content" autoscroll='true'>
+    <div class="row">
+
+        <!-- big 2 block -->
+        <div class="block block--white block--big">
+            <div class="col-xs-12">
+                <h2 class="block__title">Сейчас смотрят</h2>
+            </div>
+            <div class="col-xs-12 col-sm-6" ng-repeat="video in videos | limitTo: 2">
+                <div class="thumb thumb--big" ng-class="{'thumb--exclusive': video.exclusive > 0}">
+                    <a ui-sref="video({ url: video.url })">
+                        <div class="thumb__img thumb__img--shadow">
+                            <span class="thumb__length">{{ video.length }}</span>
+                            <img ng-src="{{ video.img }}" alt="" />
+                            <span class="thumb__exclusive">Эксклюзивное видео</span>
+                        </div>
+                    </a>
+                    <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                    <p class="thumb__user"><a ui-sref="user({ url: video.userUrl })">{{ video.user }}</a></p>
+                    <p class="thumb__info">
+                        <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                        <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- slider block -->
+        <div class="block block--white">
+            <div class="col-xs-12">
+                <h2 class="block__title block__title--left">Новые видео</h2>
+                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
+            </div>
+            <!-- slider visible desktop only -->
+            <slider info='videos' type="videos" class="hidden-phone hidden-tablet"></slider>
+            <!-- slider replaced by simple block on mob and tablet -->
+            <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in videos | limitTo: 3">
+                <div class="thumb row">
+                    <div class="col-xs-7 col-sm-12">
+                        <a ui-sref="video({ url: videos[$index].url })">
+                            <div class="thumb__img">
+                                <span class="thumb__length">{{ video.length }}</span>
+                                <img ng-src="{{ video.img }}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-5 col-sm-12">
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__info hidden-phone">
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- slider block -->
+        <div class="block block--white">
+            <div class="col-xs-12">
+                <h2 class="block__title block__title--left">Популярные видео</h2>
+                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
+            </div>
+            <!-- slider visible desktop only -->
+            <slider info='videos' type="videos" class="hidden-phone hidden-tablet"></slider>
+            <!-- slider replaced by simple block on mob and tablet -->
+            <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in videos | limitTo: 3">
+                <div class="thumb row">
+                    <div class="col-xs-7 col-sm-12">
+                        <a ui-sref="video({ url: videos[$index].url })">
+                            <div class="thumb__img">
+                                <span class="thumb__length">{{ video.length }}</span>
+                                <img ng-src="{{ video.img }}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-5 col-sm-12">
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__info hidden-phone">
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- big picture block -->
+        <div class="block block--white block--big">
+            <div class="col-xs-12">
+                <h2 class="block__title">Custom block</h2>
+            </div>
+            <div class="col-xs-12 col-md-8" ng-repeat="video in videos | limitTo: 1">
+                <div class="thumb thumb--big thumb--onepic">
+                    <a ui-sref="video({ url: videos[$index].url })">
+                        <div class="thumb__img thumb__img--shadow">
+                            <span class="thumb__length">{{ video.length }}</span>
+                            <img ng-src="{{ video.img }}" alt="" />
+                        </div>
+                    </a>
+                    <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                    <div class="clearfix">
+                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__info">
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-12" ng-repeat="video in videos | limitTo: 5 | startFrom : 1" ng-class="{'hidden-phone hidden-tablet':$last}">
+                        <div class="thumb row">
+                            <div class="col-xs-7 col-sm-12 col-md-6">
+                                <a ui-sref="video({ url: videos[$index].url })">
+                                    <div class="thumb__img thumb__img--shadow">
+                                        <img ng-src="{{ video.img }}" alt="" />
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-xs-5 col-sm-12 col-md-6">
+                                <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                                <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- blog 3 block -->
+        <div class="block block--white block--big">
+            <div class="col-xs-12">
+                <h2 class="block__title block__title--left">Блог</h2>
+                <div class="block__btn"><a href="#" class="btn btn-white">Читать все</a></div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="video in videos | limitTo: 3" ng-class="{'hidden-phone hidden-tablet':$last}">
+                <div class="thumb thumb--medium row">
+                    <div class="col-xs-6 col-sm-12">
+                        <a ui-sref="video({ url: videos[$index].url })">
+                            <div class="thumb__img">
+                                <img ng-src="{{ video.img }}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-sm-12">
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__text"><a href="#">{{ video.text }}</a></p>
+                        <p>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                            <span class="thumb__hasvideo">Содержит Видео</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- exclusive 4 block -->
+        <div class="block block--white">
+            <div class="col-xs-12">
+                <h2 class="block__title block__title--exclusive block__title--left">Эксклюзивные видео</h2>
+                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="video in videos | filter: { exclusive: 1 } | limitTo: 4" ng-class="{'hidden-phone hidden-tablet':$last}">
+                <div class="thumb thumb--exclusive row">
+                    <div class="col-xs-7 col-sm-12">
+                        <a ui-sref="video({ url: videos[$index].url })">
+                            <div class="thumb__img">
+                                <span class="thumb__length">{{ video.length }}</span>
+                                <img ng-src="{{ video.img }}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-5 col-sm-12">
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__info hidden-phone">
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- scroll block -->
+        <div class="block block--white block--big">
+            <div class="col-xs-12">
+                <h2 class="block__title">Custom block 2</h2>
+            </div>
+            <div style="position:relative;">
+                <div class="col-xs-12 col-md-7" ng-repeat="video in videos | limitTo: 1">
+                    <div class="thumb thumb--big thumb--onepic">
+                        <a ui-sref="video({ url: videos[$index].url })">
+                            <div class="thumb__img thumb__img--shadow">
+                                <span class="thumb__length">{{ video.length }}</span>
+                                <img ng-src="{{ video.img }}" alt="" />
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <div class="clearfix">
+                            <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                            <p class="thumb__info">
+                                <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                                <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5 col-scroll hidden-phone hidden-tablet">
+                    <div class="row">
+                        <div class="col-xs-6" ng-repeat="video in videos | limitTo: 13 | startFrom : 1">
+                            <div class="thumb">
+                                <a ui-sref="video({ url: videos[$index].url })">
+                                    <div class="thumb__img thumb__img--shadow">
+                                        <img ng-src="{{ video.img }}" alt="" />
+                                    </div>
+                                </a>
+                                <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                                <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 hidden-desktop" style="padding:0;">
+                    <div class="col-xs-6" ng-repeat="video in videos | limitTo: 5 | startFrom : 1">
+                        <div class="thumb">
+                            <a ui-sref="video({ url: videos[$index].url })">
+                                <div class="thumb__img">
+                                    <img ng-src="{{ video.img }}" alt="" />
+                                </div>
+                            </a>
+                            <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                            <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- popular channels 12 block -->
+        <div class="block block--white">
+            <div class="col-xs-12">
+                <h2 class="block__title block__title--left">Популярные каналы</h2>
+                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
+            </div>
+            <!-- slider visible desktop only -->
+            <slider info='channels' type="channels" class="hidden-phone hidden-tablet"></slider>
+            <!-- slider replaced by simple block on mob and tablet -->
+            <div class="col-xs-6 hidden-desktop" ng-repeat="channel in channels | limitTo: 6">
+                <div class="thumb thumb--chan row">
+                    <div class="col-xs-12 col-sm-5">
+                        <a ui-sref="video({ url: videos[$index].url })">
+                            <div class="thumb__img">
+                                <img ng-src="{{ channel.img }}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="thumb__info">
+                            <p class="thumb__name">{{ channel.name }}</p>
+                            <p class="thumb__subs"><a href="#">{{ channel.subscribers }}</a></p>
+                        </div>
+                        <div class="thumb__btn">
+                            <a href="#" class="btn btn-green btn-small">Подписаться</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- popular goods 6 block -->
+        <div class="block block--white">
+            <div class="col-xs-12">
+                <h2 class="block__title">Популярные товары</h2>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-2" ng-repeat="good in goods | limitTo: 6">
+                <div class="thumb">
+                    <a ui-sref="video({ url: videos[$index].url })">
+                        <div class="thumb__img">
+                            <img ng-src="{{ good.img }}" alt="" />
+                        </div>
+                    </a>
+                    <p class="thumb__price">{{ good.price | currency }}</p>
+                    <p class="thumb__goods-title"><a href="#">{{ good.name }}</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- simple 3 block -->
+        <div class="block block--white block--big">
+            <div class="col-xs-12">
+                <h2 class="block__title">Custom block 3</h2>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="video in videos | limitTo: 3" ng-class="{'hidden-phone hidden-tablet':$last}">
+                <div class="thumb thumb--medium" ng-class="{'thumb--exclusive': video.exclusive > 0}">
+                    <a ui-sref="video({ url: videos[$index].url })">
+                        <div class="thumb__img">
+                            <span class="thumb__length">{{ video.length }}</span>
+                            <img ng-src="{{ video.img }}" alt="" />
+                            <span class="thumb__exclusive">Эксклюзивное видео</span>
+                        </div>
+                    </a>
+                    <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                    <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                    <p class="thumb__info">
+                        <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                        <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

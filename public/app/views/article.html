@@ -1,0 +1,171 @@
+<div class="content" autoscroll='true'>
+    <div class="row">
+
+        <!-- blog article -->
+        <div class="col-xs-12 col-md-8">
+
+            <div class="block block--white block--article">
+                <article class="col-xs-12 article">
+                    <h2 class="thumb__title">{{ content.title }}</h2>
+                    <p>
+                        <div class="article__content">
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(content.date) }}</span></span>
+                            <span class="thumb__hasvideo">Содержит Видео</span>
+                        </div>
+                    </p>
+                    <p class="article__subtitle">
+                        <div class="article__content">
+                            {{ content.text }}
+                        </div>
+                    </p>
+                    <div class="article__grey-bg">
+                        <div class="article__content center-tablet center-phone">
+                            <span class="article__text hidden-phone">Поделится в соцсетях </span>
+                            <a class="btn btn-vk">Vkontakte</a>
+                            <a class="btn btn-fb">Facebook</a>
+                        </div>
+                    </div>
+                    <div class="thumb__img">
+                        <img ng-src="{{ content.img }}" alt="" />
+                    </div>
+                    <p>
+                        <div class="article__content article__text">
+                            {{ content.text }}
+                        </div>
+                    </p>
+                </article>
+            </div>
+
+            <div class="block" ng-controller="CommentsCtrl">
+                <div class="col-xs-12">
+                    <p>
+                        <span class="comments__title">Комментарии </span>
+                        <span class="comments__number">{{ commentsLength() }}</span>
+                    </p>
+                    <br>
+                </div>
+                <hr class="block__hr">
+                <div class="col-xs-12">
+                    <!-- comments -->
+                    <div class="comments__item">
+                        <div class="comments__img">
+                            <img src="assets/img/ball-61.png" alt="" />
+                        </div>
+                        <div class="comments__right">
+                            <textarea class="comments__textarea" placeholder="Оставить комментарий"
+                            ng-model="comment" ng-focus="initInput = true"
+                            ng-enter="initInput = false; addComment(comment); comment = ''; limits.comments = limits.comments + 1"></textarea>
+                            <div class="comments__controls-r" ng-show="initInput">
+                                <span class="btn btn-white comments__answer" ng-click="initInput = false; comment = ''">Отмена</span>
+                                <span class="btn btn-white comments__answer" ng-click="initInput = false; addComment(comment); comment = ''; limits.comments = limits.comments + 1">Ответить</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="comments__container">
+                        <li class="comments__item" ng-repeat="comment in comments | limitTo: limits.comments ">
+                            <div class="clearfix">
+                                <div class="comments__img">
+                                    <img ng-src="{{ comment.img }}" alt="" />
+                                </div>
+                                <div class="comments__right">
+                                    <p class="comments__user">{{ comment.user }}</p>
+                                    <p class="comments__text">{{ comment.text }}</p>
+                                    <p class="hidden-tablet hidden-desktop"><span class="comments__date">{{ comment.date | date:'dd MMMM' }}</span></p>
+                                    <div class="comments__controls">
+                                        <div class="comments__controls-l">
+                                            <span class="btn btn-white comments__answer" ng-click="allowInput($index)">Ответить</span>
+                                            <span class="btn btn-white comments__plusone" ng-click="comment.likes = comment.likes + 1">+ {{ comment.likes }}</span>
+                                        </div>
+                                        <div class="comments__controls-r">
+                                            <span class="comments__date hidden-phone">{{ comment.date | date:'dd MMMM' }}</span>
+                                            <span class="btn btn-white comments__other"><span>...</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix" ng-show="isInputAllowed($index)">
+                                        <textarea class="comments__textarea comments__textarea--response" placeholder="Оставить ответ"
+                                        ng-model="response"
+                                        ng-enter="allowInput(); addComment(response,$index); response = ''"
+                                        ></textarea>
+                                        <div class="comments__controls-r">
+                                            <span class="btn btn-white comments__answer" ng-click="allowInput(); response = ''">Отмена</span>
+                                            <span class="btn btn-white comments__answer" ng-click="allowInput(); addComment(response,$index); response = ''">Ответить</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="comments__container">
+                                <li class="comments__item" ng-repeat="response in comment.responses">
+                                    <div class="comments__img">
+                                        <img ng-src="{{ response.img }}" alt="" />
+                                    </div>
+                                    <div class="comments__right">
+                                        <p class="comments__user">{{ response.user }}</p>
+                                        <p class="comments__text">{{ response.text }}</p>
+                                        <p class="hidden-tablet hidden-desktop"><span class="comments__date">{{ response.date }}</span></p>
+                                        <div class="comments__controls">
+                                            <div class="comments__controls-l">
+                                                <span class="btn btn-white comments__answer" ng-click="allowInput($parent.$index,$index)">Ответить</span>
+                                                <span class="btn btn-white comments__plusone" ng-click="response.likes = response.likes + 1">+ {{ response.likes }}</span>
+                                            </div>
+                                            <div class="comments__controls-r">
+                                                <span class="comments__date hidden-phone">{{ response.date | date:'dd MMMM' }}</span>
+                                                <span class="btn btn-white comments__other"><span>...</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix" ng-show="isInputAllowed($parent.$index,$index)">
+                                            <textarea class="comments__textarea comments__textarea--response" placeholder="Оставить ответ"
+                                            ng-model="reply"
+                                            ng-enter="allowInput(); addComment(reply,$parent.$index,$index); reply = ''"
+                                            ></textarea>
+                                            <div class="comments__controls-r">
+                                                <span class="btn btn-white comments__answer" ng-click="allowInput(); reply = ''">Отмена</span>
+                                                <span class="btn btn-white comments__answer" ng-click="allowInput(); addComment(reply,$parent.$index,$index); reply = ''">Ответить</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- comments -->
+                </div>
+            </div>
+
+            <div class="block center">
+                <a class="btn btn-more" ng-click="loadMore('comments')">ЗАГРУЗИТЬ ЕЩЕ</a>
+            </div>
+
+        </div>
+
+        <!-- blog sidebar -->
+        <div class="col-xs-12 col-md-4">
+            <div class="block block--white block--sidebar">
+                <div class="col-xs-12">
+                    <h3 class="block__title">Другие статьи</h3>
+                    <div class="block__btn"><a href="#" class="btn btn-white">Читать все</a></div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-12" ng-repeat="blog in blogs | limitTo: 2">
+                    <div class="thumb thumb--medium row">
+                        <div class="col-xs-6 col-sm-12">
+                            <a ui-sref="video({ url: blogs[$index].url })">
+                                <div class="thumb__img">
+                                    <img ng-src="{{ blog.img }}" alt="" />
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-12">
+                            <p class="thumb__title"><a href="">{{ blog.title }}</a></p>
+                            <p class="thumb__text hidden-phone"><a href="#">{{ blog.text }}</a></p>
+                            <p>
+                                <span class="thumb__date"><span class="thumb__number">{{ blog.date }}</span> дня назад</span>
+                                <span class="thumb__hasvideo">Содержит Видео</span>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

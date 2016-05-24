@@ -1,0 +1,66 @@
+<div class="content" autoscroll='true'>
+    <div class="row">
+
+        <!-- exclusive page header -->
+        <div class="block block--header block--blog">
+            <div class="col-xs-12">
+                <div class="clearfix">
+                    <h2 class="block__title">Блог</h2>
+                </div>
+                <p class="block__subtitle">Информация о новых каналах, интересных видео и о всем, что происходит на new [age]!</p>
+                <hr class="block__hr">
+            </div>
+        </div>
+
+        <div class="block  block--blog">
+
+            <!-- first article -->
+            <div class="col-xs-12" ng-repeat="blog in blogs | limitTo: 1">
+                <div class="thumb thumb--blog row">
+                    <div class="col-xs-12 col-sm-6 col-md-5">
+                        <a  ui-sref="article({ url: blogs[$index].url })">
+                            <div class="thumb__img">
+                                <img ng-src="{{ blog.img }}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-7">
+                        <p class="thumb__title"><a href="">{{ blog.title }}</a></p>
+                        <p class="thumb__text"><a href="#">{{ blog.text }}</a></p>
+                        <p>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(blog.date)  }}</span> </span>
+                            <span class="thumb__hasvideo">Содержит Видео</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- other articles -->
+            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="blog in blogs | limitTo: (limits.blogs + 1) | startFrom : 1" ng-class="{'hidden-phone hidden-tablet':$last}">
+                <div class="thumb thumb--blog-med row">
+                    <div class="col-xs-6 col-sm-12">
+                        <a ui-sref="article({ url: blogs[$index + 1].url })">
+                            <div class="thumb__img">
+                                <img ng-src="{{ blog.img }}" alt="" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-sm-12">
+                        <p class="thumb__title"><a href="">{{ blog.title }}</a></p>
+                        <p class="thumb__text"><a href="#">{{ blog.text }}</a></p>
+                        <p>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(blog.date)  }}</span></span>
+                            <span class="thumb__hasvideo">Содержит Видео</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="block center">
+            <a class="btn btn-more" ng-click="loadMore('blogs')">ЗАГРУЗИТЬ ЕЩЕ</a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<!-- ratings channels block -->
+<div class="block block--white block--table">
+    <table class="channels__table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>
+                    <div class="th-subs">Подписчики</div>
+                    <div class="hidden-desktop">Просмотры</div>
+                </th>
+                <th class="hidden-phone">Видео</th>
+                <th class="hidden-tablet hidden-phone">Просмотры</th>
+                <th>Канал</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="channel in channels | limitTo: limits.channels">
+                <td><span class="table__number">{{ $index + 1 }}</span></td>
+                <td>
+                    <div class="table__subscribers">{{ channel.subscribers | number }}</div>
+                    <div class="table__views hidden-desktop">{{ channel.views | number }}</div>
+                </td>
+                <td class="hidden-phone"><span class="table__videos">{{ channel.videos | number }}</span></td>
+                <td class="hidden-tablet hidden-phone">
+                    <span class="table__views">{{ channel.views | number }}</span>
+                </td>
+                <td class="table__channel">
+                    <img ng-src="{{ channel.img }}" alt="channel avatar"/>
+                    <span>{{ channel.name }}</span>
+                    <p class="hidden-tablet hidden-phone">{{ channel.description }}</p>
+                    <div class="hidden-tablet hidden-desktop">
+                        <i class="table__videos">{{ channel.videos | number }}</i><i class="videos"> Видео</i>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="block center">
+    <a class="btn btn-more" ng-click="loadMore('channels')">ЗАГРУЗИТЬ ЕЩЕ</a>
+</div>

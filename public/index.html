@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="MainApp" lang="ru_RU">
+	<head>
+		<meta charset="utf-8">
+		<title>new [age]</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700&subset=latin,cyrillic-ext,cyrillic' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="assets/css/main.min.css">
+	</head>
+	<body ng-controller="MainCtrl">
+
+		<headerview></headerview>
+
+		<sidebarview></sidebarview>
+
+		<div class="wrapper" ng-class="{'sidebarHidden':sandwichClicked}">
+
+			<div class="page">
+				<!-- page views here -->
+				<div ui-view></div>
+				<div class="tablet-overlay" ng-click="sandwichClicked = false" ng-class="{'active':sandwichClicked}"></div>
+			</div>
+
+			<footerview></footerview>
+
+		</div>
+
+		<script src="assets/js/shared.min.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>
