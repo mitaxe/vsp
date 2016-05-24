@@ -1,0 +1,28 @@
+<div class="slider">
+    <div class="slider__box">
+        <div class="slider__inner">
+            <div class="col-xs-3 slider__slide slider__slide--12" ng-repeat="video in info | limitTo: 12">
+                <div class="thumb">
+                    <a ui-sref="video({ url: info[$index].url })">
+                        <div class="thumb__img">
+                            <span class="thumb__length">{{ video.length }}</span>
+                            <img ng-src="{{ video.img }}" alt="" />
+                        </div>
+                    </a>
+                    <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                    <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                    <p>
+                        <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                        <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="slider__pager">
+        <li ng-class="{'active':isActiveSlide($index)}"
+            ng-model="activeSlide"
+            ng-click="slideTo($index)"
+            ng-repeat="i in slidesN"></li>
+    </ul>
+</div>

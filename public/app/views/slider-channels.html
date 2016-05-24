@@ -1,0 +1,28 @@
+<div class="slider">
+    <div class="slider__box">
+        <div class="slider__inner">
+            <div class="col-xs-3 slider__slide slider__slide--24" ng-repeat="channel in info | limitTo: 24">
+                <div class="thumb thumb--chan">
+                    <a ui-sref="video({ url: videos[$index].url })">
+                        <div class="thumb__img">
+                            <img ng-src="{{ channel.img }}" alt="" />
+                        </div>
+                    </a>
+                    <div class="thumb__info">
+                        <p class="thumb__name"><a href="#">{{ channel.name }}</a></p>
+                        <p class="thumb__subs">{{ channel.subscribers | number }}</p>
+                    </div>
+                    <div class="center">
+                        <a href="#" class="btn btn-green btn-small">Подписаться</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="slider__pager">
+        <li ng-class="{'active':isActiveSlide($index)}"
+            ng-model="activeSlide"
+            ng-click="slideTo($index)"
+            ng-repeat="i in slidesN"></li>
+    </ul>
+</div>

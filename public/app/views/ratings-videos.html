@@ -1,0 +1,26 @@
+<!-- ratings videos block -->
+<div class="block block--white">
+    <div class="col-xs-6 col-sm-4 col-md-3"
+    ng-repeat="video in videos | filter: { user: selectedCategory } | limitTo: limits.videos ">
+        <div class="thumb">
+            <a ui-sref="video({ url: videos[$index].url })">
+                <div class="thumb__img">
+                    <span class="thumb__length">{{ video.length }}</span>
+                    <img ng-src="{{ video.img }}" alt="" />
+                </div>
+            </a>
+            <div class="thumb__description">
+                <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                <p class="thumb__info hidden-phone">
+                    <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                    <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="block center">
+    <a class="btn btn-more" ng-click="loadMore('videos')">ЗАГРУЗИТЬ ЕЩЕ</a>
+</div>
