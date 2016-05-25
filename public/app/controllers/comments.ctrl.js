@@ -1,7 +1,6 @@
 angular.module("MainApp")
 .controller('CommentsCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
 
-    // comments
     $scope.commentsLength = function() {
         if ($scope.comments) {
             var commentsNumber = 0;
@@ -39,12 +38,13 @@ angular.module("MainApp")
 
     $scope.addComment = function(text,commentIndex,responseIndex) {
         if (text) {
+            var now = $scope.getDate(new Date().toLocaleString());
             var comment = {
-                "user": "Current User",
+                "user": $scope.currentUser.name,
                 "text": text,
                 "link": "#",
-                "img": "assets/img/ball-60.png",
-                "date": "16 часов назад",
+                "img": $scope.currentUser.avatar,
+                "date": now,
                 "likes": 0,
                 "responses": []
             };

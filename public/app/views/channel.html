@@ -1,130 +1,71 @@
-<div class="channel">
-    <div class="channel__cover" ng-class= "{bf_vis : channelbgText}" ng-style="{'background-image': 'url(' + currentUser.cover + ')'}">
-        <a href="#" ng-mouseover="hoverIn('bg')" ng-mouseleave="hoverOut('bg')" class="change_img channel_bg hidden-tablet hidden-phone"></a>
-        <div ng-show="channelbgText" class="bg_text">Обновить фото обложки канала</div>
-        <div class="channel__ava" ng-class= "{bf_vis : changeAvaText}">
-            <img  ng-src="{{ currentUser.avatar }}" alt="avatar" style="width: 100%"/>
-            <a href="#" ng-mouseover="hoverIn('ava')" ng-mouseleave="hoverOut('ava')" class="change_img channel_ava hidden-tablet hidden-phone"></a>
-            <div ng-show="changeAvaText" class="bg_text ava">Обновить аватар канала</div>
+<div ng-controller="ChannelCtrl">
+
+    <!-- channel page -->
+    <div class="channel">
+        <div class="channel__cover" ng-class= "{bf_vis : channelbgText}" ng-style="{'background-image': 'url(' + currentUser.cover + ')'}">
+            <a href="#" ng-mouseover="hoverIn('bg')" ng-mouseleave="hoverOut('bg')" class="change_img channel_bg hidden-tablet hidden-phone"></a>
+            <div ng-show="channelbgText" class="bg_text">Обновить фото обложки канала</div>
+            <div class="channel__ava" ng-class="{bf_vis : changeAvaText}">
+                <img  ng-src="{{ currentUser.avatar }}" alt="avatar" style="width: 100%"/>
+                <a href="#" ng-mouseover="hoverIn('ava')" ng-mouseleave="hoverOut('ava')" class="change_img channel_ava hidden-tablet hidden-phone"></a>
+                <div ng-show="changeAvaText" class="bg_text ava">Обновить аватар канала</div>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- content -->
-<div class="content" autoscroll='true'>
-    <div class="row">
+    <!-- content -->
+    <div class="content" autoscroll='true'>
+        <div class="row">
 
+            <!-- channel page header -->
+            <div class="block block--header">
+                <div class="col-xs-12">
+                    <div class="channel__head">
+                        <div class="clearfix">
+                            <h2 class="block__title">{{ content.name }}</h2> <a href="#" class="btn btn-white edit_channel hidden-tablet hidden-phone">Редактировать канал</a>
+                            <div class="subscribe_box hidden-tablet hidden-phone">
+                                <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
+                            </div>
+                        </div>
+                        <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
+                            <div class="subscribe_box hidden-desktop" style="float: none;">
+                                <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
+                            </div>
+                            <a href="#" class="btn btn-white edit_channel hidden-desktop" style="float: none;;">Редактировать канал</a>
+                        </div>
+                        <p class="block__subtitle">{{ content.description }}
+                            <a class="toggler" ng-click="descActive = !descActive" ng-class="{'active':descActive}">
+                                <span class="toggler__text">Читать далее</span>
+                                <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                            </a>
+                        </p>
+                        <div class="toggler__block">
+                            <div class="toggler__content" ng-class="{'active':descActive}">
+                                <p class="block__subtitle">2nd part of description here - {{ content.description }}2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tablet_ctrl clearfix hidden-phone">
+                        <div class="subscribe_box hidden-desktop" style="float: left;">
+                            <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
+                        </div>
+                        <a href="#" class="btn btn-white edit_channel hidden-desktop">Редактировать канал</a>
+                    </div>
 
-        <!-- exclusive page header -->
-        <div class="block block--header">
-            <div class="col-xs-12">
-                <div class="channel__head">
                     <div class="clearfix">
-                        <h2 class="block__title">{{ content.name }}</h2> <a href="#" class="btn btn-white edit_channel hidden-tablet hidden-phone">Редактировать канал</a>
-                        <div class="subscribe_box hidden-tablet hidden-phone">
-                            <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
-                        </div>
-                    </div>
-                    <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
-                        <div class="subscribe_box hidden-desktop" style="float: none;">
-                            <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
-                        </div>
-                        <a href="#" class="btn btn-white edit_channel hidden-desktop" style="float: none;;">Редактировать канал</a>
-                    </div>
-                    <p class="block__subtitle">{{ content.description }}
-                        <a class="toggler" ng-click="descActive = !descActive" ng-class="{'active':descActive}">
-                            <span class="toggler__text">Читать далее</span>
-                            <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                        </a>
-                    </p>
-                    <div class="toggler__block">
-                        <div class="toggler__content" ng-class="{'active':descActive}">
-                            <p class="block__subtitle">2nd part of description here - {{ content.description }}2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here</p>
+                        <div class="tabs">
+                            <a ui-sref="user.all({ url: currentUser.url })" ui-sref-active="active">Все видео</a>
+                            <a ui-sref="user.liked({ url: currentUser.url })" ui-sref-active="active">Понравившиеся</a>
                         </div>
                     </div>
                 </div>
-                <div class="tablet_ctrl clearfix hidden-phone">
-                    <div class="subscribe_box hidden-desktop" style="float: left;">
-                        <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
-                    </div>
-                    <a href="#" class="btn btn-white edit_channel hidden-desktop">Редактировать канал</a>
-                </div>
-
-                <div class="clearfix">
-                    <div class="tabs">
-                        <a ui-sref="user.all-video" ui-sref-active="active">Все видео</a>
-                        <a ui-sref="history.liked" ui-sref-active="active">Понравившиеся</a>
-                    </div>
-                </div>
+                <hr class="block__hr">
             </div>
-            <hr class="block__hr">
+
+            <!-- channel views -->
+            <div ui-view></div>
+
         </div>
-
-        <!-- slider block -->
-        <div class="block block--white">
-            <div class="col-xs-12">
-                <h2 class="block__title block__title--left--auto">Пранки</h2><span class="cat_counter">110</span>
-                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
-            </div>
-            <!-- slider visible desktop only -->
-            <slider info='videos' type="videos" class="hidden-phone hidden-tablet"></slider>
-            <!-- slider replaced by simple block on mob and tablet -->
-            <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in videos | limitTo: 3">
-                <div class="thumb row">
-                    <div class="col-xs-7 col-sm-12">
-                        <a ui-sref="video({ url: videos[$index].url })">
-                            <div class="thumb__img">
-                                <span class="thumb__length">{{ video.length }}</span>
-                                <img ng-src="{{ video.img }}" alt="" />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xs-5 col-sm-12">
-                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
-                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
-                        <p class="thumb__info hidden-phone">
-                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- slider block -->
-        <div class="block block--white">
-            <div class="col-xs-12">
-                <h2 class="block__title block__title--left--auto">Игровые</h2><span class="cat_counter">65</span>
-                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
-            </div>
-            <!-- slider visible desktop only -->
-            <slider info='videos' type="videos" class="hidden-phone hidden-tablet"></slider>
-            <!-- slider replaced by simple block on mob and tablet -->
-            <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in videos | limitTo: 3">
-                <div class="thumb row">
-                    <div class="col-xs-7 col-sm-12">
-                        <a ui-sref="video({ url: videos[$index].url })">
-                            <div class="thumb__img">
-                                <span class="thumb__length">{{ video.length }}</span>
-                                <img ng-src="{{ video.img }}" alt="" />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xs-5 col-sm-12">
-                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
-                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
-                        <p class="thumb__info hidden-phone">
-                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="block center">
-            <a class="btn btn-more" ng-click="">ЗАГРУЗИТЬ ЕЩЕ</a>
-        </div>
-
     </div>
+
 </div>

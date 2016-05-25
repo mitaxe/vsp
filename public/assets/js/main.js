@@ -143,6 +143,7 @@ angular.module("MainApp")
     .state('user', {
         url: "/user/:url",
         templateUrl: "app/views/channel.html",
+        redirectTo: 'user.all',
         scope: {
             content: '='
         },
@@ -158,9 +159,13 @@ angular.module("MainApp")
             }
         }]
     })
-    .state('user.all-video', {
-        url : '/all-video',
-        templateUrl: 'app/views/all-video.html'
+    .state('user.all', {
+        url : '/all',
+        templateUrl: 'app/views/channel-all.html'
+    })
+    .state('user.liked', {
+        url : '/liked',
+        templateUrl: 'app/views/channel-liked.html'
     })
 
 
@@ -219,7 +224,7 @@ angular.module("MainApp")
             return "Сегодня";
         } else {
             return day_diff == 0 && (
-                    diff < 60 && "Меньше минуты назад" ||
+                    diff < 60 && "Только что" ||
                     diff < 120 && "1 минуту назад" ||
                     diff < 3600 && Math.floor( diff / 60 ) + " минут назад" ||
                     diff < 7200 && "1 час назад" ||
@@ -236,9 +241,30 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
+.controller('ChannelCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
+
+    // $scope.channelbgText = false;
+    // $scope.changeAvaText = false;
+    $scope.hoverIn = function(target) {
+        if(target == 'ava') {
+            $scope.changeAvaText = true;
+        } else {
+            $scope.channelbgText = true;
+        }
+    };
+    $scope.hoverOut = function(target) {
+        if(target == 'ava') {
+            $scope.changeAvaText = false;
+        } else {
+            $scope.channelbgText = false;
+        }
+    };
+
+}]);
+
+angular.module("MainApp")
 .controller('CommentsCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
 
-    // comments
     $scope.commentsLength = function() {
         if ($scope.comments) {
             var commentsNumber = 0;
@@ -276,12 +302,13 @@ angular.module("MainApp")
 
     $scope.addComment = function(text,commentIndex,responseIndex) {
         if (text) {
+            var now = $scope.getDate(new Date().toLocaleString());
             var comment = {
-                "user": "Current User",
+                "user": $scope.currentUser.name,
                 "text": text,
                 "link": "#",
-                "img": "assets/img/ball-60.png",
-                "date": "16 часов назад",
+                "img": $scope.currentUser.avatar,
+                "date": now,
                 "likes": 0,
                 "responses": []
             };
@@ -410,23 +437,6 @@ angular.module("MainApp")
     // trash
     window.showVideos = function() {
         console.log($scope.videos);
-    };
-
-    $scope.channelbgText = false;
-    $scope.changeAvaText = false;
-    $scope.hoverIn = function(target) {
-        if(target == 'ava') {
-            $scope.changeAvaText = true;
-        } else {
-            $scope.channelbgText = true;
-        }
-    };
-    $scope.hoverOut = function(target) {
-        if(target == 'ava') {
-            $scope.changeAvaText = false;
-        } else {
-            $scope.channelbgText = false;
-        }
     };
 
 }]);

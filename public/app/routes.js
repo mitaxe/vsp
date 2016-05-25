@@ -77,6 +77,7 @@ angular.module("MainApp")
     .state('user', {
         url: "/user/:url",
         templateUrl: "app/views/channel.html",
+        redirectTo: 'user.all',
         scope: {
             content: '='
         },
@@ -92,9 +93,13 @@ angular.module("MainApp")
             }
         }
     })
-    .state('user.all-video', {
-        url : '/all-video',
-        templateUrl: 'app/views/all-video.html'
+    .state('user.all', {
+        url : '/all',
+        templateUrl: 'app/views/channel-all.html'
+    })
+    .state('user.liked', {
+        url : '/liked',
+        templateUrl: 'app/views/channel-liked.html'
     })
 
 
