@@ -40,3 +40,9 @@ $desktop-width: 1280px;
     @content;
   }
 }
+
+@mixin deskMax1600 {
+  @media screen and (max-width: 1600px) {
+    @content;
+  }
+}

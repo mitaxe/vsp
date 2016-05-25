@@ -142,7 +142,7 @@ angular.module("MainApp")
     // channel
     .state('user', {
         url: "/user/:url",
-        templateUrl: 'app/views/channel.html',
+        templateUrl: "app/views/channel.html",
         scope: {
             content: '='
         },
@@ -157,6 +157,10 @@ angular.module("MainApp")
                 }
             }
         }]
+    })
+    .state('user.all-video', {
+        url : '/all-video',
+        templateUrl: 'app/views/all-video.html'
     })
 
 
@@ -354,7 +358,8 @@ angular.module("MainApp")
         "url": "CurrUser",
         "avatar": "https://yt3.ggpht.com/-fGQ0wMqcQ2E/AAAAAAAAAAI/AAAAAAAAAAA/DJ1UmcmYRMI/s100-c-k-no-rj-c0xffffff/photo.jpg",
         "cover": "https://yt3.ggpht.com/-n5hYQ4Nf_Uk/VQsVarAAlgI/AAAAAAAAKhM/U3WIG__7xQs/w2120-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no/Never-Stop-Learning-Social_YouTube%2B%25281%2529.png",
-        "description": "This is user channel description test test test test test test test test test test test test test test test test."
+        "description": "This is user channel description test test test test test test test test test test test test test test test test.",
+        "subscr_counter" : 18358461
     };
 
 
@@ -405,6 +410,23 @@ angular.module("MainApp")
     // trash
     window.showVideos = function() {
         console.log($scope.videos);
+    };
+
+    $scope.channelbgText = false;
+    $scope.changeAvaText = false;
+    $scope.hoverIn = function(target) {
+        if(target == 'ava') {
+            $scope.changeAvaText = true;
+        } else {
+            $scope.channelbgText = true;
+        }
+    };
+    $scope.hoverOut = function(target) {
+        if(target == 'ava') {
+            $scope.changeAvaText = false;
+        } else {
+            $scope.channelbgText = false;
+        }
     };
 
 }]);

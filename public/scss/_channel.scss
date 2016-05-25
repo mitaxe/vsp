@@ -9,6 +9,21 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        &:before {
+            background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0;
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: none;
+        }
+        &.bf_vis {
+            &:before {
+                display: block;
+            }
+        }
     }
 
     &__ava {
@@ -18,6 +33,21 @@
         left: 30px;
         box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
         z-index: 100;
+        &:before {
+            background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0;
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: none;
+        }
+        &.bf_vis {
+            &:before {
+                display: block;
+            }
+        }
     }
 
     &__head {
@@ -71,5 +101,115 @@
         &__ava {
             width: 250px;
         }
+    }
+}
+
+.edit_channel {
+    background: #c7c7c7 url("../img/edit_icon.png") no-repeat 23px 13px / 12px 13px;
+    padding: 11px 20px 11px 50px;
+    font-size: 16px;
+    color: #828383;
+    margin: 4px 0 0 25px;
+}
+.subscribe_box {
+    margin-top: 2px;
+    float: right;
+    .subscribe {
+        border-radius: 50px;
+    }
+    .green_btn {
+        background: #1bbb47;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 12px 30px 12px 30px;
+        position: relative;
+        z-index: 2;
+        font-weight:bold;
+        font-size: 14px;
+    }
+    .counter {
+        background: #e6e6e6;
+        color: #5b5d5e;
+        text-align: center;
+        padding: 10px 20px 13px 40px;
+        margin-left: -30px;
+        position: relative;
+        z-index: 1;
+        font-size: 18px;
+        box-shadow: inset 0px 3px 5px rgba(0,0,0, .15);
+        display: inline-block;
+    }
+}
+.cat_counter {
+    font-size: 36px;
+    color: #1bbb47;
+    margin-left: 10px;
+}
+.change_img {
+    width:30px;
+    height:25px;
+    display: block;
+    background: url("../img/change_logo_icon.png") no-repeat center / 30px 25px;
+    &.channel_bg {
+        position: absolute;
+        right:30px;
+        top:30px;
+        z-index:2;
+    }
+    &.channel_ava {
+        position: absolute;
+        right:15px;
+        top:15px;
+        z-index: 2;
+    }
+}
+.bg_text {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+    color: #fff;
+    display: block;
+    line-height: 22px;
+    padding: 8px 40px 8px 8px;
+    position: absolute;
+    right: 26px;
+    top: 25px;
+    z-index: 1;
+    font-size: 14px;
+    &.ava {
+        right:10px;
+        top:10px;
+    }
+}
+@include deskMax1600 {
+    .bg_text.ava {
+        right:0;
+        padding: 4px 20px 4px 4px;
+    }
+}
+
+@include tablet {
+    .subscribe_box {
+        float: left;
+    }
+    .tablet_ctrl {
+        padding-top: 10px;
+        margin-left: -10px;
+        .edit_channel {
+            float: right;
+        }
+    }
+    .cat_counter {
+        font-size: 26px;
+    }
+}
+
+@include phone {
+    .tablet_ctrl {
+        margin-bottom: 15px;
+    }
+    .edit_channel {
+        margin: 15px auto 0;
+    }
+    .cat_counter {
+        font-size: 20px;
     }
 }

@@ -76,7 +76,7 @@ angular.module("MainApp")
     // channel
     .state('user', {
         url: "/user/:url",
-        templateUrl: 'app/views/channel.html',
+        templateUrl: "app/views/channel.html",
         scope: {
             content: '='
         },
@@ -91,6 +91,10 @@ angular.module("MainApp")
                 }
             }
         }
+    })
+    .state('user.all-video', {
+        url : '/all-video',
+        templateUrl: 'app/views/all-video.html'
     })
 
 

@@ -1,12 +1,6 @@
 <div class="channel">
-    <div class="channel__cover" ng-class= "{bf_vis : channelbgText}" ng-style="{'background-image': 'url(' + currentUser.cover + ')'}">
-        <a href="#" ng-mouseover="hoverIn('bg')" ng-mouseleave="hoverOut('bg')" class="change_img channel_bg hidden-tablet hidden-phone"></a>
-        <div ng-show="channelbgText" class="bg_text">Обновить фото обложки канала</div>
-        <div class="channel__ava" ng-class= "{bf_vis : changeAvaText}">
-            <img  ng-src="{{ currentUser.avatar }}" alt="avatar" style="width: 100%"/>
-            <a href="#" ng-mouseover="hoverIn('ava')" ng-mouseleave="hoverOut('ava')" class="change_img channel_ava hidden-tablet hidden-phone"></a>
-            <div ng-show="changeAvaText" class="bg_text ava">Обновить аватар канала</div>
-        </div>
+    <div class="channel__cover" ng-style="{'background-image': 'url(' + currentUser.cover + ')'}">
+        <img class="channel__ava" ng-src="{{ currentUser.avatar }}" alt="avatar"/>
     </div>
 </div>
 
@@ -20,16 +14,10 @@
             <div class="col-xs-12">
                 <div class="channel__head">
                     <div class="clearfix">
-                        <h2 class="block__title">{{ content.name }}</h2> <a href="#" class="btn btn-white edit_channel hidden-tablet hidden-phone">Редактировать канал</a>
-                        <div class="subscribe_box hidden-tablet hidden-phone">
+                        <h2 class="block__title">{{ content.name }}</h2> <a href="#" class="btn btn-white edit_channel">Редактировать канал</a>
+                        <div class="subscribe_box" style="float:right;">
                             <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
                         </div>
-                    </div>
-                    <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
-                        <div class="subscribe_box hidden-desktop" style="float: none;">
-                            <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
-                        </div>
-                        <a href="#" class="btn btn-white edit_channel hidden-desktop" style="float: none;;">Редактировать канал</a>
                     </div>
                     <p class="block__subtitle">{{ content.description }}
                         <a class="toggler" ng-click="descActive = !descActive" ng-class="{'active':descActive}">
@@ -43,17 +31,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="tablet_ctrl clearfix hidden-phone">
-                    <div class="subscribe_box hidden-desktop" style="float: left;">
-                        <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
-                    </div>
-                    <a href="#" class="btn btn-white edit_channel hidden-desktop">Редактировать канал</a>
-                </div>
-
                 <div class="clearfix">
                     <div class="tabs">
-                        <a ui-sref="user.all-video" ui-sref-active="active">Все видео</a>
-                        <a ui-sref="history.liked" ui-sref-active="active">Понравившиеся</a>
+                        <a ui-sref="user({ url: currentUser.url })" ui-sref-active="active">Все видео</a>
                     </div>
                 </div>
             </div>
@@ -63,7 +43,7 @@
         <!-- slider block -->
         <div class="block block--white">
             <div class="col-xs-12">
-                <h2 class="block__title block__title--left--auto">Пранки</h2><span class="cat_counter">110</span>
+                <h2 class="block__title block__title--left">Новые видео</h2>
                 <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
             </div>
             <!-- slider visible desktop only -->
@@ -94,7 +74,7 @@
         <!-- slider block -->
         <div class="block block--white">
             <div class="col-xs-12">
-                <h2 class="block__title block__title--left--auto">Игровые</h2><span class="cat_counter">65</span>
+                <h2 class="block__title block__title--left">Популярные видео</h2>
                 <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
             </div>
             <!-- slider visible desktop only -->
@@ -120,10 +100,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="block center">
-            <a class="btn btn-more" ng-click="">ЗАГРУЗИТЬ ЕЩЕ</a>
         </div>
 
     </div>
