@@ -74,7 +74,8 @@ angular.module("MainApp")
     // home
     .state('home', {
         url: "/",
-        templateUrl: "app/views/home.html"
+        templateUrl: "app/views/home.html",
+        controller: 'HomeCtrl'
     })
 
     // exclusive
@@ -181,6 +182,10 @@ angular.module("MainApp")
 .factory('factory', ["$http", function($http) {
 
         var factory = {};
+
+        factory.getHomePageData = function() {
+            return $http.get('./assets/js/data.json');
+        };
 
         factory.getVideos = function() {
             return $http.get('./assets/js/data.json');
@@ -304,6 +309,19 @@ angular.module("MainApp")
             $scope.pins.splice(index, 1);
         }
     };
+
+}]);
+
+angular.module("MainApp")
+.controller('HomeCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
+
+    // factory data
+    factory.getHomePageData().success(function(response) {
+        $scope.blogs = response.videos;
+        $scope.videos = response.videos;
+        $scope.channels = response.channels;
+        $scope.goods = response.goods;
+    });
 
 }]);
 

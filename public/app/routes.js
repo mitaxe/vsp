@@ -8,7 +8,8 @@ angular.module("MainApp")
     // home
     .state('home', {
         url: "/",
-        templateUrl: "app/views/home.html"
+        templateUrl: "app/views/home.html",
+        controller: 'HomeCtrl'
     })
 
     // exclusive
