@@ -45,7 +45,7 @@
     transition: .3s;
     padding: 6px 22px;
     line-height: 1;
-    &:hover {
+    &:not(.edit_channel):hover {
         border-color: $col-green;
         color: $col-green;
     }

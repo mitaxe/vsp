@@ -17,5 +17,7 @@ angular.module("MainApp")
             $scope.channelbgText = false;
         }
     };
+    
+    $scope.subscriptions = 116;
 
 }]);

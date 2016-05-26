@@ -629,7 +629,7 @@ select option:hover {
   transition: .3s;
   padding: 6px 22px;
   line-height: 1; }
-  .btn-white:hover {
+  .btn-white:not(.edit_channel):hover {
     border-color: #00cc33;
     color: #00cc33; }
   @media screen and (max-width: 767px) {
@@ -2690,9 +2690,10 @@ svg {
       position: absolute;
       top: 0;
       width: 100%;
-      display: none; }
+      opacity: 0;
+      transition: .3s; }
     .channel__cover.bf_vis:before {
-      display: block; }
+      opacity: 1; }
   .channel__ava {
     width: 180px;
     position: absolute;
@@ -2762,7 +2763,7 @@ svg {
     background: #1bbb47;
     color: #fff;
     text-transform: uppercase;
-    padding: 12px 30px 12px 30px;
+    padding: 12px 29px 12px 29px;
     position: relative;
     z-index: 2;
     font-weight: bold;
@@ -2772,7 +2773,7 @@ svg {
     color: #5b5d5e;
     text-align: center;
     padding: 10px 20px 13px 40px;
-    margin-left: -30px;
+    margin-left: -35px;
     position: relative;
     z-index: 1;
     font-size: 18px;
@@ -2788,7 +2789,8 @@ svg {
   width: 30px;
   height: 25px;
   display: block;
-  background: url("../img/change_logo_icon.png") no-repeat center/30px 25px; }
+  background: url("../img/change_logo_icon.png") no-repeat center/30px 25px;
+  transition: .3s; }
   .change_img.channel_bg {
     position: absolute;
     right: 30px;
@@ -2810,7 +2812,12 @@ svg {
   right: 26px;
   top: 25px;
   z-index: 1;
-  font-size: 14px; }
+  font-size: 14px;
+  transition: .3s; }
+  .bg_text.ng-hide {
+    opacity: 0; }
+  .bg_text.ng-show {
+    opacity: 1; }
   .bg_text.ava {
     right: 10px;
     top: 10px; }
