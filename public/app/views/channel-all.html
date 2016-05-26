@@ -3,7 +3,7 @@
 <!-- slider block -->
 <div class="block block--white">
     <div class="col-xs-12">
-        <h2 class="block__title block__title--left--auto">Новые видео</h2> <span class="cat_counter"> {{ subscriptions | number}}</span>
+        <h2 class="block__title block__title--left--auto">Новые видео</h2> <span class="cat_counter"> {{ videos.length | number }}</span>
         <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
     </div>
     <!-- slider visible desktop only -->
@@ -23,7 +23,7 @@
                 <p class="thumb__title"><a href="">{{ video.title }}</a></p>
                 <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                 <p class="thumb__info hidden-phone">
-                    <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                    <span class="thumb__count"><span class="thumb__number">{{ video.count }}</span> просмотров</span>
                     <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
                 </p>
             </div>
@@ -34,7 +34,7 @@
 <!-- slider block -->
 <div class="block block--white">
     <div class="col-xs-12">
-        <h2 class="block__title block__title--left--auto">Популярные видео</h2> <span class="cat_counter"> {{ subscriptions | number}}</span>
+        <h2 class="block__title block__title--left--auto">Популярные видео</h2> <span class="cat_counter"> {{ videos.length }}</span>
         <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
     </div>
     <!-- slider visible desktop only -->

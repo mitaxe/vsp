@@ -6,7 +6,7 @@
             <a href="#" ng-mouseover="hoverIn('bg')" ng-mouseleave="hoverOut('bg')" class="change_img channel_bg hidden-tablet hidden-phone"></a>
             <div ng-show="channelbgText" class="bg_text">Обновить фото обложки канала</div>
             <div class="channel__ava" ng-class="{bf_vis : changeAvaText}">
-                <img  ng-src="{{ currentUser.avatar }}" alt="avatar" style="width: 100%"/>
+                <img ng-src="{{ currentUser.avatar }}" alt="avatar"/>
                 <a href="#" ng-mouseover="hoverIn('ava')" ng-mouseleave="hoverOut('ava')" class="change_img channel_ava hidden-tablet hidden-phone"></a>
                 <div ng-show="changeAvaText" class="bg_text ava">Обновить аватар канала</div>
             </div>

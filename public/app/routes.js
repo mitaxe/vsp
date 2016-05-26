@@ -58,13 +58,6 @@ angular.module("MainApp")
         }
     })
 
-    //profile
-    .state('profile', {
-        url : '/profile',
-        templateUrl : 'app/views/profile.html',
-        controller : 'ProfileCtrl'
-    })
-
     // history
     .state('history', {
         url: "/history",
@@ -109,6 +102,12 @@ angular.module("MainApp")
         templateUrl: 'app/views/channel-liked.html'
     })
 
+    //profile
+    .state('profile', {
+        url : '/profile',
+        templateUrl : 'app/views/profile.html',
+        controller : 'ProfileCtrl'
+    })
 
     // video page
     .state('video', {
@@ -124,6 +123,6 @@ angular.module("MainApp")
                 }
             }
         }
-    })
+    });
 
 });

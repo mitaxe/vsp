@@ -22,4 +22,5 @@ angular.module("MainApp")
                 channelSubscribers : 18358461
             }
         }
+        
     }]);
