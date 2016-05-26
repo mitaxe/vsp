@@ -1,0 +1,122 @@
+<div class="profile">
+    <div class="content">
+        <div class="row">
+            <div class="block profile_head">
+                <div class="col-xs-12 clearfix">
+                    <img ng-src="{{profile.user.avatar}}" class="profile__pic" alt="profile avatar">
+                    <div class="profile__user_info_box">
+                        <div class="clearfix">
+                            <h2 class="profile__block__title block__title name">{{profile.user.name}}</h2>
+                        </div>
+                        <p class="profile__info_line"><a target="_blank" ng-href="{{profile.user.fbLink}}" class="profile__fb_link">Facebook профиль</a><span class="profile__country">{{profile.user.userCity}}, {{profile.user.userCountry}}</span></p>
+                        <p class="profile__user_description">{{profile.user.userInfo}} <a ng-href="{{profile.userWebsite}}" class="profile__site_link">{{profile.user.userWebsite}}</a></p>
+
+                    </div>
+
+                    <div class="clearfix right-desktop pr_wrapper"><a href="#" class="btn profile__btn_white">Изменить профиль</a></div>
+                </div>
+            </div>
+        </div> <!-- end row -->
+
+        <div class="row">
+            <div class="block">
+                <div class="col-xs-12 clearfix mobile-center">
+                    <div class="ch_count_wrapper mobile-center clearfix">
+                        <h2 class="block__title">Каналы <span class="cat_counter"> {{profile.userChannels}}</span></h2>
+
+                        <!-- edit channel desktop -->
+                        <div class="clearfix" style="float:right;"><a href="#" class="btn profile__btn_white hidden-tablet hidden-phone">Редактировать канал</a></div>
+                        <!-- end edit channel desktop -->
+
+                    </div>
+                </div>
+                <div class="eq_wrapp clearfix">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 no_padding_right_desktop" style="float:left;">
+                        <div class="profile__mid_left clearfix">
+                            <img ng-src="{{profile.userAva}}" alt="user channel avatar">
+
+                            <!-- PIN desktop -->
+                            <a href="#" class="pin_btn hidden-tablet hidden-phone">Закрепить</a>
+                            <!-- end PIN desktop -->
+
+                            <div class="sub_box clearfix">
+
+                                <!-- edit channel tablet -->
+                                <a style="display: block;" href="#" class="btn profile__btn_white tbl hidden-desktop hidden-phone">Редактировать канал</a>
+                                <!-- end edit channel tablet -->
+
+                                <h3 class="ch_name">{{profile.channel.channelName}}</h3>
+
+                                <!-- subscribe desktop -->
+                                <div class="subscribe_box profile__subscribe_box hidden-tablet hidden-phone">
+                                    <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ profile.channel.channelSubscribers | number}}</span>
+                                </div>
+                                <!-- end subscribe desktop -->
+
+                                <!-- subscribe tablet and phone -->
+                                <div class="subscribe_box hidden-desktop" style="float: none;margin-bottom: 15px">
+                                    <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ profile.channel.channelSubscribers | number}}</span>
+                                </div>
+                                <!-- end subscribe tablet and phone -->
+
+                                <!-- edit channel phone -->
+                                <a style="display: block;" href="#" class="btn profile__btn_white tbl hidden-desktop hidden-tablet">Редактировать канал</a>
+                                <!-- end edit channel phone -->
+
+                                <p class="sub_info">Самый популярный Пранк канал в Мире!</p>
+                                <p class="sub_info">По вопросам сотрудничества</p>
+                                <p class="sub_info with_link"><a href="https://vk.com/ogan_g">https://vk.com/ogan_g</a></p>
+                                <p class="sub_info">Страничка Вани:</p>
+                                <p class="sub_info with_link"><a href="https://vk.com/barboolone">https://vk.com/barboolone</a></p>
+                                <p class="sub_info">Страничка Генчика:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-12 no_padding_left_desktop" style="float:left;">
+                        <div class="profile__mid_right">
+                            <div class="block block--white no_margin_desktop no_margin_tablet no_margin_phone">
+                                <div class="col-xs-12">
+                                    <h2 class="block__title block__title--left--auto">Видео</h2> <span class="cat_counter"> {{ videosCounter | number}}</span>
+                                    <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
+                                </div>
+                                <!-- slider visible desktop only -->
+                                <slider info='videos' type="videos" class="hidden-phone hidden-tablet"></slider>
+                                <!-- slider replaced by simple block on mob and tablet -->
+                                <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in videos | limitTo: 3">
+                                    <div class="thumb row">
+                                        <div class="col-xs-7 col-sm-12">
+                                            <a ui-sref="video({ url: videos[$index].url })">
+                                                <div class="thumb__img">
+                                                    <span class="thumb__length">{{ video.length }}</span>
+                                                    <img ng-src="{{ video.img }}" alt="" />
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-xs-5 col-sm-12">
+                                            <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                                            <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                                            <p class="thumb__info hidden-phone">
+                                                <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                                                <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end row -->
+        <div class="row">
+            <div class="block">
+                <div class="add_channel_box">
+                    <div class="col-xs-12 mobile-center">
+                        <hr class="block__hr">
+                        <a href="#" class="profile__add_channel_btn">Добавить видеоканал</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

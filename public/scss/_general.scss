@@ -227,3 +227,9 @@ svg {
     box-shadow: 0px 1px 0px white;
     margin: 20px 0;
 }
+
+.mobile-center {
+    @include phone {
+        text-align: center;
+    }
+}

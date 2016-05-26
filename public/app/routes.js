@@ -58,6 +58,13 @@ angular.module("MainApp")
         }
     })
 
+    //profile
+    .state('profile', {
+        url : '/profile',
+        templateUrl : 'app/views/profile.html',
+        controller : 'ProfileCtrl'
+    })
+
     // history
     .state('history', {
         url: "/history",
