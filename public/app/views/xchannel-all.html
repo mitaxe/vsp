@@ -1,0 +1,89 @@
+<div class="content nm_channel" autoscroll='true'>
+    <div class="row">
+
+        <!-- exclusive page header -->
+        <div class="block block--header">
+            <div class="col-xs-12">
+                <div class="block__btn block__btn--50 user_channel_sort_box">
+                    <div class="block__select block__select--exclusive">
+                        <div class="hidden-phone hidden-tablet" ng-class="{'hidden-visibility':$state.includes('ratings.channels')}">
+                            <span class="category-caption">Сортировка:</span>
+                            <div class="select" tabindex="0" ng-class="{'active':selectActive}" ng-blur="selectActive = false">
+                                <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                                <span class="select__title" ng-click="selectActive = !selectActive;">{{ selectedCategory || 'Все категории видео' }}</span>
+                                <div class="select__list">
+                                    <ul>
+                                        <li ng-click="sortReverse = undefined; selectedCategory = false;">Все категории видео</li>
+                                        <li ng-repeat="category in sortTypes" ng-click="sortBy($index); $parent.selectedCategory = category">{{ category }}</li>
+                                        <!-- $parent.selectActive = false -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="block__hr">
+        </div>
+
+        <div class="block block--white block--big">
+            <div class="col-xs-12">
+                <h2 class="block__title">Сейчас смотрят</h2>
+            </div>
+            <div class="col-xs-12 col-sm-6" ng-repeat="video in videos | limitTo: 2">
+                <div class="thumb thumb--big" ng-class="{'thumb--exclusive': video.exclusive > 0}">
+                    <a ui-sref="video({ url: video.url })">
+                        <div class="thumb__img thumb__img--shadow">
+                            <span class="thumb__length">{{ video.length }}</span>
+                            <img ng-src="{{ video.img }}" alt="" />
+                            <span class="thumb__exclusive">Эксклюзивное видео</span>
+                        </div>
+                    </a>
+                    <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                    <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                    <p class="thumb__info">
+                        <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                        <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="banner_box">
+            <div class="col-xs-12">
+                <div class="block">
+                    <img ng-src="assets/img/banner1.png" alt="banner1">
+                </div>
+            </div>
+        </div>
+
+        <!-- exclusive videos block -->
+        <div class="block block--white">
+            <div class="col-xs-6 col-sm-4 col-md-3"
+                 ng-repeat="video in videos | orderBy: 'video.date' : sortReverse | limitTo: limits.videos" ng-init="$parent.sliderCounter = $index">
+                <div class="thumb thumb--exclusive">
+                    <a ui-sref="video({ url: videos[$index].url })">
+                        <div class="thumb__img">
+                            <span class="thumb__length">{{ video.length }}</span>
+                            <img ng-src="{{ video.img }}" alt="" />
+                        </div>
+                    </a>
+                    <div class="thumb__description">
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__info hidden-phone">
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date)  }}</span></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="block center">
+            <a class="btn btn-more" ng-click="loadMore('videos')">ЗАГРУЗИТЬ ЕЩЕ</a>
+        </div>
+
+    </div>
+</div>

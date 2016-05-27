@@ -2775,6 +2775,12 @@ svg {
     z-index: 2;
     font-weight: bold;
     font-size: 14px; }
+    .subscribe_box .green_btn:hover {
+      background: #2daa47; }
+    .subscribe_box .green_btn:active {
+      background: -webkit-linear-gradient(top, #2b9f44 0%, #29bd4a 100%);
+      background: linear-gradient(top, #2b9f44 0%, #29bd4a 100%);
+      background: -moz-linear-gradient(top, #2b9f44 0%, #29bd4a 100%); }
   .subscribe_box .counter {
     background: #e6e6e6;
     color: #5b5d5e;
@@ -2852,6 +2858,13 @@ svg {
     margin: 15px auto 0; }
   .cat_counter {
     font-size: 20px; } }
+
+.nm_channel .user_channel_sort_box {
+  float: none;
+  position: absolute;
+  right: 0;
+  top: -106px;
+  width: 540px; }
 
 .profile__pic {
   width: 192px;
@@ -3015,6 +3028,15 @@ svg {
     font-size: 12px;
     padding: 11px 20px 9px 40px; }
 
+@media screen and (min-width: 1280px) and (max-width: 1430px) {
+  .profile__subscribe_box .green_btn {
+    padding: 5px 16px;
+    font-size: 14px; }
+  .profile__subscribe_box .counter {
+    padding: 10px 20px 8px 30px;
+    font-size: 10px;
+    margin-left: -26px; } }
+
 .profile .pin_btn {
   vertical-align: top;
   font-size: 14px;
@@ -3068,6 +3090,27 @@ svg {
     padding: 11px 30px 11px 57px;
     background-size: 25px 25px;
     background-position: 8px 4px; } }
+
+.shop_detail__main_img {
+  width: 270px;
+  float: left; }
+
+.shop_detail__preview_list {
+  float: left; }
+  .shop_detail__preview_list li {
+    position: relative; }
+    .shop_detail__preview_list li.active:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 3px;
+      height: 100%;
+      background: #00cc33;
+      left: -10px; }
+  .shop_detail__preview_list img {
+    width: 35px; }
+    .shop_detail__preview_list img:hover {
+      cursor: pointer; }
 
 @media screen and (min-width: 1280px) {
   .slider__pager {

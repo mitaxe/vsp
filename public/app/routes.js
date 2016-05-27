@@ -101,6 +101,37 @@ angular.module("MainApp")
         url : '/liked',
         templateUrl: 'app/views/channel-liked.html'
     })
+        
+        
+    //not my channel
+        
+    .state('xuser', {
+        url : '/xuser/:url',
+        templateUrl : "app/views/xchannel.html",
+        redirectTo: 'xuser.all',
+        controller : 'xChannelCtrl'
+    })
+    .state('xuser.all', {
+        url : '/all',
+        templateUrl: 'app/views/xchannel-all.html'
+    })
+    .state('xuser.playlist', {
+        url : '/playlist',
+        templateUrl: 'app/views/xchannel-liked.html'
+    })
+    .state('xuser.shop', {
+        url : '/shop',
+        templateUrl: 'app/views/xchannel-shop.html'
+    })
+
+    //shop detailed page
+    .state('shop-detailed', {
+        url : '/shop/:itemId',
+        templateUrl: 'app/views/shop-detail.html',
+        controller : 'shopDetailCtrl'
+    })
+
+
 
     //profile
     .state('profile', {

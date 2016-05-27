@@ -1,0 +1,14 @@
+<div class="content shop_detail" autoscroll='true'>
+    <div class="row">
+        <div class="block block--white">
+            <div class="col-xs-12">
+                <div class="item_box clearfix">
+                    <img ng-src="{{mainImageUrl}}" alt="main img" class="shop_detail__main_img">
+                    <ul class="shop_detail__preview_list">
+                        <li ng-class="{'active' : selectedPreview == $index}" ng-repeat="item in itemDetails.images"><img ng-src="{{item}}"  ng-click="setImage(item);setPreview($index);" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

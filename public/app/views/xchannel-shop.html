@@ -1,0 +1,16 @@
+<div class="block block--white">
+    <div class="col-xs-12">
+        <h2 class="block__title">Популярные товары</h2>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-2" ng-repeat="good in goods | limitTo: 6">
+        <div class="thumb">
+            <a ui-sref="shop-detailed({ itemId: good.name })">
+                <div class="thumb__img">
+                    <img ng-src="{{ good.img }}" alt="" />
+                </div>
+            </a>
+            <p class="thumb__price">{{ good.price | currency }}</p>
+            <p class="thumb__goods-title"><a href="#">{{ good.name }}</a></p>
+        </div>
+    </div>
+</div>

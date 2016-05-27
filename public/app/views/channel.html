@@ -31,7 +31,7 @@
                             <div class="subscribe_box hidden-desktop" style="float: none;">
                                 <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
                             </div>
-                            <a href="#" class="btn btn-white edit_channel hidden-desktop" style="float: none;;">Редактировать канал</a>
+                            <a ui-sref="profile" class="btn btn-white edit_channel hidden-desktop" style="float: none;;">Редактировать канал</a>
                         </div>
                         <p class="block__subtitle">{{ content.description }}
                             <a class="toggler" ng-click="descActive = !descActive" ng-class="{'active':descActive}">
@@ -49,7 +49,7 @@
                         <div class="subscribe_box hidden-desktop" style="float: left;">
                             <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
                         </div>
-                        <a href="#" class="btn btn-white edit_channel hidden-desktop">Редактировать канал</a>
+                        <a ui-sref="profile" class="btn btn-white edit_channel hidden-desktop">Редактировать канал</a>
                     </div>
 
                     <div class="clearfix">

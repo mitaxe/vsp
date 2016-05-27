@@ -11,6 +11,8 @@ angular.module("MainApp")
         $scope.notifications = response.notifications;
         $scope.comments = response.comments;
 
+        // console.log($scope.goods);
+
         // videos sorted by date from most recent
         $scope.videosHistory = clone($scope.videos.sort(dynamicSort('date'))).reverse();
     });
