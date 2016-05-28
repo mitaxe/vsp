@@ -1,5 +1,5 @@
 angular.module("MainApp")
-    .controller('shopDetailCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
+    .controller('ShopDetailCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
         $scope.test = 'asgasgasg';
 
         $scope.itemDetails = {
@@ -9,7 +9,7 @@ angular.module("MainApp")
                 'assets/img/tshort2.png'
             ]
         };
-        
+
         $scope.mainImageUrl = $scope.itemDetails.images[0];
 
         $scope.setImage = function(url) {

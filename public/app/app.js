@@ -4,13 +4,19 @@ var app = angular.module("MainApp", ['ui.router', 'ngAnimate']);
 app.run(function($rootScope, $document, $locale, $state){
 
     // scroll ng view top on enter
-    $rootScope.$on('$stateChangeSuccess', function() {
-       document.body.scrollTop = document.documentElement.scrollTop = 0;
+    $rootScope.$on('$stateChangeSuccess', function(ev, toState, toParams, fromState, fromParams) {
+        // prevent child states form scrolling top
+        if (!(
+            fromState.name.indexOf('user.') >= 0 &&
+            toState.name.indexOf('user.') >= 0
+        )) {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+        }
     });
 
     // replace angular number comma separator with space
-    // $locale.NUMBER_FORMATS.GROUP_SEP = " ";
-    // $locale.NUMBER_FORMATS.DECIMAL_SEP = ".";
+    $locale.NUMBER_FORMATS.GROUP_SEP = " ";
+    $locale.NUMBER_FORMATS.DECIMAL_SEP = ".";
 
     // redirect route to child first state when needed
     $rootScope.$state = $state;
@@ -25,7 +31,7 @@ app.run(function($rootScope, $document, $locale, $state){
 });
 
 
-// filters ---------------------------------------------------------------------
+// filters
 
     // ng repeat start from
     app.filter('startFrom', function() {
@@ -39,7 +45,7 @@ app.run(function($rootScope, $document, $locale, $state){
     });
 
 
-// helpers ---------------------------------------------------------------------
+// helpers
 
     // clone object simple
     function clone(obj) {

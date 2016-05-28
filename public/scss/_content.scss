@@ -1001,10 +1001,11 @@
         color: $col-green;
         &:hover {
             border-color: $col-green;
+            color: $col-green;
         }
         &:active {
             transition: 0s;
-            color: white;
+            color: white !important;
             background: $col-green;
             border-color: $col-green;
         }

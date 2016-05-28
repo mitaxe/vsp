@@ -4,13 +4,19 @@ var app = angular.module("MainApp", ['ui.router', 'ngAnimate']);
 app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $document, $locale, $state){
 
     // scroll ng view top on enter
-    $rootScope.$on('$stateChangeSuccess', function() {
-       document.body.scrollTop = document.documentElement.scrollTop = 0;
+    $rootScope.$on('$stateChangeSuccess', function(ev, toState, toParams, fromState, fromParams) {
+        // prevent child states form scrolling top
+        if (!(
+            fromState.name.indexOf('user.') >= 0 &&
+            toState.name.indexOf('user.') >= 0
+        )) {
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+        }
     });
 
     // replace angular number comma separator with space
-    // $locale.NUMBER_FORMATS.GROUP_SEP = " ";
-    // $locale.NUMBER_FORMATS.DECIMAL_SEP = ".";
+    $locale.NUMBER_FORMATS.GROUP_SEP = " ";
+    $locale.NUMBER_FORMATS.DECIMAL_SEP = ".";
 
     // redirect route to child first state when needed
     $rootScope.$state = $state;
@@ -25,7 +31,7 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
 }]);
 
 
-// filters ---------------------------------------------------------------------
+// filters
 
     // ng repeat start from
     app.filter('startFrom', function() {
@@ -39,7 +45,7 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
     });
 
 
-// helpers ---------------------------------------------------------------------
+// helpers
 
     // clone object simple
     function clone(obj) {
@@ -75,13 +81,27 @@ angular.module("MainApp")
     .state('home', {
         url: "/",
         templateUrl: "app/views/home.html",
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl',
+        resolve: {
+            homeData: ["factory", function(factory) {
+                return factory.getHomePageData();
+            }]
+        },
+        controller: function($scope, homeData) {
+            $scope.homeData = homeData.data;
+        }
     })
 
     // exclusive
     .state('exclusive', {
         url: "/exclusive",
-        templateUrl: "app/views/exclusive.html"
+        templateUrl: "app/views/exclusive.html",
+        controller: 'ExclusiveCtrl',
+        resolve: {
+            exclusiveVideos: ["factory", function(factory) {
+                return factory.getExclusiveVideos();
+            }]
+        }
     })
 
     // ratings
@@ -89,6 +109,12 @@ angular.module("MainApp")
         url: "/ratings",
         templateUrl: "app/views/ratings.html",
         redirectTo: 'ratings.videos',
+        resolve: {
+            ratingsData: ["factory", function(factory) {
+                return factory.getExclusiveVideos();
+            }]
+        },
+        controller: 'RatingsCtrl'
     })
     .state('ratings.videos', {
         url: "-videos",
@@ -102,7 +128,15 @@ angular.module("MainApp")
     // blog
     .state('blog', {
         url: "/blog",
-        templateUrl: "app/views/blog.html"
+        templateUrl: "app/views/blog.html",
+        resolve: {
+            blogData: ["factory", function(factory) {
+                return factory.getBlogData();
+            }]
+        },
+        controller: ["$scope", "blogData", function($scope, blogData) {
+            $scope.blogData = blogData.data.videos;
+        }]
     })
     .state('article', {
         url: "/blog/:url",
@@ -110,11 +144,6 @@ angular.module("MainApp")
         scope: {
             content: '='
         },
-        // resolve: {
-        //     data: function(factory){
-        //         return factory.getVideos();
-        //     }
-        // },
         controller: ["$scope", "$stateParams", function($scope, $stateParams) {
             for (var i = 0; i < $scope.videos.length; i++) {
                 if ($scope.videos[i].url === $stateParams.url) {
@@ -129,6 +158,12 @@ angular.module("MainApp")
         url: "/history",
         templateUrl: "app/views/history.html",
         redirectTo: 'history.viewed',
+        resolve: {
+            historyData: ["factory", function(factory) {
+                return factory.getHistoryData();
+            }]
+        },
+        controller: 'HistoryCtrl'
     })
     .state('history.viewed', {
         url: "-viewed",
@@ -148,15 +183,7 @@ angular.module("MainApp")
             content: '='
         },
         controller: ["$scope", "$stateParams", "factory", function($scope, $stateParams, factory) {
-            if ($stateParams.url === $scope.currentUser.url) {
-                $scope.content = $scope.currentUser;
-            } else {
-                for (var i = 0; i < $scope.channels.length; i++) {
-                    if ($scope.channels[i].url === $stateParams.url) {
-                        $scope.content = $scope.channels[i];
-                    }
-                }
-            }
+            $scope.content = $scope.currentUser;
         }]
     })
     .state('user.all', {
@@ -167,43 +194,41 @@ angular.module("MainApp")
         url : '/liked',
         templateUrl: 'app/views/channel-liked.html'
     })
-        
-        
-    //not my channel
-        
+
+    // profile
+    .state('profile', {
+        url : '/profile',
+        templateUrl : 'app/views/profile.html',
+        controller : 'ProfileCtrl'
+    })
+
+    // not my channel
     .state('xuser', {
-        url : '/xuser/:url',
-        templateUrl : "app/views/xchannel.html",
+        url: '/xuser/:url',
+        templateUrl: "app/views/xchannel.html",
         redirectTo: 'xuser.all',
-        controller : 'xChannelCtrl'
+        scope: {
+            content: '='
+        }
     })
     .state('xuser.all', {
-        url : '/all',
+        url: '/all',
         templateUrl: 'app/views/xchannel-all.html'
     })
     .state('xuser.playlist', {
-        url : '/playlist',
+        url: '/playlist',
         templateUrl: 'app/views/xchannel-liked.html'
     })
     .state('xuser.shop', {
-        url : '/shop',
+        url: '/shop',
         templateUrl: 'app/views/xchannel-shop.html'
     })
 
     //shop detailed page
     .state('shop-detailed', {
-        url : '/shop/:itemId',
+        url: '/shop/:itemId',
         templateUrl: 'app/views/shop-detail.html',
-        controller : 'shopDetailCtrl'
-    })
-
-
-
-    //profile
-    .state('profile', {
-        url : '/profile',
-        templateUrl : 'app/views/profile.html',
-        controller : 'ProfileCtrl'
+        controller : 'ShopDetailCtrl'
     })
 
     // video page
@@ -229,10 +254,32 @@ angular.module("MainApp")
 
         var factory = {};
 
+        // home page
         factory.getHomePageData = function() {
             return $http.get('./assets/js/data.json');
         };
 
+        // exclusive page
+        factory.getExclusiveVideos = function() {
+            return $http.get('./assets/js/data.json');
+        };
+
+        // ratings page
+        factory.getRatings = function() {
+            return $http.get('./assets/js/data.json');
+        };
+
+        // blog page
+        factory.getBlogData = function() {
+            return $http.get('./assets/js/data.json');
+        };
+
+        // history page
+        factory.getHistoryData = function() {
+            return $http.get('./assets/js/data.json');
+        };
+
+        //
         factory.getVideos = function() {
             return $http.get('./assets/js/data.json');
         };
@@ -371,27 +418,38 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('HeaderCtrl', ['$scope', 'factory', function ($scope, factory) {
+.controller('ExclusiveCtrl', ['$scope', 'exclusiveVideos', function ($scope, exclusiveVideos) {
 
-    $scope.removePin = function(pin) {
-        var index = $scope.pins.indexOf(pin);
-        if (index > -1) {
-            $scope.pins.splice(index, 1);
-        }
-    };
+    $scope.exclusiveVideos = exclusiveVideos.data.videos; //--
+
+    $scope.categories = [
+        'Adamantio 993',
+        'JOD'
+    ];
 
 }]);
 
 angular.module("MainApp")
-.controller('HomeCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
+.controller('HeaderCtrl', ['$scope', 'factory', function ($scope, factory) {
 
-    // factory data
-    factory.getHomePageData().success(function(response) {
-        $scope.blogs = response.videos;
-        $scope.videos = response.videos;
-        $scope.channels = response.channels;
-        $scope.goods = response.goods;
-    });
+    
+
+}]);
+
+angular.module("MainApp")
+.controller('HistoryCtrl', ['$scope', 'historyData', function ($scope, historyData) {
+
+    $scope.historyData = clone(historyData.data.videos.sort(dynamicSort('date'))).reverse();
+
+    // history filter
+    $scope.historyFilter = function(array,index,prop) {
+        if (
+            index !== 0 &&
+            array[index][prop] === array[index-1][prop]
+        ) {
+            return true;
+        }
+    };
 
 }]);
 
@@ -407,18 +465,8 @@ angular.module("MainApp")
         $scope.goods = response.goods;
         $scope.notifications = response.notifications;
         $scope.comments = response.comments;
-
-        // console.log($scope.goods);
-
-        // videos sorted by date from most recent
-        $scope.videosHistory = clone($scope.videos.sort(dynamicSort('date'))).reverse();
     });
 
-    // video categories
-    $scope.categories = [
-        'JOD',
-        'Adamantio 993'
-    ];
 
     // current user
     $scope.currentUser = {
@@ -434,17 +482,6 @@ angular.module("MainApp")
     // get humanized date format
     $scope.getDate = function(date,toDay) {
         return prettyDate(date,toDay);
-    };
-
-
-    // history filter
-    $scope.historyFilter = function(array,index,prop) {
-        if (
-            index !== 0 &&
-            array[index][prop] === array[index-1][prop]
-        ) {
-            return true;
-        }
     };
 
 
@@ -474,11 +511,6 @@ angular.module("MainApp")
         }
     };
 
-
-    // trash
-    window.showVideos = function() {
-        console.log($scope.videos);
-    };
 
 }]);
 
@@ -510,7 +542,20 @@ angular.module("MainApp")
     }]);
 
 angular.module("MainApp")
-    .controller('shopDetailCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
+.controller('RatingsCtrl', ['$scope', 'ratingsData', function ($scope, ratingsData) {
+
+    $scope.ratingsData = ratingsData.data;
+
+    // video categories
+    $scope.categories = [
+        'JOD',
+        'Adamantio 993'
+    ];
+
+}]);
+
+angular.module("MainApp")
+    .controller('ShopDetailCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
         $scope.test = 'asgasgasg';
 
         $scope.itemDetails = {
@@ -520,7 +565,7 @@ angular.module("MainApp")
                 'assets/img/tshort2.png'
             ]
         };
-        
+
         $scope.mainImageUrl = $scope.itemDetails.images[0];
 
         $scope.setImage = function(url) {
@@ -532,30 +577,39 @@ angular.module("MainApp")
             $scope.selectedPreview = index;
         }
     }]);
+
 angular.module("MainApp")
-    .controller('xChannelCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
+.controller('xChannelCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
 
-        $scope.sortTypes = [
-            'По дате добавления [сначала новые]',
-            'По дате добавления [сначала старые]'
-        ];
-        $scope.xUser = {
-            "name": $stateParams.url,
-            "url": $stateParams.url,
-            "avatar": "https://yt3.ggpht.com/-fGQ0wMqcQ2E/AAAAAAAAAAI/AAAAAAAAAAA/DJ1UmcmYRMI/s100-c-k-no-rj-c0xffffff/photo.jpg",
-            "cover": "https://yt3.ggpht.com/-n5hYQ4Nf_Uk/VQsVarAAlgI/AAAAAAAAKhM/U3WIG__7xQs/w2120-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no/Never-Stop-Learning-Social_YouTube%2B%25281%2529.png",
-            "description": "This is user channel description test test test test test test test test test test test test test test test test.",
-            "subscr_counter" : 18358461
-        };
-        
-        $scope.sortReverse = undefined;
-        $scope.sortBy = function(index) {
-            
-                $scope.sortReverse = index == 0 ? true : false;
-        };
+    for (var i = 0; i < $scope.channels.length; i++) {
+        if ($scope.channels[i].url === $stateParams.url) {
+            $scope.content = $scope.channels[i];
+        }
+    }
 
-        // console.log($stateParams.url);
-    }]);
+    $scope.sortTypes = [
+        'По дате добавления [новые]',
+        'По дате добавления [старые]'
+    ];
+
+    $scope.selectedSortType = $scope.sortTypes[0];
+
+    $scope.xUser = {
+        "cover": "https://yt3.ggpht.com/-n5hYQ4Nf_Uk/VQsVarAAlgI/AAAAAAAAKhM/U3WIG__7xQs/w2120-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no/Never-Stop-Learning-Social_YouTube%2B%25281%2529.png",
+        "description": "This is user channel description test test test test test test test test test test test test test test test test.",
+        "subscr_counter" : 18358461
+    };
+
+    $scope.sortReverse = true;
+
+    $scope.sortBy = function(index) {
+        $scope.sortReverse = index == 0 ? true : false;
+    };
+
+    // console.log($stateParams.url);
+
+}]);
+
 angular.module("MainApp")
 .directive('footerview', function() {
   return {

@@ -15,10 +15,10 @@
         <div class="block  block--blog">
 
             <!-- first article -->
-            <div class="col-xs-12" ng-repeat="blog in blogs | limitTo: 1">
+            <div class="col-xs-12" ng-repeat="blog in blogData | limitTo: 1">
                 <div class="thumb thumb--blog row">
                     <div class="col-xs-12 col-sm-6 col-md-5">
-                        <a  ui-sref="article({ url: blogs[$index].url })">
+                        <a  ui-sref="article({ url: blog.url })">
                             <div class="thumb__img">
                                 <img ng-src="{{ blog.img }}" alt="" />
                             </div>
@@ -36,10 +36,10 @@
             </div>
 
             <!-- other articles -->
-            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="blog in blogs | limitTo: (limits.blogs + 1) | startFrom : 1" ng-class="{'hidden-phone hidden-tablet':$last}">
+            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="blog in blogData | limitTo: (limits.blogs + 1) | startFrom : 1" ng-class="{'hidden-phone hidden-tablet':$last}">
                 <div class="thumb thumb--blog-med row">
                     <div class="col-xs-6 col-sm-12">
-                        <a ui-sref="article({ url: blogs[$index + 1].url })">
+                        <a ui-sref="article({ url: blogData[$index + 1].url })">
                             <div class="thumb__img">
                                 <img ng-src="{{ blog.img }}" alt="" />
                             </div>

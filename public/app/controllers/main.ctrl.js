@@ -10,18 +10,8 @@ angular.module("MainApp")
         $scope.goods = response.goods;
         $scope.notifications = response.notifications;
         $scope.comments = response.comments;
-
-        // console.log($scope.goods);
-
-        // videos sorted by date from most recent
-        $scope.videosHistory = clone($scope.videos.sort(dynamicSort('date'))).reverse();
     });
 
-    // video categories
-    $scope.categories = [
-        'JOD',
-        'Adamantio 993'
-    ];
 
     // current user
     $scope.currentUser = {
@@ -37,17 +27,6 @@ angular.module("MainApp")
     // get humanized date format
     $scope.getDate = function(date,toDay) {
         return prettyDate(date,toDay);
-    };
-
-
-    // history filter
-    $scope.historyFilter = function(array,index,prop) {
-        if (
-            index !== 0 &&
-            array[index][prop] === array[index-1][prop]
-        ) {
-            return true;
-        }
     };
 
 
@@ -77,10 +56,5 @@ angular.module("MainApp")
         }
     };
 
-
-    // trash
-    window.showVideos = function() {
-        console.log($scope.videos);
-    };
 
 }]);

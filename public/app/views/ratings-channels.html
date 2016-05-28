@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="channel in channels | limitTo: limits.channels">
+            <tr ng-repeat="channel in ratingsData.channels | limitTo: limits.channels">
                 <td><span class="table__number">{{ $index + 1 }}</span></td>
                 <td>
                     <div class="table__subscribers">{{ channel.subscribers | number }}</div>

@@ -1,9 +1,9 @@
 <!-- ratings videos block -->
 <div class="block block--white">
     <div class="col-xs-6 col-sm-4 col-md-3"
-    ng-repeat="video in videos | filter: { user: selectedCategory } | limitTo: limits.videos ">
+    ng-repeat="video in ratingsData.videos | filter: { user: selectedCategory } | limitTo: limits.videos ">
         <div class="thumb">
-            <a ui-sref="video({ url: videos[$index].url })">
+            <a ui-sref="video({ url: video.url })">
                 <div class="thumb__img">
                     <span class="thumb__length">{{ video.length }}</span>
                     <img ng-src="{{ video.img }}" alt="" />

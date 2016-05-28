@@ -3,11 +3,11 @@
     <!-- channel page -->
     <div class="channel">
         <div class="channel__cover" ng-class= "{bf_vis : channelbgText}" ng-style="{'background-image': 'url(' + currentUser.cover + ')'}">
-            <a href="#" ng-mouseover="hoverIn('bg')" ng-mouseleave="hoverOut('bg')" class="change_img channel_bg hidden-tablet hidden-phone"></a>
+            <a ng-mouseover="hoverIn('bg')" ng-mouseleave="hoverOut('bg')" class="change_img channel_bg hidden-tablet hidden-phone"></a>
             <div ng-show="channelbgText" class="bg_text">Обновить фото обложки канала</div>
             <div class="channel__ava" ng-class="{bf_vis : changeAvaText}">
                 <img ng-src="{{ currentUser.avatar }}" alt="avatar"/>
-                <a href="#" ng-mouseover="hoverIn('ava')" ng-mouseleave="hoverOut('ava')" class="change_img channel_ava hidden-tablet hidden-phone"></a>
+                <a ng-mouseover="hoverIn('ava')" ng-mouseleave="hoverOut('ava')" class="change_img channel_ava hidden-tablet hidden-phone"></a>
                 <div ng-show="changeAvaText" class="bg_text ava">Обновить аватар канала</div>
             </div>
         </div>
@@ -24,12 +24,12 @@
                         <div class="clearfix">
                             <h2 class="block__title">{{ content.name }}</h2> <a ui-sref="profile" class="btn btn-white edit_channel hidden-tablet hidden-phone">Редактировать канал</a>
                             <div class="subscribe_box hidden-tablet hidden-phone">
-                                <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
+                                <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe">{{ content.subscr_counter | number }}</span>
                             </div>
                         </div>
                         <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
                             <div class="subscribe_box hidden-desktop" style="float: none;">
-                                <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
+                                <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
                             </div>
                             <a ui-sref="profile" class="btn btn-white edit_channel hidden-desktop" style="float: none;;">Редактировать канал</a>
                         </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="tablet_ctrl clearfix hidden-phone">
                         <div class="subscribe_box hidden-desktop" style="float: left;">
-                            <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
+                            <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.subscr_counter | number}}</span>
                         </div>
                         <a ui-sref="profile" class="btn btn-white edit_channel hidden-desktop">Редактировать канал</a>
                     </div>

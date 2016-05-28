@@ -2575,10 +2575,11 @@ svg {
   .comments__plusone, .comments__other {
     color: #00cc33; }
     .comments__plusone:hover, .comments__other:hover {
-      border-color: #00cc33; }
+      border-color: #00cc33;
+      color: #00cc33; }
     .comments__plusone:active, .comments__other:active {
       transition: 0s;
-      color: white;
+      color: white !important;
       background: #00cc33;
       border-color: #00cc33; }
   .comments__date {
@@ -2762,36 +2763,58 @@ svg {
   margin: 4px 0 0 25px; }
 
 .subscribe_box {
-  margin-top: 2px;
+  margin-top: 4px;
   float: right; }
   .subscribe_box .subscribe {
     border-radius: 50px; }
   .subscribe_box .green_btn {
+    -webkit-user-select: none;
+    /* Chrome all / Safari all */
+    -moz-user-select: none;
+    /* Firefox all */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+    /* Likely future */
     background: #1bbb47;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
     color: #fff;
     text-transform: uppercase;
-    padding: 12px 29px 12px 29px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 35px;
+    display: inline-block;
+    vertical-align: top;
     position: relative;
     z-index: 2;
     font-weight: bold;
-    font-size: 14px; }
+    font-size: 14px;
+    cursor: pointer; }
     .subscribe_box .green_btn:hover {
       background: #2daa47; }
     .subscribe_box .green_btn:active {
-      background: -webkit-linear-gradient(top, #2b9f44 0%, #29bd4a 100%);
-      background: linear-gradient(top, #2b9f44 0%, #29bd4a 100%);
-      background: -moz-linear-gradient(top, #2b9f44 0%, #29bd4a 100%); }
+      background: linear-gradient(#2b9f44, #29bd4a); }
   .subscribe_box .counter {
     background: #e6e6e6;
     color: #5b5d5e;
+    padding: 0 15px 0 25px;
+    line-height: 40px;
+    height: 40px;
+    width: 150px;
+    vertical-align: top;
     text-align: center;
-    padding: 10px 20px 13px 40px;
-    margin-left: -35px;
+    margin-left: -20px;
     position: relative;
     z-index: 1;
     font-size: 18px;
     box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.15);
-    display: inline-block; }
+    display: inline-block;
+    border-radius: 0 50px 50px 0; }
+  @media screen and (max-width: 767px) {
+    .subscribe_box .green_btn {
+      padding: 0 20px; }
+    .subscribe_box .counter {
+      padding: 0 10px 0 20px; } }
 
 .cat_counter {
   font-size: 36px;
@@ -2803,7 +2826,8 @@ svg {
   height: 25px;
   display: block;
   background: url("../img/change_logo_icon.png") no-repeat center/30px 25px;
-  transition: .3s; }
+  transition: .3s;
+  cursor: pointer; }
   .change_img.channel_bg {
     position: absolute;
     right: 30px;
@@ -2845,6 +2869,7 @@ svg {
     float: left; }
   .tablet_ctrl {
     padding-top: 10px;
+    padding-bottom: 10px;
     margin-left: -10px; }
     .tablet_ctrl .edit_channel {
       float: right; }
@@ -3020,22 +3045,24 @@ svg {
   float: none;
   margin: 15px 0; }
   .profile__subscribe_box .green_btn {
-    font-size: 16px;
-    padding: 6px 20px;
-    font-weight: normal;
-    text-transform: capitalize; }
-  .profile__subscribe_box .counter {
-    font-size: 12px;
-    padding: 11px 20px 9px 40px; }
-
-@media screen and (min-width: 1280px) and (max-width: 1430px) {
-  .profile__subscribe_box .green_btn {
-    padding: 5px 16px;
     font-size: 14px; }
   .profile__subscribe_box .counter {
-    padding: 10px 20px 8px 30px;
+    font-size: 14px;
+    width: 130px; }
+
+@media screen and (min-width: 1280px) and (max-width: 1700px) {
+  .profile__subscribe_box .green_btn {
+    padding: 0 15px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 10px; }
+  .profile__subscribe_box .counter {
+    padding: 0 10px 0 15px;
     font-size: 10px;
-    margin-left: -26px; } }
+    height: 30px;
+    line-height: 30px;
+    width: 100px;
+    margin-left: -20px; } }
 
 .profile .pin_btn {
   vertical-align: top;

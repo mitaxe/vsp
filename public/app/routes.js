@@ -9,13 +9,27 @@ angular.module("MainApp")
     .state('home', {
         url: "/",
         templateUrl: "app/views/home.html",
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl',
+        resolve: {
+            homeData: function(factory) {
+                return factory.getHomePageData();
+            }
+        },
+        controller: function($scope, homeData) {
+            $scope.homeData = homeData.data;
+        }
     })
 
     // exclusive
     .state('exclusive', {
         url: "/exclusive",
-        templateUrl: "app/views/exclusive.html"
+        templateUrl: "app/views/exclusive.html",
+        controller: 'ExclusiveCtrl',
+        resolve: {
+            exclusiveVideos: function(factory) {
+                return factory.getExclusiveVideos();
+            }
+        }
     })
 
     // ratings
@@ -23,6 +37,12 @@ angular.module("MainApp")
         url: "/ratings",
         templateUrl: "app/views/ratings.html",
         redirectTo: 'ratings.videos',
+        resolve: {
+            ratingsData: function(factory) {
+                return factory.getExclusiveVideos();
+            }
+        },
+        controller: 'RatingsCtrl'
     })
     .state('ratings.videos', {
         url: "-videos",
@@ -36,7 +56,15 @@ angular.module("MainApp")
     // blog
     .state('blog', {
         url: "/blog",
-        templateUrl: "app/views/blog.html"
+        templateUrl: "app/views/blog.html",
+        resolve: {
+            blogData: function(factory) {
+                return factory.getBlogData();
+            }
+        },
+        controller: function($scope, blogData) {
+            $scope.blogData = blogData.data.videos;
+        }
     })
     .state('article', {
         url: "/blog/:url",
@@ -44,11 +72,6 @@ angular.module("MainApp")
         scope: {
             content: '='
         },
-        // resolve: {
-        //     data: function(factory){
-        //         return factory.getVideos();
-        //     }
-        // },
         controller: function($scope, $stateParams) {
             for (var i = 0; i < $scope.videos.length; i++) {
                 if ($scope.videos[i].url === $stateParams.url) {
@@ -63,6 +86,12 @@ angular.module("MainApp")
         url: "/history",
         templateUrl: "app/views/history.html",
         redirectTo: 'history.viewed',
+        resolve: {
+            historyData: function(factory) {
+                return factory.getHistoryData();
+            }
+        },
+        controller: 'HistoryCtrl'
     })
     .state('history.viewed', {
         url: "-viewed",
@@ -82,15 +111,7 @@ angular.module("MainApp")
             content: '='
         },
         controller: function($scope, $stateParams, factory) {
-            if ($stateParams.url === $scope.currentUser.url) {
-                $scope.content = $scope.currentUser;
-            } else {
-                for (var i = 0; i < $scope.channels.length; i++) {
-                    if ($scope.channels[i].url === $stateParams.url) {
-                        $scope.content = $scope.channels[i];
-                    }
-                }
-            }
+            $scope.content = $scope.currentUser;
         }
     })
     .state('user.all', {
@@ -101,43 +122,41 @@ angular.module("MainApp")
         url : '/liked',
         templateUrl: 'app/views/channel-liked.html'
     })
-        
-        
-    //not my channel
-        
+
+    // profile
+    .state('profile', {
+        url : '/profile',
+        templateUrl : 'app/views/profile.html',
+        controller : 'ProfileCtrl'
+    })
+
+    // not my channel
     .state('xuser', {
-        url : '/xuser/:url',
-        templateUrl : "app/views/xchannel.html",
+        url: '/xuser/:url',
+        templateUrl: "app/views/xchannel.html",
         redirectTo: 'xuser.all',
-        controller : 'xChannelCtrl'
+        scope: {
+            content: '='
+        }
     })
     .state('xuser.all', {
-        url : '/all',
+        url: '/all',
         templateUrl: 'app/views/xchannel-all.html'
     })
     .state('xuser.playlist', {
-        url : '/playlist',
+        url: '/playlist',
         templateUrl: 'app/views/xchannel-liked.html'
     })
     .state('xuser.shop', {
-        url : '/shop',
+        url: '/shop',
         templateUrl: 'app/views/xchannel-shop.html'
     })
 
     //shop detailed page
     .state('shop-detailed', {
-        url : '/shop/:itemId',
+        url: '/shop/:itemId',
         templateUrl: 'app/views/shop-detail.html',
-        controller : 'shopDetailCtrl'
-    })
-
-
-
-    //profile
-    .state('profile', {
-        url : '/profile',
-        templateUrl : 'app/views/profile.html',
-        controller : 'ProfileCtrl'
+        controller : 'ShopDetailCtrl'
     })
 
     // video page

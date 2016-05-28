@@ -7,6 +7,7 @@
         "count": "1233346",
         "length": "4:25",
         "user": "Adamantio 993",
+        "userLink": "Adamantio993",
         "exclusive": 0,
         "date": "2016-05-24T00:24:17Z"
     },{
@@ -17,6 +18,7 @@
         "count": "123412347",
         "length": "4:25",
         "user": "JOD",
+        "userLink": "JOD",
         "exclusive": 1,
         "date": "2016-05-23"
     },{
@@ -260,16 +262,16 @@
     }],
 
     "channels": [{
-        "name": "Katie Perry",
-        "url": "KatiePerry",
+        "name": "Adamantio 993",
+        "url": "Adamantio993",
         "subscribers": 12367,
         "img": "assets/img/ball-58.png",
         "videos": 123,
         "views": 76842,
         "description": "The Joe Rogan Experience podcast"
     },{
-        "name": "Donald Duck",
-        "url": "KatiePerry",
+        "name": "JOD",
+        "url": "JOD",
         "subscribers": 12367,
         "img": "assets/img/ball-59.png",
         "videos": 44444,
