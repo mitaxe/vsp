@@ -712,7 +712,7 @@
 
 /* content tabs */
 .tabs {
-    margin-bottom: -5px;
+    margin-bottom: -3px;
     color: #5d5b5e;
     font-size: 18px;
     font-weight: 300;
@@ -720,6 +720,12 @@
     width: 50%;
     display: block;
     height: 45px;
+    &__underline {
+        height: 2px;
+        position: relative;
+        background: $col-green;
+        transition: .3s;
+    }
     a {
         @include no-select;
         display: inline-block;
@@ -729,9 +735,9 @@
         height: 45px;
         transition: .3s;
         border-bottom: 2px solid transparent;
-        &.active {
-            border-bottom: 2px solid $col-green;
-        }
+        // &.active {
+        //     border-bottom: 2px solid $col-green;
+        // }
         &:hover {
             color: $col-green;
         }

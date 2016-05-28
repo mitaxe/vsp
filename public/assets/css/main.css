@@ -2349,7 +2349,7 @@ svg {
 /* custom select dropdons */
 /* content tabs */
 .tabs {
-  margin-bottom: -5px;
+  margin-bottom: -3px;
   color: #5d5b5e;
   font-size: 18px;
   font-weight: 300;
@@ -2357,6 +2357,11 @@ svg {
   width: 50%;
   display: block;
   height: 45px; }
+  .tabs__underline {
+    height: 2px;
+    position: relative;
+    background: #00cc33;
+    transition: .3s; }
   .tabs a {
     -webkit-user-select: none;
     /* Chrome all / Safari all */
@@ -2373,8 +2378,6 @@ svg {
     height: 45px;
     transition: .3s;
     border-bottom: 2px solid transparent; }
-    .tabs a.active {
-      border-bottom: 2px solid #00cc33; }
     .tabs a:hover {
       color: #00cc33; }
   @media screen and (max-width: 767px) {
