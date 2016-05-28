@@ -767,15 +767,13 @@
         padding-bottom: 70px;
         overflow: auto;
         &__header {
+            @include clearfix;
             text-align: center;
             padding: 15px 15px 0px;
             border-bottom: 1px solid #cacaca;
             a {
                 padding: 10px 20px !important;
                 margin-bottom: -1px;
-                &.active {
-                    border-bottom: 2px solid $col-green;
-                }
             }
         }
         &__left,

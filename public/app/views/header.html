@@ -86,8 +86,13 @@
             ng-click="$event.stopPropagation();">
             <div class="noti-tabs" ng-init="notiNotActive = true">
                 <div class="noti-tabs__header">
-                    <a ng-class="{'active':notiNotActive}" ng-click="notiNotActive = true; notiComActive = false;">Комментарии</a>
-                    <a ng-class="{'active':notiComActive}" ng-click="notiNotActive = false; notiComActive = true;">Уведомления</a>
+                    <tabs>
+                        <div class="clearfix">
+                            <a ng-class="{'active':notiNotActive}" ng-click="notiNotActive = true; notiComActive = false;">Комментарии</a>
+                            <a ng-class="{'active':notiComActive}" ng-click="notiNotActive = false; notiComActive = true;">Уведомления</a>
+                        </div>
+                        <div class="tabs__underline hidden-tablet hidden-desktop"></div>
+                    </tabs>
                 </div>
                 <div class="noti-tabs__box">
                     <div class="noti-tabs__left" ng-class="{'active':notiNotActive}">
