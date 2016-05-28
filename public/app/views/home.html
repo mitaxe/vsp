@@ -33,7 +33,24 @@
                 <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
             </div>
             <!-- slider visible desktop only -->
-            <slider info='homeData.videos' type="videos" class="hidden-phone hidden-tablet"></slider>
+            <slider slides="homeData.videos" limitto="12" class="hidden-phone hidden-tablet">
+                <div class="col-xs-2 slider__slide" ng-repeat="video in homeData.videos | limitTo: 12">
+                    <div class="thumb">
+                        <a ui-sref="video({ url: video.url })">
+                            <div class="thumb__img">
+                                <span class="thumb__length">{{ video.length }}</span>
+                                <img ng-src="{{ video.img }}" alt="" />
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__user"><a href="">{{ video.user }}</a></p>
+                        <p>
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                        </p>
+                    </div>
+                </div>
+            </slider>
             <!-- slider replaced by simple block on mob and tablet -->
             <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in homeData.videos | limitTo: 3">
                 <div class="thumb row">
@@ -64,7 +81,24 @@
                 <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
             </div>
             <!-- slider visible desktop only -->
-            <slider info='homeData.videos' type="videos" class="hidden-phone hidden-tablet"></slider>
+            <slider slides="homeData.videos" class="hidden-phone hidden-tablet">
+                <div class="col-xs-2 slider__slide" ng-repeat="video in homeData.videos">
+                    <div class="thumb">
+                        <a ui-sref="video({ url: video.url })">
+                            <div class="thumb__img">
+                                <span class="thumb__length">{{ video.length }}</span>
+                                <img ng-src="{{ video.img }}" alt="" />
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__user"><a href="">{{ video.user }}</a></p>
+                        <p>
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                        </p>
+                    </div>
+                </div>
+            </slider>
             <!-- slider replaced by simple block on mob and tablet -->
             <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in homeData.videos | limitTo: 3">
                 <div class="thumb row">
@@ -249,7 +283,24 @@
                 <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
             </div>
             <!-- slider visible desktop only -->
-            <slider info='homeData.channels' type="channels" class="hidden-phone hidden-tablet"></slider>
+            <slider slides="homeData.channels" limitto="24" perslide="8" class="hidden-phone hidden-tablet">
+                <div class="col-xs-3 slider__slide slider__slide--24" ng-repeat="channel in homeData.channels | limitTo: 24">
+                    <div class="thumb thumb--chan">
+                        <a ui-sref="channel({ url: channel.url })">
+                            <div class="thumb__img">
+                                <img ng-src="{{ channel.img }}" alt="" />
+                            </div>
+                        </a>
+                        <div class="thumb__info">
+                            <p class="thumb__name"><a href="#">{{ channel.name }}</a></p>
+                            <p class="thumb__subs">{{ channel.subscribers | number }}</p>
+                        </div>
+                        <div class="center">
+                            <a href="#" class="btn btn-green btn-small">Подписаться</a>
+                        </div>
+                    </div>
+                </div>
+            </slider>
             <!-- slider replaced by simple block on mob and tablet -->
             <div class="col-xs-6 hidden-desktop" ng-repeat="channel in homeData.channels | limitTo: 6">
                 <div class="thumb thumb--chan row">

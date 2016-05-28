@@ -1,41 +1,70 @@
 angular.module("MainApp")
-.directive('slider', function(prettyDate) {
+.directive('slider', function($timeout) {
   return {
     restrict: 'E',
+    transclude: true,
     scope: {
-        info: '='
+        slidesN: '=slides',
+        limitTo: '=limitto',
+        perSlide: '=perslide'
     },
-    replace: true,
-    templateUrl: function(tElement, tAttrs) {
-        if (tAttrs) {
-            if (tAttrs.type === 'videos') {
-                return 'app/views/slider-videos.html';
-            }
-            if (tAttrs.type === 'channels') {
-                return 'app/views/slider-channels.html';
-            }
-        }
-    },
+    template: '<div class="slider" ng-class="{sliderReady:sliderReady}">' +
+                '<div class="slider__box">' +
+                    '<div class="slider__inner">' +
+                        '<div ng-transclude></div>' +
+                    '</div>' +
+                '</div>' +
+                '<ul class="slider__pager">' +
+                    '<li ng-class="{active: isActiveSlide($index)}" ng-model="activeSlide" ng-click="slideTo($index)" ng-repeat="i in pages"></li>' +
+                '</ul>' +
+                '</div>',
     link: function(scope, element, attrs) {
 
-        scope.slidesN = [0,1,2]; /// ---
+        // scope.$watch('slidesN', function() {
+            var timer = $timeout(function() {
+                
+                scope.pages = [];
+                scope.activeSlide = 0;
 
-        scope.activeSlide = 0;
+                var perSlide = scope.perSlide || 4;
 
-        scope.slideTo = function(slide) {
-            scope.activeSlide = slide;
-            element[0].querySelector('.slider__inner').style.left = '-' + slide * 100 + '%';
-        };
+                var slidesNumber = scope.limitTo ? scope.limitTo : scope.slidesN.length;
 
-        scope.isActiveSlide = function(i) {
-            if (i === scope.activeSlide) {
-                return true;
-            }
-        };
+                var sliderBox = element[0].querySelector('.slider__inner');
+                var slides = element[0].querySelectorAll('.slider__slide');
 
-        scope.getDate = function(date,toDay) {
-            return prettyDate(date,toDay);
-        };
+                for (var i = 0; i < (slidesNumber/perSlide); i++) {
+                    scope.pages.push(i);
+                }
+
+                sliderBox.style.width = scope.pages.length * 100 + '%';
+
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].style.width = 100 / slidesNumber + '%';
+                }
+
+                scope.sliderReady = true;
+
+                scope.slideTo = function(slide) {
+                    scope.activeSlide = slide;
+                    element[0].querySelector('.slider__inner').style.left = '-' + slide * 100 + '%';
+                };
+
+                scope.isActiveSlide = function(i) {
+                    if (i === scope.activeSlide) {
+                        return true;
+                    }
+                };
+
+            },100);
+        //  }, true);
+
+                    // scope.$on(
+					// 	"$destroy",
+					// 	function( event ) {
+					// 		$timeout.cancel( timer );
+					// 	}
+					// );
 
     }
   };
