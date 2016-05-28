@@ -4,17 +4,17 @@ angular.module("MainApp")
         var factory = {};
 
         // home page
-        factory.getHomePageData = function() {
+        factory.getHomeData = function() {
             return $http.get('./assets/js/data.json');
         };
 
         // exclusive page
-        factory.getExclusiveVideos = function() {
+        factory.getExclusiveData = function() {
             return $http.get('./assets/js/data.json');
         };
 
         // ratings page
-        factory.getRatings = function() {
+        factory.getRatingsData = function() {
             return $http.get('./assets/js/data.json');
         };
 

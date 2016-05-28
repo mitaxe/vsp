@@ -4,11 +4,11 @@ var app = angular.module("MainApp", ['ui.router', 'ngAnimate']);
 app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $document, $locale, $state){
 
     // scroll ng view top on enter
-    $rootScope.$on('$stateChangeSuccess', function(ev, toState, toParams, fromState, fromParams) {
+    $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
         // prevent child states form scrolling top
         if (!(
-            fromState.name.indexOf('user.') >= 0 &&
-            toState.name.indexOf('user.') >= 0
+            from.name.indexOf('user.') >= 0 &&
+            to.name.indexOf('user.') >= 0
         )) {
             document.body.scrollTop = document.documentElement.scrollTop = 0;
         }
@@ -17,16 +17,6 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
     // replace angular number comma separator with space
     $locale.NUMBER_FORMATS.GROUP_SEP = " ";
     $locale.NUMBER_FORMATS.DECIMAL_SEP = ".";
-
-    // redirect route to child first state when needed
-    $rootScope.$state = $state;
-
-    $rootScope.$on('$stateChangeStart', function(evt, to, params) {
-      if (to.redirectTo) {
-        evt.preventDefault();
-        $state.go(to.redirectTo, params, {location: 'replace'})
-      }
-    });
 
 }]);
 
@@ -75,6 +65,14 @@ angular.module("MainApp")
 
     $urlRouterProvider.otherwise("/");
 
+    // redirects
+    $urlRouterProvider
+    .when("/history", "/history/viewed")
+    .when("/ratings", "/ratings/videos")
+    .when("/user/:url", "/user/:url/all")
+    .when("/xuser/:url", "/xuser/:url/all");
+
+
     $stateProvider
 
     // home
@@ -84,7 +82,7 @@ angular.module("MainApp")
         controller: 'HomeCtrl',
         resolve: {
             homeData: ["factory", function(factory) {
-                return factory.getHomePageData();
+                return factory.getHomeData();
             }]
         },
         controller: function($scope, homeData) {
@@ -99,7 +97,7 @@ angular.module("MainApp")
         controller: 'ExclusiveCtrl',
         resolve: {
             exclusiveVideos: ["factory", function(factory) {
-                return factory.getExclusiveVideos();
+                return factory.getExclusiveData();
             }]
         }
     })
@@ -108,20 +106,19 @@ angular.module("MainApp")
     .state('ratings', {
         url: "/ratings",
         templateUrl: "app/views/ratings.html",
-        redirectTo: 'ratings.videos',
         resolve: {
             ratingsData: ["factory", function(factory) {
-                return factory.getExclusiveVideos();
+                return factory.getRatingsData();
             }]
         },
         controller: 'RatingsCtrl'
     })
     .state('ratings.videos', {
-        url: "-videos",
+        url: "/videos",
         templateUrl: "app/views/ratings-videos.html"
     })
     .state('ratings.channels', {
-        url: "-channels",
+        url: "/channels",
         templateUrl: "app/views/ratings-channels.html"
     })
 
@@ -157,7 +154,6 @@ angular.module("MainApp")
     .state('history', {
         url: "/history",
         templateUrl: "app/views/history.html",
-        redirectTo: 'history.viewed',
         resolve: {
             historyData: ["factory", function(factory) {
                 return factory.getHistoryData();
@@ -166,11 +162,11 @@ angular.module("MainApp")
         controller: 'HistoryCtrl'
     })
     .state('history.viewed', {
-        url: "-viewed",
+        url: "/viewed",
         templateUrl: "app/views/history-viewed.html"
     })
     .state('history.liked', {
-        url: "-liked",
+        url: "/liked",
         templateUrl: "app/views/history-liked.html"
     })
 
@@ -178,13 +174,7 @@ angular.module("MainApp")
     .state('user', {
         url: "/user/:url",
         templateUrl: "app/views/channel.html",
-        redirectTo: 'user.all',
-        scope: {
-            content: '='
-        },
-        controller: ["$scope", "$stateParams", "factory", function($scope, $stateParams, factory) {
-            $scope.content = $scope.currentUser;
-        }]
+        controller: 'ChannelCtrl'
     })
     .state('user.all', {
         url : '/all',
@@ -206,10 +196,7 @@ angular.module("MainApp")
     .state('xuser', {
         url: '/xuser/:url',
         templateUrl: "app/views/xchannel.html",
-        redirectTo: 'xuser.all',
-        scope: {
-            content: '='
-        }
+        controller: 'xChannelCtrl'
     })
     .state('xuser.all', {
         url: '/all',
@@ -228,7 +215,7 @@ angular.module("MainApp")
     .state('shop-detailed', {
         url: '/shop/:itemId',
         templateUrl: 'app/views/shop-detail.html',
-        controller : 'ShopDetailCtrl'
+        controller: 'ShopDetailCtrl'
     })
 
     // video page
@@ -255,17 +242,17 @@ angular.module("MainApp")
         var factory = {};
 
         // home page
-        factory.getHomePageData = function() {
+        factory.getHomeData = function() {
             return $http.get('./assets/js/data.json');
         };
 
         // exclusive page
-        factory.getExclusiveVideos = function() {
+        factory.getExclusiveData = function() {
             return $http.get('./assets/js/data.json');
         };
 
         // ratings page
-        factory.getRatings = function() {
+        factory.getRatingsData = function() {
             return $http.get('./assets/js/data.json');
         };
 
@@ -327,8 +314,8 @@ angular.module("MainApp")
 angular.module("MainApp")
 .controller('ChannelCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
 
-    // $scope.channelbgText = false;
-    // $scope.changeAvaText = false;
+    $scope.content = $scope.currentUser;
+
     $scope.hoverIn = function(target) {
         if(target == 'ava') {
             $scope.changeAvaText = true;
@@ -343,7 +330,7 @@ angular.module("MainApp")
             $scope.channelbgText = false;
         }
     };
-    
+
     $scope.subscriptions = 116;
 
 }]);
@@ -555,28 +542,28 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-    .controller('ShopDetailCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
-        $scope.test = 'asgasgasg';
+.controller('ShopDetailCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
+    $scope.test = 'asgasgasg';
 
-        $scope.itemDetails = {
-            name : $stateParams.itemId,
-            images : [
-                'assets/img/tshort1.png',
-                'assets/img/tshort2.png'
-            ]
-        };
+    $scope.itemDetails = {
+        name : $stateParams.itemId,
+        images : [
+            'assets/img/tshort1.png',
+            'assets/img/tshort2.png'
+        ]
+    };
 
-        $scope.mainImageUrl = $scope.itemDetails.images[0];
+    $scope.mainImageUrl = $scope.itemDetails.images[0];
 
-        $scope.setImage = function(url) {
-            $scope.mainImageUrl = url;
-        };
+    $scope.setImage = function(url) {
+        $scope.mainImageUrl = url;
+    };
 
-        $scope.selectedPreview = 0;
-        $scope.setPreview = function(index) {
-            $scope.selectedPreview = index;
-        }
-    }]);
+    $scope.selectedPreview = 0;
+    $scope.setPreview = function(index) {
+        $scope.selectedPreview = index;
+    }
+}]);
 
 angular.module("MainApp")
 .controller('xChannelCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {

@@ -1,82 +1,78 @@
-<div ng-controller="xChannelCtrl" autoscroll='true'>
-
-    <!-- channel page -->
-    <div class="channel">
-        <div class="channel__cover" ng-style="{'background-image': 'url(' + xUser.cover + ')'}">
-            <div class="channel__ava">
-                <img ng-src="{{ content.img }}" alt="avatar"/>
-            </div>
+<!-- channel page -->
+<div class="channel">
+    <div class="channel__cover" ng-style="{'background-image': 'url(' + xUser.cover + ')'}">
+        <div class="channel__ava">
+            <img ng-src="{{ content.img }}" alt="avatar"/>
         </div>
     </div>
+</div>
 
-    <!-- content -->
-    <div class="content">
-        <div class="row">
+<!-- content -->
+<div class="content">
+    <div class="row">
 
-            <!-- channel page header -->
-            <div class="block block--header">
-                <div class="col-xs-12">
-                    <div class="channel__head">
-                        <div class="clearfix">
-                            <h2 class="block__title">{{ content.name }}</h2>
-                            <div class="subscribe_box hidden-tablet hidden-phone">
-                                <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ xUser.subscr_counter | number }}</span>
-                            </div>
-                        </div>
-                        <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
-                            <div class="subscribe_box hidden-desktop" style="float: none;">
-                                <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ xUser.subscr_counter | number }}</span>
-                            </div>
-                        </div>
-                        <p class="block__subtitle">{{ xUser.description }}
-                            <a class="toggler" ng-click="descActive = !descActive" ng-class="{'active':descActive}">
-                                <span class="toggler__text">Читать далее</span>
-                                <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                            </a>
-                        </p>
-                        <div class="toggler__block">
-                            <div class="toggler__content" ng-class="{'active':descActive}">
-                                <p class="block__subtitle">2nd part of description here - {{ xUser.description }}2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tablet_ctrl clearfix hidden-phone">
-                        <div class="subscribe_box hidden-desktop" style="float:left;">
-                            <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ xUser.subscr_counter | number}}</span>
-                        </div>
-                    </div>
-
+        <!-- channel page header -->
+        <div class="block block--header">
+            <div class="col-xs-12">
+                <div class="channel__head">
                     <div class="clearfix">
-                        <div class="block__btn user_channel_sort_box hidden-tablet hidden-phone">
-                            <div class="block__select">
-                                <div ng-class="{'hidden-visibility':$state.includes('xuser.shop')}">
-                                    <span class="category-caption">Сортировка:</span>
-                                    <div class="select" tabindex="0" ng-class="{'active':selectActive}" ng-blur="selectActive = false">
-                                        <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                                        <span class="select__title" ng-click="selectActive = !selectActive;">{{ selectedSortType }}</span>
-                                        <div class="select__list">
-                                            <ul>
-                                                <li ng-repeat="sortType in sortTypes" ng-click="sortBy($index); $parent.selectedSortType = sortType">{{ sortType }}</li>
-                                            </ul>
-                                        </div>
+                        <h2 class="block__title">{{ content.name }}</h2>
+                        <div class="subscribe_box hidden-tablet hidden-phone">
+                            <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ xUser.subscr_counter | number }}</span>
+                        </div>
+                    </div>
+                    <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
+                        <div class="subscribe_box hidden-desktop" style="float: none;">
+                            <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ xUser.subscr_counter | number }}</span>
+                        </div>
+                    </div>
+                    <p class="block__subtitle">{{ xUser.description }}
+                        <a class="toggler" ng-click="descActive = !descActive" ng-class="{'active':descActive}">
+                            <span class="toggler__text">Читать далее</span>
+                            <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                        </a>
+                    </p>
+                    <div class="toggler__block">
+                        <div class="toggler__content" ng-class="{'active':descActive}">
+                            <p class="block__subtitle">2nd part of description here - {{ xUser.description }}2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here2nd part of description here</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tablet_ctrl clearfix hidden-phone">
+                    <div class="subscribe_box hidden-desktop" style="float:left;">
+                        <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ xUser.subscr_counter | number}}</span>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="block__btn user_channel_sort_box hidden-tablet hidden-phone">
+                        <div class="block__select">
+                            <div ng-class="{'hidden-visibility':$state.includes('xuser.shop')}">
+                                <span class="category-caption">Сортировка:</span>
+                                <div class="select" tabindex="0" ng-class="{'active':selectActive}" ng-blur="selectActive = false">
+                                    <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                                    <span class="select__title" ng-click="selectActive = !selectActive;">{{ selectedSortType }}</span>
+                                    <div class="select__list">
+                                        <ul>
+                                            <li ng-repeat="sortType in sortTypes" ng-click="sortBy($index); $parent.selectedSortType = sortType">{{ sortType }}</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="tabs">
-                            <a ui-sref="xuser.all({ url: content.url })" ui-sref-active="active">Все видео</a>
-                            <a ui-sref="xuser.playlist({ url: content.url })" ui-sref-active="active">Плейлисты</a>
-                            <a ui-sref="xuser.shop({ url: content.url })" ui-sref-active="active">Магазин</a>
-                        </div>
+                    </div>
+                    <div class="tabs">
+                        <a ui-sref="xuser.all({ url: content.url })" ui-sref-active="active">Все видео</a>
+                        <a ui-sref="xuser.playlist({ url: content.url })" ui-sref-active="active">Плейлисты</a>
+                        <a ui-sref="xuser.shop({ url: content.url })" ui-sref-active="active">Магазин</a>
                     </div>
                 </div>
-                <hr class="block__hr">
             </div>
-
-            <!-- channel views -->
-            <div ui-view></div>
-
+            <hr class="block__hr">
         </div>
-    </div>
 
+        <!-- channel views -->
+        <div ui-view></div>
+
+    </div>
 </div>
