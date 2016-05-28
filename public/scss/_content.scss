@@ -724,7 +724,8 @@
         height: 2px;
         position: relative;
         background: $col-green;
-        transition: .3s;
+        width: 0;
+        // transition: .3s;
     }
     a {
         @include no-select;
