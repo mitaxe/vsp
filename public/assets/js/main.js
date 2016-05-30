@@ -90,6 +90,34 @@ angular.module("MainApp")
         }
     })
 
+    .state('search', {
+        url : '/search',
+        templateUrl : 'app/views/search.html',
+        redirectTo : 'search.all',
+        resolve: {
+            historyData: ["factory", function(factory) {
+                return factory.getHistoryData();
+            }]
+        },
+        controller : 'SearchCtrl'
+    })
+    .state('search.all', {
+        url : '/all',
+        templateUrl : 'app/views/search-all.html'
+    })
+    .state('search.video', {
+        url : '/video',
+        templateUrl : ''
+    })
+    .state('search.channel', {
+        url : '/channel',
+        templateUrl : ''
+    })
+    .state('search.articles', {
+        url : '/articles',
+        templateUrl : ''
+    })
+
     // exclusive
     .state('exclusive', {
         url: "/exclusive",
@@ -541,6 +569,22 @@ angular.module("MainApp")
 
 }]);
 
+angular.module("MainApp")
+    .controller('SearchCtrl', ['$scope', 'historyData', function ($scope, historyData) {
+
+        $scope.historyData = clone(historyData.data.videos.sort(dynamicSort('date'))).reverse();
+
+        // history filter
+        $scope.historyFilter = function(array,index,prop) {
+            if (
+                index !== 0 &&
+                array[index][prop] === array[index-1][prop]
+            ) {
+                return true;
+            }
+        };
+
+    }]);
 angular.module("MainApp")
 .controller('ShopDetailCtrl', ['$scope', '$stateParams', '$window', function($scope, $stateParams, $window) {
 

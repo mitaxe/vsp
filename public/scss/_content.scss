@@ -742,6 +742,9 @@
         &:hover {
             color: $col-green;
         }
+        span {
+            font-weight:bold;
+        }
     }
     @include phone {
         text-align: center;

@@ -2383,6 +2383,8 @@ svg {
     border-bottom: 2px solid transparent; }
     .tabs a:hover {
       color: #00cc33; }
+    .tabs a span {
+      font-weight: bold; }
   @media screen and (max-width: 767px) {
     .tabs {
       text-align: center;
@@ -3215,6 +3217,15 @@ svg {
   font-size: 30px;
   color: #00cc33;
   margin-bottom: 20px; }
+
+.result_row__left {
+  display: inline-block;
+  vertical-align: top;
+  width: 10%; }
+
+.result_row__right {
+  display: inline-block;
+  width: 89%; }
 
 @media screen and (min-width: 1280px) {
   .slider {

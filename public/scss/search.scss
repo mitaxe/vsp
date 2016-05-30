@@ -1,0 +1,11 @@
+.result_row {
+  &__left {
+    display: inline-block;
+    vertical-align: top;
+    width: 10%;
+  }
+  &__right {
+    display: inline-block;
+    width:89%;
+  }
+}

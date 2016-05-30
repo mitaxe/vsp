@@ -28,6 +28,34 @@ angular.module("MainApp")
         }
     })
 
+    .state('search', {
+        url : '/search',
+        templateUrl : 'app/views/search.html',
+        redirectTo : 'search.all',
+        resolve: {
+            historyData: function(factory) {
+                return factory.getHistoryData();
+            }
+        },
+        controller : 'SearchCtrl'
+    })
+    .state('search.all', {
+        url : '/all',
+        templateUrl : 'app/views/search-all.html'
+    })
+    .state('search.video', {
+        url : '/video',
+        templateUrl : ''
+    })
+    .state('search.channel', {
+        url : '/channel',
+        templateUrl : ''
+    })
+    .state('search.articles', {
+        url : '/articles',
+        templateUrl : ''
+    })
+
     // exclusive
     .state('exclusive', {
         url: "/exclusive",

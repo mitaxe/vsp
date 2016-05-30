@@ -1,0 +1,29 @@
+<!-- history viewed -->
+<div class="block">
+    <div class="col-xs-12">
+
+        <div class="row">
+            <div class="col-xs-12 col-md-1 history__date">
+                <span>Видео</span>
+            </div>
+            <div ng-repeat="video in historyData | limitTo: 2" class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+                <div class="thumb row">
+                    <div class="col-xs-7 col-sm-5 col-md-5">
+                        <div class="thumb__img">
+                            <a ui-sref="video({ url: videos[$index].url })">
+                                <span class="thumb__length">{{ video.length }}</span>
+                                <img ng-src="{{ video.img }}" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-5 col-sm-5 col-md-5">
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                        <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

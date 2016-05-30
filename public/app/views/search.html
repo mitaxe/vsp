@@ -1,0 +1,31 @@
+<div class="content" autoscroll='true'>
+    <div class="row">
+
+        <!-- history header -->
+        <div class="block block--header">
+            <div class="col-xs-12 block__heading--ratings">
+                <div class="clearfix">
+                    <h2 class="block__title">Search string</h2>
+                    <div class="" style="float:right">
+                        <a ng-click="remove(historyData,'all')" class="btn btn-white">Очистить историю просмотров</a>
+                    </div>
+                </div>
+                <p>Результаты поиска</p>
+                <div class="clearfix">
+                    <tabs class="tabs">
+                        <a ui-sref="search.all" ui-sref-active="active">Все результаты</a>
+                        <a ui-sref="search.video" ui-sref-active="active">Видео <span class="cnt">(2)</span></a>
+                        <a ui-sref="search.channel" ui-sref-active="active">Каналы <span class="cnt">(1)</span></a>
+                        <a ui-sref="search.articles" ui-sref-active="active">Стати <span class="cnt">(2)</span></a>
+                        <div class="tabs__underline"></div>
+                    </tabs>
+                </div>
+            </div>
+            <hr class="block__hr">
+        </div>
+
+        <!-- history views -->
+        <div ui-view></div>
+
+    </div>
+</div>
