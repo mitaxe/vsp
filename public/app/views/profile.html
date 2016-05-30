@@ -76,11 +76,28 @@
                         <div class="profile__mid_right">
                             <div class="block block--white no_margin_desktop no_margin_tablet no_margin_phone">
                                 <div class="col-xs-12">
-                                    <h2 class="block__title block__title--left--auto">Видео</h2> <span class="cat_counter"> {{ videosCounter | number}}</span>
+                                    <h2 class="block__title block__title--left--auto">Видео</h2> <span class="cat_counter"> {{ videos.length | number}}</span>
                                     <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
                                 </div>
                                 <!-- slider visible desktop only -->
-                                <slider info='videos' type="videos" class="hidden-phone hidden-tablet"></slider>
+                                <slider slides="videos" class="hidden-phone hidden-tablet">
+                                    <div class="col-xs-2 slider__slide" ng-repeat="video in videos">
+                                        <div class="thumb">
+                                            <a ui-sref="video({ url: video.url })">
+                                                <div class="thumb__img">
+                                                    <span class="thumb__length">{{ video.length }}</span>
+                                                    <img ng-src="{{ video.img }}" alt="" />
+                                                </div>
+                                            </a>
+                                            <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                                            <p class="thumb__user"><a href="">{{ video.user }}</a></p>
+                                            <p>
+                                                <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
+                                                <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </slider>
                                 <!-- slider replaced by simple block on mob and tablet -->
                                 <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in videos | limitTo: 3">
                                     <div class="thumb row">

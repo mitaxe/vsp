@@ -22,7 +22,7 @@ angular.module("MainApp")
 
         // scope.$watch('slidesN', function() {
             var timer = $timeout(function() {
-                
+
                 scope.pages = [];
                 scope.activeSlide = 0;
 
@@ -56,15 +56,8 @@ angular.module("MainApp")
                     }
                 };
 
-            },100);
+            },0);
         //  }, true);
-
-                    // scope.$on(
-					// 	"$destroy",
-					// 	function( event ) {
-					// 		$timeout.cancel( timer );
-					// 	}
-					// );
 
     }
   };

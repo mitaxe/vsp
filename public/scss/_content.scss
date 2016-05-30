@@ -725,7 +725,7 @@
         position: relative;
         background: $col-green;
         width: 0;
-        // transition: .3s;
+        transition: .3s ease-in-out;
     }
     a {
         @include no-select;

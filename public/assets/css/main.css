@@ -2363,7 +2363,8 @@ svg {
     height: 2px;
     position: relative;
     background: #00cc33;
-    width: 0; }
+    width: 0;
+    transition: .3s ease-in-out; }
   .tabs a {
     -webkit-user-select: none;
     /* Chrome all / Safari all */
@@ -3146,8 +3147,7 @@ svg {
 
 @media screen and (min-width: 1280px) {
   .slider {
-    opacity: 0;
-    transition: opacity .5s; }
+    opacity: 0; }
     .slider.sliderReady {
       opacity: 1; }
     .slider__pager {
@@ -3185,4 +3185,5 @@ svg {
       transition: left 300ms cubic-bezier(0.86, 0, 0.07, 1); }
     .slider__slide {
       vertical-align: top;
-      white-space: normal; } }
+      white-space: normal;
+      width: 200px; } }

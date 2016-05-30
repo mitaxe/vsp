@@ -28,7 +28,7 @@ angular.module("MainApp")
                 angular.element(scope.underline).css({
                     'left': currentLeft + 'px',
                     'width': currentWidth + 'px',
-                    'transition': '0.3s'
+                    // 'transition': '0.3s'
                 });
             }
 

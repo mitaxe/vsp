@@ -716,7 +716,7 @@ angular.module("MainApp")
 
         // scope.$watch('slidesN', function() {
             var timer = $timeout(function() {
-                
+
                 scope.pages = [];
                 scope.activeSlide = 0;
 
@@ -750,15 +750,8 @@ angular.module("MainApp")
                     }
                 };
 
-            },100);
+            },0);
         //  }, true);
-
-                    // scope.$on(
-					// 	"$destroy",
-					// 	function( event ) {
-					// 		$timeout.cancel( timer );
-					// 	}
-					// );
 
     }
   };
@@ -844,7 +837,7 @@ angular.module("MainApp")
                 angular.element(scope.underline).css({
                     'left': currentLeft + 'px',
                     'width': currentWidth + 'px',
-                    'transition': '0.3s'
+                    // 'transition': '0.3s'
                 });
             }
 
