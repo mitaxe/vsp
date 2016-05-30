@@ -1,12 +1,57 @@
-<div class="content shop_detail" autoscroll='true'>
+<div class="content" autoscroll='true'>
     <div class="row">
-        <div class="block block--white">
+        <div class="block block--white" style="overflow:hidden;">
             <div class="col-xs-12">
-                <div class="item_box clearfix">
-                    <img ng-src="{{mainImageUrl}}" alt="main img" class="shop_detail__main_img">
-                    <ul class="shop_detail__preview_list">
+                <div class="item_description">
+                    <h2 class="item_description__name hidden-desktop">{{itemDetails.name}}</h2>
+                </div>
+                <div class="shop_item clearfix pull-left hidden-phone">
+                    <img ng-src="{{mainImageUrl}}" alt="main img" class="shop_item__main_img">
+                    <ul class="shop_item__preview_list">
                         <li ng-class="{'active' : selectedPreview == $index}" ng-repeat="item in itemDetails.images"><img ng-src="{{item}}"  ng-click="setImage(item);setPreview($index);" alt=""></li>
                     </ul>
+                </div>
+
+
+                <div class="container mb_slider hidden-desktop hidden-tablet">
+                    <!--<img ng-src="{{itemDetails.images[0]}}" style="opacity: 0;" alt="hidden image">-->
+                    <div ng-style="{'width' : wrapperWidth}" id="sWr" style="position: relative;">
+                        <img ng-style="{'width' : sliderWidth }" ng-repeat="slide in itemDetails.images" class="mb_slider__slide slide-animation nonDraggableImage"
+                             ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()"
+                              ng-src="{{slide}}">
+                    </div>
+                </div>
+
+
+                <div class="item_description">
+                    <h2 class="item_description__name hidden-tablet hidden-phone">{{itemDetails.name}}</h2>
+                    <p class="item_description__text hidden-phone">{{itemDetails.description}}</p>
+                    <p class="item_description__price hidden-tablet hidden-phone">{{itemDetails.price | currency }}</p>
+                    <a href="#" class="btn btn-green item_description__to_shop hidden-tablet hidden-phone">В магазин</a>
+                </div>
+                <div class="clearfix hidden-desktop"></div>
+                <div class="item_description hidden-desktop">
+                    <p class="item_description__text hidden-desktop hidden-tablet">{{itemDetails.description}}</p>
+                    <p class="item_description__price hidden-desktop">{{itemDetails.price | currency }}</p>
+                    <a href="#" class="btn btn-green item_description__to_shop hidden-desktop">В магазин</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="block block--white">
+            <div class="col-xs-12">
+                <h2 class="block__title">Другие товары</h2>
+                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-2" ng-repeat="good in goods | limitTo: 6">
+                <div class="thumb">
+                    <a ui-sref="shop-detailed({ itemId: good.name })">
+                        <div class="thumb__img">
+                            <img ng-src="{{ good.img }}" alt="" />
+                        </div>
+                    </a>
+                    <p class="thumb__price">{{ good.price | currency }}</p>
+                    <p class="thumb__goods-title"><a href="#">{{ good.name }}</a></p>
                 </div>
             </div>
         </div>

@@ -1,13 +1,25 @@
-.shop_detail {
+.shop_item {
+  margin-right: 100px;
   &__main_img {
     width: 270px;
     float: left;
+    border:1px solid #eeeeee;
+  }
+  @include tablet {
+    &__main_img {
+      margin-bottom: 30px;
+    }
   }
   &__preview_list {
     float: left;
+    margin-left: 20px;
     li{
       position: relative;
+      border:1px solid #eeeeee;
+      margin-bottom: 15px;
+      opacity: .7;
       &.active {
+        opacity: 1;
         &:before {
           content:'';
           display: block;
@@ -15,7 +27,7 @@
           width:3px;
           height:100%;
           background: $col-green;
-          left: -10px;
+          left: -15px;
         }
       }
     }
@@ -25,5 +37,79 @@
         cursor: pointer;
       }
     }
+  }
+}
+.mb_slider {
+  width: 100%;
+  height: auto;
+  //overflow: hidden;
+  position: relative;
+  background: #e6e6e6;
+  border: 20px solid #FFF;
+  margin-top: 20px;
+  &__slide {
+    //position: absolute;
+    //max-width: 50%;
+    top: 0;
+    left: 0;
+    border:1px solid #eeeeee;
+  }
+}
+
+@include tablet {
+  .shop_item {
+    margin-right: 30px;
+  }
+}
+
+.item_description {
+  &__name {
+    font-weight: 500;
+    color: #3a3d3e;
+    font-size: 46px;
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
+  }
+  @include tablet {
+    &__name {
+      margin-bottom: 15px;
+    }
+  }
+  @include phone {
+    &__name {
+      font-size: 20px;
+    }
+  }
+  &__text {
+    font-weight: 300;
+    color: #3a3d3e;
+    font-size: 18px;
+    padding: 20px 0;
+    max-width: 80%;
+  }
+  @include tablet {
+    &__text {
+      padding-top: 0;
+      max-width: 95%;
+    }
+  }
+  @include phone {
+    &__text {
+      font-size: 12px;
+      max-width: none;
+    }
+  }
+  &__to_shop {
+    text-transform: uppercase;
+    font-weight:bold;
+  }
+  @include  tablet {
+    &__to_shop {
+      margin-bottom: 30px;
+    }
+  }
+  &__price {
+    font-size: 30px;
+    color: $col-green;
+    margin-bottom: 20px;
   }
 }

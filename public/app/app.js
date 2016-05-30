@@ -1,4 +1,4 @@
-var app = angular.module("MainApp", ['ui.router', 'ngAnimate']);
+var app = angular.module("MainApp", ['ui.router', 'ngAnimate', 'ngTouch']);
 
 
 app.run(function($rootScope, $document, $locale, $state){
