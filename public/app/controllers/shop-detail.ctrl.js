@@ -52,7 +52,7 @@ angular.module("MainApp")
     });
     // $scope.testWidth = document.getElementById('dMobSlider').clientWidth;
 
-    
+
     // $scope.direction = 'left';
     $scope.currentIndex = 0;
     $scope.isCurrentSlideIndex = function (index) {

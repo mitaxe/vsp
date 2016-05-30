@@ -1599,8 +1599,9 @@ svg {
           display: table;
           clear: both; }
         .noti-tabs__header a {
-          padding: 10px 20px !important;
-          margin-bottom: -1px; }
+          padding: 10px 20px !important; }
+          .noti-tabs__header a.active {
+            border-bottom: 2px solid #00cc33; }
       .noti-tabs__left, .noti-tabs__right {
         padding: 25px 20px 15px 40px;
         width: 100%;
@@ -2351,7 +2352,7 @@ svg {
 /* custom select dropdons */
 /* content tabs */
 .tabs {
-  margin-bottom: -3px;
+  margin-bottom: -5px;
   color: #5d5b5e;
   font-size: 18px;
   font-weight: 300;
@@ -2360,6 +2361,7 @@ svg {
   display: block;
   height: 45px; }
   .tabs__underline {
+    display: none;
     height: 2px;
     position: relative;
     background: #00cc33;
@@ -2381,6 +2383,8 @@ svg {
     height: 45px;
     transition: .3s;
     border-bottom: 2px solid transparent; }
+    .tabs a.active {
+      border-bottom: 2px solid #00cc33; }
     .tabs a:hover {
       color: #00cc33; }
     .tabs a span {
