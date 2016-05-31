@@ -8,6 +8,11 @@
     display: inline-block;
     width:89%;
   }
+  @include phone{
+      &__right {
+        width:100%;
+      }
+  }
 }
 .search_amount {
   font-size: 48px;

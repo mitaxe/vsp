@@ -1,7 +1,7 @@
 <div class="content" autoscroll='true'>
     <div class="row">
 
-        <!-- history header -->
+        <!-- search header -->
         <div class="block block--header">
             <div class="col-xs-12 block__heading--ratings">
                 <div class="clearfix">
@@ -13,18 +13,23 @@
                 <p class="sub_title">Результаты поиска</p>
                 <div class="clearfix">
                     <tabs class="tabs four">
+                        <hr class="block__hr hidden-tablet hidden-desktop">
                         <a ui-sref="search.all" ui-sref-active="active">Все результаты</a>
+                        <hr class="block__hr hidden-tablet hidden-desktop">
                         <a ui-sref="search.video" ui-sref-active="active">Видео <span class="cnt">(2)</span></a>
+                        <hr class="block__hr hidden-tablet hidden-desktop">
                         <a ui-sref="search.channel" ui-sref-active="active">Каналы <span class="cnt">(1)</span></a>
+                        <hr class="block__hr hidden-tablet hidden-desktop">
                         <a ui-sref="search.articles" ui-sref-active="active">Стати <span class="cnt">(2)</span></a>
                         <div class="tabs__underline"></div>
+                        <hr class="block__hr hidden-tablet hidden-desktop">
                     </tabs>
                 </div>
             </div>
-            <hr class="block__hr">
+            <hr class="block__hr hidden-phone">
         </div>
 
-        <!-- history views -->
+        <!-- search views -->
         <div ui-view></div>
 
     </div>

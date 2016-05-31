@@ -1,4 +1,4 @@
-<!-- history viewed -->
+<!-- search all -->
 <div class="block">
     <div class="col-xs-12">
 
@@ -14,7 +14,7 @@
                         <span>Видео</span>
                     </div>
                     <div ng-repeat="video in historyData | limitTo: 2" class="">
-                        <div class="thumb row">
+                        <div class="row">
                             <div class="col-xs-7 col-sm-5 col-md-3">
                                 <div class="thumb__img">
                                     <a ui-sref="video({ url: videos[$index].url })">
@@ -23,7 +23,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-xs-5 col-sm-5 col-md-3">
+                            <div class="col-xs-5 col-sm-6 col-md-3">
                                 <p class="thumb__title"><a href="">{{ video.title }}</a></p>
                                 <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                                 <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
@@ -52,20 +52,36 @@
                         <span>Каналы</span>
                     </div>
                     <div>
-                        <div class="thumb row clearfix">
-                                <div class="thumb thumb--chan search_thumb pull-left">
-                                    <div class="thumb__img">
-                                        <a href="#">
-                                            <img ng-src="assets/img/ball-58.png" alt="" />
-                                        </a>
-                                    </div>
+                        <div class="row clearfix">
+                            <div class="thumb thumb--chan search_thumb pull-left">
+                                <div class="thumb__img">
+                                    <a href="#">
+                                        <img ng-src="assets/img/ball-58.png" alt="" />
+                                    </a>
                                 </div>
+                            </div>
                             <div class="col-md-5 col-sm-7 col-xs-6 pull-left">
                                 <div class="thumb thumb--chan search_thumb">
                                     <p class="thumb__name"><a href="">Smosh</a><a href="#" class="btn btn-green btn-small hidden-phone">Подписаться</a> <span class="thumb__subs">11 223 22</span> <a href="#" class="btn btn-green btn-small hidden-desktop hidden-tablet">Подписаться</a></p>
                                     <p class="thumb_text hidden-phone">UBSCRIBE ►► http://smo.sh/SmoshSub
                                         WATCH THE FIRST EPISODE NOW ►► http://smo.sh/1OLqJdT
-
+                                        SMOSH’S “PART TIMERS” is a new series about the dysfunctional </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <div class="thumb thumb--chan search_thumb pull-left">
+                                <div class="thumb__img">
+                                    <a href="#">
+                                        <img ng-src="assets/img/ball-58.png" alt="" />
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-sm-7 col-xs-6 pull-left">
+                                <div class="thumb thumb--chan search_thumb">
+                                    <p class="thumb__name"><a href="">Smosh</a><a href="#" class="btn btn-green btn-small hidden-phone">Подписаться</a> <span class="thumb__subs">11 223 22</span> <a href="#" class="btn btn-green btn-small hidden-desktop hidden-tablet">Подписаться</a></p>
+                                    <p class="thumb_text hidden-phone">UBSCRIBE ►► http://smo.sh/SmoshSub
+                                        WATCH THE FIRST EPISODE NOW ►► http://smo.sh/1OLqJdT
                                         SMOSH’S “PART TIMERS” is a new series about the dysfunctional </p>
                                 </div>
                             </div>

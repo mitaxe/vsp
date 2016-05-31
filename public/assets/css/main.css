@@ -2,7 +2,8 @@
   position: relative;
   min-height: 1px;
   padding-left: 7.5px;
-  padding-right: 7.5px; }
+  padding-right: 7.5px;
+  font-szie: 0px; }
 
 .row {
   margin-left: -7.5px;
@@ -1986,7 +1987,7 @@ svg {
     margin-bottom: 25px; }
   @media screen and (max-width: 767px) {
     .block {
-      margin: 0 10px 20px;
+      margin: 0 5px 20px;
       padding: 15px 5px 10px; }
       .block__title {
         font-size: 21px;
@@ -2164,7 +2165,8 @@ svg {
     .thumb--chan.search_thumb {
       padding-top: 0;
       padding-left: 0;
-      text-align: left; }
+      text-align: left;
+      margin-bottom: 0; }
       .thumb--chan.search_thumb .thumb__name {
         font-size: 25px; }
         .thumb--chan.search_thumb .thumb__name a {
@@ -2439,8 +2441,12 @@ svg {
       .tabs.four {
         width: 100%;
         height: auto; }
+        .tabs.four .block__hr {
+          margin: 0; }
         .tabs.four a {
-          display: block; } }
+          display: block;
+          width: 80%;
+          margin: 0 auto; } }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     .tabs a {
       padding: 0 10px; } }
@@ -3210,11 +3216,13 @@ svg {
   width: 100%;
   height: auto;
   position: relative;
-  background: #e6e6e6;
   border: 20px solid #FFF;
+  border-bottom: 0;
+  border-top: 0;
   margin-top: 20px; }
   .mb_slider #sWr {
-    transition: .3s; }
+    transition: .3s ease-in-out;
+    left: 0; }
   .mb_slider__slide {
     top: 0;
     left: 0;
@@ -3244,7 +3252,8 @@ svg {
   font-size: 18px;
   padding: 20px 0;
   max-width: 80%;
-  word-break: break-all; }
+  word-break: break-all;
+  line-height: 1.3; }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .item_description__text {
@@ -3278,6 +3287,10 @@ svg {
 .result_row__right {
   display: inline-block;
   width: 89%; }
+
+@media screen and (max-width: 767px) {
+  .result_row__right {
+    width: 100%; } }
 
 .search_amount {
   font-size: 48px;

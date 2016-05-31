@@ -103,7 +103,7 @@
     }
 
     @include phone {
-        margin: 0 10px 20px;
+        margin: 0 5px 20px;
         padding: 15px 5px 10px;
         &__title {
             font-size: 21px;
@@ -379,6 +379,7 @@
             padding-top: 0;
             padding-left: 0;
             text-align: left;
+            margin-bottom: 0;
             .thumb__name {
                 font-size: 25px;
                 a {
@@ -802,8 +803,13 @@
         &.four {
             width: 100%;
             height:auto;
+            .block__hr {
+                margin: 0;
+            }
             a {
                 display: block;
+                width: 80%;
+                margin: 0 auto;
             }
         }
     }

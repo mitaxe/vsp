@@ -60,9 +60,5 @@ angular.module("MainApp")
         }
     };
 
-    // trash
-    window.showComments = function() {
-        console.log($scope.comments);
-    };
 
 }]);

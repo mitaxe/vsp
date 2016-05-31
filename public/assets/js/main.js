@@ -90,8 +90,8 @@ angular.module("MainApp")
             $scope.homeData = homeData.data;
         }
     })
-        
-    //registration /sign-in
+
+    // registration/sign-in
     .state('reg', {
         url : '/reg',
         templateUrl : 'app/views/registration.html'
@@ -101,6 +101,7 @@ angular.module("MainApp")
         templateUrl : 'app/views/sign-in.html'
     })
 
+    // search
     .state('search', {
         url : '/search',
         templateUrl : 'app/views/search.html',
@@ -250,7 +251,7 @@ angular.module("MainApp")
         templateUrl: 'app/views/xchannel-shop.html'
     })
 
-    //shop detailed page
+    // shop detailed page
     .state('shop-detailed', {
         url: '/shop/:itemId',
         templateUrl: 'app/views/shop-detail.html',
@@ -436,10 +437,6 @@ angular.module("MainApp")
         }
     };
 
-    // trash
-    window.showComments = function() {
-        console.log($scope.comments);
-    };
 
 }]);
 
@@ -544,28 +541,28 @@ angular.module("MainApp")
  * Created by exz0N on 26.05.2016.
  */
 angular.module("MainApp")
-    .controller('ProfileCtrl', ['$scope', function($scope) {
+.controller('ProfileCtrl', ['$scope', function($scope) {
 
-        $scope.videosCounter = 110;
-        $scope.profile = {
-            user : {
-                avatar : 'assets/img/prof_img.png',
-                name : 'Burav4ik24',
-                fbLink : 'http://fb.com/',
-                userInfo : '25 лет, Есть свой личный пранк канал. Веду активный способ жизни. мой вебсайт:',
-                userWebsite : 'http://google.com',
-                userCity : 'Киев',
-                userCountry : 'Украина'
-            },
-            userChannels : 1,
-            userAva : 'assets/img/u1.png',
-            channel : {
-                channelName : 'RomanAtwood',
-                channelSubscribers : 18358461
-            }
+    $scope.videosCounter = 110;
+    $scope.profile = {
+        user : {
+            avatar : 'assets/img/prof_img.png',
+            name : 'Burav4ik24',
+            fbLink : 'http://fb.com/',
+            userInfo : '25 лет, Есть свой личный пранк канал. Веду активный способ жизни. мой вебсайт:',
+            userWebsite : 'http://google.com',
+            userCity : 'Киев',
+            userCountry : 'Украина'
+        },
+        userChannels : 1,
+        userAva : 'assets/img/u1.png',
+        channel : {
+            channelName : 'RomanAtwood',
+            channelSubscribers : 18358461
         }
-        
-    }]);
+    }
+
+}]);
 
 angular.module("MainApp")
 .controller('RatingsCtrl', ['$scope', 'ratingsData', function ($scope, ratingsData) {
@@ -581,21 +578,22 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-    .controller('SearchCtrl', ['$scope', 'historyData', function ($scope, historyData) {
+.controller('SearchCtrl', ['$scope', 'historyData', function ($scope, historyData) {
 
-        $scope.historyData = clone(historyData.data.videos.sort(dynamicSort('date'))).reverse();
+    $scope.historyData = clone(historyData.data.videos.sort(dynamicSort('date'))).reverse();
 
-        // history filter
-        $scope.historyFilter = function(array,index,prop) {
-            if (
-                index !== 0 &&
-                array[index][prop] === array[index-1][prop]
-            ) {
-                return true;
-            }
-        };
+    // history filter
+    $scope.historyFilter = function(array,index,prop) {
+        if (
+            index !== 0 &&
+            array[index][prop] === array[index-1][prop]
+        ) {
+            return true;
+        }
+    };
 
-    }]);
+}]);
+
 angular.module("MainApp")
 .controller('ShopDetailCtrl', ['$scope', '$stateParams', '$window', function($scope, $stateParams, $window) {
 

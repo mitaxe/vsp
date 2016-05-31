@@ -28,8 +28,8 @@ angular.module("MainApp")
             $scope.homeData = homeData.data;
         }
     })
-        
-    //registration /sign-in
+
+    // registration/sign-in
     .state('reg', {
         url : '/reg',
         templateUrl : 'app/views/registration.html'
@@ -39,6 +39,7 @@ angular.module("MainApp")
         templateUrl : 'app/views/sign-in.html'
     })
 
+    // search
     .state('search', {
         url : '/search',
         templateUrl : 'app/views/search.html',
@@ -188,7 +189,7 @@ angular.module("MainApp")
         templateUrl: 'app/views/xchannel-shop.html'
     })
 
-    //shop detailed page
+    // shop detailed page
     .state('shop-detailed', {
         url: '/shop/:itemId',
         templateUrl: 'app/views/shop-detail.html',

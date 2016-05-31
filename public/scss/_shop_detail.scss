@@ -44,11 +44,14 @@
   height: auto;
   //overflow: hidden;
   position: relative;
-  background: #e6e6e6;
+  // background: #e6e6e6;
   border: 20px solid #FFF;
+  border-bottom: 0;
+  border-top: 0;
   margin-top: 20px;
   #sWr {
-    transition: .3s;
+    transition: .3s ease-in-out;
+    left: 0;
   }
   &__slide {
     //position: absolute;
@@ -89,6 +92,7 @@
     padding: 20px 0;
     max-width: 80%;
     word-break: break-all;
+    line-height: 1.3;
   }
   @include tablet {
     &__text {
