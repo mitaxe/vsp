@@ -5,14 +5,14 @@
         <div class="block block--header">
             <div class="col-xs-12 block__heading--ratings">
                 <div class="clearfix">
-                    <h2 class="block__title">Search string</h2>
-                    <div class="" style="float:right">
+                    <h2 class="block__title">Search str <span class="search_amount">5</span></h2>
+                    <div class="hidden-phone" style="float:right">
                         <a ng-click="remove(historyData,'all')" class="btn btn-white">Очистить историю просмотров</a>
                     </div>
                 </div>
-                <p>Результаты поиска</p>
+                <p class="sub_title">Результаты поиска</p>
                 <div class="clearfix">
-                    <tabs class="tabs">
+                    <tabs class="tabs four">
                         <a ui-sref="search.all" ui-sref-active="active">Все результаты</a>
                         <a ui-sref="search.video" ui-sref-active="active">Видео <span class="cnt">(2)</span></a>
                         <a ui-sref="search.channel" ui-sref-active="active">Каналы <span class="cnt">(1)</span></a>

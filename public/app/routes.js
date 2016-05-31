@@ -45,15 +45,15 @@ angular.module("MainApp")
     })
     .state('search.video', {
         url : '/video',
-        templateUrl : ''
+        templateUrl : 'app/views/search-video.html'
     })
     .state('search.channel', {
         url : '/channel',
-        templateUrl : ''
+        templateUrl : 'app/views/search-channels.html'
     })
     .state('search.articles', {
         url : '/articles',
-        templateUrl : ''
+        templateUrl : 'app/views/search-articles.html'
     })
 
     // exclusive

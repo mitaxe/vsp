@@ -47,6 +47,9 @@
   background: #e6e6e6;
   border: 20px solid #FFF;
   margin-top: 20px;
+  #sWr {
+    transition: .3s;
+  }
   &__slide {
     //position: absolute;
     //max-width: 50%;
@@ -85,6 +88,7 @@
     font-size: 18px;
     padding: 20px 0;
     max-width: 80%;
+    word-break: break-all;
   }
   @include tablet {
     &__text {
@@ -101,6 +105,7 @@
   &__to_shop {
     text-transform: uppercase;
     font-weight:bold;
+    margin-bottom: 20px;
   }
   @include  tablet {
     &__to_shop {
