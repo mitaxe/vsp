@@ -763,6 +763,13 @@
     &.four {
         width: 75%;
     }
+    &.reg {
+        width: 100%;
+        text-align: center;
+        a {
+            height:40px;
+        }
+    }
     a {
         @include no-select;
         display: inline-block;

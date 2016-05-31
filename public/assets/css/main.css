@@ -618,6 +618,9 @@ select option:hover {
   border-radius: 50px;
   transition: .2s;
   padding: 9px 28px; }
+  .btn-green.full_width {
+    width: 100%;
+    text-align: center; }
   .btn-green:hover {
     box-shadow: 0 2.5px 2.5px rgba(0, 0, 0, 0.47); }
 
@@ -661,7 +664,8 @@ select option:hover {
     background: #00cc33; }
 
 .btn-vk,
-.btn-fb {
+.btn-fb,
+.btn-google {
   color: white;
   font-size: 14px;
   border-radius: 50px;
@@ -670,7 +674,8 @@ select option:hover {
   margin: 0 10px;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1); }
   .btn-vk:hover,
-  .btn-fb:hover {
+  .btn-fb:hover,
+  .btn-google:hover {
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3); }
 
 .btn-fb {
@@ -678,6 +683,9 @@ select option:hover {
 
 .btn-vk {
   background: #5e7ba3; }
+
+.btn-google {
+  background: #dc4e41; }
 
 /* main views animations */
 .mainview-animation.ng-enter,
@@ -2391,6 +2399,11 @@ svg {
     transition: .3s ease-in-out; }
   .tabs.four {
     width: 75%; }
+  .tabs.reg {
+    width: 100%;
+    text-align: center; }
+    .tabs.reg a {
+      height: 40px; }
   .tabs a {
     -webkit-user-select: none;
     /* Chrome all / Safari all */
@@ -3308,6 +3321,98 @@ svg {
     .article_thumb__article_description p {
       font-size: 12px;
       font-weight: 300; } }
+
+.registration {
+  width: 460px;
+  margin: 75px auto 0;
+  padding: 20px 0;
+  box-shadow: 1px 2px 8px -1px rgba(0, 0, 0, 0.75); }
+  .registration span {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 70%;
+    font-size: 14px;
+    color: #5b5d5e;
+    font-weight: 300;
+    line-height: 16px; }
+    .registration span.line {
+      width: 45%;
+      height: 1px;
+      background: #e0e0e0;
+      vertical-align: middle; }
+  .registration__nav_box {
+    padding: 0 20px;
+    border-bottom: 1px solid #e0e0e0; }
+  .registration__logo_row {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0; }
+    .registration__logo_row img {
+      width: 85px;
+      margin-right: 30px; }
+  .registration__sign_in_options {
+    padding: 20px;
+    background: #fff; }
+  .registration .options__soc_bar {
+    margin-bottom: 15px; }
+  .registration .options__form {
+    margin-top: 15px; }
+    .registration .options__form label {
+      font-size: 14px;
+      color: #5b5d5e;
+      font-weight: 300;
+      width: 29%;
+      display: inline-block; }
+      .registration .options__form label.check_label {
+        position: relative;
+        width: 35%;
+        padding-left: 35px;
+        cursor: pointer; }
+        .registration .options__form label.check_label:before {
+          content: '';
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          background: url("../img/checkbox_bg.png") no-repeat no-repeat 0 -1px;
+          background-size: 24px auto;
+          left: 0;
+          top: -5px; }
+    .registration .options__form input {
+      width: 68%;
+      border-radius: 50px;
+      border: 1px solid #e0e0e0;
+      background: #fff;
+      outline: none;
+      font-size: 16px;
+      color: #3a3d3e;
+      padding: 3px 15px; }
+      .registration .options__form input#password {
+        padding-right: 125px; }
+      .registration .options__form input:checked + .check_label:before {
+        background-position: 0px -86px; }
+    .registration .options__form .inp_row {
+      margin-bottom: 15px;
+      position: relative; }
+      .registration .options__form .inp_row__forgot_pass {
+        font-size: 14px;
+        color: #00cc33;
+        text-decoration: none;
+        right: 18px;
+        top: 6px;
+        position: absolute; }
+    .registration .options__form.bottom {
+      padding: 20px 20px 0;
+      margin-top: 0; }
+      .registration .options__form.bottom .reg_info {
+        text-align: center;
+        font-size: 14px;
+        color: #5b5d5e;
+        font-weight: 300;
+        line-height: 16px;
+        margin-bottom: 15px; }
+        .registration .options__form.bottom .reg_info a {
+          color: #00cc33;
+          font-weight: 500;
+          text-decoration: none; }
 
 @media screen and (min-width: 1280px) {
   .slider {

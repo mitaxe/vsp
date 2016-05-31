@@ -70,6 +70,7 @@ angular.module("MainApp")
     .when("/history", "/history/viewed")
     .when("/ratings", "/ratings/videos")
     .when("/user/:url", "/user/:url/all")
+    .when('/search', '/search/all')
     .when("/xuser/:url", "/xuser/:url/all");
 
 
@@ -88,6 +89,16 @@ angular.module("MainApp")
         controller: function($scope, homeData) {
             $scope.homeData = homeData.data;
         }
+    })
+        
+    //registration /sign-in
+    .state('reg', {
+        url : '/reg',
+        templateUrl : 'app/views/registration.html'
+    })
+    .state('sign-in', {
+        url : '/sign-in',
+        templateUrl : 'app/views/sign-in.html'
     })
 
     .state('search', {
