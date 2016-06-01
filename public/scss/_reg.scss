@@ -18,6 +18,11 @@
       background: #e0e0e0;
       vertical-align: middle;
     }
+    &.not_mandatory {
+      font-weight: 300;
+      color: #bcbdbd;
+      max-width: none;
+    }
   }
 
   &__nav_box {
@@ -35,6 +40,7 @@
   &__sign_in_options {
     padding: 20px;
     background: #fff;
+    box-shadow: 0px 1px 11px -6px rgba(0, 0, 0, 0.75);
   }
   .options {
     &__soc_bar {
@@ -82,7 +88,9 @@
         }
       }
       .inp_row {
-        margin-bottom: 15px;
+        &:not(:last-child) {
+          margin-bottom: 15px;
+        }
         position: relative;
         &__forgot_pass {
           font-size: 14px;
@@ -107,6 +115,52 @@
             color: $col-green;
             font-weight:500;
             text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include phone {
+  .registration {
+    width: 100%;
+    box-shadow: none;
+    span {
+      max-width: 56%;
+      &.not_mandatory {
+        max-width: none;
+      }
+    }
+    .btn-fb, .btn-google, .btn-vk{
+      margin: 0 6px;
+    }
+    .btn-google {
+      margin-left: 0;
+    }
+    &__sign_in_options {
+      padding: 20px 10px;
+      margin: 0 10px;
+    }
+    .options {
+      &__form {
+        label {
+          margin-bottom: 10px;
+          padding-left: 15px;
+          width: auto;
+          &.check_label {
+            width: auto;
+          }
+        }
+        input {
+          display: block;
+          width: 100%;
+        }
+        .inp_row {
+          &__forgot_pass {
+            position: static;
+            margin-top: 15px;
+            margin-left: 15px;
           }
         }
       }

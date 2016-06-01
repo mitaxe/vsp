@@ -36,6 +36,13 @@
         width: 100%;
         text-align: center;
     }
+    @include phone {
+        &.full_width {
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+        }
+    }
     &:hover {
         box-shadow: 0 2.5px 2.5px rgba(0,0,0,0.47);
     }

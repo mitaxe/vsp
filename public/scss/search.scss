@@ -67,5 +67,10 @@
         font-weight: 300;
       }
     }
+    &__article_preview {
+      img {
+        width: 150px;
+      }
+    }
   }
 }

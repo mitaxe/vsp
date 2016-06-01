@@ -622,6 +622,11 @@ select option:hover {
   .btn-green.full_width {
     width: 100%;
     text-align: center; }
+  @media screen and (max-width: 767px) {
+    .btn-green.full_width {
+      width: 50%;
+      display: block;
+      margin: 0 auto; } }
   .btn-green:hover {
     box-shadow: 0 2.5px 2.5px rgba(0, 0, 0, 0.47); }
 
@@ -2446,7 +2451,12 @@ svg {
         .tabs.four a {
           display: block;
           width: 80%;
-          margin: 0 auto; } }
+          margin: 0 auto; }
+      .tabs.reg a {
+        height: 36px;
+        padding: 0 25px; }
+        .tabs.reg a:first-child {
+          margin-right: 20px; } }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     .tabs a {
       padding: 0 10px; } }
@@ -3333,7 +3343,9 @@ svg {
       font-size: 14px; }
     .article_thumb__article_description p {
       font-size: 12px;
-      font-weight: 300; } }
+      font-weight: 300; }
+  .article_thumb__article_preview img {
+    width: 150px; } }
 
 .registration {
   width: 460px;
@@ -3353,6 +3365,10 @@ svg {
       height: 1px;
       background: #e0e0e0;
       vertical-align: middle; }
+    .registration span.not_mandatory {
+      font-weight: 300;
+      color: #bcbdbd;
+      max-width: none; }
   .registration__nav_box {
     padding: 0 20px;
     border-bottom: 1px solid #e0e0e0; }
@@ -3364,7 +3380,8 @@ svg {
       margin-right: 30px; }
   .registration__sign_in_options {
     padding: 20px;
-    background: #fff; }
+    background: #fff;
+    box-shadow: 0px 1px 11px -6px rgba(0, 0, 0, 0.75); }
   .registration .options__soc_bar {
     margin-bottom: 15px; }
   .registration .options__form {
@@ -3403,8 +3420,9 @@ svg {
       .registration .options__form input:checked + .check_label:before {
         background-position: 0px -86px; }
     .registration .options__form .inp_row {
-      margin-bottom: 15px;
       position: relative; }
+      .registration .options__form .inp_row:not(:last-child) {
+        margin-bottom: 15px; }
       .registration .options__form .inp_row__forgot_pass {
         font-size: 14px;
         color: #00cc33;
@@ -3426,6 +3444,35 @@ svg {
           color: #00cc33;
           font-weight: 500;
           text-decoration: none; }
+
+@media screen and (max-width: 767px) {
+  .registration {
+    width: 100%;
+    box-shadow: none; }
+    .registration span {
+      max-width: 56%; }
+      .registration span.not_mandatory {
+        max-width: none; }
+    .registration .btn-fb, .registration .btn-google, .registration .btn-vk {
+      margin: 0 6px; }
+    .registration .btn-google {
+      margin-left: 0; }
+    .registration__sign_in_options {
+      padding: 20px 10px;
+      margin: 0 10px; }
+    .registration .options__form label {
+      margin-bottom: 10px;
+      padding-left: 15px;
+      width: auto; }
+      .registration .options__form label.check_label {
+        width: auto; }
+    .registration .options__form input {
+      display: block;
+      width: 100%; }
+    .registration .options__form .inp_row__forgot_pass {
+      position: static;
+      margin-top: 15px;
+      margin-left: 15px; } }
 
 @media screen and (min-width: 1280px) {
   .slider {

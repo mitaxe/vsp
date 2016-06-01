@@ -13,14 +13,14 @@
     <form id="reg-form" action="">
         <div class="registration__sign_in_options options">
             <div class="options__soc_bar clearfix">
-                <span>Авторизация <br> через соц сети</span>
+                <span class="hidden-phone">Авторизация <br> через соц сети</span>
                 <div class="pull-right">
                     <a class="btn btn-google">Google +</a>
                     <a class="btn btn-vk">Vk</a>
                     <a class="btn btn-fb">Fb</a>
                 </div>
             </div>
-            <span class="line"></span> <span>или</span> <span class="line"></span>
+            <div class="hidden-phone"><span class="line"></span> <span>или</span> <span class="line"></span></div>
             <div class="options__form">
                 <div class="inp_row">
                     <label for="email">Email</label> <input type="email" id="email" name="email">
@@ -29,10 +29,10 @@
                     <label for="password">Пароль</label> <input type="password" id="password" name="password">
                 </div>
                 <div class="inp_row">
-                    <label for="password_confirm">Подтвердить <br> пароль</label> <input type="password" id="password_confirm" name="password_confirm">
+                    <label for="password_confirm">Подтвердить <br class="hidden-phone"> пароль</label> <input type="password" id="password_confirm" name="password_confirm">
                 </div>
                 <div class="inp_row">
-                    <label for="nick_name">Никнейм <br> <span>не обязательно</span></label> <input type="text" id="nick_name" name="nick_name">
+                    <label for="nick_name">Никнейм <br class="hidden-phone"> <span class="not_mandatory">(не обязательно)</span></label> <input type="text" id="nick_name" name="nick_name">
                 </div>
             </div>
         </div>
