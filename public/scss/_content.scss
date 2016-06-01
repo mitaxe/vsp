@@ -639,6 +639,14 @@
     width: 300px;
     text-align: left;
     outline: 0;
+    &--video-page {
+        border-color: #4b4c4c;
+        color: $col-green;
+        text-align: center;
+        padding-right: 25px;
+        display: block;
+        margin: 0 auto 15px;
+    }
 
     svg {
         top: 0;
@@ -658,6 +666,9 @@
         cursor: pointer;
         &:hover {
             color: $col-green;
+        }
+        &--video-page {
+            margin: 8px 0 8px 25px;
         }
     }
 
@@ -760,6 +771,10 @@
         background: $col-green;
         width: 0;
         transition: .3s ease-in-out;
+    }
+    &--video {
+        width: 100%;
+        margin-top: 23px;
     }
     &.four {
         width: 75%;

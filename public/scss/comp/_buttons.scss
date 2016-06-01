@@ -118,3 +118,31 @@
 .btn-google {
     background: #dc4e41;
 }
+
+
+.btn-video-ctrl {
+    border-radius: 50px;
+    border: 1px solid #4d4d4d;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #fff;
+    font-weight:bold;
+    text-transform: uppercase;
+    position: relative;
+    max-width: 175px;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    span {
+        vertical-align: top;
+    }
+    img {
+        width: 22px;
+    }
+    .next {
+        margin-left: 10px;
+    }
+    .prev {
+        margin-right: 10px;
+    }
+}

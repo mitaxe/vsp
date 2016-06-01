@@ -672,6 +672,15 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
+    .controller('VideoPageCtrl', ['$scope', function($scope) {
+
+        $scope.activeTab = 1;
+
+        $scope.setActiveTab = function(index) {
+            $scope.activeTab = index;
+        }
+    }]);
+angular.module("MainApp")
 .controller('xChannelCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
 
     for (var i = 0; i < $scope.channels.length; i++) {

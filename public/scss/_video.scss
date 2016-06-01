@@ -1,0 +1,79 @@
+.video_page {
+  padding: 0;
+  .player_box {
+    background: #1a1b1b;
+    p {
+      font-size: 14px;
+      color: #999999;
+      text-align: center;
+      margin: 15px 0 5px;
+    }
+  }
+  .video_slider {
+    background: #1a1b1b;
+    padding: 0 7.5px;
+    &__item {
+      display: inline-block;
+      vertical-align: top;
+      text-align: center;
+      .th_description {
+        text-align: center;
+        color: #999999;
+        font-size: 14px;
+        line-height: 24px;
+        max-width: 80%;
+        margin: 0 auto;
+      }
+      &--left,
+      &--right {
+        padding-top: 9%;
+      }
+      &--main {
+        .about_video {
+          margin: 30px 0 20px;
+          &__left{
+            text-align: left;
+            h2 {
+              font-size: 46px;
+              font-weight: 500;
+              color: #fff;
+            }
+            span {
+              font-size: 14px;
+              color: #a6a8a9;
+              span {
+                font-weight:bold;
+              }
+            }
+          }
+          &__right {
+            text-align: left;
+            p {
+              font-size: 14px;
+              color: #a6a8a9;
+              &:first-child {
+                margin-bottom: 10px;
+              }
+              span {
+                color: $col-green;
+                font-weight: 300;
+                padding-left: 10px;
+                &.views {
+                  font-size: 30px;
+                }
+                &.likes {
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .right_video_list {
+    padding: 17px 10px;
+    background: #fff;
+    margin-top: 6px;
+  }
+}
