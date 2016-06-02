@@ -36,6 +36,15 @@
         width: 100%;
         text-align: center;
     }
+    &.main-ui {
+        background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%);
+        &:hover {
+            background: linear-gradient(to bottom, #29bd4a 0%, #2da747 100%);
+        }
+        &:active {
+            background: linear-gradient(to bottom, #2b9f44 0%, #29be4a 100%);
+        }
+    }
     @include phone {
         &.full_width {
             width: 50%;

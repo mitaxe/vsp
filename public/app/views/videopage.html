@@ -1,21 +1,19 @@
 <div class="content video_page" autoscroll='true' ng-controller="VideoPageCtrl">
     <div class="player_box">
-        <div class="row">
-            <div class="col-xs-12" >
-                <!--<h1>{{ content.title }}</h1>-->
-                <!--<hr/>-->
-                <p>Плейлист:</p>
-                <div class="select select--video-page" tabindex="0" ng-class="{'active':selectActive}" ng-blur="selectActive = false">
-                    <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                    <span class="select__title select__title--video-page" ng-click="selectActive = !selectActive;">{{ selectedCategory || 'Все видео' }}</span>
-                    <div class="select__list">
-                        <ul>
-                            <li ng-click="selectedCategory = undefined">Все видео</li>
-                            <li ng-click="$parent.selectedCategory = Cat1">Cat 1</li>
-                            <li ng-click="$parent.selectedCategory = Cat2">Cat 2</li>
-                            <!-- $parent.selectActive = false -->
-                        </ul>
-                    </div>
+        <div class="col-xs-12" >
+            <!--<h1>{{ content.title }}</h1>-->
+            <!--<hr/>-->
+            <p>Плейлист:</p>
+            <div class="select select--video-page" tabindex="0" ng-class="{'active':selectActive}" ng-blur="selectActive = false">
+                <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                <span class="select__title select__title--video-page" ng-click="selectActive = !selectActive;">{{ selectedCategory || 'Все видео' }}</span>
+                <div class="select__list">
+                    <ul>
+                        <li ng-click="selectedCategory = undefined">Все видео</li>
+                        <li ng-click="$parent.selectedCategory = Cat1">Cat 1</li>
+                        <li ng-click="$parent.selectedCategory = Cat2">Cat 2</li>
+                        <!-- $parent.selectActive = false -->
+                    </ul>
                 </div>
             </div>
         </div>
@@ -62,216 +60,226 @@
         </div>
     </div> <!-- end slider box -->
 
-    <div class="col-xs-12 col-md-7">
-        <div class="block" ng-controller="CommentsCtrl">
-            <div class="col-xs-12">
-                <p>
-                    <span class="comments__title">Комментарии </span>
-                    <span class="comments__number">{{ commentsLength() }}</span>
-                </p>
-                <br>
-            </div>
-            <hr class="block__hr">
-            <div class="col-xs-12">
-                <!-- comments block -->
-                <div class="comments__item">
-                    <div class="comments__img">
-                        <img src="assets/img/ball-61.png" alt="" />
-                    </div>
-                    <div class="comments__right">
+    <div class="comments_bar_box">
+        <div class="col-xs-12 col-md-7">
+            <div class="block" ng-controller="CommentsCtrl">
+                <div class="col-xs-12">
+                    <p>
+                        <span class="comments__title">Комментарии </span>
+                        <span class="comments__number">{{ commentsLength() }}</span>
+                    </p>
+                    <br>
+                </div>
+                <hr class="block__hr">
+                <div class="col-xs-12">
+                    <!-- comments block -->
+                    <div class="comments__item">
+                        <div class="comments__img">
+                            <img src="assets/img/ball-61.png" alt="" />
+                        </div>
+                        <div class="comments__right">
                             <textarea class="comments__textarea" placeholder="Оставить комментарий"
                                       ng-model="comment" ng-focus="initInput = true"
                                       ng-enter="initInput = false; addComment(comment); comment = ''; limits.comments = limits.comments + 1"></textarea>
-                        <div class="comments__controls-r" ng-show="initInput">
-                            <span class="btn btn-white comments__answer" ng-click="initInput = false; comment = ''">Отмена</span>
-                            <span class="btn btn-white comments__answer" ng-click="initInput = false; addComment(comment); comment = ''; limits.comments = limits.comments + 1">Ответить</span>
+                            <div class="comments__controls-r" ng-show="initInput">
+                                <span class="btn btn-white comments__answer" ng-click="initInput = false; comment = ''">Отмена</span>
+                                <span class="btn btn-white comments__answer" ng-click="initInput = false; addComment(comment); comment = ''; limits.comments = limits.comments + 1">Ответить</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <ul class="comments__container">
-                    <li class="comments__item" ng-repeat="comment in comments | limitTo: limits.comments ">
-                        <div class="clearfix">
-                            <div class="comments__img">
-                                <img ng-src="{{ comment.img }}" alt="" />
-                            </div>
-                            <div class="comments__right">
-                                <p class="comments__user">{{ comment.user }}</p>
-                                <p class="comments__text">{{ comment.text }}</p>
-                                <p class="hidden-tablet hidden-desktop"><span class="comments__date">{{ comment.date | date:'dd MMMM' }}</span></p>
-                                <div class="comments__controls">
-                                    <div class="comments__controls-l">
-                                        <span class="btn btn-white comments__answer" ng-click="allowInput($index)">Ответить</span>
-                                        <span class="btn btn-white comments__plusone" ng-click="comment.likes = comment.likes + 1">+ {{ comment.likes }}</span>
-                                    </div>
-                                    <div class="comments__controls-r">
-                                        <span class="comments__date hidden-phone">{{ comment.date | date:'dd MMMM' }}</span>
-                                        <span class="btn btn-white comments__other"><span>...</span></span>
-                                    </div>
+                    <ul class="comments__container">
+                        <li class="comments__item" ng-repeat="comment in comments | limitTo: limits.comments ">
+                            <div class="clearfix">
+                                <div class="comments__img">
+                                    <img ng-src="{{ comment.img }}" alt="" />
                                 </div>
-                                <div class="clearfix" ng-show="isInputAllowed($index)">
+                                <div class="comments__right">
+                                    <p class="comments__user">{{ comment.user }}</p>
+                                    <p class="comments__text">{{ comment.text }}</p>
+                                    <p class="hidden-tablet hidden-desktop"><span class="comments__date">{{ comment.date | date:'dd MMMM' }}</span></p>
+                                    <div class="comments__controls">
+                                        <div class="comments__controls-l">
+                                            <span class="btn btn-white comments__answer" ng-click="allowInput($index)">Ответить</span>
+                                            <span class="btn btn-white comments__plusone" ng-click="comment.likes = comment.likes + 1">+ {{ comment.likes }}</span>
+                                        </div>
+                                        <div class="comments__controls-r">
+                                            <span class="comments__date hidden-phone">{{ comment.date | date:'dd MMMM' }}</span>
+                                            <span class="btn btn-white comments__other"><span>...</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix" ng-show="isInputAllowed($index)">
                                         <textarea class="comments__textarea comments__textarea--response" placeholder="Оставить ответ"
                                                   ng-model="response"
                                                   ng-enter="allowInput(); addComment(response,$index); response = ''"
                                         ></textarea>
-                                    <div class="comments__controls-r">
-                                        <span class="btn btn-white comments__answer" ng-click="allowInput(); response = ''">Отмена</span>
-                                        <span class="btn btn-white comments__answer" ng-click="allowInput(); addComment(response,$index); response = ''">Ответить</span>
+                                        <div class="comments__controls-r">
+                                            <span class="btn btn-white comments__answer" ng-click="allowInput(); response = ''">Отмена</span>
+                                            <span class="btn btn-white comments__answer" ng-click="allowInput(); addComment(response,$index); response = ''">Ответить</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <ul class="comments__container">
-                            <li class="comments__item" ng-repeat="response in comment.responses">
-                                <div class="comments__img">
-                                    <img ng-src="{{ response.img }}" alt="" />
-                                </div>
-                                <div class="comments__right">
-                                    <p class="comments__user">{{ response.user }}</p>
-                                    <p class="comments__text">{{ response.text }}</p>
-                                    <p class="hidden-tablet hidden-desktop"><span class="comments__date">{{ response.date }}</span></p>
-                                    <div class="comments__controls">
-                                        <div class="comments__controls-l">
-                                            <span class="btn btn-white comments__answer" ng-click="allowInput($parent.$index,$index)">Ответить</span>
-                                            <span class="btn btn-white comments__plusone" ng-click="response.likes = response.likes + 1">+ {{ response.likes }}</span>
-                                        </div>
-                                        <div class="comments__controls-r">
-                                            <span class="comments__date hidden-phone">{{ response.date | date:'dd MMMM' }}</span>
-                                            <span class="btn btn-white comments__other"><span>...</span></span>
-                                        </div>
+                            <ul class="comments__container">
+                                <li class="comments__item" ng-repeat="response in comment.responses">
+                                    <div class="comments__img">
+                                        <img ng-src="{{ response.img }}" alt="" />
                                     </div>
-                                    <div class="clearfix" ng-show="isInputAllowed($parent.$index,$index)">
+                                    <div class="comments__right">
+                                        <p class="comments__user">{{ response.user }}</p>
+                                        <p class="comments__text">{{ response.text }}</p>
+                                        <p class="hidden-tablet hidden-desktop"><span class="comments__date">{{ response.date }}</span></p>
+                                        <div class="comments__controls">
+                                            <div class="comments__controls-l">
+                                                <span class="btn btn-white comments__answer" ng-click="allowInput($parent.$index,$index)">Ответить</span>
+                                                <span class="btn btn-white comments__plusone" ng-click="response.likes = response.likes + 1">+ {{ response.likes }}</span>
+                                            </div>
+                                            <div class="comments__controls-r">
+                                                <span class="comments__date hidden-phone">{{ response.date | date:'dd MMMM' }}</span>
+                                                <span class="btn btn-white comments__other"><span>...</span></span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix" ng-show="isInputAllowed($parent.$index,$index)">
                                             <textarea class="comments__textarea comments__textarea--response" placeholder="Оставить ответ"
                                                       ng-model="reply"
                                                       ng-enter="allowInput(); addComment(reply,$parent.$index,$index); reply = ''"
                                             ></textarea>
-                                        <div class="comments__controls-r">
-                                            <span class="btn btn-white comments__answer" ng-click="allowInput(); reply = ''">Отмена</span>
-                                            <span class="btn btn-white comments__answer" ng-click="allowInput(); addComment(reply,$parent.$index,$index); reply = ''">Ответить</span>
+                                            <div class="comments__controls-r">
+                                                <span class="btn btn-white comments__answer" ng-click="allowInput(); reply = ''">Отмена</span>
+                                                <span class="btn btn-white comments__answer" ng-click="allowInput(); addComment(reply,$parent.$index,$index); reply = ''">Ответить</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- comments -->
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- comments -->
+                </div>
             </div>
+
+            <div class="block center">
+                <a class="btn btn-more" ng-click="loadMore('comments')">ЗАГРУЗИТЬ ЕЩЕ</a>
+            </div>
+        </div> <!-- end col -->
+        <div class="col-xs-12 col-md-5">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="clearfix">
+                        <tabs class="tabs tabs--video">
+                            <a ng-class="{'active' : activeTab == 1}" ng-click="setActiveTab(1)">Похожие видео</a>
+                            <a ng-class="{'active' : activeTab == 2}" ng-click="setActiveTab(2)">Похожие каналы</a>
+                            <div class="tabs__underline"></div>
+                        </tabs>
+                    </div>
+                </div>
+            </div>
+            <!--<hr class="block__hr">-->
+
+
+            <!--  videos -->
+            <div ng-show="activeTab == 1" class="row right_video_list">
+                <div class="col-xs-6">
+                    <div class="thumb">
+                        <a class="btn" href="#" >
+                            <div class="thumb__img thumb__img--shadow">
+                                <span class="thumb__length">4:25</span>
+                                <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">4</a></p>
+                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="thumb">
+                        <a class="btn" href="#">
+                            <div class="thumb__img thumb__img--shadow">
+                                <span class="thumb__length">4:25</span>
+                                <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">4</a></p>
+                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="thumb">
+                        <a class="btn" href="#" >
+                            <div class="thumb__img thumb__img--shadow">
+                                <span class="thumb__length">4:25</span>
+                                <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">4</a></p>
+                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="thumb">
+                        <a class="btn" href="#">
+                            <div class="thumb__img thumb__img--shadow">
+                                <span class="thumb__length">4:25</span>
+                                <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">4</a></p>
+                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+            <!--  channels -->
+            <div ng-show="activeTab == 2" class="row right_video_list">
+                <div class="col-xs-6">
+                    <div class="thumb">
+                        <a class="btn" href="#" >
+                            <div class="thumb__img thumb__img--shadow">
+                                <span class="thumb__length">4:25</span>
+                                <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">4</a></p>
+                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="thumb">
+                        <a class="btn" href="#">
+                            <div class="thumb__img thumb__img--shadow">
+                                <span class="thumb__length">4:25</span>
+                                <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">4</a></p>
+                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="thumb">
+                        <a class="btn" href="#" >
+                            <div class="thumb__img thumb__img--shadow">
+                                <span class="thumb__length">4:25</span>
+                                <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">4</a></p>
+                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="thumb">
+                        <a class="btn" href="#">
+                            <div class="thumb__img thumb__img--shadow">
+                                <span class="thumb__length">4:25</span>
+                                <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
+                            </div>
+                        </a>
+                        <p class="thumb__title"><a href="">4</a></p>
+                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                    </div>
+                </div>
+            </div> <!-- end row -->
         </div>
-
-        <div class="block center">
-            <a class="btn btn-more" ng-click="loadMore('comments')">ЗАГРУЗИТЬ ЕЩЕ</a>
-        </div>
-    </div> <!-- end col -->
-    <div class="col-xs-12 col-md-5">
-
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="clearfix">
-                    <tabs class="tabs tabs--video">
-                        <a ng-class="{'active' : activeTab == 1}" ng-click="setActiveTab(1)">Похожие видео</a>
-                        <a ng-class="{'active' : activeTab == 2}" ng-click="setActiveTab(2)">Похожие каналы</a>
-                        <div class="tabs__underline"></div>
-                    </tabs>
-                </div>
-            </div>
-        </div>
-        <!--<hr class="block__hr">-->
-
-
-        <!--  videos -->
-        <div ng-show="activeTab == 1" class="row right_video_list">
-            <div class="col-xs-6">
-                <div class="thumb">
-                    <a class="btn" href="#" >
-                        <div class="thumb__img thumb__img--shadow">
-                            <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                        </div>
-                    </a>
-                    <p class="thumb__title"><a href="">4</a></p>
-                    <p class="thumb__user"><a href="#">Adamantio 993</a></p>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="thumb">
-                    <a class="btn" href="#">
-                        <div class="thumb__img thumb__img--shadow">
-                            <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                        </div>
-                    </a>
-                    <p class="thumb__title"><a href="">4</a></p>
-                    <p class="thumb__user"><a href="#">Adamantio 993</a></p>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="thumb">
-                    <a class="btn" href="#" >
-                        <div class="thumb__img thumb__img--shadow">
-                            <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                        </div>
-                    </a>
-                    <p class="thumb__title"><a href="">4</a></p>
-                    <p class="thumb__user"><a href="#">Adamantio 993</a></p>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="thumb">
-                    <a class="btn" href="#">
-                        <div class="thumb__img thumb__img--shadow">
-                            <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                        </div>
-                    </a>
-                    <p class="thumb__title"><a href="">4</a></p>
-                    <p class="thumb__user"><a href="#">Adamantio 993</a></p>
-                </div>
-            </div>
-        </div> <!-- end row -->
-
-        <!--  channels -->
-        <div ng-show="activeTab == 2" class="row right_video_list">
-            <div class="col-xs-6">
-                <div class="thumb">
-                    <a class="btn" href="#" >
-                        <div class="thumb__img thumb__img--shadow">
-                            <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                        </div>
-                    </a>
-                    <p class="thumb__title"><a href="">4</a></p>
-                    <p class="thumb__user"><a href="#">Adamantio 993</a></p>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="thumb">
-                    <a class="btn" href="#">
-                        <div class="thumb__img thumb__img--shadow">
-                            <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                        </div>
-                    </a>
-                    <p class="thumb__title"><a href="">4</a></p>
-                    <p class="thumb__user"><a href="#">Adamantio 993</a></p>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="thumb">
-                    <a class="btn" href="#" >
-                        <div class="thumb__img thumb__img--shadow">
-                            <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                        </div>
-                    </a>
-                    <p class="thumb__title"><a href="">4</a></p>
-                    <p class="thumb__user"><a href="#">Adamantio 993</a></p>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="thumb">
-                    <a class="btn" href="#">
-                        <div class="thumb__img thumb__img--shadow">
-                            <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                        </div>
-                    </a>
-                    <p class="thumb__title"><a href="">4</a></p>
-                    <p class="thumb__user"><a href="#">Adamantio 993</a></p>
-                </div>
-            </div>
-        </div> <!-- end row -->
     </div>
 </div>

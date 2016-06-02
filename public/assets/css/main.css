@@ -622,6 +622,12 @@ select option:hover {
   .btn-green.full_width {
     width: 100%;
     text-align: center; }
+  .btn-green.main-ui {
+    background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%); }
+    .btn-green.main-ui:hover {
+      background: linear-gradient(to bottom, #29bd4a 0%, #2da747 100%); }
+    .btn-green.main-ui:active {
+      background: linear-gradient(to bottom, #2b9f44 0%, #29be4a 100%); }
   @media screen and (max-width: 767px) {
     .btn-green.full_width {
       width: 50%;
@@ -2862,11 +2868,14 @@ svg {
       width: 250px; } }
 
 .edit_channel {
-  background: #c7c7c7 url("../img/edit_icon.png") no-repeat 23px 13px/12px 13px;
-  padding: 11px 20px 11px 50px;
+  background: linear-gradient(to bottom, #d7d7d7 0%, #c4c4c4 100%);
+  padding: 11px 20px 11px 25px;
   font-size: 16px;
   color: #828383;
   margin: 4px 0 0 25px; }
+  .edit_channel svg {
+    fill: #828383;
+    margin-right: 10px; }
 
 .subscribe_box {
   margin-top: 4px;
@@ -2882,7 +2891,7 @@ svg {
     /* IE 10+ */
     user-select: none;
     /* Likely future */
-    background: #1bbb47;
+    background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%);
     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
     color: #fff;
     text-transform: uppercase;
@@ -2897,9 +2906,9 @@ svg {
     font-size: 14px;
     cursor: pointer; }
     .subscribe_box .green_btn:hover {
-      background: #2daa47; }
+      background: linear-gradient(to bottom, #29bd4a 0%, #2da747 100%); }
     .subscribe_box .green_btn:active {
-      background: linear-gradient(#2b9f44, #29bd4a); }
+      background: linear-gradient(to bottom, #2b9f44 0%, #29be4a 100%); }
   .subscribe_box .counter {
     background: #e6e6e6;
     color: #5b5d5e;
@@ -3412,10 +3421,16 @@ svg {
     .registration__logo_row img {
       width: 85px;
       margin-right: 30px; }
+  @media screen and (max-width: 767px) {
+    .registration__logo_row {
+      padding: 10px 20px;
+      border-bottom: none; }
+      .registration__logo_row img {
+        margin-bottom: 25px; } }
   .registration__sign_in_options {
     padding: 20px;
     background: #fff;
-    box-shadow: 0px 1px 11px -6px rgba(0, 0, 0, 0.75); }
+    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.1); }
   .registration .options__soc_bar {
     margin-bottom: 15px; }
   .registration .options__form {
@@ -3492,7 +3507,7 @@ svg {
     .registration .btn-google {
       margin-left: 0; }
     .registration__sign_in_options {
-      padding: 20px 10px;
+      padding: 10px 10px 20px;
       margin: 0 10px; }
     .registration .options__form label {
       margin-bottom: 10px;
@@ -3534,7 +3549,7 @@ svg {
       .video_page .video_slider__item--left, .video_page .video_slider__item--right {
         padding-top: 9%; }
       .video_page .video_slider__item--main .about_video {
-        margin: 30px 0 20px; }
+        margin: 30px 0; }
         .video_page .video_slider__item--main .about_video__left {
           text-align: left; }
           .video_page .video_slider__item--main .about_video__left h2 {
@@ -3561,6 +3576,8 @@ svg {
                 font-size: 30px; }
               .video_page .video_slider__item--main .about_video__right p span.likes {
                 font-size: 18px; }
+  .video_page .comments_bar_box {
+    padding-top: 15px; }
   .video_page .right_video_list {
     padding: 17px 10px;
     background: #fff;

@@ -110,11 +110,15 @@
 }
 
 .edit_channel {
-    background: #c7c7c7 url("../img/edit_icon.png") no-repeat 23px 13px / 12px 13px;
-    padding: 11px 20px 11px 50px;
+    background: linear-gradient(to bottom, #d7d7d7 0%, #c4c4c4 100%);
+    padding: 11px 20px 11px 25px;
     font-size: 16px;
     color: #828383;
     margin: 4px 0 0 25px;
+    svg {
+        fill: #828383;
+        margin-right: 10px;
+    }
 }
 .subscribe_box {
     margin-top: 4px;
@@ -124,7 +128,7 @@
     }
     .green_btn {
         @include no-select;
-        background: #1bbb47;
+        background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%);
         text-shadow: 0px 1px 1px rgba(0,0,0,0.2);
         color: #fff;
         text-transform: uppercase;
@@ -139,10 +143,10 @@
         font-size: 14px;
         cursor: pointer;
         &:hover {
-            background: #2daa47;
+            background: linear-gradient(to bottom, #29bd4a 0%, #2da747 100%);
         }
         &:active {
-            background: linear-gradient(#2b9f44, #29bd4a);
+            background: linear-gradient(to bottom, #2b9f44 0%, #29be4a 100%);
         }
     }
     .counter {

@@ -6,15 +6,20 @@
             <div class="tabs__underline"></div>
         </tabs>
     </div>
-    <div class="registration__logo_row">
+    <div class="registration__logo_row clearfix">
         <img src="assets/img/logo.png" alt="logo">
         <span>Вы можете использовать данные для входа с VSP Online</span>
+        <div class="pull-right hidden-tablet hidden-desktop">
+            <a class="btn btn-google">Google +</a>
+            <a class="btn btn-vk">Vk</a>
+            <a class="btn btn-fb">Fb</a>
+        </div>
     </div>
     <form id="sign-in-form" action="">
         <div class="registration__sign_in_options options">
             <div class="options__soc_bar clearfix">
                 <span class="hidden-phone">Войти через <br> соц сети</span>
-                <div class="pull-right">
+                <div class="pull-right hidden-phone">
                     <a class="btn btn-google">Google +</a>
                     <a class="btn btn-vk">Vk</a>
                     <a class="btn btn-fb">Fb</a>
@@ -37,7 +42,7 @@
                 <label for="remember_me" class="check_label">Запомнить меня</label>
             </div>
             <div class="inp_row">
-                <a href="#" class="btn btn-green full_width">Вход</a>
+                <a href="#" class="btn btn-green main-ui full_width">Вход</a>
             </div>
         </div>
     </form>
