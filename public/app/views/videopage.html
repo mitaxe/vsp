@@ -1,9 +1,9 @@
 <div class="content video_page" autoscroll='true' ng-controller="VideoPageCtrl">
-    <div class="player_box">
+    <div class="player_box hidden-phone">
         <div class="col-xs-12" >
             <!--<h1>{{ content.title }}</h1>-->
             <!--<hr/>-->
-            <p>Плейлист:</p>
+            <p class="">Плейлист:</p>
             <div class="select select--video-page" tabindex="0" ng-class="{'active':selectActive}" ng-blur="selectActive = false">
                 <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
                 <span class="select__title select__title--video-page" ng-click="selectActive = !selectActive;">{{ selectedCategory || 'Все видео' }}</span>
@@ -35,13 +35,68 @@
             <div class="video_slider__item video_slider__item--main col-md-8 col-sm-12">
                 <img ng-src="{{ content.img }}" alt="" />
                 <div class="about_video clearfix">
-                    <div class="about_video__left pull-left">
+                    <div class="about_video__left hidden-phone hidden-tablet">
                         <h2>{{content.title}}</h2>
                         <span> <span>2</span> дня назад</span>
                     </div>
-                    <div class="about_video__right pull-right">
-                        <p>Просмотров <span class="views">110</span></p>
-                        <p>Нравится <span class="likes">110</span> <a href="#" class="btn like_btn"></a></p>
+                    <div class="about_video__right clearfix">
+                        <div class="about_video__left hidden-phone">
+                            <span class="hidden-desktop"> <span>2</span> дня назад</span>
+                        </div>
+                        <h2 class="hidden-desktop hidden-tablet">{{content.title}}</h2>
+                        <p class="hidden-phone">Просмотров <span class="views">38 806</span></p>
+                        <p><span class="hidden-tablet hidden-desktop mob_channel_name">50-50 Pranker</span> <i class="hidden-phone">Нравится</i> <span class="likes">870</span> <a href="#" class="btn like_btn">
+                            <i class="svg">
+                                <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="23px" viewBox="0 0 13.566 11" enable-background="new 0 0 13.566 11" xml:space="preserve">
+                                    <path fill="" d="M4.901,8.47c1.686,0.776,3.688,1.21,5.661,1.21c0.639,0,0.402-0.03,1.016-0.133
+                                        c0.24-0.041,0.551-0.131,0.688-0.236c0.188-0.146,0.309-0.379,0.309-0.639c0-0.24-0.104-0.458-0.268-0.605h0.07
+                                        c0.438,0,0.793-0.361,0.793-0.807s-0.355-0.807-0.793-0.807h0.396c0.439,0,0.795-0.361,0.795-0.807c0-0.446-0.355-0.807-0.795-0.807
+                                        c0.439,0,0.795-0.361,0.795-0.807s-0.355-0.807-0.795-0.807h-2.695c-0.274,0-0.497-0.226-0.497-0.504l0.25-1.676
+                                        C9.854,0.97,9.867,0.89,9.867,0.807C9.867,0.361,9.511,0,9.071,0C8.704,0,8.394,0.254,8.304,0.597L8.271,0.712
+                                        C7.76,2.361,6.604,3.868,4.901,4.84V8.47z"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M0,3.52h3.9v6.412L0,11V3.52z"/>
+                                </svg>
+                            </i>
+                        </a></p>
+                        <p class="hidden-tablet hidden-desktop"><span class="mob_date"> <span>2</span> дня назад</span> Просмотров <span class="views">38 806</span></p>
+                        <h2 class="hidden-desktop hidden-phone">{{content.title}}</h2>
+                        <div class="row hidden-desktop hidden-phone">
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-3 ctrl">
+                                        <a href="#" class="btn btn-video-ctrl">
+                                            <img class="prev" src="assets/img/video-prev-icon.png" alt="prev icon">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-9 l_text">
+                                        <div class="thumb__img">
+                                            <span class="thumb__length">4:25</span>
+                                            <img alt="" ng-src="https://i.ytimg.com/vi/BBhZPWmXUtE/maxresdefault.jpg" src="https://i.ytimg.com/vi/BBhZPWmXUtE/maxresdefault.jpg">
+                                        </div>
+
+                                        <p class="th_description">Тыквы-зомби / пранк</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-9 r_text">
+                                        <div class="thumb__img">
+                                            <span class="thumb__length">4:25</span>
+                                            <img alt="" ng-src="https://i.ytimg.com/vi/BBhZPWmXUtE/maxresdefault.jpg" src="https://i.ytimg.com/vi/BBhZPWmXUtE/maxresdefault.jpg">
+                                        </div>
+
+                                        <p class="th_description">Самая неприятная шутка на годовщину
+                                            / Anniversary Prank Backfires!!</p>
+                                    </div>
+                                    <div class="col-xs-3 ctrl">
+                                        <a href="#" class="btn btn-video-ctrl">
+                                            <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,17 +115,31 @@
         </div>
     </div> <!-- end slider box -->
 
+    <div class="tabl_mob_tebs hidden-desktop" ng-controller="CommentsCtrl">
+        <div class="clearfix">
+            <tabs class="tabs tabs--video tablet-center">
+                <a ng-class="{'active' : activeTab == 3}" ng-click="setActiveTab(3)">Комментари <span>{{ commentsLength() }}</span></a>
+                <hr class="block__hr hidden-tablet hidden-desktop">
+                <a ng-class="{'active' : activeTab == 1}" ng-click="setActiveTab(1)">Похожие видео</a>
+                <hr class="block__hr hidden-tablet hidden-desktop">
+                <a ng-class="{'active' : activeTab == 2}" ng-click="setActiveTab(2)">Похожие каналы</a>
+                <hr class="block__hr hidden-tablet hidden-desktop">
+                <div class="tabs__underline"></div>
+            </tabs>
+        </div>
+        <hr class="block__hr hidden-phone">
+    </div>
     <div class="comments_bar_box">
-        <div class="col-xs-12 col-md-7">
+        <div class="col-xs-12 col-md-7" ng-show="activeTab == 3 || desktop == true">
             <div class="block" ng-controller="CommentsCtrl">
-                <div class="col-xs-12">
+                <div class="col-xs-12 hidden-phone hidden-tablet">
                     <p>
                         <span class="comments__title">Комментарии </span>
                         <span class="comments__number">{{ commentsLength() }}</span>
                     </p>
                     <br>
                 </div>
-                <hr class="block__hr">
+                <hr class="block__hr hidden-phone hidden-tablet">
                 <div class="col-xs-12">
                     <!-- comments block -->
                     <div class="comments__item">
@@ -163,7 +232,7 @@
         </div> <!-- end col -->
         <div class="col-xs-12 col-md-5">
 
-            <div class="row">
+            <div class="row hidden-phone hidden-tablet">
                 <div class="col-xs-12">
                     <div class="clearfix">
                         <tabs class="tabs tabs--video">
@@ -188,7 +257,7 @@
                             </div>
                         </a>
                         <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
                     </div>
                 </div>
                 <div class="col-xs-6">
@@ -200,7 +269,7 @@
                             </div>
                         </a>
                         <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
                     </div>
                 </div>
                 <div class="col-xs-6">
@@ -212,7 +281,7 @@
                             </div>
                         </a>
                         <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
                     </div>
                 </div>
                 <div class="col-xs-6">
@@ -224,7 +293,7 @@
                             </div>
                         </a>
                         <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
                     </div>
                 </div>
             </div> <!-- end row -->
@@ -240,7 +309,7 @@
                             </div>
                         </a>
                         <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
                     </div>
                 </div>
                 <div class="col-xs-6">
@@ -252,7 +321,7 @@
                             </div>
                         </a>
                         <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
                     </div>
                 </div>
                 <div class="col-xs-6">
@@ -264,7 +333,7 @@
                             </div>
                         </a>
                         <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
                     </div>
                 </div>
                 <div class="col-xs-6">
@@ -276,7 +345,7 @@
                             </div>
                         </a>
                         <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__user"><a href="#">Adamantio 993</a></p>
+                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
                     </div>
                 </div>
             </div> <!-- end row -->

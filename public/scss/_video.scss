@@ -9,6 +9,21 @@
       margin: 15px 0 5px;
     }
   }
+  @include tablet {
+    .player_box {
+      padding: 15px 0;
+      p {
+        float: left;
+        margin-top: 8px;
+        margin-left: 15px;
+      }
+      .select {
+        float: right;
+        width: 60%;
+        margin-bottom: 0;
+      }
+    }
+  }
   .video_slider {
     background: #1a1b1b;
     padding: 0 7.5px;
@@ -32,7 +47,11 @@
         .about_video {
           margin: 30px 0;
           &__left{
+            display: inline-block;
+            vertical-align: top;
+            max-width: 80%;
             text-align: left;
+            width: calc(100% - 210px);
             h2 {
               font-size: 46px;
               font-weight: 500;
@@ -47,12 +66,16 @@
             }
           }
           &__right {
-            text-align: left;
+            width: auto;
+            min-width: 200px;
+            text-align: right;
+            display: inline-block;
+            vertical-align: top;
             p {
               font-size: 14px;
               color: #a6a8a9;
               &:first-child {
-                margin-bottom: 10px;
+                margin-bottom: 20px;
               }
               span {
                 color: $col-green;
@@ -64,6 +87,121 @@
                 &.likes {
                   font-size: 18px;
                 }
+              }
+            }
+            .like_btn {
+              border: 1px solid #4d4d4d;
+              padding: 8px 20px;
+              border-radius: 50px;
+              vertical-align: middle;
+              margin-left: 15px;
+              svg {
+                fill: #585959;
+              }
+              &:hover {
+                border-color: $col-green;
+                svg {
+                  fill: $col-green;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      @include tablet {
+        &--main {
+          .about_video {
+            margin: 20px 0;
+            &__left {
+              float: left;
+              width: auto;
+              max-width: none;
+              margin-top: 10px;
+            }
+            &__right {
+              min-width: 100%;
+              p {
+                display: inline-block;
+                text-align: left;
+                max-width: none;
+                .views {
+                  margin-right: 25px;
+                }
+              }
+              h2 {
+                font-size: 37px;
+                color: #fff;
+                text-align: center;
+                font-weight: 500;
+                max-width: 70%;
+                margin: 30px auto;
+              }
+              .ctrl {
+                text-align: center;
+                padding-top: 15%;
+              }
+              .r_text {
+                padding-left: 5%;
+              }
+              .l_text {
+                padding-right: 5%;
+              }
+              .r_text,
+              .l_text {
+                text-align: left;
+              }
+            }
+          }
+        }
+      }
+
+      @include phone {
+        &--main {
+          .about_video {
+            margin: 15px 0;
+            &__left {
+
+            }
+            &__right {
+              width: 100%;
+              h2 {
+                font-size: 18px;
+                color: #fff;
+                font-weight: 500;
+                text-align: left;
+                margin-bottom: 10px;
+              }
+              .mob_channel_name {
+                float: left;
+                font-size: 15px;
+                font-weight: 500;
+                color: $col-green;
+                padding-left: 0;
+                margin-top: 8px;
+              }
+              p {
+                &:not(last-child) {
+                  margin-bottom: 15px;
+                }
+                span {
+                  &.views {
+                    font-size: 15px;
+                  }
+                  &.mob_date {
+                    color: #a6a8a9;
+                    float: left;
+                    padding-left: 0;
+                    > span {
+                      font-weight:500;
+                      color: #a6a8a9;
+                      padding-left: 0;
+                    }
+                  }
+                }
+              }
+              .like_btn {
+                padding: 4px 12px;
               }
             }
           }
@@ -78,5 +216,29 @@
     padding: 17px 10px;
     background: #fff;
     margin-top: 6px;
+  }
+  .tabl_mob_tebs .tabs{
+    a {
+      &:not(last-child) {
+        margin-right: 8%;
+      }
+    }
+  }
+  @include phone {
+    .tabl_mob_tebs .tabs {
+      height: auto;
+      .block__hr {
+        margin-top: 0;
+      }
+      a {
+        display: block;
+        width: 40%;
+        min-width: 200px;
+        margin: 0 auto;
+        &:not(last-child) {
+          margin-right: auto;
+        }
+      }
+    }
   }
 }

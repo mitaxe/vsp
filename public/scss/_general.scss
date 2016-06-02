@@ -227,7 +227,11 @@ svg {
     box-shadow: 0px 1px 0px white;
     margin: 20px 0;
 }
-
+.tablet-center {
+    @include tablet {
+        text-align: center;
+    }
+}
 .mobile-center {
     @include phone {
         text-align: center;

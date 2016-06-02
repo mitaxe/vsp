@@ -155,3 +155,16 @@
         margin-right: 10px;
     }
 }
+@include tablet {
+    .btn-video-ctrl {
+        padding: 8px 15px;
+        max-width: none;
+        width: auto;
+        .prev {
+            margin-right: 0;
+        }
+        .next {
+            margin-left: 0;
+        }
+    }
+}
