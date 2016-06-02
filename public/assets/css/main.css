@@ -1999,7 +1999,7 @@ svg {
     padding-left: 0;
     padding-right: 0; }
   .block--white {
-    border-radius: 3px;
+    border-radius: 2px;
     background: white;
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1); }
   .block--header {
