@@ -1,0 +1,88 @@
+<div class="block">
+    <div class="settings">
+        <div class="settings__row">
+            <p>Авторизация в VSP online</p>
+            <div class="form_box">
+                <form action="#">
+                    <div class="form_box__inp_row">
+                        <label for="email">Email</label> <input type="email" id="email" name="email">
+                    </div>
+                    <div class="form_box__inp_row">
+                        <label for="password">Пароль</label> <input type="password" id="password" name="password">
+                    </div>
+
+                    <a href="#" class="btn btn-green main-ui change-user-data">Изменить</a>
+                </form>
+            </div>
+        </div>
+
+        <hr class="block__hr">
+
+        <div class="settings__row">
+            <p>Активировать на моем канале</p>
+            <input type="checkbox" class="hidden" id="activate_on_channel">
+            <label for="activate_on_channel" class="ctrl"></label>
+        </div>
+
+        <hr class="block__hr">
+
+        <div class="settings__row">
+            <div class="form_box">
+                <form action="" id="chanel_info">
+                    <div class="form_box__inp_row">
+                        <label for="channel_name">Название канала</label> <input type="text" id="channel_name" name="channel_name">
+                        <span class="edit">
+                            <i class="svg">
+                                <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve">
+                                    <path fill="#0c3" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02
+                                        c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z
+                                        "/>
+                                </svg>
+                            </i>
+                        </span>
+                    </div>
+                    <div class="form_box__inp_row">
+                        <label class="v-align-top" for="channel_description">Описание канала</label>
+                        <textarea name="channel_description" id="channel_description" cols="30" rows="10"></textarea>
+                        <span class="edit v-align-top">
+                            <i class="svg">
+                                <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve">
+                                    <path fill="#0c3" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02
+                                        c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z
+                                        "/>
+                                </svg>
+                            </i>
+                        </span>
+                    </div>
+
+                    <div class="form_box__inp_row form_box__inp_row--image-upload">
+                        <span class="title">Обложка канала</span>
+                        <img class="bg" src="assets/img/channel_img.png" alt="channel img">
+                        <div class="ctrl_box">
+                            <a href="#" class="btn btn-white">Загрузить</a>
+                            <a href="#" class="btn btn-white btn-remove">Удалить</a>
+                            <span>Размер бэкгрунда 3200 на 800 пикселей</span>
+                        </div>
+                    </div>
+
+                    <div class="form_box__inp_row form_box__inp_row--image-upload">
+                        <span class="title">Обложка канала</span>
+                        <img class="ava" src="assets/img/channel_ava.png" alt="channel img">
+                        <div class="ctrl_box">
+                            <a href="#" class="btn btn-white">Загрузить</a>
+                            <a href="#" class="btn btn-white btn-remove">Удалить</a>
+                            <span>Размер аватара 498 на 498 пикселей</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <hr class="block__hr">
+
+        <div class="settings__row">
+            <a href="#" class="btn btn-green main-ui change-user-data">Сохранить</a>
+        </div>
+
+    </div>
+</div>

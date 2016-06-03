@@ -9,7 +9,8 @@ angular.module("MainApp")
     .when("/ratings", "/ratings/videos")
     .when("/user/:url", "/user/:url/all")
     .when('/search', '/search/all')
-    .when("/xuser/:url", "/xuser/:url/all");
+    .when("/xuser/:url", "/xuser/:url/all")
+    .when('/settings', '/settings/main');
 
 
     $stateProvider
@@ -174,6 +175,20 @@ angular.module("MainApp")
     .state('add-channel' ,{
         url : '/add-channel',
         templateUrl : 'app/views/add-channel.html'
+    })
+
+    //settings
+    .state('settings',{
+        url : '/settings',
+        templateUrl : 'app/views/settings.html'
+    })
+    .state('settings.main', {
+        url : '/main',
+        templateUrl : 'app/views/settings-main.html'
+    })
+    .state('settings.video', {
+        url : '/video',
+        templateUtl : 'app/views/settings-video.html'
     })
 
     // not my channel

@@ -75,6 +75,13 @@
     }
 }
 
+.btn-remove {
+    padding-left: 30px;
+    background-image: url("../img/x-icon.png");
+    background-repeat: no-repeat;
+    background-position: 12px 9px;
+    background-size: 10px 11px;
+}
 .btn-small {
     font-size: 14px;
     padding: 7px 15px;
@@ -153,6 +160,39 @@
     }
     .prev {
         margin-right: 10px;
+    }
+}
+label.ctrl {
+    border-radius: 50px;
+    background: #e6e6e6;
+    height:22px;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2) inset;
+    position: relative;
+    &:before {
+        background: #fff;
+        border-radius: 50%;
+        content: "";
+        display: block;
+        height: 22px;
+        left: -6px;
+        position: absolute;
+        top: -2px;
+        width: 22px;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: .3s;
+    }
+    &:hover {
+        &:before {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+input:checked + label.ctrl {
+    background: $col-green;
+    &:before {
+        left: 22px;
     }
 }
 @include tablet {
