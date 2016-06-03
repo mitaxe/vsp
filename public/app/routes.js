@@ -170,6 +170,12 @@ angular.module("MainApp")
         controller : 'ProfileCtrl'
     })
 
+    //add channel
+    .state('add-channel' ,{
+        url : '/add-channel',
+        templateUrl : 'app/views/add-channel.html'
+    })
+
     // not my channel
     .state('xuser', {
         url: '/xuser/:url',

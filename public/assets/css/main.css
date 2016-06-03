@@ -3749,6 +3749,82 @@ svg {
         .video_page .tabl_mob_tebs .tabs a:not(last-child) {
           margin-right: auto; } }
 
+.add_channel__logo_row {
+  margin-bottom: 30px; }
+  .add_channel__logo_row img {
+    width: 85px; }
+  .add_channel__logo_row span {
+    font-size: 18px;
+    color: #5b5d5e;
+    vertical-align: top;
+    margin-top: 5px;
+    display: inline-block;
+    margin-left: 46px; }
+  .add_channel__logo_row .sign-in-google {
+    margin-left: 135px;
+    padding: 8px 40px; }
+
+@media screen and (max-width: 767px) {
+  .add_channel__logo_row span {
+    max-width: 50%; }
+  .add_channel__logo_row--youtube img {
+    display: block;
+    margin-bottom: 15px; }
+  .add_channel__logo_row--youtube span {
+    margin-left: 0;
+    margin-bottom: 20px;
+    max-width: none; }
+  .add_channel__logo_row--youtube .sign-in-google {
+    margin-left: 0; } }
+
+.add_channel__form .inp_row {
+  margin-bottom: 20px; }
+  .add_channel__form .inp_row label {
+    font-weight: 300;
+    font-size: 14px;
+    width: 128px;
+    display: inline-block;
+    vertical-align: middle;
+    color: #5b5d5e; }
+  .add_channel__form .inp_row input {
+    width: 300px;
+    border-radius: 50px;
+    background: #fff;
+    border: 1px solid #dddddd;
+    height: 30px;
+    padding: 0 20px; }
+
+.add_channel__form .sign-in {
+  margin-left: 135px; }
+
+@media screen and (max-width: 767px) {
+  .add_channel__form .inp_row label {
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 5px; }
+  .add_channel__form .inp_row input {
+    width: 100%;
+    max-width: 340px; }
+  .add_channel__form .sign-in {
+    margin-left: 0; } }
+
+.add_channel__or_row {
+  margin: 25px 0; }
+  .add_channel__or_row span {
+    font-size: 18px;
+    color: #5b5d5e; }
+    .add_channel__or_row span.line {
+      display: inline-block;
+      background: #e0e0e0;
+      height: 1px;
+      vertical-align: middle;
+      width: 210px; }
+
+@media screen and (max-width: 767px) {
+  .add_channel span.line {
+    max-width: 190px;
+    width: 43%; } }
+
 @media screen and (min-width: 1280px) {
   .slider {
     opacity: 0; }
