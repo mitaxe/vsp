@@ -1,4 +1,5 @@
 <div class="content video_page" autoscroll='true' ng-controller="VideoPageCtrl">
+
     <div class="player_box hidden-phone">
         <div class="col-xs-12" >
             <!--<h1>{{ content.title }}</h1>-->
@@ -21,6 +22,8 @@
 
     <div class="video_slider">
         <div class="">
+
+            <!-- left preview -->
             <div class="video_slider__item video_slider__item--left col-md-2 hidden-tablet hidden-phone">
                 <div class="thumb__img">
                     <span class="thumb__length">4:25</span>
@@ -32,8 +35,14 @@
                 </a>
                 <p class="th_description">Тыквы-зомби / пранк</p>
             </div>
+
+            <!-- main video slide -->
             <div class="video_slider__item video_slider__item--main col-md-8 col-sm-12">
-                <img ng-src="{{ content.img }}" alt="" />
+                <div class="relative">
+                    <button class="play_btn hidden-phone hidden-tablet"><span class="left"></span>play<span class="right"></span></button>
+                    <img ng-src="{{ content.img }}" alt="" />
+                    <span class="thumb__length">4:25</span>
+                </div>
                 <div class="about_video clearfix">
                     <div class="about_video__left hidden-phone hidden-tablet">
                         <h2>{{content.title}}</h2>
@@ -44,8 +53,8 @@
                             <span class="hidden-desktop"> <span>2</span> дня назад</span>
                         </div>
                         <h2 class="hidden-desktop hidden-tablet">{{content.title}}</h2>
-                        <p class="hidden-phone">Просмотров <span class="views">38 806</span></p>
-                        <p><span class="hidden-tablet hidden-desktop mob_channel_name">50-50 Pranker</span> <i class="hidden-phone">Нравится</i> <span class="likes">870</span> <a href="#" class="btn like_btn">
+                        <p class="hidden-phone views_row">Просмотров <span class="views">38 806</span></p>
+                        <p><span class="hidden-tablet hidden-desktop mob_channel_name">50-50 Pranker</span> <i class="hidden-phone">Нравится</i> <span class="likes">870</span> <button class="btn like_btn">
                             <i class="svg">
                                 <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="23px" viewBox="0 0 13.566 11" enable-background="new 0 0 13.566 11" xml:space="preserve">
                                     <path fill="" d="M4.901,8.47c1.686,0.776,3.688,1.21,5.661,1.21c0.639,0,0.402-0.03,1.016-0.133
@@ -57,7 +66,7 @@
                                     <path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M0,3.52h3.9v6.412L0,11V3.52z"/>
                                 </svg>
                             </i>
-                        </a></p>
+                        </button></p>
                         <p class="hidden-tablet hidden-desktop"><span class="mob_date"> <span>2</span> дня назад</span> Просмотров <span class="views">38 806</span></p>
                         <h2 class="hidden-desktop hidden-phone">{{content.title}}</h2>
                         <div class="row hidden-desktop hidden-phone">
@@ -100,6 +109,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- right preview -->
             <div class="video_slider__item video_slider__item--right col-md-2 hidden-tablet hidden-phone">
                 <div class="thumb__img">
                     <span class="thumb__length">4:25</span>
@@ -115,6 +126,7 @@
         </div>
     </div> <!-- end slider box -->
 
+    <!-- mobile tabs -->
     <div class="tabl_mob_tebs hidden-desktop" ng-controller="CommentsCtrl">
         <div class="clearfix">
             <tabs class="tabs tabs--video tablet-center">
@@ -232,6 +244,8 @@
         </div> <!-- end col -->
         <div class="col-xs-12 col-md-5">
 
+
+            <!-- desktop tabs -->
             <div class="row hidden-phone hidden-tablet">
                 <div class="col-xs-12">
                     <div class="clearfix">
@@ -248,6 +262,8 @@
 
             <!--  videos -->
             <div ng-show="activeTab == 1" class="row right_video_list">
+
+
                 <div class="col-xs-6">
                     <div class="thumb">
                         <a class="btn" href="#" >
@@ -260,6 +276,8 @@
                         <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
                     </div>
                 </div>
+
+
                 <div class="col-xs-6">
                     <div class="thumb">
                         <a class="btn" href="#">

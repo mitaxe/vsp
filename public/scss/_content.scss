@@ -646,6 +646,11 @@
         padding-right: 25px;
         display: block;
         margin: 0 auto 15px;
+        .select__list {
+            ul {
+                background: #1a1b1b;
+            }
+        }
     }
 
     svg {
@@ -772,10 +777,6 @@
         width: 0;
         transition: .3s ease-in-out;
     }
-    &--video {
-        width: 100%;
-        margin-top: 23px;
-    }
     &.four {
         width: 75%;
     }
@@ -803,6 +804,13 @@
         }
         span {
             font-weight:bold;
+        }
+    }
+    &--video {
+        width: 100%;
+        margin-top: 23px;
+        a {
+            padding: 0 24px;
         }
     }
     @include phone {
