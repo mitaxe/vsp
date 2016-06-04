@@ -1,4 +1,4 @@
-var app = angular.module("MainApp", ['ui.router', 'ngAnimate', 'ngTouch']);
+var app = angular.module("MainApp", ['ui.router', 'ngAnimate', 'ngTouch', 'angular-sortable-view']);
 
 
 app.run(function($rootScope, $document, $locale, $state){

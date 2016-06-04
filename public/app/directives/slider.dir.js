@@ -56,7 +56,7 @@ angular.module("MainApp")
                     }
                 };
 
-            },0);
+            }, 0);
         //  }, true);
 
     }

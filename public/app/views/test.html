@@ -1,5 +1,39 @@
 <!-- test page -->
-<div class="">
 
+<div ng-init='data.items1 = ["1.0", "1.1", "1.2", "1.3", "1.4", "1.5"]; accordions = [1,2]'>
+
+<div class="accordion">
+
+    <div ng-repeat="acc in accordions">
+        <div toggler>click me to expand</div>
+        <div class="accordion__pannel">
+            <div class="accordion__content">
+                <div sv-root sv-part="data.items1">
+                    <div ng-repeat="item in data.items1" sv-element="opts" class="well">
+                        {{item}}, drag it
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- info  -->
+<div>
+    <br><br><br>
+    <h2>Data changes as you drag:</h2>
+    <p>{{ data.items1 }}</p>
+    <br><br><br>
+    <p>
+        <a href="https://github.com/kamilkp/angular-sortable-view">Docs</a>, <a href="http://kamilkp.github.io/angular-sortable-view/#?tab=7">Examples</a>
+        <br><br>
+        tasks: implement nested lists so accordions become draggable too
+        <br><br>
+        <a href="https://github.com/kamilkp/angular-sortable-view/issues/35">https://github.com/kamilkp/angular-sortable-view/issues/35</a>
+        <br>
+        <a href="https://github.com/kamilkp/angular-sortable-view/issues/58">https://github.com/kamilkp/angular-sortable-view/issues/58</a>
+    </p>
+</div>
 
 </div>
