@@ -39,9 +39,12 @@
             <!-- main video slide -->
             <div class="video_slider__item video_slider__item--main col-md-8 col-sm-12">
                 <div class="relative">
-                    <button class="play_btn hidden-phone hidden-tablet"><span class="left"></span>play<span class="right"></span></button>
-                    <img ng-src="{{ content.img }}" alt="" />
+                    <!-- <img ng-src="{{ content.img }}" alt=""/> -->
+                    <div class='embed-container'>
+                        <iframe src='https://www.youtube.com/embed/SFdR240qaXA' frameborder='0' allowfullscreen></iframe>
+                    </div>
                     <span class="thumb__length">4:25</span>
+                    <button class="play_btn hidden-phone hidden-tablet"><span class="left"></span>play<span class="right"></span></button>
                 </div>
                 <div class="about_video clearfix">
                     <div class="about_video__left hidden-phone hidden-tablet">
