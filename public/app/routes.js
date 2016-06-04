@@ -231,6 +231,12 @@ angular.module("MainApp")
                 }
             }
         }
+    })
+
+    // shop detailed page
+    .state('test', {
+        url: '/test',
+        templateUrl: 'app/views/test.html'
     });
 
 });

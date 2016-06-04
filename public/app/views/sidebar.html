@@ -49,81 +49,90 @@
         <div class="sidebar__line"></div>
 
         <div class="sidebar__submenu">
-            <a class="sidebar__link hidden-tablet hidden-desktop">
-                <div class="table-middle">
-                    <span class="sidebar__text">Мои подписки</span>
+            <div class="accordion hidden-phone">
+                <div toggler>
+                    <a class="sidebar__link">
+                        <div class="table-middle">
+                            <span class="sidebar__icon">
+                                <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="25" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                            </span><span class="sidebar__text">Мои подписки</span>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a class="sidebar__link hidden-phone slideable-closer" slide-toggle="#sidebar-subscriptions">
-                <div class="table-middle">
-                    <span class="sidebar__icon">
-                        <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="25" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                    </span><span class="sidebar__text">Мои подписки</span>
-                </div>
-            </a>
-            <div id="sidebar-subscriptions" class="slideable">
-                <a class="sidebar__link channel" href="#" ng-repeat="channel in channels | limitTo: 5">
-                    <div class="table-middle">
-                        <img ng-src="{{ channel.img }}" alt="" class="channel__avatar"/>
-                        <div class="channel__info">
-                            <span class="channel__name">{{ channel.name }}</span>
-                            <span class="channel__subscribers">{{ channel.subscribers }}</span>
+                <div class="accordion__pannel">
+                    <div class="accordion__content">
+                        <a class="sidebar__link channel" href="#" ng-repeat="channel in channels | limitTo: 5">
+                            <div class="table-middle">
+                                <img ng-src="{{ channel.img }}" alt="" class="channel__avatar"/>
+                                <div class="channel__info">
+                                    <span class="channel__name">{{ channel.name }}</span>
+                                    <span class="channel__subscribers">{{ channel.subscribers }}</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="sidebar__button hidden-phone">
+                            <a href="" class="btn btn-trans">Смотерть все</a>
                         </div>
                     </div>
-                </a>
-                <div class="sidebar__button hidden-phone">
-                    <a href="" class="btn btn-trans">Смотерть все</a>
                 </div>
-            </div>
-            <a class="sidebar__link hidden-tablet hidden-desktop">
-                <div class="table-middle">
-                    <span class="sidebar__text">Рекомендуемые каналы</span>
+                <div toggler>
+                    <a class="sidebar__link">
+                        <div class="table-middle">
+                            <span class="sidebar__icon">
+                                <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="25" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                            </span><span class="sidebar__text">Рекомендуемые каналы</span>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a class="sidebar__link hidden-phone slideable-closer" slide-toggle="#sidebar-recommended">
-                <div class="table-middle">
-                    <span class="sidebar__icon">
-                        <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="25" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                    </span><span class="sidebar__text">Рекомендуемые каналы</span>
-                </div>
-            </a>
-            <div id="sidebar-recommended" class="slideable">
-                <a class="sidebar__link channel" href="#" ng-repeat="channel in channels | limitTo: 5">
-                    <div class="table-middle">
-                        <img ng-src="{{ channel.img }}" alt="" class="channel__avatar"/>
-                        <div class="channel__info">
-                            <span class="channel__name">{{ channel.name }}</span>
-                            <span class="channel__subscribers">{{ channel.subscribers }}</span>
+                <div class="accordion__pannel">
+                    <div class="accordion__content">
+                        <a class="sidebar__link channel" href="#" ng-repeat="channel in channels | limitTo: 5">
+                            <div class="table-middle">
+                                <img ng-src="{{ channel.img }}" alt="" class="channel__avatar"/>
+                                <div class="channel__info">
+                                    <span class="channel__name">{{ channel.name }}</span>
+                                    <span class="channel__subscribers">{{ channel.subscribers }}</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="sidebar__button hidden-phone">
+                            <a href="" class="btn btn-trans">Смотерть все</a>
                         </div>
                     </div>
-                </a>
-                <div class="sidebar__button hidden-phone">
-                    <a href="" class="btn btn-trans">Смотерть все</a>
                 </div>
             </div>
-
-            <div class="sidebar__line hidden-tablet hidden-desktop"></div>
-
-            <div class="sidebar__usermenu hidden-desktop hidden-tablet">
+            <!-- mob submenu -->
+            <div class="hidden-tablet hidden-desktop">
                 <a class="sidebar__link">
                     <div class="table-middle">
-                        <div class="sidebar__avatar"><img src="assets/img/ball-58.png" alt="avatar"/></div><span class="sidebar__text">Профиль</span>
+                        <span class="sidebar__text">Мои подписки</span>
                     </div>
                 </a>
                 <a class="sidebar__link">
                     <div class="table-middle">
-                        <div class="sidebar__avatar"></div><span class="sidebar__text">Канал</span>
+                        <span class="sidebar__text">Рекомендуемые каналы</span>
                     </div>
                 </a>
-                <a class="sidebar__link">
-                    <div class="table-middle">
-                        <div class="sidebar__avatar"></div><span class="sidebar__text">Выйти</span>
-                    </div>
-                </a>
+                <div class="sidebar__line"></div>
+                <div class="sidebar__usermenu">
+                    <a class="sidebar__link">
+                        <div class="table-middle">
+                            <div class="sidebar__avatar"><img src="assets/img/ball-58.png" alt="avatar"/></div><span class="sidebar__text">Профиль</span>
+                        </div>
+                    </a>
+                    <a class="sidebar__link">
+                        <div class="table-middle">
+                            <div class="sidebar__avatar"></div><span class="sidebar__text">Канал</span>
+                        </div>
+                    </a>
+                    <a class="sidebar__link">
+                        <div class="table-middle">
+                            <div class="sidebar__avatar"></div><span class="sidebar__text">Выйти</span>
+                        </div>
+                    </a>
+                </div>
             </div>
-
         </div>
 
     </div>
-
 </nav>

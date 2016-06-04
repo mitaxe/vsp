@@ -82,6 +82,7 @@
     background-position: 12px 9px;
     background-size: 10px 11px;
 }
+
 .btn-small {
     font-size: 14px;
     padding: 7px 15px;
@@ -110,10 +111,9 @@
     }
 }
 
-
 .btn-vk,
 .btn-fb,
-.btn-google{
+.btn-google {
     color: white;
     font-size: 14px;
     border-radius: 50px;
@@ -161,6 +161,17 @@
     .prev {
         margin-right: 10px;
     }
+    @include tablet {
+        padding: 8px 15px;
+        max-width: none;
+        width: auto;
+        .prev {
+            margin-right: 0;
+        }
+        .next {
+            margin-left: 0;
+        }
+    }
 }
 label.ctrl {
     border-radius: 50px;
@@ -193,18 +204,5 @@ input:checked + label.ctrl {
     background: $col-green;
     &:before {
         left: 22px;
-    }
-}
-@include tablet {
-    .btn-video-ctrl {
-        padding: 8px 15px;
-        max-width: none;
-        width: auto;
-        .prev {
-            margin-right: 0;
-        }
-        .next {
-            margin-left: 0;
-        }
     }
 }

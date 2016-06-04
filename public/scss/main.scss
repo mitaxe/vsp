@@ -1,13 +1,18 @@
 @import "libs/bootstrapgrid";
 
-@import "comp/vars";
-@import "comp/mixins";
+@import "base/vars";
+@import "base/mixins";
 
-@import "comp/reset";
-@import "comp/fixes";
+@import "base/reset";
+@import "base/fixes";
 
-@import "comp/buttons";
-@import "comp/animations";
+@import "base/buttons";
+@import "base/animations";
+
+@import "components/slider";
+@import "components/accordion";
+@import "components/comments";
+@import "components/tabs";
 
 @import "general";
 
@@ -23,4 +28,4 @@
 @import "add_channel";
 @import "settings";
 
-@import "slider";
+@import "test";

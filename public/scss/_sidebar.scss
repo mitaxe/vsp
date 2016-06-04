@@ -129,17 +129,17 @@
                     color: white;
                 }
             }
-            &.active {
-                svg {
-                    transform: rotate(180deg);
-                    fill: $col-green;
-                }
-                .sidebar__text {
-                    color: $col-green;
-                }
+        }
+        [toggler].active {
+            svg {
+                transform: rotate(180deg);
+                fill: $col-green;
+            }
+            .sidebar__text {
+                color: $col-green;
             }
         }
-        .slideable {
+        .accordion__pannel {
             padding-left: 55px;
         }
         .sidebar__text {
