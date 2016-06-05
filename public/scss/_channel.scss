@@ -128,8 +128,6 @@
     }
     .green_btn {
         @include no-select;
-        background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%);
-        text-shadow: 0px 1px 1px rgba(0,0,0,0.2);
         color: #fff;
         text-transform: uppercase;
         height: 40px;
@@ -142,6 +140,11 @@
         font-weight:bold;
         font-size: 14px;
         cursor: pointer;
+
+        box-shadow: 0px 0px 5px 5px rgba(29,278,70,0.13);
+        background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%);
+        text-shadow: none;
+
         &:hover {
             background: linear-gradient(to bottom, #29bd4a 0%, #2da747 100%);
         }
