@@ -180,7 +180,8 @@ angular.module("MainApp")
     //settings
     .state('settings',{
         url : '/settings',
-        templateUrl : 'app/views/settings.html'
+        templateUrl : 'app/views/settings.html',
+        controller : 'SettingsCtrl'
     })
     .state('settings.main', {
         url : '/main',
@@ -188,7 +189,7 @@ angular.module("MainApp")
     })
     .state('settings.video', {
         url : '/video',
-        templateUtl : 'app/views/settings-video.html'
+        templateUrl : 'app/views/settings-video.html'
     })
 
     // not my channel

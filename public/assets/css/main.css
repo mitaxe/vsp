@@ -4055,6 +4055,74 @@ svg {
   .form_box .change-user-data {
     margin-left: 0; } }
 
+.accordion .accordion_item {
+  position: relative; }
+  .accordion .accordion_item__view {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+    background: #fff;
+    font-size: 16px;
+    color: #5b5d5e;
+    padding: 17px;
+    margin-bottom: 10px; }
+    .accordion .accordion_item__view span {
+      color: #999999; }
+    .accordion .accordion_item__view svg {
+      margin-right: 12px;
+      fill: #00cc33; }
+    .accordion .accordion_item__view.active {
+      background: #565758;
+      color: #fff; }
+      .accordion .accordion_item__view.active span {
+        color: #fff; }
+      .accordion .accordion_item__view.active svg {
+        fill: #fff; }
+      .accordion .accordion_item__view.active + .icon_set {
+        display: block; }
+    .accordion .accordion_item__view--inner {
+      margin-left: 30px;
+      position: relative; }
+      .accordion .accordion_item__view--inner .inner_icons {
+        position: absolute;
+        right: 12px;
+        top: 15px; }
+        .accordion .accordion_item__view--inner .inner_icons__toggler {
+          width: 31px;
+          height: 7px;
+          background: url("../img/dots.png") no-repeat center/31px 7px;
+          outline: none;
+          border: none;
+          vertical-align: middle; }
+        .accordion .accordion_item__view--inner .inner_icons .sandwich {
+          display: none;
+          margin-top: 3px; }
+          .accordion .accordion_item__view--inner .inner_icons .sandwich span {
+            background: #757575;
+            box-shadow: none; }
+        .accordion .accordion_item__view--inner .inner_icons.visible .inner_icons__toggler {
+          display: none; }
+        .accordion .accordion_item__view--inner .inner_icons.visible .sandwich {
+          display: inline-block; }
+
+.accordion .icon_set {
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 15px; }
+  .accordion .icon_set .sandwich {
+    margin-top: 3px;
+    display: inline-block; }
+    .accordion .icon_set .sandwich span {
+      background: #fff;
+      box-shadow: none; }
+  .accordion .icon_set .del_btn {
+    background: transparent url("../img/del_icon.png") no-repeat scroll center center/17px 15px;
+    border: medium none;
+    height: 17px;
+    outline: medium none navy;
+    vertical-align: top;
+    width: 15px;
+    cursor: pointer; }
+
 .well {
   -webkit-user-select: none;
   /* Chrome all / Safari all */

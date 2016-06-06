@@ -1,0 +1,83 @@
+<div class="block">
+    <div class="col-xs-12 settings">
+
+        <div class="settings__row">
+            <p>Синхонизация с youtube-каналом</p>
+            <input type="checkbox" class="hidden" id="sync_youtube_channel" name="sync_youtube_channel">
+            <label for="sync_youtube_channel" class="ctrl"></label>
+        </div>
+
+        <hr class="block__hr">
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="left_list">
+                    <div class="accordion">
+                        <div>
+                            <div>
+                                <div ng-repeat="item in items">
+                                    <div toggler>{{item.name}} ( {{item.items.length}} )</div>
+                                    <div class="accordion__pannel">
+                                        <div class="accordion__content">
+                                            <div>
+                                                <div>
+                                                    <div ng-repeat="inner in item.items">
+                                                        {{inner}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="right_list">
+                    <h3>Структура вашего канала на эй[play]</h3>
+                    <input type="text" class="search_play">
+                    <div class="accordion">
+                        <div sv-root>
+                            <div sv-part="items">
+                                <div ng-repeat="item in items" sv-element class="accordion_item clearfix">
+                                    <div toggler  class="accordion_item__view">
+                                        <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                                        {{item.name}} <span>({{item.items.length}})</span>
+                                    </div>
+                                    <div class="icon_set">
+                                        <button ng-click="removeItem($index)" class="btn del_btn"></button>
+                                        <div sv-handle class="sandwich">
+                                            <span></span><span></span><span></span>
+                                        </div>
+                                    </div>
+                                    <div class="accordion__pannel">
+                                        <div class="accordion__content">
+                                            <div sv-root>
+                                                <ul sv-part="item.items">
+                                                    <li class="accordion_item__view accordion_item__view--inner" sv-element ng-repeat="inner in item.items" ng-mouseleave="hideInnerICons($event)">
+                                                        {{inner}}
+                                                        <div class="inner_icons">
+                                                            <button ng-mouseover="showInnerIcons($event)" class="btn inner_icons__toggler"></button>
+                                                            <div sv-handle class="sandwich">
+                                                                <span></span><span></span><span></span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- test page -->
+    </div>
+</div>

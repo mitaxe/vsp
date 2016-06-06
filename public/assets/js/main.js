@@ -242,7 +242,8 @@ angular.module("MainApp")
     //settings
     .state('settings',{
         url : '/settings',
-        templateUrl : 'app/views/settings.html'
+        templateUrl : 'app/views/settings.html',
+        controller : 'SettingsCtrl'
     })
     .state('settings.main', {
         url : '/main',
@@ -250,7 +251,7 @@ angular.module("MainApp")
     })
     .state('settings.video', {
         url : '/video',
-        templateUtl : 'app/views/settings-video.html'
+        templateUrl : 'app/views/settings-video.html'
     })
 
     // not my channel
@@ -622,6 +623,47 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
+    .controller('SettingsCtrl', ['$scope', function ($scope) {
+
+
+        $scope.items = [
+            {
+                name : 'Оригинальные пранки',
+                items: [1,2,3,4]
+            },
+            {
+                name : 'Лучшие видео',
+                items: [1,2]
+            },
+            {
+                name : 'Пантера Шоу',
+                items: [1,2,3,4,5]
+            }
+
+        ];
+
+        $scope.removeItem = function(outer, inner) {
+            // console.log(arguments.length);
+            if(arguments.length == 1) {
+                //remove outer element
+                $scope.items.splice(outer, 1);
+            } else {
+                //remove inner element
+                $scope.items[outer].items.splice(inner, 1);
+            }
+        };
+
+
+        $scope.showInnerIcons = function($event) {
+            angular.element($event.currentTarget).parent().addClass('visible');
+        };
+
+        $scope.hideInnerICons = function($event) {
+            angular.element($event.currentTarget).children().removeClass('visible')
+        }
+    }]);
+
+angular.module("MainApp")
 .controller('ShopDetailCtrl', ['$scope', '$stateParams', '$window', function($scope, $stateParams, $window) {
 
     $scope.itemDetails = {
@@ -770,8 +812,10 @@ angular.module("MainApp")
                 var contents = angular.element(element[0].querySelectorAll('.accordion__content'));
                 angular.forEach(togglers, function(toggler,index) {
                     toggler.onclick = function() {
-                        if (toggler.className === 'active') {
-                            toggler.className = '';
+                        if (toggler.className.indexOf('active') != -1) {
+
+                            toggler.className = toggler.className.replace(/\bactive\b/,'');
+                            console.log(toggler.className);
                             angular.forEach(pannels, function(el) {
                                 el.style.height = '0';
                             });
@@ -780,11 +824,11 @@ angular.module("MainApp")
                                 el.style.height = '0';
                             });
                             angular.forEach(togglers, function(el) {
-                                el.className = '';
+                                el.className = el.className.replace(/\bactive\b/,'');
                             });
                             var y = contents[index].clientHeight;
                             pannels[index].style.height = y + 15 + 'px';
-                            toggler.className = 'active';
+                            toggler.className += ' active';
                         }
                     };
                 });
