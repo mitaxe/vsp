@@ -1,4 +1,7 @@
 .settings {
+  .fw {
+    width: 100%;
+  }
   &__row {
     position: relative;
     padding: 25px 0;
@@ -6,6 +9,11 @@
       font-size: 18px;
       color: #5b5d5e;
       margin-bottom: 17px;
+    }
+    .rm_top_right {
+      position: absolute;
+      right: 20px;
+      top:20px;
     }
   }
 }
@@ -54,7 +62,7 @@
         font-size: 14px;
         color: #5b5d5e;
       }
-      .bg {
+      img.bg {
         max-width: 900px;
         width: 71%;
       }
@@ -63,6 +71,33 @@
         width: 20%;
       }
     }
+    @include tablet {
+      &--image-upload {
+        .title.bg {
+          display: block;
+          margin-bottom: 25px;
+        }
+      }
+    }
+  @include phone {
+    &--image-upload {
+      .title {
+        display: block;
+        margin-bottom: 25px;
+      }
+      img.bg {
+        width: 90%;
+      }
+      .ava {
+        max-width: none;
+        width: 50%;
+        float: left;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
   }
   .change-user-data {
     margin-left: 130px;
@@ -79,6 +114,63 @@
     span {
       color: #999999;
       font-size: 12px;
+    }
+  }
+  @include phone {
+    .ctrl_box {
+      max-width: none;
+      width: 90%;
+      padding-top: 18px;
+      padding-left: 0;
+      span {
+        display: inline-block;
+        width: 130px;
+      }
+      .btns_wrapp {
+       text-align: center;
+        .btn-white {
+          padding: 6px 22px;
+          font-size: 14px;
+          min-width: 115px;
+          &:first-child {
+            margin-right: 15px;
+          }
+          &.btn-remove {
+            padding-left: 30px;
+          }
+        }
+      }
+      &.ava {
+        float: left;
+        width: 50%;
+        padding: 0 0 0 15px;
+        text-align: left;
+        .btns_wrapp {
+          text-align: left;
+          .btn-white {
+            &:first-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include phone {
+  .form_box {
+    &__inp_row {
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input, textarea {
+        width: 250px;
+      }
+    }
+    .change-user-data {
+      margin-left: 0;
     }
   }
 }
