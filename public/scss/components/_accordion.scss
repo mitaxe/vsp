@@ -16,7 +16,7 @@
             fill: $col-green;
         }
         &.active {
-            svg {
+            svg:not(.ctrl_icon) {
                 transform: rotate(180deg);
             }
         }

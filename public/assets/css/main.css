@@ -896,7 +896,7 @@ input:checked + label.ctrl {
   color: #00cc33; }
   .accordion [toggler] .svg {
     fill: #00cc33; }
-  .accordion [toggler].active svg {
+  .accordion [toggler].active svg:not(.ctrl_icon) {
     transform: rotate(180deg); }
 
 /* comments component */
@@ -4091,32 +4091,63 @@ svg {
         color: #fff; }
       .accordion .accordion_item__view.active svg {
         fill: #fff; }
-      .accordion .accordion_item__view.active + .icon_set {
+      .accordion .accordion_item__view.active .icon_set {
         display: block; }
+    .accordion .accordion_item__view:hover {
+      background: #565758;
+      color: #fff; }
+    .accordion .accordion_item__view.icon_visible .icon_set {
+      display: block; }
     .accordion .accordion_item__view--inner {
       margin-left: 30px;
       position: relative; }
+      .accordion .accordion_item__view--inner .item_content {
+        width: 80%;
+        border: none; }
+        .accordion .accordion_item__view--inner .item_content.editing {
+          border-bottom: 1px dashed #ccc; }
       .accordion .accordion_item__view--inner .inner_icons {
         position: absolute;
         right: 12px;
         top: 15px; }
         .accordion .accordion_item__view--inner .inner_icons__toggler {
-          width: 31px;
-          height: 7px;
-          background: url("../img/dots.png") no-repeat center/31px 7px;
           outline: none;
           border: none;
-          vertical-align: middle; }
+          display: block;
+          position: absolute;
+          right: 0;
+          top: -5px; }
+          .accordion .accordion_item__view--inner .inner_icons__toggler svg {
+            fill: #757575; }
+        .accordion .accordion_item__view--inner .inner_icons .wrp {
+          display: none; }
+        .accordion .accordion_item__view--inner .inner_icons .btn_edit {
+          border: none;
+          outline: none;
+          background: none;
+          padding: 0; }
+          .accordion .accordion_item__view--inner .inner_icons .btn_edit svg {
+            margin-right: 0;
+            fill: #757575; }
+        .accordion .accordion_item__view--inner .inner_icons .del_btn {
+          display: inline-block;
+          padding: 0; }
+          .accordion .accordion_item__view--inner .inner_icons .del_btn svg {
+            fill: #757575;
+            margin-right: 0; }
         .accordion .accordion_item__view--inner .inner_icons .sandwich {
-          display: none;
+          display: inline-block;
           margin-top: 3px; }
           .accordion .accordion_item__view--inner .inner_icons .sandwich span {
             background: #757575;
             box-shadow: none; }
         .accordion .accordion_item__view--inner .inner_icons.visible .inner_icons__toggler {
           display: none; }
-        .accordion .accordion_item__view--inner .inner_icons.visible .sandwich {
-          display: inline-block; }
+        .accordion .accordion_item__view--inner .inner_icons.visible .wrp {
+          display: block; }
+      .accordion .accordion_item__view--inner:hover {
+        background: #fff;
+        color: #5b5d5e; }
 
 .accordion .icon_set {
   display: none;
@@ -4130,13 +4161,18 @@ svg {
       background: #fff;
       box-shadow: none; }
   .accordion .icon_set .del_btn {
-    background: transparent url("../img/del_icon.png") no-repeat scroll center center/17px 15px;
     border: medium none;
     height: 17px;
     outline: medium none navy;
     vertical-align: top;
-    width: 15px;
+    width: 20px;
     cursor: pointer; }
+    .accordion .icon_set .del_btn svg {
+      fill: #fff; }
+
+.highlightedText {
+  background: yellow;
+  color: #5b5d5e !important; }
 
 .well {
   -webkit-user-select: none;
