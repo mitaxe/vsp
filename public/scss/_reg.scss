@@ -93,6 +93,10 @@
         font-size: 16px;
         color: #3a3d3e;
         padding: 3px 15px;
+        &:focus {
+          border-color: $col-green;
+          box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
+        }
         &#password {
           padding-right: 125px;
         }

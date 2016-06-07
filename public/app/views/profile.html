@@ -13,7 +13,15 @@
 
                     </div>
 
-                    <div class="clearfix right-desktop pr_wrapper"><a href="#" class="btn profile__btn_white">Изменить профиль</a></div>
+                    <div class="clearfix right-desktop pr_wrapper"><a ui-sref="settings.main" class="btn profile__btn_white btn-white">
+                        <i class="svg">
+                            <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve">
+                                    <path fill="" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02
+                                        c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z
+                                        "/>
+                                </svg>
+                        </i>
+                        Изменить профиль</a></div>
                 </div>
             </div>
         </div> <!-- end row -->
@@ -25,7 +33,15 @@
                         <h2 class="block__title">Каналы <span class="cat_counter"> {{profile.userChannels}}</span></h2>
 
                         <!-- edit channel desktop -->
-                        <div class="clearfix" style="float:right;"><a href="#" class="btn profile__btn_white hidden-tablet hidden-phone">Редактировать канал</a></div>
+                        <div class="clearfix" style="float:right;"><a ui-sref="settings.video" class="btn profile__btn_white hidden-tablet hidden-phone btn-white">
+                            <i class="svg">
+                                <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve">
+                                    <path fill="" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02
+                                        c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z
+                                        "/>
+                                </svg>
+                            </i>
+                            Редактировать канал</a></div>
                         <!-- end edit channel desktop -->
 
                     </div>
@@ -42,7 +58,15 @@
                             <div class="sub_box clearfix">
 
                                 <!-- edit channel tablet -->
-                                <a style="display: block;" href="#" class="btn profile__btn_white tbl hidden-desktop hidden-phone">Редактировать канал</a>
+                                <a style="display: block;" ui-sref="settings.video"class="btn profile__btn_white tbl hidden-desktop hidden-phone btn-white">
+                                    <i class="svg">
+                                        <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve">
+                                    <path fill="" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02
+                                        c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z
+                                        "/>
+                                </svg>
+                                    </i>
+                                    Редактировать канал</a>
                                 <!-- end edit channel tablet -->
 
                                 <h3 class="ch_name">{{profile.channel.channelName}}</h3>
@@ -60,7 +84,15 @@
                                 <!-- end subscribe tablet and phone -->
 
                                 <!-- edit channel phone -->
-                                <a style="display: block;" href="#" class="btn profile__btn_white tbl hidden-desktop hidden-tablet">Редактировать канал</a>
+                                <a style="display: block;" ui-sref="settings.video" class="btn profile__btn_white tbl hidden-desktop hidden-tablet btn-white">
+                                    <i class="svg">
+                                        <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve">
+                                    <path fill="" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02
+                                        c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z
+                                        "/>
+                                </svg>
+                                    </i>
+                                    Редактировать канал</a>
                                 <!-- end edit channel phone -->
 
                                 <p class="sub_info">Самый популярный Пранк канал в Мире!</p>

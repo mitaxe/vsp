@@ -159,11 +159,20 @@
     border-radius: 50px;
     color: #3a3b3b;
     line-height: 1;
-    padding: 6px 22px 6px 44px;
+    padding: 6px 22px 6px 22px;
     transition: all 0.3s ease 0s;
-    background: rgba(0, 0, 0, 0) url("../img/edit_icon.png") no-repeat 19px 6px / 12px 13px;
     max-width: 240px;
+    svg {
+      margin-right: 10px;
+      fill: #999999;
+    }
+    &:hover {
+      svg {
+        fill: $col-green;
+      }
+    }
   }
+
   @include tablet {
     &__btn_white {
       position: absolute;
@@ -172,8 +181,8 @@
       &.tbl {
         position: static;
         float: none;
-        width:200px;
-        padding: 6px 14px 6px 37px;
+        width:210px;
+        padding: 6px 14px 6px 14px;
       }
     }
   }

@@ -655,11 +655,13 @@ select option:hover {
       padding: 5px 10px; } }
 
 .btn-remove {
-  padding-left: 30px;
-  background-image: url("../img/x-icon.png");
-  background-repeat: no-repeat;
-  background-position: 12px 9px;
-  background-size: 10px 11px; }
+  padding-left: 18px; }
+  .btn-remove svg {
+    position: relative;
+    top: 1px;
+    margin-right: 5px; }
+  .btn-remove:hover svg {
+    fill: #00cc33; }
 
 .btn-small {
   font-size: 14px;
@@ -3236,10 +3238,14 @@ svg {
   border-radius: 50px;
   color: #3a3b3b;
   line-height: 1;
-  padding: 6px 22px 6px 44px;
+  padding: 6px 22px 6px 22px;
   transition: all 0.3s ease 0s;
-  background: transparent url("../img/edit_icon.png") no-repeat 19px 6px/12px 13px;
   max-width: 240px; }
+  .profile__btn_white svg {
+    margin-right: 10px;
+    fill: #999999; }
+  .profile__btn_white:hover svg {
+    fill: #00cc33; }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .profile__btn_white {
@@ -3249,8 +3255,8 @@ svg {
     .profile__btn_white.tbl {
       position: static;
       float: none;
-      width: 200px;
-      padding: 6px 14px 6px 37px; } }
+      width: 210px;
+      padding: 6px 14px 6px 14px; } }
 
 .profile__subscribe_box {
   float: none;
@@ -3563,6 +3569,9 @@ svg {
       font-size: 16px;
       color: #3a3d3e;
       padding: 3px 15px; }
+      .registration .options__form input:focus {
+        border-color: #00cc33;
+        box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2); }
       .registration .options__form input#password {
         padding-right: 125px; }
       .registration .options__form input:checked + .check_label:before {
@@ -3944,7 +3953,7 @@ svg {
 
 .form_box__inp_row {
   margin-bottom: 20px; }
-  .form_box__inp_row label {
+  .form_box__inp_row label:not(.file) {
     font-weight: 300;
     font-size: 14px;
     width: 128px;
@@ -3962,6 +3971,9 @@ svg {
     border: 1px solid #dddddd;
     height: 30px;
     padding: 0 20px; }
+    .form_box__inp_row input:focus {
+      border-color: #00cc33;
+      box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2); }
   .form_box__inp_row textarea {
     border: 1px solid #dddddd;
     background: none;
@@ -3970,6 +3982,9 @@ svg {
     padding: 5px;
     font-size: 12px;
     color: #999999; }
+    .form_box__inp_row textarea:focus {
+      border-color: #00cc33;
+      box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2); }
   .form_box__inp_row .edit {
     margin-left: 5px; }
   .form_box__inp_row--image-upload .title {
@@ -4010,7 +4025,7 @@ svg {
   vertical-align: top;
   padding-left: 10px;
   max-width: 135px; }
-  .form_box .ctrl_box a {
+  .form_box .ctrl_box a, .form_box .ctrl_box .file {
     display: inline-block;
     margin-bottom: 15px; }
   .form_box .ctrl_box span {

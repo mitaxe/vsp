@@ -78,11 +78,17 @@
 }
 
 .btn-remove {
-    padding-left: 30px;
-    background-image: url("../img/x-icon.png");
-    background-repeat: no-repeat;
-    background-position: 12px 9px;
-    background-size: 10px 11px;
+    padding-left: 18px;
+    svg {
+        position: relative;
+        top:1px;
+        margin-right: 5px;
+    }
+    &:hover {
+        svg {
+            fill: $col-green;
+        }
+    }
 }
 
 .btn-small {
