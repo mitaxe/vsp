@@ -769,6 +769,53 @@ input:checked + label.ctrl {
   input:checked + label.ctrl:before {
     left: 22px; }
 
+label.check_label {
+  position: relative;
+  width: 35%;
+  padding-left: 35px;
+  cursor: pointer; }
+  label.check_label:before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: url("../img/checkbox_bg.png") no-repeat no-repeat 0 -1px;
+    background-size: 24px auto;
+    left: 0;
+    top: -5px; }
+
+input:checked + .check_label:before {
+  background-position: 0px -86px; }
+
+label.radio_label {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer; }
+  label.radio_label:before {
+    content: "";
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid #dddddd;
+    box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    left: 0;
+    top: -2px; }
+  label.radio_label:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #00cc33;
+    left: 7px;
+    top: 5px;
+    display: none; }
+
+input[type='radio']:checked + .radio_label:after {
+  display: block; }
+
 /* main views animations */
 .mainview-animation.ng-enter,
 .mainview-animation.ng-leave {
@@ -3946,10 +3993,41 @@ svg {
     font-size: 18px;
     color: #5b5d5e;
     margin-bottom: 17px; }
+    .settings__row p span {
+      font-weight: 500; }
   .settings__row .rm_top_right {
     position: absolute;
     right: 20px;
     top: 20px; }
+  .settings__row .radio_label {
+    margin-right: 20px;
+    font-size: 16px;
+    color: #5b5d5e; }
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    .settings__row .inp_row {
+      margin-top: 30px; }
+      .settings__row .inp_row .tablet_check_box {
+        vertical-align: top; }
+      .settings__row .inp_row p.sending_paragraph {
+        display: inline-block;
+        max-width: 80%; }
+      .settings__row .inp_row .check_label:before {
+        top: -1px; } }
+  @media screen and (max-width: 767px) {
+    .settings__row .inp_row {
+      margin-top: 30px; }
+      .settings__row .inp_row .tablet_check_box {
+        vertical-align: top;
+        display: inline-block;
+        margin-top: 3px; }
+      .settings__row .inp_row p.sending_paragraph {
+        display: inline-block;
+        max-width: 80%;
+        font-size: 15px; } }
+
+@media screen and (max-width: 767px) {
+  .settings__row p {
+    font-size: 14px; } }
 
 .form_box__inp_row {
   margin-bottom: 20px; }
@@ -3970,7 +4048,8 @@ svg {
     background: none;
     border: 1px solid #dddddd;
     height: 30px;
-    padding: 0 20px; }
+    padding: 0 20px;
+    outline: none; }
     .form_box__inp_row input:focus {
       border-color: #00cc33;
       box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2); }
@@ -3981,7 +4060,7 @@ svg {
     resize: none;
     padding: 5px;
     font-size: 12px;
-    color: #999999; }
+    outline: none; }
     .form_box__inp_row textarea:focus {
       border-color: #00cc33;
       box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2); }
@@ -4148,6 +4227,9 @@ svg {
       .accordion .accordion_item__view--inner:hover {
         background: #fff;
         color: #5b5d5e; }
+    @media screen and (max-width: 767px) {
+      .accordion .accordion_item__view--inner .item_content {
+        font-size: 12px; } }
 
 .accordion .icon_set {
   display: none;
@@ -4169,6 +4251,54 @@ svg {
     cursor: pointer; }
     .accordion .icon_set .del_btn svg {
       fill: #fff; }
+
+.right_list h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #5b5d5e;
+  line-height: 24px; }
+
+.left_list .left_accordion__item {
+  font-size: 16px;
+  color: #5b5d5e;
+  margin-bottom: 25px; }
+  .left_list .left_accordion__item span {
+    color: #999999; }
+  .left_list .left_accordion__item svg {
+    margin-right: 15px; }
+  .left_list .left_accordion__item.active {
+    font-weight: bold; }
+    .left_list .left_accordion__item.active svg {
+      fill: #757575; }
+
+.left_list .left_accordion .inner_content {
+  margin-left: 50px;
+  font-size: 16px;
+  line-height: 40px;
+  color: #5b5d5e; }
+
+.inner_search_form {
+  position: relative;
+  margin: 20px 0; }
+  .inner_search_form__search {
+    width: 500px;
+    background: none;
+    border-radius: 50px;
+    border: 1px solid #dddddd;
+    height: 30px;
+    text-align: center; }
+  .inner_search_form svg {
+    fill: #898989;
+    height: 18px;
+    left: 9px;
+    top: 7px;
+    transition: all 0.3s ease 0s;
+    width: 18px;
+    z-index: 99;
+    position: absolute; }
+  @media screen and (max-width: 767px) {
+    .inner_search_form__search {
+      width: 90%; } }
 
 .highlightedText {
   background: yellow;

@@ -213,3 +213,55 @@ input:checked + label.ctrl {
         left: 22px;
     }
 }
+
+label.check_label {
+    position: relative;
+    width: 35%;
+    padding-left: 35px;
+    cursor: pointer;
+    &:before {
+        content: '';
+        position: absolute;
+        width: 24px;
+        height:24px;
+        background:url("../img/checkbox_bg.png") no-repeat no-repeat 0 -1px;
+        background-size: 24px auto;
+        left: 0;
+        top:-5px;
+    }
+}
+input:checked + .check_label:before {
+    background-position: 0px -86px;
+}
+
+label.radio_label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    &:before {
+        content: "";
+        position: absolute;
+        width: 23px;
+        height:23px;
+        background: #fff;
+        border-radius: 50%;
+        border: 1px solid #dddddd;
+        box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        left: 0;
+        top:-2px;
+    }
+    &:after {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height:10px;
+        border-radius: 50%;
+        background: $col-green;
+        left: 7px;
+        top:5px;
+        display: none;
+    }
+}
+input[type='radio']:checked + .radio_label:after {
+    display: block;
+}

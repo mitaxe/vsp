@@ -10,18 +10,50 @@
         <hr class="block__hr">
 
         <div class="row">
-            <div class="col-xs-12 col-md-6">
+            <div class="settings__row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <p>Автоматически публиковать новые видео на канале</p>
+                    <input class="hidden" type="radio" value="yes" name="publish_on_channel" id="publish_yes">
+                    <label class="radio_label" for="publish_yes">Да</label>
+                    <input class="hidden" type="radio" value="ask" name="publish_on_channel" id="publish_ask">
+                    <label class="radio_label" for="publish_ask">Спрашивать меня</label>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 inp_row">
+                    <span class="tablet_check_box hidden-desktop">
+                            <input type="checkbox" id="send_info_tabl" name="send_info" class="hidden">
+                            <label for="send_info_tabl" class="check_label"></label>
+                        </span>
+                    <p class="sending_paragraph">
+                        Отправлять уведомления о новых видео мне на почту <span>(qwerty@gmail.com)</span></p>
+                    <input type="checkbox" id="send_info_desktop" name="send_info" class="hidden hidden-tablet hidden-phone">
+                    <label for="send_info_desktop" class="check_label hidden-tablet hidden-phone"></label>
+                </div>
+            </div>
+        </div>
+        <hr class="block__hr">
+
+        <div class="row settings__row">
+            <div class="col-xs-12 col-md-6 hidden-tablet hidden-phone">
                 <div class="left_list">
-                    <div class="accordion">
+                    <h3>VSP Online</h3>
+                    <form class="inner_search_form" action="">
+                        <input type="text" class="inner_search_form__search search_vsp" id="search_vsp" ng-model="channel_vsp_filter">
+                        <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 34 34"><path fill="" d="M34 31.163L25.27 22.43c1.754-2.342 2.804-5.24 2.804-8.394C28.072 6.28 21.79 0 14.037 0 6.287 0 0 6.28 0 14.036 0 21.788 6.286 28.07 14.038 28.07c3.152 0 6.05-1.05 8.392-2.805L31.163 34 34 31.163zM4.013 14.033C4.012 8.507 8.51 4.01 14.037 4.01s10.025 4.496 10.025 10.024c0 5.527-4.498 10.024-10.025 10.024-5.528 0-10.025-4.496-10.025-10.024z"/></svg></i>
+                    </form>
+                    <div class="accordion left_accordion">
                         <div>
                             <div>
-                                <div ng-repeat="item in items">
-                                    <div toggler>{{item.name}} ( {{item.items.length}} )</div>
+                                <div ng-repeat="item in items | filter:channel_vsp_filter">
+                                    <div toggler class="left_accordion__item">
+                                        <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                                        {{item.name}} <span>({{item.items.innerName.length}})</span>
+                                    </div>
+
                                     <div class="accordion__pannel">
                                         <div class="accordion__content">
                                             <div>
                                                 <div>
-                                                    <div ng-repeat="inner in item.items">
+                                                    <div class="inner_content" ng-repeat="inner in item.items.innerName | filter : channel_vsp_filter">
                                                         {{inner}}
                                                     </div>
                                                 </div>
@@ -38,7 +70,10 @@
             <div class="col-xs-12 col-md-6">
                 <div class="right_list">
                     <h3>Структура вашего канала на эй[play]</h3>
-                    <input type="text" class="search_play" id="search_play" ng-model="channel_filter">
+                    <form class="inner_search_form" action="">
+                        <input type="text" class="inner_search_form__search search_play" id="search_play" ng-model="channel_filter">
+                        <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 34 34"><path fill="" d="M34 31.163L25.27 22.43c1.754-2.342 2.804-5.24 2.804-8.394C28.072 6.28 21.79 0 14.037 0 6.287 0 0 6.28 0 14.036 0 21.788 6.286 28.07 14.038 28.07c3.152 0 6.05-1.05 8.392-2.805L31.163 34 34 31.163zM4.013 14.033C4.012 8.507 8.51 4.01 14.037 4.01s10.025 4.496 10.025 10.024c0 5.527-4.498 10.024-10.025 10.024-5.528 0-10.025-4.496-10.025-10.024z"/></svg></i>
+                    </form>
                     <div class="accordion">
                         <div sv-root>
                             <div sv-part="items">
@@ -48,7 +83,7 @@
                                          ng-mouseleave = "showMainIcon = false"
                                     >
                                         <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                                        <i ng-bind-html="highlight(item.name, channel_filter)">{{item.name}}</i> <span>({{item.items.length}})</span>
+                                        <i ng-bind-html="highlight(item.name, channel_filter)">{{item.name}}</i> <span>({{item.items.innerName.length}})</span>
                                         <div class="icon_set">
                                             <button  ng-click="removeItem($index)" class="btn del_btn">
                                                 <i class="svg"> <svg class="ctrl_icon" width="17px" height="15px" fill="" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 418 418" style="enable-background:new 0 0 418 418;" xml:space="preserve"><g><path d="M265.616,38V0H152.384v38H69v60h280V38H265.616z M182.384,30h53.232v8h-53.232V30z"/><polygon points="109,418 309,418 328.016,128 89.984,128 	"/></g></svg></i>
@@ -64,7 +99,7 @@
                                             <div sv-root>
                                                 <ul sv-part="item.items">
                                                     <li class="accordion_item__view accordion_item__view--inner" sv-element
-                                                        ng-repeat="inner in item.items | filter : channel_filter"
+                                                        ng-repeat="inner in item.items.innerName | filter : channel_filter"
                                                         ng-mouseleave="hideInnerICons($event)"
                                                     >
                                                         <div ng-bind-html="highlight(inner, channel_filter)"
@@ -109,7 +144,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> <!-- end row -->
+
         <!-- test page -->
     </div>
 </div>

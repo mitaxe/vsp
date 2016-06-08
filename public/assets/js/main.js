@@ -630,15 +630,24 @@ angular.module("MainApp")
         $scope.items = [
             {
                 name : 'Оригинальные пранки',
-                items: ['Пранки','test2','Пранки 2','test4']
+                items: {
+                    innerName : ['Пранки','test2','Пранки 2','test4'],
+                    hidden : false
+                }
             },
             {
                 name : 'Лучшие видео',
-                items: [1,'Пранк']
+                items: {
+                    innerName : [1,'Пранк'],
+                    hidden : false
+                }
             },
             {
                 name : 'Пантера Шоу',
-                items: [1,2,3,4,5]
+                items: {
+                    innerName : [1,2,3,4,5],
+                    hidden : false
+                }
             }
 
         ];
@@ -650,7 +659,7 @@ angular.module("MainApp")
                 $scope.items.splice(outer, 1);
             } else {
                 //remove inner element
-                $scope.items[outer].items.splice(inner, 1);
+                $scope.items[outer].items.innerName.splice(inner, 1);
             }
         };
 
@@ -676,7 +685,7 @@ angular.module("MainApp")
 
             if($scope.editableIndex != -1) {// edit now
                 // $scope.items[outer].items[inner] = angular.element($event.currentTarget).val();
-                $scope.items[outer].items[inner] = angular.element($event.currentTarget).text();
+                $scope.items[outer].items.innerName[inner] = angular.element($event.currentTarget).text();
             }
             $scope.editableIndex = -1;
             // console.log(angular.element($event.currentTarget).html());
