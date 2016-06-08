@@ -170,6 +170,10 @@ angular.module("MainApp")
         templateUrl : 'app/views/profile.html',
         controller : 'ProfileCtrl'
     })
+    .state('profile-edit', {
+        url : '/profile-edit',
+        templateUrl : 'app/views/profile-edit.html'
+    })
 
     //add channel
     .state('add-channel' ,{
@@ -190,6 +194,16 @@ angular.module("MainApp")
     .state('settings.video', {
         url : '/video',
         templateUrl : 'app/views/settings-video.html'
+    })
+
+    //notifications and comments
+    .state('comments', {
+        url : '/comments-all',
+        templateUrl : 'app/views/comments-all.html'
+    })
+    .state('notifications', {
+        url : '/notifications-all',
+        templateUrl : 'app/views/notifications-all.html'
     })
 
     // not my channel

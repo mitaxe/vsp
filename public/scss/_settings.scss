@@ -193,7 +193,7 @@
             margin-right: 15px;
           }
           &.btn-remove {
-            padding-left: 30px;
+            padding-left: 20px;
           }
         }
       }
@@ -333,6 +333,17 @@
             }
             .wrp {
               display: block;
+            }
+          }
+        }
+        @include phone {
+          .inner_icons {
+            &__toggler {
+              margin-right: -5px;
+              svg {
+                transform: rotate(90deg);
+                margin-right: 0;
+              }
             }
           }
         }

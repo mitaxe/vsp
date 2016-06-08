@@ -675,7 +675,12 @@
         @include clearfix;
         font-size: 13px;
         height: 100%;
-        a { color: #251dd1; }
+        a {
+            color: #251dd1;
+            &.btn-white {
+                color: #3a3b3b;
+            }
+        }
         .noti-tabs__link {
             color: #666;
             line-height: 1.3;

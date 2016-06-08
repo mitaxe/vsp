@@ -1,0 +1,132 @@
+<div class="content">
+    <div class="row">
+
+        <div class="block block--header">
+            <div class="col-xs-12 block__heading">
+                <h2 class="block__title">Настройки профиля</h2>
+            </div>
+            <hr class="block__hr">
+        </div> <!-- end block -->
+
+        <div class="block">
+            <div class="col-xs-12">
+                <div class="profile_row clearfix">
+                    <div class="profile_row__left">
+                        <p>Привязка <br>к соц сетям</p>
+                    </div>
+                    <div class="profile_row__right">
+                        <a href="#" class="btn btn-vk">Vkontakte</a> <br>
+                        <a href="#" class="btn btn-fb">Facebook</a>
+                        <input type="checkbox" id="show_link" name="show_link" class="hidden">
+                        <label for="show_link" class="check_label">Показывать ссылку</label>
+                    </div>
+                </div>
+            </div>
+            <hr class="block__hr">
+        </div> <!-- end block -->
+
+        <div class="block">
+            <div class="col-xs-12">
+
+                <div class="profile_row clearfix">
+                    <div class="profile_row__left">
+                        <label for="email">Email</label>
+                    </div>
+                    <div class="profile_row__right">
+                        <input type="email" id="email" name="email">
+                        <div class="check-box">
+                            <input type="checkbox" id="site_notification" name="site_notification" class="hidden">
+                            <label for="site_notification" class="check_label">Уведомлять о новых действиях на сайте</label>
+                        </div>
+                    </div>
+                </div> <!-- end profile row -->
+
+                <div class="profile_row clearfix" ng-init="passDisabled = true;">
+                    <div class="profile_row__left">
+                        <label for="password">Пароль</label>
+                    </div>
+                    <div class="profile_row__right">
+                        <input ng-disabled="passDisabled" type="password" id="password" name="password">
+                        <div class="check-box">
+                            <button class="btn" ng-click="passDisabled = !passDisabled">{{passDisabled ? 'Изменить пароль' : 'Сохранить пароль' }}</button>
+                        </div>
+                    </div>
+                </div> <!-- end profile row -->
+
+                <div class="profile_row clearfix" ng-init="passDisabled = true;">
+                    <div class="profile_row__left">
+                        <label for="nick">Никнейм</label>
+                    </div>
+                    <div class="profile_row__right">
+                        <input type="text" id="nick" name="nick">
+                    </div>
+                </div> <!-- end profile row -->
+
+                <div class="profile_row clearfix" ng-init="passDisabled = true;">
+                    <div class="profile_row__left">
+                        <label for="city">Город</label>
+                    </div>
+                    <div class="profile_row__right">
+                        <input type="text" id="city" name="city">
+                    </div>
+                </div> <!-- end profile row -->
+
+                <div class="profile_row clearfix" ng-init="passDisabled = true;">
+                    <div class="profile_row__left">
+                        <span>Фото <br> профиля</span>
+                    </div>
+                    <div class="profile_row__right profile_row__right--inline">
+                        <div class="inline">
+                            <img class="ava" src="assets/img/channel_ava.png" alt="profile img">
+                            <p class="hidden-desktop hidden-tablet">Взять изображение
+                                из моей стринички:</p>
+                        </div>
+                        <div class="inline inline--padding">
+                            <input class="hidden" type="file" id="profile_img" name="profile_img">
+                            <label for="profile_img" class="btn btn-white file">Загрузить</label> <br class="hidden-phone">
+                            <a href="#" class="btn btn-white btn-remove">
+                                <i class="svg"><svg width="10" xmlns="http://www.w3.org/2000/svg" height="11" viewBox="0 0 64 64"><path fill="" d="M28.94 31.786L.614 60.114c-.787.787-.787 2.062 0 2.85.393.393.91.59 1.424.59.516 0 1.03-.197 1.424-.59L32.003 34.42l28.54 28.54c.395.395.91.59 1.425.59s1.03-.195 1.424-.59c.788-.786.788-2.06 0-2.848L35.065 31.786 63.41 3.438c.787-.787.787-2.062 0-2.85-.787-.785-2.062-.785-2.848 0L32.002 29.15 3.443.59C2.653-.196 1.38-.196.59.59c-.786.787-.786 2.062 0 2.85l28.35 28.346z"/></svg></i>
+                                Удалить</a>
+
+                            <p class="hidden-phone">Взять изображение
+                                из моей стринички:</p>
+
+                            <div class="btns_wrapper">
+                                <a href="#" class="btn btn-vk btn-vk--small">Vk</a>
+                                <a href="#" class="btn btn-fb btn-fb--small">Fb</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end profile row -->
+
+                <div class="profile_row clearfix" ng-init="passDisabled = true;">
+                    <div class="profile_row__left">
+                        <label for="about_me">Обо мне</label>
+                    </div>
+                    <div class="profile_row__right">
+                        <textarea name="about_me" id="about_me" cols="30" rows="10"></textarea>
+                    </div>
+                </div> <!-- end profile row -->
+
+            </div>
+
+            <hr class="block__hr">
+        </div> <!-- end block -->
+
+        <div class="block">
+            <div class="col-xs-12">
+                <div class="profile_row">
+                    <div class="btns">
+                        <a href="#" class="btn btn-white btn-cancel">
+                            <i class="svg"><svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="6.008px" height="10.232px" viewBox="0 0 6.008 10.232" enable-background="new 0 0 6.008 10.232" xml:space="preserve">
+<path fill="" d="M6.008,9.053l-3.715-3.82l3.715-3.82l-1.146-1.18L0,5.232l4.861,5L6.008,9.053z"/>
+</svg></i>
+                            Отменить</a>
+                        <a href="#" class="btn btn-green main-ui change-user-data">Сохранить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
