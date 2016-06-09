@@ -81,15 +81,15 @@ angular.module("MainApp")
     .state('home', {
         url: "/",
         templateUrl: "app/views/home.html",
-        controller: 'HomeCtrl',
         resolve: {
-            homeData: ["factory", function(factory) {
+            videos: ["factory", function(factory) {
                 return factory.getHomeData();
             }]
         },
-        controller: function($scope, homeData) {
-            $scope.homeData = homeData.data;
-        }
+        controller: ["$scope", "videos", function($scope, videos) {
+            console.log(videos.data.data);
+            $scope.videos = videos.data.data;
+        }]
     })
 
     // registration/sign-in
@@ -325,7 +325,7 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get('./assets/js/data.json');
+            return $http.get('./assets/js/test.json');
         };
 
         // exclusive page
@@ -515,6 +515,13 @@ angular.module("MainApp")
             return true;
         }
     };
+
+}]);
+
+angular.module("MainApp")
+.controller('HomeCtrl', ['$scope', 'factory', function ($scope, factory) {
+
+    console.log('home init');
 
 }]);
 

@@ -19,14 +19,14 @@ angular.module("MainApp")
     .state('home', {
         url: "/",
         templateUrl: "app/views/home.html",
-        controller: 'HomeCtrl',
         resolve: {
-            homeData: function(factory) {
+            videos: function(factory) {
                 return factory.getHomeData();
             }
         },
-        controller: function($scope, homeData) {
-            $scope.homeData = homeData.data;
+        controller: function($scope, videos) {
+            console.log(videos.data.data);
+            $scope.videos = videos.data.data;
         }
     })
 

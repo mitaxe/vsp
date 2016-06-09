@@ -5,7 +5,7 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get('./assets/js/data.json');
+            return $http.get('./assets/js/test.json');
         };
 
         // exclusive page
