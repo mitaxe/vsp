@@ -1170,6 +1170,14 @@ svg {
   display: table;
   clear: both; }
 
+input,
+textarea {
+  outline: none; }
+  input:focus, input:active,
+  textarea:focus,
+  textarea:active {
+    outline: none; }
+
 /* main content layout */
 .wrapper {
   display: block;
@@ -4056,7 +4064,8 @@ svg {
     cursor: pointer; }
   .form_box__inp_row .v-align-top {
     vertical-align: top;
-    margin-top: 5px; }
+    margin-top: 5px;
+    display: inline-block; }
   .form_box__inp_row input {
     width: 300px;
     border-radius: 50px;
@@ -4197,7 +4206,8 @@ svg {
       position: relative; }
       .accordion .accordion_item__view--inner .item_content {
         width: 80%;
-        border: none; }
+        border: none;
+        outline: none; }
         .accordion .accordion_item__view--inner .item_content.editing {
           border-bottom: 1px dashed #ccc; }
       .accordion .accordion_item__view--inner .inner_icons {
@@ -4302,7 +4312,8 @@ svg {
   position: relative;
   margin: 20px 0; }
   .inner_search_form__search {
-    width: 500px;
+    max-width: 500px;
+    width: 80%;
     background: none;
     border-radius: 50px;
     border: 1px solid #dddddd;
