@@ -81,15 +81,12 @@ angular.module("MainApp")
     .state('home', {
         url: "/",
         templateUrl: "app/views/home.html",
+        controller: 'HomeCtrl',
         resolve: {
             videos: ["factory", function(factory) {
                 return factory.getHomeData();
             }]
-        },
-        controller: ["$scope", "videos", function($scope, videos) {
-            console.log(videos.data.data);
-            $scope.videos = videos.data.data;
-        }]
+        }
     })
 
     // registration/sign-in
@@ -528,9 +525,10 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('HomeCtrl', ['$scope', 'factory', function ($scope, factory) {
+.controller('HomeCtrl', ['$scope', 'factory', 'videos', function ($scope, factory, videos) {
 
-    console.log('home init');
+    console.log('init home controller');
+    $scope.videos = videos.data.data;
 
 }]);
 
