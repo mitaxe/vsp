@@ -331,7 +331,8 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get('/index/videos');
+            // return $http.get('/index/videos');
+            return $http.get('./assets/js/test.json');
         };
 
         // exclusive page
@@ -392,8 +393,10 @@ angular.module("MainApp")
                 day_diff == 1 && "Вчера" ||
                 day_diff < 7 && day_diff + " дней назад" ||
                 day_diff < 31 && Math.ceil( day_diff / 7 ) + " недель назад" ||
-                years_diff === 1 && years_diff + " год назад" ||
-                years_diff > 1 && years_diff + " лет назад";
+              years_diff < 1 && Math.ceil( day_diff / 30 ) + " месяц назад" ||
+              years_diff == 1 && years_diff + " год назад" ||
+              years_diff > 1 && years_diff + " лет назад" ||
+              'неизвестная дата';
         }
     };
 
