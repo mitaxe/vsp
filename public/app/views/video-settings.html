@@ -1,0 +1,166 @@
+<div class="content">
+    <div class="row">
+
+        <div class="block block--header">
+            <div class="col-xs-12 block__heading">
+                <h2 class="block__title">Настройки видео</h2>
+            </div>
+            <hr class="block__hr">
+        </div> <!-- end block -->
+
+        <div class="block">
+            <div class="col-xs-12">
+                <div class="profile_row profile_row--video clearfix">
+                    <div class="profile_row__left">
+                        <label for="video_url">URL видео:</label>
+                    </div>
+                    <div class="profile_row__right">
+                        <input type="text" id="video_url" ng-readonly="true" value="https://www.youtube.com/watch?v=HQx5Be9g16U" name="video_url">
+                        <div class="about_video">
+                            <img class="about_video__chevron" src="assets/img/chevronb.png" alt="chevron">
+                            <img class="about_video__preview" src="assets/img/video_thumb.png" alt="video preview">
+                            <div class="about_video__text">
+                                <p class="sb_title">10 Amazing Science Tricks Using Liquid!</p>
+                                <p class="text">Add me on Facebook (click LIKE on Facebook to add me) -
+                                    http://www.facebook.com/brusspup
+                                    Download the music in this video:
+                                    Song #1: Abyss - iTunes: https://itunes.apple.com/us/album/aby.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="block__hr">
+        </div> <!-- end block -->
+        <div class="block">
+            <div class="col-xs-12">
+                <div class="profile_row profile_row--video clearfix">
+                    <div class="profile_row__left">
+                        <span>
+                            Показывать <br>на эй[play]
+                        </span>
+                    </div>
+                    <div class="profile_row__right">
+                        <a href="#" class="btn btn-green main-ui btn-show">Показывать</a>
+                        <a href="#" class="btn btn-green main-ui btn-hide">Скрыть</a>
+                    </div>
+                </div>
+                <div class="profile_row profile_row--video clearfix">
+                    <div class="profile_row__left">
+                        <label for="video_name">Название видео</label>
+                    </div>
+                    <div class="profile_row__right">
+                        <input type="text" id="video_name" ng-readonly="true" value="10 Amazing Science Tricks Using Liquid!" name="video_name">
+                        <span class="edit">
+                            <i class="svg">
+                            <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve">
+                                    <path fill="#0c3" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02
+                                        c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z
+                                        "/>
+                                </svg>
+                        </i>
+                        </span>
+                    </div>
+                </div>
+                <div class="profile_row profile_row--video clearfix">
+                    <div class="profile_row__left">
+                        <label for="video_description">Описание видео</label>
+                    </div>
+                    <div class="profile_row__right">
+                        <textarea name="video_description" ng-readonly="true" id="video_description" cols="30" rows="10"></textarea>
+                        <span class="edit">
+                            <i class="svg">
+                            <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve">
+                                    <path fill="#0c3" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02
+                                        c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z
+                                        "/>
+                                </svg>
+                        </i>
+                        </span>
+                    </div>
+                </div>
+                <div class="profile_row profile_row--video profile_row__right--inline clearfix">
+                    <div class="profile_row__left">
+                        <span class="cat_margin">Заставка</span>
+                    </div>
+                    <div class="profile_row__right">
+                        <div class="inline">
+                            <img src="assets/img/video-img.png" alt="video img" class="video_img">
+                        </div>
+                        <div class="inline inline--padding">
+                            <input class="hidden" type="file" id="video_img" name="video_img">
+                            <label for="video_img" class="btn btn-white file">Обновить</label> <br class="hidden-phone">
+                            <a href="#" class="btn btn-white">Оригинал</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="block__hr">
+        </div>
+
+        <div class="block">
+            <div class="col-xs-12">
+                <div class="profile_row profile_row--video clearfix">
+                    <div class="profile_row__left">
+                        <span>Категория:</span>
+                    </div>
+                    <div class="profile_row__right" ng-init="cats = ['cat1', 'cat2']">
+                        <div class="select" tabindex="0" ng-class="{'active':selectActive}" ng-blur="selectActive = false">
+                            <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                            <span class="select__title" ng-click="selectActive = !selectActive;">{{ selectedSortType || 'Общее' }}</span>
+                            <div class="select__list">
+                                <ul>
+                                    <li ng-repeat="sortType in cats" ng-click="$parent.selectedSortType = sortType">{{ sortType }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="block__hr">
+        </div>
+
+        <div class="block">
+            <div class="col-xs-12">
+                <div class="profile_row profile_row--video clearfix">
+                    <div class="profile_row__left">
+                        <span>Плейлист</span>
+                    </div>
+                    <div class="profile_row__right">
+                        <div>
+                            <input type="checkbox" id="all_video" name="all_video" class="hidden">
+                            <label for="all_video" class="check_label">Все видео</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="pranks" name="pranks" class="hidden">
+                            <label for="pranks" class="check_label">Пранк шоу</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="other" name="other" class="hidden">
+                            <label for="other" class="check_label">Видеобаттлы с другими каналами</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="days_history" name="days_history" class="hidden">
+                            <label for="days_history" class="check_label">История одного дня</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="block__hr">
+        </div>
+
+        <div class="block">
+            <div class="col-xs-12">
+                <div class="profile_row">
+                    <div class="btns">
+                        <a href="#" class="btn btn-white btn-cancel">
+                            <i class="svg"><svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="6.008px" height="10.232px" viewBox="0 0 6.008 10.232" enable-background="new 0 0 6.008 10.232" xml:space="preserve"><path fill="" d="M6.008,9.053l-3.715-3.82l3.715-3.82l-1.146-1.18L0,5.232l4.861,5L6.008,9.053z"/></svg></i>
+                            Отменить</a>
+                        <a href="#" class="btn btn-green main-ui change-video-data">Сохранить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
