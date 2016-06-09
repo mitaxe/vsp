@@ -4451,6 +4451,9 @@ textarea {
   .profile_row {
     margin-bottom: 14px; } }
 
+.profile_row--video #video_url {
+  background: none; }
+
 .profile_row--video .about_video {
   margin-top: 25px; }
   .profile_row--video .about_video__chevron {
@@ -4506,7 +4509,8 @@ textarea {
   vertical-align: top;
   display: inline-block;
   margin-left: 10px;
-  margin-top: 5px; }
+  margin-top: 5px;
+  cursor: pointer; }
 
 .profile_row--video .video_img {
   max-width: 410px; }
