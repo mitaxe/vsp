@@ -301,15 +301,15 @@ angular.module("MainApp")
     })
 
     // video page
-    .state('video', {
-        url: "/video/:url",
+    .state('videos', {
+        url: "/videos/:id",
         templateUrl: 'app/views/videopage.html',
         scope: {
             content: '='
         },
         controller: ["$scope", "$stateParams", "factory", function($scope, $stateParams, factory) {
             for (var i = 0; i < $scope.videos.length; i++) {
-                if ($scope.videos[i].url === $stateParams.url) {
+                if ($scope.videos[i].id === $stateParams.id) {
                     $scope.content = $scope.videos[i];
                 }
             }
@@ -332,6 +332,7 @@ angular.module("MainApp")
         // home page
         factory.getHomeData = function() {
             return $http.get('/index/videos');
+            // return $http.get('./assets/js/test.json');
         };
 
         // exclusive page
@@ -392,8 +393,10 @@ angular.module("MainApp")
                 day_diff == 1 && "Вчера" ||
                 day_diff < 7 && day_diff + " дней назад" ||
                 day_diff < 31 && Math.ceil( day_diff / 7 ) + " недель назад" ||
-                years_diff === 1 && years_diff + " год назад" ||
-                years_diff > 1 && years_diff + " лет назад";
+              years_diff < 1 && Math.ceil( day_diff / 30 ) + " месяц назад" ||
+              years_diff == 1 && years_diff + " год назад" ||
+              years_diff > 1 && years_diff + " лет назад" ||
+              'неизвестная дата';
         }
     };
 
