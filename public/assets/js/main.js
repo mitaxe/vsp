@@ -331,7 +331,7 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get('./assets/js/test.json');
+            return $http.get('/index/videos');
         };
 
         // exclusive page
