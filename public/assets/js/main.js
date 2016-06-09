@@ -301,15 +301,15 @@ angular.module("MainApp")
     })
 
     // video page
-    .state('video', {
-        url: "/video/:url",
+    .state('videos', {
+        url: "/videos/:id",
         templateUrl: 'app/views/videopage.html',
         scope: {
             content: '='
         },
         controller: ["$scope", "$stateParams", "factory", function($scope, $stateParams, factory) {
             for (var i = 0; i < $scope.videos.length; i++) {
-                if ($scope.videos[i].url === $stateParams.url) {
+                if ($scope.videos[i].id === $stateParams.id) {
                     $scope.content = $scope.videos[i];
                 }
             }
