@@ -34,6 +34,15 @@ svg {
     @include clearfix;
 }
 
+input,
+textarea {
+    outline: none;
+    &:focus,
+    &:active{
+        outline: none;
+    }
+}
+
 
 /* main content layout */
 .wrapper {
