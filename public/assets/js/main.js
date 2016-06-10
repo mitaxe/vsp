@@ -540,7 +540,7 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('ExclusiveCtrl', ['$scope', 'exclusiveVideos', function ($scope, exclusiveVideos) {
+.controller('ExclusiveCtrl', ['$scope', 'exclusiveVideos', '$http', function ($scope, exclusiveVideos, $http) {
 
     $scope.exclusiveVideos = exclusiveVideos.data.videos; //--
 
@@ -548,6 +548,24 @@ angular.module("MainApp")
         'Adamantio 993',
         'JOD'
     ];
+
+    // console.log(exclusiveVideos.data.videos);
+
+    $scope.videos = 12;
+    $scope.loadMoreVideos = function() {
+        $scope.videos += 12;
+        $scope.limits.videos+=4;
+        $http({
+            method: 'GET',
+            url: '/exclusive/videos?offset='+ $scope.videos +''
+        }).then(function successCallback(response) {
+            console.log(response);
+            // this callback will be called asynchronously
+            // when the response is available
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+    }
 
 }]);
 
@@ -581,6 +599,17 @@ angular.module("MainApp")
     console.log('init home controller');
     $scope.videos = videos.data.data;
 
+    // console.log($scope.videos);
+
+    // Сейчас смотрят = 0
+    // Новые видео = 1
+    // Популярные видео = 2
+    // Custom block = 3
+    // Блог = 4
+    // Эксклюзивные видео = 5
+    // Custom block 2 = 6
+    // Custom block 3 = 7
+
 }]);
 
 angular.module("MainApp")
@@ -595,7 +624,11 @@ angular.module("MainApp")
         $scope.goods = response.goods;
         $scope.notifications = response.notifications;
         $scope.comments = response.comments;
+
+        // console.log($scope.videos)
     });
+
+
 
 
     // current user

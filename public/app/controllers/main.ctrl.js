@@ -10,7 +10,11 @@ angular.module("MainApp")
         $scope.goods = response.goods;
         $scope.notifications = response.notifications;
         $scope.comments = response.comments;
+
+        // console.log($scope.videos)
     });
+
+
 
 
     // current user
