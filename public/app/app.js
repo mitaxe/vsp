@@ -20,7 +20,6 @@ app.run(function($rootScope, $document, $locale, $state){
 
 });
 
-
 // filters
 
     // ng repeat start from
