@@ -34,7 +34,7 @@
                 <div class="thumb thumb--exclusive">
                     <a ui-sref="video({ url: exclusiveVideos[$index].url })">
                         <div class="thumb__img">
-                            <span class="thumb__length">{{ video.length }}</span>
+                            <span class="thumb__length">{{ video.length | secondsToTime}}</span>
                             <img ng-src="{{ video.img }}" alt="" />
                         </div>
                     </a>

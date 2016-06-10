@@ -12,7 +12,7 @@
             <div class="thumb">
                 <a ui-sref="video({ url: video.url })">
                     <div class="thumb__img">
-                        <span class="thumb__length">{{ video.length }}</span>
+                        <span class="thumb__length">{{ video.length | secondsToTime}}</span>
                         <img ng-src="{{ video.img }}" alt="" />
                     </div>
                 </a>
@@ -31,7 +31,7 @@
             <div class="col-xs-7 col-sm-12">
                 <a ui-sref="video({ url: videos[$index].url })">
                     <div class="thumb__img">
-                        <span class="thumb__length">{{ video.length }}</span>
+                        <span class="thumb__length">{{ video.length | secondsToTime}}</span>
                         <img ng-src="{{ video.img }}" alt="" />
                     </div>
                 </a>
@@ -60,7 +60,7 @@
             <div class="thumb">
                 <a ui-sref="video({ url: video.url })">
                     <div class="thumb__img">
-                        <span class="thumb__length">{{ video.length }}</span>
+                        <span class="thumb__length">{{ video.length | secondsToTime}}</span>
                         <img ng-src="{{ video.img }}" alt="" />
                     </div>
                 </a>
@@ -79,7 +79,7 @@
             <div class="col-xs-7 col-sm-12">
                 <a ui-sref="video({ url: videos[$index].url })">
                     <div class="thumb__img">
-                        <span class="thumb__length">{{ video.length }}</span>
+                        <span class="thumb__length">{{ video.length | secondsToTime}}</span>
                         <img ng-src="{{ video.img }}" alt="" />
                     </div>
                 </a>

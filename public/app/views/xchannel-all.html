@@ -6,7 +6,7 @@
         <div class="thumb thumb--big" ng-class="{'thumb--exclusive': video.exclusive > 0}">
             <a ui-sref="video({ url: video.url })">
                 <div class="thumb__img thumb__img--shadow">
-                    <span class="thumb__length">{{ video.length }}</span>
+                    <span class="thumb__length">{{ video.length | secondsToTime}}</span>
                     <img ng-src="{{ video.img }}" alt="" />
                     <span class="thumb__exclusive">Эксклюзивное видео</span>
                 </div>
@@ -36,7 +36,7 @@
         <div class="thumb thumb--exclusive">
             <a ui-sref="video({ url: videos[$index].url })">
                 <div class="thumb__img">
-                    <span class="thumb__length">{{ video.length }}</span>
+                    <span class="thumb__length">{{ video.length | secondsToTime}}</span>
                     <img ng-src="{{ video.img }}" alt="" />
                 </div>
             </a>
