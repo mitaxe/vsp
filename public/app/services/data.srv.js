@@ -11,12 +11,14 @@ angular.module("MainApp")
 
         // exclusive page
         factory.getExclusiveData = function() {
-            return $http.get('./assets/js/data.json');
+            // return $http.get('./assets/js/data.json');
+            return $http.get('/exclusive/videos');
         };
 
         // ratings page
         factory.getRatingsData = function() {
-            return $http.get('./assets/js/data.json');
+            // return $http.get('./assets/js/data.json');
+            return $http.get('/ratings/videos');
         };
 
         // blog page
