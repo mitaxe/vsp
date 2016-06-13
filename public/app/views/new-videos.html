@@ -32,7 +32,7 @@
             <div class="col-xs-6 col-sm-4 col-md-3"
                  ng-repeat="video in newVideos | filter: selectedCategory | limitTo: limits.videos ">
                 <div class="thumb thumb--exclusive">
-                    <a ui-sref="video({ url: exclusiveVideos[$index].url })">
+                    <a ui-sref="videos({ id: video.id })">
                         <div class="thumb__img">
                             <span class="thumb__length">{{ video.length | secondsToTime}}</span>
                             <img ng-src="{{ video.img }}" alt="" />
