@@ -30,7 +30,7 @@ app.run(function($rootScope, $document, $locale, $state){
                 return input.slice(start);
             }
             return [];
-        }
+        };
     });
 
 
@@ -42,8 +42,9 @@ app.run(function($rootScope, $document, $locale, $state){
         }
 
         return function(_seconds) {
-            if (typeof _seconds !== "number" || _seconds < 0)
+            if (typeof _seconds !== "number" || _seconds < 0) {
                 return "00:00:00";
+            }
 
             var hours = Math.floor(_seconds / 3600),
                 minutes = Math.floor((_seconds % 3600) / 60),
@@ -72,7 +73,7 @@ app.run(function($rootScope, $document, $locale, $state){
                 } else {
                     wordsToShow = i -1; //index of last word
                     // console.log('words ' + wordsToShow);
-                    break
+                    break;
                 }
             }
             
@@ -81,7 +82,7 @@ app.run(function($rootScope, $document, $locale, $state){
            // console.log(words.splice(0,words.length - wordsToShow).length);
 
             return words.splice(0, wordsToShow).join(' ') + ' ...';
-        }
+        };
     });
 
 
@@ -89,10 +90,14 @@ app.run(function($rootScope, $document, $locale, $state){
 
     // clone object simple
     function clone(obj) {
-        if (null == obj || "object" != typeof obj) return obj;
+        if (null === obj || "object" !== typeof obj) {
+            return obj;
+        }
         var copy = obj.constructor();
         for (var attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+            if (obj.hasOwnProperty(attr)) {
+                copy[attr] = obj[attr];
+            }
         }
         return copy;
     }
@@ -107,5 +112,5 @@ app.run(function($rootScope, $document, $locale, $state){
         return function (a,b) {
             var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
             return result * sortOrder;
-        }
+        };
     }

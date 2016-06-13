@@ -84,8 +84,8 @@ angular.module("MainApp")
         templateUrl : 'app/views/new-videos.html',
         controller: 'NewVideosCtrl',
         resolve: {
-            exclusiveVideos: function(factory) {
-                return factory.getExclusiveData();
+            newVideos: function(factory) {
+                return factory.getNewVideosData();
             }
         }
     })

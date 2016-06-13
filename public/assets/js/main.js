@@ -30,7 +30,7 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
                 return input.slice(start);
             }
             return [];
-        }
+        };
     });
 
 
@@ -42,8 +42,9 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
         }
 
         return function(_seconds) {
-            if (typeof _seconds !== "number" || _seconds < 0)
+            if (typeof _seconds !== "number" || _seconds < 0) {
                 return "00:00:00";
+            }
 
             var hours = Math.floor(_seconds / 3600),
                 minutes = Math.floor((_seconds % 3600) / 60),
@@ -72,7 +73,7 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
                 } else {
                     wordsToShow = i -1; //index of last word
                     // console.log('words ' + wordsToShow);
-                    break
+                    break;
                 }
             }
             
@@ -81,7 +82,7 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
            // console.log(words.splice(0,words.length - wordsToShow).length);
 
             return words.splice(0, wordsToShow).join(' ') + ' ...';
-        }
+        };
     });
 
 
@@ -89,10 +90,14 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
 
     // clone object simple
     function clone(obj) {
-        if (null == obj || "object" != typeof obj) return obj;
+        if (null === obj || "object" !== typeof obj) {
+            return obj;
+        }
         var copy = obj.constructor();
         for (var attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+            if (obj.hasOwnProperty(attr)) {
+                copy[attr] = obj[attr];
+            }
         }
         return copy;
     }
@@ -107,7 +112,7 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
         return function (a,b) {
             var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
             return result * sortOrder;
-        }
+        };
     }
 
 angular.module("MainApp")
@@ -196,8 +201,8 @@ angular.module("MainApp")
         templateUrl : 'app/views/new-videos.html',
         controller: 'NewVideosCtrl',
         resolve: {
-            exclusiveVideos: ["factory", function(factory) {
-                return factory.getExclusiveData();
+            newVideos: ["factory", function(factory) {
+                return factory.getNewVideosData();
             }]
         }
     })
@@ -390,12 +395,17 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get('/index/videos');
-            // return $http.get('./assets/js/test.json');
+            // return $http.get('/index/videos');
+            return $http.get('./assets/js/test.json');
         };
 
         // exclusive page
         factory.getExclusiveData = function() {
+            return $http.get('./assets/js/data.json');
+        };
+    
+        //new videos page
+        factory.getNewVideosData = function() {
             return $http.get('./assets/js/data.json');
         };
 
@@ -690,9 +700,9 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-    .controller('NewVideosCtrl', ['$scope', 'exclusiveVideos', '$http', function ($scope, exclusiveVideos, $http) {
+    .controller('NewVideosCtrl', ['$scope', 'newVideos', '$http', function ($scope, newVideos, $http) {
 
-        $scope.exclusiveVideos = exclusiveVideos.data.videos; //--
+        $scope.newVideos = newVideos.data.videos; //--
 
         $scope.categories = [
             'Adamantio 993',

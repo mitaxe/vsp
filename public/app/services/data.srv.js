@@ -5,12 +5,17 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get('/index/videos');
-            // return $http.get('./assets/js/test.json');
+            // return $http.get('/index/videos');
+            return $http.get('./assets/js/test.json');
         };
 
         // exclusive page
         factory.getExclusiveData = function() {
+            return $http.get('./assets/js/data.json');
+        };
+    
+        //new videos page
+        factory.getNewVideosData = function() {
             return $http.get('./assets/js/data.json');
         };
 

@@ -1,7 +1,7 @@
 angular.module("MainApp")
-    .controller('NewVideosCtrl', ['$scope', 'exclusiveVideos', '$http', function ($scope, exclusiveVideos, $http) {
+    .controller('NewVideosCtrl', ['$scope', 'newVideos', '$http', function ($scope, newVideos, $http) {
 
-        $scope.exclusiveVideos = exclusiveVideos.data.videos; //--
+        $scope.newVideos = newVideos.data.videos; //--
 
         $scope.categories = [
             'Adamantio 993',
