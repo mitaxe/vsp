@@ -24,6 +24,6 @@ angular.module("MainApp")
         }, function errorCallback(response) {
             console.log(response);
         });
-    }
+    };
 
 }]);

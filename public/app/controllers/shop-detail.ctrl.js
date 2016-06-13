@@ -60,14 +60,14 @@ angular.module("MainApp")
     };
     $scope.prevSlide = function () {
         // $scope.direction = 'left';
-        $scope.currentIndex = ($scope.currentIndex < $scope.itemDetails.images.length - 1) ? ++$scope.currentIndex : 0;
+        $scope.currentIndex = ($scope.currentIndex < $scope.itemDetails.images.length - 1) ? $scope.currentIndex +1 : 0;
         document.getElementById('sWr').style.left = -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex )) + 'px';
         // console.log( 'prev ' + -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex +1)));
         // TweenMax.to(document.getElementById('sWr'), 1, {left : -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex ))});
     };
     $scope.nextSlide = function () {
         // $scope.direction = 'right';
-        $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.itemDetails.images.length - 1;
+        $scope.currentIndex = ($scope.currentIndex > 0) ? $scope.currentIndex -1 : $scope.itemDetails.images.length - 1;
         document.getElementById('sWr').style.left = - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex)) + 'px';
         // console.log('next ' + - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex +1)));
         // TweenMax.to(document.getElementById('sWr'), 1, {left : - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex))});

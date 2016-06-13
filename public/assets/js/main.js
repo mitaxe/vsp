@@ -189,6 +189,18 @@ angular.module("MainApp")
             }]
         }
     })
+        
+    //new videos
+    .state('newVideos', {
+        url : '/new-videos',
+        templateUrl : 'app/views/new-videos.html',
+        controller: 'NewVideosCtrl',
+        resolve: {
+            exclusiveVideos: ["factory", function(factory) {
+                return factory.getExclusiveData();
+            }]
+        }
+    })
 
     // ratings
     .state('ratings', {
@@ -424,13 +436,14 @@ angular.module("MainApp")
             day_diff = Math.floor(diff / 86400),
             years_diff = Math.floor(diff / 31536000);
 
-        if ( isNaN(day_diff) || day_diff < 0 )
+        if ( isNaN(day_diff) || day_diff < 0 ) {
             return;
+        }
 
         if (toDay && day_diff < 1) {
             return "Сегодня";
         } else {
-            return day_diff == 0 && (
+            return day_diff === 0 && (
                     diff < 60 && "Только что" ||
                     diff < 120 && "1 минуту назад" ||
                     diff < 3600 && Math.floor( diff / 60 ) + " минут назад" ||
@@ -450,18 +463,18 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('ChannelCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
+.controller('ChannelCtrl', ['$scope', function ($scope) {
 
     $scope.content = $scope.currentUser;
 
-    $scope.hoverIn = function(target) {
-        if(target == 'ava') {
+    $scope.hoverIn = function (target) {
+        if (target == 'ava') {
             $scope.changeAvaText = true;
         } else {
             $scope.channelbgText = true;
         }
     };
-    $scope.hoverOut = function(target) {
+    $scope.hoverOut = function (target) {
         if(target == 'ava') {
             $scope.changeAvaText = false;
         } else {
@@ -564,7 +577,7 @@ angular.module("MainApp")
         }, function errorCallback(response) {
             console.log(response);
         });
-    }
+    };
 
 }]);
 
@@ -676,6 +689,36 @@ angular.module("MainApp")
 
 }]);
 
+angular.module("MainApp")
+    .controller('NewVideosCtrl', ['$scope', 'exclusiveVideos', '$http', function ($scope, exclusiveVideos, $http) {
+
+        $scope.exclusiveVideos = exclusiveVideos.data.videos; //--
+
+        $scope.categories = [
+            'Adamantio 993',
+            'JOD'
+        ];
+
+        // console.log(exclusiveVideos.data.videos);
+
+        $scope.videos = 12;
+        $scope.loadMoreVideos = function() {
+            $scope.videos += 12;
+            $scope.limits.videos+=4;
+            $http({
+                method: 'GET',
+                url: '/exclusive/videos?offset='+ $scope.videos +''
+            }).then(function successCallback(response) {
+                console.log(response);
+                // this callback will be called asynchronously
+                // when the response is available
+            }, function errorCallback(response) {
+                console.log(response);
+            });
+        };
+
+    }]);
+
 /**
  * Created by exz0N on 26.05.2016.
  */
@@ -699,7 +742,7 @@ angular.module("MainApp")
             channelName : 'RomanAtwood',
             channelSubscribers : 18358461
         }
-    }
+    };
 
 }]);
 
@@ -780,7 +823,7 @@ angular.module("MainApp")
         };
 
         $scope.hideInnerICons = function($event) {
-            angular.element($event.currentTarget).children().removeClass('visible')
+            angular.element($event.currentTarget).children().removeClass('visible');
         };
 
 
@@ -871,14 +914,14 @@ angular.module("MainApp")
     };
     $scope.prevSlide = function () {
         // $scope.direction = 'left';
-        $scope.currentIndex = ($scope.currentIndex < $scope.itemDetails.images.length - 1) ? ++$scope.currentIndex : 0;
+        $scope.currentIndex = ($scope.currentIndex < $scope.itemDetails.images.length - 1) ? $scope.currentIndex +1 : 0;
         document.getElementById('sWr').style.left = -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex )) + 'px';
         // console.log( 'prev ' + -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex +1)));
         // TweenMax.to(document.getElementById('sWr'), 1, {left : -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex ))});
     };
     $scope.nextSlide = function () {
         // $scope.direction = 'right';
-        $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.itemDetails.images.length - 1;
+        $scope.currentIndex = ($scope.currentIndex > 0) ? $scope.currentIndex -1 : $scope.itemDetails.images.length - 1;
         document.getElementById('sWr').style.left = - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex)) + 'px';
         // console.log('next ' + - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex +1)));
         // TweenMax.to(document.getElementById('sWr'), 1, {left : - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex))});
@@ -936,7 +979,7 @@ angular.module("MainApp")
     $scope.sortReverse = true;
 
     $scope.sortBy = function(index) {
-        $scope.sortReverse = index == 0 ? true : false;
+        $scope.sortReverse = index === 0 ? true : false;
     };
 
     // console.log($stateParams.url);
@@ -982,7 +1025,7 @@ angular.module("MainApp")
             }, 0);
 
         }
-    }
+    };
 }]);
 
 angular.module("MainApp")
@@ -1029,7 +1072,7 @@ app.directive('popoverTrigger', ["$document", function ($document) {
                     scope.$apply(function () {
                         scope.userActive = false;
                         scope.notificationActive = false;
-                    })
+                    });
                 }
             });
 
@@ -1118,8 +1161,8 @@ angular.module("MainApp")
 
                 sliderBox.style.width = scope.pages.length * 100 + '%';
 
-                for (var i = 0; i < slides.length; i++) {
-                    slides[i].style.width = 100 / slidesNumber + '%';
+                for (var k = 0; k < slides.length; k++) {
+                    slides[k].style.width = 100 / slidesNumber + '%';
                 }
 
                 scope.sliderReady = true;
@@ -1224,5 +1267,5 @@ app.directive('resize', ["$window", function($window) {
       angular.element($window).on('resize', onResize);
       scope.$on('$destroy', cleanUp);
     }
-  }
+  };
 }]);

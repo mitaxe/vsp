@@ -77,6 +77,18 @@ angular.module("MainApp")
             }
         }
     })
+        
+    //new videos
+    .state('newVideos', {
+        url : '/new-videos',
+        templateUrl : 'app/views/new-videos.html',
+        controller: 'NewVideosCtrl',
+        resolve: {
+            exclusiveVideos: function(factory) {
+                return factory.getExclusiveData();
+            }
+        }
+    })
 
     // ratings
     .state('ratings', {
