@@ -21,96 +21,93 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
 }]);
 
 
-// filters
+/* filters */
 
-
-    // ng repeat start from
-    app.filter('startFrom', function() {
-        return function(input, start) {
-            if(input) {
-                start = +start; //parse to int
-                return input.slice(start);
-            }
-            return [];
+// ng repeat start from
+app.filter('startFrom', function() {
+    return function(input, start) {
+        if(input) {
+            start = +start; //parse to int
+            return input.slice(start);
         }
-    });
+        return [];
+    };
+});
 
 
-    //video length formatter
-    app.filter('secondsToTime', function() {
+//video length formatter
+app.filter('secondsToTime', function() {
 
-        function padTime(t) {
-            return t < 10 ? "0"+t : t;
+    function padTime(t) {
+        return t < 10 ? "0"+t : t;
+    }
+
+    return function(_seconds) {
+        if (typeof _seconds !== "number" || _seconds < 0)
+            return "00:00:00";
+
+        var hours = Math.floor(_seconds / 3600),
+            minutes = Math.floor((_seconds % 3600) / 60),
+            seconds = Math.floor(_seconds % 60);
+
+        if(hours) {
+            return padTime(hours) + ":" + padTime(minutes) + ":" + padTime(seconds);
+        } else {
+            return  padTime(minutes) + ":" + padTime(seconds);
         }
+    };
+});
 
-        return function(_seconds) {
-            if (typeof _seconds !== "number" || _seconds < 0)
-                return "00:00:00";
 
-            var hours = Math.floor(_seconds / 3600),
-                minutes = Math.floor((_seconds % 3600) / 60),
-                seconds = Math.floor(_seconds % 60);
+//description filter
+app.filter('descriptionFormatter', function() {
+    return function(text, limit) {
+        var words = text.split(' '),
+            wordsToShow = 0, //how much words need to show
+            counter = 0; //letter counter
 
-            if(hours) {
-                return padTime(hours) + ":" + padTime(minutes) + ":" + padTime(seconds);
+        for (var i = 0; i <= words.length; i++) {
+            if(counter < limit) {
+                counter += words[i].length; //count letters length
+                // console.log('counter ' + counter);
             } else {
-                return  padTime(minutes) + ":" + padTime(seconds);
+                wordsToShow = i -1; //index of last word
+                // console.log('words ' + wordsToShow);
+                break;
             }
-        };
-    });
-
-
-    //description filter
-    app.filter('descriptionFormatter', function() {
-        return function(text, limit) {
-            var words = text.split(' '),
-                wordsToShow = 0, //how much words need to show
-                counter = 0; //letter counter
-
-            for (var i = 0; i <= words.length; i++) {
-                if(counter < limit) {
-                    counter += words[i].length; //count letters length
-                    // console.log('counter ' + counter);
-                } else {
-                    wordsToShow = i -1; //index of last word
-                    // console.log('words ' + wordsToShow);
-                    break
-                }
-            }
-            
-           // console.log('words length ' + words.length + ' ned to show  ' + wordsToShow + ' have to slice ' + (words.length - wordsToShow))
-
-           // console.log(words.splice(0,words.length - wordsToShow).length);
-
-            return words.splice(0, wordsToShow).join(' ') + ' ...';
         }
-    });
+       // console.log('words length ' + words.length + ' ned to show  ' + wordsToShow + ' have to slice ' + (words.length - wordsToShow))
+       // console.log(words.splice(0,words.length - wordsToShow).length);
+
+        return words.splice(0, wordsToShow).join(' ') + ' ...';
+    };
+});
 
 
-// helpers
+/* helpers */
 
-    // clone object simple
-    function clone(obj) {
-        if (null == obj || "object" != typeof obj) return obj;
-        var copy = obj.constructor();
-        for (var attr in obj) {
-            if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-        }
-        return copy;
+// clone object simple
+function clone(obj) {
+    if (null === obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
     }
+    return copy;
+}
 
-    // sort array by obg prop
-    function dynamicSort(property) {
-        var sortOrder = 1;
-        if(property[0] === "-") {
-            sortOrder = -1;
-            property = property.substr(1);
-        }
-        return function (a,b) {
-            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-            return result * sortOrder;
-        }
+// sort array by obg prop
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
     }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    };
+}
 
 angular.module("MainApp")
 .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
@@ -139,6 +136,38 @@ angular.module("MainApp")
                 return factory.getHomeData();
             }]
         }
+    })
+
+    // exclusive
+    .state('exclusive', {
+        url: "/exclusive",
+        templateUrl: "app/views/exclusive.html",
+        controller: 'ExclusiveCtrl',
+        resolve: {
+            exclusiveVideos: ["factory", function(factory) {
+                return factory.getExclusiveData();
+            }]
+        }
+    })
+
+    // ratings
+    .state('ratings', {
+        url: "/ratings",
+        templateUrl: "app/views/ratings.html",
+        resolve: {
+            ratingsData: ["factory", function(factory) {
+                return factory.getRatingsData();
+            }]
+        },
+        controller: 'RatingsCtrl'
+    })
+    .state('ratings.videos', {
+        url: "/videos",
+        templateUrl: "app/views/ratings-videos.html"
+    })
+    .state('ratings.channels', {
+        url: "/channels",
+        templateUrl: "app/views/ratings-channels.html"
     })
 
     // registration/sign-in
@@ -178,38 +207,6 @@ angular.module("MainApp")
     .state('search.articles', {
         url : '/articles',
         templateUrl : 'app/views/search-articles.html'
-    })
-
-    // exclusive
-    .state('exclusive', {
-        url: "/exclusive",
-        templateUrl: "app/views/exclusive.html",
-        controller: 'ExclusiveCtrl',
-        resolve: {
-            exclusiveVideos: ["factory", function(factory) {
-                return factory.getExclusiveData();
-            }]
-        }
-    })
-
-    // ratings
-    .state('ratings', {
-        url: "/ratings",
-        templateUrl: "app/views/ratings.html",
-        resolve: {
-            ratingsData: ["factory", function(factory) {
-                return factory.getRatingsData();
-            }]
-        },
-        controller: 'RatingsCtrl'
-    })
-    .state('ratings.videos', {
-        url: "/videos",
-        templateUrl: "app/views/ratings-videos.html"
-    })
-    .state('ratings.channels', {
-        url: "/channels",
-        templateUrl: "app/views/ratings-channels.html"
     })
 
     // blog
@@ -380,20 +377,23 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get('/index/videos');
-            // return $http.get('./assets/js/test.json');
+        //     return $http.get('/index/videos');
+            return $http.get('./assets/js/test.json');
         };
 
         // exclusive page
-        factory.getExclusiveData = function() {
-            // return $http.get('./assets/js/data.json');
-            return $http.get('/exclusive/videos');
+        factory.getExclusiveData = function(offset) {
+        return $http.get('./assets/js/data.json');
+//     return $http.get('/exclusive/videos');
+                if (offset) {
+                        return $http.get('/exclusive/videos');
+                }
         };
 
         // ratings page
         factory.getRatingsData = function() {
-            // return $http.get('./assets/js/data.json');
-            return $http.get('/ratings/videos');
+            return $http.get('./assets/js/data.json');
+        //     return $http.get('/ratings/videos');
         };
 
         // blog page
@@ -434,7 +434,7 @@ angular.module("MainApp")
         if (toDay && day_diff < 1) {
             return "Сегодня";
         } else {
-            return day_diff == 0 && (
+            return day_diff === 0 && (
                     diff < 60 && "Только что" ||
                     diff < 120 && "1 минуту назад" ||
                     diff < 3600 && Math.floor( diff / 60 ) + " минут назад" ||
@@ -568,7 +568,7 @@ angular.module("MainApp")
         }, function errorCallback(response) {
             console.log(response);
         });
-    }
+    };
 
 }]);
 
@@ -631,9 +631,6 @@ angular.module("MainApp")
         // console.log($scope.videos)
     });
 
-
-
-
     // current user
     $scope.currentUser = {
         "name": "Current User",
@@ -664,7 +661,6 @@ angular.module("MainApp")
     $scope.loadMore = function(prop) {
         $scope.limits[prop] += $scope.initialLimits[prop];
     };
-
 
     // remove element function
     $scope.remove = function(array,item) {
@@ -703,7 +699,7 @@ angular.module("MainApp")
             channelName : 'RomanAtwood',
             channelSubscribers : 18358461
         }
-    }
+    };
 
 }]);
 
@@ -784,7 +780,7 @@ angular.module("MainApp")
         };
 
         $scope.hideInnerICons = function($event) {
-            angular.element($event.currentTarget).children().removeClass('visible')
+            angular.element($event.currentTarget).children().removeClass('visible');
         };
 
 
@@ -839,82 +835,71 @@ angular.module("MainApp")
     };
 
 
-
-
     /* mobile slider */
 
     $scope.wrapperWidth = 0;
     $scope.sliderWidth = 0;
+
     $scope.setWrapperWidth = function(amount) {
-        // console.log(document.querySelectorAll('.mb_slider__slide')[0].clientWidth * amount);
-        // document.getElementById('sWr').style.width = document.querySelectorAll('.mb_slider__slide')[0].clientWidth * amount + 'px';
         $scope.wrapperWidth = document.querySelectorAll('.mb_slider')[0].clientWidth * amount + 'px';
         $scope.sliderWidth = document.querySelectorAll('.mb_slider')[0].clientWidth + 'px';
-
-        // console.log($scope.sliderWidth + 'aaa');
-        // console.log($scope.testWidth)
     };
 
     $scope.$on('resize::resize', function() {
-        // console.log($window.innerWidth);
-        // $scope.setWrapperWidth($scope.itemDetails.images.length);
-        // console.log(document.querySelectorAll('.mb_slider__slide')[0].clientWidth)
         $scope.setWrapperWidth($scope.itemDetails.images.length);
     });
+
     $scope.setWrapperWidth($scope.itemDetails.images.length);
+
     angular.element($window).bind('resize', function() {
         $scope.$apply();
     });
-    // $scope.testWidth = document.getElementById('dMobSlider').clientWidth;
 
-
-    // $scope.direction = 'left';
     $scope.currentIndex = 0;
+
     $scope.isCurrentSlideIndex = function (index) {
         return $scope.currentIndex === index;
     };
+
     $scope.prevSlide = function () {
-        // $scope.direction = 'left';
         $scope.currentIndex = ($scope.currentIndex < $scope.itemDetails.images.length - 1) ? ++$scope.currentIndex : 0;
         document.getElementById('sWr').style.left = -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex )) + 'px';
-        // console.log( 'prev ' + -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex +1)));
-        // TweenMax.to(document.getElementById('sWr'), 1, {left : -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex ))});
     };
+    
     $scope.nextSlide = function () {
-        // $scope.direction = 'right';
         $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.itemDetails.images.length - 1;
         document.getElementById('sWr').style.left = - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex)) + 'px';
-        // console.log('next ' + - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex +1)));
-        // TweenMax.to(document.getElementById('sWr'), 1, {left : - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex))});
     };
 
 }]);
 
 angular.module("MainApp")
-    .controller('VideoPageCtrl', ['$scope', '$window', function($scope, $window) {
-        var windWidth = window.innerWidth;
+.controller('VideoPageCtrl', ['$scope', '$window', function($scope, $window) {
+    var windWidth = window.innerWidth;
 
-        $scope.activeTab = windWidth > 1280 ? 1 : 3;
-        $scope.desktop =  windWidth > 1280 ? true : false;
+    $scope.activeTab = windWidth > 1280 ? 1 : 3;
+    $scope.desktop =  windWidth > 1280 ? true : false;
 
-        $scope.setActiveTab = function(index) {
-            $scope.activeTab = index;
-        };
+    $scope.setActiveTab = function(index) {
+        $scope.activeTab = index;
+    };
 
-        $scope.$on('resize::resize', function() {
-            if(window.innerWidth < 1280) {
-                $scope.desktop = false;
-                $scope.activeTab = 3; //set active comments tab
-            } else {
-                $scope.desktop = true;
-                $scope.activeTab = 1;
-            }
-        });
+    $scope.$on('resize::resize', function() {
+        if(window.innerWidth < 1280) {
+            $scope.desktop = false;
+            $scope.activeTab = 3; //set active comments tab
+        } else {
+            $scope.desktop = true;
+            $scope.activeTab = 1;
+        }
+    });
 
-        angular.element($window).bind('resize', function() {
-            $scope.$apply();
-        });
-    }]);
+    angular.element($window).bind('resize', function() {
+        $scope.$apply();
+    });
+    
+}]);
+
 angular.module("MainApp")
 .controller('xChannelCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
 
@@ -940,10 +925,8 @@ angular.module("MainApp")
     $scope.sortReverse = true;
 
     $scope.sortBy = function(index) {
-        $scope.sortReverse = index == 0 ? true : false;
+        $scope.sortReverse = index === 0 ? true : false;
     };
-
-    // console.log($stateParams.url);
 
 }]);
 
@@ -986,7 +969,7 @@ angular.module("MainApp")
             }, 0);
 
         }
-    }
+    };
 }]);
 
 angular.module("MainApp")
@@ -1033,7 +1016,7 @@ app.directive('popoverTrigger', ["$document", function ($document) {
                     scope.$apply(function () {
                         scope.userActive = false;
                         scope.notificationActive = false;
-                    })
+                    });
                 }
             });
 
@@ -1122,8 +1105,8 @@ angular.module("MainApp")
 
                 sliderBox.style.width = scope.pages.length * 100 + '%';
 
-                for (var i = 0; i < slides.length; i++) {
-                    slides[i].style.width = 100 / slidesNumber + '%';
+                for (var k = 0; k < slides.length; k++) {
+                    slides[k].style.width = 100 / slidesNumber + '%';
                 }
 
                 scope.sliderReady = true;
@@ -1228,5 +1211,5 @@ app.directive('resize', ["$window", function($window) {
       angular.element($window).on('resize', onResize);
       scope.$on('$destroy', cleanUp);
     }
-  }
+  };
 }]);

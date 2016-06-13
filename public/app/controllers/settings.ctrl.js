@@ -45,7 +45,7 @@ angular.module("MainApp")
         };
 
         $scope.hideInnerICons = function($event) {
-            angular.element($event.currentTarget).children().removeClass('visible')
+            angular.element($event.currentTarget).children().removeClass('visible');
         };
 
 

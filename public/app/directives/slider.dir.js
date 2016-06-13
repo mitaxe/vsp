@@ -39,8 +39,8 @@ angular.module("MainApp")
 
                 sliderBox.style.width = scope.pages.length * 100 + '%';
 
-                for (var i = 0; i < slides.length; i++) {
-                    slides[i].style.width = 100 / slidesNumber + '%';
+                for (var k = 0; k < slides.length; k++) {
+                    slides[k].style.width = 100 / slidesNumber + '%';
                 }
 
                 scope.sliderReady = true;

@@ -8,7 +8,7 @@ app.directive('popoverTrigger', function ($document) {
                     scope.$apply(function () {
                         scope.userActive = false;
                         scope.notificationActive = false;
-                    })
+                    });
                 }
             });
 

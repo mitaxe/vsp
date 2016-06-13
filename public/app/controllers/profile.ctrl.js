@@ -21,6 +21,6 @@ angular.module("MainApp")
             channelName : 'RomanAtwood',
             channelSubscribers : 18358461
         }
-    }
+    };
 
 }]);

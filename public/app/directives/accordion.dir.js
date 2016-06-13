@@ -37,5 +37,5 @@ angular.module("MainApp")
             }, 0);
 
         }
-    }
+    };
 });

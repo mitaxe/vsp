@@ -13,7 +13,7 @@ angular.module("MainApp")
         if (toDay && day_diff < 1) {
             return "Сегодня";
         } else {
-            return day_diff == 0 && (
+            return day_diff === 0 && (
                     diff < 60 && "Только что" ||
                     diff < 120 && "1 минуту назад" ||
                     diff < 3600 && Math.floor( diff / 60 ) + " минут назад" ||
