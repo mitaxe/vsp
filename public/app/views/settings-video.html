@@ -46,15 +46,17 @@
                                 <div ng-repeat="item in items | filter:channel_vsp_filter">
                                     <div toggler class="left_accordion__item">
                                         <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                                        {{item.name}} <span>({{item.items.innerName.length}})</span>
+                                        <em ng-bind-html="highlight(item.name, channel_vsp_filter)">{{ item.name }}</em> <span>({{item.inner.length}})</span>
                                     </div>
 
                                     <div class="accordion__pannel">
                                         <div class="accordion__content">
                                             <div>
                                                 <div>
-                                                    <div class="inner_content" ng-repeat="inner in item.items.innerName | filter : channel_vsp_filter">
-                                                        {{inner}}
+                                                    <div class="inner_content" ng-repeat="inner in item.inner | filter : channel_vsp_filter"
+                                                         ng-bind-html="highlight(inner.name, channel_vsp_filter)"
+                                                    >
+                                                        {{inner.name}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,7 +85,7 @@
                                          ng-mouseleave = "showMainIcon = false"
                                     >
                                         <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                                        <i ng-bind-html="highlight(item.name, channel_filter)">{{item.name}}</i> <span>({{item.items.innerName.length}})</span>
+                                        <i ng-bind-html="highlight(item.name, channel_filter)">{{item.name}}</i> <span>({{item.inner.length}})</span>
                                         <div class="icon_set">
                                             <button  ng-click="removeItem($index)" class="btn del_btn">
                                                 <i class="svg"> <svg class="ctrl_icon" width="17px" height="15px" fill="" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 418 418" style="enable-background:new 0 0 418 418;" xml:space="preserve"><g><path d="M265.616,38V0H152.384v38H69v60h280V38H265.616z M182.384,30h53.232v8h-53.232V30z"/><polygon points="109,418 309,418 328.016,128 89.984,128 	"/></g></svg></i>
@@ -99,14 +101,14 @@
                                             <div sv-root>
                                                 <ul sv-part="item.items">
                                                     <li class="accordion_item__view accordion_item__view--inner" sv-element
-                                                        ng-repeat="inner in item.items.innerName | filter : channel_filter"
+                                                        ng-repeat="inner in item.inner | filter : channel_filter"
                                                         ng-mouseleave="hideInnerICons($event)"
                                                     >
-                                                        <div ng-bind-html="highlight(inner, channel_filter)"
+                                                        <div ng-bind-html="highlight(inner.name, channel_filter)"
                                                              ng-class="{'editing' : editableIndex == $index}"
                                                              contenteditable="{{editableIndex == $index}}"
                                                              ng-blur="disableAndUpdate($parent.$index, $index, $event)"
-                                                             class="item_content">{{inner}}</div>
+                                                             class="item_content">{{inner.name}}</div>
                                                         <!--<input type="text"-->
                                                                <!--ng-class="{'editing' : editableIndex == $index}"-->
                                                                <!--id="{{editableIndex == $index ? 'test' : ''}}"-->
@@ -119,6 +121,14 @@
                                                                 <i class="svg"><svg width="31px" height="31px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 290 290" style="enable-background:new 0 0 290 290;" xml:space="preserve"><g><path d="M255,110c-19.299,0-35,15.701-35,35s15.701,35,35,35s35-15.701,35-35S274.299,110,255,110z"/><path d="M35,110c-19.299,0-35,15.701-35,35s15.701,35,35,35s35-15.701,35-35S54.299,110,35,110z"/><path d="M145,110c-19.299,0-35,15.701-35,35s15.701,35,35,35s35-15.701,35-35S164.299,110,145,110z"/></g></svg></i>
                                                             </a>
                                                             <div class="wrp">
+                                                                <button class="btn btn_show_hide" ng-click="showHide($parent.$index, $index, inner.hidden)">
+                                                                    <i ng-class="{'hidden' : inner.hidden}" class="svg">
+                                                                        <svg version="1.1" id="Layer_1" width="29px" height="24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 455 455" style="enable-background:new 0 0 455 455;" xml:space="preserve"><g><path d="M81.177,227.5c0-46.992,22.272-88.875,56.809-115.665C79.526,133.029,30.729,174.382,0,227.5 c30.729,53.118,79.526,94.471,137.986,115.665C103.449,316.375,81.177,274.492,81.177,227.5z"/><path d="M227.5,111.177c-64.141,0-116.323,52.183-116.323,116.323S163.359,343.823,227.5,343.823S343.823,291.641,343.823,227.5 S291.641,111.177,227.5,111.177z M227.5,262.5c-19.33,0-35-15.67-35-35s15.67-35,35-35s35,15.67,35,35S246.83,262.5,227.5,262.5z"/><path d="M317.014,111.835c34.537,26.79,56.809,68.673,56.809,115.665s-22.272,88.875-56.809,115.665 C375.474,321.971,424.271,280.618,455,227.5C424.271,174.382,375.474,133.029,317.014,111.835z"/></g></svg>
+                                                                    </i>
+                                                                    <i ng-class="{'hidden' : !inner.hidden}" class="svg">
+                                                                        <svg version="1.1" id="Capa_1" width="29px" height="24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 476.208 476.208" style="enable-background:new 0 0 476.208 476.208;" xml:space="preserve"><g><path d="M0,21.213L21.213,0l454.995,454.995l-21.213,21.213L0,21.213z"/><path d="M354.431,238.104c0-64.141-52.183-116.323-116.323-116.323c-15.573,0-30.437,3.084-44.024,8.66l151.687,151.687 C351.347,268.541,354.431,253.677,354.431,238.104z"/><path d="M384.431,238.104c0,23.978-5.798,46.627-16.065,66.619l18.518,18.518c32.142-22.136,59.114-51.239,78.724-85.137 c-30.729-53.118-79.526-94.471-137.986-115.665C362.158,149.229,384.431,191.112,384.431,238.104z"/><path d="M121.784,238.104c0,64.141,52.183,116.323,116.323,116.323c15.573,0,30.437-3.084,44.024-8.66L130.444,194.081 C124.868,207.668,121.784,222.532,121.784,238.104z"/><path d="M91.784,238.104c0-23.978,5.798-46.627,16.065-66.619l-18.518-18.518c-32.142,22.136-59.114,51.239-78.724,85.137 c30.729,53.118,79.526,94.471,137.986,115.665C114.056,326.979,91.784,285.097,91.784,238.104z"/></g></svg>
+                                                                    </i>
+                                                                </button>
                                                                 <button class="btn btn_edit" ng-click="editMode($index)">
                                                                     <i class="svg">
                                                                         <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve"><path fill="" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z"/></svg>

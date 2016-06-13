@@ -303,22 +303,17 @@
           .wrp {
             display: none;
           }
-          .btn_edit {
+          .btn_edit,
+          .btn_show_hide,
+          .del_btn{
             border: none;
             outline: none;
             background: none;
             padding: 0;
+            vertical-align: middle;
             svg {
               margin-right: 0;
               fill: #757575;
-            }
-          }
-          .del_btn {
-            display: inline-block;
-            padding: 0;
-            svg {
-              fill:#757575;
-              margin-right: 0;
             }
           }
           .sandwich{
@@ -390,7 +385,8 @@
     }
   }
 }
-.right_list {
+.right_list,
+.left_list{
   h3 {
     font-size: 18px;
     font-weight:bold;
@@ -437,6 +433,15 @@
     border: 1px solid #dddddd;
     height: 30px;
     text-align: center;
+    &:focus {
+      border-color: $col-green;
+      box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
+      +.svg {
+        svg {
+          fill: $col-green;
+        }
+      }
+    }
   }
   svg {
     fill: #898989;

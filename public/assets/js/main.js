@@ -395,8 +395,8 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            // return $http.get('/index/videos');
-            return $http.get('./assets/js/test.json');
+            return $http.get('/index/videos');
+            // return $http.get('./assets/js/test.json');
         };
 
         // exclusive page
@@ -794,24 +794,50 @@ angular.module("MainApp")
         $scope.items = [
             {
                 name : 'Оригинальные пранки',
-                items: {
-                    innerName : ['Пранки','test2','Пранки 2','test4'],
-                    hidden : false
-                }
+                inner : [
+                    {
+                        name : 'Пранки',
+                        hidden : false
+                    },
+                    {
+                        name : 'test2',
+                        hidden : false
+                    },
+                    {
+                        name : 'Пранки 2',
+                        hidden : false
+                    },
+                    {
+                        name : 'test4',
+                        hidden : false
+                    }
+                ]
             },
             {
                 name : 'Лучшие видео',
-                items: {
-                    innerName : [1,'Пранк'],
-                    hidden : false
-                }
+                inner: [
+                    {
+                        name : 1,
+                        hidden : false
+                    },
+                    {
+                        name : 'Пранк',
+                        hidden : false
+                    }
+                ]
             },
             {
                 name : 'Пантера Шоу',
-                items: {
-                    innerName : [1,2,3,4,5],
-                    hidden : false
-                }
+                inner: [
+                    {
+                        name : 'Пранк',
+                        hidden : false
+                    },
+                    {
+                        name : 'Пранк 2',
+                        hidden : false
+                    }
+                ]
             }
 
         ];
@@ -823,7 +849,7 @@ angular.module("MainApp")
                 $scope.items.splice(outer, 1);
             } else {
                 //remove inner element
-                $scope.items[outer].items.innerName.splice(inner, 1);
+                $scope.items[outer].inner.splice(inner, 1);
             }
         };
 
@@ -849,7 +875,7 @@ angular.module("MainApp")
 
             if($scope.editableIndex != -1) {// edit now
                 // $scope.items[outer].items[inner] = angular.element($event.currentTarget).val();
-                $scope.items[outer].items.innerName[inner] = angular.element($event.currentTarget).text();
+                $scope.items[outer].inner[inner].name = angular.element($event.currentTarget).text();
             }
             $scope.editableIndex = -1;
             // console.log(angular.element($event.currentTarget).html());
@@ -859,6 +885,12 @@ angular.module("MainApp")
                 return $sce.trustAsHtml(text.toString());
             }
             return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
+        };
+
+        $scope.showHide = function(outer, inner, value) {
+
+            $scope.items[outer].inner[inner].hidden = !value;
+           // console.log($scope.items[outer].inner[inner].hidden);
         };
     }]);
 
