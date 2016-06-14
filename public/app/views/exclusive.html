@@ -30,7 +30,7 @@
         <!-- exclusive videos block -->
         <div class="block block--white">
             <div class="col-xs-6 col-sm-4 col-md-3"
-            ng-repeat="video in exclusiveVideos  | filter: selectedCategory | limitTo: limits.videos ">
+            ng-repeat="video in exclusiveVideos.data  | filter: selectedCategory | limitTo: limits.videos ">
                 <div class="thumb thumb--exclusive">
                     <a ui-sref="videos({ id: video.id })">
                         <div class="thumb__img">
