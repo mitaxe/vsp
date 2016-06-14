@@ -1,7 +1,8 @@
 angular.module("MainApp")
 .config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
 
-    // turn loading spinner on/off
+    // configure loading bar and spinner
+    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.includeSpinner = false;
 
     $urlRouterProvider.otherwise("/");

@@ -17,13 +17,16 @@
 
 			<div class="page">
 				<!-- page views here -->
-				<div ui-view>Loading...</div>
+				<div ui-view></div>
 				<div class="tablet-overlay" ng-click="sandwichClicked = false" ng-class="{'active':sandwichClicked}"></div>
 			</div>
 
 			<footerview></footerview>
 
 		</div>
+
+        <div id="loading-bar-container" ng-class="{'sandwichClicked':sandwichClicked}"></div>
+
 		<script src="assets/js/shared.min.js"></script>
 		<script src="assets/js/main.js"></script>
 	</body>

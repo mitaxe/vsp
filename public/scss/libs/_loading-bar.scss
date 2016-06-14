@@ -37,7 +37,8 @@
   transition: width 350ms;
 
   background: $col-green;
-  position: fixed;
+  // position: fixed;
+  position: relative;
   z-index: 10002;
   top: 0;
   left: 0;
@@ -48,28 +49,30 @@
 }
 
 /* Fancy blur effect */
-#loading-bar .peg {
-  position: absolute;
-  width: 70px;
-  right: 0;
-  top: 0;
-  height: 2px;
-  opacity: .45;
-  -moz-box-shadow: $col-green 1px 0 6px 1px;
-  -ms-box-shadow: $col-green 1px 0 6px 1px;
-  -webkit-box-shadow: $col-green 1px 0 6px 1px;
-  box-shadow: $col-green 1px 0 6px 1px;
-  -moz-border-radius: 100%;
-  -webkit-border-radius: 100%;
-  border-radius: 100%;
-}
+// #loading-bar .peg {
+//   position: absolute;
+//   width: 70px;
+//   right: 0;
+//   top: 0;
+//   height: 3px;
+//   opacity: .45;
+//   -moz-box-shadow: $col-green 1px 0 6px 1px;
+//   -ms-box-shadow: $col-green 1px 0 6px 1px;
+//   -webkit-box-shadow: $col-green 1px 0 6px 1px;
+//   box-shadow: $col-green 1px 0 6px 1px;
+//   -moz-border-radius: 100%;
+//   -webkit-border-radius: 100%;
+//   border-radius: 100%;
+// }
 
 #loading-bar-spinner {
   display: block;
-  position: fixed;
+  // position: fixed;
   z-index: 10002;
-  top: 10px;
-  left: 10px;
+  float: right;
+  margin: 5px 5px 0 0;
+  // top: 10px;
+  // left: 10px;
 }
 
 #loading-bar-spinner .spinner-icon {
@@ -107,4 +110,28 @@
 @keyframes loading-bar-spinner {
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+#loading-bar-container {
+    @include clearfix;
+    position: fixed;
+    top: 70px;
+    left: 320px;
+    width: 100%;
+    z-index: 99999;
+    -webkit-transition: left 300ms cubic-bezier(0.86, 0, 0.07, 1);
+    transition:         left 300ms cubic-bezier(0.86, 0, 0.07, 1);
+    &.sandwichClicked {
+        left: 0;
+    }
+    @include tablet {
+        left: 60px;
+        &.sandwichClicked {
+            left: 320px;
+        }
+    }
+    @include phone {
+        left: 0;
+        top: 55px;
+    }
 }
