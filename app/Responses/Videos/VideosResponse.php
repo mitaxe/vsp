@@ -19,7 +19,7 @@ class VideosResponse extends ResponseArray
                     $video->statViews,
                     $video->durationSeconds,
                     'userName',
-                    0,
+                    $video->exclusive,
                     $video->datePublished
                 ));
         }        
