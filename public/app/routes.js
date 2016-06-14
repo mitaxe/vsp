@@ -98,6 +98,18 @@ angular.module("MainApp")
         templateUrl : 'app/views/search-articles.html'
     })
 
+    // new videos
+    .state('newVideos', {
+        url : '/new-videos',
+        templateUrl : 'app/views/new-videos.html',
+        controller: 'NewVideosCtrl',
+        resolve: {
+            newVideos: function(factory) {
+                return factory.getNewVideosData();
+            }
+        }
+    })
+
     // blog
     .state('blog', {
         url: "/blog",
@@ -172,13 +184,13 @@ angular.module("MainApp")
         templateUrl : 'app/views/profile-edit.html'
     })
 
-    //add channel
+    // add channel
     .state('add-channel' ,{
         url : '/add-channel',
         templateUrl : 'app/views/add-channel.html'
     })
 
-    //settings
+    // settings
     .state('settings',{
         url : '/settings',
         templateUrl : 'app/views/settings.html',
@@ -193,13 +205,13 @@ angular.module("MainApp")
         templateUrl : 'app/views/settings-video.html'
     })
 
-    //video settings
+    // video settings
     .state('video-edit', {
         url : '/video-edit',
         templateUrl : 'app/views/video-settings.html'
     })
 
-    //notifications and comments
+    // notifications and comments
     .state('comments', {
         url : '/comments-all',
         templateUrl : 'app/views/comments-all.html'

@@ -17,6 +17,11 @@ angular.module("MainApp")
             }
             return $http.get('/exclusive/videos');
         };
+    
+        //new videos page
+        factory.getNewVideosData = function() {
+            return $http.get('./assets/js/data.json');
+        };
 
         // ratings page
         factory.getRatingsData = function() {

@@ -1,16 +1,16 @@
 angular.module("MainApp")
-.controller('ChannelCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
+.controller('ChannelCtrl', ['$scope', function ($scope) {
 
     $scope.content = $scope.currentUser;
 
-    $scope.hoverIn = function(target) {
-        if(target == 'ava') {
+    $scope.hoverIn = function (target) {
+        if (target == 'ava') {
             $scope.changeAvaText = true;
         } else {
             $scope.channelbgText = true;
         }
     };
-    $scope.hoverOut = function(target) {
+    $scope.hoverOut = function (target) {
         if(target == 'ava') {
             $scope.changeAvaText = false;
         } else {

@@ -20,7 +20,6 @@ app.run(function($rootScope, $document, $locale, $state){
 
 });
 
-
 /* filters */
 
 // ng repeat start from
@@ -34,8 +33,7 @@ app.filter('startFrom', function() {
     };
 });
 
-
-//video length formatter
+// video length formatter
 app.filter('secondsToTime', function() {
 
     function padTime(t) {
@@ -58,8 +56,7 @@ app.filter('secondsToTime', function() {
     };
 });
 
-
-//description filter
+// description filter
 app.filter('descriptionFormatter', function() {
     return function(text, limit) {
         var words = text.split(' '),
@@ -82,7 +79,6 @@ app.filter('descriptionFormatter', function() {
         return words.splice(0, wordsToShow).join(' ') + ' ...';
     };
 });
-
 
 /* helpers */
 

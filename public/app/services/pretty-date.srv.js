@@ -7,8 +7,9 @@ angular.module("MainApp")
             day_diff = Math.floor(diff / 86400),
             years_diff = Math.floor(diff / 31536000);
 
-        if ( isNaN(day_diff) || day_diff < 0 )
+        if ( isNaN(day_diff) || day_diff < 0 ) {
             return;
+        }
 
         if (toDay && day_diff < 1) {
             return "Сегодня";
