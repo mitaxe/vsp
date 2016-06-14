@@ -1,7 +1,7 @@
 angular.module("MainApp")
 .controller('RatingsCtrl', ['$scope', 'ratingsData', function ($scope, ratingsData) {
 
-    $scope.ratingsData = ratingsData.data;
+    $scope.ratingsData = ratingsData.data.data;
 
     // video categories
     $scope.categories = [
