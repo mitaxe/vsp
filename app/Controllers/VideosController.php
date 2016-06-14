@@ -35,7 +35,7 @@ class VideosController extends RESTController
     public function getExclusiveVideos()
     {
         $response = new VideosResponse();
-        $queryParams = ['limit' => 12, 'conditions' => 'exclusive=true'];
+        $queryParams = ['limit' => 12, 'conditions' => 'status=\'public\' AND exclusive=true'];
 
         if ($offset = $this->request->getOffset()) {
             $queryParams['offset'] = $offset;
@@ -48,7 +48,7 @@ class VideosController extends RESTController
     public function getRatingsVideos()
     {
         $response = new VideosResponse();
-        $queryParams = ['limit' => 12, 'order' => 'statViews DESC'];
+        $queryParams = ['limit' => 12, 'conditions' => 'status=\'public\'', 'order' => 'statViews DESC'];
 
         if ($offset = $this->request->getOffset()) {
             $queryParams['offset'] = $offset;
@@ -62,7 +62,7 @@ class VideosController extends RESTController
     public function getNewVideos()
     {
         $response = new VideosResponse();
-        $queryParams = ['limit' => 12, 'order' => 'dateCreated DESC'];
+        $queryParams = ['limit' => 12, 'conditions' => 'status=\'public\'', 'order' => 'dateCreated DESC'];
 
         if ($offset = $this->request->getOffset()) {
             $queryParams['offset'] = $offset;

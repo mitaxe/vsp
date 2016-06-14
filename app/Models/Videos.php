@@ -119,25 +119,28 @@ class Videos extends Model
 
     static public function findCurrentlyWatched($params = [])
     {
-        $params['conditions'] = ['actual' => true];
+        $params['conditions'] = 'actual=true AND status=\'public\'';
         return parent::find($params);
     }
 
     static public function findNew($params = [])
     {
         $params['order'] = 'dateCreated DESC';
+        $params['conditions'] = 'status=\'public\'';
         return parent::find($params);
     }
 
     static public function findPopular($params = [])
     {
         $params['order'] = 'statViews DESC';
+        $params['conditions'] = 'status=\'public\'';
         return parent::find($params);
     }
 
     static public function findExclusive($params = [])
     {
         $params['order'] = 'exclusive DESC';
+        $params['conditions'] = 'status=\'public\'';
         return parent::find($params);
     }    
 
