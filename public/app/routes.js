@@ -27,6 +27,38 @@ angular.module("MainApp")
         }
     })
 
+    // exclusive
+    .state('exclusive', {
+        url: "/exclusive",
+        templateUrl: "app/views/exclusive.html",
+        controller: 'ExclusiveCtrl',
+        resolve: {
+            exclusiveVideos: function(factory) {
+                return factory.getExclusiveData();
+            }
+        }
+    })
+
+    // ratings
+    .state('ratings', {
+        url: "/ratings",
+        templateUrl: "app/views/ratings.html",
+        resolve: {
+            ratingsData: function(factory) {
+                return factory.getRatingsData();
+            }
+        },
+        controller: 'RatingsCtrl'
+    })
+    .state('ratings.videos', {
+        url: "/videos",
+        templateUrl: "app/views/ratings-videos.html"
+    })
+    .state('ratings.channels', {
+        url: "/channels",
+        templateUrl: "app/views/ratings-channels.html"
+    })
+
     // registration/sign-in
     .state('reg', {
         url : '/reg',
@@ -66,19 +98,7 @@ angular.module("MainApp")
         templateUrl : 'app/views/search-articles.html'
     })
 
-    // exclusive
-    .state('exclusive', {
-        url: "/exclusive",
-        templateUrl: "app/views/exclusive.html",
-        controller: 'ExclusiveCtrl',
-        resolve: {
-            exclusiveVideos: function(factory) {
-                return factory.getExclusiveData();
-            }
-        }
-    })
-        
-    //new videos
+    // new videos
     .state('newVideos', {
         url : '/new-videos',
         templateUrl : 'app/views/new-videos.html',
@@ -88,26 +108,6 @@ angular.module("MainApp")
                 return factory.getNewVideosData();
             }
         }
-    })
-
-    // ratings
-    .state('ratings', {
-        url: "/ratings",
-        templateUrl: "app/views/ratings.html",
-        resolve: {
-            ratingsData: function(factory) {
-                return factory.getRatingsData();
-            }
-        },
-        controller: 'RatingsCtrl'
-    })
-    .state('ratings.videos', {
-        url: "/videos",
-        templateUrl: "app/views/ratings-videos.html"
-    })
-    .state('ratings.channels', {
-        url: "/channels",
-        templateUrl: "app/views/ratings-channels.html"
     })
 
     // blog
@@ -184,13 +184,13 @@ angular.module("MainApp")
         templateUrl : 'app/views/profile-edit.html'
     })
 
-    //add channel
+    // add channel
     .state('add-channel' ,{
         url : '/add-channel',
         templateUrl : 'app/views/add-channel.html'
     })
 
-    //settings
+    // settings
     .state('settings',{
         url : '/settings',
         templateUrl : 'app/views/settings.html',
@@ -205,13 +205,13 @@ angular.module("MainApp")
         templateUrl : 'app/views/settings-video.html'
     })
 
-    //video settings
+    // video settings
     .state('video-edit', {
         url : '/video-edit',
         templateUrl : 'app/views/video-settings.html'
     })
 
-    //notifications and comments
+    // notifications and comments
     .state('comments', {
         url : '/comments-all',
         templateUrl : 'app/views/comments-all.html'

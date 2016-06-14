@@ -5,25 +5,32 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get('/index/videos');
             // return $http.get('./assets/js/test.json');
+            return $http.get('/index/videos');
         };
 
         // exclusive page
-        factory.getExclusiveData = function() {
-            // return $http.get('./assets/js/data.json');
+        factory.getExclusiveData = function(offset) {
+            // return $http.get('./assets/js/test.json');
+            if (offset) {
+                return $http.get('/exclusive/videos?offset=' + offset);
+            }
             return $http.get('/exclusive/videos');
-        };
-    
-        //new videos page
-        factory.getNewVideosData = function() {
-            return $http.get('./assets/js/data.json');
         };
 
         // ratings page
         factory.getRatingsData = function() {
-            // return $http.get('./assets/js/data.json');
+            // return $http.get('./assets/js/test.json');
             return $http.get('/ratings/videos');
+        };
+
+        // new videos page
+
+        factory.getNewVideosData = function (offset) {
+            if (offset) {
+                return $http.get('/new/videos?offset=' + offset);
+            }
+            return $http.get('/new/videos');
         };
 
         // blog page

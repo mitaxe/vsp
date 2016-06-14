@@ -10,9 +10,9 @@ angular.module("MainApp")
     // Новые видео = 1
     // Популярные видео = 2
     // Custom block = 3
-    // Блог = 4
-    // Эксклюзивные видео = 5
-    // Custom block 2 = 6
-    // Custom block 3 = 7
+    // Блог = null
+    // Эксклюзивные видео = 4
+    // Custom block 2 = 5
+    // Custom block 3 = 6
 
 }]);
