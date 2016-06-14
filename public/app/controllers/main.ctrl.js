@@ -36,9 +36,12 @@ angular.module("MainApp")
         videos:  4,
         channels: 6,
         blogs: 6,
-        comments: 2
+        comments: 2,
+        reqCnt : 0
     };
 
+
+    $scope.videosRq = 12;
     $scope.initialLimits = clone($scope.limits);
 
     $scope.loadMore = function(prop) {
