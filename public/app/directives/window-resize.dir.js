@@ -13,5 +13,5 @@ app.directive('resize', function($window) {
       angular.element($window).on('resize', onResize);
       scope.$on('$destroy', cleanUp);
     }
-  }
+  };
 });

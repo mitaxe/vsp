@@ -23,9 +23,7 @@ angular.module("MainApp")
     $scope.sortReverse = true;
 
     $scope.sortBy = function(index) {
-        $scope.sortReverse = index == 0 ? true : false;
+        $scope.sortReverse = index === 0 ? true : false;
     };
-
-    // console.log($stateParams.url);
 
 }]);

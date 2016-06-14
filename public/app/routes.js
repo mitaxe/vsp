@@ -27,6 +27,38 @@ angular.module("MainApp")
         }
     })
 
+    // exclusive
+    .state('exclusive', {
+        url: "/exclusive",
+        templateUrl: "app/views/exclusive.html",
+        controller: 'ExclusiveCtrl',
+        resolve: {
+            exclusiveVideos: function(factory) {
+                return factory.getExclusiveData();
+            }
+        }
+    })
+
+    // ratings
+    .state('ratings', {
+        url: "/ratings",
+        templateUrl: "app/views/ratings.html",
+        resolve: {
+            ratingsData: function(factory) {
+                return factory.getRatingsData();
+            }
+        },
+        controller: 'RatingsCtrl'
+    })
+    .state('ratings.videos', {
+        url: "/videos",
+        templateUrl: "app/views/ratings-videos.html"
+    })
+    .state('ratings.channels', {
+        url: "/channels",
+        templateUrl: "app/views/ratings-channels.html"
+    })
+
     // registration/sign-in
     .state('reg', {
         url : '/reg',
@@ -64,38 +96,6 @@ angular.module("MainApp")
     .state('search.articles', {
         url : '/articles',
         templateUrl : 'app/views/search-articles.html'
-    })
-
-    // exclusive
-    .state('exclusive', {
-        url: "/exclusive",
-        templateUrl: "app/views/exclusive.html",
-        controller: 'ExclusiveCtrl',
-        resolve: {
-            exclusiveVideos: function(factory) {
-                return factory.getExclusiveData();
-            }
-        }
-    })
-
-    // ratings
-    .state('ratings', {
-        url: "/ratings",
-        templateUrl: "app/views/ratings.html",
-        resolve: {
-            ratingsData: function(factory) {
-                return factory.getRatingsData();
-            }
-        },
-        controller: 'RatingsCtrl'
-    })
-    .state('ratings.videos', {
-        url: "/videos",
-        templateUrl: "app/views/ratings-videos.html"
-    })
-    .state('ratings.channels', {
-        url: "/channels",
-        templateUrl: "app/views/ratings-channels.html"
     })
 
     // blog
