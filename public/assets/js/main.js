@@ -377,23 +377,23 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-        //     return $http.get('/index/videos');
-            return $http.get('./assets/js/test.json');
+            // return $http.get('./assets/js/test.json');
+            return $http.get('/index/videos');
         };
 
         // exclusive page
         factory.getExclusiveData = function(offset) {
-        return $http.get('./assets/js/data.json');
-//     return $http.get('/exclusive/videos');
-                if (offset) {
-                        return $http.get('/exclusive/videos');
-                }
+            // return $http.get('./assets/js/data.json');
+            if (offset) {
+                return $http.get('/exclusive/videos?offset=' + offset);
+            }
+            return $http.get('/exclusive/videos');
         };
 
         // ratings page
         factory.getRatingsData = function() {
-            return $http.get('./assets/js/data.json');
-        //     return $http.get('/ratings/videos');
+            // return $http.get('./assets/js/data.json');
+            return $http.get('/ratings/videos');
         };
 
         // blog page
@@ -543,26 +543,38 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('ExclusiveCtrl', ['$scope', 'exclusiveVideos', '$http', function ($scope, exclusiveVideos, $http) {
+.controller('ExclusiveCtrl', ['$scope', 'factory', 'exclusiveVideos', '$http', function ($scope, factory, exclusiveVideos, $http) {
 
-    $scope.exclusiveVideos = exclusiveVideos.data.videos; //--
+    if($scope.limits.reqCnt) {
+        factory.getExclusiveData($scope.limits.reqCnt).success(function(response){
+            $scope.exclusiveVideos = response.data.videos;
+        });
+    } else {
+        $scope.exclusiveVideos = exclusiveVideos.data.videos;
+    }
+    
 
     $scope.categories = [
         'Adamantio 993',
         'JOD'
     ];
+    
+    
 
     // console.log(exclusiveVideos.data.videos);
 
-    $scope.videos = 12;
     $scope.loadMoreVideos = function() {
-        $scope.videos += 12;
-        $scope.limits.videos+=4;
+        $scope.limits.reqCnt += 12;
+        $scope.limits.videos += 4;
+        // factory.getExclusiveData(offset).success(function(response){
+        //     console.log(response);
+        // });
         $http({
             method: 'GET',
-            url: '/exclusive/videos?offset='+ $scope.videos +''
+            url: '/exclusive/videos?offset='+ $scope.limits.reqCnt +''
         }).then(function successCallback(response) {
             console.log(response);
+            $scope.exclusiveVideos.push(response);
             // this callback will be called asynchronously
             // when the response is available
         }, function errorCallback(response) {
@@ -653,9 +665,12 @@ angular.module("MainApp")
         videos:  4,
         channels: 6,
         blogs: 6,
-        comments: 2
+        comments: 2,
+        reqCnt : 0
     };
 
+
+    $scope.videosRq = 12;
     $scope.initialLimits = clone($scope.limits);
 
     $scope.loadMore = function(prop) {
