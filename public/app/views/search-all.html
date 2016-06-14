@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-xs-7 col-sm-5 col-md-3">
                                 <div class="thumb__img">
-                                    <a ui-sref="video({ url: videos[$index].url })">
+                                    <a ui-sref="videos({ id: video.id })">
                                         <span class="thumb__length">{{ video.length | secondsToTime}}</span>
                                         <img ng-src="{{ video.img }}" alt="" />
                                     </a>

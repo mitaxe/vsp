@@ -4225,20 +4225,19 @@ textarea {
             fill: #757575; }
         .accordion .accordion_item__view--inner .inner_icons .wrp {
           display: none; }
-        .accordion .accordion_item__view--inner .inner_icons .btn_edit {
+        .accordion .accordion_item__view--inner .inner_icons .btn_edit,
+        .accordion .accordion_item__view--inner .inner_icons .btn_show_hide,
+        .accordion .accordion_item__view--inner .inner_icons .del_btn {
           border: none;
           outline: none;
           background: none;
-          padding: 0; }
-          .accordion .accordion_item__view--inner .inner_icons .btn_edit svg {
+          padding: 0;
+          vertical-align: middle; }
+          .accordion .accordion_item__view--inner .inner_icons .btn_edit svg,
+          .accordion .accordion_item__view--inner .inner_icons .btn_show_hide svg,
+          .accordion .accordion_item__view--inner .inner_icons .del_btn svg {
             margin-right: 0;
             fill: #757575; }
-        .accordion .accordion_item__view--inner .inner_icons .del_btn {
-          display: inline-block;
-          padding: 0; }
-          .accordion .accordion_item__view--inner .inner_icons .del_btn svg {
-            fill: #757575;
-            margin-right: 0; }
         .accordion .accordion_item__view--inner .inner_icons .sandwich {
           display: inline-block;
           margin-top: 3px; }
@@ -4283,7 +4282,8 @@ textarea {
     .accordion .icon_set .del_btn svg {
       fill: #fff; }
 
-.right_list h3 {
+.right_list h3,
+.left_list h3 {
   font-size: 18px;
   font-weight: bold;
   color: #5b5d5e;
@@ -4319,6 +4319,11 @@ textarea {
     border: 1px solid #dddddd;
     height: 30px;
     text-align: center; }
+    .inner_search_form__search:focus {
+      border-color: #00cc33;
+      box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2); }
+      .inner_search_form__search:focus + .svg svg {
+        fill: #00cc33; }
   .inner_search_form svg {
     fill: #898989;
     height: 18px;
