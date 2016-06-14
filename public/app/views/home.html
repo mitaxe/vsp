@@ -29,7 +29,7 @@
         <div class="block block--white">
             <div class="col-xs-12">
                 <h2 class="block__title block__title--left">Новые видео</h2>
-                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
+                <div class="block__btn"><a ui-sref="newVideos" class="btn btn-white">Смотреть все</a></div>
             </div>
             <!-- slider visible desktop only -->
             <slider slides="videos" limitto="12" class="hidden-phone hidden-tablet">
@@ -171,7 +171,7 @@
                 <h2 class="block__title block__title--left">Блог</h2>
                 <div class="block__btn"><a href="#" class="btn btn-white">Читать все</a></div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="video in videos | filter: { blockId: 4 } | limitTo: 3 " ng-class="{'hidden-phone hidden-tablet':$last}">
+            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="video in videos | limitTo: 3 " ng-class="{'hidden-phone hidden-tablet':$last}">
                 <div class="thumb thumb--medium row">
                     <div class="col-xs-6 col-sm-12">
                         <a ui-sref="videos({ id: video.id })">
@@ -198,7 +198,7 @@
                 <h2 class="block__title block__title--exclusive block__title--left">Эксклюзивные видео</h2>
                 <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
             </div>
-            <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="video in videos | filter: { blockId: 5 } | limitTo: 4" ng-class="{'hidden-phone hidden-tablet':$last}">
+            <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="video in videos | filter: { blockId: 4 } | limitTo: 4" ng-class="{'hidden-phone hidden-tablet':$last}">
                 <div class="thumb thumb--exclusive row">
                     <div class="col-xs-7 col-sm-12">
                         <a ui-sref="videos({ id: video.id })">
@@ -226,7 +226,7 @@
                 <h2 class="block__title">Custom block 2</h2>
             </div>
             <div style="position:relative;">
-                <div class="col-xs-12 col-md-7" ng-repeat="video in videos | filter: { blockId: 6 } | limitTo: 1 ">
+                <div class="col-xs-12 col-md-7" ng-repeat="video in videos | filter: { blockId: 5 } | limitTo: 1 ">
                     <div class="thumb thumb--big thumb--onepic">
                         <a ui-sref="videos({ id: video.id })">
                             <div class="thumb__img thumb__img--shadow">
@@ -246,7 +246,7 @@
                 </div>
                 <div class="col-xs-5 col-scroll hidden-phone hidden-tablet">
                     <div class="row">
-                        <div class="col-xs-6" ng-repeat="video in videos | filter: { blockId: 6 } | limitTo: 13 | startFrom : 1 ">
+                        <div class="col-xs-6" ng-repeat="video in videos | filter: { blockId: 5 } | limitTo: 13 | startFrom : 1 ">
                             <div class="thumb">
                                 <a ui-sref="videos({ id: video.id })">
                                     <div class="thumb__img thumb__img--shadow">
@@ -260,7 +260,7 @@
                     </div>
                 </div>
                 <div class="col-xs-12 hidden-desktop" style="padding:0;">
-                    <div class="col-xs-6" ng-repeat="video in videos | filter: { blockId: 6 } | limitTo: 5 | startFrom : 1 ">
+                    <div class="col-xs-6" ng-repeat="video in videos | filter: { blockId: 5 } | limitTo: 5 | startFrom : 1 ">
                         <div class="thumb">
                             <a ui-sref="videos({ id: video.id })">
                                 <div class="thumb__img">
@@ -346,7 +346,7 @@
             <div class="col-xs-12">
                 <h2 class="block__title">Custom block 3</h2>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="video in videos | filter: { blockId: 7 } | limitTo: 3 " ng-class="{'hidden-phone hidden-tablet':$last}">
+            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="video in videos | filter: { blockId: 6 } | limitTo: 3 " ng-class="{'hidden-phone hidden-tablet':$last}">
                 <div class="thumb thumb--medium" ng-class="{'thumb--exclusive': video.exclusive > 0}">
                     <a ui-sref="videos({ id: video.id })">
                         <div class="thumb__img">

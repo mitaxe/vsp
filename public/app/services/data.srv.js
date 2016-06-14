@@ -11,7 +11,7 @@ angular.module("MainApp")
 
         // exclusive page
         factory.getExclusiveData = function(offset) {
-            // return $http.get('./assets/js/data.json');
+            // return $http.get('./assets/js/test.json');
             if (offset) {
                 return $http.get('/exclusive/videos?offset=' + offset);
             }
@@ -20,8 +20,17 @@ angular.module("MainApp")
 
         // ratings page
         factory.getRatingsData = function() {
-            // return $http.get('./assets/js/data.json');
+            // return $http.get('./assets/js/test.json');
             return $http.get('/ratings/videos');
+        };
+
+        // new videos page
+
+        factory.getNewVideosData = function (offset) {
+            if (offset) {
+                return $http.get('/new/videos?offset=' + offset);
+            }
+            return $http.get('/new/videos');
         };
 
         // blog page
