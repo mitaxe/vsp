@@ -14,9 +14,6 @@ angular.module("MainApp")
         // console.log($scope.videos)
     });
 
-
-
-
     // current user
     $scope.currentUser = {
         "name": "Current User",
@@ -47,7 +44,6 @@ angular.module("MainApp")
     $scope.loadMore = function(prop) {
         $scope.limits[prop] += $scope.initialLimits[prop];
     };
-
 
     // remove element function
     $scope.remove = function(array,item) {

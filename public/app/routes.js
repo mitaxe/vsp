@@ -27,6 +27,38 @@ angular.module("MainApp")
         }
     })
 
+    // exclusive
+    .state('exclusive', {
+        url: "/exclusive",
+        templateUrl: "app/views/exclusive.html",
+        controller: 'ExclusiveCtrl',
+        resolve: {
+            exclusiveVideos: function(factory) {
+                return factory.getExclusiveData();
+            }
+        }
+    })
+
+    // ratings
+    .state('ratings', {
+        url: "/ratings",
+        templateUrl: "app/views/ratings.html",
+        resolve: {
+            ratingsData: function(factory) {
+                return factory.getRatingsData();
+            }
+        },
+        controller: 'RatingsCtrl'
+    })
+    .state('ratings.videos', {
+        url: "/videos",
+        templateUrl: "app/views/ratings-videos.html"
+    })
+    .state('ratings.channels', {
+        url: "/channels",
+        templateUrl: "app/views/ratings-channels.html"
+    })
+
     // registration/sign-in
     .state('reg', {
         url : '/reg',
@@ -66,6 +98,7 @@ angular.module("MainApp")
         templateUrl : 'app/views/search-articles.html'
     })
 
+<<<<<<< HEAD
     // exclusive
     .state('exclusive', {
         url: "/exclusive",
@@ -110,6 +143,8 @@ angular.module("MainApp")
         templateUrl: "app/views/ratings-channels.html"
     })
 
+=======
+>>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
     // blog
     .state('blog', {
         url: "/blog",

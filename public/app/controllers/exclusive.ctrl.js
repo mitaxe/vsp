@@ -1,7 +1,7 @@
 angular.module("MainApp")
-.controller('ExclusiveCtrl', ['$scope', 'exclusiveVideos', '$http', function ($scope, exclusiveVideos, $http) {
+.controller('ExclusiveCtrl', ['$scope', 'factory', 'exclusiveVideos', '$http', function ($scope, factory, exclusiveVideos, $http) {
 
-    $scope.exclusiveVideos = exclusiveVideos.data.videos; //--
+    $scope.exclusiveVideos = exclusiveVideos.data.videos;
 
     $scope.categories = [
         'Adamantio 993',
@@ -11,9 +11,13 @@ angular.module("MainApp")
     // console.log(exclusiveVideos.data.videos);
 
     $scope.videos = 12;
+
     $scope.loadMoreVideos = function() {
         $scope.videos += 12;
-        $scope.limits.videos+=4;
+        $scope.limits.videos += 4;
+        // factory.getExclusiveData(offset).success(function(response){
+        //     console.log(response);
+        // });
         $http({
             method: 'GET',
             url: '/exclusive/videos?offset='+ $scope.videos +''

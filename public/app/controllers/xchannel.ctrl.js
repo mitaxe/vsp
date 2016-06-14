@@ -26,6 +26,4 @@ angular.module("MainApp")
         $scope.sortReverse = index === 0 ? true : false;
     };
 
-    // console.log($stateParams.url);
-
 }]);
