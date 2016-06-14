@@ -22,6 +22,7 @@ angular.module("MainApp")
         controller: 'HomeCtrl',
         resolve: {
             videos: function(factory) {
+                console.time('homeRequestTime');
                 return factory.getHomeData();
             }
         }
@@ -43,12 +44,12 @@ angular.module("MainApp")
     .state('ratings', {
         url: "/ratings",
         templateUrl: "app/views/ratings.html",
+        controller: 'RatingsCtrl',
         resolve: {
-            ratingsData: function(factory) {
-                return factory.getRatingsData();
+            ratingsVideos: function(factory) {
+                return factory.getRatingsVideos();
             }
-        },
-        controller: 'RatingsCtrl'
+        }
     })
     .state('ratings.videos', {
         url: "/videos",

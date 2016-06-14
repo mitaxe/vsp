@@ -646,13 +646,26 @@ select option:hover {
   transition: .3s;
   padding: 6px 22px;
   line-height: 1; }
-  .btn-white:not(.edit_channel):hover {
+  .btn-white:hover {
     border-color: #00cc33;
     color: #00cc33; }
   @media screen and (max-width: 767px) {
     .btn-white {
       font-size: 11px;
       padding: 5px 10px; } }
+
+.btn-grey {
+  border-radius: 50px;
+  line-height: 1;
+  background: linear-gradient(to bottom, #d7d7d7 0%, #c4c4c4 100%);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+  padding: 12px 20px 12px 25px;
+  font-size: 16px;
+  color: #828383;
+  margin: 4px 0 0 25px; }
+  .btn-grey svg {
+    fill: #828383;
+    margin-right: 10px; }
 
 .btn-remove {
   padding-left: 18px; }
@@ -3034,16 +3047,6 @@ textarea {
     .channel__ava {
       width: 250px; } }
 
-.edit_channel {
-  background: linear-gradient(to bottom, #d7d7d7 0%, #c4c4c4 100%);
-  padding: 11px 20px 11px 25px;
-  font-size: 16px;
-  color: #828383;
-  margin: 4px 0 0 25px; }
-  .edit_channel svg {
-    fill: #828383;
-    margin-right: 10px; }
-
 .subscribe_box {
   margin-top: 4px;
   float: right; }
@@ -3154,7 +3157,7 @@ textarea {
     padding-top: 10px;
     padding-bottom: 10px;
     margin-left: -10px; }
-    .tablet_ctrl .edit_channel {
+    .tablet_ctrl .btn-grey {
       float: right; }
   .cat_counter {
     font-size: 26px; } }
@@ -3162,7 +3165,7 @@ textarea {
 @media screen and (max-width: 767px) {
   .tablet_ctrl {
     margin-bottom: 15px; }
-  .edit_channel {
+  .btn-grey {
     margin: 15px auto 0; }
   .cat_counter {
     font-size: 20px; } }

@@ -1,7 +1,7 @@
 <!-- ratings videos block -->
 <div class="block block--white">
     <div class="col-xs-6 col-sm-4 col-md-3"
-    ng-repeat="video in ratingsData.data | filter: { user: selectedCategory } | limitTo: limits.videos ">
+    ng-repeat="video in ratingsVideos | filter: { user: selectedCategory } ">
         <div class="thumb">
             <a ui-sref="videos({ id: video.id })">
                 <div class="thumb__img">
@@ -22,5 +22,5 @@
 </div>
 
 <div class="block center">
-    <a class="btn btn-more" ng-click="loadMore('videos')">ЗАГРУЗИТЬ ЕЩЕ</a>
+    <a class="btn btn-more" ng-click="loadMore()">ЗАГРУЗИТЬ ЕЩЕ</a>
 </div>
