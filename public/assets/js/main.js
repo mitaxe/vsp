@@ -20,21 +20,6 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
 
 }]);
 
-<<<<<<< HEAD
-// filters
-
-    // ng repeat start from
-    app.filter('startFrom', function() {
-        return function(input, start) {
-            if(input) {
-                start = +start; //parse to int
-                return input.slice(start);
-            }
-            return [];
-        };
-    });
-=======
-
 /* filters */
 
 // ng repeat start from
@@ -47,26 +32,17 @@ app.filter('startFrom', function() {
         return [];
     };
 });
->>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
 
-
-//video length formatter
+// video length formatter
 app.filter('secondsToTime', function() {
 
     function padTime(t) {
         return t < 10 ? "0"+t : t;
     }
 
-<<<<<<< HEAD
-        return function(_seconds) {
-            if (typeof _seconds !== "number" || _seconds < 0) {
-                return "00:00:00";
-            }
-=======
     return function(_seconds) {
         if (typeof _seconds !== "number" || _seconds < 0)
             return "00:00:00";
->>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
 
         var hours = Math.floor(_seconds / 3600),
             minutes = Math.floor((_seconds % 3600) / 60),
@@ -80,41 +56,13 @@ app.filter('secondsToTime', function() {
     };
 });
 
-<<<<<<< HEAD
-    //description filter
-    app.filter('descriptionFormatter', function() {
-        return function(text, limit) {
-            var words = text.split(' '),
-                wordsToShow = 0, //how much words need to show
-                counter = 0; //letter counter
-
-            for (var i = 0; i <= words.length; i++) {
-                if(counter < limit) {
-                    counter += words[i].length; //count letters length
-                    // console.log('counter ' + counter);
-                } else {
-                    wordsToShow = i -1; //index of last word
-                    // console.log('words ' + wordsToShow);
-                    break;
-                }
-            }
-            
-           // console.log('words length ' + words.length + ' ned to show  ' + wordsToShow + ' have to slice ' + (words.length - wordsToShow))
-=======
->>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
-
-//description filter
+// description filter
 app.filter('descriptionFormatter', function() {
     return function(text, limit) {
         var words = text.split(' '),
             wordsToShow = 0, //how much words need to show
             counter = 0; //letter counter
 
-<<<<<<< HEAD
-            return words.splice(0, wordsToShow).join(' ') + ' ...';
-        };
-    });
-=======
         for (var i = 0; i <= words.length; i++) {
             if(counter < limit) {
                 counter += words[i].length; //count letters length
@@ -127,40 +75,11 @@ app.filter('descriptionFormatter', function() {
         }
        // console.log('words length ' + words.length + ' ned to show  ' + wordsToShow + ' have to slice ' + (words.length - wordsToShow))
        // console.log(words.splice(0,words.length - wordsToShow).length);
->>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
 
         return words.splice(0, wordsToShow).join(' ') + ' ...';
     };
 });
 
-
-<<<<<<< HEAD
-    // clone object simple
-    function clone(obj) {
-        if (null === obj || "object" !== typeof obj) {
-            return obj;
-        }
-        var copy = obj.constructor();
-        for (var attr in obj) {
-            if (obj.hasOwnProperty(attr)) {
-                copy[attr] = obj[attr];
-            }
-        }
-        return copy;
-    }
-
-    // sort array by obg prop
-    function dynamicSort(property) {
-        var sortOrder = 1;
-        if(property[0] === "-") {
-            sortOrder = -1;
-            property = property.substr(1);
-        }
-        return function (a,b) {
-            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-            return result * sortOrder;
-        };
-=======
 /* helpers */
 
 // clone object simple
@@ -169,7 +88,6 @@ function clone(obj) {
     var copy = obj.constructor();
     for (var attr in obj) {
         if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
->>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
     }
     return copy;
 }
@@ -287,20 +205,7 @@ angular.module("MainApp")
         templateUrl : 'app/views/search-articles.html'
     })
 
-<<<<<<< HEAD
-    // exclusive
-    .state('exclusive', {
-        url: "/exclusive",
-        templateUrl: "app/views/exclusive.html",
-        controller: 'ExclusiveCtrl',
-        resolve: {
-            exclusiveVideos: ["factory", function(factory) {
-                return factory.getExclusiveData();
-            }]
-        }
-    })
-        
-    //new videos
+    // new videos
     .state('newVideos', {
         url : '/new-videos',
         templateUrl : 'app/views/new-videos.html',
@@ -312,28 +217,6 @@ angular.module("MainApp")
         }
     })
 
-    // ratings
-    .state('ratings', {
-        url: "/ratings",
-        templateUrl: "app/views/ratings.html",
-        resolve: {
-            ratingsData: ["factory", function(factory) {
-                return factory.getRatingsData();
-            }]
-        },
-        controller: 'RatingsCtrl'
-    })
-    .state('ratings.videos', {
-        url: "/videos",
-        templateUrl: "app/views/ratings-videos.html"
-    })
-    .state('ratings.channels', {
-        url: "/channels",
-        templateUrl: "app/views/ratings-channels.html"
-    })
-
-=======
->>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
     // blog
     .state('blog', {
         url: "/blog",
@@ -408,13 +291,13 @@ angular.module("MainApp")
         templateUrl : 'app/views/profile-edit.html'
     })
 
-    //add channel
+    // add channel
     .state('add-channel' ,{
         url : '/add-channel',
         templateUrl : 'app/views/add-channel.html'
     })
 
-    //settings
+    // settings
     .state('settings',{
         url : '/settings',
         templateUrl : 'app/views/settings.html',
@@ -429,13 +312,13 @@ angular.module("MainApp")
         templateUrl : 'app/views/settings-video.html'
     })
 
-    //video settings
+    // video settings
     .state('video-edit', {
         url : '/video-edit',
         templateUrl : 'app/views/video-settings.html'
     })
 
-    //notifications and comments
+    // notifications and comments
     .state('comments', {
         url : '/comments-all',
         templateUrl : 'app/views/comments-all.html'
@@ -502,17 +385,17 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-        //     return $http.get('/index/videos');
-            return $http.get('./assets/js/test.json');
+            // return $http.get('./assets/js/test.json');
+            return $http.get('/index/videos');
         };
 
         // exclusive page
         factory.getExclusiveData = function(offset) {
-        return $http.get('./assets/js/data.json');
-//     return $http.get('/exclusive/videos');
-                if (offset) {
-                        return $http.get('/exclusive/videos');
-                }
+            // return $http.get('./assets/js/data.json');
+            if (offset) {
+                return $http.get('/exclusive/videos?offset=' + offset);
+            }
+            return $http.get('/exclusive/videos');
         };
     
         //new videos page
@@ -522,8 +405,8 @@ angular.module("MainApp")
 
         // ratings page
         factory.getRatingsData = function() {
-            return $http.get('./assets/js/data.json');
-        //     return $http.get('/ratings/videos');
+            // return $http.get('./assets/js/data.json');
+            return $http.get('/ratings/videos');
         };
 
         // blog page
@@ -674,9 +557,9 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('ExclusiveCtrl', ['$scope', 'exclusiveVideos', '$http', function ($scope, exclusiveVideos, $http) {
+.controller('ExclusiveCtrl', ['$scope', 'factory', 'exclusiveVideos', '$http', function ($scope, factory, exclusiveVideos, $http) {
 
-    $scope.exclusiveVideos = exclusiveVideos.data.videos; //--
+    $scope.exclusiveVideos = exclusiveVideos.data.videos;
 
     $scope.categories = [
         'Adamantio 993',
@@ -686,9 +569,13 @@ angular.module("MainApp")
     // console.log(exclusiveVideos.data.videos);
 
     $scope.videos = 12;
+
     $scope.loadMoreVideos = function() {
         $scope.videos += 12;
-        $scope.limits.videos+=4;
+        $scope.limits.videos += 4;
+        // factory.getExclusiveData(offset).success(function(response){
+        //     console.log(response);
+        // });
         $http({
             method: 'GET',
             url: '/exclusive/videos?offset='+ $scope.videos +''
@@ -1055,22 +942,14 @@ angular.module("MainApp")
     };
 
     $scope.prevSlide = function () {
-<<<<<<< HEAD
         // $scope.direction = 'left';
-        $scope.currentIndex = ($scope.currentIndex < $scope.itemDetails.images.length - 1) ? $scope.currentIndex +1 : 0;
-=======
         $scope.currentIndex = ($scope.currentIndex < $scope.itemDetails.images.length - 1) ? ++$scope.currentIndex : 0;
->>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
         document.getElementById('sWr').style.left = -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex )) + 'px';
     };
-    
+
     $scope.nextSlide = function () {
-<<<<<<< HEAD
         // $scope.direction = 'right';
-        $scope.currentIndex = ($scope.currentIndex > 0) ? $scope.currentIndex -1 : $scope.itemDetails.images.length - 1;
-=======
         $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.itemDetails.images.length - 1;
->>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
         document.getElementById('sWr').style.left = - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex)) + 'px';
     };
 
