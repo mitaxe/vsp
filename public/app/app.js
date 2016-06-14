@@ -22,6 +22,7 @@ app.run(function($rootScope, $document, $locale, $state){
 
 // filters
 
+
     // ng repeat start from
     app.filter('startFrom', function() {
         return function(input, start) {

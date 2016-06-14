@@ -22,6 +22,7 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
 
 // filters
 
+
     // ng repeat start from
     app.filter('startFrom', function() {
         return function(input, start) {
@@ -401,7 +402,8 @@ angular.module("MainApp")
 
         // exclusive page
         factory.getExclusiveData = function() {
-            return $http.get('./assets/js/data.json');
+            // return $http.get('./assets/js/data.json');
+            return $http.get('/exclusive/videos');
         };
     
         //new videos page
@@ -411,7 +413,8 @@ angular.module("MainApp")
 
         // ratings page
         factory.getRatingsData = function() {
-            return $http.get('./assets/js/data.json');
+            // return $http.get('./assets/js/data.json');
+            return $http.get('/ratings/videos');
         };
 
         // blog page
