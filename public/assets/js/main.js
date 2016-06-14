@@ -1,4 +1,4 @@
-var app = angular.module("MainApp", ['ui.router', 'ngAnimate', 'ngTouch', 'angular-sortable-view']);
+var app = angular.module("MainApp", ['ui.router', 'angular-loading-bar', 'ngAnimate', 'ngTouch', 'angular-sortable-view']);
 
 
 app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $document, $locale, $state){
@@ -106,7 +106,10 @@ function dynamicSort(property) {
 }
 
 angular.module("MainApp")
-.config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
+.config(["$stateProvider", "$urlRouterProvider", "cfpLoadingBarProvider", function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+
+    // turn loading spinner on/off
+    cfpLoadingBarProvider.includeSpinner = false;
 
     $urlRouterProvider.otherwise("/");
 
