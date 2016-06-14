@@ -1,2 +1,3 @@
 node_modules/
-app/Config/
+app/Config/config.ini
+.idea/*
