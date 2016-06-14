@@ -16,7 +16,6 @@ angular.module("MainApp")
     ];
     
     
-
     // console.log(exclusiveVideos.data.videos);
 
     $scope.loadMoreVideos = function() {
