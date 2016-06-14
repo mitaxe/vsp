@@ -7,51 +7,69 @@ class VideosController extends RESTController
 
     public function getVideos()
     {
-
         $response = new VideosResponse();
-
-        $target = $this->request->get('target');
-
-        $videos = Videos::find(['limit' => 100]);
-        foreach ($videos as $video)
-        {
+        $videos = Videos::find(['limit' => 8]);
+        foreach ($videos as $video) {
             $response->addResponse(
                 new VideoResponse(
                     $video->id,
-                    'title for video',
-                    /*$video->title,*/
-                    'http:://vsponline.dev',
-                    'video description',
-                    /*$video->description,*/
+                    $video->title,
+                    $video->vspVideoId,
+                    $video->description,
                     $video->description,
                     $video->thumbsHigh,
                     $video->statViews,
                     $video->durationSeconds,
                     'userName',
-                    0,
                     0
                 ));
-        }        
-
+        }
         return $response;
     }
 
     public function getVideo($id)
     {
-        $video = Videos::findFirst($id);
 
+    }
+
+    public function getExclusiveVideos()
+    {
         $response = new VideosResponse();
+        $queryParams = ['limit' => 12, 'conditions' => 'exclusive=true'];
 
-        $response->addResponse(
-            new VideoResponse(
-                $video->id, $video->vspVideoId
-            ));
-
-        $response->addResponse(
-            new VideoResponse(
-                $video->id, $video->vspVideoId
-            ));
-
+        if ($offset = $this->request->getOffset()) {
+            $queryParams['offset'] = $offset;
+        }
+        $videos = Videos::find($queryParams);
+        $response->add($videos);
         return $response;
     }
+
+    public function getRatingsVideos()
+    {
+        $response = new VideosResponse();
+        $queryParams = ['limit' => 12, 'order' => 'statViews DESC'];
+
+        if ($offset = $this->request->getOffset()) {
+            $queryParams['offset'] = $offset;
+        }
+        $videos = Videos::find($queryParams);
+        $response->add($videos);
+        return $response;
+    }
+
+
+    public function getNewVideos()
+    {
+        $response = new VideosResponse();
+        $queryParams = ['limit' => 12, 'order' => 'dateCreated DESC'];
+
+        if ($offset = $this->request->getOffset()) {
+            $queryParams['offset'] = $offset;
+        }
+        $videos = Videos::find($queryParams);
+        $response->add($videos);
+        return $response;
+    }    
+    
 }

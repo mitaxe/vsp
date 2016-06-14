@@ -123,19 +123,19 @@ class RestAPI extends MicroMVC
     $indexPage = new MicroCollection();
     // Устанавливаем главный обработчик, например, экземпляр объекта контроллера
     $indexPage->setHandler(new IndexController());
-    
     $indexPage->setPrefix('/index');
-
-    // Используем метод 'index' в контроллере PostsController
     $indexPage->get('/videos', 'getVideos');
-
     $indexPage->get('/goods', 'getGoods');
-
     $indexPage->get('/channels', 'getChannels');
-
-    // Используем метод 'show' в контроллере PostsController
-    //$indexPage->get('/videos/{id:[0-9]+}', 'getVideo');
     $collections[] = $indexPage;
+
+    $videosPage = new MicroCollection();
+    $videosPage->setHandler(new VideosController());
+    $videosPage->get('/exclusive/videos', 'getExclusiveVideos');
+    $videosPage->get('/ratings/videos', 'getRatingsVideos');
+    $videosPage->get('/new/videos', 'getNewVideos');
+    $collections[] = $videosPage;
+    
     /** @var Config $collectionConfig */
     /*$collectionConfig = $this->getDI()->get('collectionConfig');
     $collections = [];
