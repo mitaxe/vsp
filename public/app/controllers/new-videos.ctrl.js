@@ -3,6 +3,14 @@ angular.module("MainApp")
 
         $scope.newVideos = newVideos.data.videos; //--
 
+        if($scope.limits.reqCnt) {
+            factory.getNewVideosData($scope.limits.reqCnt).success(function(response){
+                $scope.newVideos = response.data;
+            });
+        } else {
+            $scope.newVideos = newVideos.data;
+        }
+
         $scope.categories = [
             'Adamantio 993',
             'JOD'

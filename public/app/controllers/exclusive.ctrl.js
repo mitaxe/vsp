@@ -1,12 +1,17 @@
 angular.module("MainApp")
 .controller('ExclusiveCtrl', ['$scope', 'factory', 'exclusiveVideos', '$http', function ($scope, factory, exclusiveVideos, $http) {
 
+
+    // $http.get('./assets/js/test.json').success(function(response) {
+    //     $scope.exclusiveVideos = response.data;
+    //     console.log($scope.exclusiveVideos);
+    // });
     if($scope.limits.reqCnt) {
         factory.getExclusiveData($scope.limits.reqCnt).success(function(response){
-            $scope.exclusiveVideos = response.data.videos;
+            $scope.exclusiveVideos = response.data;
         });
     } else {
-        $scope.exclusiveVideos = exclusiveVideos.data.videos;
+        $scope.exclusiveVideos = exclusiveVideos.data;
     }
     
 

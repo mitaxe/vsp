@@ -391,7 +391,7 @@ angular.module("MainApp")
 
         // exclusive page
         factory.getExclusiveData = function(offset) {
-            // return $http.get('./assets/js/data.json');
+            // return $http.get('./assets/js/test.json');
             if (offset) {
                 return $http.get('/exclusive/videos?offset=' + offset);
             }
@@ -400,8 +400,17 @@ angular.module("MainApp")
 
         // ratings page
         factory.getRatingsData = function() {
-            // return $http.get('./assets/js/data.json');
+            // return $http.get('./assets/js/test.json');
             return $http.get('/ratings/videos');
+        };
+
+        // new videos page
+
+        factory.getNewVideosData = function (offset) {
+            if (offset) {
+                return $http.get('/new/videos?offset=' + offset);
+            }
+            return $http.get('/new/videos');
         };
 
         // blog page
@@ -554,12 +563,17 @@ angular.module("MainApp")
 angular.module("MainApp")
 .controller('ExclusiveCtrl', ['$scope', 'factory', 'exclusiveVideos', '$http', function ($scope, factory, exclusiveVideos, $http) {
 
+
+    // $http.get('./assets/js/test.json').success(function(response) {
+    //     $scope.exclusiveVideos = response.data;
+    //     console.log($scope.exclusiveVideos);
+    // });
     if($scope.limits.reqCnt) {
         factory.getExclusiveData($scope.limits.reqCnt).success(function(response){
-            $scope.exclusiveVideos = response.data.videos;
+            $scope.exclusiveVideos = response.data;
         });
     } else {
-        $scope.exclusiveVideos = exclusiveVideos.data.videos;
+        $scope.exclusiveVideos = exclusiveVideos.data;
     }
     
 
@@ -628,10 +642,10 @@ angular.module("MainApp")
     // Новые видео = 1
     // Популярные видео = 2
     // Custom block = 3
-    // Блог = 4
-    // Эксклюзивные видео = 5
-    // Custom block 2 = 6
-    // Custom block 3 = 7
+    // Блог = null
+    // Эксклюзивные видео = 4
+    // Custom block 2 = 5
+    // Custom block 3 = 6
 
 }]);
 
@@ -703,6 +717,14 @@ angular.module("MainApp")
     .controller('NewVideosCtrl', ['$scope', 'newVideos', '$http', function ($scope, newVideos, $http) {
 
         $scope.newVideos = newVideos.data.videos; //--
+
+        if($scope.limits.reqCnt) {
+            factory.getNewVideosData($scope.limits.reqCnt).success(function(response){
+                $scope.newVideos = response.data;
+            });
+        } else {
+            $scope.newVideos = newVideos.data;
+        }
 
         $scope.categories = [
             'Adamantio 993',
