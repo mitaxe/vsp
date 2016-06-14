@@ -51,22 +51,14 @@ angular.module("MainApp")
     };
 
     $scope.prevSlide = function () {
-<<<<<<< HEAD
         // $scope.direction = 'left';
-        $scope.currentIndex = ($scope.currentIndex < $scope.itemDetails.images.length - 1) ? $scope.currentIndex +1 : 0;
-=======
         $scope.currentIndex = ($scope.currentIndex < $scope.itemDetails.images.length - 1) ? ++$scope.currentIndex : 0;
->>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
         document.getElementById('sWr').style.left = -(document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex )) + 'px';
     };
-    
+
     $scope.nextSlide = function () {
-<<<<<<< HEAD
         // $scope.direction = 'right';
-        $scope.currentIndex = ($scope.currentIndex > 0) ? $scope.currentIndex -1 : $scope.itemDetails.images.length - 1;
-=======
         $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.itemDetails.images.length - 1;
->>>>>>> 52320c502fe1d01924c0e0120ed7ba4c96a18793
         document.getElementById('sWr').style.left = - (document.querySelectorAll('.mb_slider')[0].clientWidth * ($scope.currentIndex)) + 'px';
     };
 
