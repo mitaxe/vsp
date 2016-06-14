@@ -9,17 +9,24 @@ angular.module("MainApp")
 
     var offset = $scope.initialOffset;
 
+    // loading indicator
+    $scope.loading = false;
+
     // load more videos
     $scope.loadMore = function() {
+        $scope.loading = true;
         offset += $scope.initialOffset;
+
         console.log('offset request - ' + offset); //---
         console.time('exclRequestTime');
+
         factory.getExclusiveData(offset).success(function(response){
             console.timeEnd('exclRequestTime');
             console.log('videos received - ' + response.data.length); //---
+            $scope.loading = false;
             $scope.exclusiveVideos.push.apply($scope.exclusiveVideos, response.data);
         });
-
+        
     };
 
     $scope.categories = [
