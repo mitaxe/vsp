@@ -1,5 +1,5 @@
 angular.module("MainApp")
-.config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+.config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider, $locationProvider) {
 
     // configure loading bar and spinner
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
@@ -272,6 +272,11 @@ angular.module("MainApp")
     .state('test', {
         url: '/test',
         templateUrl: 'app/views/test.html'
+    });
+
+    $locationProvider.html5Mode({
+        enabled : true,
+        requireBase : false
     });
 
 });

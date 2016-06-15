@@ -1,6 +1,5 @@
 <!-- ratings videos block -->
 <div class="block block--white">
-    <p>{{ratingsVideos}}</p>
     <div class="col-xs-6 col-sm-4 col-md-3"
     ng-repeat="video in ratingsVideos | filter: { user: selectedCategory } ">
         <div class="thumb">
@@ -24,7 +23,7 @@
 
 
 <div class="block center">
-    <a class="btn btn-more" ng-click="loadMore()">{{ loading ? 'идет загрузка...' : 'загрузить еще' }}</a>
+    <a class="btn btn-more" ng-click="loadMore()">{{ loading && !noVideo ? 'идет загрузка...' : !loading && !noVideo ? 'загрузить еще' : 'Все видео загружены'}}</a>
 </div>
 
 

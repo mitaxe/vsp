@@ -52,7 +52,7 @@
         </div>
 
         <div class="block center">
-            <a class="btn btn-more" ng-click="loadMore()">ЗАГРУЗИТЬ ЕЩЕ</a>
+            <a class="btn btn-more" ng-click="loadMore()">{{ loading && !noVideo ? 'идет загрузка...' : !loading && !noVideo ? 'загрузить еще' : 'Все видео загружены'}}</a>
         </div>
 
     </div>

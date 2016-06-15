@@ -253,7 +253,7 @@
                                         <img ng-src="{{ video.img }}" alt="" />
                                     </div>
                                 </a>
-                                <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                                <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 45}}</a></p>
                                 <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                             </div>
                         </div>
