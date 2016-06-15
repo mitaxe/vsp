@@ -135,6 +135,9 @@ class RestAPI extends MicroMVC
     $videosPage->get('/ratings/videos', 'getRatingsVideos');
     $videosPage->get('/new/videos', 'getNewVideos');
     $videosPage->get('/videos/{id}', 'getVideo');
+    $videosPage->get('/videos/{id}/comments', 'getVideoComments');
+    $videosPage->get('/videos/{id}/related_videos', 'getRelatedVideos');
+    $videosPage->get('/videos/{id}/related_channels', 'getRelatedChannels');
     $collections[] = $videosPage;
 
     $channelsPage = new MicroCollection();
