@@ -803,6 +803,7 @@ angular.module("MainApp")
     // get offset number
     $scope.initialOffset = ratingsVideos.data.meta.count;
 
+    
     var offset = 0;
 
     // loading indicator
