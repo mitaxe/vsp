@@ -26,8 +26,9 @@ angular.module("MainApp")
             return $http.get('http://vsponline.qa/ratings/videos?offset=' + offset);
         };
 
-        factory.getRatingsChannels = function() {
-          return $http.get('http://vsponline.qa/ratings/channels');
+        factory.getRatingsChannels = function(offset) {
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/ratings/channels?offset=' + offset);
         };
 
         // blog page
