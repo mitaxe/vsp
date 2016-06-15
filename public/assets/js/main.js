@@ -567,7 +567,7 @@ angular.module("MainApp")
     // get offset number
     $scope.initialOffset = exclusiveVideos.data.meta.count;
 
-    var offset = $scope.initialOffset;
+    var offset = 0;
 
     // loading indicator
     $scope.loading = false;
@@ -580,14 +580,22 @@ angular.module("MainApp")
         console.log('offset request - ' + offset); //---
         console.time('exclRequestTime');
 
+        
         factory.getExclusiveData(offset).success(function(response){
-            console.timeEnd('exclRequestTime');
-            console.log('videos received - ' + response.data.length); //---
-            $scope.loading = false;
-            $scope.exclusiveVideos.push.apply($scope.exclusiveVideos, response.data);
+            if(response.data != null) {
+                console.timeEnd('exclRequestTime');
+                console.log('videos received - ' + response.data.length); //---
+
+                $scope.loading = false;
+                $scope.exclusiveVideos.push.apply($scope.exclusiveVideos, response.data);
+            } else {
+                $scope.loading = false;
+            }
+
         });
         
     };
+
 
     $scope.categories = [
         'Adamantio 993',
@@ -707,40 +715,48 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-    .controller('NewVideosCtrl', ['$scope', 'newVideos', '$http', function ($scope, newVideos, $http) {
+    .controller('NewVideosCtrl', ['$scope', 'newVideos', '$http', 'factory', function ($scope, newVideos, $http, factory) {
 
-        $scope.newVideos = newVideos.data.videos; //--
+        // get first portion of videos from route resolve
+        $scope.newVideos = newVideos.data.data;
 
-        if($scope.limits.reqCnt) {
-            factory.getNewVideosData($scope.limits.reqCnt).success(function(response){
-                $scope.newVideos = response.data;
+        // get offset number
+        $scope.initialOffset = newVideos.data.meta.count;
+
+        var offset = 0;
+
+        // loading indicator
+        $scope.loading = false;
+
+        // load more videos
+        $scope.loadMore = function() {
+            $scope.loading = true;
+            offset += $scope.initialOffset;
+
+            console.log('offset request - ' + offset); //---
+            console.time('exclRequestTime');
+
+            factory.getNewVideosData(offset).success(function(response){
+                
+                if(response.data != null) {
+                    console.timeEnd('exclRequestTime');
+                    console.log('videos received - ' + response.data.length); //---
+                    $scope.loading = false;
+                    $scope.newVideos.push.apply($scope.newVideos, response.data);
+                } else {
+                    $scope.loading = false;
+                }
+                
+                
             });
-        } else {
-            $scope.newVideos = newVideos.data;
-        }
+
+        };
 
         $scope.categories = [
             'Adamantio 993',
             'JOD'
         ];
 
-        // console.log(exclusiveVideos.data.videos);
-
-        $scope.videos = 12;
-        $scope.loadMoreVideos = function() {
-            $scope.videos += 12;
-            $scope.limits.videos+=4;
-            $http({
-                method: 'GET',
-                url: '/exclusive/videos?offset='+ $scope.videos +''
-            }).then(function successCallback(response) {
-                console.log(response);
-                // this callback will be called asynchronously
-                // when the response is available
-            }, function errorCallback(response) {
-                console.log(response);
-            });
-        };
 
     }]);
 
@@ -775,16 +791,23 @@ angular.module("MainApp")
 .controller('RatingsCtrl', ['$scope', 'factory', 'ratingsVideos', function ($scope, factory, ratingsVideos) {
 
     // get first portion of ratings videos from route resolve
+    $scope.ratingsVideos = [];
+    console.log('after init empty array');
+    console.log($scope.ratingsVideos);
+
+
     $scope.ratingsVideos = ratingsVideos.data.data;
+    console.log('set data to array');
+    console.log($scope.ratingsVideos);
 
     // get offset number
     $scope.initialOffset = ratingsVideos.data.meta.count;
 
-    var offset = $scope.initialOffset;
+    
+    var offset = 0;
 
     // loading indicator
     $scope.loading = false;
-
     // load more videos
     $scope.loadMore = function() {
         $scope.loading = true;
@@ -794,10 +817,16 @@ angular.module("MainApp")
         console.time('ratingsRequestTime');
 
         factory.getRatingsVideos(offset).success(function(response){
-            console.timeEnd('ratingsRequestTime');
-            console.log('videos received - ' + response.data.length); //---
-            $scope.ratingsVideos.push.apply($scope.ratingsVideos, response.data);
-            $scope.loading = false;
+
+            if(response.data != null) {
+                console.timeEnd('ratingsRequestTime');
+                console.log('videos received - ' + response.data.length); //---
+                $scope.ratingsVideos.push.apply($scope.ratingsVideos, response.data);
+                $scope.loading = false;
+            } else {
+                $scope.loading = false;
+            }
+
         });
 
     };
