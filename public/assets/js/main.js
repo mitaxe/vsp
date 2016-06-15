@@ -789,7 +789,14 @@ angular.module("MainApp")
 .controller('RatingsCtrl', ['$scope', 'factory', 'ratingsVideos', function ($scope, factory, ratingsVideos) {
 
     // get first portion of ratings videos from route resolve
+    $scope.ratingsVideos = [];
+    console.log('after init empty array');
+    console.log($scope.ratingsVideos);
+
+
     $scope.ratingsVideos = ratingsVideos.data.data;
+    console.log('set data to array');
+    console.log($scope.ratingsVideos);
 
     // get offset number
     $scope.initialOffset = ratingsVideos.data.meta.count;
