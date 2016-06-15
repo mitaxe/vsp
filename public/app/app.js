@@ -63,7 +63,9 @@ app.filter('descriptionFormatter', function() {
             wordsToShow = 0, //how much words need to show
             counter = 0; //letter counter
 
-        for (var i = 0; i <= words.length; i++) {
+        // console.log(words);
+
+        for (var i = 0; i < words.length; i++) {
             if(counter < limit) {
                 counter += words[i].length; //count letters length
                 // console.log('counter ' + counter);
@@ -76,7 +78,12 @@ app.filter('descriptionFormatter', function() {
        // console.log('words length ' + words.length + ' ned to show  ' + wordsToShow + ' have to slice ' + (words.length - wordsToShow))
        // console.log(words.splice(0,words.length - wordsToShow).length);
 
-        return words.splice(0, wordsToShow).join(' ') + ' ...';
+        if (counter > limit) {
+            return words.splice(0, wordsToShow).join(' ') + ' ...';
+        } else {
+            return words.join(' ');
+        }
+
     };
 });
 

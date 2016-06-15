@@ -2967,7 +2967,8 @@ textarea {
     font-size: 18px; }
   .channels__table .table__channel img {
     float: left;
-    margin-right: 15px; }
+    margin-right: 15px;
+    max-width: 100px; }
   .channels__table .table__channel span {
     display: inline-block;
     padding-bottom: 10px;

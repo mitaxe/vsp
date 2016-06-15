@@ -11,28 +11,33 @@ angular.module("MainApp")
 
     // loading indicator
     $scope.loading = false;
+    $scope.noVideo = false;
 
     // load more videos
     $scope.loadMore = function() {
-        $scope.loading = true;
-        offset += $scope.initialOffset;
+        if (!$scope.noVideo) {
+            $scope.loading = true;
+            offset += $scope.initialOffset;
 
-        console.log('offset request - ' + offset); //---
-        console.time('exclRequestTime');
+            console.log('offset request - ' + offset); //---
+            console.time('exclRequestTime');
 
-        
-        factory.getExclusiveData(offset).success(function(response){
-            if(response.data != null) {
-                console.timeEnd('exclRequestTime');
-                console.log('videos received - ' + response.data.length); //---
 
-                $scope.loading = false;
-                $scope.exclusiveVideos.push.apply($scope.exclusiveVideos, response.data);
-            } else {
-                $scope.loading = false;
-            }
+            factory.getExclusiveData(offset).success(function(response){
+                if(response.data != null) {
+                    console.timeEnd('exclRequestTime');
+                    console.log('videos received - ' + response.data.length); //---
 
-        });
+                    $scope.loading = false;
+                    $scope.exclusiveVideos.push.apply($scope.exclusiveVideos, response.data);
+                } else {
+                    $scope.loading = false;
+                    $scope.noVideo = true;
+                }
+
+            });
+        }
+
         
     };
 

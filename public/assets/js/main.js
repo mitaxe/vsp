@@ -63,7 +63,9 @@ app.filter('descriptionFormatter', function() {
             wordsToShow = 0, //how much words need to show
             counter = 0; //letter counter
 
-        for (var i = 0; i <= words.length; i++) {
+        // console.log(words);
+
+        for (var i = 0; i < words.length; i++) {
             if(counter < limit) {
                 counter += words[i].length; //count letters length
                 // console.log('counter ' + counter);
@@ -76,7 +78,12 @@ app.filter('descriptionFormatter', function() {
        // console.log('words length ' + words.length + ' ned to show  ' + wordsToShow + ' have to slice ' + (words.length - wordsToShow))
        // console.log(words.splice(0,words.length - wordsToShow).length);
 
-        return words.splice(0, wordsToShow).join(' ') + ' ...';
+        if (counter > limit) {
+            return words.splice(0, wordsToShow).join(' ') + ' ...';
+        } else {
+            return words.join(' ');
+        }
+
     };
 });
 
@@ -106,7 +113,7 @@ function dynamicSort(property) {
 }
 
 angular.module("MainApp")
-.config(["$stateProvider", "$urlRouterProvider", "cfpLoadingBarProvider", function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+.config(["$stateProvider", "$urlRouterProvider", "cfpLoadingBarProvider", "$locationProvider", function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider, $locationProvider) {
 
     // configure loading bar and spinner
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
@@ -381,6 +388,11 @@ angular.module("MainApp")
         templateUrl: 'app/views/test.html'
     });
 
+    $locationProvider.html5Mode({
+        enabled : true,
+        requireBase : false
+    });
+
 }]);
 
 angular.module("MainApp")
@@ -409,6 +421,10 @@ angular.module("MainApp")
         factory.getRatingsVideos = function(offset) {
             offset = offset || '';
             return $http.get('http://vsponline.qa/ratings/videos?offset=' + offset);
+        };
+
+        factory.getRatingsChannels = function() {
+          return $http.get('http://vsponline.qa/ratings/channels');
         };
 
         // blog page
@@ -571,28 +587,33 @@ angular.module("MainApp")
 
     // loading indicator
     $scope.loading = false;
+    $scope.noVideo = false;
 
     // load more videos
     $scope.loadMore = function() {
-        $scope.loading = true;
-        offset += $scope.initialOffset;
+        if (!$scope.noVideo) {
+            $scope.loading = true;
+            offset += $scope.initialOffset;
 
-        console.log('offset request - ' + offset); //---
-        console.time('exclRequestTime');
+            console.log('offset request - ' + offset); //---
+            console.time('exclRequestTime');
 
-        
-        factory.getExclusiveData(offset).success(function(response){
-            if(response.data != null) {
-                console.timeEnd('exclRequestTime');
-                console.log('videos received - ' + response.data.length); //---
 
-                $scope.loading = false;
-                $scope.exclusiveVideos.push.apply($scope.exclusiveVideos, response.data);
-            } else {
-                $scope.loading = false;
-            }
+            factory.getExclusiveData(offset).success(function(response){
+                if(response.data != null) {
+                    console.timeEnd('exclRequestTime');
+                    console.log('videos received - ' + response.data.length); //---
 
-        });
+                    $scope.loading = false;
+                    $scope.exclusiveVideos.push.apply($scope.exclusiveVideos, response.data);
+                } else {
+                    $scope.loading = false;
+                    $scope.noVideo = true;
+                }
+
+            });
+        }
+
         
     };
 
@@ -727,28 +748,32 @@ angular.module("MainApp")
 
         // loading indicator
         $scope.loading = false;
+        $scope.noVideo = false;
 
         // load more videos
-        $scope.loadMore = function() {
-            $scope.loading = true;
-            offset += $scope.initialOffset;
+        $scope.loadMore = function () {
+            if (!$scope.noVideo) {
+                $scope.loading = true;
+                offset += $scope.initialOffset;
 
-            console.log('offset request - ' + offset); //---
-            console.time('exclRequestTime');
+                console.log('offset request - ' + offset); //---
+                console.time('exclRequestTime');
 
-            factory.getNewVideosData(offset).success(function(response){
-                
-                if(response.data != null) {
-                    console.timeEnd('exclRequestTime');
-                    console.log('videos received - ' + response.data.length); //---
-                    $scope.loading = false;
-                    $scope.newVideos.push.apply($scope.newVideos, response.data);
-                } else {
-                    $scope.loading = false;
-                }
-                
-                
-            });
+                factory.getNewVideosData(offset).success(function (response) {
+
+                    if (response.data != null) {
+                        console.timeEnd('exclRequestTime');
+                        console.log('videos received - ' + response.data.length); //---
+                        $scope.loading = false;
+                        $scope.newVideos.push.apply($scope.newVideos, response.data);
+                    } else {
+                        $scope.loading = false;
+                        $scope.noVideo = true;
+                    }
+
+
+                });
+            }
 
         };
 
@@ -803,33 +828,48 @@ angular.module("MainApp")
     // get offset number
     $scope.initialOffset = ratingsVideos.data.meta.count;
 
-    
     var offset = 0;
 
     // loading indicator
     $scope.loading = false;
+    $scope.noVideo = false;
     // load more videos
     $scope.loadMore = function() {
-        $scope.loading = true;
-        offset += $scope.initialOffset;
 
-        console.log('offset request - ' + offset); //---
-        console.time('ratingsRequestTime');
+        if (!$scope.noVideo) {
+            $scope.loading = true;
+            offset += $scope.initialOffset;
 
-        factory.getRatingsVideos(offset).success(function(response){
+            console.log('offset request - ' + offset); //---
+            console.time('ratingsRequestTime');
 
-            if(response.data != null) {
-                console.timeEnd('ratingsRequestTime');
-                console.log('videos received - ' + response.data.length); //---
-                $scope.ratingsVideos.push.apply($scope.ratingsVideos, response.data);
-                $scope.loading = false;
-            } else {
-                $scope.loading = false;
-            }
+            factory.getRatingsVideos(offset).success(function(response){
 
-        });
+                if(response.data != null) {
+                    console.timeEnd('ratingsRequestTime');
+                    console.log('videos received - ' + response.data.length); //---
+                    $scope.ratingsVideos.push.apply($scope.ratingsVideos, response.data);
+                    $scope.loading = false;
+                } else {
+                    $scope.loading = false;
+                    $scope.noVideo = true;
+                }
+
+            });
+        }
+        
 
     };
+
+
+    $scope.ratingsChannel = [];
+    factory.getRatingsChannels().success(function(response) {
+        $scope.ratingsChannel = response.data;
+        console.log($scope.ratingsChannel);
+    });
+    // $scope.ratingsChannel = ratingsChannel.data;
+    // console.log('aaa');
+    // console.log($scope.ratingsChannel);
 
     // video categories
     $scope.categories = [
