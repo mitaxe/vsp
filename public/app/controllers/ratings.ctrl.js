@@ -7,7 +7,7 @@ angular.module("MainApp")
     // get offset number
     $scope.initialOffset = ratingsVideos.data.meta.count;
 
-    var offset = $scope.initialOffset;
+    var offset = 0;
 
     // loading indicator
     $scope.loading = false;
@@ -21,10 +21,16 @@ angular.module("MainApp")
         console.time('ratingsRequestTime');
 
         factory.getRatingsVideos(offset).success(function(response){
-            console.timeEnd('ratingsRequestTime');
-            console.log('videos received - ' + response.data.length); //---
-            $scope.ratingsVideos.push.apply($scope.ratingsVideos, response.data);
-            $scope.loading = false;
+
+            if(response.data != null) {
+                console.timeEnd('ratingsRequestTime');
+                console.log('videos received - ' + response.data.length); //---
+                $scope.ratingsVideos.push.apply($scope.ratingsVideos, response.data);
+                $scope.loading = false;
+            } else {
+                $scope.loading = false;
+            }
+
         });
 
     };
