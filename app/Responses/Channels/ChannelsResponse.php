@@ -11,13 +11,13 @@ class ChannelsResponse extends ResponseArray
         foreach ($channels as $channel) {
             $this->addResponse(
                 new ChannelResponse(
-                    $channel->title,
-                    $channel->description,
                     $channel->vspChannelId,
-                    $channel->thumbHigh,
-                    $channel->statSubscribers,
+                    $channel->title,
+                    $channel->description,                 
+                    $channel->thumbHigh,                 
                     $channel->statVideos,
-                    $channel->statViews
+                    $channel->statViews,
+                    $channel->statSubscribers
                 ));
         }
 

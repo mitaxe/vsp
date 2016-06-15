@@ -6,18 +6,17 @@ class ChannelResponse extends Response
     /**
      * @var string
      */
+    public $id = null;    
+    /**
+     * @var string
+     */
     public $title = null;
 
     /**
      * @var string
      */
     public $description = null;
-
-    /**
-     * @var string
-     */
-    public $url = null;
-
+    
     /**
      * @var string
      */
@@ -39,11 +38,11 @@ class ChannelResponse extends Response
     public $statSubscribers = null;
 
 
-    public function __construct($title, $description, $url, $img, $videos, $views, $subscribers)
+    public function __construct($id, $title, $description, $img, $videos, $views, $subscribers)
     {
+        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
-        $this->url = $url;
         $this->img = $img;
         $this->statVideos = $videos;
         $this->statViews = $views;
