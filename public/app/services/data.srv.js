@@ -5,32 +5,25 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            // return $http.get('./assets/js/test.json');
-            return $http.get('/index/videos');
+            return $http.get('http://vsponline.qa/index/videos');
         };
 
         // exclusive page
         factory.getExclusiveData = function(offset) {
-            // return $http.get('./assets/js/test.json');
-            if (offset) {
-                return $http.get('/exclusive/videos?offset=' + offset);
-            }
-            return $http.get('/exclusive/videos');
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/exclusive/videos?offset=' + offset);
+        };
+
+        //new videos page
+        factory.getNewVideosData = function(offset) {
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/new/videos?offset=' + offset);
         };
 
         // ratings page
-        factory.getRatingsData = function() {
-            // return $http.get('./assets/js/test.json');
-            return $http.get('/ratings/videos');
-        };
-
-        // new videos page
-
-        factory.getNewVideosData = function (offset) {
-            if (offset) {
-                return $http.get('/new/videos?offset=' + offset);
-            }
-            return $http.get('/new/videos');
+        factory.getRatingsVideos = function(offset) {
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/ratings/videos?offset=' + offset);
         };
 
         // blog page

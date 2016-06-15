@@ -1,4 +1,4 @@
-var app = angular.module("MainApp", ['ui.router', 'ngAnimate', 'ngTouch', 'angular-sortable-view']);
+var app = angular.module("MainApp", ['ui.router', 'angular-loading-bar', 'ngAnimate', 'ngTouch', 'angular-sortable-view']);
 
 
 app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $document, $locale, $state){
@@ -106,7 +106,11 @@ function dynamicSort(property) {
 }
 
 angular.module("MainApp")
-.config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
+.config(["$stateProvider", "$urlRouterProvider", "cfpLoadingBarProvider", function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+
+    // configure loading bar and spinner
+    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+    cfpLoadingBarProvider.includeSpinner = false;
 
     $urlRouterProvider.otherwise("/");
 
@@ -129,6 +133,7 @@ angular.module("MainApp")
         controller: 'HomeCtrl',
         resolve: {
             videos: ["factory", function(factory) {
+                console.time('homeRequestTime');
                 return factory.getHomeData();
             }]
         }
@@ -150,12 +155,12 @@ angular.module("MainApp")
     .state('ratings', {
         url: "/ratings",
         templateUrl: "app/views/ratings.html",
+        controller: 'RatingsCtrl',
         resolve: {
-            ratingsData: ["factory", function(factory) {
-                return factory.getRatingsData();
+            ratingsVideos: ["factory", function(factory) {
+                return factory.getRatingsVideos();
             }]
-        },
-        controller: 'RatingsCtrl'
+        }
     })
     .state('ratings.videos', {
         url: "/videos",
@@ -385,32 +390,25 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            // return $http.get('./assets/js/test.json');
-            return $http.get('/index/videos');
+            return $http.get('http://vsponline.qa/index/videos');
         };
 
         // exclusive page
         factory.getExclusiveData = function(offset) {
-            // return $http.get('./assets/js/test.json');
-            if (offset) {
-                return $http.get('/exclusive/videos?offset=' + offset);
-            }
-            return $http.get('/exclusive/videos');
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/exclusive/videos?offset=' + offset);
+        };
+
+        //new videos page
+        factory.getNewVideosData = function(offset) {
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/new/videos?offset=' + offset);
         };
 
         // ratings page
-        factory.getRatingsData = function() {
-            // return $http.get('./assets/js/test.json');
-            return $http.get('/ratings/videos');
-        };
-
-        // new videos page
-
-        factory.getNewVideosData = function (offset) {
-            if (offset) {
-                return $http.get('/new/videos?offset=' + offset);
-            }
-            return $http.get('/new/videos');
+        factory.getRatingsVideos = function(offset) {
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/ratings/videos?offset=' + offset);
         };
 
         // blog page
@@ -561,48 +559,40 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('ExclusiveCtrl', ['$scope', 'factory', 'exclusiveVideos', '$http', function ($scope, factory, exclusiveVideos, $http) {
+.controller('ExclusiveCtrl', ['$scope', 'factory', 'exclusiveVideos', function ($scope, factory, exclusiveVideos) {
 
+    // get first portion of videos from route resolve
+    $scope.exclusiveVideos = exclusiveVideos.data.data;
 
-    // $http.get('./assets/js/test.json').success(function(response) {
-    //     $scope.exclusiveVideos = response.data;
-    //     console.log($scope.exclusiveVideos);
-    // });
-    if($scope.limits.reqCnt) {
-        factory.getExclusiveData($scope.limits.reqCnt).success(function(response){
-            $scope.exclusiveVideos = response.data;
+    // get offset number
+    $scope.initialOffset = exclusiveVideos.data.meta.count;
+
+    var offset = $scope.initialOffset;
+
+    // loading indicator
+    $scope.loading = false;
+
+    // load more videos
+    $scope.loadMore = function() {
+        $scope.loading = true;
+        offset += $scope.initialOffset;
+
+        console.log('offset request - ' + offset); //---
+        console.time('exclRequestTime');
+
+        factory.getExclusiveData(offset).success(function(response){
+            console.timeEnd('exclRequestTime');
+            console.log('videos received - ' + response.data.length); //---
+            $scope.loading = false;
+            $scope.exclusiveVideos.push.apply($scope.exclusiveVideos, response.data);
         });
-    } else {
-        $scope.exclusiveVideos = exclusiveVideos.data;
-    }
-    
+        
+    };
 
     $scope.categories = [
         'Adamantio 993',
         'JOD'
     ];
-    
-    
-    // console.log(exclusiveVideos.data.videos);
-
-    $scope.loadMoreVideos = function() {
-        $scope.limits.reqCnt += 12;
-        $scope.limits.videos += 4;
-        // factory.getExclusiveData(offset).success(function(response){
-        //     console.log(response);
-        // });
-        $http({
-            method: 'GET',
-            url: '/exclusive/videos?offset='+ $scope.limits.reqCnt +''
-        }).then(function successCallback(response) {
-            console.log(response);
-            $scope.exclusiveVideos.push(response);
-            // this callback will be called asynchronously
-            // when the response is available
-        }, function errorCallback(response) {
-            console.log(response);
-        });
-    };
 
 }]);
 
@@ -633,16 +623,19 @@ angular.module("MainApp")
 angular.module("MainApp")
 .controller('HomeCtrl', ['$scope', 'factory', 'videos', function ($scope, factory, videos) {
 
-    console.log('init home controller');
+    console.timeEnd('homeRequestTime');
     $scope.videos = videos.data.data;
 
-    // console.log($scope.videos);
+    // console.log(
+    //     $scope.videos.filter(function (el) {
+    //       return el.blockId === 1;
+    //     })
+    // );
 
     // Сейчас смотрят = 0
     // Новые видео = 1
     // Популярные видео = 2
     // Custom block = 3
-    // Блог = null
     // Эксклюзивные видео = 4
     // Custom block 2 = 5
     // Custom block 3 = 6
@@ -779,9 +772,35 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('RatingsCtrl', ['$scope', 'ratingsData', function ($scope, ratingsData) {
+.controller('RatingsCtrl', ['$scope', 'factory', 'ratingsVideos', function ($scope, factory, ratingsVideos) {
 
-    $scope.ratingsData = ratingsData.data;
+    // get first portion of ratings videos from route resolve
+    $scope.ratingsVideos = ratingsVideos.data.data;
+
+    // get offset number
+    $scope.initialOffset = ratingsVideos.data.meta.count;
+
+    var offset = $scope.initialOffset;
+
+    // loading indicator
+    $scope.loading = false;
+
+    // load more videos
+    $scope.loadMore = function() {
+        $scope.loading = true;
+        offset += $scope.initialOffset;
+
+        console.log('offset request - ' + offset); //---
+        console.time('ratingsRequestTime');
+
+        factory.getRatingsVideos(offset).success(function(response){
+            console.timeEnd('ratingsRequestTime');
+            console.log('videos received - ' + response.data.length); //---
+            $scope.ratingsVideos.push.apply($scope.ratingsVideos, response.data);
+            $scope.loading = false;
+        });
+
+    };
 
     // video categories
     $scope.categories = [

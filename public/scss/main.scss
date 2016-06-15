@@ -1,7 +1,8 @@
-@import "libs/bootstrapgrid";
-
 @import "base/vars";
 @import "base/mixins";
+
+@import "libs/bootstrapgrid";
+@import "libs/loading-bar";
 
 @import "base/reset";
 @import "base/fixes";
