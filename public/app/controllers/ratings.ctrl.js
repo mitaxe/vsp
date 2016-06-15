@@ -11,7 +11,6 @@ angular.module("MainApp")
 
     // loading indicator
     $scope.loading = false;
-
     // load more videos
     $scope.loadMore = function() {
         $scope.loading = true;

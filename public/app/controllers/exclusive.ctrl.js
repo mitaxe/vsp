@@ -20,6 +20,7 @@ angular.module("MainApp")
         console.log('offset request - ' + offset); //---
         console.time('exclRequestTime');
 
+        
         factory.getExclusiveData(offset).success(function(response){
             if(response.data != null) {
                 console.timeEnd('exclRequestTime');

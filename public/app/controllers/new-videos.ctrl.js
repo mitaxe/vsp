@@ -21,6 +21,7 @@ angular.module("MainApp")
             console.time('exclRequestTime');
 
             factory.getNewVideosData(offset).success(function(response){
+                
                 if(response.data != null) {
                     console.timeEnd('exclRequestTime');
                     console.log('videos received - ' + response.data.length); //---

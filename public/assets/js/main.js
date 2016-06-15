@@ -580,6 +580,7 @@ angular.module("MainApp")
         console.log('offset request - ' + offset); //---
         console.time('exclRequestTime');
 
+        
         factory.getExclusiveData(offset).success(function(response){
             if(response.data != null) {
                 console.timeEnd('exclRequestTime');
@@ -736,6 +737,7 @@ angular.module("MainApp")
             console.time('exclRequestTime');
 
             factory.getNewVideosData(offset).success(function(response){
+                
                 if(response.data != null) {
                     console.timeEnd('exclRequestTime');
                     console.log('videos received - ' + response.data.length); //---
@@ -798,7 +800,6 @@ angular.module("MainApp")
 
     // loading indicator
     $scope.loading = false;
-
     // load more videos
     $scope.loadMore = function() {
         $scope.loading = true;
