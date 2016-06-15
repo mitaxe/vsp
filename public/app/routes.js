@@ -52,6 +52,9 @@ angular.module("MainApp")
         resolve: {
             ratingsVideos: function(factory) {
                 return factory.getRatingsVideos();
+            },
+            ratingsChannels: function(factory) {
+                return factory.getRatingsChannels();
             }
         }
     })
