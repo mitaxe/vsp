@@ -26,8 +26,8 @@
                 </td>
                 <td class="table__channel">
                     <img ng-src="{{ channel.img }}" alt="channel avatar"/>
-                    <span>{{ channel.title }}</span>
-                    <p class="hidden-tablet hidden-phone">{{ channel.description }}</p>
+                    <span>{{ channel.title | descriptionFormatter : 25 }}</span>
+                    <p class="hidden-tablet hidden-phone">{{ channel.description | descriptionFormatter : 200}}</p>
                     <div class="hidden-tablet hidden-desktop">
                         <i class="table__videos">{{ channel.statVideos | number }}</i><i class="videos"> Видео</i>
                     </div>
