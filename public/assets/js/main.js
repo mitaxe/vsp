@@ -269,13 +269,12 @@ angular.module("MainApp")
     .state('history', {
         url: "/history",
         templateUrl: "app/views/history.html",
+        controller: 'HistoryCtrl',
         resolve: {
             historyData: ["factory", function(factory) {
-                console.log();
-                // return factory.getHistoryData();
+                return factory.getHistoryData();
             }]
-        },
-        controller: 'HistoryCtrl'
+        }
     })
     .state('history.viewed', {
         url: "/viewed",
