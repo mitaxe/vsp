@@ -1,5 +1,9 @@
 angular.module("MainApp")
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+
+    // configure loading bar and spinner
+    cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+    cfpLoadingBarProvider.includeSpinner = false;
 
     $urlRouterProvider.otherwise("/");
 
@@ -22,6 +26,7 @@ angular.module("MainApp")
         controller: 'HomeCtrl',
         resolve: {
             videos: function(factory) {
+                console.time('homeRequestTime');
                 return factory.getHomeData();
             }
         }
@@ -43,12 +48,12 @@ angular.module("MainApp")
     .state('ratings', {
         url: "/ratings",
         templateUrl: "app/views/ratings.html",
+        controller: 'RatingsCtrl',
         resolve: {
-            ratingsData: function(factory) {
-                return factory.getRatingsData();
+            ratingsVideos: function(factory) {
+                return factory.getRatingsVideos();
             }
-        },
-        controller: 'RatingsCtrl'
+        }
     })
     .state('ratings.videos', {
         url: "/videos",

@@ -1,3 +1,6 @@
+/* fonts */
+/* colors */
+/* media breakpoints */
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
   min-height: 1px;
@@ -511,9 +514,131 @@
 .affix {
   position: fixed; }
 
-/* fonts */
-/* colors */
-/* media breakpoints */
+/*!
+ * angular-loading-bar v0.9.0
+ * https://chieffancypants.github.io/angular-loading-bar
+ * Copyright (c) 2016 Wes Cruver
+ * License: MIT
+ */
+/* Make clicks pass-through */
+#loading-bar,
+#loading-bar-spinner {
+  pointer-events: none;
+  -webkit-pointer-events: none;
+  -webkit-transition: 350ms linear all;
+  -moz-transition: 350ms linear all;
+  -o-transition: 350ms linear all;
+  transition: 350ms linear all; }
+
+#loading-bar.ng-enter,
+#loading-bar.ng-leave.ng-leave-active,
+#loading-bar-spinner.ng-enter,
+#loading-bar-spinner.ng-leave.ng-leave-active {
+  opacity: 0; }
+
+#loading-bar.ng-enter.ng-enter-active,
+#loading-bar.ng-leave,
+#loading-bar-spinner.ng-enter.ng-enter-active,
+#loading-bar-spinner.ng-leave {
+  opacity: 1; }
+
+#loading-bar .bar {
+  -webkit-transition: width 350ms;
+  -moz-transition: width 350ms;
+  -o-transition: width 350ms;
+  transition: width 350ms;
+  background: #00cc33;
+  position: relative;
+  z-index: 10002;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-bottom-right-radius: 1px;
+  border-top-right-radius: 1px; }
+
+/* Fancy blur effect */
+#loading-bar-spinner {
+  display: block;
+  z-index: 10002;
+  float: right;
+  margin: 5px 5px 0 0; }
+
+#loading-bar-spinner .spinner-icon {
+  width: 14px;
+  height: 14px;
+  border: solid 2px transparent;
+  border-top-color: #00cc33;
+  border-left-color: #00cc33;
+  border-radius: 50%;
+  -webkit-animation: loading-bar-spinner 400ms linear infinite;
+  -moz-animation: loading-bar-spinner 400ms linear infinite;
+  -ms-animation: loading-bar-spinner 400ms linear infinite;
+  -o-animation: loading-bar-spinner 400ms linear infinite;
+  animation: loading-bar-spinner 400ms linear infinite; }
+
+@-webkit-keyframes loading-bar-spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@-moz-keyframes loading-bar-spinner {
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@-o-keyframes loading-bar-spinner {
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@-ms-keyframes loading-bar-spinner {
+  0% {
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@keyframes loading-bar-spinner {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+#loading-bar-container {
+  position: fixed;
+  top: 70px;
+  left: 320px;
+  width: 100%;
+  z-index: 99999;
+  -webkit-transition: left 300ms cubic-bezier(0.86, 0, 0.07, 1);
+  transition: left 300ms cubic-bezier(0.86, 0, 0.07, 1); }
+  #loading-bar-container:after {
+    content: "";
+    display: table;
+    clear: both; }
+  #loading-bar-container.sandwichClicked {
+    left: 0; }
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    #loading-bar-container {
+      left: 60px; }
+      #loading-bar-container.sandwichClicked {
+        left: 320px; } }
+  @media screen and (max-width: 767px) {
+    #loading-bar-container {
+      left: 0;
+      top: 55px; } }
+
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -646,13 +771,26 @@ select option:hover {
   transition: .3s;
   padding: 6px 22px;
   line-height: 1; }
-  .btn-white:not(.edit_channel):hover {
+  .btn-white:hover {
     border-color: #00cc33;
     color: #00cc33; }
   @media screen and (max-width: 767px) {
     .btn-white {
       font-size: 11px;
       padding: 5px 10px; } }
+
+.btn-grey {
+  border-radius: 50px;
+  line-height: 1;
+  background: linear-gradient(to bottom, #d7d7d7 0%, #c4c4c4 100%);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+  padding: 12px 20px 12px 25px;
+  font-size: 16px;
+  color: #828383;
+  margin: 4px 0 0 25px; }
+  .btn-grey svg {
+    fill: #828383;
+    margin-right: 10px; }
 
 .btn-remove {
   padding-left: 18px; }
@@ -3034,16 +3172,6 @@ textarea {
     .channel__ava {
       width: 250px; } }
 
-.edit_channel {
-  background: linear-gradient(to bottom, #d7d7d7 0%, #c4c4c4 100%);
-  padding: 11px 20px 11px 25px;
-  font-size: 16px;
-  color: #828383;
-  margin: 4px 0 0 25px; }
-  .edit_channel svg {
-    fill: #828383;
-    margin-right: 10px; }
-
 .subscribe_box {
   margin-top: 4px;
   float: right; }
@@ -3154,7 +3282,7 @@ textarea {
     padding-top: 10px;
     padding-bottom: 10px;
     margin-left: -10px; }
-    .tablet_ctrl .edit_channel {
+    .tablet_ctrl .btn-grey {
       float: right; }
   .cat_counter {
     font-size: 26px; } }
@@ -3162,7 +3290,7 @@ textarea {
 @media screen and (max-width: 767px) {
   .tablet_ctrl {
     margin-bottom: 15px; }
-  .edit_channel {
+  .btn-grey {
     margin: 15px auto 0; }
   .cat_counter {
     font-size: 20px; } }
