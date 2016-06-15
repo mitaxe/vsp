@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="channel in ratingsChannel | limitTo: limits.channels">
+            <tr ng-repeat="channel in ratingsChannels">
                 <td><span class="table__number">{{ $index + 1 }}</span></td>
                 <td>
                     <div class="table__subscribers">{{ channel.statSubscribers | number }}</div>
@@ -26,8 +26,8 @@
                 </td>
                 <td class="table__channel">
                     <img ng-src="{{ channel.img }}" alt="channel avatar"/>
-                    <span>{{ channel.title }}</span>
-                    <p class="hidden-tablet hidden-phone">{{ channel.description }}</p>
+                    <span>{{ channel.title | descriptionFormatter : 25 }}</span>
+                    <p class="hidden-tablet hidden-phone">{{ channel.description | descriptionFormatter : 200}}</p>
                     <div class="hidden-tablet hidden-desktop">
                         <i class="table__videos">{{ channel.statVideos | number }}</i><i class="videos"> Видео</i>
                     </div>
@@ -38,5 +38,5 @@
 </div>
 
 <div class="block center">
-    <a class="btn btn-more" ng-click="loadMore('channels')">ЗАГРУЗИТЬ ЕЩЕ</a>
+    <a class="btn btn-more" ng-click="loadMoreChannels('channels')">{{ loading && !noChannels ? 'идет загрузка...' : !loading && !noChannels ? 'загрузить еще' : 'Все каналы загружены'}}</a>
 </div>

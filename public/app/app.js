@@ -59,6 +59,11 @@ app.filter('secondsToTime', function() {
 // description filter
 app.filter('descriptionFormatter', function() {
     return function(text, limit) {
+
+        if(!text) {
+            return '';
+        }
+
         var words = text.split(' '),
             wordsToShow = 0, //how much words need to show
             counter = 0; //letter counter
