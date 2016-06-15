@@ -277,9 +277,9 @@ angular.module("MainApp")
         templateUrl: 'app/views/test.html'
     });
 
-    // $locationProvider.html5Mode({
-    //     enabled : true,
-    //     requireBase : false
-    // });
+    $locationProvider.html5Mode({
+        enabled : true,
+        requireBase : false
+    });
 
 });
