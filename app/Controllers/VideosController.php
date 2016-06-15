@@ -29,7 +29,28 @@ class VideosController extends RESTController
 
     public function getVideo($id)
     {
+        $video = Videos::findFirst([
+                'conditions' => "vspVideoId = ?1",
+                'bind' => [1 => $id]
+        ]);
 
+        if (empty($video)) {
+            return [];
+        }
+        $response = new VideoResponse(
+            $video->id,
+            $video->title,
+            $video->vspVideoId,
+            $video->description,
+            $video->description,
+            $video->thumbsHigh,
+            $video->statViews,
+            $video->durationSeconds,
+            'userName',
+            0
+        );
+
+        return $response;
     }
 
     public function getExclusiveVideos()
