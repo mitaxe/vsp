@@ -1,5 +1,5 @@
 angular.module("MainApp")
-.controller('VideoPageCtrl', ['$scope', '$window', function($scope, $window) {
+.controller('VideoPageCtrl', ['$scope', '$window', 'mainVideos', function($scope, $window, mainVideos) {
     var windWidth = window.innerWidth;
 
     $scope.activeTab = windWidth > 1280 ? 1 : 3;
@@ -22,5 +22,15 @@ angular.module("MainApp")
     angular.element($window).bind('resize', function() {
         $scope.$apply();
     });
+
+
+    $scope.mainVideos = [];
+    $scope.mainVideos = mainVideos.data.data;
+
+    $scope.iframeSrc = function(src) {
+      return 'https://www.youtube.com/embed/'+ src;
+    };
+
+    // console.log($scope.mainVideos);
     
 }]);

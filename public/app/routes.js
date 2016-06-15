@@ -152,7 +152,8 @@ angular.module("MainApp")
         templateUrl: "app/views/history.html",
         resolve: {
             historyData: function(factory) {
-                return factory.getHistoryData();
+                console.log();
+                // return factory.getHistoryData();
             }
         },
         controller: 'HistoryCtrl'
@@ -262,12 +263,13 @@ angular.module("MainApp")
         scope: {
             content: '='
         },
-        controller: function($scope, $stateParams, factory) {
-            for (var i = 0; i < $scope.videos.length; i++) {
-                if ($scope.videos[i].id === $stateParams.id) {
-                    $scope.content = $scope.videos[i];
-                }
-            }
+        controller : 'VideoPageCtrl',
+        resolve:  {
+          mainVideos : function(factory, $stateParams) {
+              // console.log($stateParams);
+              
+              return factory.getVideoPageMainVideos($stateParams.id);
+          }   
         }
     })
 
@@ -277,9 +279,9 @@ angular.module("MainApp")
         templateUrl: 'app/views/test.html'
     });
 
-    $locationProvider.html5Mode({
-        enabled : true,
-        requireBase : false
-    });
+    // $locationProvider.html5Mode({
+    //     enabled : true,
+    //     requireBase : false
+    // });
 
 });

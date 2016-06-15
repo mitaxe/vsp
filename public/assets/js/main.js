@@ -271,7 +271,8 @@ angular.module("MainApp")
         templateUrl: "app/views/history.html",
         resolve: {
             historyData: ["factory", function(factory) {
-                return factory.getHistoryData();
+                console.log();
+                // return factory.getHistoryData();
             }]
         },
         controller: 'HistoryCtrl'
@@ -381,13 +382,14 @@ angular.module("MainApp")
         scope: {
             content: '='
         },
-        controller: ["$scope", "$stateParams", "factory", function($scope, $stateParams, factory) {
-            for (var i = 0; i < $scope.videos.length; i++) {
-                if ($scope.videos[i].id === $stateParams.id) {
-                    $scope.content = $scope.videos[i];
-                }
-            }
-        }]
+        controller : 'VideoPageCtrl',
+        resolve:  {
+          mainVideos : ["factory", "$stateParams", function(factory, $stateParams) {
+              // console.log($stateParams);
+              
+              return factory.getVideoPageMainVideos($stateParams.id);
+          }]   
+        }
     })
 
     // shop detailed page
@@ -435,6 +437,11 @@ angular.module("MainApp")
         factory.getRatingsChannels = function(offset) {
             offset = offset || '';
             return $http.get('http://vsponline.qa/ratings/channels?offset=' + offset);
+        };
+
+        //video page
+        factory.getVideoPageMainVideos = function(id) {
+          return $http.get('http://vsponline.qa/videos/'+id);
         };
 
         // blog page
@@ -1113,7 +1120,7 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('VideoPageCtrl', ['$scope', '$window', function($scope, $window) {
+.controller('VideoPageCtrl', ['$scope', '$window', 'mainVideos', function($scope, $window, mainVideos) {
     var windWidth = window.innerWidth;
 
     $scope.activeTab = windWidth > 1280 ? 1 : 3;
@@ -1136,6 +1143,16 @@ angular.module("MainApp")
     angular.element($window).bind('resize', function() {
         $scope.$apply();
     });
+
+
+    $scope.mainVideos = [];
+    $scope.mainVideos = mainVideos.data.data;
+
+    $scope.iframeSrc = function(src) {
+      return 'https://www.youtube.com/embed/'+ src;
+    };
+
+    // console.log($scope.mainVideos);
     
 }]);
 
