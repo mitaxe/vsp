@@ -386,9 +386,8 @@ angular.module("MainApp")
         resolve:  {
           mainVideos : ["factory", "$stateParams", function(factory, $stateParams) {
               // console.log($stateParams);
-              
               return factory.getVideoPageMainVideos($stateParams.id);
-          }]   
+          }]
         }
     })
 
@@ -398,6 +397,8 @@ angular.module("MainApp")
         templateUrl: 'app/views/test.html'
     });
 
+
+    // fix /# url
     // $locationProvider.html5Mode({
     //     enabled : true,
     //     requireBase : false
@@ -421,7 +422,7 @@ angular.module("MainApp")
             return $http.get('http://vsponline.qa/exclusive/videos?offset=' + offset);
         };
 
-        //new videos page
+        // new videos page
         factory.getNewVideosData = function(offset) {
             offset = offset || '';
             return $http.get('http://vsponline.qa/new/videos?offset=' + offset);
@@ -432,16 +433,14 @@ angular.module("MainApp")
             offset = offset || '';
             return $http.get('http://vsponline.qa/ratings/videos?offset=' + offset);
         };
-    
-
         factory.getRatingsChannels = function(offset) {
             offset = offset || '';
             return $http.get('http://vsponline.qa/ratings/channels?offset=' + offset);
         };
 
-        //video page
+        // video page
         factory.getVideoPageMainVideos = function(id) {
-          return $http.get('http://vsponline.qa/videos/'+id);
+            return $http.get('http://vsponline.qa/videos/' + id);
         };
 
         // blog page
@@ -454,7 +453,7 @@ angular.module("MainApp")
             return $http.get('./assets/js/data.json');
         };
 
-        //
+        // default test
         factory.getVideos = function() {
             return $http.get('./assets/js/data.json');
         };
@@ -832,11 +831,10 @@ angular.module("MainApp")
 angular.module("MainApp")
 .controller('RatingsCtrl', ['$scope', 'factory', 'ratingsVideos', 'ratingsChannels', function ($scope, factory, ratingsVideos, ratingsChannels) {
 
-
     /* Videos */
-    
+
     // get first portion of ratings videos from route resolve
-    $scope.ratingsVideos = [];
+    // $scope.ratingsVideos = [];
     // console.log('after init empty array');
     // console.log($scope.ratingsVideos);
 
@@ -846,11 +844,11 @@ angular.module("MainApp")
 
     // get offset number
     $scope.initialOffset = ratingsVideos.data.meta.count;
-
     var offset = 0;
 
     // loading indicator
     $scope.loading = false;
+
     $scope.noVideo = false;
 
     // load more videos
@@ -883,7 +881,6 @@ angular.module("MainApp")
 
     /* Channels */
 
-
     $scope.ratingsChannels = ratingsChannels.data.data;
 
     // get offset number
@@ -891,7 +888,7 @@ angular.module("MainApp")
     $scope.noChannels = false;
     $scope.channelsOffset = ratingsChannels.data.meta.count;
 
-    console.log('channels - ' + $scope.ratingsChannels);
+    console.log('channels - ', $scope.ratingsChannels);
 
     $scope.loadMoreChannels = function() {
 
@@ -906,7 +903,7 @@ angular.module("MainApp")
 
                 if(response.data !== null) {
                     console.timeEnd('ratingsRequestTime');
-                    console.log('videos received - ' + response.data.length); //---
+                    console.log('channels received - ' + response.data.length); //---
                     $scope.ratingsChannels.push.apply($scope.ratingsChannels, response.data);
                     $scope.loading = false;
                 } else {
@@ -1120,11 +1117,27 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('VideoPageCtrl', ['$scope', '$window', 'mainVideos', function($scope, $window, mainVideos) {
+.controller('VideoPageCtrl', ['$scope', '$sce', '$window', 'mainVideos', function($scope, $sce, $window, mainVideos) {
+
+    /* Main Video */
+
+    $scope.mainVideos = mainVideos.data.data;
+
+    console.log('1st api response - ', $scope.mainVideos);
+
+    $scope.iframeSrc = function(src) {
+        var url = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + src);
+        // console.log(url);
+        return url;
+    };
+
+
+    /* Sidebar Tabs */
+
     var windWidth = window.innerWidth;
 
     $scope.activeTab = windWidth > 1280 ? 1 : 3;
-    $scope.desktop =  windWidth > 1280 ? true : false;
+    $scope.desktop = windWidth > 1280 ? true : false;
 
     $scope.setActiveTab = function(index) {
         $scope.activeTab = index;
@@ -1144,16 +1157,6 @@ angular.module("MainApp")
         $scope.$apply();
     });
 
-
-    $scope.mainVideos = [];
-    $scope.mainVideos = mainVideos.data.data;
-
-    $scope.iframeSrc = function(src) {
-      return 'https://www.youtube.com/embed/'+ src;
-    };
-
-    // console.log($scope.mainVideos);
-    
 }]);
 
 angular.module("MainApp")

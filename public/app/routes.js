@@ -267,9 +267,8 @@ angular.module("MainApp")
         resolve:  {
           mainVideos : function(factory, $stateParams) {
               // console.log($stateParams);
-              
               return factory.getVideoPageMainVideos($stateParams.id);
-          }   
+          }
         }
     })
 
@@ -279,6 +278,8 @@ angular.module("MainApp")
         templateUrl: 'app/views/test.html'
     });
 
+
+    // fix /# url
     // $locationProvider.html5Mode({
     //     enabled : true,
     //     requireBase : false

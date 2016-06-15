@@ -1,9 +1,25 @@
 angular.module("MainApp")
-.controller('VideoPageCtrl', ['$scope', '$window', 'mainVideos', function($scope, $window, mainVideos) {
+.controller('VideoPageCtrl', ['$scope', '$sce', '$window', 'mainVideos', function($scope, $sce, $window, mainVideos) {
+
+    /* Main Video */
+
+    $scope.mainVideos = mainVideos.data.data;
+
+    console.log('1st api response - ', $scope.mainVideos);
+
+    $scope.iframeSrc = function(src) {
+        var url = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + src);
+        // console.log(url);
+        return url;
+    };
+
+
+    /* Sidebar Tabs */
+
     var windWidth = window.innerWidth;
 
     $scope.activeTab = windWidth > 1280 ? 1 : 3;
-    $scope.desktop =  windWidth > 1280 ? true : false;
+    $scope.desktop = windWidth > 1280 ? true : false;
 
     $scope.setActiveTab = function(index) {
         $scope.activeTab = index;
@@ -23,14 +39,4 @@ angular.module("MainApp")
         $scope.$apply();
     });
 
-
-    $scope.mainVideos = [];
-    $scope.mainVideos = mainVideos.data.data;
-
-    $scope.iframeSrc = function(src) {
-      return 'https://www.youtube.com/embed/'+ src;
-    };
-
-    // console.log($scope.mainVideos);
-    
 }]);

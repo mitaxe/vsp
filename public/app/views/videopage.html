@@ -41,9 +41,9 @@
                 <div class="relative">
                     <!-- <img ng-src="{{ content.img }}" alt=""/> -->
                     <div class='embed-container'>
-                        <iframe ng-src="{{iframeSrc(mainVideos[0].srcId)}}" frameborder='0' allowfullscreen></iframe>
+                        <iframe ng-src="{{ iframeSrc(mainVideos[0].srcId) }}" frameborder='0' allowfullscreen></iframe>
                     </div>
-                    <span class="thumb__length">{{mainVideos[0].length | secondsToTime}}</span>
+                    <!-- <span class="thumb__length">{{mainVideos[0].length | secondsToTime}}</span> -->
                     <!--<button class="play_btn hidden-phone hidden-tablet"><span class="left"></span>play<span class="right"></span></button>-->
                 </div>
                 <div class="about_video clearfix">
@@ -75,7 +75,6 @@
                                             <span class="thumb__length">{{mainVideos[1].length | secondsToTime}}</span>
                                             <img alt="" ng-src="https://i.ytimg.com/vi/BBhZPWmXUtE/maxresdefault.jpg" src="https://i.ytimg.com/vi/BBhZPWmXUtE/maxresdefault.jpg">
                                         </div>
-
                                         <p class="th_description">{{mainVideos[1].title}к</p>
                                     </div>
                                 </div>
@@ -231,9 +230,10 @@
             <div class="block center">
                 <a class="btn btn-more" ng-click="loadMore('comments')">ЗАГРУЗИТЬ ЕЩЕ</a>
             </div>
+            
         </div> <!-- end col -->
-        <div class="col-xs-12 col-md-5">
 
+        <div class="col-xs-12 col-md-5">
 
             <!-- desktop tabs -->
             <div class="row hidden-phone hidden-tablet">
@@ -249,11 +249,8 @@
             </div>
             <!--<hr class="block__hr">-->
 
-
             <!--  videos -->
             <div ng-show="activeTab == 1" class="row right_video_list">
-
-
                 <div class="col-xs-6">
                     <div class="thumb">
                         <a class="btn" href="#" >
@@ -266,8 +263,6 @@
                         <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
                     </div>
                 </div>
-
-
                 <div class="col-xs-6">
                     <div class="thumb">
                         <a class="btn" href="#">

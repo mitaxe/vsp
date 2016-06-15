@@ -780,6 +780,7 @@ select option:hover {
       padding: 5px 10px; } }
 
 .btn-grey {
+  border: 0;
   border-radius: 50px;
   line-height: 1;
   background: linear-gradient(to bottom, #d7d7d7 0%, #c4c4c4 100%);
@@ -791,6 +792,8 @@ select option:hover {
   .btn-grey svg {
     fill: #828383;
     margin-right: 10px; }
+  .btn-grey:hover svg {
+    fill: #00cc33; }
 
 .btn-remove {
   padding-left: 18px; }

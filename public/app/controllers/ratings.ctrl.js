@@ -1,11 +1,10 @@
 angular.module("MainApp")
 .controller('RatingsCtrl', ['$scope', 'factory', 'ratingsVideos', 'ratingsChannels', function ($scope, factory, ratingsVideos, ratingsChannels) {
 
-
     /* Videos */
-    
+
     // get first portion of ratings videos from route resolve
-    $scope.ratingsVideos = [];
+    // $scope.ratingsVideos = [];
     // console.log('after init empty array');
     // console.log($scope.ratingsVideos);
 
@@ -15,11 +14,11 @@ angular.module("MainApp")
 
     // get offset number
     $scope.initialOffset = ratingsVideos.data.meta.count;
-
     var offset = 0;
 
     // loading indicator
     $scope.loading = false;
+
     $scope.noVideo = false;
 
     // load more videos
@@ -52,7 +51,6 @@ angular.module("MainApp")
 
     /* Channels */
 
-
     $scope.ratingsChannels = ratingsChannels.data.data;
 
     // get offset number
@@ -60,7 +58,7 @@ angular.module("MainApp")
     $scope.noChannels = false;
     $scope.channelsOffset = ratingsChannels.data.meta.count;
 
-    console.log('channels - ' + $scope.ratingsChannels);
+    console.log('channels - ', $scope.ratingsChannels);
 
     $scope.loadMoreChannels = function() {
 
@@ -75,7 +73,7 @@ angular.module("MainApp")
 
                 if(response.data !== null) {
                     console.timeEnd('ratingsRequestTime');
-                    console.log('videos received - ' + response.data.length); //---
+                    console.log('channels received - ' + response.data.length); //---
                     $scope.ratingsChannels.push.apply($scope.ratingsChannels, response.data);
                     $scope.loading = false;
                 } else {
