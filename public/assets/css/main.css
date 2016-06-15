@@ -2641,7 +2641,8 @@ textarea {
     font-size: 20px;
     color: #3a3d3e;
     margin-bottom: 12px;
-    font-weight: 500; }
+    font-weight: 500;
+    word-break: break-all; }
   .thumb__text {
     font-size: 20px;
     margin-bottom: 12px;
