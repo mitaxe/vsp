@@ -20,7 +20,9 @@ class VideosResponse extends ResponseArray
                     $video->durationSeconds,
                     'userName',
                     $video->exclusive,
-                    $video->datePublished
+                    $video->datePublished,
+                    $video->statLikes,
+                    $video->statViews
                 ));
         }        
         

@@ -52,10 +52,18 @@ class VideoResponse extends Response
      * @var date
      */
     public $date = null;
-    
 
+    /**
+     * @var date
+     */
+    public $statLikes = null;
 
-    public function __construct($id, $title, $srcId, $text, $img, $count, $length, $user, $exclusive, $date)
+    /**
+     * @var date
+     */
+    public $statViews = null;
+
+    public function __construct($id, $title, $srcId, $text, $img, $count, $length, $user, $exclusive, $date, $statLikes = null, $statViews = null)
     {
         $this->id = $id;
         $this->title = $title;
@@ -67,6 +75,8 @@ class VideoResponse extends Response
         $this->user = $user;
         $this->exclusive = $exclusive;
         $this->date = $date;
+        $this->statLikes = $statLikes;
+        $this->statViews = $statViews;
         parent::__construct();
     }
 
