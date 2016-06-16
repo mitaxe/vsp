@@ -56,11 +56,11 @@
                             <span class="hidden-desktop"> {{getDate(mainVideos[0].date)}}</span>
                         </div>
                         <h2 class="hidden-desktop hidden-tablet">{{mainVideos[0].title | descriptionFormatter : 30}}</h2>
-                        <p class="hidden-phone views_row">Просмотров <span class="views">38 806</span></p>
-                        <p><span class="hidden-tablet hidden-desktop mob_channel_name">50-50 Pranker</span> <i class="hidden-phone">Нравится</i> <span class="likes">870</span> <button class="btn like_btn">
+                        <p class="hidden-phone views_row">Просмотров <span class="views">{{mainVideos[0].statViews | number}}</span></p>
+                        <p><span class="hidden-tablet hidden-desktop mob_channel_name">50-50 Pranker</span> <i class="hidden-phone">Нравится</i> <span class="likes">{{mainVideos[0].statLikes}}</span> <button class="btn like_btn">
                             <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="23" viewBox="0 0 13.566 11"><path d="M4.9 8.47c1.687.776 3.69 1.21 5.662 1.21.64 0 .402-.03 1.016-.133.24-.04.55-.13.688-.236.188-.145.31-.378.31-.638 0-.24-.105-.458-.27-.605h.07c.44 0 .794-.36.794-.807s-.355-.807-.793-.807h.396c.44 0 .795-.36.795-.807 0-.446-.355-.807-.795-.807.44 0 .795-.362.795-.808s-.355-.807-.795-.807h-2.695c-.274 0-.497-.226-.497-.504l.25-1.675c.024-.075.037-.155.037-.238C9.867.36 9.51 0 9.07 0c-.366 0-.676.254-.766.597L8.27.712C7.76 2.362 6.605 3.868 4.9 4.84v3.63z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 3.52h3.9v6.412L0 11V3.52z"/></svg></i>
                         </button></p>
-                        <p class="hidden-tablet hidden-desktop"><span class="mob_date"> {{getDate(mainVideos[0].date)}}</span> Просмотров <span class="views">38 806</span></p>
+                        <p class="hidden-tablet hidden-desktop"><span class="mob_date"> {{getDate(mainVideos[0].date)}}</span> Просмотров <span class="views">{{mainVideos[0].statViews | number}}</span></p>
                         <h2 class="hidden-desktop hidden-phone">{{mainVideos[0].title | descriptionFormatter : 30}}</h2>
                         <div class="row hidden-desktop hidden-phone">
                             <div class="col-xs-6">

@@ -74,6 +74,7 @@ app.filter('descriptionFormatter', function() {
         for (var i = 0; i < words.length; i++) {
             if(counter < limit) {
                 counter += words[i].length; //count letters length
+                wordsToShow = i;
                 // console.log('counter ' + counter);
             } else {
                 wordsToShow = i -1; //index of last word
@@ -81,10 +82,12 @@ app.filter('descriptionFormatter', function() {
                 break;
             }
         }
+
+
        // console.log('words length ' + words.length + ' ned to show  ' + wordsToShow + ' have to slice ' + (words.length - wordsToShow))
        // console.log(words.splice(0,words.length - wordsToShow).length);
 
-        if (counter > limit) {
+        if (counter + 10 >= limit) {
             return words.splice(0, wordsToShow).join(' ') + ' ...';
         } else {
             return words.join(' ');
@@ -1131,6 +1134,7 @@ angular.module("MainApp")
     /* Main Video */
 
     $scope.mainVideos = mainVideos.data.data;
+    console.log('main videos', mainVideos);
 
     // console.log('1st api response - ', $scope.mainVideos);
 

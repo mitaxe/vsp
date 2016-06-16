@@ -4,6 +4,7 @@ angular.module("MainApp")
     /* Main Video */
 
     $scope.mainVideos = mainVideos.data.data;
+    console.log('main videos', mainVideos);
 
     // console.log('1st api response - ', $scope.mainVideos);
 
