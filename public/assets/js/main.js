@@ -303,6 +303,10 @@ angular.module("MainApp")
         url : '/liked',
         templateUrl: 'app/views/channel-liked.html'
     })
+    .state('user.shop', {
+        url : '/shop',
+        templateUrl: 'app/views/channel-shop.html'
+    })
 
     // profile
     .state('profile', {
@@ -402,10 +406,10 @@ angular.module("MainApp")
 
 
     // fix /# url
-    $locationProvider.html5Mode({
-        enabled : true,
-        requireBase : false
-    });
+    // $locationProvider.html5Mode({
+    //     enabled : true,
+    //     requireBase : false
+    // });
 
 }]);
 

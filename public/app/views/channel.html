@@ -1,14 +1,18 @@
 <!-- channel page -->
 <div class="channel">
-    <div class="channel__cover" ng-class= "{bf_vis : channelbgText}" ng-style="{'background-image': 'url(' + currentUser.cover + ')'}">
-        <a ng-mouseover="hoverIn('bg')" ng-mouseleave="hoverOut('bg')" class="change_img channel_bg hidden-tablet hidden-phone"></a>
-        <div ng-show="channelbgText" class="bg_text">Обновить фото обложки канала</div>
-        <div class="channel__ava" ng-class="{bf_vis : changeAvaText}">
-            <img ng-src="{{ currentUser.avatar }}" alt="avatar"/>
-            <a ng-mouseover="hoverIn('ava')" ng-mouseleave="hoverOut('ava')" class="change_img channel_ava hidden-tablet hidden-phone"></a>
-            <div ng-show="changeAvaText" class="bg_text ava">Обновить аватар канала</div>
+    <form action="">
+        <div class="channel__cover" ng-class= "{bf_vis : channelbgText}" ng-style="{'background-image': 'url(' + currentUser.cover + ')'}">
+            <label for="channel_bg" ng-mouseover="hoverIn('bg')" ng-mouseleave="hoverOut('bg')" class="change_img channel_bg hidden-tablet hidden-phone"></label>
+            <div ng-show="channelbgText" class="bg_text">Обновить фото обложки канала</div>
+            <input type="file" id="channel_bg" name="channel_ava" class="hidden">
+            <div class="channel__ava" ng-class="{bf_vis : changeAvaText}">
+                <img ng-src="{{ currentUser.avatar }}" alt="avatar"/>
+                <label for="channel_ava" ng-mouseover="hoverIn('ava')" ng-mouseleave="hoverOut('ava')" class="change_img channel_ava hidden-tablet hidden-phone"></label>
+                <div ng-show="changeAvaText" class="bg_text ava">Обновить аватар канала</div>
+                <input type="file" id="channel_ava" name="channel_ava" class="hidden">
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 
 <!-- content -->
@@ -76,7 +80,8 @@
                 <div class="clearfix">
                     <tabs class="tabs">
                         <a ui-sref="user.all({ url: currentUser.url })" ui-sref-active="active">Все видео</a>
-                        <a ui-sref="user.liked({ url: currentUser.url })" ui-sref-active="active">Понравившиеся</a>
+                        <a ui-sref="user.liked({ url: currentUser.url })" ui-sref-active="active">Плейлисты</a>
+                        <a ui-sref="user.shop({ url: currentUser.url })" ui-sref-active="active">Магазин</a>
                         <div class="tabs__underline"></div>
                     </tabs>
                 </div>
