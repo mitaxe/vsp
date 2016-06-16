@@ -6,12 +6,12 @@ class CommentResponse extends Response
     /**
      * @var data
      */
-    public $data = null;
+    public $comments = null;
 
 
     public function __construct($data)
     {
-        $this->data = $data;
+        $this->comments = $data;
         parent::__construct();
     }
 

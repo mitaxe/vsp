@@ -27,6 +27,8 @@ $loader->registerDirs(array(
 
 ))->register();
 
+//var_dump($loader);exit;
+
 //require dirname(__DIR__) . '/vendor/autoload.php';
 
 // Handle the request
