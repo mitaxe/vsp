@@ -254,6 +254,7 @@ angular.module("MainApp")
         templateUrl: 'app/views/shop-detail.html',
         controller: 'ShopDetailCtrl'
     })
+        
 
     // video page
     .state('videos', {

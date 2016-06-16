@@ -73,9 +73,9 @@
                                     <div class="col-xs-9 l_text">
                                         <div class="thumb__img">
                                             <span class="thumb__length">{{mainVideos[1].length | secondsToTime}}</span>
-                                            <img alt="" ng-src="https://i.ytimg.com/vi/BBhZPWmXUtE/maxresdefault.jpg" src="https://i.ytimg.com/vi/BBhZPWmXUtE/maxresdefault.jpg">
+                                            <img alt="" ng-src="{{mainVideos[1].img}}">
                                         </div>
-                                        <p class="th_description">{{mainVideos[1].title}к</p>
+                                        <p class="th_description">{{mainVideos[1].title}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                                     <div class="col-xs-9 r_text">
                                         <div class="thumb__img">
                                             <span class="thumb__length">{{mainVideos[2].length | secondsToTime}}</span>
-                                            <img alt="" ng-src="https://i.ytimg.com/vi/BBhZPWmXUtE/maxresdefault.jpg" src="https://i.ytimg.com/vi/BBhZPWmXUtE/maxresdefault.jpg">
+                                            <img alt="" ng-src="{{mainVideos[1].img}}">
                                         </div>
                                         <p class="th_description">{{mainVideos[1].title}}</p>
                                     </div>
@@ -106,7 +106,7 @@
                     <span class="thumb__length">{{mainVideos[2].length | secondsToTime}}</span>
                     <img alt="" ng-src="{{mainVideos[2].img}}">
                 </div>
-                <a href="#" class="btn btn-video-ctrl">
+                <a ui-sref="videos({ id: mainVideos[2].id })" class="btn btn-video-ctrl">
                     <span>Следующее</span>
                     <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
                 </a>
@@ -249,106 +249,54 @@
             </div>
             <!--<hr class="block__hr">-->
 
-            <!--  videos -->
+            <!-- related videos -->
             <div ng-show="activeTab == 1" class="row right_video_list">
-                <div class="col-xs-6">
+                <div class="col-xs-6" ng-repeat="video in relatedVideos">
                     <div class="thumb">
-                        <a class="btn" href="#" >
+                        <a class="btn" ui-sref="videos({ id: video.id })" >
                             <div class="thumb__img thumb__img--shadow">
-                                <span class="thumb__length">4:25</span>
-                                <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
+                                <span class="thumb__length">{{ video.length | secondsToTime }}</span>
+                                <img alt="" ng-src="{{ video.img }}">
                             </div>
                         </a>
-                        <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="thumb">
-                        <a class="btn" href="#">
-                            <div class="thumb__img thumb__img--shadow">
-                                <span class="thumb__length">4:25</span>
-                                <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                            </div>
-                        </a>
-                        <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="thumb">
-                        <a class="btn" href="#" >
-                            <div class="thumb__img thumb__img--shadow">
-                                <span class="thumb__length">4:25</span>
-                                <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                            </div>
-                        </a>
-                        <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="thumb">
-                        <a class="btn" href="#">
-                            <div class="thumb__img thumb__img--shadow">
-                                <span class="thumb__length">4:25</span>
-                                <img alt="" ng-src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                            </div>
-                        </a>
-                        <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
+                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__count"><a href="#"><span class="thumb__number">{{ video.count | number }}</span> просмотров</a></p>
                     </div>
                 </div>
             </div> <!-- end row -->
 
-            <!--  channels -->
+            <!-- related  channels -->
             <div ng-show="activeTab == 2" class="row right_video_list">
-                <div class="col-xs-6">
-                    <div class="thumb">
-                        <a class="btn" href="#" >
-                            <div class="thumb__img thumb__img--shadow">
-                                <span class="thumb__length">4:25</span>
-                                <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                            </div>
-                        </a>
-                        <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
+                <!--<div class="col-xs-6" ng-repeat="channel in relatedChannels">-->
+                    <!--<div class="thumb">-->
+                        <!--<a class="btn" href="#" >-->
+                            <!--<div class="thumb__img thumb__img&#45;&#45;shadow">-->
+                                <!--<span class="thumb__length">{{ channel.length | secondsToTime }}</span>-->
+                                <!--<img alt="" ng-src="{{channel.img}}">-->
+                            <!--</div>-->
+                        <!--</a>-->
+                        <!--<p class="thumb__title"><a href="">{{channel.title}}</a></p>-->
+                        <!--<p class="thumb__count"><a href="#"><span class="thumb__number">{{channel.count | number}}</span> просмотров</a></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="thumb row clearfix" ng-repeat="channel in relatedChannels">
+                    <div class="thumb thumb--chan search_thumb pull-left">
+                        <div class="thumb__img">
+                            <a href="#">
+                                <img ng-src="{{channel.img}}" alt="channel img" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="thumb">
-                        <a class="btn" href="#">
-                            <div class="thumb__img thumb__img--shadow">
-                                <span class="thumb__length">4:25</span>
-                                <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                            </div>
-                        </a>
-                        <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="thumb">
-                        <a class="btn" href="#" >
-                            <div class="thumb__img thumb__img--shadow">
-                                <span class="thumb__length">4:25</span>
-                                <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                            </div>
-                        </a>
-                        <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="thumb">
-                        <a class="btn" href="#">
-                            <div class="thumb__img thumb__img--shadow">
-                                <span class="thumb__length">4:25</span>
-                                <img alt="" ng-src="https://i.ytimg.com/vi/_-CD_5YhJTA/maxresdefault.jpg" src="https://i.ytimg.com/vi/ZL4yYHdDSWs/maxresdefault.jpg">
-                            </div>
-                        </a>
-                        <p class="thumb__title"><a href="">4</a></p>
-                        <p class="thumb__count"><a href="#"><span class="thumb__number">14</span> просмотров</a></p>
+                    <div class="col-md-7 col-sm-7 col-xs-6 pull-left">
+                        <div class="thumb thumb--chan search_thumb">
+                            <p class="thumb__name">
+                                <a href="" style="display:block;margin-bottom: 3px">{{channel.title}}</a>
+                                <a href="#" class="btn btn-green btn-small hidden-phone">Подписаться</a>
+                                <span class="thumb__subs">{{channel.statSubscribers | number}}</span>
+                                <a href="#" class="btn btn-green btn-small hidden-desktop hidden-tablet">Подписаться</a>
+                            </p>
+                            <p class="thumb_text hidden-phone">{{channel.description | descriptionFormatter : 120}}</p>
+                        </div>
                     </div>
                 </div>
             </div> <!-- end row -->

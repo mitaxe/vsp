@@ -34,6 +34,15 @@ angular.module("MainApp")
         factory.getVideoPageMainVideos = function(id) {
             return $http.get('http://vsponline.qa/videos/' + id);
         };
+        factory.getVideoPageComments = function(id) {
+            return $http.get('http://vsponline.qa/videos/' + id + '/comments');
+        };
+        factory.getRelatedVideos = function(id) {
+            return $http.get('http://vsponline.qa/videos/' + id + '/related_videos');
+        };
+        factory.getRelatedChannels = function(id) {
+            return $http.get('http://vsponline.qa/videos/' + id + '/related_channels');
+        };
 
         // blog page
         factory.getBlogData = function() {
