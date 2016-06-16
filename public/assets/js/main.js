@@ -56,6 +56,7 @@ app.filter('secondsToTime', function() {
     };
 });
 
+
 // description filter
 app.filter('descriptionFormatter', function() {
     return function(text, limit) {
@@ -373,7 +374,6 @@ angular.module("MainApp")
         templateUrl: 'app/views/shop-detail.html',
         controller: 'ShopDetailCtrl'
     })
-        
 
     // video page
     .state('videos', {
@@ -1139,6 +1139,7 @@ angular.module("MainApp")
         // console.log(url);
         return url;
     };
+    
 
     //comments
     $scope.comments = [];

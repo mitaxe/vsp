@@ -56,6 +56,7 @@ app.filter('secondsToTime', function() {
     };
 });
 
+
 // description filter
 app.filter('descriptionFormatter', function() {
     return function(text, limit) {

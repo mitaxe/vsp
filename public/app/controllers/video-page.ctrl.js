@@ -12,6 +12,7 @@ angular.module("MainApp")
         // console.log(url);
         return url;
     };
+    
 
     //comments
     $scope.comments = [];
