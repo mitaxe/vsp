@@ -12,9 +12,11 @@ $loader->registerDirs(array(
     '../app/Models/',
     '../app/Config/',
     '../app/Components/',
+    '../app/Responses/',
     '../app/Responses/Videos/',
     '../app/Responses/Index/',
     '../app/Responses/Channels/',
+    '../app/Responses/Comments/',
 
     '../app/Api/',
     '../app/Api/DI',

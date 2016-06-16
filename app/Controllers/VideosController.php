@@ -46,7 +46,164 @@ class VideosController extends RESTController
 
     public function getVideoComments($id)
     {
-        return new Response();
+        $data = '{
+            "user": "Clan ZIP",
+            "link": "#",
+            "img": "assets/img/ball-59.png",
+            "text": "Очень красивое видео!!!",
+            "date": "5 часов назад",
+            "likes": 12,
+            "responses": [
+                {
+                    "user": "The Dude",
+                    "link": "#",
+                    "img": "assets/img/ball-60.png",
+                    "text": "Test Test Text",
+                    "date": "12 часов назад",
+                    "likes": 2
+                },
+                {
+                    "user": "Ozzy12345",
+                    "link": "#",
+                    "img": "assets/img/ball-59.png",
+                    "text": "Looks cool...",
+                    "date": "24 часов назад",
+                    "likes": 18
+                }
+            ]
+        },
+        {
+            "user": "AlinaJones",
+            "link": "#",
+            "img": "assets/img/ball-62.png",
+            "text": "Очень красивое видео!!!",
+            "date": "4 часов назад",
+            "likes": 22,
+            "responses": [
+                {
+                    "user": "The Dude",
+                    "link": "#",
+                    "img": "assets/img/ball-60.png",
+                    "text": "Test Test Text Super Cool",
+                    "date": "16 часов назад",
+                    "likes": 2
+                },
+                {
+                    "user": "Ozzy12345",
+                    "link": "#",
+                    "img": "assets/img/ball-59.png",
+                    "text": "Looks cool... Awesome",
+                    "date": "24 часов назад",
+                    "likes": 123
+                }
+            ]
+        },
+        {
+            "user": "Clan ZIP",
+            "link": "#",
+            "img": "assets/img/ball-59.png",
+            "text": "Очень красивое видео!!!",
+            "date": "5 часов назад",
+            "likes": 12,
+            "responses": [
+                {
+                    "user": "The Dude",
+                    "link": "#",
+                    "img": "assets/img/ball-60.png",
+                    "text": "Test Test Text",
+                    "date": "12 часов назад",
+                    "likes": 2
+                },
+                {
+                    "user": "Ozzy12345",
+                    "link": "#",
+                    "img": "assets/img/ball-59.png",
+                    "text": "Looks cool...",
+                    "date": "24 часов назад",
+                    "likes": 18
+                }
+            ]
+        },
+        {
+            "user": "AlinaJones",
+            "link": "#",
+            "img": "assets/img/ball-62.png",
+            "text": "Очень красивое видео!!!",
+            "date": "4 часов назад",
+            "likes": 22,
+            "responses": [
+                {
+                    "user": "The Dude",
+                    "link": "#",
+                    "img": "assets/img/ball-60.png",
+                    "text": "Test Test Text Super Cool",
+                    "date": "16 часов назад",
+                    "likes": 2
+                },
+                {
+                    "user": "Ozzy12345",
+                    "link": "#",
+                    "img": "assets/img/ball-59.png",
+                    "text": "Looks cool... Awesome",
+                    "date": "24 часов назад",
+                    "likes": 123
+                }
+            ]
+        },
+        {
+            "user": "Clan ZIP",
+            "link": "#",
+            "img": "assets/img/ball-59.png",
+            "text": "Очень красивое видео!!!",
+            "date": "5 часов назад",
+            "likes": 12,
+            "responses": [
+                {
+                    "user": "The Dude",
+                    "link": "#",
+                    "img": "assets/img/ball-60.png",
+                    "text": "Test Test Text",
+                    "date": "12 часов назад",
+                    "likes": 2
+                },
+                {
+                    "user": "Ozzy12345",
+                    "link": "#",
+                    "img": "assets/img/ball-59.png",
+                    "text": "Looks cool...",
+                    "date": "24 часов назад",
+                    "likes": 18
+                }
+            ]
+        },
+        {
+            "user": "AlinaJones",
+            "link": "#",
+            "img": "assets/img/ball-62.png",
+            "text": "Очень красивое видео!!!",
+            "date": "4 часов назад",
+            "likes": 22,
+            "responses": [
+                {
+                    "user": "The Dude",
+                    "link": "#",
+                    "img": "assets/img/ball-60.png",
+                    "text": "Test Test Text Super Cool",
+                    "date": "16 часов назад",
+                    "likes": 2
+                },
+                {
+                    "user": "Ozzy12345",
+                    "link": "#",
+                    "img": "assets/img/ball-59.png",
+                    "text": "Looks cool... Awesome",
+                    "date": "24 часов назад",
+                    "likes": 123
+                }
+            ]
+        }';
+
+        return new CommentResponse($data);
     }
 
     public function getRelatedVideos($id)
