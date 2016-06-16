@@ -797,13 +797,17 @@
         img {
             float: left;
             margin-right: 15px;
-            max-width: 100px;
+            width: 100px;
+            height:100px;
         }
         span {
-            display: inline-block;
+            display: block;
             padding-bottom: 10px;
             font-size: 25px;
             color: #5d5d5e;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         p {
             font-size: 14px;
@@ -835,6 +839,10 @@
         .table__channel {
             span {
                 font-size: 10px;
+            }
+            img {
+                width: 75px;
+                height:75px;
             }
             .table__videos {
                 font-size: 14px;

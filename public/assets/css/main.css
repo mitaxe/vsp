@@ -780,6 +780,7 @@ select option:hover {
       padding: 5px 10px; } }
 
 .btn-grey {
+  border: 0;
   border-radius: 50px;
   line-height: 1;
   background: linear-gradient(to bottom, #d7d7d7 0%, #c4c4c4 100%);
@@ -791,6 +792,8 @@ select option:hover {
   .btn-grey svg {
     fill: #828383;
     margin-right: 10px; }
+  .btn-grey:hover svg {
+    fill: #00cc33; }
 
 .btn-remove {
   padding-left: 18px; }
@@ -2968,12 +2971,16 @@ textarea {
   .channels__table .table__channel img {
     float: left;
     margin-right: 15px;
-    max-width: 100px; }
+    width: 100px;
+    height: 100px; }
   .channels__table .table__channel span {
-    display: inline-block;
+    display: block;
     padding-bottom: 10px;
     font-size: 25px;
-    color: #5d5d5e; }
+    color: #5d5d5e;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
   .channels__table .table__channel p {
     font-size: 14px;
     color: #999;
@@ -2995,6 +3002,9 @@ textarea {
       margin-top: 5px; }
     .channels__table .table__channel span {
       font-size: 10px; }
+    .channels__table .table__channel img {
+      width: 75px;
+      height: 75px; }
     .channels__table .table__channel .table__videos {
       font-size: 14px; }
     .channels__table .table__channel .videos {
