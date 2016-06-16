@@ -4,6 +4,7 @@ angular.module("MainApp")
     /* Main Video */
 
     $scope.mainVideos = mainVideos.data.data;
+    console.log('main videos', mainVideos);
 
     // console.log('1st api response - ', $scope.mainVideos);
 
@@ -12,12 +13,12 @@ angular.module("MainApp")
         // console.log(url);
         return url;
     };
-    
+
 
     //comments
     $scope.comments = [];
     factory.getVideoPageComments($stateParams.id).success(function(response) {
-        $scope.comments = response.data;
+        $scope.comments = response.data.comments;
         console.log('comments ', $scope.comments);
     });
     

@@ -15,7 +15,7 @@
                             <span class="thumb__exclusive">Эксклюзивное видео</span>
                         </div>
                     </a>
-                    <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                    <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 52}}</a></p>
                     <p class="thumb__user"><a ui-sref="xuser({ url: video.userLink })">{{ video.user }}</a></p>
                     <p class="thumb__info">
                         <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
@@ -41,7 +41,7 @@
                                 <img ng-src="{{ video.img }}" alt="" />
                             </div>
                         </a>
-                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50 }}</a></p>
                         <p class="thumb__user"><a href="">{{ video.user }}</a></p>
                         <p>
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
@@ -62,7 +62,7 @@
                         </a>
                     </div>
                     <div class="col-xs-5 col-sm-12">
-                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50}}</a></p>
                         <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
@@ -89,7 +89,7 @@
                                 <img ng-src="{{ video.img }}" alt="" />
                             </div>
                         </a>
-                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50 }}</a></p>
                         <p class="thumb__user"><a href="">{{ video.user }}</a></p>
                         <p>
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
@@ -110,7 +110,7 @@
                         </a>
                     </div>
                     <div class="col-xs-5 col-sm-12">
-                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50}}</a></p>
                         <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
@@ -134,7 +134,7 @@
                             <img ng-src="{{ video.img }}" alt="" />
                         </div>
                     </a>
-                    <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                    <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 52 }}</a></p>
                     <div class="clearfix">
                         <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                         <p class="thumb__info">
@@ -156,7 +156,7 @@
                                 </a>
                             </div>
                             <div class="col-xs-5 col-sm-12 col-md-6">
-                                <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                                <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 40 }}</a></p>
                                 <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                         </a>
                     </div>
                     <div class="col-xs-5 col-sm-12">
-                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50 }}</a></p>
                         <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
@@ -234,7 +234,7 @@
                                 <img ng-src="{{ video.img }}" alt="" />
                             </div>
                         </a>
-                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 52 }}</a></p>
                         <div class="clearfix">
                             <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                             <p class="thumb__info">
@@ -267,7 +267,7 @@
                                     <img ng-src="{{ video.img }}" alt="" />
                                 </div>
                             </a>
-                            <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                            <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 45 }}</a></p>
                             <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                         </div>
                     </div>
@@ -355,7 +355,7 @@
                             <span class="thumb__exclusive">Эксклюзивное видео</span>
                         </div>
                     </a>
-                    <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                    <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50 }}</a></p>
                     <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                     <p class="thumb__info">
                         <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
