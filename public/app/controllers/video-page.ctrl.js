@@ -12,12 +12,12 @@ angular.module("MainApp")
         // console.log(url);
         return url;
     };
-    
+
 
     //comments
     $scope.comments = [];
     factory.getVideoPageComments($stateParams.id).success(function(response) {
-        $scope.comments = response.data;
+        $scope.comments = response.data.comments;
         console.log('comments ', $scope.comments);
     });
     
