@@ -13,7 +13,8 @@ class ChannelsResponse extends ResponseArray
                 new ChannelResponse(
                     $channel->vspChannelId,
                     $channel->title,
-                    $channel->description,                 
+                    $channel->description,
+                    $channel->thumbHigh,
                     $channel->thumbHigh,                 
                     $channel->statVideos,
                     $channel->statViews,
