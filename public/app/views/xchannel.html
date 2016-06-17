@@ -1,6 +1,6 @@
 <!-- channel page -->
 <div class="channel">
-    <div class="channel__cover" ng-style="{'background-image': 'url(' + xUser.cover + ')'}">
+    <div class="channel__cover" ng-style="{'background-image': 'url(' + content.imgBg + ')'}">
         <div class="channel__ava">
             <img ng-src="{{ content.img }}" alt="avatar"/>
         </div>
@@ -16,14 +16,14 @@
             <div class="col-xs-12">
                 <div class="accordion channel__head">
                     <div class="clearfix">
-                        <h2 class="block__title">{{ content.name }}</h2>
+                        <h2 class="block__title">{{ content.title }}</h2>
                         <div class="subscribe_box hidden-tablet hidden-phone">
-                            <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ xUser.subscr_counter | number }}</span>
+                            <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.statSubscribers | number }}</span>
                         </div>
                     </div>
                     <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
                         <div class="subscribe_box hidden-desktop" style="float: none;">
-                            <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ xUser.subscr_counter | number }}</span>
+                            <a class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ content.statSubscribers | number }}</span>
                         </div>
                     </div>
                     <p class="block__subtitle">{{ content.description }}
@@ -62,9 +62,9 @@
                         </div>
                     </div>
                     <tabs class="tabs">
-                        <a ui-sref="xuser.all({ url: content.url })" ui-sref-active="active">Все видео</a>
-                        <a ui-sref="xuser.playlist({ url: content.url })" ui-sref-active="active">Плейлисты</a>
-                        <a ui-sref="xuser.shop({ url: content.url })" ui-sref-active="active">Магазин</a>
+                        <a ui-sref="channels.all" ui-sref-active="active">Все видео</a>
+                        <a ui-sref="channels.playlist({ url: content.url })" ui-sref-active="active">Плейлисты</a>
+                        <a ui-sref="channels.shop({ url: content.url })" ui-sref-active="active">Магазин</a>
                         <div class="tabs__underline"></div>
                     </tabs>
                 </div>
