@@ -13,7 +13,7 @@ angular.module("MainApp")
     .when("/ratings", "/ratings/videos")
     .when("/user/:url", "/user/:url/all")
     .when('/search', '/search/all')
-    .when("/xuser/:url", "/xuser/:url/all")
+    .when("/channels/:id", "/channels/:id/all")
     .when('/settings', '/settings/main');
 
 
@@ -234,20 +234,29 @@ angular.module("MainApp")
     })
 
     // not my channel
-    .state('xuser', {
-        url: '/xuser/:url',
+    .state('channels', {
+        url: '/channels/:id',
         templateUrl: "app/views/xchannel.html",
-        controller: 'xChannelCtrl'
+        controller: 'xChannelCtrl',
+        scope: {
+            content: '='
+        },
+        resolve:  {
+            mainChannel : function(factory, $stateParams) {
+                // console.log($stateParams);
+                return factory.getChannelData($stateParams.id);
+            }
+        }
     })
-    .state('xuser.all', {
+    .state('channels.all', {
         url: '/all',
         templateUrl: 'app/views/xchannel-all.html'
     })
-    .state('xuser.playlist', {
+    .state('channels.playlist', {
         url: '/playlist',
         templateUrl: 'app/views/xchannel-liked.html'
     })
-    .state('xuser.shop', {
+    .state('channels.shop', {
         url: '/shop',
         templateUrl: 'app/views/xchannel-shop.html'
     })

@@ -44,6 +44,24 @@ angular.module("MainApp")
             return $http.get('http://vsponline.qa/videos/' + id + '/related_channels');
         };
 
+        // channel page
+        factory.getChannelData = function(id) {
+            return $http.get('http://vsponline.qa/channels/' + id);
+        };
+        factory.getChannelVideos = function(id) {
+            return $http.get('http://vsponline.qa/channels/' + id + '/videos');
+        };    
+    
+        /*factory.get = function(id) {
+            return $http.get('http://vsponline.qa/videos/' + id + '/comments');
+        };
+        factory.getRelatedVideos = function(id) {
+            return $http.get('http://vsponline.qa/videos/' + id + '/related_videos');
+        };
+        factory.getRelatedChannels = function(id) {
+            return $http.get('http://vsponline.qa/videos/' + id + '/related_channels');
+        };    */
+
         // blog page
         factory.getBlogData = function() {
             return $http.get('./assets/js/data.json');

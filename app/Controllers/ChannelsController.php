@@ -47,21 +47,7 @@ class ChannelsController extends RESTController
         }
 
         $videos = Videos::find($queryParams);
-        foreach ($videos as $video) {
-            $response->addResponse(
-                new VideoResponse(
-                    $video->id,
-                    $video->title,
-                    $video->vspVideoId,
-                    $video->description,
-                    $video->description,
-                    $video->thumbsHigh,
-                    $video->statViews,
-                    $video->durationSeconds,
-                    'userName',
-                    0
-                ));
-        }
+        $response->add($videos);
         return $response;
     }
 
