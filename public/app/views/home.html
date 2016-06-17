@@ -15,8 +15,8 @@
                             <span class="thumb__exclusive">Эксклюзивное видео</span>
                         </div>
                     </a>
-                    <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 52}}</a></p>
-                    <p class="thumb__user"><a ui-sref="xuser({ url: video.userLink })">{{ video.user }}</a></p>
+                    <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 52}}</a></p>
+                    <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                     <p class="thumb__info">
                         <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                         <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
@@ -41,8 +41,8 @@
                                 <img ng-src="{{ video.img }}" alt="" />
                             </div>
                         </a>
-                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50 }}</a></p>
-                        <p class="thumb__user"><a href="">{{ video.user }}</a></p>
+                        <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 50 }}</a></p>
+                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p>
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
@@ -62,8 +62,8 @@
                         </a>
                     </div>
                     <div class="col-xs-5 col-sm-12">
-                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50}}</a></p>
-                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 50}}</a></p>
+                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
@@ -89,8 +89,8 @@
                                 <img ng-src="{{ video.img }}" alt="" />
                             </div>
                         </a>
-                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50 }}</a></p>
-                        <p class="thumb__user"><a href="">{{ video.user }}</a></p>
+                        <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 50 }}</a></p>
+                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p>
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
@@ -102,7 +102,7 @@
             <div class="col-xs-12 col-sm-4 hidden-desktop" ng-repeat="video in videos | filter: { blockId: 2 } | limitTo: 3 ">
                 <div class="thumb row">
                     <div class="col-xs-7 col-sm-12">
-                        <a ui-sref="video({ url: homeData.video.url })">
+                        <a ui-sref="videos({ id: video.id })">
                             <div class="thumb__img">
                                 <span class="thumb__length">{{ video.length | secondsToTime }}</span>
                                 <img ng-src="{{ video.img }}" alt="" />
@@ -110,8 +110,8 @@
                         </a>
                     </div>
                     <div class="col-xs-5 col-sm-12">
-                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50}}</a></p>
-                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 50}}</a></p>
+                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
@@ -134,9 +134,9 @@
                             <img ng-src="{{ video.img }}" alt="" />
                         </div>
                     </a>
-                    <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 52 }}</a></p>
+                    <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 52 }}</a></p>
                     <div class="clearfix">
-                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p class="thumb__info">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
@@ -156,8 +156,8 @@
                                 </a>
                             </div>
                             <div class="col-xs-5 col-sm-12 col-md-6">
-                                <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 40 }}</a></p>
-                                <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                                <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 40 }}</a></p>
+                                <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                             </div>
                         </div>
                     </div>
@@ -196,7 +196,7 @@
         <div class="block block--white">
             <div class="col-xs-12">
                 <h2 class="block__title block__title--exclusive block__title--left">Эксклюзивные видео</h2>
-                <div class="block__btn"><a href="#" class="btn btn-white">Смотреть все</a></div>
+                <div class="block__btn"><a ui-sref="exclusive" class="btn btn-white">Смотреть все</a></div>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="video in videos | filter: { blockId: 4 } | limitTo: 4" ng-class="{'hidden-phone hidden-tablet':$last}">
                 <div class="thumb thumb--exclusive row">
@@ -209,8 +209,8 @@
                         </a>
                     </div>
                     <div class="col-xs-5 col-sm-12">
-                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50 }}</a></p>
-                        <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                        <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 50 }}</a></p>
+                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
@@ -234,9 +234,9 @@
                                 <img ng-src="{{ video.img }}" alt="" />
                             </div>
                         </a>
-                        <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 52 }}</a></p>
+                        <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 52 }}</a></p>
                         <div class="clearfix">
-                            <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                            <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                             <p class="thumb__info">
                                 <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                                 <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
@@ -253,8 +253,8 @@
                                         <img ng-src="{{ video.img }}" alt="" />
                                     </div>
                                 </a>
-                                <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 45}}</a></p>
-                                <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                                <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 45}}</a></p>
+                                <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                             </div>
                         </div>
                     </div>
@@ -267,8 +267,8 @@
                                     <img ng-src="{{ video.img }}" alt="" />
                                 </div>
                             </a>
-                            <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 45 }}</a></p>
-                            <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                            <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 45 }}</a></p>
+                            <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         </div>
                     </div>
                 </div>
@@ -355,8 +355,8 @@
                             <span class="thumb__exclusive">Эксклюзивное видео</span>
                         </div>
                     </a>
-                    <p class="thumb__title"><a href="">{{ video.title | descriptionFormatter : 50 }}</a></p>
-                    <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
+                    <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | descriptionFormatter : 50 }}</a></p>
+                    <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                     <p class="thumb__info">
                         <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                         <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>

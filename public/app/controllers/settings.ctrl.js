@@ -100,7 +100,6 @@ angular.module("MainApp")
         };
 
         $scope.showHide = function(outer, inner, value) {
-
             $scope.items[outer].inner[inner].hidden = !value;
            // console.log($scope.items[outer].inner[inner].hidden);
         };

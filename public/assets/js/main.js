@@ -303,6 +303,10 @@ angular.module("MainApp")
         url : '/liked',
         templateUrl: 'app/views/channel-liked.html'
     })
+    .state('user.shop', {
+        url : '/shop',
+        templateUrl: 'app/views/channel-shop.html'
+    })
 
     // profile
     .state('profile', {
@@ -402,10 +406,10 @@ angular.module("MainApp")
 
 
     // fix /# url
-    $locationProvider.html5Mode({
-        enabled : true,
-        requireBase : false
-    });
+    // $locationProvider.html5Mode({
+    //     enabled : true,
+    //     requireBase : false
+    // });
 
 }]);
 
@@ -1056,7 +1060,6 @@ angular.module("MainApp")
         };
 
         $scope.showHide = function(outer, inner, value) {
-
             $scope.items[outer].inner[inner].hidden = !value;
            // console.log($scope.items[outer].inner[inner].hidden);
         };
@@ -1233,13 +1236,14 @@ angular.module("MainApp")
         template: '<div ng-transclude></div>',
         link: function(scope, element, attrs) {
 
-            $timeout(function() {
-
+            function accordionCode () {
                 var togglers = angular.element(element[0].querySelectorAll('[toggler]'));
                 var pannels = angular.element(element[0].querySelectorAll('.accordion__pannel'));
                 var contents = angular.element(element[0].querySelectorAll('.accordion__content'));
+
                 angular.forEach(togglers, function(toggler,index) {
                     toggler.onclick = function() {
+                        console.log('click');
                         if (toggler.className.indexOf('active') != -1) {
 
                             toggler.className = toggler.className.replace(/\bactive\b/,'');
@@ -1260,8 +1264,24 @@ angular.module("MainApp")
                         }
                     };
                 });
+            }
 
+
+            $timeout(function() {
+                accordionCode();
             }, 0);
+
+
+            scope.$watch(
+                function() {
+                    return element[0].querySelectorAll('[toggler]').length;
+                },
+                function (newValue, oldValue) {
+                    if (newValue !== oldValue) {
+                        accordionCode();
+                    }
+                }
+            );
 
         }
     };

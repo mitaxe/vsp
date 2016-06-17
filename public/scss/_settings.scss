@@ -348,6 +348,18 @@
           background: #fff;
           color: #5b5d5e;
         }
+        &.sv-helper {
+          background: #565758;
+          color: #fff;
+          svg {
+            fill: #fff!important;
+          }
+          .sandwich {
+            span {
+              background: #fff;
+            }
+          }
+        }
       }
 
       @include phone {
