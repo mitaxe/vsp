@@ -1,186 +1,186 @@
 .registration {
-  width: 460px;
-  margin: 75px auto 0;
-  padding: 20px 0;
-  box-shadow: 1px 2px 8px -1px rgba(0, 0, 0, 0.75);
+    width: 460px;
+    margin: 75px auto 0;
+    padding: 20px 0;
+    box-shadow: 1px 2px 8px -1px rgba(0, 0, 0, 0.75);
 
-  span {
-    display: inline-block;
-    vertical-align: top;
-    max-width: 70%;
-    font-size: 14px;
-    color: #5b5d5e;
-    font-weight: 300;
-    line-height: 16px;
-    &.line {
-      width: 45%;
-      height:1px;
-      background: #e0e0e0;
-      vertical-align: middle;
-    }
-    &.not_mandatory {
-      font-weight: 300;
-      color: #bcbdbd;
-      max-width: none;
-    }
-  }
-
-  &__nav_box {
-    padding: 0 20px;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  &__logo_row {
-    padding: 20px;
-    border-bottom: 1px solid #e0e0e0;
-    img {
-      width: 85px;
-      margin-right: 30px;
-    }
-  }
-  @include phone {
-    &__logo_row {
-      padding: 10px 20px;
-      border-bottom: none;
-      img {
-        margin-bottom: 25px;
-      }
-      .mob_btn {
-        float: none!important;
-        text-align: center;
-      }
-    }
-  }
-  &__sign_in_options {
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.1);
-  }
-  .options {
-    &__soc_bar {
-      margin-bottom: 15px;
-    }
-    &__form {
-      margin-top: 15px;
-      label {
+    span {
+        display: inline-block;
+        vertical-align: top;
+        max-width: 70%;
         font-size: 14px;
         color: #5b5d5e;
         font-weight: 300;
-        width:29%;
-        display: inline-block;
-        &.check_label {
-          position: relative;
-          width: 35%;
-          padding-left: 35px;
-          cursor: pointer;
-          &:before {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height:24px;
-            background:url("../img/checkbox_bg.png") no-repeat no-repeat 0 -1px;
-            background-size: 24px auto;
-            left: 0;
-            top:-5px;
-          }
+        line-height: 16px;
+        &.line {
+            width: 45%;
+            height:1px;
+            background: #e0e0e0;
+            vertical-align: middle;
         }
-      }
-      input {
-        width: 68%;
-        border-radius: 50px;
-        border: 1px solid #e0e0e0;
-        background: #fff;
-        outline: none;
-        font-size: 16px;
-        color: #3a3d3e;
-        padding: 3px 15px;
-        &:focus {
-          border-color: $col-green;
-          box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
+        &.not_mandatory {
+            font-weight: 300;
+            color: #bcbdbd;
+            max-width: none;
         }
-        &#password {
-          padding-right: 125px;
-        }
-        &:checked + .check_label:before {
-          background-position: 0px -86px;
-        }
-      }
-      .inp_row {
-        &:not(:last-child) {
-          margin-bottom: 15px;
-        }
-        position: relative;
-        &__forgot_pass {
-          font-size: 14px;
-          color: $col-green;
-          text-decoration: none;
-          right:18px;
-          top:6px;
-          position: absolute;
-        }
-      }
-      &.bottom {
-        padding: 20px 20px 0;
-        margin-top: 0;
-        .reg_info {
-          text-align: center;
-          font-size: 14px;
-          color: #5b5d5e;
-          font-weight: 300;
-          line-height: 16px;
-          margin-bottom: 15px;
-          a {
-            color: $col-green;
-            font-weight:500;
-            text-decoration: none;
-          }
-        }
-      }
     }
-  }
+
+    &__nav_box {
+        padding: 0 20px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    &__logo_row {
+        padding: 20px;
+        border-bottom: 1px solid #e0e0e0;
+        img {
+            width: 85px;
+            margin-right: 30px;
+        }
+    }
+    @include phone {
+        &__logo_row {
+            padding: 10px 20px;
+            border-bottom: none;
+            img {
+                margin-bottom: 25px;
+            }
+            .mob_btn {
+                float: none!important;
+                text-align: center;
+            }
+        }
+    }
+    &__sign_in_options {
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.1);
+    }
+    .options {
+        &__soc_bar {
+            margin-bottom: 15px;
+        }
+        &__form {
+            margin-top: 15px;
+            label {
+                font-size: 14px;
+                color: #5b5d5e;
+                font-weight: 300;
+                width:29%;
+                display: inline-block;
+                &.check_label {
+                    position: relative;
+                    width: 35%;
+                    padding-left: 35px;
+                    cursor: pointer;
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        width: 24px;
+                        height:24px;
+                        background:url("../img/checkbox_bg.png") no-repeat no-repeat 0 -1px;
+                        background-size: 24px auto;
+                        left: 0;
+                        top:-5px;
+                    }
+                }
+            }
+            input {
+                width: 68%;
+                border-radius: 50px;
+                border: 1px solid #e0e0e0;
+                background: #fff;
+                outline: none;
+                font-size: 16px;
+                color: #3a3d3e;
+                padding: 3px 15px;
+                &:focus {
+                    border-color: $col-green;
+                    box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
+                }
+                &#password {
+                    padding-right: 125px;
+                }
+                &:checked + .check_label:before {
+                    background-position: 0px -86px;
+                }
+            }
+            .inp_row {
+                &:not(:last-child) {
+                    margin-bottom: 15px;
+                }
+                position: relative;
+                &__forgot_pass {
+                    font-size: 14px;
+                    color: $col-green;
+                    text-decoration: none;
+                    right:18px;
+                    top:6px;
+                    position: absolute;
+                }
+            }
+            &.bottom {
+                padding: 20px 20px 0;
+                margin-top: 0;
+                .reg_info {
+                    text-align: center;
+                    font-size: 14px;
+                    color: #5b5d5e;
+                    font-weight: 300;
+                    line-height: 16px;
+                    margin-bottom: 15px;
+                    a {
+                        color: $col-green;
+                        font-weight:500;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
 }
 
 @include phone {
-  .registration {
-    width: 100%;
-    box-shadow: none;
-    span {
-      max-width: 56%;
-      &.not_mandatory {
-        max-width: none;
-      }
-    }
-    .btn-fb, .btn-google, .btn-vk{
-      margin: 0 6px;
-    }
-    .btn-google {
-      margin-left: 0;
-    }
-    &__sign_in_options {
-      padding: 10px 10px 20px;
-      margin: 0 10px;
-    }
-    .options {
-      &__form {
-        label {
-          margin-bottom: 10px;
-          padding-left: 15px;
-          width: auto;
-          &.check_label {
-            width: auto;
-          }
+    .registration {
+        width: 100%;
+        box-shadow: none;
+        span {
+            max-width: 56%;
+            &.not_mandatory {
+                max-width: none;
+            }
         }
-        input {
-          display: block;
-          width: 100%;
+        .btn-fb, .btn-google, .btn-vk{
+            margin: 0 6px;
         }
-        .inp_row {
-          &__forgot_pass {
-            position: static;
-            margin-top: 15px;
-            margin-left: 15px;
-          }
+        .btn-google {
+            margin-left: 0;
         }
-      }
+        &__sign_in_options {
+            padding: 10px 10px 20px;
+            margin: 0 10px;
+        }
+        .options {
+            &__form {
+                label {
+                    margin-bottom: 10px;
+                    padding-left: 15px;
+                    width: auto;
+                    &.check_label {
+                        width: auto;
+                    }
+                }
+                input {
+                    display: block;
+                    width: 100%;
+                }
+                .inp_row {
+                    &__forgot_pass {
+                        position: static;
+                        margin-top: 15px;
+                        margin-left: 15px;
+                    }
+                }
+            }
+        }
     }
-  }
 }

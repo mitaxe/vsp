@@ -1,106 +1,106 @@
 .add_channel {
-  &__logo_row {
-    margin-bottom: 30px;
-    img {
-      width: 85px;
-    }
-    span {
-      font-size: 18px;
-      color: #5b5d5e;
-      vertical-align: top;
-      margin-top: 5px;
-      display: inline-block;
-      margin-left: 46px;
-    }
-    .sign-in-google {
-      margin-left: 135px;
-      padding: 8px 40px;
-    }
-  }
-
-  @include phone {
     &__logo_row {
-      span {
-        max-width: 50%;
-      }
-      &--youtube {
+        margin-bottom: 30px;
         img {
-          display: block;
-          margin-bottom: 15px;
+            width: 85px;
         }
         span {
-          margin-left: 0;
-          margin-bottom: 20px;
-          max-width: none;
+            font-size: 18px;
+            color: #5b5d5e;
+            vertical-align: top;
+            margin-top: 5px;
+            display: inline-block;
+            margin-left: 46px;
         }
         .sign-in-google {
-          margin-left: 0;
+            margin-left: 135px;
+            padding: 8px 40px;
         }
-      }
     }
-  }
-  &__form {
-    .inp_row {
-      margin-bottom: 20px;
-      label {
-        font-weight: 300;
-        font-size: 14px;
-        width: 128px;
-        display: inline-block;
-        vertical-align: middle;
-        color: #5b5d5e;
-      }
-      input {
-        width: 300px;
-        border-radius: 50px;
-        background: #fff;
-        border:1px solid #dddddd;
-        height: 30px;
-        padding: 0 20px;
-      }
+
+    @include phone {
+        &__logo_row {
+            span {
+                max-width: 50%;
+            }
+            &--youtube {
+                img {
+                    display: block;
+                    margin-bottom: 15px;
+                }
+                span {
+                    margin-left: 0;
+                    margin-bottom: 20px;
+                    max-width: none;
+                }
+                .sign-in-google {
+                    margin-left: 0;
+                }
+            }
+        }
     }
-    .sign-in {
-      margin-left: 135px;
-    }
-  }
-  @include phone {
     &__form {
-      .inp_row {
-        label {
-          display: block;
-          margin-bottom: 10px;
-          margin-left: 5px;
+        .inp_row {
+            margin-bottom: 20px;
+            label {
+                font-weight: 300;
+                font-size: 14px;
+                width: 128px;
+                display: inline-block;
+                vertical-align: middle;
+                color: #5b5d5e;
+            }
+            input {
+                width: 300px;
+                border-radius: 50px;
+                background: #fff;
+                border:1px solid #dddddd;
+                height: 30px;
+                padding: 0 20px;
+            }
         }
-        input {
-          width: 100%;
-          max-width: 340px;
+        .sign-in {
+            margin-left: 135px;
         }
-      }
-      .sign-in {
-        margin-left: 0;
-      }
     }
-  }
-  &__or_row {
-    margin: 25px 0;
-    span{
-      font-size: 18px;
-      color: #5b5d5e;
-      &.line {
-        display: inline-block;
-        background: #e0e0e0;
-        height: 1px;
-        vertical-align: middle;
-        width: 210px;
-      }
+    @include phone {
+        &__form {
+            .inp_row {
+                label {
+                    display: block;
+                    margin-bottom: 10px;
+                    margin-left: 5px;
+                }
+                input {
+                    width: 100%;
+                    max-width: 340px;
+                }
+            }
+            .sign-in {
+                margin-left: 0;
+            }
+        }
     }
-  }
-  @include phone {
-    span {
-      &.line {
-        max-width: 190px;
-        width:43%;
-      }
+    &__or_row {
+        margin: 25px 0;
+        span{
+            font-size: 18px;
+            color: #5b5d5e;
+            &.line {
+                display: inline-block;
+                background: #e0e0e0;
+                height: 1px;
+                vertical-align: middle;
+                width: 210px;
+            }
+        }
     }
-  }
+    @include phone {
+        span {
+            &.line {
+                max-width: 190px;
+                width:43%;
+            }
+        }
+    }
 }

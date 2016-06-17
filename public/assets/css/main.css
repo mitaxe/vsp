@@ -3151,7 +3151,9 @@ textarea {
   .channel__head .block__subtitle {
     color: #999;
     font-size: 14px;
-    line-height: 1.3; }
+    line-height: 1.5; }
+  .channel__head .toggler__text {
+    margin-left: 10px; }
   @media screen and (max-width: 767px) {
     .channel__cover {
       height: 100px; }
@@ -4630,16 +4632,6 @@ textarea {
       font-size: 12px;
       color: #999999; }
 
-@media screen and (max-width: 767px) {
-  .profile_row--video .about_video__chevron, .profile_row--video .about_video__preview, .profile_row--video .about_video__text {
-    display: block; }
-  .profile_row--video .about_video__text {
-    padding-left: 0; }
-  .profile_row--video .about_video img {
-    margin-bottom: 10px; }
-  .profile_row--video .about_video__preview {
-    margin-bottom: 5px; } }
-
 .profile_row--video .btn {
   position: relative; }
   .profile_row--video .btn.btn-hide {
@@ -4666,14 +4658,6 @@ textarea {
 .profile_row--video .video_img {
   max-width: 410px; }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
-  .profile_row--video .video_img {
-    max-width: 350px; } }
-
-@media screen and (max-width: 767px) {
-  .profile_row--video .video_img {
-    max-width: 100%; } }
-
 .profile_row--video .select {
   margin-top: 0; }
 
@@ -4692,15 +4676,27 @@ textarea {
 @media screen and (max-width: 767px) {
   .profile_row--video input[type=text],
   .profile_row--video textarea {
-    width: 88%; } }
-
-@media screen and (max-width: 767px) {
+    width: 88%; }
   .profile_row--video .inline--padding {
     width: 100%;
     padding-left: 0;
     text-align: center; }
     .profile_row--video .inline--padding .btn-white {
-      display: inline-block; } }
+      display: inline-block; }
+  .profile_row--video .video_img {
+    max-width: 100%; }
+  .profile_row--video .about_video__chevron, .profile_row--video .about_video__preview, .profile_row--video .about_video__text {
+    display: block; }
+  .profile_row--video .about_video__text {
+    padding-left: 0; }
+  .profile_row--video .about_video img {
+    margin-bottom: 10px; }
+  .profile_row--video .about_video__preview {
+    margin-bottom: 5px; } }
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .profile_row--video .video_img {
+    max-width: 350px; } }
 
 .well {
   -webkit-user-select: none;

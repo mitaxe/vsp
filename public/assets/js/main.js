@@ -7,8 +7,10 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
     $rootScope.$on('$stateChangeSuccess', function(ev, to, toParams, from, fromParams) {
         // prevent child states form scrolling top
         if (!(
-            from.name.indexOf('user.') >= 0 &&
-            to.name.indexOf('user.') >= 0
+            (from.name.indexOf('user.') >= 0 &&
+            to.name.indexOf('user.') >= 0) ||
+            (from.name.indexOf('channels.') >= 0 &&
+            to.name.indexOf('channels.') >= 0)
         )) {
             document.body.scrollTop = document.documentElement.scrollTop = 0;
         }
@@ -19,6 +21,7 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
     $locale.NUMBER_FORMATS.DECIMAL_SEP = ".";
 
 }]);
+
 
 /* filters */
 
@@ -56,38 +59,31 @@ app.filter('secondsToTime', function() {
     };
 });
 
-
-// description filter
-app.filter('descriptionFormatter', function() {
-    return function(text, limit) {
+// text length filter
+app.filter('trimText', function() {
+    return function(text, limit, backwards) {
 
         if(!text) {
             return '';
         }
 
-        var words = text.split(' '),
-            wordsToShow = 0, //how much words need to show
-            counter = 0; //letter counter
-
-        // console.log(words);
+        var words = text.split(' ');
+        var wordsToShow = 0; // how much words need to show
+        var counter = 0; // letter counter
 
         for (var i = 0; i < words.length; i++) {
             if(counter < limit) {
-                counter += words[i].length; //count letters length
+                counter += words[i].length; // count letters length
                 wordsToShow = i;
-                // console.log('counter ' + counter);
             } else {
-                wordsToShow = i -1; //index of last word
-                // console.log('words ' + wordsToShow);
+                wordsToShow = i -1; // index of last word
                 break;
             }
         }
 
-
-       // console.log('words length ' + words.length + ' ned to show  ' + wordsToShow + ' have to slice ' + (words.length - wordsToShow))
-       // console.log(words.splice(0,words.length - wordsToShow).length);
-
-        if (counter + 10 >= limit) {
+        if (backwards) {
+            return '...' + words.splice(wordsToShow).join(' ');
+        } else if (counter + 10 >= limit) {
             return words.splice(0, wordsToShow).join(' ') + ' ...';
         } else {
             return words.join(' ');
@@ -95,6 +91,7 @@ app.filter('descriptionFormatter', function() {
 
     };
 });
+
 
 /* helpers */
 

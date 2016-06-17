@@ -26,8 +26,8 @@
                 </td>
                 <td class="table__channel">
                     <a ui-sref="channels({ id: channel.id })"><img ng-src="{{ channel.img }}" alt="channel avatar"/></a>
-                    <a href="#"><span>{{ channel.title | descriptionFormatter : 25 }}</span></a>
-                    <p class="hidden-tablet hidden-phone">{{ channel.description | descriptionFormatter : 200}}</p>
+                    <a href="#"><span>{{ channel.title | trimText : 25 }}</span></a>
+                    <p class="hidden-tablet hidden-phone">{{ channel.description | trimText : 200}}</p>
                     <div class="hidden-tablet hidden-desktop">
                         <i class="table__videos">{{ channel.statVideos | number }}</i><i class="videos"> Видео</i>
                     </div>
