@@ -1325,8 +1325,7 @@ textarea {
   width: 100%;
   height: 100%;
   padding-top: 70px;
-  padding-left: 320px;
-  transform: translate3d(0, 0, 0); }
+  padding-left: 320px; }
   .wrapper.sidebarHidden {
     padding-left: 0px; }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
@@ -4397,6 +4396,13 @@ textarea {
       .accordion .accordion_item__view--inner:hover {
         background: #fff;
         color: #5b5d5e; }
+      .accordion .accordion_item__view--inner.sv-helper {
+        background: #565758;
+        color: #fff; }
+        .accordion .accordion_item__view--inner.sv-helper svg {
+          fill: #fff !important; }
+        .accordion .accordion_item__view--inner.sv-helper .sandwich span {
+          background: #fff; }
     @media screen and (max-width: 767px) {
       .accordion .accordion_item__view--inner .item_content {
         font-size: 12px; } }
