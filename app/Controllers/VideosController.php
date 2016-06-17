@@ -98,7 +98,7 @@ class VideosController extends RESTController
     {
         $response = new VideosResponse();
         $queryParams = ['limit' => 12, 'conditions' => 'status=\'public\' AND exclusive=true'];
-
+        
         if ($offset = $this->request->getOffset()) {
             $queryParams['offset'] = $offset;
         }
