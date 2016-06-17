@@ -82,7 +82,7 @@ app.filter('trimText', function() {
         }
 
         if (backwards) {
-            return '...' + words.splice(wordsToShow).join(' ');
+            return '...' + words.splice(wordsToShow + 1).join(' ');
         } else if (counter + 10 >= limit) {
             return words.splice(0, wordsToShow).join(' ') + ' ...';
         } else {

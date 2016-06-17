@@ -82,7 +82,7 @@ app.filter('trimText', function() {
         }
 
         if (backwards) {
-            return '...' + words.splice(wordsToShow).join(' ');
+            return '...' + words.splice(wordsToShow + 1).join(' ');
         } else if (counter + 10 >= limit) {
             return words.splice(0, wordsToShow).join(' ') + ' ...';
         } else {
@@ -1225,12 +1225,29 @@ angular.module("MainApp")
 angular.module("MainApp")
 .controller('xChannelCtrl', ['$scope', '$stateParams', 'mainChannel', 'factory' , function($scope, $stateParams, mainChannel, factory) {
 
-    // for (var i = 0; i < $scope.channels.length; i++) {
-    //     if ($scope.channels[i].url === $stateParams.url) {
-    //         $scope.content = $scope.channels[i];
-    //     }
-    // }
+    // get main channel data
+    $scope.content = mainChannel.data.data;
 
+
+    // get the rest of channel data
+    factory.getChannelVideos($stateParams.id).success(function(response) {
+        $scope.channelVideos = response.data;
+        console.log('related videos ', $scope.channelVideos);
+    });
+
+
+    // subscribe
+    $scope.subscribe = function() {
+        $scope.subscribed = !$scope.subscribed;
+        if ($scope.subscribed) {
+            $scope.content.statSubscribers += 1;
+        } else {
+            $scope.content.statSubscribers -= 1;
+        }
+    };
+
+
+    // sort channels
     $scope.sortTypes = [
         'По дате добавления [новые]',
         'По дате добавления [старые]'
@@ -1238,13 +1255,6 @@ angular.module("MainApp")
 
     $scope.selectedSortType = $scope.sortTypes[0];
 
-    $scope.content = mainChannel.data.data;
-
-    factory.getChannelVideos($stateParams.id).success(function(response) {
-        $scope.channelVideos = response.data;
-        console.log('related videos ', $scope.channelVideos);
-    });
-    
     $scope.sortReverse = true;
 
     $scope.sortBy = function(index) {
