@@ -1,0 +1,22 @@
+/* closer */
+.close {
+    @include no-select;
+    display: inline-block;
+    margin-top: 4px;
+    cursor: pointer;
+    svg {
+        vertical-align: top;
+        transition: .3s;
+        fill: #ccc;
+    }
+    &:hover svg {
+        fill: $col-green;
+    }
+    @include phone {
+        margin-top: 2px;
+        svg {
+            width: 10px;
+            height: 10px;
+        }
+    }
+}

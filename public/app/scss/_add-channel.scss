@@ -1,4 +1,5 @@
 .add_channel {
+
     &__logo_row {
         margin-bottom: 30px;
         img {
@@ -18,27 +19,6 @@
         }
     }
 
-    @include phone {
-        &__logo_row {
-            span {
-                max-width: 50%;
-            }
-            &--youtube {
-                img {
-                    display: block;
-                    margin-bottom: 15px;
-                }
-                span {
-                    margin-left: 0;
-                    margin-bottom: 20px;
-                    max-width: none;
-                }
-                .sign-in-google {
-                    margin-left: 0;
-                }
-            }
-        }
-    }
     &__form {
         .inp_row {
             margin-bottom: 20px;
@@ -63,7 +43,27 @@
             margin-left: 135px;
         }
     }
+
+    &__or_row {
+        margin: 25px 0;
+        span{
+            font-size: 18px;
+            color: #5b5d5e;
+            &.line {
+                display: inline-block;
+                background: #e0e0e0;
+                height: 1px;
+                vertical-align: middle;
+                width: 210px;
+            }
+        }
+    }
+
     @include phone {
+        span.line {
+            max-width: 190px;
+            width:43%;
+        }
         &__form {
             .inp_row {
                 label {
@@ -80,27 +80,25 @@
                 margin-left: 0;
             }
         }
-    }
-    &__or_row {
-        margin: 25px 0;
-        span{
-            font-size: 18px;
-            color: #5b5d5e;
-            &.line {
-                display: inline-block;
-                background: #e0e0e0;
-                height: 1px;
-                vertical-align: middle;
-                width: 210px;
+        &__logo_row {
+            span {
+                max-width: 50%;
+            }
+            &--youtube {
+                img {
+                    display: block;
+                    margin-bottom: 15px;
+                }
+                span {
+                    margin-left: 0;
+                    margin-bottom: 20px;
+                    max-width: none;
+                }
+                .sign-in-google {
+                    margin-left: 0;
+                }
             }
         }
     }
-    @include phone {
-        span {
-            &.line {
-                max-width: 190px;
-                width:43%;
-            }
-        }
-    }
+
 }

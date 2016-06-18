@@ -22,102 +22,6 @@ app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $d
 
 }]);
 
-
-/* filters */
-
-// ng repeat start from
-app.filter('startFrom', function() {
-    return function(input, start) {
-        if(input) {
-            start = +start; //parse to int
-            return input.slice(start);
-        }
-        return [];
-    };
-});
-
-// video length formatter
-app.filter('secondsToTime', function() {
-
-    function padTime(t) {
-        return t < 10 ? "0"+t : t;
-    }
-
-    return function(_seconds) {
-        if (typeof _seconds !== "number" || _seconds < 0)
-            return "00:00:00";
-
-        var hours = Math.floor(_seconds / 3600),
-            minutes = Math.floor((_seconds % 3600) / 60),
-            seconds = Math.floor(_seconds % 60);
-
-        if(hours) {
-            return padTime(hours) + ":" + padTime(minutes) + ":" + padTime(seconds);
-        } else {
-            return  padTime(minutes) + ":" + padTime(seconds);
-        }
-    };
-});
-
-// text length filter
-app.filter('trimText', function() {
-    return function(text, limit, backwards) {
-
-        if(!text) {
-            return '';
-        }
-
-        var words = text.split(' ');
-        var wordsToShow = 0; // how much words need to show
-        var counter = 0; // letter counter
-
-        for (var i = 0; i < words.length; i++) {
-            if(counter < limit) {
-                counter += words[i].length; // count letters length
-                wordsToShow = i;
-            } else {
-                wordsToShow = i -1; // index of last word
-                break;
-            }
-        }
-
-        if (backwards) {
-            return '...' + words.splice(wordsToShow + 1).join(' ');
-        } else if (counter + 10 >= limit) {
-            return words.splice(0, wordsToShow).join(' ') + ' ...';
-        } else {
-            return words.join(' ');
-        }
-
-    };
-});
-
-
-/* helpers */
-
-// clone object simple
-function clone(obj) {
-    if (null === obj || "object" != typeof obj) return obj;
-    var copy = obj.constructor();
-    for (var attr in obj) {
-        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-    }
-    return copy;
-}
-
-// sort array by obg prop
-function dynamicSort(property) {
-    var sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-    }
-    return function (a,b) {
-        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-        return result * sortOrder;
-    };
-}
-
 angular.module("MainApp")
 .config(["$stateProvider", "$urlRouterProvider", "cfpLoadingBarProvider", "$locationProvider", function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider, $locationProvider) {
 
@@ -125,9 +29,17 @@ angular.module("MainApp")
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.includeSpinner = false;
 
-    $urlRouterProvider.otherwise("/");
+
+    // fix /# url
+    // $locationProvider.html5Mode({
+    //     enabled : true,
+    //     requireBase : false
+    // });
+
 
     // redirects
+    $urlRouterProvider.otherwise("/");
+
     $urlRouterProvider
     .when("/history", "/history/viewed")
     .when("/ratings", "/ratings/videos")
@@ -137,6 +49,7 @@ angular.module("MainApp")
     .when('/settings', '/settings/main');
 
 
+    // states
     $stateProvider
 
     // home
@@ -410,14 +323,101 @@ angular.module("MainApp")
         templateUrl: 'app/views/test.html'
     });
 
-
-    // fix /# url
-    // $locationProvider.html5Mode({
-    //     enabled : true,
-    //     requireBase : false
-    // });
-
 }]);
+
+/* filters */
+
+// ng repeat start from
+app.filter('startFrom', function() {
+    return function(input, start) {
+        if(input) {
+            start = +start; // parse to int
+            return input.slice(start);
+        }
+        return [];
+    };
+});
+
+// video length formatter
+app.filter('secondsToTime', function() {
+
+    function padTime(t) {
+        return t < 10 ? "0"+t : t;
+    }
+
+    return function(_seconds) {
+        if (typeof _seconds !== "number" || _seconds < 0)
+            return "00:00:00";
+
+        var hours = Math.floor(_seconds / 3600),
+            minutes = Math.floor((_seconds % 3600) / 60),
+            seconds = Math.floor(_seconds % 60);
+
+        if(hours) {
+            return padTime(hours) + ":" + padTime(minutes) + ":" + padTime(seconds);
+        } else {
+            return  padTime(minutes) + ":" + padTime(seconds);
+        }
+    };
+});
+
+// text length filter
+app.filter('trimText', function() {
+    return function(text, limit, backwards) {
+
+        if(!text) {
+            return '';
+        }
+
+        var words = text.split(' ');
+        var wordsToShow = 0; // how much words need to show
+        var counter = 0; // letter counter
+
+        for (var i = 0; i < words.length; i++) {
+            if(counter < limit) {
+                counter += words[i].length; // count letters length
+                wordsToShow = i;
+            } else {
+                wordsToShow = i -1; // index of last word
+                break;
+            }
+        }
+
+        if (backwards) {
+            return '...' + words.splice(wordsToShow + 1).join(' ');
+        } else if (counter + 10 >= limit) {
+            return words.splice(0, wordsToShow).join(' ') + ' ...';
+        } else {
+            return words.join(' ');
+        }
+
+    };
+});
+
+/* helpers */
+
+// clone object simple
+function clone(obj) {
+    if (null === obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
+
+// sort array by obg prop
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    };
+}
 
 angular.module("MainApp")
 .factory('factory', ["$http", function($http) {

@@ -1,0 +1,190 @@
+.accordion {
+    &__pannel {
+        overflow: hidden;
+        height: 0px;
+        transition: height .3s ease-in-out;
+    }
+    &__content {
+        margin: 0 0 15px 0 !important;
+        padding: 0 !important;
+    }
+    [toggler] {
+        @include no-select;
+        cursor: pointer;
+        color: $col-green;
+        .svg {
+            fill: $col-green;
+        }
+        &.active {
+            svg:not(.ctrl_icon) {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+
+/* accordion - channel settings page */
+.accordion {
+    .accordion_item {
+        position: relative;
+        &__view {
+            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+            background: #fff;
+            font-size: 16px;
+            color: #5b5d5e;
+            padding: 17px;
+            //transition: opacity .3s;
+            margin-bottom: 10px;
+            span {
+                color: #999999;
+            }
+            svg {
+                margin-right: 12px;
+                fill: $col-green;
+            }
+            &.active {
+                background: #565758;
+                color: #fff;
+                span {
+                    color: #fff;
+                }
+                svg {
+                    fill: #fff;
+                }
+                .icon_set {
+                    display: block;
+                }
+            }
+            &:hover {
+                background: #565758;
+                color: #fff;
+            }
+            &.icon_visible {
+                .icon_set {
+                    display: block;
+                }
+            }
+            &--inner {
+                .item_content {
+                    width: 80%;
+                    border: none;
+                    outline: none;
+                    &.editing {
+                        border-bottom: 1px dashed #ccc;
+                    }
+                }
+
+                margin-left: 30px;
+                position: relative;
+                .inner_icons {
+                    position: absolute;
+                    right: 12px;
+                    top:15px;
+                    &__toggler {
+                        outline: none;
+                        border: none;
+                        display: block;
+                        position: absolute;
+                        right: 0;
+                        top:-5px;
+                        svg {
+                            fill: #757575;
+                        }
+                    }
+                    .wrp {
+                        display: none;
+                    }
+                    .btn_edit,
+                    .btn_show_hide,
+                    .del_btn{
+                        border: none;
+                        outline: none;
+                        background: none;
+                        padding: 0;
+                        vertical-align: middle;
+                        svg {
+                            margin-right: 0;
+                            fill: #757575;
+                        }
+                    }
+                    .sandwich{
+                        display: inline-block;
+                        margin-top: 3px;
+                        span {
+                            background: #757575;
+                            box-shadow: none;
+                        }
+                    }
+                    &.visible {
+                        .inner_icons__toggler {
+                            display: none;
+                        }
+                        .wrp {
+                            display: block;
+                        }
+                    }
+                }
+                @include phone {
+                    .inner_icons {
+                        &__toggler {
+                            margin-right: -5px;
+                            svg {
+                                transform: rotate(90deg);
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+                &:hover {
+                    background: #fff;
+                    color: #5b5d5e;
+                }
+                &.sv-helper {
+                    background: #565758;
+                    color: #fff;
+                    svg {
+                        fill: #fff!important;
+                    }
+                    .sandwich {
+                        span {
+                            background: #fff;
+                        }
+                    }
+                }
+            }
+
+            @include phone {
+                &--inner {
+                    .item_content {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+    .icon_set {
+        display: none;
+        position: absolute;
+        right:12px;
+        top:15px;
+        .sandwich {
+            margin-top: 3px;
+            display: inline-block;
+            span {
+                background: #fff;
+                box-shadow: none;
+            }
+        }
+        .del_btn {
+            border: medium none;
+            height: 17px;
+            outline: medium none navy;
+            vertical-align: top;
+            width: 20px;
+            cursor: pointer;
+            svg {
+                fill: #fff;
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 .profile_row {
     margin-bottom: 28px;
+
     &__left{
         font-size: 14px;
         font-weight: 300;
@@ -14,6 +15,7 @@
             cursor: pointer;
         }
     }
+
     &__right {
         float: left;
         .btn {
@@ -59,6 +61,7 @@
             max-width: 200px;
             display: block;
         }
+
         &--inline {
             .inline {
                 display: inline-block;
@@ -85,6 +88,8 @@
     }
 
     @include phone {
+        margin-bottom: 14px;
+        
         &__left {
             float: none;
             label {
@@ -141,6 +146,7 @@
             }
         }
     }
+
     .check-box {
         margin-top:15px;
         padding-left: 8px;
@@ -149,14 +155,10 @@
             font-size: 14px;
         }
     }
+
     .btns {
         .btn {
             margin-right: 20px;
         }
-    }
-}
-@include phone {
-    .profile_row {
-        margin-bottom: 14px;
     }
 }

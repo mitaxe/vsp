@@ -115,9 +115,11 @@
 .subscribe_box {
     margin-top: 4px;
     float: right;
+
     .subscribe {
         border-radius: 50px;
     }
+
     .green_btn {
         @include no-select;
         color: #fff;
@@ -144,6 +146,7 @@
             background: linear-gradient(to bottom, #2b9f44 0%, #29be4a 100%);
         }
     }
+
     .counter {
         background: #e6e6e6;
         color: #5b5d5e;
@@ -161,6 +164,7 @@
         display: inline-block;
         border-radius: 0 50px 50px 0;
     }
+
     @include phone {
         .green_btn {
             padding: 0 20px;
@@ -170,11 +174,13 @@
         }
     }
 }
+
 .cat_counter {
     font-size: 36px;
     color: #1bbb47;
     margin-left: 10px;
 }
+
 .change_img {
     width:30px;
     height:25px;
@@ -195,6 +201,7 @@
         z-index: 2;
     }
 }
+
 .bg_text {
     background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
     color: #fff;
@@ -218,6 +225,7 @@
         top:10px;
     }
 }
+
 @include deskMax1600 {
     .bg_text.ava {
         right:0;
@@ -253,7 +261,6 @@
         font-size: 20px;
     }
 }
-
 
 .nm_channel {
     .user_channel_sort_box {

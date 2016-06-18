@@ -1,0 +1,43 @@
+/* article */
+.article {
+    color: #3a3d3e;
+    .thumb__title {
+        font-size: 48px;
+        margin-bottom: 15px;
+    }
+    p {
+        margin-bottom: 25px;
+    }
+    &__subtitle {
+        font-size: 26px;
+        color: #3a3d3e;
+        font-weight: 300;
+    }
+    &__grey-bg {
+        background: #fafafa;
+        padding: 25px 17.5px;
+        margin: 0 -15px 25px;
+    }
+    &__text {
+        font-size: 18px;
+        color: #666;
+    }
+
+    @include phone {
+        &__content {
+            padding: 0 20px;
+        }
+        &__grey-bg {
+            margin: 0 -12.5px 25px;
+        }
+    }
+    @include tablet {
+        &__content {
+            padding: 0 10px;
+        }
+        &__grey-bg {
+            margin: 0 -15px 25px;
+        }
+    }
+}
+/* article */

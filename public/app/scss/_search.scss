@@ -14,26 +14,26 @@
         }
     }
 }
+
 .search_amount {
     font-size: 48px;
     color: $col-green;
-}
-@include phone{
-    .search_amount {
+    @include phone{
         font-size: 20px;
     }
 }
+
 .sub_title {
     font-size: 18px;
     color: #5b5d5e;
     font-weight: 300;
     margin-bottom: 20px;
-}
-@include phone {
-    .sub_title {
+    @include phone {
         font-size: 14px;
     }
 }
+
+
 .article_thumb {
     &__article_preview {
         padding: 0 10px;
@@ -54,9 +54,7 @@
             margin-bottom: 15px;
         }
     }
-}
-@include phone {
-    .article_thumb {
+    @include phone {
         &__article_description {
             padding-left: 0;
             h3 {

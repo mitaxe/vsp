@@ -5,9 +5,17 @@ angular.module("MainApp")
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.includeSpinner = false;
 
-    $urlRouterProvider.otherwise("/");
+
+    // fix /# url
+    // $locationProvider.html5Mode({
+    //     enabled : true,
+    //     requireBase : false
+    // });
+
 
     // redirects
+    $urlRouterProvider.otherwise("/");
+
     $urlRouterProvider
     .when("/history", "/history/viewed")
     .when("/ratings", "/ratings/videos")
@@ -17,6 +25,7 @@ angular.module("MainApp")
     .when('/settings', '/settings/main');
 
 
+    // states
     $stateProvider
 
     // home
@@ -289,12 +298,5 @@ angular.module("MainApp")
         url: '/test',
         templateUrl: 'app/views/test.html'
     });
-
-
-    // fix /# url
-    // $locationProvider.html5Mode({
-    //     enabled : true,
-    //     requireBase : false
-    // });
 
 });

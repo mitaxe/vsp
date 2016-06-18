@@ -111,6 +111,7 @@
         }
     }
 }
+
 .btn-cancel {
     padding: 8px 22px 8px 18px ;
     svg {
@@ -177,6 +178,24 @@
     background: #dc4e41;
 }
 
+.btn-add_channel {
+    border-radius: 50px;
+    padding: 11px 45px 11px 90px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: $col-green;
+    background: #fff url("../img/add_channel_icon.png") no-repeat 8px 2px / 33px 33px;
+    display: inline-block;
+    margin-top: 15px;
+    @include phone {
+        font-size: 11px;
+        padding: 11px 30px 11px 57px;
+        background-size: 25px 25px;
+        background-position: 8px 4px;
+    }
+}
+
+/////
 .btn-video-ctrl {
     border-radius: 50px;
     border: 1px solid #4d4d4d;
