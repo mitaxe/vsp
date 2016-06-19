@@ -1300,9 +1300,10 @@ input[type='radio']:checked + .radio_label:after {
       margin-left: 30px;
       position: relative; }
       .accordion_item__view--inner .item_content {
+        line-height: 1.3;
         border: none;
         outline: none; }
-        .accordion_item__view--inner .item_content.editing {
+        .accordion_item__view--inner .item_content[contenteditable="true"] {
           border-bottom: 1px dashed #ccc; }
       .accordion_item__view--inner .inner_icons {
         position: absolute;
@@ -1359,16 +1360,18 @@ input[type='radio']:checked + .radio_label:after {
 
 .left_accordion__item {
   font-size: 16px;
-  color: #5b5d5e;
+  color: #5b5d5e !important;
   margin-bottom: 25px; }
   .left_accordion__item span {
-    color: #999999; }
+    color: #999; }
   .left_accordion__item svg {
     margin-right: 15px; }
   .left_accordion__item.active {
     font-weight: bold; }
     .left_accordion__item.active svg {
       fill: #757575; }
+    .left_accordion__item.active span {
+      color: #5b5d5e; }
 
 .left_accordion .inner_content {
   margin-left: 50px;
@@ -1741,6 +1744,12 @@ input[type='radio']:checked + .radio_label:after {
     .form input[disabled],
     .form textarea[disabled] {
       background: none; }
+    .form input.ng-invalid,
+    .form textarea.ng-invalid {
+      border: 1px solid red; }
+      .form input.ng-invalid:focus,
+      .form textarea.ng-invalid:focus {
+        box-shadow: none; }
   .form input {
     padding: 0 20px;
     height: 30px;
@@ -3351,7 +3360,7 @@ textarea {
     width: 100px;
     height: 100px; }
   .channels__table .table__channel span {
-    display: inline-block;
+    display: block;
     padding-bottom: 10px;
     font-size: 25px;
     color: #5d5d5e;

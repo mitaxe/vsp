@@ -1,7 +1,7 @@
 angular.module("MainApp")
 .controller('MainCtrl', ['$scope', '$sce', 'factory', 'prettyDate', function ($scope, $sce, factory, prettyDate) {
 
-    // factory data
+    // factory test data
     factory.getVideos().success(function(response) {
         $scope.blogs = response.videos;
         $scope.videos = response.videos;
@@ -10,11 +10,10 @@ angular.module("MainApp")
         $scope.goods = response.goods;
         $scope.notifications = response.notifications;
         $scope.comments = response.comments;
-
         // console.log($scope.videos)
     });
 
-    // current user
+    // current user test
     $scope.currentUser = {
         "name": "Current User",
         "url": "CurrUser",
@@ -24,14 +23,12 @@ angular.module("MainApp")
         "subscr_counter" : 18358461
     };
 
-
     // get humanized date format
     $scope.getDate = function(date,toDay) {
         return prettyDate(date,toDay);
     };
 
-
-    // limits and loadMore
+    // test limits and loadMore
     $scope.limits = {
         videos:  4,
         channels: 6,
@@ -39,7 +36,6 @@ angular.module("MainApp")
         comments: 2,
         reqCnt : 0
     };
-
 
     $scope.videosRq = 12;
     $scope.initialLimits = clone($scope.limits);

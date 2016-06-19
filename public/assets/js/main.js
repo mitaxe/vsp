@@ -730,7 +730,7 @@ angular.module("MainApp")
 angular.module("MainApp")
 .controller('MainCtrl', ['$scope', '$sce', 'factory', 'prettyDate', function ($scope, $sce, factory, prettyDate) {
 
-    // factory data
+    // factory test data
     factory.getVideos().success(function(response) {
         $scope.blogs = response.videos;
         $scope.videos = response.videos;
@@ -739,11 +739,10 @@ angular.module("MainApp")
         $scope.goods = response.goods;
         $scope.notifications = response.notifications;
         $scope.comments = response.comments;
-
         // console.log($scope.videos)
     });
 
-    // current user
+    // current user test
     $scope.currentUser = {
         "name": "Current User",
         "url": "CurrUser",
@@ -753,14 +752,12 @@ angular.module("MainApp")
         "subscr_counter" : 18358461
     };
 
-
     // get humanized date format
     $scope.getDate = function(date,toDay) {
         return prettyDate(date,toDay);
     };
 
-
-    // limits and loadMore
+    // test limits and loadMore
     $scope.limits = {
         videos:  4,
         channels: 6,
@@ -768,7 +765,6 @@ angular.module("MainApp")
         comments: 2,
         reqCnt : 0
     };
-
 
     $scope.videosRq = 12;
     $scope.initialLimits = clone($scope.limits);
@@ -985,9 +981,7 @@ angular.module("MainApp")
 angular.module("MainApp")
 .controller('SettingsCtrl', ['$scope', '$timeout', '$sce', function ($scope, $timeout, $sce) {
 
-
-    $scope.showMainIcon = false;
-
+    // test data for channels accordions
     $scope.items = [
         {
             name : 'Оригинальные пранки',
@@ -1012,7 +1006,7 @@ angular.module("MainApp")
         },
         {
             name : 'Лучшие видео',
-            inner: [
+            inner : [
                 {
                     name : 1,
                     hidden : false
@@ -1025,7 +1019,7 @@ angular.module("MainApp")
         },
         {
             name : 'Пантера Шоу',
-            inner: [
+            inner : [
                 {
                     name : 'Пранк',
                     hidden : false
@@ -1039,56 +1033,12 @@ angular.module("MainApp")
 
     ];
 
-    $scope.removeItem = function(outer, inner) {
-        // console.log(arguments.length);
-        if(arguments.length == 1) {
-            //remove outer element
-            $scope.items.splice(outer, 1);
-        } else {
-            //remove inner element
-            $scope.items[outer].inner.splice(inner, 1);
-        }
-    };
-
-
-    $scope.showInnerIcons = function($event) {
-        angular.element($event.currentTarget).parent().addClass('visible');
-    };
-
-    $scope.hideInnerICons = function($event) {
-        angular.element($event.currentTarget).children().removeClass('visible');
-    };
-
-
-    $scope.editableIndex = -1;
-
-    $scope.editMode = function(index) {
-        $scope.editableIndex = index;
-
-        // $timeout(function() {
-        //     document.getElementById('test').focus();
-        // }, 500);
-    };
-
-    $scope.disableAndUpdate = function(outer, inner, $event) {
-        if ($scope.editableIndex != -1) { // edit now
-            // $scope.items[outer].items[inner] = angular.element($event.currentTarget).val();
-            $scope.items[outer].inner[inner].name = angular.element($event.currentTarget).text();
-        }
-        $scope.editableIndex = -1;
-        // console.log(angular.element($event.currentTarget).html());
-    };
-
+    // highlight filtered accordion items
     $scope.highlight = function(text, search) {
         if (!search) {
             return $sce.trustAsHtml(text.toString());
         }
         return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
-    };
-
-    $scope.showHide = function(outer, inner, value) {
-        $scope.items[outer].inner[inner].hidden = !value;
-       // console.log($scope.items[outer].inner[inner].hidden);
     };
 
 }]);

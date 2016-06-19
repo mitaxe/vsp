@@ -47,9 +47,9 @@
         <div class="block">
             <div class="col-xs-12">
                 <div class="form">
-                    <div class="form__row">
-                        <label class="form__title">Email</label>
-                        <input type="email" class="white">
+                    <div class="form__row" ng-init="email = 'test@test.com'">
+                        <label class="form__title">Email *</label>
+                        <input type="email" class="white" ng-model="email" required>
                     </div>
                     <div class="form__row">
                         <label class="form__title hidden-phone"></label>
@@ -57,9 +57,9 @@
                         <label for="site_notification" class="check_label">Уведомлять о новых действиях на сайте</label>
                     </div>
                     <!-- <div class="form__row hidden-phone"></div> -->
-                    <div class="form__row">
-                        <label class="form__title">Пароль</label>
-                        <input class="white" ng-model="password" ng-disabled="passDisabled" type="password">
+                    <div class="form__row" ng-init="password = 'qwerty12345'; passDisabled = true">
+                        <label class="form__title">Пароль *</label>
+                        <input class="white" minlength="8" ng-model="password" ng-disabled="passDisabled" type="password" required>
                     </div>
                     <div class="form__row" ng-show="password">
                         <label class="form__title hidden-phone"></label>
@@ -67,7 +67,7 @@
                     </div>
                     <!-- <div class="form__row hidden-phone"></div> -->
                     <div class="form__row">
-                        <label class="form__title">Никнейм</label>
+                        <label class="form__title">Никнейм *</label>
                         <input type="text" class="white">
                     </div>
                     <!-- <div class="form__row hidden-phone"></div> -->
@@ -96,7 +96,7 @@
                     <!-- <div class="form__row hidden-phone"></div> -->
                     <div class="form__row">
                         <label class="form__title alignTop">Обо мне</label>
-                        <textarea class="white" cols="30" rows="10"></textarea>
+                        <textarea class="white" cols="30" rows="10" maxlength="500"></textarea>
                     </div>
                 </div>
             </div>
