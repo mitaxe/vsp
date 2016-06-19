@@ -98,17 +98,21 @@
     }
 }
 
-.btn-remove{
+.btn-remove {
     padding-left: 18px;
     svg {
         position: relative;
-        top:1px;
+        top: 1px;
         margin-right: 5px;
+        fill: #3a3b3b;
     }
     &:hover {
         svg {
             fill: $col-green;
         }
+    }
+    @include phone {
+        padding-left: 10px;
     }
 }
 
@@ -195,7 +199,7 @@
     }
 }
 
-/////
+/* video ctrl ? */
 .btn-video-ctrl {
     border-radius: 50px;
     border: 1px solid #4d4d4d;
@@ -233,11 +237,15 @@
         }
     }
 }
-label.ctrl {
+
+/* toggle button */
+.ctrl {
+    @include no-select;
     border-radius: 50px;
     background: #e6e6e6;
     height:22px;
     padding: 0 20px;
+    margin-left: 5px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2) inset;
     position: relative;
     &:before {
@@ -267,29 +275,41 @@ input:checked + label.ctrl {
     }
 }
 
-label.check_label {
+/* checkbox */
+.check_label {
+    @include no-select;
+    display: inline-block;
     position: relative;
-    width: 35%;
     padding-left: 35px;
+    height: 25px;
+    line-height: 25px;
+    // color: #5b5d5e;
     cursor: pointer;
     &:before {
         content: '';
         position: absolute;
         width: 24px;
-        height:24px;
+        height: 24px;
         background:url("../img/checkbox_bg.png") no-repeat no-repeat 0 -1px;
         background-size: 24px auto;
         left: 0;
-        top:-5px;
+        top: 0;
     }
 }
 input:checked + .check_label:before {
     background-position: 0px -86px;
 }
 
-label.radio_label {
+/* radio button */
+.radio_label {
+    @include no-select;
+    display: inline-block;
     position: relative;
     padding-left: 35px;
+    padding-right: 15px;
+    height: 25px;
+    line-height: 25px;
+    color: #5b5d5e;
     cursor: pointer;
     &:before {
         content: "";
@@ -301,7 +321,7 @@ label.radio_label {
         border: 1px solid #dddddd;
         box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.2);
         left: 0;
-        top:-2px;
+        top: 0;
     }
     &:after {
         content: '';
@@ -311,7 +331,7 @@ label.radio_label {
         border-radius: 50%;
         background: $col-green;
         left: 7px;
-        top:5px;
+        top: 8px;
         display: none;
     }
 }

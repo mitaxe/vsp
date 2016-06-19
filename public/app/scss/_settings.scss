@@ -1,305 +1,53 @@
 .settings {
-    .fw {
-        width: 100%;
+    .block {
+        margin-bottom: 0;
     }
-    &__row {
-        position: relative;
-        padding: 25px 0;
-        p {
-            font-size: 18px;
-            color: #5b5d5e;
-            margin-bottom: 17px;
-            span {
-                font-weight: 500;
-            }
-        }
-        .rm_top_right {
-            position: absolute;
-            right: 20px;
-            top:20px;
-        }
-        .radio_label {
-            margin-right: 20px;
-            font-size: 16px;
-            color: #5b5d5e;
-        }
-        @include tablet {
-            .inp_row {
-                margin-top: 30px;
-                .tablet_check_box {
-                    vertical-align: top;
-                }
-                p.sending_paragraph {
-                    display: inline-block;
-                    max-width: 80%;
-                }
-                .check_label {
-                    &:before {
-                        top:-1px;
-                    }
-                }
-            }
-        }
-        @include phone {
-            p {
-                font-size: 14px;
-            }
-            .inp_row {
-                margin-top: 30px;
-                .tablet_check_box {
-                    vertical-align: top;
-                    display: inline-block;
-                    margin-top: 3px;
-                }
-                p.sending_paragraph {
-                    display: inline-block;
-                    max-width: 80%;
-                    font-size: 15px;
-                }
-            }
-        }
-    }
-}
-
-.form_box {
-    &__inp_row {
-        margin-bottom: 20px;
-        label:not(.file) {
-            font-weight: 300;
-            font-size: 14px;
-            width: 128px;
-            display: inline-block;
-            vertical-align: middle;
-            color: #5b5d5e;
-            cursor: pointer;
-        }
-        .v-align-top {
-            vertical-align: top;
-            margin-top: 5px;
-            display: inline-block;
-        }
-        input {
-            width: 300px;
-            border-radius: 50px;
-            background: none;
-            border:1px solid #dddddd;
-            height: 30px;
-            padding: 0 20px;
-            outline: none;
-            &:focus {
-                border-color: $col-green;
-                box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
-            }
-        }
-        textarea {
-            border:1px solid #dddddd;
-            background: none;
-            width: 300px;
-            resize: none;
-            padding: 5px;
-            font-size: 12px;
-            outline: none;
-            &:focus {
-                border-color: $col-green;
-                box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
-            }
-        }
-        .edit {
-            margin-left: 5px;
-        }
-        &--image-upload {
-            .title {
-                display: inline-block;
-                vertical-align: top;
-                width: 128px;
-                font-weight: 300;
-                font-size: 14px;
-                color: #5b5d5e;
-            }
-            img.bg {
-                max-width: 900px;
-                width: 71%;
-            }
-            .ava {
-                max-width: 210px;
-                width: 20%;
-            }
-        }
-        @include tablet {
-            &--image-upload {
-                .title.bg {
-                    display: block;
-                    margin-bottom: 25px;
-                }
-            }
-        }
-        @include phone {
-            &--image-upload {
-                .title {
-                    display: block;
-                    margin-bottom: 25px;
-                }
-                img.bg {
-                    width: 90%;
-                }
-                .ava {
-                    max-width: none;
-                    width: 50%;
-                    float: left;
-                }
-                &:last-child {
-                    margin-bottom: 0;
-                }
-            }
-        }
-    }
-    .change-user-data {
-        margin-left: 130px;
-    }
-    .ctrl_box {
-        display: inline-block;
-        vertical-align: top;
-        padding-left: 10px;
-        max-width: 135px;
-        a, .file {
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-        span {
-            color: #999999;
-            font-size: 12px;
-        }
-    }
-    @include phone {
-        &__inp_row {
-            label {
-                display: block;
-                margin-bottom: 10px;
-            }
-            input, textarea {
-                width: 250px;
-            }
-        }
-        .change-user-data {
-            margin-left: 0;
-        }
-        .ctrl_box {
-            max-width: none;
-            width: 90%;
-            padding-top: 18px;
-            padding-left: 0;
-            span {
-                display: inline-block;
-                width: 130px;
-            }
-            .btns_wrapp {
-                text-align: center;
-                .btn-white {
-                    padding: 6px 22px;
-                    font-size: 14px;
-                    min-width: 115px;
-                    &:first-child {
-                        margin-right: 15px;
-                    }
-                    &.btn-remove {
-                        padding-left: 20px;
-                    }
-                }
-            }
-            &.ava {
-                float: left;
-                width: 50%;
-                padding: 0 0 0 15px;
-                text-align: left;
-                .btns_wrapp {
-                    text-align: left;
-                    .btn-white {
-                        &:first-child {
-                            margin-right: 0;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-.right_list,
-.left_list {
-    h3 {
+    p {
         font-size: 18px;
-        font-weight:bold;
-        color: #5b5d5e;
-        line-height: 24px;
+        margin-bottom: 15px;
     }
-}
-.left_list {
-    .left_accordion {
-        &__item {
-            font-size: 16px;
-            color: #5b5d5e;
-            margin-bottom: 25px;
-            span {
-                color: #999999;
-            }
-            svg {
-                margin-right: 15px;
-            }
-            &.active {
-                font-weight:bold;
-                svg {
-                    fill: #757575;
-                }
-            }
-        }
-        .inner_content {
-            margin-left: 50px;
-            font-size: 16px;
-            line-height: 40px;
-            color: #5b5d5e;
-        }
-    }
-}
-
-.inner_search_form {
-    position: relative;
-    margin: 20px 0;
-    &__search {
-        max-width: 500px;
-        width: 80%;
-        background: none;
-        border-radius: 50px;
-        border: 1px solid #dddddd;
-        height: 30px;
-        text-align: center;
-        &:focus {
-            border-color: $col-green;
-            box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
-            +.svg {
-                svg {
-                    fill: $col-green;
-                }
-            }
-        }
-    }
-    svg {
-        fill: #898989;
-        height: 18px;
-        left: 9px;
-        top: 7px;
-        transition: all 0.3s ease 0s;
-        width: 18px;
-        z-index: 99;
+    .rm_top_right {
         position: absolute;
+        right: 20px;
+        top: 0px;
     }
-    @include phone {
-        &__search {
-            width: 90%;
-        }
-    }
+
 }
 
 .highlightedText {
     background: yellow;
     color: #5b5d5e!important;
+}
+
+.ctrl_box {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 10px;
+    max-width: 150px;
+    .btn {
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+    span {
+        color: #999999;
+        font-size: 12px;
+    }
+    @include phone {
+        max-width: none;
+        width: 50%;
+        float: right;
+    }
+}
+
+@include phone {
+    .bg + .ctrl_box,
+    .video-preview + .ctrl_box {
+        padding: 0;
+        width: 100%;
+        float: none;
+        margin-top: 15px;
+        .btn {
+            margin-right: 10px;
+        }
+    }
 }

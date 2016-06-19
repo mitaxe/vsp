@@ -1,0 +1,127 @@
+/* helpers */
+
+// positioning
+.alignTop {
+    vertical-align: top !important;
+    margin-top: 3px;
+    display: inline-block;
+}
+
+.alignLeft {
+    text-align: left !important;
+}
+
+.alignRight {
+    text-align: right !important;
+}
+
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
+.tablet-center {
+    @include tablet {
+        text-align: center;
+    }
+}
+.mobile-center {
+    @include phone {
+        text-align: center;
+    }
+}
+
+.align-middle {
+    @include vertical-align;
+    display: block;
+}
+
+.center {
+    text-align: center;
+}
+
+.center-tablet {
+    @include tablet {
+        text-align: center;
+    }
+}
+.center-phone {
+    @include phone {
+        text-align: center;
+    }
+}
+.center-desktop {
+    @include desktop {
+        text-align: center;
+    }
+}
+
+.right-tablet {
+    @include tablet {
+        text-align: right;
+    }
+}
+.right-phone {
+    @include phone {
+        text-align: right;
+    }
+}
+.right-desktop {
+    @include desktop {
+        text-align: right;
+    }
+}
+
+.table-middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+// colors
+.colGreen {
+    color: $col-green !important;
+}
+.col-orange {
+    color: $col-orange !important;
+}
+.col-grey {
+    color: #3a3b3b;
+}
+
+// margins paddings
+.marginRight10 {
+    margin-right: 10px !important;
+}
+
+// hideden/visible
+.hidden-phone {
+    @include phone {
+        display: none !important;
+    };
+}
+
+.hidden-tablet {
+    @include tablet {
+        display: none !important;
+    };
+}
+
+.hidden-desktop {
+    @include desktop {
+        display: none !important;
+    };
+}
+
+.hidden-visibility {
+    visibility: hidden;
+    opacity: 0;
+    transition: 0s !important;
+}
+
+// other
+.relative {
+    position: relative;
+}

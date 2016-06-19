@@ -1,21 +1,21 @@
 <div class="content settings" autoscroll='true'>
     <div class="row">
+
         <div class="block block--header">
             <div class="col-xs-12 block__heading--ratings">
                 <div class="clearfix">
                     <h2 class="block__title">Комментарии и уведомления</h2>
                 </div>
                 <div class="clearfix">
-                    <tabs class="tabs fw four">
-                        <a ui-sref="comments" ui-sref-active="active">Все комментарии</a>
-                        <a ui-sref="notifications" ui-sref-active="active">Все уведомления</a>
+                    <tabs class="tabs fw">
+                        <a ui-sref="notifications-comments" ui-sref-active="active">Все комментарии</a>
+                        <a ui-sref="notifications-all" ui-sref-active="active">Все уведомления</a>
                         <div class="tabs__underline"></div>
                     </tabs>
                 </div>
             </div>
             <hr class="block__hr">
         </div>
-
 
         <div class="block">
             <div class="noti-tabs__box">
@@ -24,9 +24,11 @@
                          ng-class="{'reply': comment.type}">
                         <p class="reply"><a href="#" class="user-name">Clan ZIP: </a><a href="#">Привет, да видео монтировал я сам)), tes test test</a></p>
                     </div>
-                    <a href="#" class="btn btn-white">Загрузить еще</a>
+                    <br>
+                    <span href="#" class="btn btn-white">Загрузить еще</span>
                 </div>
             </div>
         </div>
+
     </div>
 </div>

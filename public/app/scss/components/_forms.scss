@@ -1,0 +1,138 @@
+.form {
+    position: relative;
+    margin: 0 0 20px;
+    color: $col-grey-3;
+
+    input,
+    textarea {
+        width: 300px;
+        max-width: 90%;
+        font-size: 15px;
+        outline: none;
+        background: none;
+        border: 1px solid #ddd;
+        color: #5b5d5e;
+        &:focus {
+            border-color: $col-green;
+            box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
+        }
+        &.white {
+            background: white;
+        }
+        &[disabled] {
+            background: none;
+        }
+    }
+
+    input {
+        padding: 0 20px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 50px;
+    }
+
+    textarea {
+        width: 300px;
+        resize: none;
+        padding: 10px 20px;
+    }
+
+    p {
+        margin-bottom: 15px;
+    }
+
+    &__search {
+        max-width: 500px;
+        width: 80%;
+        background: none;
+        border-radius: 50px;
+        border: 1px solid #dddddd;
+        height: 30px;
+        text-align: center;
+        &:focus {
+            border-color: $col-green;
+            box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
+            +.svg {
+                svg {
+                    fill: $col-green;
+                }
+            }
+        }
+        @include phone {
+            width: 90%;
+        }
+    }
+
+    &__icon {
+        fill: #898989;
+        height: 18px;
+        left: 9px;
+        top: 7px;
+        transition: all 0.3s ease 0s;
+        width: 18px;
+        z-index: 99;
+        position: absolute;
+    }
+
+    &__title {
+        margin-bottom: 10px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 128px;
+        font-weight: 300;
+        font-size: 14px;
+        color: #5b5d5e;
+        @include phone {
+            width: 100%;
+        }
+    }
+
+    .edit {
+        margin-left: 5px;
+    }
+
+    .change-user-data {
+        margin-left: 130px;
+    }
+
+    &__row {
+        @include clearfix;
+        margin-bottom: 20px;
+        font-size: 14px;
+
+        &--image-upload {
+            .bg {
+                margin-top: 5px;
+                max-width: 900px;
+                width: 71%;
+            }
+            .ava {
+                max-width: 210px;
+                width: 20%;
+            }
+            .video-preview {
+                max-width: 100%;
+                width: 300px;
+            }
+            @include phone {
+                .form__title {
+                    display: block;
+                    margin-bottom: 25px;
+                }
+                .bg {
+                    width: 90%;
+                }
+                .ava {
+                    max-width: none;
+                    width: 50%;
+                    float: left;
+                }
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+    }
+
+}

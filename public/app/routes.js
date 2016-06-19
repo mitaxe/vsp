@@ -233,12 +233,12 @@ angular.module("MainApp")
     })
 
     // notifications and comments
-    .state('comments', {
-        url : '/comments-all',
-        templateUrl : 'app/views/comments-all.html'
+    .state('notifications-comments', {
+        url : '/notifications/comments',
+        templateUrl : 'app/views/notifications-comments.html'
     })
-    .state('notifications', {
-        url : '/notifications-all',
+    .state('notifications-all', {
+        url : '/notifications/all',
         templateUrl : 'app/views/notifications-all.html'
     })
 

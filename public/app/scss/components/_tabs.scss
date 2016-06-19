@@ -19,12 +19,9 @@
     &.four {
         width: 75%;
     }
-    &.reg {
+    &--center {
         width: 100%;
         text-align: center;
-        a {
-            height:40px;
-        }
     }
     a {
         @include no-select;

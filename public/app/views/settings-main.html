@@ -1,101 +1,103 @@
+<!-- authorization block -->
 <div class="block">
-    <div class="col-xs-12 settings">
-        <div class="settings__row">
+    <div class="col-xs-12">
+        <div class="form">
             <p>Авторизация в VSP online</p>
-            <div class="form_box">
-                <form action="#">
-                    <div class="form_box__inp_row">
-                        <label for="email">Email</label> <input type="email" id="email" name="email">
-                    </div>
-                    <div class="form_box__inp_row">
-                        <label for="password">Пароль</label> <input type="password" id="password" name="password">
-                    </div>
-
-                    <a href="#" class="btn btn-green main-ui change-user-data">Изменить</a>
-                    <a href="#" class="btn btn-white btn-remove rm_top_right hidden-phone hidden-tablet">
-                        <i class="svg"><svg width="10" xmlns="http://www.w3.org/2000/svg" height="11" viewBox="0 0 64 64"><path fill="" d="M28.94 31.786L.614 60.114c-.787.787-.787 2.062 0 2.85.393.393.91.59 1.424.59.516 0 1.03-.197 1.424-.59L32.003 34.42l28.54 28.54c.395.395.91.59 1.425.59s1.03-.195 1.424-.59c.788-.786.788-2.06 0-2.848L35.065 31.786 63.41 3.438c.787-.787.787-2.062 0-2.85-.787-.785-2.062-.785-2.848 0L32.002 29.15 3.443.59C2.653-.196 1.38-.196.59.59c-.786.787-.786 2.062 0 2.85l28.35 28.346z"/></svg></i>
-                        Удалить канал</a>
-                </form>
+            <div class="form__row">
+                <label class="form__title">Email</label>
+                <input type="email">
             </div>
+            <div class="form__row">
+                <label class="form__title">Пароль</label>
+                <input type="password">
+            </div>
+            <span class="btn btn-green main-ui change-user-data">Изменить</span>
+            <span class="btn btn-white btn-remove rm_top_right hidden-phone hidden-tablet">
+                <i class="svg"><svg width="10" xmlns="http://www.w3.org/2000/svg" height="11" viewBox="0 0 64 64"><path fill="" d="M28.94 31.786L.614 60.114c-.787.787-.787 2.062 0 2.85.393.393.91.59 1.424.59.516 0 1.03-.197 1.424-.59L32.003 34.42l28.54 28.54c.395.395.91.59 1.425.59s1.03-.195 1.424-.59c.788-.786.788-2.06 0-2.848L35.065 31.786 63.41 3.438c.787-.787.787-2.062 0-2.85-.787-.785-2.062-.785-2.848 0L32.002 29.15 3.443.59C2.653-.196 1.38-.196.59.59c-.786.787-.786 2.062 0 2.85l28.35 28.346z"/></svg></i>
+                Удалить канал
+            </span>
         </div>
+    </div>
+    <hr class="block__hr">
+</div><!-- authorization block -->
 
-        <hr class="block__hr">
 
-        <div class="settings__row">
+<!-- activation block -->
+<div class="block">
+    <div class="col-xs-12">
+        <div class="form">
             <p>Активировать на моем канале</p>
-            <input type="checkbox" class="hidden" id="activate_on_channel">
-            <label for="activate_on_channel" class="ctrl"></label>
+            <input type="checkbox" class="hidden" id="activate">
+            <label class="ctrl" for="activate"></label>
         </div>
+    </div>
+    <hr class="block__hr">
+</div><!-- activation block -->
 
-        <hr class="block__hr">
+<!-- main settings block -->
+<div class="block">
+    <div class="col-xs-12">
+        <div class="form"  id="chanel_info">
 
-        <div class="settings__row">
-            <div class="form_box">
-                <form action="" id="chanel_info">
-                    <div class="form_box__inp_row">
-                        <label for="channel_name">Название канала</label> <input type="text" id="channel_name" name="channel_name">
-                        <span class="edit">
-                            <i class="svg">
-                                <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve">
-                                    <path fill="#0c3" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02
-                                        c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z
-                                        "/>
-                                </svg>
-                            </i>
-                        </span>
-                    </div>
-                    <div class="form_box__inp_row">
-                        <label class="v-align-top" for="channel_description">Описание канала</label>
-                        <textarea name="channel_description" id="channel_description" cols="30" rows="10"></textarea>
-                        <span class="edit v-align-top">
-                            <i class="svg">
-                                <svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.5px" height="12.75px" viewBox="0 0 12.5 12.75" enable-background="new 0 0 12.5 12.75" xml:space="preserve">
-                                    <path fill="#0c3" d="M0,10.109v2.641h2.639l7.639-7.715L7.639,2.394L0,10.109L0,10.109z M12.292,3.02
-                                        c0.277-0.278,0.277-0.695,0-0.973l-1.597-1.599c-0.279-0.278-0.695-0.278-0.973,0l-1.25,1.251l2.639,2.641L12.292,3.02L12.292,3.02z
-                                        "/>
-                                </svg>
-                            </i>
-                        </span>
-                    </div>
+            <!-- channel name -->
+            <div class="form__row">
+                <label class="form__title">Название канала</label>
+                <input type="text">
+                <span class="edit alignTop">
+                    <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path fill="#0c3" d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/></svg></i>
+                </span>
+            </div><!-- channel name -->
 
-                    <div class="form_box__inp_row form_box__inp_row--image-upload">
-                        <span class="title bg">Обложка <br class="hidden-desktop"> канала</span>
-                        <img class="bg" src="assets/img/channel_img.png" alt="channel img">
-                        <div class="ctrl_box">
-                            <div class="btns_wrapp">
-                                <input type="file" class="hidden" id="channel_bg" name="channel_bg">
-                                <label for="channel_bg" class="btn btn-white file">Загрузить</label>
-                                <a href="#" class="btn btn-white btn-remove">
-                                    <i class="svg"><svg width="10" xmlns="http://www.w3.org/2000/svg" height="11" viewBox="0 0 64 64"><path fill="" d="M28.94 31.786L.614 60.114c-.787.787-.787 2.062 0 2.85.393.393.91.59 1.424.59.516 0 1.03-.197 1.424-.59L32.003 34.42l28.54 28.54c.395.395.91.59 1.425.59s1.03-.195 1.424-.59c.788-.786.788-2.06 0-2.848L35.065 31.786 63.41 3.438c.787-.787.787-2.062 0-2.85-.787-.785-2.062-.785-2.848 0L32.002 29.15 3.443.59C2.653-.196 1.38-.196.59.59c-.786.787-.786 2.062 0 2.85l28.35 28.346z"/></svg></i>
-                                    Удалить</a>
-                            </div>
-                            <span>Размер бэкгрунда 3200 на 800 пикселей</span>
-                        </div>
-                    </div>
+            <!-- channel description -->
+            <div class="form__row">
+                <label class="form__title alignTop">Описание канала</label>
+                <textarea cols="30" rows="10"></textarea>
+                <span class="edit alignTop">
+                    <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path fill="#0c3" d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
+                    </svg></i>
+                </span>
+            </div><!-- channel description -->
 
-                    <div class="form_box__inp_row form_box__inp_row--image-upload clearfix">
-                        <span class="title">Аватар канала</span>
-                        <img class="ava" src="assets/img/channel_ava.png" alt="channel img">
-                        <div class="ctrl_box ava">
-                            <div class="btns_wrapp">
-                                <input type="file" class="hidden" id="channel_ava" name="channel_ava">
-                                <label for="channel_ava" class="btn btn-white file">Загрузить</label>
-                                <a href="#" class="btn btn-white btn-remove">
-                                    <i class="svg"><svg width="10" xmlns="http://www.w3.org/2000/svg" height="11" viewBox="0 0 64 64"><path fill="" d="M28.94 31.786L.614 60.114c-.787.787-.787 2.062 0 2.85.393.393.91.59 1.424.59.516 0 1.03-.197 1.424-.59L32.003 34.42l28.54 28.54c.395.395.91.59 1.425.59s1.03-.195 1.424-.59c.788-.786.788-2.06 0-2.848L35.065 31.786 63.41 3.438c.787-.787.787-2.062 0-2.85-.787-.785-2.062-.785-2.848 0L32.002 29.15 3.443.59C2.653-.196 1.38-.196.59.59c-.786.787-.786 2.062 0 2.85l28.35 28.346z"/></svg></i>
-                                    Удалить</a>
-                            </div>
-                            <span>Размер аватара 498 на 498 пикселей</span>
-                        </div>
+            <!-- channel cover -->
+            <div class="form__row form__row--image-upload">
+                <div><span class="form__title">Обложка канала</span></div>
+                <img class="bg" src="assets/img/channel_img.png" alt="channel img">
+                <div class="ctrl_box ctrl_box--bg">
+                    <div class="btns_wrapp">
+                        <input type="file" class="hidden" id="uploadBg">
+                        <label class="btn btn-white file" for="uploadBg">Загрузить</label>
+                        <a href="#" class="btn btn-white btn-remove">
+                            <i class="svg"><svg width="10" xmlns="http://www.w3.org/2000/svg" height="11" viewBox="0 0 64 64"><path fill="" d="M28.94 31.786L.614 60.114c-.787.787-.787 2.062 0 2.85.393.393.91.59 1.424.59.516 0 1.03-.197 1.424-.59L32.003 34.42l28.54 28.54c.395.395.91.59 1.425.59s1.03-.195 1.424-.59c.788-.786.788-2.06 0-2.848L35.065 31.786 63.41 3.438c.787-.787.787-2.062 0-2.85-.787-.785-2.062-.785-2.848 0L32.002 29.15 3.443.59C2.653-.196 1.38-.196.59.59c-.786.787-.786 2.062 0 2.85l28.35 28.346z"/></svg></i>
+                            Удалить
+                        </a>
                     </div>
-                </form>
-            </div>
+                    <span>Размер бэкгрунда 3200 на 800 пикселей</span>
+                </div>
+            </div><!-- channel cover -->
+
+            <!-- channel avatar -->
+            <div class="form__row form__row--image-upload clearfix">
+                <span class="form__title alignTop">Аватар канала</span>
+                <img class="ava" src="assets/img/channel_ava.png" alt="channel img">
+                <div class="ctrl_box">
+                    <input type="file" class="hidden" id="uploadAvatar">
+                    <label class="btn btn-white file" for="uploadAvatar">Загрузить</label><br>
+                    <a class="btn btn-white btn-remove">
+                        <i class="svg"><svg width="10" xmlns="http://www.w3.org/2000/svg" height="11" viewBox="0 0 64 64"><path fill="" d="M28.94 31.786L.614 60.114c-.787.787-.787 2.062 0 2.85.393.393.91.59 1.424.59.516 0 1.03-.197 1.424-.59L32.003 34.42l28.54 28.54c.395.395.91.59 1.425.59s1.03-.195 1.424-.59c.788-.786.788-2.06 0-2.848L35.065 31.786 63.41 3.438c.787-.787.787-2.062 0-2.85-.787-.785-2.062-.785-2.848 0L32.002 29.15 3.443.59C2.653-.196 1.38-.196.59.59c-.786.787-.786 2.062 0 2.85l28.35 28.346z"/></svg></i>
+                        Удалить
+                    </a><br>
+                    <span>Размер аватара 498 на 498 пикселей</span>
+                </div>
+            </div><!-- channel avatar -->
+
         </div>
+    </div>
+    <hr class="block__hr">
+</div><!-- main settings block -->
 
-        <hr class="block__hr">
-
-        <div class="settings__row">
-            <a href="#" class="btn btn-green main-ui change-user-data">Сохранить</a>
-        </div>
-
+<!-- save button -->
+<div class="block">
+    <div class="col-xs-12">
+        <a href="#" class="btn btn-green main-ui change-user-data">Сохранить</a>
     </div>
 </div>

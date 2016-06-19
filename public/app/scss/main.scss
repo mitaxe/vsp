@@ -6,10 +6,10 @@
 
 @import "base/reset";
 @import "base/fixes";
-
-@import "base/buttons";
+@import "base/helpers";
 @import "base/animations";
 
+@import "components/buttons";
 @import "components/slider";
 @import "components/accordion";
 @import "components/comments";
@@ -17,6 +17,7 @@
 @import "components/closer";
 @import "components/article";
 @import "components/select";
+@import "components/forms";
 
 @import "general";
 
@@ -31,7 +32,6 @@
 @import "video";
 @import "add-channel";
 @import "settings";
-@import "profile-edit";
 @import "video-edit";
 
 @import "test";

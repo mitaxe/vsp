@@ -1,5 +1,7 @@
 <div class="content settings" autoscroll='true'>
     <div class="row">
+
+        <!-- settings page header -->
         <div class="block block--header">
             <div class="col-xs-12 block__heading--ratings">
                 <div class="clearfix">
@@ -8,20 +10,17 @@
                 <div class="clearfix">
                     <tabs class="tabs fw four">
                         <a ui-sref="settings.main" ui-sref-active="active">Основные настройки</a>
+                        <hr class="block__hr hidden-tablet hidden-desktop">
                         <a ui-sref="settings.video" ui-sref-active="active">Работа с видео и плейлистами</a>
-                        <div class="tabs__underline"></div>
+                        <hr class="block__hr hidden-tablet hidden-desktop">
                     </tabs>
                 </div>
             </div>
-            <hr class="block__hr">
-        </div>
-
+            <hr class="block__hr hidden-phone">
+        </div><!-- settings page header -->
 
         <!-- settings views -->
         <div ui-view></div>
+        
     </div>
 </div>
-
-
-
-

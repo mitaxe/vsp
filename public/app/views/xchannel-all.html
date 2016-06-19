@@ -1,7 +1,4 @@
 <div class="block block--white block--big">
-    <div class="col-xs-12">
-
-    </div>
     <div class="col-xs-12 col-sm-6" ng-repeat="video in channelVideos | orderBy: 'video.date' : sortReverse | limitTo: 2">
         <div class="thumb thumb--big" ng-class="{'thumb--exclusive': video.exclusive > 0}">
             <a ui-sref="videos({ id: video.id })">
@@ -21,15 +18,15 @@
     </div>
 </div>
 
-<div class="banner_box">
+<!-- banner block -->
+<div class="block">
     <div class="col-xs-12">
-        <div class="block">
+        <div class="banner_box">
             <img ng-src="assets/img/banner1.png" alt="banner1">
         </div>
     </div>
 </div>
 
-<!-- all videos block -->
 <div class="block block--white">
     <div class="col-xs-6 col-sm-4 col-md-3"
          ng-repeat="video in channelVideos | orderBy: 'video.date' : sortReverse | limitTo: limits.videos" ng-init="$parent.sliderCounter = $index">

@@ -25,30 +25,11 @@
         }
     }
 
-    &__nav_box {
-        padding: 0 20px;
-        border-bottom: 1px solid #e0e0e0;
-    }
     &__logo_row {
         padding: 20px;
-        border-bottom: 1px solid #e0e0e0;
         img {
             width: 85px;
             margin-right: 30px;
-        }
-    }
-
-    @include phone {
-        &__logo_row {
-            padding: 10px 20px;
-            border-bottom: none;
-            img {
-                margin-bottom: 25px;
-            }
-            .mob_btn {
-                float: none!important;
-                text-align: center;
-            }
         }
     }
 
@@ -57,7 +38,7 @@
         background: #fff;
         box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.1);
     }
-    
+
     .options {
         &__soc_bar {
             margin-bottom: 15px;
@@ -68,23 +49,9 @@
                 font-size: 14px;
                 color: #5b5d5e;
                 font-weight: 300;
-                width:29%;
                 display: inline-block;
-                &.check_label {
-                    position: relative;
-                    width: 35%;
-                    padding-left: 35px;
-                    cursor: pointer;
-                    &:before {
-                        content: '';
-                        position: absolute;
-                        width: 24px;
-                        height:24px;
-                        background:url("../img/checkbox_bg.png") no-repeat no-repeat 0 -1px;
-                        background-size: 24px auto;
-                        left: 0;
-                        top:-5px;
-                    }
+                &:not(.check_label) {
+                    width: 29%;
                 }
             }
             input {
@@ -102,9 +69,6 @@
                 }
                 &#password {
                     padding-right: 125px;
-                }
-                &:checked + .check_label:before {
-                    background-position: 0px -86px;
                 }
             }
             .inp_row {
@@ -140,12 +104,20 @@
             }
         }
     }
-}
 
-@include phone {
-    .registration {
-        width: 100%;
-        box-shadow: none;
+    @include phone {
+        margin: 0 auto 0;
+        &__logo_row {
+            padding: 10px 20px;
+            border-bottom: none;
+            img {
+                margin-bottom: 25px;
+            }
+            .mob_btn {
+                float: none!important;
+                text-align: center;
+            }
+        }
         span {
             max-width: 56%;
             &.not_mandatory {
@@ -166,10 +138,10 @@
             &__form {
                 label {
                     margin-bottom: 10px;
-                    padding-left: 15px;
                     width: auto;
-                    &.check_label {
-                        width: auto;
+                    &:not(.check_label) {
+                        width: 100%;
+                        padding-left: 15px;
                     }
                 }
                 input {
@@ -186,4 +158,5 @@
             }
         }
     }
+
 }

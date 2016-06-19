@@ -67,12 +67,12 @@
                         <div class="row hidden-desktop hidden-phone">
                             <div class="col-xs-6">
                                 <div class="row">
-                                    <div class="col-xs-3 ctrl">
+                                    <div class="col-xs-3">
                                         <a ui-sref="videos({ id: mainVideos[1].id })" class="btn btn-video-ctrl">
                                             <img class="prev" src="assets/img/video-prev-icon.png" alt="prev icon">
                                         </a>
                                     </div>
-                                    <div class="col-xs-9 l_text">
+                                    <div class="col-xs-9">
                                         <div class="thumb__img">
                                             <a ui-sref="videos({ id: mainVideos[1].id })">
                                                 <span class="thumb__length">{{mainVideos[1].length | secondsToTime}}</span>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="row">
-                                    <div class="col-xs-9 r_text">
+                                    <div class="col-xs-9">
                                         <div class="thumb__img">
                                             <a ui-sref="videos({ id: mainVideos[2].id })">
                                                 <span class="thumb__length">{{mainVideos[2].length | secondsToTime}}</span>
@@ -94,7 +94,7 @@
                                         </div>
                                         <p class="th_description">{{mainVideos[1].title}}</p>
                                     </div>
-                                    <div class="col-xs-3 ctrl">
+                                    <div class="col-xs-3 alignLeft">
                                         <a ui-sref="videos({ id: mainVideos[2].id })" class="btn btn-video-ctrl">
                                             <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
                                         </a>
@@ -238,7 +238,7 @@
             <div class="block center">
                 <a class="btn btn-more" ng-click="loadMore('comments')">ЗАГРУЗИТЬ ЕЩЕ</a>
             </div>
-            
+
         </div> <!-- end col -->
 
         <div class="col-xs-12 col-md-5">

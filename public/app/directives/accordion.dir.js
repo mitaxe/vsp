@@ -13,9 +13,8 @@ angular.module("MainApp")
 
                 angular.forEach(togglers, function(toggler,index) {
                     toggler.onclick = function() {
-                        console.log('click');
+                        // console.log('click');
                         if (toggler.className.indexOf('active') != -1) {
-
                             toggler.className = toggler.className.replace(/\bactive\b/,'');
                             console.log(toggler.className);
                             angular.forEach(pannels, function(el) {
@@ -36,11 +35,9 @@ angular.module("MainApp")
                 });
             }
 
-
             $timeout(function() {
                 accordionCode();
             }, 0);
-
 
             scope.$watch(
                 function() {

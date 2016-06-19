@@ -21,152 +21,11 @@
             }
         }
     }
-}
-
-/* accordion - channel settings page */
-.accordion {
-    .accordion_item {
-        position: relative;
-        &__view {
-            box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-            background: #fff;
-            font-size: 16px;
-            color: #5b5d5e;
-            padding: 17px;
-            //transition: opacity .3s;
-            margin-bottom: 10px;
-            span {
-                color: #999999;
-            }
-            svg {
-                margin-right: 12px;
-                fill: $col-green;
-            }
-            &.active {
-                background: #565758;
-                color: #fff;
-                span {
-                    color: #fff;
-                }
-                svg {
-                    fill: #fff;
-                }
-                .icon_set {
-                    display: block;
-                }
-            }
-            &:hover {
-                background: #565758;
-                color: #fff;
-            }
-            &.icon_visible {
-                .icon_set {
-                    display: block;
-                }
-            }
-            &--inner {
-                .item_content {
-                    width: 80%;
-                    border: none;
-                    outline: none;
-                    &.editing {
-                        border-bottom: 1px dashed #ccc;
-                    }
-                }
-
-                margin-left: 30px;
-                position: relative;
-                .inner_icons {
-                    position: absolute;
-                    right: 12px;
-                    top:15px;
-                    &__toggler {
-                        outline: none;
-                        border: none;
-                        display: block;
-                        position: absolute;
-                        right: 0;
-                        top:-5px;
-                        svg {
-                            fill: #757575;
-                        }
-                    }
-                    .wrp {
-                        display: none;
-                    }
-                    .btn_edit,
-                    .btn_show_hide,
-                    .del_btn{
-                        border: none;
-                        outline: none;
-                        background: none;
-                        padding: 0;
-                        vertical-align: middle;
-                        svg {
-                            margin-right: 0;
-                            fill: #757575;
-                        }
-                    }
-                    .sandwich{
-                        display: inline-block;
-                        margin-top: 3px;
-                        span {
-                            background: #757575;
-                            box-shadow: none;
-                        }
-                    }
-                    &.visible {
-                        .inner_icons__toggler {
-                            display: none;
-                        }
-                        .wrp {
-                            display: block;
-                        }
-                    }
-                }
-                @include phone {
-                    .inner_icons {
-                        &__toggler {
-                            margin-right: -5px;
-                            svg {
-                                transform: rotate(90deg);
-                                margin-right: 0;
-                            }
-                        }
-                    }
-                }
-                &:hover {
-                    background: #fff;
-                    color: #5b5d5e;
-                }
-                &.sv-helper {
-                    background: #565758;
-                    color: #fff;
-                    svg {
-                        fill: #fff!important;
-                    }
-                    .sandwich {
-                        span {
-                            background: #fff;
-                        }
-                    }
-                }
-            }
-
-            @include phone {
-                &--inner {
-                    .item_content {
-                        font-size: 12px;
-                    }
-                }
-            }
-        }
-    }
     .icon_set {
         display: none;
         position: absolute;
-        right:12px;
-        top:15px;
+        right: 12px;
+        top: 15px;
         .sandwich {
             margin-top: 3px;
             display: inline-block;
@@ -176,15 +35,174 @@
             }
         }
         .del_btn {
-            border: medium none;
-            height: 17px;
-            outline: medium none navy;
+            width: 15px;
+            margin-right: 5px;
+        }
+    }
+
+}
+
+/* accordion - channel settings page */
+.accordion_item {
+    position: relative;
+    &__view {
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+        background: #fff;
+        font-size: 16px;
+        color: #5b5d5e;
+        padding: 17px;
+        padding-right: 80px;
+        margin-bottom: 10px;
+        span {
+            color: #999999;
+        }
+        svg {
+            margin-right: 12px;
+            fill: $col-green;
+        }
+        .svg {
             vertical-align: top;
-            width: 20px;
-            cursor: pointer;
+        }
+        &:hover,
+        &.active,
+        &.icon_visible {
+            background: #565758;
+            color: #fff;
+            span {
+                color: #fff;
+            }
             svg {
-                fill: #fff;
+                fill: white;
             }
         }
+        &.icon_visible {
+            .icon_set {
+                display: block;
+            }
+        }
+        &--inner {
+            padding-right: 135px;
+            margin-left: 30px;
+            position: relative;
+            .item_content {
+                border: none;
+                outline: none;
+                &.editing {
+                    border-bottom: 1px dashed #ccc;
+                }
+            }
+            .inner_icons {
+                position: absolute;
+                right: 12px;
+                top: 15px;
+                &__toggler {
+                    outline: none;
+                    border: none;
+                    display: block;
+                    position: absolute;
+                    right: 0;
+                    top: -5px;
+                    svg {
+                        fill: #757575;
+                    }
+                }
+                .wrp {
+                    display: none;
+                }
+                .btn_edit,
+                .btn_show_hide,
+                .del_btn {
+                    border: none;
+                    outline: none;
+                    background: none;
+                    padding: 0;
+                    vertical-align: middle;
+                    svg {
+                        margin-right: 5px;
+                        fill: #757575;
+                    }
+                }
+                .del_btn {
+                    width: 15px;
+                }
+                .sandwich{
+                    display: inline-block;
+                    margin-top: 3px;
+                    span {
+                        background: #757575;
+                        box-shadow: none;
+                    }
+                }
+                &.visible {
+                    .inner_icons__toggler {
+                        display: none;
+                    }
+                    .wrp {
+                        display: block;
+                    }
+                }
+            }
+            &:hover {
+                background: #fff;
+                color: #5b5d5e;
+            }
+            // &.sv-helper {
+            //     background: #565758;
+            //     color: #fff;
+            //     svg {
+            //         fill: #fff!important;
+            //     }
+            //     .sandwich {
+            //         span {
+            //             background: #fff;
+            //         }
+            //     }
+            // }
+        }
+
+        @include phone {
+            &--inner {
+                .item_content {
+                    font-size: 12px;
+                }
+                .inner_icons {
+                    &__toggler {
+                        margin-right: -5px;
+                        svg {
+                            transform: rotate(90deg);
+                            margin-right: 0;
+                            height: 25px;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.left_accordion {
+    &__item {
+        font-size: 16px;
+        color: $col-grey-3;
+        margin-bottom: 25px;
+        span {
+            color: #999999;
+        }
+        svg {
+            margin-right: 15px;
+        }
+        &.active {
+            font-weight:bold;
+            svg {
+                fill: #757575;
+            }
+        }
+    }
+    .inner_content {
+        margin-left: 50px;
+        padding-bottom: 15px;
+        font-size: 16px;
+        color: $col-grey-3;
     }
 }
