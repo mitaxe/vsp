@@ -4,9 +4,14 @@ class PlaylistResponse extends Response
 {
 
     /**
-     * @var int
+     * @var string
      */
     public $id = null;
+
+    /**
+     * @var string
+     */
+    public $channelId = null;
 
     /**
      * @var string
@@ -16,24 +21,21 @@ class PlaylistResponse extends Response
     /**
      * @var string
      */
-    public $srcId = null;
+    public $description = null;
 
     /**
-     * @var string
+     * @var array
      */
-    public $text = null;
-
-    /**
-     * @var string
-     */
-    public $img = null;
+    public $videos = [];
 
 
-    public function __construct($id, $title, $srcId)
+    public function __construct($id, $channelId, $title, $description, $videos)
     {
         $this->id = $id;
+        $this->channelId = $channelId;
         $this->title = $title;
-        $this->srcId = $srcId;
+        $this->description = $description;
+        $this->videos = $videos;
 
         parent::__construct();
     }

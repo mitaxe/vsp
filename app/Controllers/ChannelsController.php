@@ -27,8 +27,17 @@ class ChannelsController extends RESTController
         return new Response;
     }
 
-    public function getPlaylists()
+    public function getPlaylists($channelId)
     {
+        $playlists = Playlists::find([
+            'conditions' => "vspChannelId = ?1",
+            'bind' => [1 => $channelId]
+        ]);
+        if (count($playlists)) {
+            $response = new PlaylistsResponse();
+            $response->add($playlists);
+            return $response;
+        }
         return new Response();
     }
 

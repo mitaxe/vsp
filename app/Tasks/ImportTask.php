@@ -288,8 +288,8 @@ class ImportTask extends \Phalcon\Cli\Task
                     $this->syncChannelVideosData($videos);
                 }
                 //echo PHP_EOL.'END OF VIDEOS'.PHP_EOL;
-                //$playlists = $mainData->getChannelPlaylists($channel);
-                //$this->syncChannelPlaylistsData($playlists);
+                $playlists = $mainData->getChannelPlaylists($channel);
+                $this->syncChannelPlaylistsData($playlists);
                 //echo PHP_EOL.'updated playlist'.PHP_EOL;
             }
         }

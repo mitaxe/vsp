@@ -24,8 +24,8 @@ class PlaylistsVideos extends Model
 
     public function initialize()
     {
-        $this->belongsTo("channelId", "Channels", "id", ["alias" => "channels"]);
-        $this->belongsTo("tagId", "Tags", "id");
+        $this->belongsTo("playlistId", "Playlists", "id", ["alias" => "playlist"]);
+        //$this->belongsTo("tagId", "Tags", "id");
         
     }
 
