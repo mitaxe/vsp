@@ -260,7 +260,8 @@
         color: #3a3d3e;
         margin-bottom: 12px;
         font-weight: 500;
-        word-break: break-all;
+        // word-break: break-all;
+        word-wrap: break-word;
     }
 
     &__text {
@@ -665,12 +666,14 @@
             color: #5d5d5e;
             overflow: hidden;
             text-overflow: ellipsis;
+            word-wrap: break-word;
         }
         p {
             font-size: 14px;
             color: #999;
             line-height: 1.2;
-            word-break: break-all;
+            // word-break: break-all;
+            word-wrap: break-word;
         }
     }
     @include phone {
