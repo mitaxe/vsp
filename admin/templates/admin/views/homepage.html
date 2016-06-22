@@ -22,7 +22,7 @@
                 <input type="text" class="form-control" placeholder="Search">
               </div>
               <div class="col-xs-2">
-                <button type="button" ng-model="search" class="btn btn-info">Search</button>
+                <button type="button" ng-model="search" class="btn btn-edit">Search</button>
               </div>
             </div><!-- search -->
 
@@ -72,34 +72,39 @@
                 </table>
             </div>
 
-            <!-- add new row -->
-            <button class="btn btn-info" data-toggle="modal" data-target="#addRow">Добавить запись</button>
-
-            <!-- pagination -->
-            <nav>
-              <ul class="pagination">
-                <li>
-                  <a href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                  <a href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav><!-- pagination -->
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <!-- add new row -->
+                    <button class="btn edit-mode" data-toggle="modal" data-target="#addRow">Добавить запись</button>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <!-- pagination -->
+                    <div class="dataTables_paginate paging_simple_numbers">
+                      <ul class="pagination" style="margin:0; text-align:right; width:100%;">
+                        <li>
+                          <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                          <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </ul>
+                  </div><!-- pagination -->
+                </div>
+            </div>
 
             <!-- modals (hidden) -->
             <div ng-repeat="row in tableData">
                 <!-- Modal Edit-->
-                <div class="modal fade" id="{{row.id}}-edit" tabindex="-1" role="dialog">
+                <div class="modal modal-styled fade" id="{{row.id}}-edit" tabindex="-1" role="dialog">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -130,7 +135,7 @@
                   </div>
                 </div>
                 <!-- Modal Add Row -->
-                <div class="modal fade" id="addRow" tabindex="-1" role="dialog">
+                <div class="modal modal-styled fade" id="addRow" tabindex="-1" role="dialog">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -161,7 +166,7 @@
                   </div>
                 </div>
                 <!-- Delete -->
-                <div class="modal fade" id="{{row.id}}-delete" tabindex="-1" role="dialog">
+                <div class="modal modal-styled fade" id="{{row.id}}-delete" tabindex="-1" role="dialog">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
