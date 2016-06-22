@@ -1,11 +1,9 @@
 <div class="content" autoscroll='true'>
     <div class="row">
-
-
         <!-- exclusive page header -->
         <div class="block block--header">
             <div class="col-xs-12">
-                <h2 class="block__title block__title--50">Новые видео</h2>
+                <h2 class="block__title block__title--50">{{ mainPlaylist.title }}</h2>
                 <div class="block__btn block__btn--50">
                     <div class="block__select">
                         <div>
@@ -31,7 +29,7 @@
         <!-- exclusive videos block -->
         <div class="block block--white">
             <div class="col-xs-6 col-sm-4 col-md-3"
-                 ng-repeat="video in newVideos | filter: selectedCategory ">
+                 ng-repeat="video in mainPlaylist.videos | filter: selectedCategory ">
                 <div class="thumb">
                     <a ui-sref="videos({ id: video.id })">
                         <div class="thumb__img">

@@ -263,7 +263,18 @@ angular.module("MainApp")
     })
     .state('channels.playlist', {
         url: '/playlist',
-        templateUrl: 'app/views/xchannel-liked.html'
+        templateUrl: 'app/views/xchannel-playlists.html'
+    })
+    .state('playlist', {
+        url: '/playlists/:id',
+        templateUrl: 'app/views/playlist.html',
+        controller: 'PlaylistCtrl',
+        resolve:  {
+            mainPlaylist : function(factory, $stateParams) {
+                // console.log($stateParams);
+                return factory.getPlaylistData($stateParams.id);
+            }
+        }        
     })
     .state('channels.shop', {
         url: '/shop',

@@ -14,7 +14,7 @@ angular.module("MainApp")
     // get the rest of channel data
     factory.getChannelPlaylists($stateParams.id).success(function(response) {
         $scope.channelPlaylists = response.data;
-        console.log('related videos ', $scope.channelPlaylists);
+        console.log('channels playlists ', $scope.channelPlaylists);
     });    
 
 

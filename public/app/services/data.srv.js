@@ -14,6 +14,12 @@ angular.module("MainApp")
             return $http.get('http://vsponline.qa/exclusive/videos?offset=' + offset);
         };
 
+        // playlist page
+        factory.getPlaylistData = function(id, offset) {
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/playlists/' + id + '?offset=' + offset);
+        };
+
         // new videos page
         factory.getNewVideosData = function(offset) {
             offset = offset || '';

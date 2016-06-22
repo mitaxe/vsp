@@ -14,7 +14,9 @@ class PlaylistsResponse extends ResponseArray
             foreach ($playlist->playlistVideos as $videos) {
                 $allVideos[] = $videos->video;
             }
-
+            if (empty($allVideos)) {
+                continue;
+            }
             $videosResponse->add($allVideos);
             $this->addResponse(
                 new PlaylistResponse(
