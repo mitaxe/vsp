@@ -471,7 +471,10 @@ angular.module("MainApp")
         };
         factory.getChannelVideos = function(id) {
             return $http.get('http://vsponline.qa/channels/' + id + '/videos');
-        };    
+        };
+        factory.getChannelPlaylists = function(id) {
+            return $http.get('http://vsponline.qa/channels/' + id + '/playlists');
+        };
     
         /*factory.get = function(id) {
             return $http.get('http://vsponline.qa/videos/' + id + '/comments');
@@ -1188,6 +1191,12 @@ angular.module("MainApp")
         $scope.channelVideos = response.data;
         console.log('related videos ', $scope.channelVideos);
     });
+
+    // get the rest of channel data
+    factory.getChannelPlaylists($stateParams.id).success(function(response) {
+        $scope.channelPlaylists = response.data;
+        console.log('related videos ', $scope.channelPlaylists);
+    });    
 
 
     // subscribe
