@@ -14,12 +14,6 @@ angular.module("MainApp")
             return $http.get('http://vsponline.qa/exclusive/videos?offset=' + offset);
         };
 
-        // playlist page
-        factory.getPlaylistData = function(id, offset) {
-            offset = offset || '';
-            return $http.get('http://vsponline.qa/playlists/' + id + '?offset=' + offset);
-        };
-
         // new videos page
         factory.getNewVideosData = function(offset) {
             offset = offset || '';
@@ -60,16 +54,12 @@ angular.module("MainApp")
         factory.getChannelPlaylists = function(id) {
             return $http.get('http://vsponline.qa/channels/' + id + '/playlists');
         };
-    
-        /*factory.get = function(id) {
-            return $http.get('http://vsponline.qa/videos/' + id + '/comments');
+
+        // playlist page
+        factory.getPlaylistData = function(id, offset) {
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/playlists/' + id + '?offset=' + offset);
         };
-        factory.getRelatedVideos = function(id) {
-            return $http.get('http://vsponline.qa/videos/' + id + '/related_videos');
-        };
-        factory.getRelatedChannels = function(id) {
-            return $http.get('http://vsponline.qa/videos/' + id + '/related_channels');
-        };    */
 
         // blog page
         factory.getBlogData = function() {

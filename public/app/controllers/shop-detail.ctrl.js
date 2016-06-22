@@ -23,11 +23,10 @@ angular.module("MainApp")
         $scope.selectedPreview = index;
     };
 
-
-    /* mobile slider */
-
+    // mobile slider
     $scope.wrapperWidth = 0;
     $scope.sliderWidth = 0;
+    $scope.currentIndex = 0;
 
     $scope.setWrapperWidth = function(amount) {
         $scope.wrapperWidth = document.querySelectorAll('.mb_slider')[0].clientWidth * amount + 'px';
@@ -43,8 +42,6 @@ angular.module("MainApp")
     angular.element($window).bind('resize', function() {
         $scope.$apply();
     });
-
-    $scope.currentIndex = 0;
 
     $scope.isCurrentSlideIndex = function (index) {
         return $scope.currentIndex === index;

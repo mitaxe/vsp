@@ -10,6 +10,7 @@ angular.module("MainApp")
             $scope.channelbgText = true;
         }
     };
+    
     $scope.hoverOut = function (target) {
         if(target == 'ava') {
             $scope.changeAvaText = false;

@@ -29,13 +29,11 @@ angular.module("MainApp")
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.includeSpinner = false;
 
-
     // fix /# url
     // $locationProvider.html5Mode({
     //     enabled : true,
     //     requireBase : false
     // });
-
 
     // redirects
     $urlRouterProvider.otherwise("/");
@@ -47,7 +45,6 @@ angular.module("MainApp")
     .when('/search', '/search/all')
     .when("/channels/:id", "/channels/:id/all")
     .when('/settings', '/settings/main');
-
 
     // states
     $stateProvider
@@ -80,7 +77,7 @@ angular.module("MainApp")
     // ratings
     .state('ratings', {
         url: "/ratings",
-        templateUrl: "app/views/ratings.html",
+        templateUrl: "app/views/ratings/ratings.html",
         controller: 'RatingsCtrl',
         resolve: {
             ratingsVideos: ["factory", function(factory) {
@@ -93,27 +90,27 @@ angular.module("MainApp")
     })
     .state('ratings.videos', {
         url: "/videos",
-        templateUrl: "app/views/ratings-videos.html"
+        templateUrl: "app/views/ratings/ratings-videos.html"
     })
     .state('ratings.channels', {
         url: "/channels",
-        templateUrl: "app/views/ratings-channels.html"
+        templateUrl: "app/views/ratings/ratings-channels.html"
     })
 
     // registration/sign-in
     .state('reg', {
         url : '/reg',
-        templateUrl : 'app/views/registration.html'
+        templateUrl : 'app/views/auth/registration.html'
     })
     .state('sign-in', {
         url : '/sign-in',
-        templateUrl : 'app/views/sign-in.html'
+        templateUrl : 'app/views/auth/sign-in.html'
     })
 
     // search
     .state('search', {
         url : '/search',
-        templateUrl : 'app/views/search.html',
+        templateUrl : 'app/views/search/search.html',
         redirectTo : 'search.all',
         resolve: {
             historyData: ["factory", function(factory) {
@@ -124,19 +121,19 @@ angular.module("MainApp")
     })
     .state('search.all', {
         url : '/all',
-        templateUrl : 'app/views/search-all.html'
+        templateUrl : 'app/views/search/search-all.html'
     })
     .state('search.video', {
         url : '/video',
-        templateUrl : 'app/views/search-video.html'
+        templateUrl : 'app/views/search/search-video.html'
     })
     .state('search.channel', {
         url : '/channel',
-        templateUrl : 'app/views/search-channels.html'
+        templateUrl : 'app/views/search/search-channels.html'
     })
     .state('search.articles', {
         url : '/articles',
-        templateUrl : 'app/views/search-articles.html'
+        templateUrl : 'app/views/search/search-articles.html'
     })
 
     // new videos
@@ -182,7 +179,7 @@ angular.module("MainApp")
     // history
     .state('history', {
         url: "/history",
-        templateUrl: "app/views/history.html",
+        templateUrl: "app/views/history/history.html",
         controller: 'HistoryCtrl',
         resolve: {
             historyData: ["factory", function(factory) {
@@ -192,123 +189,121 @@ angular.module("MainApp")
     })
     .state('history.viewed', {
         url: "/viewed",
-        templateUrl: "app/views/history-viewed.html"
+        templateUrl: "app/views/history/history-viewed.html"
     })
     .state('history.liked', {
         url: "/liked",
-        templateUrl: "app/views/history-liked.html"
+        templateUrl: "app/views/history/history-liked.html"
     })
 
     // channel
     .state('user', {
         url: "/user/:url",
-        templateUrl: "app/views/channel.html",
+        templateUrl: "app/views/channels/channel.html",
         controller: 'ChannelCtrl'
     })
     .state('user.all', {
-        url : '/all',
-        templateUrl: 'app/views/channel-all.html'
+        url: '/all',
+        templateUrl: 'app/views/channels/channel-all.html'
     })
     .state('user.liked', {
-        url : '/liked',
-        templateUrl: 'app/views/channel-liked.html'
+        url: '/liked',
+        templateUrl: 'app/views/channels/channel-liked.html'
     })
     .state('user.shop', {
-        url : '/shop',
-        templateUrl: 'app/views/channel-shop.html'
+        url: '/shop',
+        templateUrl: 'app/views/channels/channel-shop.html'
     })
 
     // profile
     .state('profile', {
-        url : '/profile',
-        templateUrl : 'app/views/profile.html',
-        controller : 'ProfileCtrl'
+        url: '/profile',
+        templateUrl: 'app/views/profile/profile.html',
+        controller: 'ProfileCtrl'
     })
     .state('profile-edit', {
-        url : '/profile-edit',
-        templateUrl : 'app/views/profile-edit.html'
+        url: '/profile-edit',
+        templateUrl: 'app/views/profile/profile-edit.html'
     })
 
     // add channel
     .state('add-channel' ,{
-        url : '/add-channel',
-        templateUrl : 'app/views/add-channel.html'
+        url: '/add-channel',
+        templateUrl: 'app/views/add-channel.html'
     })
 
     // settings
     .state('settings',{
-        url : '/settings',
-        templateUrl : 'app/views/settings.html',
-        controller : 'SettingsCtrl'
+        url: '/settings',
+        templateUrl: 'app/views/settings/settings.html',
+        controller: 'SettingsCtrl'
     })
     .state('settings.main', {
-        url : '/main',
-        templateUrl : 'app/views/settings-main.html'
+        url: '/main',
+        templateUrl: 'app/views/settings/settings-main.html'
     })
     .state('settings.video', {
-        url : '/video',
-        templateUrl : 'app/views/settings-video.html'
+        url: '/video',
+        templateUrl: 'app/views/settings/settings-video.html'
     })
 
     // video settings
     .state('video-edit', {
-        url : '/video-edit',
-        templateUrl : 'app/views/video-settings.html'
+        url: '/video-edit',
+        templateUrl: 'app/views/settings/video-settings.html'
     })
 
     // notifications and comments
     .state('notifications-comments', {
-        url : '/notifications/comments',
-        templateUrl : 'app/views/notifications-comments.html'
+        url: '/notifications/comments',
+        templateUrl: 'app/views/notifications/notifications-comments.html'
     })
     .state('notifications-all', {
-        url : '/notifications/all',
-        templateUrl : 'app/views/notifications-all.html'
+        url: '/notifications/all',
+        templateUrl: 'app/views/notifications/notifications-all.html'
     })
 
     // not my channel
     .state('channels', {
         url: '/channels/:id',
-        templateUrl: "app/views/xchannel.html",
+        templateUrl: "app/views/channels/xchannel.html",
         controller: 'xChannelCtrl',
         scope: {
             content: '='
         },
         resolve:  {
-            mainChannel : ["factory", "$stateParams", function(factory, $stateParams) {
-                // console.log($stateParams);
+            mainChannel: ["factory", "$stateParams", function(factory, $stateParams) {
                 return factory.getChannelData($stateParams.id);
             }]
         }
     })
     .state('channels.all', {
         url: '/all',
-        templateUrl: 'app/views/xchannel-all.html'
+        templateUrl: 'app/views/channels/xchannel-all.html'
     })
     .state('channels.playlist', {
         url: '/playlist',
-        templateUrl: 'app/views/xchannel-playlists.html'
+        templateUrl: 'app/views/channels/xchannel-playlists.html'
     })
     .state('playlist', {
         url: '/playlists/:id',
-        templateUrl: 'app/views/playlist.html',
+        templateUrl: 'app/views/channels/playlist.html',
         controller: 'PlaylistCtrl',
         resolve:  {
-            mainPlaylist : ["factory", "$stateParams", function(factory, $stateParams) {
-                // console.log($stateParams);
+            mainPlaylist: ["factory", "$stateParams", function(factory, $stateParams) {
                 return factory.getPlaylistData($stateParams.id);
             }]
-        }        
+        }
     })
     .state('channels.shop', {
         url: '/shop',
-        templateUrl: 'app/views/xchannel-shop.html'
+        templateUrl: 'app/views/channels/xchannel-shop.html'
     })
 
     // shop detailed page
     .state('shop-detailed', {
         url: '/shop/:itemId',
-        templateUrl: 'app/views/shop-detail.html',
+        templateUrl: 'app/views/channels/shop-detail.html',
         controller: 'ShopDetailCtrl'
     })
 
@@ -319,16 +314,16 @@ angular.module("MainApp")
         scope: {
             content: '='
         },
-        controller : 'VideoPageCtrl',
+        controller: 'VideoPageCtrl',
         resolve:  {
-          mainVideos : ["factory", "$stateParams", function(factory, $stateParams) {
+          mainVideos: ["factory", "$stateParams", function(factory, $stateParams) {
               // console.log($stateParams);
               return factory.getVideoPageMainVideos($stateParams.id);
           }]
         }
     })
 
-    // shop detailed page
+    // test page
     .state('test', {
         url: '/test',
         templateUrl: 'app/views/test.html'
@@ -346,6 +341,39 @@ app.filter('startFrom', function() {
             return input.slice(start);
         }
         return [];
+    };
+});
+
+// pretty date filter
+app.filter('prettyDate', function() {
+    return function(time,toDay) {
+        var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
+            diff = (((new Date()).getTime() - date.getTime()) / 1000),
+            day_diff = Math.floor(diff / 86400),
+            years_diff = Math.floor(diff / 31536000);
+
+        if ( isNaN(day_diff) || day_diff < 0 ) {
+            return;
+        }
+
+        if (toDay && day_diff < 1) {
+            return "Сегодня";
+        } else {
+            return day_diff === 0 && (
+                    diff < 60 && "Только что" ||
+                    diff < 120 && "1 минуту назад" ||
+                    diff < 3600 && Math.floor( diff / 60 ) + " минут назад" ||
+                    diff < 7200 && "1 час назад" ||
+                    diff < 86400 && Math.floor( diff / 3600 ) + " часов назад") ||
+                day_diff < 1 && today && "Сегодня" ||
+                day_diff == 1 && "Вчера" ||
+                day_diff < 7 && day_diff + " дней назад" ||
+                day_diff < 31 && Math.ceil( day_diff / 7 ) + " недель назад" ||
+              years_diff < 1 && Math.ceil( day_diff / 30 ) + " месяц назад" ||
+              years_diff == 1 && years_diff + " год назад" ||
+              years_diff > 1 && years_diff + " лет назад" ||
+              'неизвестная дата';
+        }
     };
 });
 
@@ -446,12 +474,6 @@ angular.module("MainApp")
             return $http.get('http://vsponline.qa/exclusive/videos?offset=' + offset);
         };
 
-        // playlist page
-        factory.getPlaylistData = function(id, offset) {
-            offset = offset || '';
-            return $http.get('http://vsponline.qa/playlists/' + id + '?offset=' + offset);
-        };
-
         // new videos page
         factory.getNewVideosData = function(offset) {
             offset = offset || '';
@@ -492,16 +514,12 @@ angular.module("MainApp")
         factory.getChannelPlaylists = function(id) {
             return $http.get('http://vsponline.qa/channels/' + id + '/playlists');
         };
-    
-        /*factory.get = function(id) {
-            return $http.get('http://vsponline.qa/videos/' + id + '/comments');
+
+        // playlist page
+        factory.getPlaylistData = function(id, offset) {
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/playlists/' + id + '?offset=' + offset);
         };
-        factory.getRelatedVideos = function(id) {
-            return $http.get('http://vsponline.qa/videos/' + id + '/related_videos');
-        };
-        factory.getRelatedChannels = function(id) {
-            return $http.get('http://vsponline.qa/videos/' + id + '/related_channels');
-        };    */
 
         // blog page
         factory.getBlogData = function() {
@@ -527,41 +545,6 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.factory('prettyDate', ["$http", function($http) {
-
-    return function(time,toDay) {
-        var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
-            diff = (((new Date()).getTime() - date.getTime()) / 1000),
-            day_diff = Math.floor(diff / 86400),
-            years_diff = Math.floor(diff / 31536000);
-
-        if ( isNaN(day_diff) || day_diff < 0 ) {
-            return;
-        }
-
-        if (toDay && day_diff < 1) {
-            return "Сегодня";
-        } else {
-            return day_diff === 0 && (
-                    diff < 60 && "Только что" ||
-                    diff < 120 && "1 минуту назад" ||
-                    diff < 3600 && Math.floor( diff / 60 ) + " минут назад" ||
-                    diff < 7200 && "1 час назад" ||
-                    diff < 86400 && Math.floor( diff / 3600 ) + " часов назад") ||
-                day_diff < 1 && today && "Сегодня" ||
-                day_diff == 1 && "Вчера" ||
-                day_diff < 7 && day_diff + " дней назад" ||
-                day_diff < 31 && Math.ceil( day_diff / 7 ) + " недель назад" ||
-              years_diff < 1 && Math.ceil( day_diff / 30 ) + " месяц назад" ||
-              years_diff == 1 && years_diff + " год назад" ||
-              years_diff > 1 && years_diff + " лет назад" ||
-              'неизвестная дата';
-        }
-    };
-
-}]);
-
-angular.module("MainApp")
 .controller('ChannelCtrl', ['$scope', function ($scope) {
 
     $scope.content = $scope.currentUser;
@@ -573,6 +556,7 @@ angular.module("MainApp")
             $scope.channelbgText = true;
         }
     };
+    
     $scope.hoverOut = function (target) {
         if(target == 'ava') {
             $scope.changeAvaText = false;
@@ -647,7 +631,6 @@ angular.module("MainApp")
         }
     };
 
-
 }]);
 
 angular.module("MainApp")
@@ -659,45 +642,8 @@ angular.module("MainApp")
     // get offset number
     $scope.initialOffset = exclusiveVideos.data.meta.count;
 
-    var offset = 0;
-
-    // loading indicator
-    $scope.loading = false;
-    $scope.noVideo = false;
-
-    // load more videos
-    $scope.loadMore = function() {
-        if (!$scope.noVideo) {
-            $scope.loading = true;
-            offset += $scope.initialOffset;
-
-            console.log('offset request - ' + offset); //---
-            console.time('exclRequestTime');
-
-
-            factory.getExclusiveData(offset).success(function(response){
-                if(response.data != null) {
-                    console.timeEnd('exclRequestTime');
-                    console.log('videos received - ' + response.data.length); //---
-
-                    $scope.loading = false;
-                    $scope.exclusiveVideos.push.apply($scope.exclusiveVideos, response.data);
-                } else {
-                    $scope.loading = false;
-                    $scope.noVideo = true;
-                }
-
-            });
-        }
-
-        
-    };
-
-
-    $scope.categories = [
-        'Adamantio 993',
-        'JOD'
-    ];
+    // default request
+    $scope.request = factory.getExclusiveData;
 
 }]);
 
@@ -729,13 +675,8 @@ angular.module("MainApp")
 .controller('HomeCtrl', ['$scope', 'factory', 'videos', function ($scope, factory, videos) {
 
     console.timeEnd('homeRequestTime');
-    $scope.videos = videos.data.data;
 
-    // console.log(
-    //     $scope.videos.filter(function (el) {
-    //       return el.blockId === 1;
-    //     })
-    // );
+    $scope.videos = videos.data.data;
 
     // Сейчас смотрят = 0
     // Новые видео = 1
@@ -745,10 +686,39 @@ angular.module("MainApp")
     // Custom block 2 = 5
     // Custom block 3 = 6
 
+    // console.log(
+    //     $scope.videos.filter(function (el) {
+    //       return el.blockId === 1;
+    //     })
+    // );
+
 }]);
 
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', 'prettyDate', function ($scope, $sce, factory, prettyDate) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
+
+    // remove element
+    $scope.remove = function(array,item) {
+        if (item !== undefined) {
+            if (item === 'all') {
+                array.length = 0;
+            } else {
+                array.splice(array.indexOf(item),1);
+            }
+        }
+    };
+
+    /* Test Data */
+
+    // current user test
+    $scope.currentUser = {
+        "name": "Current User",
+        "url": "CurrUser",
+        "avatar": "https://yt3.ggpht.com/-fGQ0wMqcQ2E/AAAAAAAAAAI/AAAAAAAAAAA/DJ1UmcmYRMI/s100-c-k-no-rj-c0xffffff/photo.jpg",
+        "cover": "https://yt3.ggpht.com/-n5hYQ4Nf_Uk/VQsVarAAlgI/AAAAAAAAKhM/U3WIG__7xQs/w2120-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no/Never-Stop-Learning-Social_YouTube%2B%25281%2529.png",
+        "description": "This is user channel description test test test test test test test test test test test test test test test test.",
+        "subscr_counter" : 18358461
+    };
 
     // factory test data
     factory.getVideos().success(function(response) {
@@ -762,21 +732,6 @@ angular.module("MainApp")
         // console.log($scope.videos)
     });
 
-    // current user test
-    $scope.currentUser = {
-        "name": "Current User",
-        "url": "CurrUser",
-        "avatar": "https://yt3.ggpht.com/-fGQ0wMqcQ2E/AAAAAAAAAAI/AAAAAAAAAAA/DJ1UmcmYRMI/s100-c-k-no-rj-c0xffffff/photo.jpg",
-        "cover": "https://yt3.ggpht.com/-n5hYQ4Nf_Uk/VQsVarAAlgI/AAAAAAAAKhM/U3WIG__7xQs/w2120-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no/Never-Stop-Learning-Social_YouTube%2B%25281%2529.png",
-        "description": "This is user channel description test test test test test test test test test test test test test test test test.",
-        "subscr_counter" : 18358461
-    };
-
-    // get humanized date format
-    $scope.getDate = function(date,toDay) {
-        return prettyDate(date,toDay);
-    };
-
     // test limits and loadMore
     $scope.limits = {
         videos:  4,
@@ -786,133 +741,48 @@ angular.module("MainApp")
         reqCnt : 0
     };
 
-    $scope.videosRq = 12;
-    $scope.initialLimits = clone($scope.limits);
-
-    $scope.loadMore = function(prop) {
-        $scope.limits[prop] += $scope.initialLimits[prop];
-    };
-
-    // remove element function
-    $scope.remove = function(array,item) {
-        if (item !== undefined) {
-            if (item === 'all') {
-                array.length = 0;
-            } else {
-                array.splice(array.indexOf(item),1);
-            }
-        }
-    };
-
+    $scope.categories = [
+        'Adamantio 993',
+        'JOD'
+    ];
 
 }]);
 
 angular.module("MainApp")
-    .controller('NewVideosCtrl', ['$scope', 'newVideos', '$http', 'factory', function ($scope, newVideos, $http, factory) {
+.controller('NewVideosCtrl', ['$scope', 'newVideos', 'factory', function ($scope, newVideos, factory) {
 
-        // get first portion of videos from route resolve
-        $scope.newVideos = newVideos.data.data;
+    // get first portion of videos from route resolve
+    $scope.newVideos = newVideos.data.data;
 
-        // get offset number
-        $scope.initialOffset = newVideos.data.meta.count;
+    // get offset number
+    $scope.initialOffset = newVideos.data.meta.count;
 
-        var offset = 0;
+    // default request for this controller
+    $scope.request = factory.getNewVideosData;
 
-        // loading indicator
-        $scope.loading = false;
-        $scope.noVideo = false;
-
-        // load more videos
-        $scope.loadMore = function () {
-            if (!$scope.noVideo) {
-                $scope.loading = true;
-                offset += $scope.initialOffset;
-
-                console.log('offset request - ' + offset); //---
-                console.time('exclRequestTime');
-
-                factory.getNewVideosData(offset).success(function (response) {
-
-                    if (response.data != null) {
-                        console.timeEnd('exclRequestTime');
-                        console.log('videos received - ' + response.data.length); //---
-                        $scope.loading = false;
-                        $scope.newVideos.push.apply($scope.newVideos, response.data);
-                    } else {
-                        $scope.loading = false;
-                        $scope.noVideo = true;
-                    }
-
-
-                });
-            }
-
-        };
-
-        $scope.categories = [
-            'Adamantio 993',
-            'JOD'
-        ];
-
-
-    }]);
+}]);
 
 angular.module("MainApp")
-    .controller('PlaylistCtrl', ['$scope', 'mainPlaylist', 'factory', '$stateParams', function ($scope, mainPlaylist, factory, $stateParams) {
+.controller('PlaylistCtrl', ['$scope', 'mainPlaylist', 'factory', '$stateParams', function ($scope, mainPlaylist, factory, $stateParams) {
 
-        // get first portion of videos from route resolve
-        $scope.mainPlaylist = mainPlaylist.data.data;
+    // get first portion of videos from route resolve
+    $scope.mainPlaylist = mainPlaylist.data.data;
 
-        // get offset number
-        $scope.initialOffset = mainPlaylist.data.meta.count;
+    // get offset number
+    $scope.initialOffset = mainPlaylist.data.meta.count;
 
-        var offset = 0;
+    // default request
+    $scope.request = factory.getPlaylistData;
 
-        // loading indicator
-        $scope.loading = false;
-        $scope.noVideo = false;
+    // id
+    $scope.id = $stateParams.id;
 
-        // load more videos
-        $scope.loadMore = function () {
-            if (!$scope.noVideo) {
-                $scope.loading = true;
-                offset += $scope.initialOffset;
+}]);
 
-                console.log('offset request - ' + offset); //---
-                console.time('exclRequestTime');
-
-                factory.getPlaylistData($stateParams.id, offset).success(function (response) {
-
-                    if (response.data != null) {
-                        console.timeEnd('exclRequestTime');
-                        console.log('videos received - ' + response.data.length); //---
-                        $scope.loading = false;
-                        $scope.mainPlaylist.push.apply($scope.mainPlaylist, response.data);
-                    } else {
-                        $scope.loading = false;
-                        $scope.noVideo = true;
-                    }
-
-
-                });
-            }
-
-        };
-
-        $scope.categories = [
-            'Adamantio 993',
-            'JOD'
-        ];
-
-
-    }]);
-
-/**
- * Created by exz0N on 26.05.2016.
- */
 angular.module("MainApp")
 .controller('ProfileCtrl', ['$scope', function($scope) {
 
+    // test
     $scope.videosCounter = 110;
     $scope.profile = {
         user : {
@@ -938,96 +808,14 @@ angular.module("MainApp")
 .controller('RatingsCtrl', ['$scope', 'factory', 'ratingsVideos', 'ratingsChannels', function ($scope, factory, ratingsVideos, ratingsChannels) {
 
     /* Videos */
-
-    // get first portion of ratings videos from route resolve
-    // $scope.ratingsVideos = [];
-    // console.log('after init empty array');
-    // console.log($scope.ratingsVideos);
-
     $scope.ratingsVideos = ratingsVideos.data.data;
-    // console.log('set data to array');
-    // console.log($scope.ratingsVideos);
-
-    // get offset number
-    $scope.initialOffset = ratingsVideos.data.meta.count;
-    var offset = 0;
-
-    // loading indicator
-    $scope.loading = false;
-
-    $scope.noVideo = false;
-
-    // load more videos
-    $scope.loadMoreVideos = function() {
-
-        if (!$scope.noVideo) {
-            $scope.loading = true;
-            offset += $scope.initialOffset;
-
-            console.log('offset request - ' + offset); //---
-            console.time('ratingsRequestTime');
-
-            factory.getRatingsVideos(offset).success(function(response){
-
-                if(response.data !== null) {
-                    console.timeEnd('ratingsRequestTime');
-                    console.log('videos received - ' + response.data.length); //---
-                    $scope.ratingsVideos.push.apply($scope.ratingsVideos, response.data);
-                    $scope.loading = false;
-                } else {
-                    $scope.loading = false;
-                    $scope.noVideo = true;
-                }
-
-            });
-        }
-
-    };
-
+    $scope.videosOffset = ratingsVideos.data.meta.count;
+    $scope.videosRequest = factory.getRatingsVideos;
 
     /* Channels */
-
     $scope.ratingsChannels = ratingsChannels.data.data;
-
-    // get offset number
-    var channelOfset = 0;
-    $scope.noChannels = false;
     $scope.channelsOffset = ratingsChannels.data.meta.count;
-
-    console.log('channels - ', $scope.ratingsChannels);
-
-    $scope.loadMoreChannels = function() {
-
-        if (!$scope.noChannels) {
-            $scope.loading = true;
-            channelOfset += $scope.channelsOffset;
-
-            console.log('offset request - ' + channelOfset); //---
-            console.time('ratingsRequestTime');
-
-            factory.getRatingsChannels(channelOfset).success(function(response){
-
-                if(response.data !== null) {
-                    console.timeEnd('ratingsRequestTime');
-                    console.log('channels received - ' + response.data.length); //---
-                    $scope.ratingsChannels.push.apply($scope.ratingsChannels, response.data);
-                    $scope.loading = false;
-                } else {
-                    $scope.loading = false;
-                    $scope.noChannels = true; // no channel in this case
-                }
-
-            });
-        }
-
-    };
-
-
-    // video categories
-    $scope.categories = [
-        'JOD',
-        'Adamantio 993'
-    ];
+    $scope.channelsRequest = factory.getRatingsChannels;
 
 }]);
 
@@ -1138,11 +926,10 @@ angular.module("MainApp")
         $scope.selectedPreview = index;
     };
 
-
-    /* mobile slider */
-
+    // mobile slider
     $scope.wrapperWidth = 0;
     $scope.sliderWidth = 0;
+    $scope.currentIndex = 0;
 
     $scope.setWrapperWidth = function(amount) {
         $scope.wrapperWidth = document.querySelectorAll('.mb_slider')[0].clientWidth * amount + 'px';
@@ -1158,8 +945,6 @@ angular.module("MainApp")
     angular.element($window).bind('resize', function() {
         $scope.$apply();
     });
-
-    $scope.currentIndex = 0;
 
     $scope.isCurrentSlideIndex = function (index) {
         return $scope.currentIndex === index;
@@ -1189,34 +974,30 @@ angular.module("MainApp")
 
     // console.log('1st api response - ', $scope.mainVideos);
 
+    // get trusted iframe url
     $scope.iframeSrc = function(src) {
         var url = $sce.trustAsResourceUrl('https://www.youtube.com/embed/' + src);
-        // console.log(url);
         return url;
     };
 
 
     //comments
-    $scope.comments = [];
     factory.getVideoPageComments($stateParams.id).success(function(response) {
         $scope.comments = response.data.comments;
         console.log('comments ', $scope.comments);
     });
-    
+
     //related videos
-    $scope.relatedVideos = [];
     factory.getRelatedVideos($stateParams.id).success(function(response) {
         $scope.relatedVideos = response.data;
         console.log('related videos ', $scope.relatedVideos);
     });
-    
-    //related channels 
-    $scope.relatedChannels = [];
+
+    //related channels
     factory.getRelatedChannels($stateParams.id).success(function(response) {
         $scope.relatedChannels = response.data;
         console.log('relatedChannels ', $scope.relatedChannels);
     });
-
 
 
     /* Sidebar Tabs */
@@ -1252,19 +1033,17 @@ angular.module("MainApp")
     // get main channel data
     $scope.content = mainChannel.data.data;
 
-
-    // get the rest of channel data
+    // get the rest of all videos data
     factory.getChannelVideos($stateParams.id).success(function(response) {
         $scope.channelVideos = response.data;
         console.log('related videos ', $scope.channelVideos);
     });
 
-    // get the rest of channel data
+    // get the rest of playlists data
     factory.getChannelPlaylists($stateParams.id).success(function(response) {
         $scope.channelPlaylists = response.data;
         console.log('channels playlists ', $scope.channelPlaylists);
-    });    
-
+    });
 
     // subscribe
     $scope.subscribe = function() {
@@ -1275,7 +1054,6 @@ angular.module("MainApp")
             $scope.content.statSubscribers -= 1;
         }
     };
-
 
     // sort channels
     $scope.sortTypes = [
@@ -1353,9 +1131,8 @@ angular.module("MainApp")
 .directive('footerview', function() {
   return {
     restrict: 'E',
-    // controller: 'MainCtrl',
     replace: true,
-    templateUrl: 'app/views/footer.html'
+    templateUrl: 'app/views/templates/footer.html'
   };
 });
 
@@ -1365,9 +1142,57 @@ angular.module("MainApp")
     restrict: 'E',
     controller: 'HeaderCtrl',
     replace: true,
-    templateUrl: 'app/views/header.html'
+    templateUrl: 'app/views/templates/header.html'
   };
 });
+
+app.directive('loadMore', ["$document", function ($document) {
+    return {
+        restrict: 'E',
+        scope: {
+            parameters: '=params'
+        },
+        template: '<a class="btn btn-more">' + '{{ getButtonText() }} ' + '</a>',
+        link: function (scope, element) {
+
+            function loadMore(request,array,offset,id) {
+                scope.offset = scope.offset || 0;
+
+                if (!scope.noMoreResponse) {
+                    scope.loadingMore = true;
+                    scope.offset += offset;
+                    var params = id ? [id, scope.offset].join() : scope.offset;
+
+                    request(params).success(function(response) {
+                        scope.loadingMore = false;
+                        if (response.data !== null) {
+                            array.push.apply(array, response.data);
+                        } else {
+                            scope.noMoreResponse = true;
+                        }
+                    });
+                }
+            }
+
+            scope.getButtonText = function() {
+                var text;
+                if (scope.loadingMore && !scope.noMoreResponse) {
+                    text = "идет загрузка...";
+                } else if (!scope.loadingMore && !scope.noMoreResponse) {
+                    text = "загрузить еще";
+                } else {
+                    text = "все данные загружены";
+                }
+                return text;
+            };
+
+            element.on("click", function(evt) {
+                loadMore.apply(this, scope.parameters);
+            });
+
+        }
+    };
+}]);
 
 app.directive('ngEnter', function () {
     return function (scope, element, attrs) {
@@ -1437,7 +1262,7 @@ angular.module("MainApp")
   return {
     restrict: 'E',
     replace: true,
-    templateUrl: 'app/views/sidebar.html'
+    templateUrl: 'app/views/templates/sidebar.html'
   };
 });
 

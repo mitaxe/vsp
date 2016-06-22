@@ -9,7 +9,7 @@
                     <h2 class="thumb__title">{{ content.title }}</h2>
                     <p>
                         <div class="article__content">
-                            <span class="thumb__date"><span class="thumb__number">{{ getDate(content.date) }}</span></span>
+                            <span class="thumb__date"><span class="thumb__number">{{ content.date | prettyDate }}</span></span>
                             <span class="thumb__hasvideo">Содержит Видео</span>
                         </div>
                     </p>
@@ -157,7 +157,7 @@
                             <p class="thumb__title"><a href="">{{ blog.title }}</a></p>
                             <p class="thumb__text hidden-phone"><a href="#">{{ blog.text }}</a></p>
                             <p>
-                                <span class="thumb__date"><span class="thumb__number">{{ blog.date }}</span> дня назад</span>
+                                <span class="thumb__date">{{ blog.date | prettyDate }}</span></span>
                                 <span class="thumb__hasvideo">Содержит Видео</span>
                             </p>
                         </div>

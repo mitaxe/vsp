@@ -4,6 +4,6 @@ angular.module("MainApp")
     restrict: 'E',
     controller: 'HeaderCtrl',
     replace: true,
-    templateUrl: 'app/views/header.html'
+    templateUrl: 'app/views/templates/header.html'
   };
 });

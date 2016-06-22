@@ -1,9 +1,7 @@
-/**
- * Created by exz0N on 26.05.2016.
- */
 angular.module("MainApp")
 .controller('ProfileCtrl', ['$scope', function($scope) {
 
+    // test
     $scope.videosCounter = 110;
     $scope.profile = {
         user : {

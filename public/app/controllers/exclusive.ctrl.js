@@ -7,44 +7,7 @@ angular.module("MainApp")
     // get offset number
     $scope.initialOffset = exclusiveVideos.data.meta.count;
 
-    var offset = 0;
-
-    // loading indicator
-    $scope.loading = false;
-    $scope.noVideo = false;
-
-    // load more videos
-    $scope.loadMore = function() {
-        if (!$scope.noVideo) {
-            $scope.loading = true;
-            offset += $scope.initialOffset;
-
-            console.log('offset request - ' + offset); //---
-            console.time('exclRequestTime');
-
-
-            factory.getExclusiveData(offset).success(function(response){
-                if(response.data != null) {
-                    console.timeEnd('exclRequestTime');
-                    console.log('videos received - ' + response.data.length); //---
-
-                    $scope.loading = false;
-                    $scope.exclusiveVideos.push.apply($scope.exclusiveVideos, response.data);
-                } else {
-                    $scope.loading = false;
-                    $scope.noVideo = true;
-                }
-
-            });
-        }
-
-        
-    };
-
-
-    $scope.categories = [
-        'Adamantio 993',
-        'JOD'
-    ];
+    // default request
+    $scope.request = factory.getExclusiveData;
 
 }]);

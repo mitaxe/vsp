@@ -2,8 +2,6 @@
 
     <div class="player_box hidden-phone">
         <div class="col-xs-12" >
-            <!--<h1>{{ content.title }}</h1>-->
-            <!--<hr/>-->
             <p class="">Плейлист:</p>
             <div class="select select--video-page" tabindex="0" ng-class="{'active':selectActive}" ng-blur="selectActive = false">
                 <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
@@ -35,82 +33,80 @@
                     <img class="prev" src="assets/img/video-prev-icon.png" alt="prev icon">
                     <span>Предыдущее</span>
                 </a>
-                <p class="th_description">{{mainVideos[1].title}}</p>
+                <p class="th_description">{{ mainVideos[1].title | trimText:100 }}</p>
             </div>
 
             <!-- main video slide -->
             <div class="video_slider__item video_slider__item--main col-md-8 col-sm-12">
                 <div class="relative">
-                    <!-- <img ng-src="{{ content.img }}" alt=""/> -->
                     <div class='embed-container'>
                         <iframe ng-src="{{ iframeSrc(mainVideos[0].srcId) }}" frameborder='0' allowfullscreen></iframe>
                     </div>
-                    <!-- <span class="thumb__length">{{mainVideos[0].length | secondsToTime}}</span> -->
-                    <!--<button class="play_btn hidden-phone hidden-tablet"><span class="left"></span>play<span class="right"></span></button>-->
-                </div>
-                <div class="about_video clearfix">
-                    <div class="about_video__left hidden-phone hidden-tablet">
-                        <h2>{{mainVideos[0].title | trimText : 30}}</h2>
-                        <span> {{getDate(mainVideos[0].date)}}</span>
-                    </div>
-                    <div class="about_video__right clearfix">
-                        <div class="about_video__left hidden-phone">
-                            <span class="hidden-desktop"> {{getDate(mainVideos[0].date)}}</span>
+                    <div class="about_video clearfix">
+                        <div class="about_video__left hidden-phone hidden-tablet">
+                            <h2>{{ mainVideos[0].title | trimText:50 }}</h2>
+                            <span> {{ mainVideos[0].date | prettyDate }}</span>
                         </div>
-                        <h2 class="hidden-desktop hidden-tablet">{{mainVideos[0].title | trimText : 30}}</h2>
-                        <p class="hidden-phone views_row">Просмотров <span class="views">{{mainVideos[0].statViews | number}}</span></p>
-                        <p><span class="hidden-tablet hidden-desktop mob_channel_name">50-50 Pranker</span> <i class="hidden-phone">Нравится</i> <span class="likes">{{mainVideos[0].statLikes}}</span> <button class="btn like_btn">
-                            <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="23" viewBox="0 0 13.566 11"><path d="M4.9 8.47c1.687.776 3.69 1.21 5.662 1.21.64 0 .402-.03 1.016-.133.24-.04.55-.13.688-.236.188-.145.31-.378.31-.638 0-.24-.105-.458-.27-.605h.07c.44 0 .794-.36.794-.807s-.355-.807-.793-.807h.396c.44 0 .795-.36.795-.807 0-.446-.355-.807-.795-.807.44 0 .795-.362.795-.808s-.355-.807-.795-.807h-2.695c-.274 0-.497-.226-.497-.504l.25-1.675c.024-.075.037-.155.037-.238C9.867.36 9.51 0 9.07 0c-.366 0-.676.254-.766.597L8.27.712C7.76 2.362 6.605 3.868 4.9 4.84v3.63z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 3.52h3.9v6.412L0 11V3.52z"/></svg></i>
-                        </button></p>
-                        <p class="hidden-tablet hidden-desktop"><span class="mob_date"> {{getDate(mainVideos[0].date)}}</span> Просмотров <span class="views">{{mainVideos[0].statViews | number}}</span></p>
-                        <h2 class="hidden-desktop hidden-phone">{{mainVideos[0].title | trimText : 30}}</h2>
-                        <div class="row hidden-desktop hidden-phone">
-                            <div class="col-xs-6">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <a ui-sref="videos({ id: mainVideos[1].id })" class="btn btn-video-ctrl">
-                                            <img class="prev" src="assets/img/video-prev-icon.png" alt="prev icon">
-                                        </a>
-                                    </div>
-                                    <div class="col-xs-9">
-                                        <div class="thumb__img">
-                                            <a ui-sref="videos({ id: mainVideos[1].id })">
-                                                <span class="thumb__length">{{mainVideos[1].length | secondsToTime}}</span>
-                                                <img alt="" ng-src="{{mainVideos[1].img}}">
+                        <div class="about_video__right clearfix">
+                            <div class="about_video__left hidden-phone">
+                                <span class="hidden-desktop"> {{ mainVideos[0].date | prettyDate }}</span>
+                            </div>
+                            <h2 class="hidden-desktop hidden-tablet">{{ mainVideos[0].title | trimText:50 }}</h2>
+                            <p class="hidden-phone views_row">Просмотров <span class="views">{{ (mainVideos[0].statViews || 0) | number}}</span></p>
+                            <p><span class="hidden-tablet hidden-desktop mob_channel_name">50-50 Pranker</span> <i class="hidden-phone">Нравится</i> <span class="likes">{{ mainVideos[0].statLikes || 0 }}</span> <button class="btn like_btn">
+                                <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="23" viewBox="0 0 13.566 11"><path d="M4.9 8.47c1.687.776 3.69 1.21 5.662 1.21.64 0 .402-.03 1.016-.133.24-.04.55-.13.688-.236.188-.145.31-.378.31-.638 0-.24-.105-.458-.27-.605h.07c.44 0 .794-.36.794-.807s-.355-.807-.793-.807h.396c.44 0 .795-.36.795-.807 0-.446-.355-.807-.795-.807.44 0 .795-.362.795-.808s-.355-.807-.795-.807h-2.695c-.274 0-.497-.226-.497-.504l.25-1.675c.024-.075.037-.155.037-.238C9.867.36 9.51 0 9.07 0c-.366 0-.676.254-.766.597L8.27.712C7.76 2.362 6.605 3.868 4.9 4.84v3.63z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 3.52h3.9v6.412L0 11V3.52z"/></svg></i>
+                            </button></p>
+                            <p class="hidden-tablet hidden-desktop"><span class="mob_date"> {{ mainVideos[0].date | prettyDate }}</span> Просмотров <span class="views">{{ mainVideos[0].statViews | number }}</span></p>
+                            <h2 class="hidden-desktop hidden-phone">{{ mainVideos[0].title | trimText:50 }}</h2>
+                            <div class="row hidden-desktop hidden-phone">
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <a ui-sref="videos({ id: mainVideos[1].id })" class="btn btn-video-ctrl">
+                                                <img class="prev" src="assets/img/video-prev-icon.png" alt="prev icon">
                                             </a>
                                         </div>
-                                        <p class="th_description">{{mainVideos[1].title}}</p>
+                                        <div class="col-xs-9">
+                                            <div class="thumb__img">
+                                                <a ui-sref="videos({ id: mainVideos[1].id })">
+                                                    <span class="thumb__length">{{ mainVideos[1].length | secondsToTime }}</span>
+                                                    <img alt="" ng-src="{{mainVideos[1].img}}">
+                                                </a>
+                                            </div>
+                                            <p class="th_description">{{ mainVideos[1].title | trimText:100 }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="row">
-                                    <div class="col-xs-9">
-                                        <div class="thumb__img">
-                                            <a ui-sref="videos({ id: mainVideos[2].id })">
-                                                <span class="thumb__length">{{mainVideos[2].length | secondsToTime}}</span>
-                                                <img alt="" ng-src="{{mainVideos[1].img}}">
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <div class="col-xs-9">
+                                            <div class="thumb__img">
+                                                <a ui-sref="videos({ id: mainVideos[2].id })">
+                                                    <span class="thumb__length">{{ mainVideos[2].length | secondsToTime }}</span>
+                                                    <img alt="" ng-src="{{mainVideos[1].img}}">
+                                                </a>
+                                            </div>
+                                            <p class="th_description">{{ mainVideos[1].title | trimText:100 }}</p>
+                                        </div>
+                                        <div class="col-xs-3 alignLeft">
+                                            <a ui-sref="videos({ id: mainVideos[2].id })" class="btn btn-video-ctrl">
+                                                <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
                                             </a>
                                         </div>
-                                        <p class="th_description">{{mainVideos[1].title}}</p>
-                                    </div>
-                                    <div class="col-xs-3 alignLeft">
-                                        <a ui-sref="videos({ id: mainVideos[2].id })" class="btn btn-video-ctrl">
-                                            <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
-                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <!-- right preview -->
             <div class="video_slider__item video_slider__item--right col-md-2 hidden-tablet hidden-phone">
                 <div class="thumb__img">
                     <a ui-sref="videos({ id: mainVideos[2].id })">
-                        <span class="thumb__length">{{mainVideos[2].length | secondsToTime}}</span>
+                        <span class="thumb__length">{{ mainVideos[2].length | secondsToTime }}</span>
                         <img alt="" ng-src="{{mainVideos[2].img}}">
                     </a>
                 </div>
@@ -118,7 +114,7 @@
                     <span>Следующее</span>
                     <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
                 </a>
-                <p class="th_description">{{mainVideos[2].title}}</p>
+                <p class="th_description">{{ mainVideos[2].title | trimText:100 }}</p>
             </div>
         </div>
     </div> <!-- end slider box -->
@@ -254,8 +250,7 @@
                         </tabs>
                     </div>
                 </div>
-            </div>
-            <!--<hr class="block__hr">-->
+            </div><!-- desktop tabs -->
 
             <!-- related videos -->
             <div ng-show="activeTab == 1" class="row right_video_list">
@@ -267,26 +262,14 @@
                                 <img alt="" ng-src="{{ video.img }}">
                             </div>
                         </a>
-                        <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                        <p class="thumb__title"><a href="">{{ video.title | trimText:100 }}</a></p>
                         <p class="thumb__count"><a href="#"><span class="thumb__number">{{ video.count | number }}</span> просмотров</a></p>
                     </div>
                 </div>
-            </div> <!-- end row -->
+            </div><!-- related videos -->
 
             <!-- related  channels -->
             <div ng-show="activeTab == 2" class="row right_video_list">
-                <!--<div class="col-xs-6" ng-repeat="channel in relatedChannels">-->
-                    <!--<div class="thumb">-->
-                        <!--<a class="btn" href="#" >-->
-                            <!--<div class="thumb__img thumb__img&#45;&#45;shadow">-->
-                                <!--<span class="thumb__length">{{ channel.length | secondsToTime }}</span>-->
-                                <!--<img alt="" ng-src="{{channel.img}}">-->
-                            <!--</div>-->
-                        <!--</a>-->
-                        <!--<p class="thumb__title"><a href="">{{channel.title}}</a></p>-->
-                        <!--<p class="thumb__count"><a href="#"><span class="thumb__number">{{channel.count | number}}</span> просмотров</a></p>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <div class="thumb row clearfix" ng-repeat="channel in relatedChannels">
                     <div class="thumb thumb--chan search_thumb pull-left">
                         <div class="thumb__img">
@@ -307,7 +290,8 @@
                         </div>
                     </div>
                 </div>
-            </div> <!-- end row -->
+            </div><!-- related  channels -->
+
         </div>
     </div>
 </div>

@@ -38,5 +38,5 @@
 </div>
 
 <div class="block center">
-    <a class="btn btn-more" ng-click="loadMoreChannels('channels')">{{ loading && !noChannels ? 'идет загрузка...' : !loading && !noChannels ? 'загрузить еще' : 'Все каналы загружены'}}</a>
+    <load-more params="[channelsRequest,ratingsChannels,channelsOffset]"></load-more>
 </div>

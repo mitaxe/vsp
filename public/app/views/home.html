@@ -19,7 +19,7 @@
                     <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                     <p class="thumb__info">
                         <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                        <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                        <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                     </p>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                         <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p>
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                         </p>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                         <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                         </p>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                         <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p>
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                         </p>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                         <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                         </p>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                         <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p class="thumb__info">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                         </p>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                         <p class="thumb__title"><a href="">{{ video.title }}</a></p>
                         <p class="thumb__text"><a href="#">{{ video.text | trimText : 80}}</a></p>
                         <p>
-                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                             <span class="thumb__hasvideo">Содержит Видео</span>
                         </p>
                     </div>
@@ -213,7 +213,7 @@
                         <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                         </p>
                     </div>
                 </div>
@@ -239,7 +239,7 @@
                             <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                             <p class="thumb__info">
                                 <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                                <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                                <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                             </p>
                         </div>
                     </div>
@@ -359,7 +359,7 @@
                     <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
                     <p class="thumb__info">
                         <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                        <span class="thumb__date"><span class="thumb__number">{{ getDate(video.date) }}</span></span>
+                        <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                     </p>
                 </div>
             </div>

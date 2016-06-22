@@ -3,6 +3,6 @@ angular.module("MainApp")
   return {
     restrict: 'E',
     replace: true,
-    templateUrl: 'app/views/sidebar.html'
+    templateUrl: 'app/views/templates/sidebar.html'
   };
 });

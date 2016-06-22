@@ -4,19 +4,17 @@ angular.module("MainApp")
     // get main channel data
     $scope.content = mainChannel.data.data;
 
-
-    // get the rest of channel data
+    // get the rest of all videos data
     factory.getChannelVideos($stateParams.id).success(function(response) {
         $scope.channelVideos = response.data;
         console.log('related videos ', $scope.channelVideos);
     });
 
-    // get the rest of channel data
+    // get the rest of playlists data
     factory.getChannelPlaylists($stateParams.id).success(function(response) {
         $scope.channelPlaylists = response.data;
         console.log('channels playlists ', $scope.channelPlaylists);
-    });    
-
+    });
 
     // subscribe
     $scope.subscribe = function() {
@@ -27,7 +25,6 @@ angular.module("MainApp")
             $scope.content.statSubscribers -= 1;
         }
     };
-
 
     // sort channels
     $scope.sortTypes = [

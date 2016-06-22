@@ -5,13 +5,11 @@ angular.module("MainApp")
     cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
     cfpLoadingBarProvider.includeSpinner = false;
 
-
     // fix /# url
     // $locationProvider.html5Mode({
     //     enabled : true,
     //     requireBase : false
     // });
-
 
     // redirects
     $urlRouterProvider.otherwise("/");
@@ -23,7 +21,6 @@ angular.module("MainApp")
     .when('/search', '/search/all')
     .when("/channels/:id", "/channels/:id/all")
     .when('/settings', '/settings/main');
-
 
     // states
     $stateProvider
@@ -56,7 +53,7 @@ angular.module("MainApp")
     // ratings
     .state('ratings', {
         url: "/ratings",
-        templateUrl: "app/views/ratings.html",
+        templateUrl: "app/views/ratings/ratings.html",
         controller: 'RatingsCtrl',
         resolve: {
             ratingsVideos: function(factory) {
@@ -69,27 +66,27 @@ angular.module("MainApp")
     })
     .state('ratings.videos', {
         url: "/videos",
-        templateUrl: "app/views/ratings-videos.html"
+        templateUrl: "app/views/ratings/ratings-videos.html"
     })
     .state('ratings.channels', {
         url: "/channels",
-        templateUrl: "app/views/ratings-channels.html"
+        templateUrl: "app/views/ratings/ratings-channels.html"
     })
 
     // registration/sign-in
     .state('reg', {
         url : '/reg',
-        templateUrl : 'app/views/registration.html'
+        templateUrl : 'app/views/auth/registration.html'
     })
     .state('sign-in', {
         url : '/sign-in',
-        templateUrl : 'app/views/sign-in.html'
+        templateUrl : 'app/views/auth/sign-in.html'
     })
 
     // search
     .state('search', {
         url : '/search',
-        templateUrl : 'app/views/search.html',
+        templateUrl : 'app/views/search/search.html',
         redirectTo : 'search.all',
         resolve: {
             historyData: function(factory) {
@@ -100,19 +97,19 @@ angular.module("MainApp")
     })
     .state('search.all', {
         url : '/all',
-        templateUrl : 'app/views/search-all.html'
+        templateUrl : 'app/views/search/search-all.html'
     })
     .state('search.video', {
         url : '/video',
-        templateUrl : 'app/views/search-video.html'
+        templateUrl : 'app/views/search/search-video.html'
     })
     .state('search.channel', {
         url : '/channel',
-        templateUrl : 'app/views/search-channels.html'
+        templateUrl : 'app/views/search/search-channels.html'
     })
     .state('search.articles', {
         url : '/articles',
-        templateUrl : 'app/views/search-articles.html'
+        templateUrl : 'app/views/search/search-articles.html'
     })
 
     // new videos
@@ -158,7 +155,7 @@ angular.module("MainApp")
     // history
     .state('history', {
         url: "/history",
-        templateUrl: "app/views/history.html",
+        templateUrl: "app/views/history/history.html",
         controller: 'HistoryCtrl',
         resolve: {
             historyData: function(factory) {
@@ -168,123 +165,121 @@ angular.module("MainApp")
     })
     .state('history.viewed', {
         url: "/viewed",
-        templateUrl: "app/views/history-viewed.html"
+        templateUrl: "app/views/history/history-viewed.html"
     })
     .state('history.liked', {
         url: "/liked",
-        templateUrl: "app/views/history-liked.html"
+        templateUrl: "app/views/history/history-liked.html"
     })
 
     // channel
     .state('user', {
         url: "/user/:url",
-        templateUrl: "app/views/channel.html",
+        templateUrl: "app/views/channels/channel.html",
         controller: 'ChannelCtrl'
     })
     .state('user.all', {
-        url : '/all',
-        templateUrl: 'app/views/channel-all.html'
+        url: '/all',
+        templateUrl: 'app/views/channels/channel-all.html'
     })
     .state('user.liked', {
-        url : '/liked',
-        templateUrl: 'app/views/channel-liked.html'
+        url: '/liked',
+        templateUrl: 'app/views/channels/channel-liked.html'
     })
     .state('user.shop', {
-        url : '/shop',
-        templateUrl: 'app/views/channel-shop.html'
+        url: '/shop',
+        templateUrl: 'app/views/channels/channel-shop.html'
     })
 
     // profile
     .state('profile', {
-        url : '/profile',
-        templateUrl : 'app/views/profile.html',
-        controller : 'ProfileCtrl'
+        url: '/profile',
+        templateUrl: 'app/views/profile/profile.html',
+        controller: 'ProfileCtrl'
     })
     .state('profile-edit', {
-        url : '/profile-edit',
-        templateUrl : 'app/views/profile-edit.html'
+        url: '/profile-edit',
+        templateUrl: 'app/views/profile/profile-edit.html'
     })
 
     // add channel
     .state('add-channel' ,{
-        url : '/add-channel',
-        templateUrl : 'app/views/add-channel.html'
+        url: '/add-channel',
+        templateUrl: 'app/views/add-channel.html'
     })
 
     // settings
     .state('settings',{
-        url : '/settings',
-        templateUrl : 'app/views/settings.html',
-        controller : 'SettingsCtrl'
+        url: '/settings',
+        templateUrl: 'app/views/settings/settings.html',
+        controller: 'SettingsCtrl'
     })
     .state('settings.main', {
-        url : '/main',
-        templateUrl : 'app/views/settings-main.html'
+        url: '/main',
+        templateUrl: 'app/views/settings/settings-main.html'
     })
     .state('settings.video', {
-        url : '/video',
-        templateUrl : 'app/views/settings-video.html'
+        url: '/video',
+        templateUrl: 'app/views/settings/settings-video.html'
     })
 
     // video settings
     .state('video-edit', {
-        url : '/video-edit',
-        templateUrl : 'app/views/video-settings.html'
+        url: '/video-edit',
+        templateUrl: 'app/views/settings/video-settings.html'
     })
 
     // notifications and comments
     .state('notifications-comments', {
-        url : '/notifications/comments',
-        templateUrl : 'app/views/notifications-comments.html'
+        url: '/notifications/comments',
+        templateUrl: 'app/views/notifications/notifications-comments.html'
     })
     .state('notifications-all', {
-        url : '/notifications/all',
-        templateUrl : 'app/views/notifications-all.html'
+        url: '/notifications/all',
+        templateUrl: 'app/views/notifications/notifications-all.html'
     })
 
     // not my channel
     .state('channels', {
         url: '/channels/:id',
-        templateUrl: "app/views/xchannel.html",
+        templateUrl: "app/views/channels/xchannel.html",
         controller: 'xChannelCtrl',
         scope: {
             content: '='
         },
         resolve:  {
-            mainChannel : function(factory, $stateParams) {
-                // console.log($stateParams);
+            mainChannel: function(factory, $stateParams) {
                 return factory.getChannelData($stateParams.id);
             }
         }
     })
     .state('channels.all', {
         url: '/all',
-        templateUrl: 'app/views/xchannel-all.html'
+        templateUrl: 'app/views/channels/xchannel-all.html'
     })
     .state('channels.playlist', {
         url: '/playlist',
-        templateUrl: 'app/views/xchannel-playlists.html'
+        templateUrl: 'app/views/channels/xchannel-playlists.html'
     })
     .state('playlist', {
         url: '/playlists/:id',
-        templateUrl: 'app/views/playlist.html',
+        templateUrl: 'app/views/channels/playlist.html',
         controller: 'PlaylistCtrl',
         resolve:  {
-            mainPlaylist : function(factory, $stateParams) {
-                // console.log($stateParams);
+            mainPlaylist: function(factory, $stateParams) {
                 return factory.getPlaylistData($stateParams.id);
             }
-        }        
+        }
     })
     .state('channels.shop', {
         url: '/shop',
-        templateUrl: 'app/views/xchannel-shop.html'
+        templateUrl: 'app/views/channels/xchannel-shop.html'
     })
 
     // shop detailed page
     .state('shop-detailed', {
         url: '/shop/:itemId',
-        templateUrl: 'app/views/shop-detail.html',
+        templateUrl: 'app/views/channels/shop-detail.html',
         controller: 'ShopDetailCtrl'
     })
 
@@ -295,16 +290,16 @@ angular.module("MainApp")
         scope: {
             content: '='
         },
-        controller : 'VideoPageCtrl',
+        controller: 'VideoPageCtrl',
         resolve:  {
-          mainVideos : function(factory, $stateParams) {
+          mainVideos: function(factory, $stateParams) {
               // console.log($stateParams);
               return factory.getVideoPageMainVideos($stateParams.id);
           }
         }
     })
 
-    // shop detailed page
+    // test page
     .state('test', {
         url: '/test',
         templateUrl: 'app/views/test.html'
