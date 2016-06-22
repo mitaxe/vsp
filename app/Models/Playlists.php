@@ -27,7 +27,7 @@ class Playlists extends Model
      */
     public function initialize()
     {
-        $this->hasMany("id", "PlaylistsVideos", "playlistId", ["limit" => 24, "alias" => "videos"]);
+        $this->hasMany("id", "PlaylistsVideos", "playlistId", ["limit" => 24, "alias" => "playlistVideos"]);
     }
 
     /**
