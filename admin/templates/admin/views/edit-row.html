@@ -1,0 +1,16 @@
+<div class="container">
+    <form class="edit_row_form" novalidate  action="#">
+        <h3>Edit data fo - {{editData.id}}</h3>
+
+        <label for="name">Title</label>
+        <input id="name" name="name" type="text" ng-model="editData.title" value="{{editData.name}}">
+
+        <label for="age">ID</label>
+        <input type="text" id="age" name="age" ng-model="editData.id" value="{{editData.age}}">
+
+        <label for="city">User</label>
+        <input type="text" name="city" id="city" ng-model="editData.user" value="{{editData.city}}">
+
+        <button ng-click="updateRowData($event)">Save</button>
+    </form>
+</div>

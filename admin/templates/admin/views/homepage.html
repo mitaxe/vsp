@@ -1,0 +1,122 @@
+<div class="container">
+    <div class="portlet portlet-default">
+
+        <div class="portlet-header">
+            <h4 class="portlet-title">Управление видео блоками на главной странице (CRUD)</h4>
+        </div> <!-- /.portlet-header -->
+
+        <div class="portlet-body">
+
+            <!-- search -->
+            <div class="row">
+              <div class="col-xs-8 col-sm-6 col-md-3">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <div class="col-xs-2">
+                <button type="button" ng-model="search" class="btn edit-mode">Search</button>
+              </div>
+            </div><!-- search -->
+
+            <hr>
+
+            <!-- table -->
+            <div style="width:100%; overflow:auto;">
+                <table class="table table-striped table-bordered table-hover ui-datatable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>User</th>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in tableData">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ row.title }}</td>
+                            <td>{{ row.user }}</td>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.date }}</td>
+                            <td>
+                                <!-- <button ui-sref="editRow({id : row.id})" class="btn edit-mode">edit</button> -->
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn edit-mode" data-toggle="modal" data-target="#{{row.id}}">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>User</th>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Edit</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- <button ui-sref="addRow"> Add new row</button> -->
+
+            <!-- pagination -->
+            <nav>
+              <ul class="pagination">
+                <li>
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav><!-- pagination -->
+
+            <!-- modals (hidden) -->
+            <div ng-repeat="row in tableData">
+                <!-- Modal -->
+                <div class="modal fade" id="{{row.id}}" tabindex="-1" role="dialog" aria-labelledby="'myModalLabel' + {{row.id}}">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title" id="'myModalLabel' + {{row.id}}">Modal for - {{row.id}}</h4>
+                      </div>
+                      <div class="modal-body">
+                        <!-- modal body -->
+                        <form>
+                          <div class="form-group">
+                            <label>Title</label>
+                            <input class="form-control" ng-model="row.title">
+                          </div>
+                          <div class="form-group">
+                            <label>ID</label>
+                            <input class="form-control" ng-model="row.id">
+                          </div>
+                          <div class="form-group">
+                            <label>User</label>
+                            <input class="form-control" ng-model="row.user">
+                          </div>
+                        </form><!-- modal body -->
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div><!-- modals (hidden) -->
+
+        </div> <!-- /.portlet-body -->
+
+    </div> <!-- /.portlet -->
+</div>

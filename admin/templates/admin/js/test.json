@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "id": "0",
+      "name": "Dima",
+      "age": "20",
+      "city": "Kiev"
+    },
+    {
+      "id": "1",
+      "name": "Vasya",
+      "age": "22",
+      "city": "Odessa"
+    },
+    {
+      "id": "3",
+      "name": "Petya",
+      "age": "30",
+      "city": "Kharkov"
+    },
+    {
+      "id": "4",
+      "name": "Petya",
+      "age": "24",
+      "city": "Lvov"
+    }
+  ]
+}

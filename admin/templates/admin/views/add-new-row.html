@@ -1,0 +1,16 @@
+<div class="container">
+    <form class="edit_row_form" novalidate  action="#">
+        <h3>Add new data</h3>
+
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" ng-model="newRow.name" value="">
+
+        <label for="age">Age</label>
+        <input type="text" id="age" name="age" ng-model="newRow.age" value="">
+
+        <label for="city">City</label>
+        <input type="text" name="city" id="city" ng-model="newRow.city" value="">
+
+        <button ng-click="addNewRow($event)"> Save </button>
+    </form>
+</div>
