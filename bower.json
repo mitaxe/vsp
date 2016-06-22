@@ -18,8 +18,8 @@
   "install": {
     "path": {
       "js": "public/app/shared/",
-      "css": "public/scss/libs/",
-      "scss": "public/scss/libs/"
+      "css": "public/app/scss/libs/",
+      "scss": "public/app/scss/libs/"
     }
   },
   "dependencies": {}

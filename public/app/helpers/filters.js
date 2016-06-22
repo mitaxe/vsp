@@ -11,7 +11,7 @@ app.filter('startFrom', function() {
     };
 });
 
-// pretty date filter
+// humanize date
 app.filter('prettyDate', function() {
     return function(time,toDay) {
         var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
@@ -44,7 +44,7 @@ app.filter('prettyDate', function() {
     };
 });
 
-// video length formatter
+// format time in seconds
 app.filter('secondsToTime', function() {
 
     function padTime(t) {
@@ -67,35 +67,14 @@ app.filter('secondsToTime', function() {
     };
 });
 
-// text length filter
-app.filter('trimText', function() {
-    return function(text, limit, backwards) {
-
-        if(!text) {
-            return '';
-        }
-
-        var words = text.split(' ');
-        var wordsToShow = 0; // how much words need to show
-        var counter = 0; // letter counter
-
-        for (var i = 0; i < words.length; i++) {
-            if(counter < limit) {
-                counter += words[i].length; // count letters length
-                wordsToShow = i;
-            } else {
-                wordsToShow = i -1; // index of last word
-                break;
-            }
-        }
-
+// trim text filter
+app.filter('trimText', function () {
+    return function (text, length, backwards) {
         if (backwards) {
-            return '...' + words.splice(wordsToShow + 1).join(' ');
-        } else if (counter + 10 >= limit) {
-            return words.splice(0, wordsToShow).join(' ') + ' ...';
-        } else {
-            return words.join(' ');
+            return '...' + text.slice(text.length = length, length);
+        } else if (text.length > length) {
+            return text.substr(0, length) + "...";
         }
-
+        return text;
     };
 });

@@ -28,10 +28,11 @@
                             <span class="counter subscribe"> {{ content.statSubscribers | number }}</span>
                         </div>
                     </div>
-                    <p ng-init="varu = 200" ng-show="content.description.length > 0" class="block__subtitle">{{ content.description | trimText:varu }}
+                    <p ng-init="symbolsLimit = 200" ng-show="content.description.length > 0" class="block__subtitle">
+                        <span ng-bind-html="content.description | trimText:symbolsLimit" style="white-space: pre-line;"></span>
                         <a class="read-more"
-                            ng-show="content.description.length > varu"
-                            ng-click="varu = infinity">
+                            ng-show="content.description.length > symbolsLimit"
+                            ng-click="symbolsLimit = infinity">
                             <span>Читать далее</span>
                             <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
                         </a>
