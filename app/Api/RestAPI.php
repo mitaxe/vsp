@@ -148,6 +148,11 @@ class RestAPI extends MicroMVC
     $channelsPage->get('/channels/{id}/videos', 'getVideos');
     $channelsPage->get('/channels/{id}/goods', 'getGoods');
     $collections[] = $channelsPage;
+
+    $playlistsPage = new MicroCollection();
+    $playlistsPage->setHandler(new PlaylistsController());
+    $playlistsPage->get('/playlists/{id}', 'getPlaylist');
+    $collections[] = $playlistsPage;
     
     /** @var Config $collectionConfig */
     /*$collectionConfig = $this->getDI()->get('collectionConfig');
