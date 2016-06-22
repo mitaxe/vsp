@@ -1,0 +1,193 @@
+<div class="container">
+    <div class="portlet portlet-default">
+
+        <div class="portlet-header">
+            <h4 class="portlet-title">Управление видео блоками на главной странице (CRUD)</h4>
+        </div> <!-- /.portlet-header -->
+
+        <div class="portlet-body">
+
+            <!-- search -->
+            <div class="row">
+                <div class="col-xs-4 col-md-3">
+                    <select class="form-control">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                </div>
+              <div class="col-xs-4 col-md-3">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <div class="col-xs-2">
+                <button type="button" ng-model="search" class="btn btn-edit">Search</button>
+              </div>
+            </div><!-- search -->
+
+            <hr>
+
+            <!-- table -->
+            <div style="width:100%; overflow:auto;">
+                <table class="table table-striped table-bordered table-hover ui-datatable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>User</th>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in tableData">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ row.title }}</td>
+                            <td>{{ row.user }}</td>
+                            <td>{{ row.id }}</td>
+                            <td>{{ row.date }}</td>
+                            <td>
+                                <!-- <button ui-sref="editRow({id : row.id})" class="btn edit-mode">edit</button> -->
+                                <button type="button" class="btn edit-mode" data-toggle="modal" data-target="#{{row.id}}-edit">Edit</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn edit-mode" data-toggle="modal" data-target="#{{row.id}}-delete">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>User</th>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <!-- add new row -->
+                    <button class="btn edit-mode" data-toggle="modal" data-target="#addRow">Добавить запись</button>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <!-- pagination -->
+                    <div class="dataTables_paginate paging_simple_numbers">
+                      <ul class="pagination" style="margin:0; text-align:right; width:100%;">
+                        <li>
+                          <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                          <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </ul>
+                  </div><!-- pagination -->
+                </div>
+            </div>
+
+            <!-- modals (hidden) -->
+            <div ng-repeat="row in tableData">
+                <!-- Modal Edit-->
+                <div class="modal modal-styled fade" id="{{row.id}}-edit" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">{{row.id}}</h4>
+                      </div>
+                      <div class="modal-body">
+                        <!-- modal body -->
+                        <form>
+                          <div class="form-group">
+                            <label>Title</label>
+                            <input class="form-control" ng-model="row.title">
+                          </div>
+                          <div class="form-group">
+                            <label>ID</label>
+                            <input class="form-control" ng-model="row.id">
+                          </div>
+                          <div class="form-group">
+                            <label>User</label>
+                            <input class="form-control" ng-model="row.user">
+                          </div>
+                        </form><!-- modal body -->
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal Add Row -->
+                <div class="modal modal-styled fade" id="addRow" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Добавить запись</h4>
+                      </div>
+                      <div class="modal-body">
+                        <!-- modal body -->
+                        <form>
+                          <div class="form-group">
+                            <label>Title</label>
+                            <input class="form-control" ng-model="newRow.title">
+                          </div>
+                          <div class="form-group">
+                            <label>ID</label>
+                            <input class="form-control" ng-model="newRow.id">
+                          </div>
+                          <div class="form-group">
+                            <label>User</label>
+                            <input class="form-control" ng-model="newRow.user">
+                          </div>
+                        </form><!-- modal body -->
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary">Добавить</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Delete -->
+                <div class="modal modal-styled fade" id="{{row.id}}-delete" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">{{row.id}}</h4>
+                      </div>
+                      <div class="modal-body">
+                        <!-- modal body -->
+                        <div class="">
+                            <h4>Вы уверены, что хотите удалить эту запись ?</h4>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary">Yes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div><!-- modals (hidden) -->
+
+        </div> <!-- /.portlet-body -->
+
+    </div> <!-- /.portlet -->
+</div>
