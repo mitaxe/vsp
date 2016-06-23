@@ -2,7 +2,6 @@
 
 class PlaylistsResponse extends ResponseArray
 {
-
     public function add($playlists = [])
     {
         if (!count($playlists)) {

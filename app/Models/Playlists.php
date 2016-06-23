@@ -13,6 +13,7 @@ use Phalcon\Mvc\Model;
 class Playlists extends Model
 {
 
+    private $videosLimit = 24;
     /**
      * Define table name
      * @return string
@@ -27,7 +28,13 @@ class Playlists extends Model
      */
     public function initialize()
     {
-        $this->hasMany("id", "PlaylistsVideos", "playlistId", ["limit" => 24, "alias" => "playlistVideos"]);
+        $this->hasMany("id", "PlaylistsVideos", "playlistId", [
+                "params" => [
+                    "limit" => $this->videosLimit
+                    ],
+                "alias" => "playlistVideos"
+            ]
+        );
     }
 
     /**
