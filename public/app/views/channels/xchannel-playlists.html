@@ -6,7 +6,7 @@
             <div class="block__btn"><a ui-sref="playlist({ id: playlist.id })" class="btn btn-white">Смотреть все</a></div>
         </div>
         <!-- slider visible desktop only -->
-        <slider slides="videos" class="hidden-phone hidden-tablet">
+        <slider slides="playlist.videos" class="hidden-phone hidden-tablet">
             <div class="col-xs-2 slider__slide" ng-repeat="video in playlist.videos">
                 <div class="thumb">
                     <a ui-sref="videos({ id: video.id })">
