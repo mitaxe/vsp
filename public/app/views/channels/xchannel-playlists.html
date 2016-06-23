@@ -2,7 +2,7 @@
 <div ng-repeat="playlist in channelPlaylists">
     <div class="block block--white">
         <div class="col-xs-12">
-            <h2 class="block__title block__title--left--auto">{{ playlist.title }}</h2><span class="cat_counter"> {{ playlist.videos.length }}</span>
+            <h2 class="block__title block__title--left--auto">{{ playlist.title }}</h2><span class="cat_counter"> {{ playlist.videosCount }}</span>
             <div class="block__btn"><a ui-sref="playlist({ id: playlist.id })" class="btn btn-white">Смотреть все</a></div>
         </div>
         <!-- slider visible desktop only -->

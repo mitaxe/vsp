@@ -23,7 +23,8 @@ class PlaylistsResponse extends ResponseArray
                     $playlist->vspChannelId,
                     $playlist->title,
                     $playlist->description,
-                    $videosResponse->getData()
+                    $videosResponse->getData(),
+                    $playlist->statPublic
                 ));
         }
 

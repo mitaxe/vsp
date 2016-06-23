@@ -28,14 +28,21 @@ class PlaylistResponse extends Response
      */
     public $videos = [];
 
+    /**
+     * @var int
+     */
+    public $videosCount = [];    
 
-    public function __construct($id, $channelId, $title, $description, $videos)
+
+    public function __construct($id, $channelId, $title, $description, $videos, $videosCount)
     {
         $this->id = $id;
         $this->channelId = $channelId;
         $this->title = $title;
         $this->description = $description;
         $this->videos = $videos;
+        $this->videosCount = $videosCount;
+
 
         parent::__construct();
     }
