@@ -1,6 +1,6 @@
 <div class="content" autoscroll='true'>
     <div class="row">
-        <!-- exclusive page header -->
+        <!-- page header -->
         <div class="block block--header">
             <div class="col-xs-12">
                 <h2 class="block__title block__title--50">{{ mainPlaylist.title }}</h2>
@@ -26,10 +26,10 @@
             <hr class="block__hr">
         </div>
 
-        <!-- exclusive videos block -->
+        <!-- videos block -->
         <div class="block block--white">
             <div class="col-xs-6 col-sm-4 col-md-3"
-                 ng-repeat="video in mainPlaylist.videos | filter: selectedCategory ">
+                 ng-repeat="video in videos(mainPlaylist.id, initialOffset) | filter: selectedCategory ">
                 <div class="thumb">
                     <a ui-sref="videos({ id: video.id })">
                         <div class="thumb__img">
@@ -50,7 +50,7 @@
         </div>
 
         <div class="block center">
-            <load-more params="[request,mainPlaylist,initialOffset,id]"></load-more>
+            <load-more params="[request,getPlaylistVideos,initialOffset,id]"></load-more>
         </div>
 
     </div>

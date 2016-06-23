@@ -12,25 +12,43 @@ class PlaylistsController extends RESTController
             'bind' => [1 => $id]
         ]);
         if (!empty($playlist)) {
-
-            $videosResponse = new VideosResponse();
-            $allVideos = [];
-            foreach ($playlist->playlistVideos as $videos) {
-                $allVideos[] = $videos->video;
-            }
-            $videosResponse->add($allVideos);
-
             return new PlaylistResponse(
                 $playlist->vspPlaylistId,
                 $playlist->vspChannelId,
                 $playlist->title,
                 $playlist->description,
-                $videosResponse->getData(),
+                [],
                 $playlist->statPublic
             );
         }
-
         return new Response;
     }
+    
+    public function getVideos($vspPlaylistId)
+    {
+        $playlist = Playlists::findFirst([
+            'conditions' => "vspPlaylistId = ?1",
+            'bind' => [1 => $vspPlaylistId]
+        ]);
+        $response = new VideosResponse();
+        $queryParams = [
+            'conditions' => "playlistId = ?1",
+            'bind' => [1 => $playlist->id],
+            'limit' => 24
+        ];
+
+        if ($offset = $this->request->getOffset()) {
+            $queryParams['offset'] = $offset;
+        }
+        $playlistVideos = PlaylistsVideos::find($queryParams);
+        foreach ($playlistVideos as $item) {
+            $response->add([$item->video]);
+        }
+
+        return $response;
+
+
+    }
+    
     
 }

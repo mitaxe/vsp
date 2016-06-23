@@ -495,10 +495,13 @@ angular.module("MainApp")
         };
 
         // playlist page
-        factory.getPlaylistData = function(id, offset) {
-            offset = offset || '';
-            return $http.get('http://vsponline.qa/playlists/' + id + '?offset=' + offset);
+        factory.getPlaylistData = function(id) {
+            return $http.get('http://vsponline.qa/playlists/' + id);
         };
+        factory.getPlaylistVideos = function(id, offset) {
+            offset = offset || '';
+            return $http.get('http://vsponline.qa/playlists/' + id + '/videos?offset=' + offset);
+        };    
 
         // blog page
         factory.getBlogData = function() {
@@ -752,6 +755,9 @@ angular.module("MainApp")
 
     // default request
     $scope.request = factory.getPlaylistData;
+    
+    //playlist videos
+    $scope.videos = factory.getPlaylistVideos.data;
 
     // id
     $scope.id = $stateParams.id;
