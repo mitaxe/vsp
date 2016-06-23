@@ -29,7 +29,7 @@
         <!-- videos block -->
         <div class="block block--white">
             <div class="col-xs-6 col-sm-4 col-md-3"
-                 ng-repeat="video in videos(mainPlaylist.id, initialOffset) | filter: selectedCategory ">
+                 ng-repeat="video in videos | filter: selectedCategory ">
                 <div class="thumb">
                     <a ui-sref="videos({ id: video.id })">
                         <div class="thumb__img">

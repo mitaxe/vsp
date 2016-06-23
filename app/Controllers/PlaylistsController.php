@@ -30,7 +30,13 @@ class PlaylistsController extends RESTController
             'conditions' => "vspPlaylistId = ?1",
             'bind' => [1 => $vspPlaylistId]
         ]);
+
         $response = new VideosResponse();
+
+        if (empty($playlist)) {
+            return new Response();
+        }
+        
         $queryParams = [
             'conditions' => "playlistId = ?1",
             'bind' => [1 => $playlist->id],

@@ -9,9 +9,11 @@ angular.module("MainApp")
 
     // default request
     $scope.request = factory.getPlaylistData;
-    
-    //playlist videos
-    $scope.videos = factory.getPlaylistVideos.data;
+
+    // get the rest of all videos data
+    factory.getPlaylistVideos($stateParams.id, $stateParams.offset).success(function(response) {
+        $scope.videos = response.data;
+    });
 
     // id
     $scope.id = $stateParams.id;
