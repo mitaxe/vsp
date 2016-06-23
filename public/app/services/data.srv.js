@@ -62,7 +62,7 @@ angular.module("MainApp")
         factory.getPlaylistVideos = function(id, offset) {
             offset = offset || '';
             return $http.get('http://vsponline.qa/playlists/' + id + '/videos?offset=' + offset);
-        };    
+        };
 
         // blog page
         factory.getBlogData = function() {

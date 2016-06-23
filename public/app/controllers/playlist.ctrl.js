@@ -4,15 +4,14 @@ angular.module("MainApp")
     // get first portion of videos from route resolve
     $scope.mainPlaylist = mainPlaylist.data.data;
 
-    // get offset number
-    $scope.initialOffset = mainPlaylist.data.meta.count;
+    // request for loadMore
+    $scope.request = factory.getPlaylistVideos;
 
-    // default request
-    $scope.request = factory.getPlaylistData;
-
-    // get the rest of all videos data
-    factory.getPlaylistVideos($stateParams.id, $stateParams.offset).success(function(response) {
-        $scope.videos = response.data;
+    // get first portion of videos
+    $scope.request($stateParams.id).success(function(response) {
+        $scope.playlistVideos = response.data;
+        // get offset number
+        $scope.initialOffset = response.meta.count;
     });
 
     // id

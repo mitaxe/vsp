@@ -7,15 +7,17 @@ app.directive('loadMore', function ($document) {
         template: '<a class="btn btn-more">' + '{{ getButtonText() }} ' + '</a>',
         link: function (scope, element) {
 
+            scope.offset = 0;
+
             function loadMore(request,array,offset,id) {
-                scope.offset = scope.offset || 0;
 
                 if (!scope.noMoreResponse) {
                     scope.loadingMore = true;
                     scope.offset += offset;
-                    var params = id ? [id, scope.offset].join() : scope.offset;
+                    id = id || scope.offset;
 
-                    request(params).success(function(response) {
+                    request(id,scope.offset).success(function(response) {
+                        console.log('offset - ',scope.offset);
                         scope.loadingMore = false;
                         if (response.data !== null) {
                             array.push.apply(array, response.data);

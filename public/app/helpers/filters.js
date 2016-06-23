@@ -70,7 +70,9 @@ app.filter('secondsToTime', function() {
 // trim text filter
 app.filter('trimText', function () {
     return function (text, length, backwards) {
-        if (backwards) {
+        if (text === null) {
+            return '';
+        } else if (backwards) {
             return '...' + text.slice(text.length = length, length);
         } else if (text.length > length) {
             return text.substr(0, length) + "...";

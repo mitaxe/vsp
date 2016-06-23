@@ -403,7 +403,9 @@ app.filter('secondsToTime', function() {
 // trim text filter
 app.filter('trimText', function () {
     return function (text, length, backwards) {
-        if (backwards) {
+        if (text === null) {
+            return '';
+        } else if (backwards) {
             return '...' + text.slice(text.length = length, length);
         } else if (text.length > length) {
             return text.substr(0, length) + "...";
@@ -501,7 +503,7 @@ angular.module("MainApp")
         factory.getPlaylistVideos = function(id, offset) {
             offset = offset || '';
             return $http.get('http://vsponline.qa/playlists/' + id + '/videos?offset=' + offset);
-        };    
+        };
 
         // blog page
         factory.getBlogData = function() {
@@ -750,15 +752,14 @@ angular.module("MainApp")
     // get first portion of videos from route resolve
     $scope.mainPlaylist = mainPlaylist.data.data;
 
-    // get offset number
-    $scope.initialOffset = mainPlaylist.data.meta.count;
+    // request for loadMore
+    $scope.request = factory.getPlaylistVideos;
 
-    // default request
-    $scope.request = factory.getPlaylistData;
-
-    // get the rest of all videos data
-    factory.getPlaylistVideos($stateParams.id, $stateParams.offset).success(function(response) {
-        $scope.videos = response.data;
+    // get first portion of videos
+    $scope.request($stateParams.id).success(function(response) {
+        $scope.playlistVideos = response.data;
+        // get offset number
+        $scope.initialOffset = response.meta.count;
     });
 
     // id
@@ -1142,15 +1143,17 @@ app.directive('loadMore', ["$document", function ($document) {
         template: '<a class="btn btn-more">' + '{{ getButtonText() }} ' + '</a>',
         link: function (scope, element) {
 
+            scope.offset = 0;
+
             function loadMore(request,array,offset,id) {
-                scope.offset = scope.offset || 0;
 
                 if (!scope.noMoreResponse) {
                     scope.loadingMore = true;
                     scope.offset += offset;
-                    var params = id ? [id, scope.offset].join() : scope.offset;
+                    id = id || scope.offset;
 
-                    request(params).success(function(response) {
+                    request(id,scope.offset).success(function(response) {
+                        console.log('offset - ',scope.offset);
                         scope.loadingMore = false;
                         if (response.data !== null) {
                             array.push.apply(array, response.data);
