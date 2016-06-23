@@ -25,7 +25,8 @@ class PlaylistsController extends RESTController
                 $playlist->vspChannelId,
                 $playlist->title,
                 $playlist->description,
-                $videosResponse->getData()
+                $videosResponse->getData(),
+                $playlist->statPublic
             );
         }
 
