@@ -5,7 +5,7 @@
         <div class="block block--header">
             <div class="col-xs-12 block__heading--ratings">
                 <div class="clearfix">
-                    <h2 class="block__title">Search str <span class="search_amount">{{ searchMetaData.count }}</span></h2>
+                    <h2 class="block__title">{{ searchKey }} <span class="search_amount">{{ searchMetaData.count }}</span></h2>
                 </div>
                 <p class="sub_title">Результаты поиска</p>
                 <div class="clearfix">
@@ -13,11 +13,11 @@
                         <hr class="block__hr hidden-tablet hidden-desktop">
                         <a ui-sref="search.all" ui-sref-active="active">Все результаты</a>
                         <hr class="block__hr hidden-tablet hidden-desktop">
-                        <a ui-sref="search.video" ui-sref-active="active">Видео <span class="cnt">(2)</span></a>
+                        <a ui-sref="search.video" ui-sref-active="active">Видео <span class="cnt">({{ searchData.videos.length }})</span></a>
                         <hr class="block__hr hidden-tablet hidden-desktop">
-                        <a ui-sref="search.channel" ui-sref-active="active">Каналы <span class="cnt">(1)</span></a>
+                        <a ui-sref="search.channel" ui-sref-active="active">Каналы <span class="cnt">({{ searchData.videos.length }})</span></a>
                         <hr class="block__hr hidden-tablet hidden-desktop">
-                        <a ui-sref="search.articles" ui-sref-active="active">Стати <span class="cnt">(2)</span></a>
+                        <a ui-sref="search.articles" ui-sref-active="active">Статьи <span class="cnt">(0)</span></a>
                         <div class="tabs__underline"></div>
                         <hr class="block__hr hidden-tablet hidden-desktop">
                     </tabs>

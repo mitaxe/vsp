@@ -12,22 +12,19 @@
                     <div class="history__date type hidden-desktop">
                         <span>Каналы</span>
                     </div>
-                    <div>
+                    <div ng-repeat="channel in searchData.channels | limitTo: 25" >
                         <div class="thumb row clearfix">
                                 <div class="thumb thumb--chan search_thumb pull-left">
                                     <div class="thumb__img">
-                                        <a href="#">
-                                            <img ng-src="assets/img/ball-58.png" alt="" />
+                                        <a ui-sref="channels({ id: channel.id })">
+                                            <img ng-src="{{ channel.img }}" alt="" />
                                         </a>
                                     </div>
                                 </div>
                             <div class="col-md-5 col-sm-7 col-xs-6 pull-left">
                                 <div class="thumb thumb--chan search_thumb">
-                                    <p class="thumb__name"><a href="">Smosh</a><a href="#" class="btn btn-green btn-small hidden-phone">Подписаться</a> <span class="thumb__subs">11 223 22</span> <a href="#" class="btn btn-green btn-small hidden-desktop hidden-tablet">Подписаться</a></p>
-                                    <p class="thumb_text hidden-phone">UBSCRIBE ►► http://smo.sh/SmoshSub
-                                        WATCH THE FIRST EPISODE NOW ►► http://smo.sh/1OLqJdT
-
-                                        SMOSH’S “PART TIMERS” is a new series about the dysfunctional </p>
+                                    <p class="thumb__name"><a ui-sref="channels({ id: channel.id })">{{ channel.title | trimText: 150}}</a><a href="#" class="btn btn-green btn-small hidden-phone">Подписаться</a> <span class="thumb__subs">{{ channel.statSubscribers | number }}</span> <a href="#" class="btn btn-green btn-small hidden-desktop hidden-tablet">Подписаться</a></p>
+                                    <p class="thumb_text hidden-phone">{{ channel.description | trimText : 150}}</p>
                                 </div>
                             </div>
                         </div>
