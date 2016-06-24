@@ -698,6 +698,7 @@ angular.module("MainApp")
         factory.getSearch($scope.searchKey).success(function(response) {
             console.log('response - ',response);
             $scope.searchData = response.data;
+            $scope.searchMetaData = response.meta;
         });
         $location.url('/search');
     };
