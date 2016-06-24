@@ -50,7 +50,13 @@ class ChannelsController extends RESTController
     {
         $response = new VideosResponse();
 
-        $queryParams = ['vspChannelId' => $id,'limit'=>12];
+
+        $queryParams = [
+            'conditions' => "vspChannelId = ?1",
+            'bind' => [1 => $id],
+            'limit' => 12
+        ];
+        
         if ($offset = $this->request->getOffset()) {
             $queryParams['offset'] = $offset;
         }
