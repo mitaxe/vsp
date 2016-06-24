@@ -46,6 +46,14 @@
         &--50 {
             width: 55%;
         }
+        &--search {
+            svg {
+                fill: $col-green;
+                width: 35px;
+                height: 35px;
+                margin-right: 5px;
+            }
+        }
     }
     &__subtitle {
         margin-bottom: 15px;
@@ -113,6 +121,12 @@
             &--50 {
                 width: 100%;
             }
+            &--search {
+                svg {
+                    width: 15px;
+                    height: 15px;
+                }
+            }
         }
         &__subtitle {
             font-size: 12px;
@@ -150,6 +164,12 @@
             font-weight: 500;
             &--50 {
                 width: 50%;
+            }
+            &--search {
+                svg {
+                    width: 22px;
+                    height: 22px;
+                }
             }
         }
         &__subtitle {

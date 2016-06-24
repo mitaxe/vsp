@@ -16,8 +16,8 @@
         width: 0;
         transition: .3s ease-in-out;
     }
-    &.four {
-        width: 75%;
+    &--fullwidth {
+        width: 100%;
     }
     &--center {
         width: 100%;
@@ -59,7 +59,7 @@
             line-height: 40px;
             padding: 0 10px;
         }
-        &.four {
+        &--fullwidth {
             width: 100%;
             height:auto;
             .block__hr {

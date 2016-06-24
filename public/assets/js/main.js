@@ -694,14 +694,27 @@ angular.module("MainApp")
 
     // search
     $scope.search = function() {
-        console.log($scope.searchKey);
+        console.log('search key - ',$scope.searchKey);
+        if (!$scope.searchKey) return;
+        if ($scope.searchData) delete $scope.searchData;
+        if ($scope.searchMetaData) delete $scope.searchMetaData;
+
+        $scope.searching = true;
+
         factory.getSearch($scope.searchKey).success(function(response) {
-            console.log('response - ',response);
+            console.log('search response - ',response);
+            document.getElementById('search-form').blur();
+            $scope.searchActive = false;
+            $scope.searching = false;
+            $scope.searchTitle = $scope.searchKey;
+            $scope.searchKey = null;
             $scope.searchData = response.data;
             $scope.searchMetaData = response.meta;
+            $location.url('/search');
         });
-        $location.url('/search');
     };
+
+
 
     /* Test Data */
 
