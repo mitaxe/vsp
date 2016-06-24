@@ -67,9 +67,10 @@ class IndexController extends RESTController
         return $response;
     }   
     
-    public function search($key) 
+    public function search()
     {
         $itemCount = 5;
+        $key = $this->request->get('key');
 
         $videosResponse = new VideosResponse();
         $videosParams = [
