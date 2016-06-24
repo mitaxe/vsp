@@ -56,8 +56,7 @@ class IndexController extends RESTController
     {
 
     }
-
-
+    
     public function getChannels()
     {
         $response = new ChannelsResponse();
@@ -66,5 +65,35 @@ class IndexController extends RESTController
         $response->add($channels);
         
         return $response;
-    }    
+    }   
+    
+    public function search($key) 
+    {
+        $itemCount = 5;
+
+        $videosResponse = new VideosResponse();
+        $videosParams = [
+            "conditions" => "title LIKE :key:",
+            "bind" => ['key' => "%" . $key . "%"],
+            'limit' => $itemCount
+        ];
+        $videos = Videos::find($videosParams);
+        $videosResponse->add($videos);
+
+        $channelsResponse = new ChannelsResponse();
+
+        $channelsParams = [
+            "conditions" => "title LIKE :key:",
+            "bind" => ['key' => "%" . $key . "%"],
+            'limit' => $itemCount
+        ];
+        $channels = Channels::find($channelsParams);
+        $channelsResponse->add($channels);
+
+
+        $articlesResponse = new Response();
+        
+        return new SearchResponse($videosResponse, $channelsResponse, $articlesResponse);
+    }
+    
 }
