@@ -1139,6 +1139,22 @@ angular.module("MainApp")
     };
 }]);
 
+app.directive('focusMe', ["$timeout", function($timeout) {
+  return {
+    link: function(scope, element, attrs) {
+      scope.$watch(attrs.focusMe, function(value) {
+        if(value === true) {
+          console.log('value=',value);
+          $timeout(function() {
+            element[0].focus();
+            // scope[attrs.focusMe] = false;
+        }, 100);
+        }
+      });
+    }
+  };
+}]);
+
 angular.module("MainApp")
 .directive('footerview', function() {
   return {
@@ -1206,6 +1222,25 @@ app.directive('loadMore', ["$document", function ($document) {
 
         }
     };
+}]);
+
+angular.module("MainApp")
+.directive('modal', ["$timeout", function($timeout) {
+  return {
+    restrict: 'E',
+    transclude: {
+        'title': 'modalTitle',
+        'body': 'modalBody',
+        'footer': 'modalFooter'
+    },
+    scope: {
+        showModal: '=show'
+    },
+    templateUrl: 'app/views/common/modal.html',
+    link: function(scope, element, attrs) {
+
+    }
+  };
 }]);
 
 app.directive('ngEnter', function () {
