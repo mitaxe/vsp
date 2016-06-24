@@ -1,6 +1,6 @@
-angular.module("MainApp")
-.controller('HeaderCtrl', ['$scope', 'factory', function ($scope, factory) {
-
-    
-
-}]);
+// angular.module("MainApp")
+// .controller('HeaderCtrl', ['$scope', 'factory', function ($scope, factory) {
+//
+//
+//
+// }]);

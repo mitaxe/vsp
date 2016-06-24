@@ -88,12 +88,7 @@ angular.module("MainApp")
         url : '/search',
         templateUrl : 'app/views/search/search.html',
         redirectTo : 'search.all',
-        resolve: {
-            historyData: function(factory) {
-                return factory.getHistoryData();
-            }
-        },
-        controller : 'SearchCtrl'
+        controller : 'MainCtrl'
     })
     .state('search.all', {
         url : '/all',

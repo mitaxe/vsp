@@ -79,6 +79,11 @@ angular.module("MainApp")
             return $http.get('./assets/js/data.json');
         };
 
+        // search
+        factory.getSearch = function(keyword) {
+            return $http.get('http://vsponline.qa/index/search?key=' + keyword);
+        };
+
         // factory.postVideos = function() {
         //
         // };

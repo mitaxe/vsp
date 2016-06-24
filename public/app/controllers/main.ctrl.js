@@ -1,5 +1,5 @@
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', '$location', function ($scope, $sce, factory, $location) {
 
     // remove element
     $scope.remove = function(array,item) {
@@ -10,6 +10,16 @@ angular.module("MainApp")
                 array.splice(array.indexOf(item),1);
             }
         }
+    };
+
+    // search
+    $scope.search = function() {
+        console.log($scope.searchKey);
+        factory.getSearch($scope.searchKey).success(function(response) {
+            console.log('response - ',response);
+            $scope.searchData = response.data;
+        });
+        $location.url('/search');
     };
 
     /* Test Data */

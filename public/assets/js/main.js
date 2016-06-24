@@ -112,12 +112,7 @@ angular.module("MainApp")
         url : '/search',
         templateUrl : 'app/views/search/search.html',
         redirectTo : 'search.all',
-        resolve: {
-            historyData: ["factory", function(factory) {
-                return factory.getHistoryData();
-            }]
-        },
-        controller : 'SearchCtrl'
+        controller : 'MainCtrl'
     })
     .state('search.all', {
         url : '/all',
@@ -520,6 +515,11 @@ angular.module("MainApp")
             return $http.get('./assets/js/data.json');
         };
 
+        // search
+        factory.getSearch = function(keyword) {
+            return $http.get('http://vsponline.qa/index/search?key=' + keyword);
+        };
+
         // factory.postVideos = function() {
         //
         // };
@@ -631,12 +631,12 @@ angular.module("MainApp")
 
 }]);
 
-angular.module("MainApp")
-.controller('HeaderCtrl', ['$scope', 'factory', function ($scope, factory) {
-
-    
-
-}]);
+// angular.module("MainApp")
+// .controller('HeaderCtrl', ['$scope', 'factory', function ($scope, factory) {
+//
+//
+//
+// }]);
 
 angular.module("MainApp")
 .controller('HistoryCtrl', ['$scope', 'historyData', function ($scope, historyData) {
@@ -679,7 +679,7 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', '$location', function ($scope, $sce, factory, $location) {
 
     // remove element
     $scope.remove = function(array,item) {
@@ -690,6 +690,16 @@ angular.module("MainApp")
                 array.splice(array.indexOf(item),1);
             }
         }
+    };
+
+    // search
+    $scope.search = function() {
+        console.log($scope.searchKey);
+        factory.getSearch($scope.searchKey).success(function(response) {
+            console.log('response - ',response);
+            $scope.searchData = response.data;
+        });
+        $location.url('/search');
     };
 
     /* Test Data */
@@ -810,17 +820,17 @@ angular.module("MainApp")
 angular.module("MainApp")
 .controller('SearchCtrl', ['$scope', 'historyData', function ($scope, historyData) {
 
-    $scope.historyData = clone(historyData.data.videos.sort(dynamicSort('date'))).reverse();
-
-    // history filter
-    $scope.historyFilter = function(array,index,prop) {
-        if (
-            index !== 0 &&
-            array[index][prop] === array[index-1][prop]
-        ) {
-            return true;
-        }
-    };
+    // $scope.historyData = clone(historyData.data.videos.sort(dynamicSort('date'))).reverse();
+    //
+    // // history filter
+    // $scope.historyFilter = function(array,index,prop) {
+    //     if (
+    //         index !== 0 &&
+    //         array[index][prop] === array[index-1][prop]
+    //     ) {
+    //         return true;
+    //     }
+    // };
 
 }]);
 
@@ -1128,7 +1138,7 @@ angular.module("MainApp")
 .directive('headerview', function() {
   return {
     restrict: 'E',
-    controller: 'HeaderCtrl',
+    controller: 'MainCtrl',
     replace: true,
     templateUrl: 'app/views/templates/header.html'
   };
