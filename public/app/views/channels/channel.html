@@ -1,37 +1,37 @@
 <!-- channel page -->
 <div class="channel">
     <div class="channel__cover"
-        ng-class= "{bf_vis : channelbgText}"
+        ng-class="{bf_vis : hoverCover}"
         ng-style="{'background-image': 'url(' + currentUser.cover + ')'}">
         <label for="channel_bg"
-            ng-mouseover="hoverIn('bg')"
-            ng-mouseleave="hoverOut('bg')"
+            ng-mouseover="hoverCover = true"
+            ng-mouseleave="hoverCover = false"
             class="change_img channel_bg hidden-tablet hidden-phone">
         </label>
-
         <modal show="show.bgModal">
             <modal-title>Обновите обложку канала</modal-title>
             <modal-body>
                 тело
             </modal-body>
             <modal-footer>
-                <div class="btn btn-white btn-cancel" ng-click="bgModal.modal = false">Отмена</div>
+                <div class="btn btn-white btn-cancel" ng-click="show.bgModal = false">Отмена</div>
                 <div class="btn btn-green main-ui">Сохранить</div>
             </modal-footer>
         </modal>
-
-        <div ng-show="channelbgText" class="bg_text">Обновить фото обложки канала</div>
+        <div ng-show="hoverCover" class="bg_text">Обновить фото обложки канала</div>
         <input type="file" id="channel_bg" class="hidden">
-        <div class="channel__ava" ng-class="{bf_vis : changeAvaText}">
+
+        <div class="channel__ava" ng-class="{bf_vis : hoverAva}">
             <img ng-src="{{ currentUser.avatar }}" alt="avatar"/>
             <label for="channel_ava"
-                ng-mouseover="hoverIn('ava')"
-                ng-mouseleave="hoverOut('ava')"
+                ng-mouseover="hoverAva = true"
+                ng-mouseleave="hoverAva = false"
                 class="change_img channel_ava hidden-tablet hidden-phone">
             </label>
-            <div ng-show="changeAvaText" class="bg_text ava">Обновить аватар канала</div>
+            <div ng-show="hoverAva" class="bg_text ava">Обновить аватар канала</div>
             <input type="file" id="channel_ava" class="hidden">
         </div>
+
     </div>
 </div>
 
