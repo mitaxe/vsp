@@ -1,0 +1,124 @@
+.profile_row--video {
+  #video_url {
+    background: none;
+  }
+  .about_video {
+    margin-top: 25px;
+    &__chevron {
+      max-width: 24px;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 15px;
+    }
+    &__preview {
+      max-width: 160px;
+      display: inline-block;
+      vertical-align: top;
+    }
+    &__text {
+      display: inline-block;
+      vertical-align: top;
+      max-width: 315px;
+      padding-left: 15px;
+      .sb_title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #3a3d3e;
+        margin-bottom: 10px;
+      }
+      .text {
+        font-size: 12px;
+        color: #999999;
+      }
+    }
+  }
+  @include phone {
+    .about_video {
+      &__chevron,
+      &__preview,
+      &__text {
+        display: block;
+      }
+      &__text {
+        padding-left: 0;
+      }
+      img {
+        margin-bottom: 10px;
+      }
+      &__preview {
+        margin-bottom: 5px;
+      }
+    }
+  }
+  .btn {
+    position: relative;
+    &.btn-hide {
+      background: #fff;
+      color: $col-green!important;
+      box-shadow: none;
+      left: -20px;
+      padding-left: 45px;
+      padding-right: 37px;
+      z-index: 0;
+      &:hover,
+      &:active {
+        background: #fff;
+      }
+    }
+    &.btn-show {
+      position: relative;
+      z-index: 1;
+    }
+  }
+  .edit {
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+  }
+  .video_img {
+    max-width: 410px;
+  }
+  @include tablet {
+    .video_img {
+      max-width: 350px;
+    }
+  }
+  @include phone {
+    .video_img {
+      max-width: 100%;
+    }
+  }
+  .select {
+    margin-top: 0;
+  }
+  .cat_margin {
+    display: inline-block;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  .check_label {
+    color: #000;
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 15px;
+    width: auto;
+  }
+  @include phone {
+    input[type=text],
+    textarea {
+      width: 88%;
+    }
+  }
+  @include phone {
+    .inline--padding {
+      width: 100%;
+      padding-left: 0;
+      text-align: center;
+      .btn-white {
+        display: inline-block;
+      }
+    }
+  }
+}
