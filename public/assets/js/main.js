@@ -694,14 +694,27 @@ angular.module("MainApp")
 
     // search
     $scope.search = function() {
-        console.log($scope.searchKey);
+        console.log('search key - ',$scope.searchKey);
+        if (!$scope.searchKey) return;
+        if ($scope.searchData) delete $scope.searchData;
+        if ($scope.searchMetaData) delete $scope.searchMetaData;
+
+        $scope.searching = true;
+
         factory.getSearch($scope.searchKey).success(function(response) {
-            console.log('response - ',response);
+            console.log('search response - ',response);
+            document.getElementById('search-form').blur();
+            $scope.searchActive = false;
+            $scope.searching = false;
+            $scope.searchTitle = $scope.searchKey;
+            $scope.searchKey = null;
             $scope.searchData = response.data;
             $scope.searchMetaData = response.meta;
+            $location.url('/search');
         });
-        $location.url('/search');
     };
+
+
 
     /* Test Data */
 
@@ -1126,6 +1139,22 @@ angular.module("MainApp")
     };
 }]);
 
+app.directive('focusMe', ["$timeout", function($timeout) {
+  return {
+    link: function(scope, element, attrs) {
+      scope.$watch(attrs.focusMe, function(value) {
+        if(value === true) {
+          console.log('value=',value);
+          $timeout(function() {
+            element[0].focus();
+            // scope[attrs.focusMe] = false;
+        }, 100);
+        }
+      });
+    }
+  };
+}]);
+
 angular.module("MainApp")
 .directive('footerview', function() {
   return {
@@ -1193,6 +1222,25 @@ app.directive('loadMore', ["$document", function ($document) {
 
         }
     };
+}]);
+
+angular.module("MainApp")
+.directive('modal', ["$timeout", function($timeout) {
+  return {
+    restrict: 'E',
+    transclude: {
+        'title': 'modalTitle',
+        'body': 'modalBody',
+        'footer': 'modalFooter'
+    },
+    scope: {
+        showModal: '=show'
+    },
+    templateUrl: 'app/views/common/modal.html',
+    link: function(scope, element, attrs) {
+
+    }
+  };
 }]);
 
 app.directive('ngEnter', function () {

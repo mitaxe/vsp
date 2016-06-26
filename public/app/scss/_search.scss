@@ -16,11 +16,7 @@
 }
 
 .search_amount {
-    font-size: 48px;
     color: $col-green;
-    @include phone{
-        font-size: 20px;
-    }
 }
 
 .sub_title {
