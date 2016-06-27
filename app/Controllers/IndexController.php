@@ -141,6 +141,11 @@ class IndexController extends RESTController
         $channelsResponse->add($channels);
 
         return new SearchChannelsResponse($channelsResponse, $channelsCount);
-    }    
+    }
+
+    public function searchArticles()
+    {
+        return new Response();
+    }
     
 }
