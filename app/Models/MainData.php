@@ -10,12 +10,17 @@
 
 class MainData
 {
+
+    /**
+     * @var Dependency Injection container
+     */
     protected $di;
 
     public function __construct($di)
     {
         $this->di = $di;
     }
+
     /**
      * Define channels table columns according to the JSON data
      * Keys are fields names from JSON data
@@ -135,6 +140,10 @@ class MainData
         'title' => 'title',
     ];
 
+    /**
+     * Get all channels
+     * @return array
+     */
     public function getChannels()
     {
         $channelsGroups = $this->di->get('dataProvider')->getChannels();
@@ -155,13 +164,22 @@ class MainData
         return !empty($dataAvailable) ? $channelsGroups : [];
     }
 
-
+    /**
+     * Get channel data
+     * @param $channelId
+     * @return array
+     */
     public function getChannelData($channelId)
     {
         $channel = $this->di->get('dataProvider')->getChannel(['id'=>$channelId]);
         return $this->dataMapping($this->channelColumnMap,$channel);
     }
 
+    /**
+     * Get channel's playlists
+     * @param Channels $channel
+     * @return mixed
+     */
     public function getChannelPlaylists(Channels $channel)
     {
         $playlists = $this->di->get('dataProvider')->getChannelPlaylists($channel->vspChannelId);
@@ -179,6 +197,11 @@ class MainData
         return $playlists;
     }
 
+    /**
+     * Get channel's videos
+     * @param Channels $channel
+     * @return mixed
+     */
     public function getChannelVideos(Channels $channel)
     {
         $videosData = $this->di->get('dataProvider')->getChannelVideos($channel->vspChannelId,$channel->statVideos);
@@ -194,6 +217,13 @@ class MainData
         return $videosData;
     }
 
+    /**
+     * Map API data according to the models fields
+     * @param array $columnMap
+     * @param $providerData
+     * @param array $returnData
+     * @return array
+     */
     private function dataMapping(array $columnMap, $providerData, $returnData = [])
     {
         if (empty($providerData)) {
