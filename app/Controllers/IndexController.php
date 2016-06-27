@@ -97,8 +97,7 @@ class IndexController extends RESTController
 
     public function searchVideos() {
 
-        $itemCount = 20;
-        $offset = $this->request->getOffset();
+        $itemLimit = 20;
         $key = $this->request->getSearchQuery();
 
         $videosResponse = new VideosResponse();
@@ -110,8 +109,10 @@ class IndexController extends RESTController
 
         $videosCount = Videos::count($queryParams);
 
-        $queryParams['limit'] = $itemCount;
-        $queryParams['offset'] =  $itemCount * $offset ;
+        $queryParams['limit'] = $itemLimit;
+        if ($offset = $this->request->getOffset()) {
+            $queryParams['offset'] =  $offset;
+        }
 
         $videos = Videos::find($queryParams);
         $videosResponse->add($videos);
@@ -122,8 +123,7 @@ class IndexController extends RESTController
 
     public function searchChannels() {
 
-        $itemCount = 20;
-        $offset = $this->request->getOffset();
+        $itemLimit = 20;
         $key = $this->request->getSearchQuery();
 
         $channelsResponse = new ChannelsResponse();
@@ -135,8 +135,10 @@ class IndexController extends RESTController
 
         $channelsCount = Channels::count($queryParams);
 
-        $queryParams['limit']  = $itemCount;
-        $queryParams['offset'] = $itemCount * $offset ;
+        $queryParams['limit']  = $itemLimit;
+        if ($offset = $this->request->getOffset()) {
+            $queryParams['offset'] = $offset;
+        }
 
         $channels = Channels::find($queryParams);
         $channelsResponse->add($channels);
