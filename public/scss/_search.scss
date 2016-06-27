@@ -1,0 +1,76 @@
+.result_row {
+  &__left {
+    display: inline-block;
+    vertical-align: top;
+    width: 10%;
+  }
+  &__right {
+    display: inline-block;
+    width:89%;
+  }
+  @include phone{
+      &__right {
+        width:100%;
+      }
+  }
+}
+.search_amount {
+  font-size: 48px;
+  color: $col-green;
+}
+@include phone{
+  .search_amount {
+    font-size: 20px;
+  }
+}
+.sub_title {
+  font-size: 18px;
+  color: #5b5d5e;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+@include phone {
+  .sub_title {
+    font-size: 14px;
+  }
+}
+.article_thumb {
+  &__article_preview {
+    padding: 0 10px;
+    img {
+      width: 175px;
+    }
+  }
+  &__article_description {
+    padding-left: 20px;
+    h3 {
+      font-size: 30px;
+      color: #3a3d3e;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 20px;
+      color: #3a3d3e;
+      margin-bottom: 15px;
+    }
+  }
+}
+@include phone {
+  .article_thumb {
+    &__article_description {
+      padding-left: 0;
+      h3 {
+        font-size: 14px;
+      }
+      p {
+        font-size: 12px;
+        font-weight: 300;
+      }
+    }
+    &__article_preview {
+      img {
+        width: 150px;
+      }
+    }
+  }
+}

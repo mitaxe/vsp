@@ -1,0 +1,263 @@
+.channel {
+    width: 100%;
+    margin: 0;
+
+    &__cover {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        &:before {
+            background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0;
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            opacity: 0;
+            transition: .3s;
+        }
+        &.bf_vis {
+            &:before {
+                opacity:1;
+            }
+        }
+    }
+
+    &__ava {
+        width: 180px;
+        position: absolute;
+        bottom: -15px;
+        left: 30px;
+        z-index: 100;
+        img {
+            display: block;
+            width: 100%;
+            box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+        }
+        &:before {
+            background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0;
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            display: none;
+        }
+        &.bf_vis {
+            &:before {
+                display: block;
+            }
+        }
+    }
+
+    &__head {
+        .block__subtitle {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.3;
+        }
+    }
+
+    @include phone {
+        &__cover {
+            height: 100px;
+        }
+        &__ava {
+            width: 120px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            top: 80px;
+        }
+        &__head {
+            padding-top: 110px;
+            text-align: center;
+            .block__title {
+                float: none;
+                text-align: center;
+            }
+        }
+    }
+
+    @include tablet {
+        &__cover {
+            height: 230px;
+        }
+        &__ava {
+            width: 170px;
+            top: 190px;
+            left: 20px;
+        }
+        &__head {
+            padding-left: 180px;
+            min-height: 100px;
+        }
+    }
+
+    @include desk-1600 {
+        &__cover {
+            height: 400px;
+        }
+        &__ava {
+            width: 250px;
+        }
+    }
+}
+
+.subscribe_box {
+    margin-top: 4px;
+    float: right;
+    .subscribe {
+        border-radius: 50px;
+    }
+    .green_btn {
+        @include no-select;
+        color: #fff;
+        text-transform: uppercase;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 35px;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+        z-index: 2;
+        font-weight:bold;
+        font-size: 14px;
+        cursor: pointer;
+
+        box-shadow: 0px 0px 5px 5px rgba(29,278,70,0.13);
+        background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%);
+        text-shadow: none;
+
+        &:hover {
+            background: linear-gradient(to bottom, #29bd4a 0%, #2da747 100%);
+        }
+        &:active {
+            background: linear-gradient(to bottom, #2b9f44 0%, #29be4a 100%);
+        }
+    }
+    .counter {
+        background: #e6e6e6;
+        color: #5b5d5e;
+        padding: 0 15px 0 25px;
+        line-height: 40px;
+        height: 40px;
+        width: 150px;
+        vertical-align: top;
+        text-align: center;
+        margin-left: -20px;
+        position: relative;
+        z-index: 1;
+        font-size: 18px;
+        box-shadow: inset 0px 3px 5px rgba(0,0,0, .15);
+        display: inline-block;
+        border-radius: 0 50px 50px 0;
+    }
+    @include phone {
+        .green_btn {
+            padding: 0 20px;
+        }
+        .counter {
+            padding: 0 10px 0 20px;
+        }
+    }
+}
+.cat_counter {
+    font-size: 36px;
+    color: #1bbb47;
+    margin-left: 10px;
+}
+.change_img {
+    width:30px;
+    height:25px;
+    display: block;
+    background: url("../img/change_logo_icon.png") no-repeat center / 30px 25px;
+    transition:.3s;
+    cursor: pointer;
+    &.channel_bg {
+        position: absolute;
+        right:30px;
+        top:30px;
+        z-index:2;
+    }
+    &.channel_ava {
+        position: absolute;
+        right:15px;
+        top:15px;
+        z-index: 2;
+    }
+}
+.bg_text {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+    color: #fff;
+    display: block;
+    line-height: 22px;
+    padding: 8px 40px 8px 8px;
+    position: absolute;
+    right: 26px;
+    top: 25px;
+    z-index: 1;
+    font-size: 14px;
+    transition:.3s;
+    &.ng-hide {
+        opacity: 0;
+    }
+    &.ng-show {
+        opacity: 1;
+    }
+    &.ava {
+        right:10px;
+        top:10px;
+    }
+}
+@include deskMax1600 {
+    .bg_text.ava {
+        right:0;
+        padding: 4px 20px 4px 4px;
+    }
+}
+
+@include tablet {
+    .subscribe_box {
+        float: left;
+    }
+    .tablet_ctrl {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left: -10px;
+        .btn-grey {
+            float: right;
+        }
+    }
+    .cat_counter {
+        font-size: 26px;
+    }
+}
+
+@include phone {
+    .tablet_ctrl {
+        margin-bottom: 15px;
+    }
+    .btn-grey {
+        margin: 15px auto 0;
+    }
+    .cat_counter {
+        font-size: 20px;
+    }
+}
+
+
+.nm_channel {
+    .user_channel_sort_box {
+        float: none;
+        position: absolute;
+        right: 0;
+        top: -106px;
+        width: 540px;
+    }
+}
