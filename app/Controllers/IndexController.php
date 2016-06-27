@@ -115,8 +115,9 @@ class IndexController extends RESTController
 
         $videos = Videos::find($queryParams);
         $videosResponse->add($videos);
+        $videosResponse->setTotalCount($videosCount);
 
-        return new SearchVideosResponse($videosResponse, $videosCount);
+        return $videosResponse;
     }
 
     public function searchChannels() {
@@ -139,8 +140,9 @@ class IndexController extends RESTController
 
         $channels = Channels::find($queryParams);
         $channelsResponse->add($channels);
+        $channelsResponse->setTotalCount($channelsCount);
 
-        return new SearchChannelsResponse($channelsResponse, $channelsCount);
+        return $channelsResponse;
     }
 
     public function searchArticles()

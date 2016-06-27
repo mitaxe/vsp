@@ -12,4 +12,7 @@ class ResponseMeta
 
   /** @var int */
   public $count;
+
+  /** @var int */
+  public $totalCount = null;  
 }

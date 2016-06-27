@@ -47,7 +47,7 @@ class Response
   }
 
   /**
-   * Set teh Response Count
+   * Set the Response Count
    *
    * @param int $count
    *
@@ -59,6 +59,30 @@ class Response
 
     return $this;
   }
+
+  /**
+   * Set the Response total count
+   *
+   * @param int $totalCount
+   *
+   * @return $this
+   */
+  public function setTotalCount($count)
+  {
+    $this->meta->totalCount = (int)$count;
+
+    return $this;
+  }
+
+  /**
+   * Get the Response Total Count
+   *
+   * @return int
+   */
+  public function getTotalCount()
+  {
+    return (int)$this->meta->totalCount;
+  }  
 
   /**
    * Get the Response Count
