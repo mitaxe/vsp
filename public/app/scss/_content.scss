@@ -198,7 +198,7 @@
 
     @include desktop {
         margin: 0 15px 20px;
-        &__select--exclusive {
+        &__select--top15 {
             margin-top: 15px;
         }
         &--sidebar {
@@ -237,6 +237,9 @@
     @include clearfix;
     margin-bottom: 20px;
     color: #3a3d3e;
+
+    overflow: hidden;
+    word-wrap: break-word;
 
     &__img {
         width: 100%;
@@ -280,7 +283,6 @@
         color: #3a3d3e;
         margin-bottom: 12px;
         font-weight: 500;
-        // word-break: break-all;
         word-wrap: break-word;
     }
 
@@ -398,6 +400,9 @@
             padding-left: 0;
             text-align: left;
             margin-bottom: 0;
+            * {
+                line-height: 1.3;
+            }
             .thumb__name {
                 font-size: 25px;
                 a {
@@ -686,14 +691,16 @@
             color: #5d5d5e;
             overflow: hidden;
             text-overflow: ellipsis;
-            word-wrap: break-word;
+            word-break: break-all;
         }
         p {
+            display: block;
             font-size: 14px;
             color: #999;
             line-height: 1.2;
-            // word-break: break-all;
-            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
         }
     }
     @include phone {

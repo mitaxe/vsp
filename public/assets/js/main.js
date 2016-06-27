@@ -520,9 +520,11 @@ angular.module("MainApp")
         //     return $http.get('http://vsponline.qa/index/search?key=' + keyword);
         // };
         factory.getSearchVideos = function(keyword,offset) {
+            console.log(keyword,offset);
             return $http.get('http://vsponline.qa/index/search/videos?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchChannels = function(keyword,offset) {
+            console.log(keyword,offset);
             return $http.get('http://vsponline.qa/index/search/channels?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchArticles = function(keyword,offset) {
@@ -821,29 +823,35 @@ angular.module("MainApp")
 
     if ($scope.searchKey) {
 
-        $scope.requestVideos($scope.searchKey).success(function(response) {
-            console.log('videos - ',response.data);
+        var q = $scope.searchKey;
+
+        console.log($scope.searchKey);
+
+        $scope.requestVideos(q,$scope.videosOffset).success(function(response) {
+            console.log('videos - ',response);
 
             $scope.searchActive = false;
             $scope.searching = false;
             // $scope.searchKey = null;
 
             $scope.searchVideos = response.data;
-            $scope.videosOffset = response.meta.count;
+            $scope.videosOffset = response.meta.count || 0;
+            console.log($scope.videosOffset);
             $scope.videosCount = response.meta.totalCount || 0;
+            console.log($scope.videosCount);
         });
 
-        $scope.requestChannels($scope.searchKey).success(function(response) {
+        $scope.requestChannels(q,$scope.channelsOffset).success(function(response) {
             console.log('channels - ',response);
             $scope.searchChannels = response.data;
-            $scope.channelsOffset = response.meta.count;
+            $scope.channelsOffset = response.meta.count || 0;
             $scope.channelsCount = response.meta.totalCount || 0;
         });
 
-        $scope.requestArticles($scope.searchKey).success(function(response) {
+        $scope.requestArticles(q,$scope.articlesOffset).success(function(response) {
             console.log('articles - ',response);
             $scope.searchArticles = response.data;
-            $scope.articlesOffset = response.meta.count;
+            $scope.articlesOffset = response.meta.count || 0;
             $scope.articlesCount = response.meta.totalCount || 0;
         });
 
@@ -1197,7 +1205,6 @@ app.directive('loadMore', ["$document", function ($document) {
             scope.offset = 0;
 
             function loadMore(request,array,offset,id) {
-
                 if (!scope.noMoreResponse) {
                     scope.loadingMore = true;
                     scope.offset += offset;
@@ -1205,10 +1212,13 @@ app.directive('loadMore', ["$document", function ($document) {
 
                     request(id,scope.offset).success(function(response) {
                         console.log('offset - ',scope.offset);
-                        console.log('load more respone - ',response);
+                        console.log('response - ',response);
                         scope.loadingMore = false;
                         if (response.data !== null) {
                             array.push.apply(array, response.data);
+                            if (response.data.length < offset) {
+                                scope.noMoreResponse = true;
+                            }
                         } else {
                             scope.noMoreResponse = true;
                         }

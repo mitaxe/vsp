@@ -1,16 +1,16 @@
 <!-- search all -->
 <div class="block">
-    <div class="col-xs-12">
+    <div ng-show="searchVideos || searchChannels || searchArticles" class="col-xs-12">
 
         <!-- video tab -->
-        <div class="row">
+        <div ng-show="searchVideos" class="row">
             <div class="result_row">
                 <div class="result_row__left col-xs-12 col-md-1 hidden-tablet hidden-phone">
                     <div class="history__date">
                         <span>Видео</span>
                     </div>
                 </div>
-                <div class="result_row__right col-xs-12 col-sm-12 col-md-8 col-lg-6">
+                <div ng-show="searchVideos" class="result_row__right col-xs-12 col-sm-12 col-md-8 col-lg-6">
                     <div class="history__date type hidden-desktop">
                         <span>Видео</span>
                     </div>
@@ -24,33 +24,34 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-xs-5 col-sm-6 col-md-3">
-                                <p class="thumb__title"><a href="">{{ video.title }}</a></p>
+                            <div class="col-xs-5 col-sm-6 col-md-4">
+                                <p class="thumb__title"><a href="">{{ video.title | trimText: 100 }}</a></p>
                                 <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                                 <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
                             </div>
                         </div>
                     </div>
+                    <a ui-sref="search.videos({ key: searchKey })" class="btn btn-white">Все видео</a><br><br>
                 </div>
-                <a ui-sref="search.videos({ key: searchKey })" class="btn btn-green main-ui">Все видео</a><br><br>
+                <h2 ng-hide="searchVideos">Нет результатов</h2>
             </div>
         </div><!-- video tab -->
 
-        <div class="row">
+        <div ng-show="searchChannels" class="row">
             <div class="col-xs-12 mobile-center">
                 <hr class="block__hr">
             </div>
         </div>
 
         <!-- channels tab -->
-        <div class="row">
+        <div ng-show="searchChannels" class="row">
             <div class="result_row">
                 <div class="result_row__left col-xs-12 col-md-1 hidden-tablet hidden-phone">
                     <div class="history__date">
                         <span>Каналы</span>
                     </div>
                 </div>
-                <div class="result_row__right col-xs-12 col-sm-12 col-md-8 col-lg-6">
+                <div ng-show="searchChannels" class="result_row__right col-xs-12 col-sm-12 col-md-8 col-lg-6">
                     <div class="history__date type hidden-desktop">
                         <span>Каналы</span>
                     </div>
@@ -75,19 +76,19 @@
                             </div>
                         </div>
                     </div>
+                    <a ui-sref="search.channels({ key: searchKey })" class="btn btn-white">Все каналы</a><br><br>
                 </div>
-                <a ui-sref="search.channels({ key: searchKey })" class="btn btn-green main-ui">Все каналы</a><br><br>
             </div>
         </div><!-- channels tab -->
 
-        <div class="row">
+        <div ng-show="searchArticles" class="row">
             <div class="col-xs-12 mobile-center">
                 <hr class="block__hr">
             </div>
         </div>
 
         <!-- articles tab -->
-        <div class="row">
+        <div ng-show="searchArticles" class="row">
             <div class="result_row">
                 <div class="result_row__left col-xs-12 col-md-1 hidden-tablet hidden-phone">
                     <div class="history__date">
@@ -115,10 +116,13 @@
                             </div>
                         </div>
                     </div>
+                    <a ui-sref="search.articles({ key: searchKey })" class="btn btn-white">Все статьи</a><br><br>
                 </div>
-                <a ui-sref="search.articles({ key: searchKey })" class="btn btn-green main-ui">Все статьи</a><br><br>
             </div>
         </div><!-- articles tab -->
 
+    </div>
+    <div ng-hide="searchVideos || searchChannels || searchArticles" class="col-xs-12">
+        <h2>Нет результатов</h2>
     </div>
 </div>

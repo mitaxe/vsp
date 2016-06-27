@@ -418,7 +418,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        padding: 0 30px 0 30px;
+        padding: 0 10px 0 30px;
         color: #898989;
         background: transparent;
         font-family: $font-main;
@@ -453,9 +453,6 @@
         transition: .3s;
     }
     @include tablet {
-        input {
-            padding-right: 10px;
-        }
         &__box {
             padding: 0 20px;
         }

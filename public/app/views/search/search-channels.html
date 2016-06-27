@@ -1,8 +1,9 @@
 <!-- search channels -->
 <div class="block">
     <div class="col-xs-12">
+
         <div class="row">
-            <div class="result_row">
+            <div ng-show="searchChannels" class="result_row">
                 <div class="result_row__left col-xs-12 col-md-1 hidden-tablet hidden-phone">
                     <div class="history__date">
                         <span>Каналы</span>
@@ -31,10 +32,14 @@
                     </div>
                 </div>
             </div>
+            <div ng-hide="searchChannels" class="col-xs-12">
+                <h2>Нет результатов</h2>
+            </div>
         </div> <!-- end row -->
+        
     </div>
 </div>
 
-<div class="block center">
-    <load-more params="[requestChannels,searchChannels,channelsOffset,key]"></load-more>
+<div ng-show="channelsCount > channlesOffset" class="block center">
+    <load-more params="[requestChannels,searchChannels,channelsOffset,searchKey]"></load-more>
 </div>
