@@ -24,8 +24,15 @@
                                 </div>
                             <div class="col-md-5 col-sm-7 col-xs-6 pull-left">
                                 <div class="thumb thumb--chan search_thumb">
-                                    <p class="thumb__name"><a ui-sref="channels({ id: channel.id })">{{ channel.title | trimText: 150}}</a><a href="#" class="btn btn-green btn-small hidden-phone">Подписаться</a> <span class="thumb__subs">{{ channel.statSubscribers | number }}</span> <a href="#" class="btn btn-green btn-small hidden-desktop hidden-tablet">Подписаться</a></p>
-                                    <p class="thumb_text hidden-phone">{{ channel.description | trimText : 150}}</p>
+                                    <p class="thumb__name">
+                                        <a ui-sref="channels({ id: channel.id })">{{ channel.title | trimText:100 }}</a>
+                                    </p>
+                                    <div class="thumb__info">
+                                        <span class="btn btn-green btn-small hidden-phone">Подписаться</span>
+                                        <span class="thumb__subs">{{ channel.statSubscribers | number }}</span>
+                                        <span class="btn btn-green btn-small hidden-desktop hidden-tablet">Подписаться</span>
+                                    </div>
+                                    <p class="thumb_text hidden-phone">{{ channel.description | trimText:100 }}</p>
                                 </div>
                             </div>
                         </div>
@@ -36,7 +43,7 @@
                 <h2>Нет результатов</h2>
             </div>
         </div> <!-- end row -->
-        
+
     </div>
 </div>
 
