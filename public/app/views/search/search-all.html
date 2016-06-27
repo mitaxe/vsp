@@ -14,7 +14,7 @@
                     <div class="history__date type hidden-desktop">
                         <span>Видео</span>
                     </div>
-                    <div ng-repeat="video in searchData.videos" class="">
+                    <div ng-repeat="video in searchData.videos | limitTo: 5" class="">
                         <div class="row">
                             <div class="col-xs-7 col-sm-5 col-md-3">
                                 <div class="thumb__img">
@@ -53,7 +53,7 @@
                     <div class="history__date type hidden-desktop">
                         <span>Каналы</span>
                     </div>
-                    <div ng-repeat="channel in searchData.channels" >
+                    <div ng-repeat="channel in searchData.channels | limitTo: 5" >
                         <div class="row clearfix">
                             <div class="thumb thumb--chan search_thumb pull-left">
                                 <div class="thumb__img">
@@ -96,7 +96,7 @@
                     <div class="history__date type hidden-desktop">
                         <span>Статьи</span>
                     </div>
-                    <div ng-repeat="article in searchData.articles" class="article_thumb">
+                    <div ng-repeat="article in searchData.articles | limitTo: 5" class="article_thumb">
                         <div class="row clearfix">
                             <div class="article_thumb__article_preview pull-left">
                                 <img src="assets/img/article_preview.png" alt="article preview">
