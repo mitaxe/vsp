@@ -1,5 +1,5 @@
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', '$location', function ($scope, $sce, factory, $location) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', function ($scope, $sce, factory, $state) {
 
     // remove element
     $scope.remove = function(array,item) {
@@ -13,27 +13,15 @@ angular.module("MainApp")
     };
 
     // search
-    $scope.search = function() {
+    $scope.goSearch = function() {
         console.log('search key - ',$scope.searchKey);
         if (!$scope.searchKey) return;
-        if ($scope.searchData) delete $scope.searchData;
-        if ($scope.searchMetaData) delete $scope.searchMetaData;
-
+        // if ($scope.searchData) delete $scope.searchData;
+        // if ($scope.searchMetaData) delete $scope.searchMetaData;
         $scope.searching = true;
-
-        factory.getSearch($scope.searchKey).success(function(response) {
-            console.log('search response - ',response);
-            document.getElementById('search-form').blur();
-            $scope.searchActive = false;
-            $scope.searching = false;
-            $scope.searchTitle = $scope.searchKey;
-            $scope.searchKey = null;
-            $scope.searchData = response.data;
-            $scope.searchMetaData = response.meta;
-            $location.url('/search');
-        });
+        $scope.searchActive = true;
+        $state.go('search.all', {'key': $scope.searchKey}, {reload: true});
     };
-
 
 
     /* Test Data */
