@@ -112,22 +112,22 @@ angular.module("MainApp")
         url : '/search',
         templateUrl : 'app/views/search/search.html',
         redirectTo : 'search.all',
-        controller : 'MainCtrl'
+        controller : 'SearchCtrl'
     })
     .state('search.all', {
-        url : '/all',
+        url : '/all/:key',
         templateUrl : 'app/views/search/search-all.html'
     })
-    .state('search.video', {
-        url : '/video',
+    .state('search.videos', {
+        url : '/video/:key',
         templateUrl : 'app/views/search/search-video.html'
     })
-    .state('search.channel', {
-        url : '/channel',
+    .state('search.channels', {
+        url : '/channel/:key',
         templateUrl : 'app/views/search/search-channels.html'
     })
     .state('search.articles', {
-        url : '/articles',
+        url : '/articles/:key',
         templateUrl : 'app/views/search/search-articles.html'
     })
 
@@ -516,8 +516,17 @@ angular.module("MainApp")
         };
 
         // search
-        factory.getSearch = function(keyword) {
-            return $http.get('http://vsponline.qa/index/search?key=' + keyword);
+        // factory.getSearch = function(keyword) {
+        //     return $http.get('http://vsponline.qa/index/search?key=' + keyword);
+        // };
+        factory.getSearchVideos = function(keyword,offset) {
+            return $http.get('http://vsponline.qa/index/search/videos?q=' + keyword + '&offset=' + offset);
+        };
+        factory.getSearchChannels = function(keyword,offset) {
+            return $http.get('http://vsponline.qa/index/search/channels?q=' + keyword + '&offset=' + offset);
+        };
+        factory.getSearchArticles = function(keyword,offset) {
+            return $http.get('http://vsponline.qa/index/search/articles?q=' + keyword + '&offset=' + offset);
         };
 
         // factory.postVideos = function() {
@@ -532,24 +541,6 @@ angular.module("MainApp")
 .controller('ChannelCtrl', ['$scope', function ($scope) {
 
     $scope.content = $scope.currentUser;
-
-    $scope.hoverIn = function (target) {
-        if (target == 'ava') {
-            $scope.changeAvaText = true;
-        } else {
-            $scope.channelbgText = true;
-        }
-    };
-    
-    $scope.hoverOut = function (target) {
-        if(target == 'ava') {
-            $scope.changeAvaText = false;
-        } else {
-            $scope.channelbgText = false;
-        }
-    };
-
-    $scope.subscriptions = 116;
 
 }]);
 
@@ -679,7 +670,7 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', '$location', function ($scope, $sce, factory, $location) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', function ($scope, $sce, factory, $state) {
 
     // remove element
     $scope.remove = function(array,item) {
@@ -693,27 +684,15 @@ angular.module("MainApp")
     };
 
     // search
-    $scope.search = function() {
+    $scope.goSearch = function() {
         console.log('search key - ',$scope.searchKey);
         if (!$scope.searchKey) return;
-        if ($scope.searchData) delete $scope.searchData;
-        if ($scope.searchMetaData) delete $scope.searchMetaData;
-
+        // if ($scope.searchData) delete $scope.searchData;
+        // if ($scope.searchMetaData) delete $scope.searchMetaData;
         $scope.searching = true;
-
-        factory.getSearch($scope.searchKey).success(function(response) {
-            console.log('search response - ',response);
-            document.getElementById('search-form').blur();
-            $scope.searchActive = false;
-            $scope.searching = false;
-            $scope.searchTitle = $scope.searchKey;
-            $scope.searchKey = null;
-            $scope.searchData = response.data;
-            $scope.searchMetaData = response.meta;
-            $location.url('/search');
-        });
+        $scope.searchActive = true;
+        $state.go('search.all', {'key': $scope.searchKey}, {reload: true});
     };
-
 
 
     /* Test Data */
@@ -832,19 +811,51 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('SearchCtrl', ['$scope', 'historyData', function ($scope, historyData) {
+.controller('SearchCtrl', ['$scope', 'factory', '$stateParams', function ($scope, factory, $stateParams) {
 
-    // $scope.historyData = clone(historyData.data.videos.sort(dynamicSort('date'))).reverse();
-    //
-    // // history filter
-    // $scope.historyFilter = function(array,index,prop) {
-    //     if (
-    //         index !== 0 &&
-    //         array[index][prop] === array[index-1][prop]
-    //     ) {
-    //         return true;
-    //     }
-    // };
+    $scope.requestVideos = factory.getSearchVideos;
+    $scope.requestChannels = factory.getSearchChannels;
+    $scope.requestArticles = factory.getSearchArticles;
+
+    $scope.searchTitle = $scope.searchKey;
+
+    if ($scope.searchKey) {
+
+        $scope.requestVideos($scope.searchKey).success(function(response) {
+            console.log('videos - ',response.data);
+
+            $scope.searchActive = false;
+            $scope.searching = false;
+            // $scope.searchKey = null;
+
+            $scope.searchVideos = response.data;
+            $scope.videosOffset = response.meta.count;
+            $scope.videosCount = response.meta.totalCount || 0;
+        });
+
+        $scope.requestChannels($scope.searchKey).success(function(response) {
+            console.log('channels - ',response);
+            $scope.searchChannels = response.data;
+            $scope.channelsOffset = response.meta.count;
+            $scope.channelsCount = response.meta.totalCount || 0;
+        });
+
+        $scope.requestArticles($scope.searchKey).success(function(response) {
+            console.log('articles - ',response);
+            $scope.searchArticles = response.data;
+            $scope.articlesOffset = response.meta.count;
+            $scope.articlesCount = response.meta.totalCount || 0;
+        });
+
+        $scope.totalCount = function() {
+            if ($scope.videosCount >= 0 && $scope.channelsCount >= 0 && $scope.articlesCount >= 0) {
+                return $scope.videosCount + $scope.channelsCount + $scope.articlesCount;
+            }
+        };
+
+        $scope.totalCount();
+
+    }
 
 }]);
 
@@ -1194,6 +1205,7 @@ app.directive('loadMore', ["$document", function ($document) {
 
                     request(id,scope.offset).success(function(response) {
                         console.log('offset - ',scope.offset);
+                        console.log('load more respone - ',response);
                         scope.loadingMore = false;
                         if (response.data !== null) {
                             array.push.apply(array, response.data);

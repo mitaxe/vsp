@@ -14,7 +14,7 @@
                     <div class="history__date type hidden-desktop">
                         <span>Видео</span>
                     </div>
-                    <div ng-repeat="video in searchData.videos | limitTo: 5" class="">
+                    <div ng-repeat="video in searchVideos | limitTo: 5" class="">
                         <div class="row">
                             <div class="col-xs-7 col-sm-5 col-md-3">
                                 <div class="thumb__img">
@@ -32,6 +32,7 @@
                         </div>
                     </div>
                 </div>
+                <a ui-sref="search.videos({ key: searchKey })" class="btn btn-green main-ui">Все видео</a><br><br>
             </div>
         </div><!-- video tab -->
 
@@ -53,7 +54,7 @@
                     <div class="history__date type hidden-desktop">
                         <span>Каналы</span>
                     </div>
-                    <div ng-repeat="channel in searchData.channels | limitTo: 5" >
+                    <div ng-repeat="channel in searchChannels | limitTo: 5" >
                         <div class="row clearfix">
                             <div class="thumb thumb--chan search_thumb pull-left">
                                 <div class="thumb__img">
@@ -75,6 +76,7 @@
                         </div>
                     </div>
                 </div>
+                <a ui-sref="search.channels({ key: searchKey })" class="btn btn-green main-ui">Все каналы</a><br><br>
             </div>
         </div><!-- channels tab -->
 
@@ -96,7 +98,7 @@
                     <div class="history__date type hidden-desktop">
                         <span>Статьи</span>
                     </div>
-                    <div ng-repeat="article in searchData.articles | limitTo: 5" class="article_thumb">
+                    <div ng-repeat="article in searchArticles | limitTo: 5" class="article_thumb">
                         <div class="row clearfix">
                             <div class="article_thumb__article_preview pull-left">
                                 <img src="assets/img/article_preview.png" alt="article preview">
@@ -114,6 +116,7 @@
                         </div>
                     </div>
                 </div>
+                <a ui-sref="search.articles({ key: searchKey })" class="btn btn-green main-ui">Все статьи</a><br><br>
             </div>
         </div><!-- articles tab -->
 

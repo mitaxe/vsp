@@ -18,6 +18,7 @@ app.directive('loadMore', function ($document) {
 
                     request(id,scope.offset).success(function(response) {
                         console.log('offset - ',scope.offset);
+                        console.log('load more respone - ',response);
                         scope.loadingMore = false;
                         if (response.data !== null) {
                             array.push.apply(array, response.data);

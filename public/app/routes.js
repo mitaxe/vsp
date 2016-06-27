@@ -88,22 +88,22 @@ angular.module("MainApp")
         url : '/search',
         templateUrl : 'app/views/search/search.html',
         redirectTo : 'search.all',
-        controller : 'MainCtrl'
+        controller : 'SearchCtrl'
     })
     .state('search.all', {
-        url : '/all',
+        url : '/all/:key',
         templateUrl : 'app/views/search/search-all.html'
     })
-    .state('search.video', {
-        url : '/video',
+    .state('search.videos', {
+        url : '/video/:key',
         templateUrl : 'app/views/search/search-video.html'
     })
-    .state('search.channel', {
-        url : '/channel',
+    .state('search.channels', {
+        url : '/channel/:key',
         templateUrl : 'app/views/search/search-channels.html'
     })
     .state('search.articles', {
-        url : '/articles',
+        url : '/articles/:key',
         templateUrl : 'app/views/search/search-articles.html'
     })
 
