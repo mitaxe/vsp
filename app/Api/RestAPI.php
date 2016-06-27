@@ -128,6 +128,8 @@ class RestAPI extends MicroMVC
     $indexPage->get('/goods', 'getGoods');
     $indexPage->get('/channels', 'getChannels');
     $indexPage->get('/search', 'search');
+    $indexPage->get('/search/videos', 'searchVideos');
+    $indexPage->get('/search/channels', 'searchChannels');
     $collections[] = $indexPage;
 
     $videosPage = new MicroCollection();

@@ -69,8 +69,8 @@ class IndexController extends RESTController
     
     public function search()
     {
-        $itemCount = 25;
-        $key = $this->request->get('key');
+        $itemCount = 5;
+        $key = $this->request->getSearchQuery();
 
         $videosResponse = new VideosResponse();
         $videosParams = [
@@ -91,10 +91,56 @@ class IndexController extends RESTController
         $channels = Channels::find($channelsParams);
         $channelsResponse->add($channels);
 
-
         $articlesResponse = new Response();
-        
         return new SearchResponse($videosResponse, $channelsResponse, $articlesResponse);
     }
+
+    public function searchVideos() {
+
+        $itemCount = 20;
+        $offset = $this->request->getOffset();
+        $key = $this->request->getSearchQuery();
+
+        $videosResponse = new VideosResponse();
+
+        $queryParams = [
+            "conditions" => "title LIKE :key:",
+            "bind" => ['key' => "%" . $key . "%"],
+        ];
+
+        $videosCount = Videos::count($queryParams);
+
+        $queryParams['limit'] = $itemCount;
+        $queryParams['offset'] =  $itemCount * $offset ;
+
+        $videos = Videos::find($queryParams);
+        $videosResponse->add($videos);
+
+        return new SearchVideosResponse($videosResponse, $videosCount);
+    }
+
+    public function searchChannels() {
+
+        $itemCount = 20;
+        $offset = $this->request->getOffset();
+        $key = $this->request->getSearchQuery();
+
+        $channelsResponse = new ChannelsResponse();
+
+        $queryParams = [
+            "conditions" => "title LIKE :key:",
+            "bind" => ['key' => "%" . $key . "%"],
+        ];
+
+        $channelsCount = Channels::count($queryParams);
+
+        $queryParams['limit']  = $itemCount;
+        $queryParams['offset'] = $itemCount * $offset ;
+
+        $channels = Channels::find($queryParams);
+        $channelsResponse->add($channels);
+
+        return new SearchChannelsResponse($channelsResponse, $channelsCount);
+    }    
     
 }
