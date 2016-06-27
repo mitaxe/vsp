@@ -19,14 +19,21 @@ class ImportTask extends \Phalcon\Cli\Task
      * Set max number of processes which could work at the same time
      */
     const WORKERS_LIMIT = 20;
+    
     /**
      * Set channels limit for each query
      */
     const CHANNELS_LIMIT = 100;
-    
-    
+
+
+    /**
+     * Default action - cli.php import
+     */
     public function mainAction()
     {
+        /**
+         * Insert or update all available channels from the MainData service
+         */
         $this->importAllChannels();
     }
 
@@ -38,13 +45,14 @@ class ImportTask extends \Phalcon\Cli\Task
      */
     public function channelsAction(array $params = [])
     {
-        $params[0] = 'MBRN2x3h2zSZqh0W-TqiF4Pl'; // channel with 10k videos
+        //$params[0] = 'MBRN2x3h2zSZqh0W-TqiF4Pl'; // channel with 10k videos
+        $processNum = 0;
         $queryParams = [];
+        $processesIds = [];
         $workersActive = 0;
         $workersLimit = $this->getWorkersLimit();
         $channelsLimit = $this->getChannelsLimit();
-        $processesIds = [];
-        $processNum = 0;
+
         do {
             // it's mandatory to create a new db connection for each child process
             $connectionName = 'mainConnection'.$processNum++;
@@ -70,12 +78,15 @@ class ImportTask extends \Phalcon\Cli\Task
             
             //create a new process
             $pid = pcntl_fork();
+            
             if ($pid === -1) {
                 die("can't fork !");
             } elseif ($pid !== 0) {
+                
                 // main process
                 $workersActive++;
                 $processesIds[$pid] = $pid;
+                
                 // handle workers number limit
                 while ($workersActive >= $workersLimit) {
                     $pid = pcntl_wait($status);
@@ -97,12 +108,13 @@ class ImportTask extends \Phalcon\Cli\Task
                     $channel->setConnectionService($connectionName);
                     $this->syncChannelData($channel);
                 }
+                
                 $this->getDI()->get($connectionName)->close();
                 
                 // close the child process, db connection will be closed(!)
                 exit(0);
             }
-        } while(count($channels) != 0);
+        } while(count($channels) == $channelsLimit);
 
         // wait till all child processes will be finished
         do {
@@ -111,104 +123,11 @@ class ImportTask extends \Phalcon\Cli\Task
         } while(count($processesIds));
     }
 
-    private function getWorkersLimit()
-    {
-        $config = $this->getDI()->get('config');
-        if (!empty($config->import->workersLimit)) {
-            return $config->import->workersLimit;
-        }
-        return self::WORKERS_LIMIT;
-    }
-
-    private function getChannelsLimit()
-    {
-        $config = $this->getDI()->get('config');
-        if (!empty($config->import->channelsLimit)) {
-            return $config->import->channelsLimit;
-        }
-        return self::CHANNELS_LIMIT;
-    }
-
-    private function createNewDbConnection($connectionName = '')
-    {
-        if (empty($connectionName)) {
-            return null;
-        };
-        $config = $this->getDI()->get('config');
-        $this->getDI()->set($connectionName,function() use ($config) {
-            $db = new DbAdapter(
-                array(
-                    "host" => $config->database->host,
-                    "username" => $config->database->username,
-                    "password" => $config->database->password,
-                    "dbname" => $config->database->dbname,
-                    "persistent" => false
-                )
-            );
-            return $db;
-        });
-    }
-
-    public function importAllChannels()
-    {
-        $mainData = new MainData($this->getDI());
-        $start = microtime(true);
-        $workersLimit = $this->getWorkersLimit();
-        $workersActive = 0;
-        $ids = [];
-        
-        while ($data = $mainData->getChannels()) {
-            $pid = pcntl_fork();
-            if ($pid === -1) {
-                die("can't fork !");
-            } elseif ($pid !== 0) {
-                // main process
-                $workersActive++;
-                $ids[$pid] = $pid;
-                if ($workersActive >= $workersLimit) {
-                    do {
-                        $pid = pcntl_wait($status);
-                        unset($ids[$pid]);
-                    } while(count($ids));
-                    $workersActive = 0;
-                }
-            } else {
-                // child process
-                $newChannels = new Channels();
-                foreach ($data as $channels) {
-                    if (empty($channels)) {
-                        continue;
-                    }
-                    foreach ($channels as $channelData) {
-                        $query = ["conditions" => "vspChannelId = :vspChannelId:",
-                            "bind" => ["vspChannelId" => $channelData['vspChannelId']]];
-                        $model = Channels::findFirst($query);
-                        if (!empty($model)) {
-                            $model->setSyncDate();
-                            $model->assignData($channelData);
-                            $model->save();
-                        } else {
-                            $newChannels->assignTags($channelData);
-                            $newChannels->addToBulkInsert($channelData);
-                        }
-                    }
-                }
-                $newChannels->bulkInsert();
-                exit(0);
-            }             
-        }
-        do {
-            $pid = pcntl_wait($status);
-            unset($ids[$pid]);
-        } while(count($ids));
-    }
-
     /**
      * Get and update data from MainData service
      * Update channel's videos
      * @param Channels $channel
-     * @return boolean
-     * @todo Delete channel tags if they are absent in the data from MainData
+     * @return null
      */
     public function syncChannelData(Channels $channel)
     {
@@ -232,25 +151,14 @@ class ImportTask extends \Phalcon\Cli\Task
 
     /**
      * Update channel's videos
-     * @param array $videos Videos data from MainData service
-     * @return boolean
-     * @todo Delete videos tags if they are absent in the data from MainData
+     * @param  array $videosData
+     * @return null
      */
     public function syncChannelVideosData(array $videosData)
     {
         if (empty($videosData)) {
             return false;
         }
-        /*foreach ($videosData as $videos) {
-            foreach ($videos as $video) {
-                $query = ["conditions" => "vspVideoId = :vspVideoId:",
-                    "bind"       => ["vspVideoId" => $video['vspVideoId']]];
-                $model = Videos::findFirst($query);
-                $model = empty($model) ? new Videos() : $model;
-                $model->assignData($video);
-                $model->save();
-            }
-        }*/
         
         $newVideos = new Videos();
         $newVideos->setConnectionService($this->getDI()->get('dbConnectionServiceName'));
@@ -273,6 +181,12 @@ class ImportTask extends \Phalcon\Cli\Task
         $newVideos->bulkInsert();
     }
 
+    /**
+     * Synchronize channel's playlists data
+     * @param $playlists array with Playlists model objects
+     * @return null
+     */
+
     public function syncChannelPlaylistsData($playlists)
     {
         if (empty($playlists)) {
@@ -291,6 +205,12 @@ class ImportTask extends \Phalcon\Cli\Task
         }
     }
 
+    /**
+     * Synchronize playlist's videos data
+     * @param Playlists $playlistModel
+     * @param array $videos
+     * @return void
+     */
     public function syncPlaylistVideosData(Playlists $playlistModel, $videos = []) 
     {
         if (empty($videos)) {
@@ -320,5 +240,117 @@ class ImportTask extends \Phalcon\Cli\Task
             $playlistVideosModel->title = !empty($video['title']) ? $video['title'] : '';
             $playlistVideosModel->save();
         }
+    }
+
+    /**
+     * Insert or update all channels from the MainData service 
+     */
+    public function importAllChannels()
+    {
+        $workersActive = 0;
+        $processesIds = [];
+        $mainData = new MainData($this->getDI());
+        $workersLimit = $this->getWorkersLimit();
+
+        while ($data = $mainData->getChannels()) {
+            
+            $pid = pcntl_fork();
+            
+            if ($pid === -1) {
+
+                die("can't fork !");
+
+            } elseif ($pid !== 0) {
+
+                // main process
+                $workersActive++;
+                $processesIds[$pid] = $pid;
+                while ($workersActive >= $workersLimit) {
+                    $pid = pcntl_wait($status);
+                    unset($processesIds[$pid]);
+                    $workersActive--;
+                }
+            } else {
+
+                // child process
+                $newChannels = new Channels();
+                foreach ($data as $channels) {
+                    if (empty($channels)) {
+                        continue;
+                    }
+                    foreach ($channels as $channelData) {
+                        $query = ["conditions" => "vspChannelId = :vspChannelId:",
+                            "bind" => ["vspChannelId" => $channelData['vspChannelId']]];
+                        $model = Channels::findFirst($query);
+                        if (!empty($model)) {
+                            $model->setSyncDate();
+                            $model->assignData($channelData);
+                            $model->save();
+                        } else {
+                            $newChannels->assignTags($channelData);
+                            $newChannels->addToBulkInsert($channelData);
+                        }
+                    }
+                }
+                $newChannels->bulkInsert();
+                exit(0);
+            }
+        }
+        // wait till all the child processes will be finished
+        do {
+            $pid = pcntl_wait($status);
+            unset($processesIds[$pid]);
+        } while(count($processesIds));
+    }
+
+    /**
+     * Get max number of simultaneously working processes
+     * @return int
+     */
+    private function getWorkersLimit()
+    {
+        $config = $this->getDI()->get('config');
+        if (!empty($config->import->workersLimit)) {
+            return $config->import->workersLimit;
+        }
+        return self::WORKERS_LIMIT;
+    }
+
+    /**
+     * Get max number of channels per one query
+     * @return int
+     */
+    private function getChannelsLimit()
+    {
+        $config = $this->getDI()->get('config');
+        if (!empty($config->import->channelsLimit)) {
+            return $config->import->channelsLimit;
+        }
+        return self::CHANNELS_LIMIT;
+    }
+
+    /**
+     * Create a new database connection
+     * @param string $connectionName
+     * @return null
+     */
+    private function createNewDbConnection($connectionName = '')
+    {
+        if (empty($connectionName)) {
+            return null;
+        }
+        $config = $this->getDI()->get('config');
+        $this->getDI()->set($connectionName,function() use ($config) {
+            $db = new DbAdapter(
+                array(
+                    "host" => $config->database->host,
+                    "username" => $config->database->username,
+                    "password" => $config->database->password,
+                    "dbname" => $config->database->dbname,
+                    "persistent" => false
+                )
+            );
+            return $db;
+        });
     }
 }
