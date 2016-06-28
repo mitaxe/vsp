@@ -13,6 +13,10 @@ use Phalcon\Mvc\Model\Resultset\Simple as Resultset;
 
 class Goods extends Model
 {
+
+    use ModelBulkInsert;
+    use ModelDataHelper;
+    
     /**
      * Define table name
      * @return string
@@ -40,6 +44,7 @@ class Goods extends Model
     {
         return array(
             'id' => 'id',
+            'vsp_goods_id' => 'vspGoodsId',
             'vsp_channel_id' => 'vspChannelId',
             'category_id' => 'categoryId',
             'actual' => 'actual',
@@ -55,12 +60,32 @@ class Goods extends Model
             'src_id' => 'srcId',
             'src_type' => 'srcType',
             'tags' => 'tags',
-            'thumb_default' => 'thumbDefault',
-            'thumb_high' => 'thumbHigh',
-            'thumb_small' => 'thumbSmall',
+            'thumbnails' => 'thumbnails',
             'title' => 'title',
             'dt_updated' => 'dateUpdated',
+            'dt_sync' => 'dateSync',
         );
+    }
+
+    /**
+     * Assign the data to the goods object
+     * @param array $data
+     */
+    public function assignData(array $data)
+    {
+        $this->setSyncDate();
+        $this->prepareData($data);
+        $this->assign($data);
+    }
+
+    /**
+     * @param array $data
+     */
+    public function prepareData(array &$data) 
+    {
+        $this->assignTags($data);
+        $this->assignJsonData($data, 'properties');
+        $this->assignJsonData($data, 'thumbnails');
     }
 
 }

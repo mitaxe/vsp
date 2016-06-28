@@ -12,7 +12,8 @@ use Phalcon\Mvc\Model;
 
 class Playlists extends Model
 {
-
+    use ModelDataHelper;
+    
     private $videosLimit = 24;
     /**
      * Define table name
@@ -65,6 +66,7 @@ class Playlists extends Model
             'stat_unlisted' => 'statUnlisted',
             'status' => 'status',
             'title' => 'title',
+            'dt_sync' => 'dateSync'
         );
     }
 

@@ -15,6 +15,7 @@ class Videos extends Model
 {
  
     use ModelBulkInsert;
+    use ModelDataHelper;
     
     public function initialize()
     {
@@ -56,7 +57,8 @@ class Videos extends Model
             'thumbs_medium' => 'thumbsMedium',
             'title' => 'title',
             'tags' => 'tags',
-            'exclusive' => 'exclusive'
+            'exclusive' => 'exclusive',
+            'dt_sync' => 'dateSync',
         );
     }
 
@@ -85,37 +87,11 @@ class Videos extends Model
      */
     public function assignData(array $data)
     {
-        /*if (!empty($data['tags'])) {
-            $data['tags'] = json_encode($data['tags']);
-        }*/        
+        $this->setSyncDate();
         $this->assignTags($data);
         $this->assign($data);
     }
-
-    /**
-     * Take tags list from the $data['tags'] and create
-     * appropriate Tags objects in order to save them to the db
-     * @param array $data
-     */
-    public function assignTags(array &$data)
-    {
-        if (!empty($data['tags'])) {
-            array_walk($data['tags'], function(&$tag){
-                $tag = filter_var($tag, FILTER_SANITIZE_SPECIAL_CHARS);
-            });
-            $data['tags'] = json_encode($data['tags']);
-        }        
-        /*if (!empty($data['tags'])) {
-            $videosTags = [];
-            foreach ($data['tags'] as $key => $tagName) {
-                 $videosTags[$key] = new VideosTags();
-                 $videosTags[$key]->tags = new Tags();
-                 $videosTags[$key]->tags->name = $tagName; 
-                  
-            }
-            $this->videosTags = $videosTags;
-        }*/
-    }
+    
 
     static public function findCurrentlyWatched($params = [])
     {

@@ -38,14 +38,19 @@ class ImportTask extends \Phalcon\Cli\Task
     }
 
     /**
-     * Console action which sync channels data
+     * Console action which sync channels data: videos, playlists, goods
      * $params[0] optional param - channel id
      * CLI: php app/cli.php import channels [channelId]
      * @param array $params
      */
     public function channelsAction(array $params = [])
     {
+        /**
+         * channels for testing
+         */
         //$params[0] = 'MBRN2x3h2zSZqh0W-TqiF4Pl'; // channel with 10k videos
+        //$params[0] = 'MBRNsbwu8nqa8Z30zUyUSsZh'; // channel with 1045 videddos
+        $params[0] = 'MBRNTnifyrOyIFG8mRicZwWV'; //channle with goods
         $processNum = 0;
         $queryParams = [];
         $processesIds = [];
@@ -135,8 +140,8 @@ class ImportTask extends \Phalcon\Cli\Task
             return false;
         }
         $mainData = new MainData($this->getDI());
+        $goodsData = new GoodsData($this->getDI());
         if ($data = $mainData->getChannelData($channel->vspChannelId)) {
-            $channel->setSyncDate();
             $channel->assignData($data);
             $channel->save();
             if ($channel->save()) {
@@ -145,8 +150,41 @@ class ImportTask extends \Phalcon\Cli\Task
                 }
                 $playlists = $mainData->getChannelPlaylists($channel);
                 $this->syncChannelPlaylistsData($playlists);
+                $goods = $goodsData->getGoods($channel->vspChannelId);
+                $this->syncChannelGoodsData($goods);
             }
         }
+    }
+
+    /**
+     * Update channel's goods
+     * @param  array $goodsData
+     * @return null
+     */
+    public function syncChannelGoodsData(array $goodsData)
+    {
+        if (empty($goodsData)) {
+            return false;
+        }
+        $newGoods = new Goods();
+        $newGoods->setConnectionService($this->getDI()->get('dbConnectionServiceName'));
+        foreach ($goodsData as $goods) {
+            foreach ($goods as $item) {
+                $query = ["conditions" => "vspGoodsId = :vspGoodsId:",
+                          "bind"       => ["vspGoodsId" => $item['vspGoodsId']]];
+                $model = new Goods();
+                $model->setConnectionService($this->getDI()->get('dbConnectionServiceName'));
+                $model = $model::findFirst($query);
+                if (!empty($model)) {
+                    $model->assignData($item);
+                    $model->save();
+                } else {
+                    $newGoods->prepareData($item);
+                    $newGoods->addToBulkInsert($item);
+                }
+            }
+        }
+        $newGoods->bulkInsert();
     }
 
     /**
@@ -198,6 +236,7 @@ class ImportTask extends \Phalcon\Cli\Task
                       "bind"       => ["vspPlaylistId" => $playlist['vspPlaylistId']]];
             $model = Playlists::findFirst($query);
             $model = empty($model) ? new Playlists() : $model;
+            $model->setSyncDate();
             $model->assign($playlist);
             if ($model->save()) {
                 $this->syncPlaylistVideosData($model, $playlist['videos']);

@@ -11,6 +11,7 @@
 class MainData
 {
 
+    use ModelDataHelper;
     /**
      * @var Dependency Injection container
      */
@@ -24,7 +25,7 @@ class MainData
     /**
      * Define channels table columns according to the JSON data
      * Keys are fields names from JSON data
-     * the values are their respective fields aliases from Channel model
+     * the values are their respective fields aliases from Videos model
      */
     public $videoColumnMap = [
         'id' => 'vspVideoId',
@@ -64,7 +65,7 @@ class MainData
     /**
      * Define videos table columns according to the JSON data
      * Keys are fields names from JSON data
-     * the values are their respective fields aliases from Channel model
+     * the values are their respective fields aliases from Channels model
      */
     public $channelColumnMap = [
         'id' => 'vspChannelId',
@@ -217,27 +218,4 @@ class MainData
         return $videosData;
     }
 
-    /**
-     * Map API data according to the models fields
-     * @param array $columnMap
-     * @param $providerData
-     * @param array $returnData
-     * @return array
-     */
-    private function dataMapping(array $columnMap, $providerData, $returnData = [])
-    {
-        if (empty($providerData)) {
-            return $returnData;
-        }
-        
-        foreach ($columnMap as $providerField => $dbField) {
-            if (is_array($dbField)) {
-                $returnData = $this->dataMapping($dbField, $providerData[$providerField], $returnData);
-            } elseif (isset($providerData[$providerField])) {
-                $returnData[$dbField] = $providerData[$providerField];
-            }
-        };
-
-        return $returnData;
-    }
 }

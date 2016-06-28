@@ -157,4 +157,48 @@ class DataProvider {
         }
         return $videos;
     }
+
+    /**
+     * Get all channel's goods
+     * @param string $vspChannelId     
+     * @return array
+     * @throws Exception
+     */
+    public function getChannelGoods($vspChannelId)
+    {
+        $goods = [];
+        
+        if (empty($vspChannelId)) {
+            return [];
+        }
+
+        for ($i = 0; $i < $this->config->api->curlMaxConcurrent; $i++) {
+            $offset = $this->recordsOffset * $this->config->api->goodsPerRequestLimit;
+            $url = $this->config->api->goodsUrl.
+                '?clientId='. $this->config->api->clientId.
+                '&brandId=' . $vspChannelId.
+                '&limit='   . $this->config->api->videosPerRequestLimit.
+                '&offset='  . $offset;
+            $this->rollingCurl->get($url);
+            $this->recordsOffset++;
+        }
+
+        $this->rollingCurl->setCallback(
+            function(\RollingCurl\Request $request, \RollingCurl\RollingCurl $rollingCurl) use (&$goods) {
+                $response = json_decode($request->getResponseText(),true);
+                if (!empty($response)) {
+                    $goods[] = $response;
+                }
+                $rollingCurl->clearCompleted();
+                $rollingCurl->prunePendingRequestQueue();
+            }
+        )
+            ->setSimultaneousLimit((int)$this->config->api->curlMaxConcurrent)
+            ->execute();
+
+        if (empty($goods)) {
+            $this->recordsOffset = 0;
+        }
+        return $goods;
+    }    
 }
