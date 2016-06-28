@@ -2360,7 +2360,7 @@ textarea {
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 0 30px 0 30px;
+    padding: 0 10px 0 30px;
     color: #898989;
     background: transparent;
     font-family: "Roboto", sans-serif;
@@ -2391,8 +2391,6 @@ textarea {
     z-index: 98;
     transition: .3s; }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
-    .search-form input {
-      padding-right: 10px; }
     .search-form__box {
       padding: 0 20px; } }
   @media screen and (max-width: 767px) {
@@ -3137,7 +3135,7 @@ textarea {
   @media screen and (min-width: 1280px) {
     .block {
       margin: 0 15px 20px; }
-      .block__select--exclusive {
+      .block__select--top15 {
         margin-top: 15px; }
       .block--sidebar {
         margin: 0 0px 25px -20px !important;
@@ -3162,11 +3160,15 @@ textarea {
 /* video and blog thumbnails */
 .thumb {
   margin-bottom: 20px;
-  color: #3a3d3e; }
+  color: #3a3d3e;
+  overflow: hidden;
+  word-wrap: break-word; }
   .thumb:after {
     content: "";
     display: table;
     clear: both; }
+  .thumb p {
+    line-height: 1.2; }
   .thumb__img {
     width: 100%;
     margin-bottom: 12px;
@@ -3278,6 +3280,11 @@ textarea {
           vertical-align: top; }
         .thumb--chan.search_thumb .thumb__name .thumb__subs {
           vertical-align: middle; }
+      .thumb--chan.search_thumb .thumb__info {
+        min-height: 0;
+        margin-bottom: 10px; }
+        .thumb--chan.search_thumb .thumb__info .btn {
+          margin-right: 15px; }
       .thumb--chan.search_thumb .thumb_text {
         font-size: 14px;
         color: #999999; }
@@ -3311,6 +3318,8 @@ textarea {
       .thumb--chan .thumb__info {
         text-align: center; }
       .thumb--chan .thumb__name {
+        font-size: 14px; }
+      .thumb--chan.search_thumb .thumb__name {
         font-size: 14px; }
       .thumb--chan.search_thumb .btn-green.btn-small {
         margin-top: 5px; }
@@ -3432,12 +3441,15 @@ textarea {
     color: #5d5d5e;
     overflow: hidden;
     text-overflow: ellipsis;
-    word-wrap: break-word; }
+    word-break: break-all; }
   .channels__table .table__channel p {
+    display: block;
     font-size: 14px;
     color: #999;
     line-height: 1.2;
-    word-wrap: break-word; }
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all; }
   @media screen and (max-width: 767px) {
     .channels__table th, .channels__table td {
       padding: 10px 10px;

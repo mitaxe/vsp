@@ -9,29 +9,35 @@ angular.module("MainApp")
 
     if ($scope.searchKey) {
 
-        $scope.requestVideos($scope.searchKey).success(function(response) {
-            console.log('videos - ',response.data);
+        var q = $scope.searchKey;
+
+        console.log($scope.searchKey);
+
+        $scope.requestVideos(q,$scope.videosOffset).success(function(response) {
+            console.log('videos - ',response);
 
             $scope.searchActive = false;
             $scope.searching = false;
             // $scope.searchKey = null;
 
             $scope.searchVideos = response.data;
-            $scope.videosOffset = response.meta.count;
+            $scope.videosOffset = response.meta.count || 0;
+            console.log($scope.videosOffset);
             $scope.videosCount = response.meta.totalCount || 0;
+            console.log($scope.videosCount);
         });
 
-        $scope.requestChannels($scope.searchKey).success(function(response) {
+        $scope.requestChannels(q,$scope.channelsOffset).success(function(response) {
             console.log('channels - ',response);
             $scope.searchChannels = response.data;
-            $scope.channelsOffset = response.meta.count;
+            $scope.channelsOffset = response.meta.count || 0;
             $scope.channelsCount = response.meta.totalCount || 0;
         });
 
-        $scope.requestArticles($scope.searchKey).success(function(response) {
+        $scope.requestArticles(q,$scope.articlesOffset).success(function(response) {
             console.log('articles - ',response);
             $scope.searchArticles = response.data;
-            $scope.articlesOffset = response.meta.count;
+            $scope.articlesOffset = response.meta.count || 0;
             $scope.articlesCount = response.meta.totalCount || 0;
         });
 

@@ -198,7 +198,7 @@
 
     @include desktop {
         margin: 0 15px 20px;
-        &__select--exclusive {
+        &__select--top15 {
             margin-top: 15px;
         }
         &--sidebar {
@@ -238,6 +238,13 @@
     margin-bottom: 20px;
     color: #3a3d3e;
 
+    overflow: hidden;
+    word-wrap: break-word;
+
+    p {
+        line-height: 1.2;
+    }
+
     &__img {
         width: 100%;
         margin-bottom: 12px;
@@ -249,7 +256,6 @@
             box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
         }
     }
-
 
     &__length {
         display: block;
@@ -280,7 +286,6 @@
         color: #3a3d3e;
         margin-bottom: 12px;
         font-weight: 500;
-        // word-break: break-all;
         word-wrap: break-word;
     }
 
@@ -325,7 +330,6 @@
         margin-bottom: 12px;
         font-weight: 500;
     }
-
 
     &__number {
         font-size: 16px;
@@ -408,6 +412,13 @@
                     vertical-align: middle;
                 }
             }
+            .thumb__info {
+                min-height: 0;
+                margin-bottom: 10px;
+                .btn {
+                    margin-right: 15px;
+                }
+            }
             .thumb_text {
                 font-size: 14px;
                 color:#999999;
@@ -471,6 +482,9 @@
                 font-size: 14px;
             }
             &.search_thumb {
+                .thumb__name {
+                    font-size: 14px;
+                }
                 .btn-green.btn-small {
                     margin-top: 5px;
                 }
@@ -686,14 +700,16 @@
             color: #5d5d5e;
             overflow: hidden;
             text-overflow: ellipsis;
-            word-wrap: break-word;
+            word-break: break-all;
         }
         p {
+            display: block;
             font-size: 14px;
             color: #999;
             line-height: 1.2;
-            // word-break: break-all;
-            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
         }
     }
     @include phone {

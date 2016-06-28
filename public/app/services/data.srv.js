@@ -84,9 +84,11 @@ angular.module("MainApp")
         //     return $http.get('http://vsponline.qa/index/search?key=' + keyword);
         // };
         factory.getSearchVideos = function(keyword,offset) {
+            console.log(keyword,offset);
             return $http.get('http://vsponline.qa/index/search/videos?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchChannels = function(keyword,offset) {
+            console.log(keyword,offset);
             return $http.get('http://vsponline.qa/index/search/channels?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchArticles = function(keyword,offset) {

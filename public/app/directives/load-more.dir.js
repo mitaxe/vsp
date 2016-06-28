@@ -10,7 +10,6 @@ app.directive('loadMore', function ($document) {
             scope.offset = 0;
 
             function loadMore(request,array,offset,id) {
-
                 if (!scope.noMoreResponse) {
                     scope.loadingMore = true;
                     scope.offset += offset;
@@ -18,10 +17,13 @@ app.directive('loadMore', function ($document) {
 
                     request(id,scope.offset).success(function(response) {
                         console.log('offset - ',scope.offset);
-                        console.log('load more respone - ',response);
+                        console.log('response - ',response);
                         scope.loadingMore = false;
                         if (response.data !== null) {
                             array.push.apply(array, response.data);
+                            if (response.data.length < offset) {
+                                scope.noMoreResponse = true;
+                            }
                         } else {
                             scope.noMoreResponse = true;
                         }
