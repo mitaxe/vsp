@@ -27,10 +27,8 @@ class Channels extends Model
      * Initialize model
      */
     public function initialize()
-    {  /*echo 'asdfasdf='.$this->getDI()->get('dbConnectionServiceName');
-       $this->setConnectionService($this->getDI()->get('dbConnectionServiceName'));*/
-        /*$this->setReadConnectionService('dbMaster');*/
-        // or $this->setWriteConnectionService('dbB') and $this->setReadConnectionService('dbA')
+    {  
+        
     }
  
     /**
