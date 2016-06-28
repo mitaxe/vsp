@@ -10,16 +10,22 @@
 
 class MainData
 {
+
+    use ModelDataHelper;
+    /**
+     * @var Dependency Injection container
+     */
     protected $di;
 
     public function __construct($di)
     {
         $this->di = $di;
     }
+
     /**
      * Define channels table columns according to the JSON data
      * Keys are fields names from JSON data
-     * the values are their respective fields aliases from Channel model
+     * the values are their respective fields aliases from Videos model
      */
     public $videoColumnMap = [
         'id' => 'vspVideoId',
@@ -59,7 +65,7 @@ class MainData
     /**
      * Define videos table columns according to the JSON data
      * Keys are fields names from JSON data
-     * the values are their respective fields aliases from Channel model
+     * the values are their respective fields aliases from Channels model
      */
     public $channelColumnMap = [
         'id' => 'vspChannelId',
@@ -135,6 +141,10 @@ class MainData
         'title' => 'title',
     ];
 
+    /**
+     * Get all channels
+     * @return array
+     */
     public function getChannels()
     {
         $channelsGroups = $this->di->get('dataProvider')->getChannels();
@@ -155,13 +165,22 @@ class MainData
         return !empty($dataAvailable) ? $channelsGroups : [];
     }
 
-
+    /**
+     * Get channel data
+     * @param $channelId
+     * @return array
+     */
     public function getChannelData($channelId)
     {
         $channel = $this->di->get('dataProvider')->getChannel(['id'=>$channelId]);
         return $this->dataMapping($this->channelColumnMap,$channel);
     }
 
+    /**
+     * Get channel's playlists
+     * @param Channels $channel
+     * @return mixed
+     */
     public function getChannelPlaylists(Channels $channel)
     {
         $playlists = $this->di->get('dataProvider')->getChannelPlaylists($channel->vspChannelId);
@@ -179,6 +198,11 @@ class MainData
         return $playlists;
     }
 
+    /**
+     * Get channel's videos
+     * @param Channels $channel
+     * @return mixed
+     */
     public function getChannelVideos(Channels $channel)
     {
         $videosData = $this->di->get('dataProvider')->getChannelVideos($channel->vspChannelId,$channel->statVideos);
@@ -194,20 +218,4 @@ class MainData
         return $videosData;
     }
 
-    private function dataMapping(array $columnMap, $providerData, $returnData = [])
-    {
-        if (empty($providerData)) {
-            return $returnData;
-        }
-        
-        foreach ($columnMap as $providerField => $dbField) {
-            if (is_array($dbField)) {
-                $returnData = $this->dataMapping($dbField, $providerData[$providerField], $returnData);
-            } elseif (isset($providerData[$providerField])) {
-                $returnData[$dbField] = $providerData[$providerField];
-            }
-        };
-
-        return $returnData;
-    }
 }

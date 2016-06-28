@@ -14,6 +14,7 @@ use Phalcon\Mvc\Model\Resultset\Simple as Resultset;
 class Channels extends Model
 {
     use ModelBulkInsert;
+    use ModelDataHelper;
     /**
      * Define table name
      * @return string
@@ -27,10 +28,8 @@ class Channels extends Model
      * Initialize model
      */
     public function initialize()
-    {  /*echo 'asdfasdf='.$this->getDI()->get('dbConnectionServiceName');
-       $this->setConnectionService($this->getDI()->get('dbConnectionServiceName'));*/
-        /*$this->setReadConnectionService('dbMaster');*/
-        // or $this->setWriteConnectionService('dbB') and $this->setReadConnectionService('dbA')
+    {  
+        
     }
  
     /**
@@ -70,7 +69,7 @@ class Channels extends Model
             'thumb_medium' => 'thumbMedium',
             'title' => 'title',
             'tags' => 'tags',
-            'dt_sync' => 'syncDate',
+            'dt_sync' => 'dateSync',
         );
     }
 
@@ -113,37 +112,9 @@ class Channels extends Model
      */
     public function assignData(array $data)
     {
+        $this->setSyncDate();
         $this->assignTags($data);
         $this->assign($data);
-    }
-
-    /**
-     * Take tags list from the $data['tags'] and create
-     * appropriate Tags objects in order to save them to the db
-     * @param array $data
-     */
-    public function assignTags(array &$data)
-    {
-        if (!empty($data['tags'])) {
-            array_walk($data['tags'], function(&$tag){
-                $tag = filter_var($tag, FILTER_SANITIZE_SPECIAL_CHARS);
-            });
-            $data['tags'] = json_encode($data['tags']);
-        }
-        /*if (!empty($data['tags'])) {
-            $channelsTags = [];
-            foreach ($data['tags'] as $key => $tagName) {
-                $channelsTags[$key] = new ChannelsTags();
-                $channelsTags[$key]->tags = new Tags();
-                $channelsTags[$key]->tags->name = $tagName;
-            }
-            $this->channelsTags = $channelsTags;
-        }*/
-    }
-    
-    public function setSyncDate()
-    {
-        $this->syncDate = 'NOW()';
     }
 
     public static function syncDateSetNull()

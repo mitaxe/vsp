@@ -28,10 +28,11 @@ trait ModelBulkInsert {
     }
 
     public function bulkInsert()
-    {
+    {   
         if (empty($this->bulkInsertData)) {
             return false;
         }
+        
         $metaData = $this->getModelsMetaData();
         $attributes = $metaData->getDataTypes($this);
 
@@ -58,6 +59,7 @@ trait ModelBulkInsert {
 
     public function addToBulkInsert(array $data)
     {
+        $data['dateSync'] = 'NOW()';
         if (!empty($data)) {
             $this->bulkInsertData[] = $data;
         }

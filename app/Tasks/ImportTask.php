@@ -2,6 +2,10 @@
 /**
  * Import VSP Main Data
  *
+ * There are two actions:
+ * - php app/cli.php import - import all channels from MainData
+ * - php app/cli.php import channels [channelId] - import all channels data (videos, playlist, goods)
+ *
  * PHP version >= 5.3.0
  *
  * @author Taras Pylypenko <pylypenko@edsson.com>
@@ -11,266 +15,124 @@ use Phalcon\Db\Adapter\Pdo\Postgresql as DbAdapter;
 
 class ImportTask extends \Phalcon\Cli\Task
 {
-    public function mainAction()
-    {
-        $this->importAllChannelsFork();
-    }
+    /**
+     * Set max number of processes which could work at the same time
+     */
+    const WORKERS_LIMIT = 20;
     
-    
-    public function importAllChannelsFork()
-    {
-        $mainData = new MainData($this->getDI());
-        $start = microtime(true);
-        $workersLimit = 20;
-        $workersActive = 0;
-        $ids = [];
-        
-        while ($data = $mainData->getChannels()) {
-            $pid = pcntl_fork();
-            if ($pid === -1) {
-                die("can't fork !");
-            } elseif ($pid !== 0) {
-                // main process
-                $workersActive++;
-                $ids[$pid] = $pid;
-                if ($workersActive >= $workersLimit) {
-                    do {
-                        $pid = pcntl_wait($status);
-                        echo PHP_EOL.'FINISHED - '.$pid.PHP_EOL;
-                        unset($ids[$pid]);
-                    } while(count($ids));
-                    $workersActive = 0;
-                }
-            } else {
-                // child process
-                $newChannels = new Channels();
-                foreach ($data as $channels) {
-                    if (empty($channels)) {
-                        continue;
-                    }
-                    foreach ($channels as $channelData) {
-                        $query = ["conditions" => "vspChannelId = :vspChannelId:",
-                            "bind" => ["vspChannelId" => $channelData['vspChannelId']]];
-                        $model = Channels::findFirst($query);
-                        if (!empty($model)) {
-                            $model->setSyncDate();
-                            $model->assignData($channelData);
-                            $model->save();
-                        } else {
-                            $newChannels->assignTags($channelData);
-                            $newChannels->addToBulkInsert($channelData);
-                        }
-                    }
-                }
-                $newChannels->bulkInsert();
-                echo "CHILD IS DONE!!!!!!!!!".PHP_EOL;
-                exit(0);
-            }             
-        }
-        do {
-            $pid = pcntl_wait($status);
-            echo PHP_EOL.'FINISHED - '.$pid.PHP_EOL;
-            unset($ids[$pid]);
-        } while(count($ids));        
-        echo 'script time - "'.(microtime(true) - $start).'"'.PHP_EOL;
-    }
-    
-    
-    public function importAllChannels()
-    {
-        $mainData = new MainData($this->getDI());
-        $start = microtime(true);
-        while ($data = $mainData->getChannels()) {
-            $dataAvailable = false;
-            $newChannels = new Channels();
-            foreach ($data as $channels) {
-                if (empty($channels)) {
-                    continue;
-                }
-                foreach ($channels as $channelData) {
-                    $query = ["conditions" => "vspChannelId = :vspChannelId:",
-                              "bind" => ["vspChannelId" => $channelData['vspChannelId']]];
-                    $model = Channels::findFirst($query);
-                    if (!empty($model)) {
-                        $model->setSyncDate();
-                        $model->assignData($channelData);
-                        $model->save();
-                    } else {
-                        $newChannels->assignTags($channelData);
-                        $newChannels->addToBulkInsert($channelData);
-                    }
-                    $dataAvailable = true;
-                }
-            }
-            $newChannels->bulkInsert();
-            if ($dataAvailable == false) {
-                break;
-            }
-        }
-        echo 'script time - "'.(microtime(true) - $start).'"'.PHP_EOL;
-    }
-
-
-
-    public function channelsActionNOTFORK(array $params = [])
-    {
-        $query = [];
-        $params[0] = 'MBRN2x3h2zSZqh0W-TqiF4Pl'; // channel with 10k videos
-        //$params[0] = 'MBRNsbwu8nqa8Z30zUyUSsZh'; // channel with 1045 videddos
-        //$params[0] = 'MBRNFn-LNscKF7kbkeSPsfgY'; // channel with playlist
-
-        if (!empty($params[0])) {
-            $query = ["conditions" => "vspChannelId = :vspChannelId: 
-                                       AND  
-                                       syncDate IS NULL",
-                "bind"       => ["vspChannelId" => $params[0]]];
-        } else {
-            $query = ["conditions" => "syncDate IS NULL", "limit" => 5000];
-        }
-        Channels::syncDateSetNull();
-        echo "STARTING ALL CHANNELS SYNC";
-        $start = microtime(true);
-
-        while ($channels = Channels::find($query)) {
-            if (count($channels) == 0) {
-                break;
-            }
-            foreach ($channels as $channel) {
-                $this->syncChannelData($channel);
-            }
-        }
-        echo PHP_EOL;
-        echo "TOTAL CHANNEL TIME = ".ceil(microtime(true)-$start).' sec';
-        echo PHP_EOL.PHP_EOL.PHP_EOL;
-    }
+    /**
+     * Set channels limit for each query
+     */
+    const CHANNELS_LIMIT = 100;
 
 
     /**
-     * Console action which sync channels data
-     * $params[0] should contain channel id
-     * CLI: php app/cli.php import channels :channelId
+     * Default action - cli.php import
+     */
+    public function mainAction()
+    {
+        /**
+         * Insert or update all available channels from the MainData service
+         */
+        $this->importAllChannels();
+    }
+
+    /**
+     * Console action which sync channels data: videos, playlists, goods
+     * $params[0] optional param - channel id
+     * CLI: php app/cli.php import channels [channelId]
      * @param array $params
-     * @todo Divide channels update into parts(now we use findAll statement)
      */
     public function channelsAction(array $params = [])
     {
-        $query = [];
+        /**
+         * channels for testing
+         */
         //$params[0] = 'MBRN2x3h2zSZqh0W-TqiF4Pl'; // channel with 10k videos
-        //$params[0] = 'MBRNsbwu8nqa8Z30zUyUSsZh'; // channel with 1045 videos
-        //$params[0] = 'MBRNFn-LNscKF7kbkeSPsfgY'; // channel with playlist
-
-        if (!empty($params[0])) {
-            $query = ["conditions" => "vspChannelId = :vspChannelId:
-                                       AND
-                                       syncDate IS NULL",
-                "bind"       => ["vspChannelId" => $params[0]]];
-            /*$query = ["conditions" => "vspChannelId = :vspChannelId:",
-                      "bind"       => ["vspChannelId" => $params[0]]];*/
-        } else {
-            $query = ["conditions" => "syncDate IS NULL", "limit" => ['number'=>10,'offset'=>10]];
-        }
-        //Channels::syncDateSetNull();
-        echo "STARTING ALL CHANNELS SYNC";
-        $start = microtime(true);
-        $workersActive = 0;
-        $workersLimit = 20;
-        $ids = [];
+        //$params[0] = 'MBRNsbwu8nqa8Z30zUyUSsZh'; // channel with 1045 videddos
+        $params[0] = 'MBRNTnifyrOyIFG8mRicZwWV'; //channle with goods
         $processNum = 0;
+        $queryParams = [];
+        $processesIds = [];
+        $workersActive = 0;
+        $workersLimit = $this->getWorkersLimit();
+        $channelsLimit = $this->getChannelsLimit();
+
         do {
-            
-            /*$channels = Channels::findFirst($query);*/
+            // it's mandatory to create a new db connection for each child process
+            $connectionName = 'mainConnection'.$processNum++;
+            $this->createNewDbConnection($connectionName);
 
-            $config = $this->getDI()->get('config');
-            $connectionName = 'dbMain'.$processNum++;
-            $this->getDI()->set($connectionName,function() use ($config) {
-                $db = new DbAdapter(
-                    array(
-                        "host" => $config->database->host,
-                        "username" => $config->database->username,
-                        "password" => $config->database->password,
-                        "dbname" => $config->database->dbname,
-                        "persistent" => false
-                    )
-                );
-                return $db;
-            });
+            if (!empty($params[0])) {
+                $queryParams = ["conditions" => "vspChannelId = :vspChannelId:",
+                                "bind"       => ["vspChannelId" => $params[0]]];
+            } else {
+                $queryParams["limit"] = ['number' => $channelsLimit, 'offset' => $processNum * $channelsLimit];
+                $queryParams["order"] = 'id ASC';
+            }
 
-            $query = ["conditions" => "syncDate IS NULL", "limit" => ['number'=>100,'offset'=>$processNum*100]];
+            // have to create a new model and set a new dbConnection before query
             $model = new Channels();
             $model->setConnectionService($connectionName);
-            $channels = $model::find($query);
-            
-            //$channels = Channels::findByRawSql(["conditions" => "dt_sync IS NULL","limit" => '10 OFFSET '.$i*10], $connectionName);
+            $channels = $model::find($queryParams);
 
+            // sync is done, no channels are left
             if (count($channels) == 0) {
                 break;
             }
-
             
+            //create a new process
             $pid = pcntl_fork();
             
-
             if ($pid === -1) {
                 die("can't fork !");
             } elseif ($pid !== 0) {
+                
                 // main process
                 $workersActive++;
-                $ids[$pid] = $pid;
-                if ($workersActive >= $workersLimit) {
-                    do {
-                        $pid = pcntl_wait($status);
-                        echo PHP_EOL.'FINISHED - '.$pid.PHP_EOL;
-                        unset($ids[$pid]);
-                    } while(count($ids));
-                    $workersActive = 0;
-                }
+                $processesIds[$pid] = $pid;
                 
+                // handle workers number limit
+                while ($workersActive >= $workersLimit) {
+                    $pid = pcntl_wait($status);
+                    unset($processesIds[$pid]);
+                    $workersActive--;
+                }
             } else {
+                // child process
                 $this->getDI()->get($connectionName)->close();
-                if (count($channels) > 0) {
-                    $connectionName .= '-fork';
-                    $this->getDI()->set($connectionName, function () use ($config) {
-                        $db = new DbAdapter(
-                            array(
-                                "host" => $config->database->host,
-                                "username" => $config->database->username,
-                                "password" => $config->database->password,
-                                "dbname" => $config->database->dbname,
-                                "persistent" => false
-                            )
-                        );
-                        return $db;
-                    });
-                    
-                    $this->getDI()->set('dbConnectionServiceName', function () use ($connectionName) {return $connectionName;});
-                    foreach ($channels as $channel) {
-                        $channel->setConnectionService($connectionName);
-                        $this->syncChannelData($channel);
-                    }                    
-                }
-                $this->getDI()->get($connectionName)->close();
-                exit(0);
                 
+                // create a new db connection for child process db queries
+                $connectionName .= '-fork';
+                $this->createNewDbConnection($connectionName);
+                $this->getDI()->set('dbConnectionServiceName', function () use ($connectionName) {
+                    return $connectionName;
+                });
+                
+                foreach ($channels as $channel) {
+                    $channel->setConnectionService($connectionName);
+                    $this->syncChannelData($channel);
+                }
+                
+                $this->getDI()->get($connectionName)->close();
+                
+                // close the child process, db connection will be closed(!)
+                exit(0);
             }
-        } while(count($channels) != 0);
+        } while(count($channels) == $channelsLimit);
 
+        // wait till all child processes will be finished
         do {
             $pid = pcntl_wait($status);
-            echo PHP_EOL.'FINISHED - '.$pid.PHP_EOL;
-            unset($ids[$pid]);
-        } while(count($ids));
-
-        echo PHP_EOL;
-        echo "TOTAL CHANNEL TIME = ".ceil(microtime(true)-$start).' sec';
-        echo PHP_EOL.PHP_EOL.PHP_EOL;
+            unset($processesIds[$pid]);
+        } while(count($processesIds));
     }
 
     /**
      * Get and update data from MainData service
      * Update channel's videos
      * @param Channels $channel
-     * @return boolean
-     * @todo Delete channel tags if they are absent in the data from MainData
+     * @return null
      */
     public function syncChannelData(Channels $channel)
     {
@@ -278,44 +140,63 @@ class ImportTask extends \Phalcon\Cli\Task
             return false;
         }
         $mainData = new MainData($this->getDI());
+        $goodsData = new GoodsData($this->getDI());
         if ($data = $mainData->getChannelData($channel->vspChannelId)) {
-            $channel->setSyncDate();
             $channel->assignData($data);
             $channel->save();
             if ($channel->save()) {
                 while ($videos = $mainData->getChannelVideos($channel)) {
-                    //echo 'videos got - '.count($videos).PHP_EOL;
                     $this->syncChannelVideosData($videos);
                 }
-                //echo PHP_EOL.'END OF VIDEOS'.PHP_EOL;
                 $playlists = $mainData->getChannelPlaylists($channel);
                 $this->syncChannelPlaylistsData($playlists);
-                //echo PHP_EOL.'updated playlist'.PHP_EOL;
+                $goods = $goodsData->getGoods($channel->vspChannelId);
+                $this->syncChannelGoodsData($goods);
             }
         }
     }
 
     /**
+     * Update channel's goods
+     * @param  array $goodsData
+     * @return null
+     */
+    public function syncChannelGoodsData(array $goodsData)
+    {
+        if (empty($goodsData)) {
+            return false;
+        }
+        $newGoods = new Goods();
+        $newGoods->setConnectionService($this->getDI()->get('dbConnectionServiceName'));
+        foreach ($goodsData as $goods) {
+            foreach ($goods as $item) {
+                $query = ["conditions" => "vspGoodsId = :vspGoodsId:",
+                          "bind"       => ["vspGoodsId" => $item['vspGoodsId']]];
+                $model = new Goods();
+                $model->setConnectionService($this->getDI()->get('dbConnectionServiceName'));
+                $model = $model::findFirst($query);
+                if (!empty($model)) {
+                    $model->assignData($item);
+                    $model->save();
+                } else {
+                    $newGoods->prepareData($item);
+                    $newGoods->addToBulkInsert($item);
+                }
+            }
+        }
+        $newGoods->bulkInsert();
+    }
+
+    /**
      * Update channel's videos
-     * @param array $videos Videos data from MainData service
-     * @return boolean
-     * @todo Delete videos tags if they are absent in the data from MainData
+     * @param  array $videosData
+     * @return null
      */
     public function syncChannelVideosData(array $videosData)
     {
         if (empty($videosData)) {
             return false;
         }
-        /*foreach ($videosData as $videos) {
-            foreach ($videos as $video) {
-                $query = ["conditions" => "vspVideoId = :vspVideoId:",
-                    "bind"       => ["vspVideoId" => $video['vspVideoId']]];
-                $model = Videos::findFirst($query);
-                $model = empty($model) ? new Videos() : $model;
-                $model->assignData($video);
-                $model->save();
-            }
-        }*/
         
         $newVideos = new Videos();
         $newVideos->setConnectionService($this->getDI()->get('dbConnectionServiceName'));
@@ -338,6 +219,12 @@ class ImportTask extends \Phalcon\Cli\Task
         $newVideos->bulkInsert();
     }
 
+    /**
+     * Synchronize channel's playlists data
+     * @param $playlists array with Playlists model objects
+     * @return null
+     */
+
     public function syncChannelPlaylistsData($playlists)
     {
         if (empty($playlists)) {
@@ -349,6 +236,7 @@ class ImportTask extends \Phalcon\Cli\Task
                       "bind"       => ["vspPlaylistId" => $playlist['vspPlaylistId']]];
             $model = Playlists::findFirst($query);
             $model = empty($model) ? new Playlists() : $model;
+            $model->setSyncDate();
             $model->assign($playlist);
             if ($model->save()) {
                 $this->syncPlaylistVideosData($model, $playlist['videos']);
@@ -356,7 +244,14 @@ class ImportTask extends \Phalcon\Cli\Task
         }
     }
 
-    public function syncPlaylistVideosData(Playlists $playlistModel, $videos = []) {
+    /**
+     * Synchronize playlist's videos data
+     * @param Playlists $playlistModel
+     * @param array $videos
+     * @return void
+     */
+    public function syncPlaylistVideosData(Playlists $playlistModel, $videos = []) 
+    {
         if (empty($videos)) {
             return false;
         }
@@ -384,5 +279,117 @@ class ImportTask extends \Phalcon\Cli\Task
             $playlistVideosModel->title = !empty($video['title']) ? $video['title'] : '';
             $playlistVideosModel->save();
         }
+    }
+
+    /**
+     * Insert or update all channels from the MainData service 
+     */
+    public function importAllChannels()
+    {
+        $workersActive = 0;
+        $processesIds = [];
+        $mainData = new MainData($this->getDI());
+        $workersLimit = $this->getWorkersLimit();
+
+        while ($data = $mainData->getChannels()) {
+            
+            $pid = pcntl_fork();
+            
+            if ($pid === -1) {
+
+                die("can't fork !");
+
+            } elseif ($pid !== 0) {
+
+                // main process
+                $workersActive++;
+                $processesIds[$pid] = $pid;
+                while ($workersActive >= $workersLimit) {
+                    $pid = pcntl_wait($status);
+                    unset($processesIds[$pid]);
+                    $workersActive--;
+                }
+            } else {
+
+                // child process
+                $newChannels = new Channels();
+                foreach ($data as $channels) {
+                    if (empty($channels)) {
+                        continue;
+                    }
+                    foreach ($channels as $channelData) {
+                        $query = ["conditions" => "vspChannelId = :vspChannelId:",
+                            "bind" => ["vspChannelId" => $channelData['vspChannelId']]];
+                        $model = Channels::findFirst($query);
+                        if (!empty($model)) {
+                            $model->setSyncDate();
+                            $model->assignData($channelData);
+                            $model->save();
+                        } else {
+                            $newChannels->assignTags($channelData);
+                            $newChannels->addToBulkInsert($channelData);
+                        }
+                    }
+                }
+                $newChannels->bulkInsert();
+                exit(0);
+            }
+        }
+        // wait till all the child processes will be finished
+        do {
+            $pid = pcntl_wait($status);
+            unset($processesIds[$pid]);
+        } while(count($processesIds));
+    }
+
+    /**
+     * Get max number of simultaneously working processes
+     * @return int
+     */
+    private function getWorkersLimit()
+    {
+        $config = $this->getDI()->get('config');
+        if (!empty($config->import->workersLimit)) {
+            return $config->import->workersLimit;
+        }
+        return self::WORKERS_LIMIT;
+    }
+
+    /**
+     * Get max number of channels per one query
+     * @return int
+     */
+    private function getChannelsLimit()
+    {
+        $config = $this->getDI()->get('config');
+        if (!empty($config->import->channelsLimit)) {
+            return $config->import->channelsLimit;
+        }
+        return self::CHANNELS_LIMIT;
+    }
+
+    /**
+     * Create a new database connection
+     * @param string $connectionName
+     * @return null
+     */
+    private function createNewDbConnection($connectionName = '')
+    {
+        if (empty($connectionName)) {
+            return null;
+        }
+        $config = $this->getDI()->get('config');
+        $this->getDI()->set($connectionName,function() use ($config) {
+            $db = new DbAdapter(
+                array(
+                    "host" => $config->database->host,
+                    "username" => $config->database->username,
+                    "password" => $config->database->password,
+                    "dbname" => $config->database->dbname,
+                    "persistent" => false
+                )
+            );
+            return $db;
+        });
     }
 }
