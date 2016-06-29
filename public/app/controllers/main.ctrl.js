@@ -28,9 +28,8 @@ function ($scope, $sce, factory, $state, $window) {
     $scope.showLoginModal = function() {
         if ($window.innerWidth < 768) {
             $state.go('login');
-        } else if (!($state.includes('registration') || $state.includes('login'))) {
+        } else if (!$state.includes('login')) {
             $scope.showloginModal = true;
-            $scope.loginActive = true;
         }
     };
 

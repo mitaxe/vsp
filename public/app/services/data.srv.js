@@ -83,18 +83,16 @@ angular.module("MainApp")
         };
 
         // search
-        // factory.getSearch = function(keyword) {
-        //     return $http.get('http://vsponline.qa/index/search?key=' + keyword);
-        // };
         factory.getSearchVideos = function(keyword,offset) {
-            console.log(keyword,offset);
+            console.log('key - ',keyword,'offset - ',offset);
             return $http.get('http://vsponline.qa/index/search/videos?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchChannels = function(keyword,offset) {
-            console.log(keyword,offset);
+            console.log('key - ',keyword,'offset - ',offset);
             return $http.get('http://vsponline.qa/index/search/channels?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchArticles = function(keyword,offset) {
+            console.log('key - ',keyword,'offset - ',offset);
             return $http.get('http://vsponline.qa/index/search/articles?q=' + keyword + '&offset=' + offset);
         };
 

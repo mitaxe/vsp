@@ -98,13 +98,9 @@ angular.module("MainApp")
     })
 
     // registration/sign-in
-    .state('registration', {
-        url : '/registration',
-        templateUrl : 'app/views/auth/registration.html'
-    })
     .state('login', {
         url : '/login',
-        templateUrl : 'app/views/auth/sign-in.html'
+        templateUrl : 'app/views/auth/login.html'
     })
 
     // search
@@ -519,18 +515,16 @@ angular.module("MainApp")
         };
 
         // search
-        // factory.getSearch = function(keyword) {
-        //     return $http.get('http://vsponline.qa/index/search?key=' + keyword);
-        // };
         factory.getSearchVideos = function(keyword,offset) {
-            console.log(keyword,offset);
+            console.log('key - ',keyword,'offset - ',offset);
             return $http.get('http://vsponline.qa/index/search/videos?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchChannels = function(keyword,offset) {
-            console.log(keyword,offset);
+            console.log('key - ',keyword,'offset - ',offset);
             return $http.get('http://vsponline.qa/index/search/channels?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchArticles = function(keyword,offset) {
+            console.log('key - ',keyword,'offset - ',offset);
             return $http.get('http://vsponline.qa/index/search/articles?q=' + keyword + '&offset=' + offset);
         };
 
@@ -704,9 +698,8 @@ function ($scope, $sce, factory, $state, $window) {
     $scope.showLoginModal = function() {
         if ($window.innerWidth < 768) {
             $state.go('login');
-        } else if (!($state.includes('registration') || $state.includes('login'))) {
+        } else if (!$state.includes('login')) {
             $scope.showloginModal = true;
-            $scope.loginActive = true;
         }
     };
 
@@ -1203,25 +1196,6 @@ app.directive('focusMe', ["$timeout", function($timeout) {
   };
 }]);
 
-angular.module("MainApp")
-.directive('footerview', function() {
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: 'app/views/templates/footer.html'
-  };
-});
-
-angular.module("MainApp")
-.directive('headerview', function() {
-  return {
-    restrict: 'E',
-    controller: 'MainCtrl',
-    replace: true,
-    templateUrl: 'app/views/templates/header.html'
-  };
-});
-
 app.directive('loadMore', ["$document", function ($document) {
     return {
         restrict: 'E',
@@ -1360,15 +1334,6 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.directive('sidebarview', function() {
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: 'app/views/templates/sidebar.html'
-  };
-});
-
-angular.module("MainApp")
 .directive('slider', ["$timeout", function($timeout) {
   return {
     restrict: 'E',
@@ -1499,6 +1464,43 @@ angular.module("MainApp")
         }
     };
 }]);
+
+angular.module("MainApp")
+.directive('footerview', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: 'app/views/templates/footer.html'
+  };
+});
+
+angular.module("MainApp")
+.directive('headerview', function() {
+  return {
+    restrict: 'E',
+    controller: 'MainCtrl',
+    replace: true,
+    templateUrl: 'app/views/templates/header.html'
+  };
+});
+
+angular.module("MainApp")
+.directive('sidebarview', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: 'app/views/templates/sidebar.html'
+  };
+});
+
+angular.module("MainApp")
+.directive('login', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: 'app/views/auth/login-template.html'
+  };
+});
 
 app.directive('resize', ["$window", function($window) {
   return {

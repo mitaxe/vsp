@@ -905,9 +905,6 @@ select option:hover {
   padding: 9px 28px; }
   .btn-green:hover {
     box-shadow: 0 2.5px 2.5px rgba(0, 0, 0, 0.47); }
-  .btn-green.full_width {
-    width: 100%;
-    text-align: center; }
   .btn-green.main-ui {
     box-shadow: 0px 0px 5px 3px rgba(29, 255, 70, 0.13);
     background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%);
@@ -916,10 +913,14 @@ select option:hover {
       background: linear-gradient(to bottom, #29bd4a 0%, #2da747 100%); }
     .btn-green.main-ui:active {
       background: linear-gradient(to bottom, #2b9f44 0%, #29be4a 100%); }
+
+.btn-fullwidth {
+  display: block;
+  width: 100%;
+  text-align: center; }
   @media screen and (max-width: 767px) {
-    .btn-green.full_width {
+    .btn-fullwidth {
       width: 50%;
-      display: block;
       margin: 0 auto; } }
 
 .btn-white {
@@ -3188,8 +3189,6 @@ textarea {
   position: absolute;
   overflow-y: scroll;
   margin-bottom: 10px; }
-  .col-scroll .thumb {
-    margin-bottom: 0; }
 
 /* customs columns */
 /* video and blog thumbnails */

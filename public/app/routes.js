@@ -74,13 +74,9 @@ angular.module("MainApp")
     })
 
     // registration/sign-in
-    .state('registration', {
-        url : '/registration',
-        templateUrl : 'app/views/auth/registration.html'
-    })
     .state('login', {
         url : '/login',
-        templateUrl : 'app/views/auth/sign-in.html'
+        templateUrl : 'app/views/auth/login.html'
     })
 
     // search
