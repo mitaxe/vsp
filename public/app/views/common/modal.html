@@ -1,13 +1,16 @@
-<div class="modal" focus-me="showModal" ng-class="{'active':showModal, 'sandwichCliked':sandwichCliked}" ng-blur="showModal = false" tabindex="0">
-    <span class="close" ng-click="showModal = false">
-        <svg width="15" xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 0 64 64"><path fill="" d="M28.94 31.786L.614 60.114c-.787.787-.787 2.062 0 2.85.393.393.91.59 1.424.59.516 0 1.03-.197 1.424-.59L32.003 34.42l28.54 28.54c.395.395.91.59 1.425.59s1.03-.195 1.424-.59c.788-.786.788-2.06 0-2.848L35.065 31.786 63.41 3.438c.787-.787.787-2.062 0-2.85-.787-.785-2.062-.785-2.848 0L32.002 29.15 3.443.59C2.653-.196 1.38-.196.59.59c-.786.787-.786 2.062 0 2.85l28.35 28.346z"/></svg>
-    </span>
-    <!-- <h2 class="modal__title" ng-transclude="title"></h2>
-    <hr class="block__hr">
-    <div class="modal__body" ng-transclude="body"></div>
-    <hr class="block__hr">
-    <div class="modal__footer" ng-transclude="footer"></div> -->
-    <div ng-transclude>
+<div>
+    <div class="modal" ng-class="{'active':showModal, 'sandwichCliked':sandwichCliked}">
+        <span class="close" ng-click="showModal = false">
+            <svg width="15" xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 0 64 64"><path fill="" d="M28.94 31.786L.614 60.114c-.787.787-.787 2.062 0 2.85.393.393.91.59 1.424.59.516 0 1.03-.197 1.424-.59L32.003 34.42l28.54 28.54c.395.395.91.59 1.425.59s1.03-.195 1.424-.59c.788-.786.788-2.06 0-2.848L35.065 31.786 63.41 3.438c.787-.787.787-2.062 0-2.85-.787-.785-2.062-.785-2.848 0L32.002 29.15 3.443.59C2.653-.196 1.38-.196.59.59c-.786.787-.786 2.062 0 2.85l28.35 28.346z"/></svg>
+        </span>
+        <!-- <h2 class="modal__title" ng-transclude="title"></h2>
+        <hr class="block__hr">
+        <div class="modal__body" ng-transclude="body"></div>
+        <hr class="block__hr">
+        <div class="modal__footer" ng-transclude="footer"></div> -->
+        <div ng-transclude>
 
+        </div>
     </div>
+    <div class="modal__overlay" ng-click="showModal = false"></div>
 </div>

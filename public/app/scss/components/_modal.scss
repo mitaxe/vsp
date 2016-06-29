@@ -56,11 +56,25 @@
         outline: 0;
     }
 
+    &__overlay {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 109;
+        display: none;
+        // background: red;
+    }
+
     &.active {
         outline: 0;
         visibility: visible;
         opacity: 1;
         transform: translate3d(-50%,0,0);
+        + .modal__overlay {
+            display: block;
+        }
     }
 
     @include phone {
