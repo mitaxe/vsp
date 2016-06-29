@@ -19,7 +19,7 @@ class Videos extends Model
     
     public function initialize()
     {
-        //$this->hasMany("id", "VideosTags", "videoId", ["alias" => "videosTags"]);
+        $this->belongsTo("channelId", "Channels", "id", ["alias" => "channel"]);
     }
 
     /**

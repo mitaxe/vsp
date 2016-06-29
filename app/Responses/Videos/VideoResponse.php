@@ -63,7 +63,7 @@ class VideoResponse extends Response
      */
     public $statViews = null;
 
-    public function __construct($id, $title, $srcId, $text, $img, $count, $length, $user, $exclusive, $date, $statLikes = null, $statViews = null)
+    public function __construct($id, $title, $srcId, $text, $img, $count, $length, $channelTitle, $exclusive, $date, $statLikes = null, $statViews = null)
     {
         $this->id = $id;
         $this->title = $title;
@@ -72,7 +72,7 @@ class VideoResponse extends Response
         $this->img = $img;
         $this->count = $count;
         $this->length = $length;
-        $this->user = $user;
+        $this->user = $channelTitle;
         $this->exclusive = $exclusive;
         $this->date = $date;
         $this->statLikes = $statLikes;

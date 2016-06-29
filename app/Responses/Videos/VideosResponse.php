@@ -18,7 +18,7 @@ class VideosResponse extends ResponseArray
                     $video->thumbsHigh,
                     $video->statViews,
                     $video->durationSeconds,
-                    'userName',
+                    $video->channel->title,
                     $video->exclusive,
                     $video->datePublished,
                     $video->statLikes,
