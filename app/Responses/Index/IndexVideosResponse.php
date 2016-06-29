@@ -14,11 +14,12 @@ class IndexVideosResponse extends ResponseArray
                     $video->vspVideoId,
                     $video->title,
                     $video->srcId,
+                    $video->channel->vspChannelId,
                     $video->description,
                     $video->thumbsHigh,
                     $video->statViews,
                     $video->durationSeconds,
-                    'userName',
+                    $video->channel->title,
                     0,
                     $video->datePublished,
                     $blockId
