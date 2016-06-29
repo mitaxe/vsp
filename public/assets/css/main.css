@@ -909,7 +909,7 @@ select option:hover {
     width: 100%;
     text-align: center; }
   .btn-green.main-ui {
-    box-shadow: 0px 0px 5px 5px rgba(29, 255, 70, 0.13);
+    box-shadow: 0px 0px 5px 3px rgba(29, 255, 70, 0.13);
     background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%);
     text-shadow: none; }
     .btn-green.main-ui:hover {
@@ -975,14 +975,6 @@ select option:hover {
     fill: #00cc33;
     margin-right: 10px; }
 
-.btn-small {
-  font-size: 14px;
-  padding: 7px 15px; }
-  @media screen and (max-width: 767px) {
-    .btn-small {
-      font-size: 11px;
-      padding: 5px 10px; } }
-
 .btn-more {
   background: white;
   border-radius: 50px;
@@ -1042,6 +1034,19 @@ select option:hover {
       padding: 11px 30px 11px 57px;
       background-size: 25px 25px;
       background-position: 8px 4px; } }
+
+.btn-small {
+  font-size: 14px;
+  padding: 7px 15px; }
+  @media screen and (max-width: 767px) {
+    .btn-small {
+      font-size: 11px;
+      padding: 5px 10px; } }
+
+@media screen and (max-width: 767px) {
+  .btn-small-phone {
+    font-size: 11px;
+    padding: 7px 12px; } }
 
 /* video ctrl ? */
 .btn-video-ctrl {
@@ -1851,19 +1856,25 @@ img-crop canvas {
   background: white;
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 3px 6px 3px rgba(0, 0, 0, 0.3);
-  padding: 20px 15px;
+  background-color: #f4f4f4;
+  border-radius: 2px;
   position: fixed;
-  width: 600px;
-  max-width: 95%;
+  max-width: 100%;
+  display: inline-block;
   top: 150px;
-  left: 0;
-  right: 0;
+  left: 50%;
   margin: 0 auto;
-  visibility: hidden;
   transition: .3s;
+  visibility: hidden;
   opacity: 0;
   z-index: 110;
-  transform: translate3d(0, -20px, 0); }
+  transform: translate3d(-50%, -20px, 0);
+  margin-left: 160px; }
+  .modal.sandwichCliked {
+    margin-left: 0px; }
+  .modal .registration {
+    box-shadow: none;
+    margin: 0 auto; }
   .modal__title {
     margin-bottom: 15px;
     font-size: 25px;
@@ -1880,11 +1891,24 @@ img-crop canvas {
     position: absolute;
     top: 15px;
     right: 20px; }
+  .modal:focus {
+    outline: 0; }
   .modal.active {
     outline: 0;
     visibility: visible;
     opacity: 1;
-    transform: translate3d(0, 0, 0); }
+    transform: translate3d(-50%, 0, 0); }
+  @media screen and (max-width: 767px) {
+    .modal {
+      top: 60px;
+      width: 100%;
+      max-height: calc(100vh - 70px);
+      overflow: scroll; } }
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+    .modal {
+      margin-left: 30px; }
+      .modal.sandwichCliked {
+        margin-left: 30px; } }
 
 /* genearal */
 * {
@@ -2150,6 +2174,11 @@ textarea {
         transition: .3s;
         -webkit-filter: drop-shadow(0px 1.5px 0px transparent);
         filter: drop-shadow(0px 1.5px 0px transparent); }
+  .header__login {
+    float: right;
+    width: 395px;
+    padding-right: 30px;
+    text-align: right; }
   @media screen and (min-width: 1280px) {
     .header {
       padding-left: 15px; }
@@ -2172,6 +2201,9 @@ textarea {
         transition: 0s;
         transition-delay: 0s;
         margin-left: -500px; }
+    .header__login {
+      width: 135px;
+      padding-right: 15px; }
     .header__search.searchActive {
       width: calc(100% - 410px); } }
   @media screen and (max-width: 767px) {
@@ -2198,7 +2230,10 @@ textarea {
         width: 50px;
         padding: 0 10px; }
         .header__search.searchActive {
-          width: calc(100% - 90px); }
+          width: calc(100% - 100px); }
+      .header__login {
+        width: 45px;
+        padding-right: 0; }
       .header__notifications {
         width: 45px;
         padding: 0 5px; }
@@ -4079,9 +4114,10 @@ textarea {
 
 .registration {
   width: 460px;
-  margin: 75px auto 0;
+  margin: 50px auto 0;
   padding: 20px 0;
-  box-shadow: 1px 2px 8px -1px rgba(0, 0, 0, 0.75); }
+  box-shadow: 1px 2px 8px -1px rgba(0, 0, 0, 0.75);
+  border-radius: 2px; }
   .registration span {
     display: inline-block;
     vertical-align: top;
@@ -4160,7 +4196,9 @@ textarea {
           text-decoration: none; }
   @media screen and (max-width: 767px) {
     .registration {
-      margin: 0 auto 0; }
+      width: 100%;
+      margin: 0 auto 0;
+      box-shadow: none; }
       .registration__logo_row {
         padding: 10px 20px;
         border-bottom: none; }

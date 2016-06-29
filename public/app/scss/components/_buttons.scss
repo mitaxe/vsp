@@ -40,7 +40,7 @@
         text-align: center;
     }
     &.main-ui {
-        box-shadow: 0px 0px 5px 5px rgba(29,278,70,0.13);
+        box-shadow: 0px 0px 5px 3px rgba(29,278,70,0.13);
         background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%);
         text-shadow: none;
         &:hover {
@@ -126,15 +126,6 @@
     }
 }
 
-.btn-small {
-    font-size: 14px;
-    padding: 7px 15px;
-    @include phone {
-        font-size: 11px;
-        padding: 5px 10px;
-    }
-}
-
 .btn-more {
     background: white;
     border-radius: 50px;
@@ -196,6 +187,22 @@
         padding: 11px 30px 11px 57px;
         background-size: 25px 25px;
         background-position: 8px 4px;
+    }
+}
+
+.btn-small {
+    font-size: 14px;
+    padding: 7px 15px;
+    @include phone {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+}
+
+.btn-small-phone {
+    @include phone {
+        font-size: 11px;
+        padding: 7px 12px;
     }
 }
 

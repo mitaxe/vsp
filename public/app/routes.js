@@ -74,12 +74,12 @@ angular.module("MainApp")
     })
 
     // registration/sign-in
-    .state('reg', {
-        url : '/reg',
+    .state('registration', {
+        url : '/registration',
         templateUrl : 'app/views/auth/registration.html'
     })
-    .state('sign-in', {
-        url : '/sign-in',
+    .state('login', {
+        url : '/login',
         templateUrl : 'app/views/auth/sign-in.html'
     })
 
