@@ -91,33 +91,50 @@ class Videos extends Model
         $this->assignTags($data);
         $this->assign($data);
     }
-    
 
-    static public function findCurrentlyWatched($params = [])
+    private static function beforeFindConditions(&$parameters)
     {
-        $params['conditions'] = 'actual=true AND status=\'public\'';
-        return parent::find($params);
+        $conditions = "durationSeconds IS NOT NULL 
+                       AND 
+                       status = 'public'";
+        if (!empty($parameters['conditions'])) {
+            $parameters['conditions'] .= ' AND '.$conditions;
+        } else {
+            $parameters['conditions'] = $conditions;
+        }
     }
 
-    static public function findNew($params = [])
+    public static function find($parameters = null)
+    {
+        self::beforeFindConditions($parameters);
+        return parent::find($parameters);
+    }
+
+    public static function findCurrentlyWatched($params = [])
+    {
+        $params['conditions'] = 'actual=true AND status=\'public\'';
+        return self::find($params);
+    }
+
+    public static function findNew($params = [])
     {
         $params['order'] = 'dateCreated DESC';
         $params['conditions'] = 'status=\'public\'';
-        return parent::find($params);
+        return self::find($params);
     }
 
-    static public function findPopular($params = [])
+    public static function findPopular($params = [])
     {
         $params['order'] = 'statViews DESC';
         $params['conditions'] = 'status=\'public\'';
-        return parent::find($params);
+        return self::find($params);
     }
 
-    static public function findExclusive($params = [])
+    public static function findExclusive($params = [])
     {
         $params['order'] = 'exclusive DESC';
         $params['conditions'] = 'status=\'public\'';
-        return parent::find($params);
+        return self::find($params);
     }    
 
 
