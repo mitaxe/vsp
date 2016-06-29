@@ -13,7 +13,7 @@ class GoodsResponse extends ResponseArray
                 new GoodsItemResponse(
                     $goodsItem->vspGoodsId,
                     $goodsItem->title,
-                    $goodsItem->imgHigh,
+                    $goodsItem->imgDefault,
                     $goodsItem->price
                 ));
         }

@@ -45,7 +45,8 @@ class ChannelsController extends RESTController
     {
         $goods = Goods::find([
             'conditions' => "vspChannelId = ?1",
-            'bind' => [1 => $channelId]
+            'bind' => [1 => $channelId],
+            'limit' => 12
         ]);
         if (count($goods)) {
             $response = new GoodsResponse();
