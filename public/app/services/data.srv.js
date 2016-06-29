@@ -54,6 +54,9 @@ angular.module("MainApp")
         factory.getChannelPlaylists = function(id) {
             return $http.get('http://vsponline.qa/channels/' + id + '/playlists');
         };
+        factory.getChannelGoods = function(id) {
+            return $http.get('http://vsponline.qa/channels/' + id + '/goods');
+        };
 
         // playlist page
         factory.getPlaylistData = function(id) {

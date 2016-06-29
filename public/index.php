@@ -18,6 +18,7 @@ $loader->registerDirs(array(
     '../app/Responses/Channels/',
     '../app/Responses/Comments/',
     '../app/Responses/Playlists/',
+    '../app/Responses/Goods/',
 
     '../app/Api/',
     '../app/Api/DI',

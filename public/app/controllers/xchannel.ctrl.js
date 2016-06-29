@@ -15,6 +15,12 @@ angular.module("MainApp")
         $scope.channelPlaylists = response.data;
         console.log('channels playlists ', $scope.channelPlaylists);
     });
+    
+    // get channel's goods
+    factory.getChannelGoods($stateParams.id).success(function(response) {
+        $scope.channelGoods = response.data;
+        console.log('channels goods ', $scope.channelGoods);
+    });    
 
     // subscribe
     $scope.subscribe = function() {

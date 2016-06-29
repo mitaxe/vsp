@@ -167,7 +167,7 @@ angular.module("MainApp")
         templateUrl: "app/views/history/history-liked.html"
     })
 
-    // channel
+    // user
     .state('user', {
         url: "/user/:url",
         templateUrl: "app/views/channels/channel.html",

@@ -41,8 +41,17 @@ class ChannelsController extends RESTController
         return new Response();
     }
 
-    public function getGoods()
+    public function getGoods($channelId)
     {
+        $goods = Goods::find([
+            'conditions' => "vspChannelId = ?1",
+            'bind' => [1 => $channelId]
+        ]);
+        if (count($goods)) {
+            $response = new GoodsResponse();
+            $response->add($goods);
+            return $response;
+        }        
         return new Response();
     }    
     

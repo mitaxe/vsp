@@ -191,7 +191,7 @@ angular.module("MainApp")
         templateUrl: "app/views/history/history-liked.html"
     })
 
-    // channel
+    // user
     .state('user', {
         url: "/user/:url",
         templateUrl: "app/views/channels/channel.html",
@@ -489,6 +489,9 @@ angular.module("MainApp")
         };
         factory.getChannelPlaylists = function(id) {
             return $http.get('http://vsponline.qa/channels/' + id + '/playlists');
+        };
+        factory.getChannelGoods = function(id) {
+            return $http.get('http://vsponline.qa/channels/' + id + '/goods');
         };
 
         // playlist page
@@ -1075,6 +1078,12 @@ angular.module("MainApp")
         $scope.channelPlaylists = response.data;
         console.log('channels playlists ', $scope.channelPlaylists);
     });
+    
+    // get channel's goods
+    factory.getChannelGoods($stateParams.id).success(function(response) {
+        $scope.channelGoods = response.data;
+        console.log('channels goods ', $scope.channelGoods);
+    });    
 
     // subscribe
     $scope.subscribe = function() {
