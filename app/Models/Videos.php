@@ -19,7 +19,7 @@ class Videos extends Model
     
     public function initialize()
     {
-        //$this->hasMany("id", "VideosTags", "videoId", ["alias" => "videosTags"]);
+        $this->belongsTo("channelId", "Channels", "id", ["alias" => "channel"]);
     }
 
     /**
@@ -91,33 +91,50 @@ class Videos extends Model
         $this->assignTags($data);
         $this->assign($data);
     }
-    
 
-    static public function findCurrentlyWatched($params = [])
+    private static function beforeFindConditions(&$parameters)
     {
-        $params['conditions'] = 'actual=true AND status=\'public\'';
+        $conditions = "durationSeconds IS NOT NULL 
+                       AND 
+                       status = 'public'
+                       AND
+                       actual=true
+                       ";
+        if (!empty($parameters['conditions'])) {
+            $parameters['conditions'] .= ' AND '.$conditions;
+        } else {
+            $parameters['conditions'] = $conditions;
+        }
+    }
+
+    public static function find($params = null)
+    {
+        self::beforeFindConditions($params);
         return parent::find($params);
     }
 
-    static public function findNew($params = [])
+    public static function findCurrentlyWatched($params = [])
+    {
+        self::beforeFindConditions($params);
+        return self::find($params);
+    }
+
+    public static function findNew($params = [])
     {
         $params['order'] = 'dateCreated DESC';
-        $params['conditions'] = 'status=\'public\'';
-        return parent::find($params);
+        return self::find($params);
     }
 
-    static public function findPopular($params = [])
+    public static function findPopular($params = [])
     {
         $params['order'] = 'statViews DESC';
-        $params['conditions'] = 'status=\'public\'';
-        return parent::find($params);
+        return self::find($params);
     }
 
-    static public function findExclusive($params = [])
+    public static function findExclusive($params = [])
     {
         $params['order'] = 'exclusive DESC';
-        $params['conditions'] = 'status=\'public\'';
-        return parent::find($params);
+        return self::find($params);
     }    
 
 
