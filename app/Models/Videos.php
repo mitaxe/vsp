@@ -96,7 +96,10 @@ class Videos extends Model
     {
         $conditions = "durationSeconds IS NOT NULL 
                        AND 
-                       status = 'public'";
+                       status = 'public'
+                       AND
+                       actual=true
+                       ";
         if (!empty($parameters['conditions'])) {
             $parameters['conditions'] .= ' AND '.$conditions;
         } else {
@@ -104,36 +107,33 @@ class Videos extends Model
         }
     }
 
-    public static function find($parameters = null)
+    public static function find($params = null)
     {
-        self::beforeFindConditions($parameters);
-        return parent::find($parameters);
+        self::beforeFindConditions($params);
+        return parent::find($params);
     }
 
     public static function findCurrentlyWatched($params = [])
     {
-        $params['conditions'] = 'actual=true AND status=\'public\'';
+        self::beforeFindConditions($params);
         return self::find($params);
     }
 
     public static function findNew($params = [])
     {
         $params['order'] = 'dateCreated DESC';
-        $params['conditions'] = 'status=\'public\'';
         return self::find($params);
     }
 
     public static function findPopular($params = [])
     {
         $params['order'] = 'statViews DESC';
-        $params['conditions'] = 'status=\'public\'';
         return self::find($params);
     }
 
     public static function findExclusive($params = [])
     {
         $params['order'] = 'exclusive DESC';
-        $params['conditions'] = 'status=\'public\'';
         return self::find($params);
     }    
 
