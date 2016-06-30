@@ -85,7 +85,7 @@ angular.module("MainApp")
         // search
         factory.getSearchVideos = function(keyword,offset) {
             console.log('key - ',keyword,'offset - ',offset);
-            return $http.get('http://vsponline.qa/index/search/videos?q=' + keyword + '&offset=' + offset);
+            return $http.get('http://vsponline.qa/index/search/videos?q=' + keyword + '&offset=' + offset,  factory.config);
         };
         factory.getSearchChannels = function(keyword,offset) {
             console.log('key - ',keyword,'offset - ',offset);
@@ -96,9 +96,10 @@ angular.module("MainApp")
             return $http.get('http://vsponline.qa/index/search/articles?q=' + keyword + '&offset=' + offset);
         };
 
-        // factory.postVideos = function() {
-        //
-        // };
+        // LOGIN
+        factory.loginUser = function(data) {
+            return $http.post('http://vsponline.qa/users/login', data);
+        };
 
         return factory;
 
