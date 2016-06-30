@@ -1916,10 +1916,7 @@ img-crop canvas {
       display: block; }
   @media screen and (max-width: 767px) {
     .modal {
-      top: 60px;
-      width: 100%;
-      max-height: calc(100vh - 70px);
-      overflow: scroll; } }
+      display: none; } }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     .modal {
       margin-left: 30px; }

@@ -78,10 +78,7 @@
     }
 
     @include phone {
-        top: 60px;
-        width: 100%;
-        max-height: calc(100vh - 70px);
-        overflow: scroll;
+        display: none;
     }
 
     @include tablet {
