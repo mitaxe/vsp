@@ -1,7 +1,12 @@
 <IfModule mod_rewrite.c>
+    Options +FollowSymLinks
     RewriteEngine on
-    RewriteRule  manage/^$ admin/templates/admin/   [L,PT]
-    RewriteRule  manage/((?s).*) admin/templates/admin/$1   [L,PT]
+    RewriteBase /
+
+    RewriteRule  manage/^$ admin/templates/admin/   [L]
+    RewriteRule  manage/((?s).*) admin/templates/admin/$1   [L]
+
     RewriteRule  ^$ public/    [L]
-    RewriteRule  ((?s).*) public/$1 [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule  ((?s).*)$ public/$1 [L]
 </IfModule>
