@@ -1731,6 +1731,11 @@ input[type='radio']:checked + .radio_label:after {
   position: relative;
   margin: 0 0 20px;
   color: #5b5d5e; }
+  .form div[ng-messages] {
+    color: red;
+    margin: 10px auto 5px;
+    text-align: right;
+    margin-right: 25px; }
   .form input,
   .form textarea {
     width: 300px;
