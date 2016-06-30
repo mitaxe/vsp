@@ -13,19 +13,21 @@ class UsersController extends RESTController
 {
     public function login()
     {
-        $login    = $this->request->getPost('email');
+        $email    = $this->request->getPost('email');
         $password = $this->request->getPost('password');
-
-        $user = Users::findFirstByLogin($login);
+        $user = Users::findFirst( ['conditions' => 'email = ?1', 'bind'=> [1 => $email]] );
         if ($user) {
-            if ($this->security->checkHash($password, $user->password)) {
-                
-            }
+            return new UserResponse($user->id, $user->email, 'adsflk2390fdvfvkljrf23sd0');
+            /*if ($this->security->checkHash($password, $user->password)) {
+                        
+            }*/
         } else {
-            // To protect against timing attacks. Regardless of whether a user exists or not, the script will take roughly the same amount as it will always be computing a hash.
             $this->security->hash(rand());
+            throw new UserNotFoundException('User not found or incorrect password/login');
         }
-
+        
+        
+        return new Response();
         // неудачная проверка
     }
 

@@ -75,7 +75,7 @@ class Users extends Model
             'id' => 'id',
             'login' => 'login',
             'password' => 'password',
-            'email' => 'password',
+            'email' => 'email',
             'is_partner' => 'isPartner',
             'is_admin' => 'isAdmin',
             'actual' => 'actual',

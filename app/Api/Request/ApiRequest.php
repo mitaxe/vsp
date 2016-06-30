@@ -17,6 +17,13 @@ class ApiRequest extends Request
    */
   protected $format = false;
 
+  public function __construct()
+  {
+      if (strpos($this->getContentType(),'application/json') !== false) {
+          $_POST = $this->getJsonRawBody(true);
+      }
+  }
+
   /**
    * Get oAuth access token
    * todo tidy up, standardize

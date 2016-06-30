@@ -12,6 +12,7 @@ $loader->registerDirs(array(
     '../app/Models/',
     '../app/Config/',
     '../app/Components/',
+
     '../app/Responses/',
     '../app/Responses/Videos/',
     '../app/Responses/Index/',
@@ -19,6 +20,9 @@ $loader->registerDirs(array(
     '../app/Responses/Comments/',
     '../app/Responses/Playlists/',
     '../app/Responses/Goods/',
+    '../app/Responses/Users/',
+
+    '../app/Exceptions/Users/',
 
     '../app/Api/',
     '../app/Api/DI',
