@@ -517,7 +517,7 @@ angular.module("MainApp")
         // search
         factory.getSearchVideos = function(keyword,offset) {
             console.log('key - ',keyword,'offset - ',offset);
-            return $http.get('http://vsponline.qa/index/search/videos?q=' + keyword + '&offset=' + offset);
+            return $http.get('http://vsponline.qa/index/search/videos?q=' + keyword + '&offset=' + offset,  factory.config);
         };
         factory.getSearchChannels = function(keyword,offset) {
             console.log('key - ',keyword,'offset - ',offset);
@@ -528,9 +528,10 @@ angular.module("MainApp")
             return $http.get('http://vsponline.qa/index/search/articles?q=' + keyword + '&offset=' + offset);
         };
 
-        // factory.postVideos = function() {
-        //
-        // };
+        // LOGIN
+        factory.loginUser = function(data) {
+            return $http.post('http://vsponline.qa/users/login', data);
+        };
 
         return factory;
 
@@ -669,8 +670,8 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', '$window',
-function ($scope, $sce, factory, $state, $window) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', '$window', '$http',
+function ($scope, $sce, factory, $state, $window, $http) {
 
     // remove element
     $scope.remove = function(array,item) {
@@ -710,6 +711,25 @@ function ($scope, $sce, factory, $state, $window) {
         } else {
             return 'Авторизация';
         }
+    };
+
+    // login request
+    $scope.loginData = {};
+
+    $scope.loginUser = function() {
+        console.log($scope.loginData);
+        factory.loginUser($scope.loginData).then(
+            // success
+            function(response) {
+                console.log(response);
+                // factory.setConfig(response.data.meta.config);
+                // $http.defaults.headers.common.Authorization = response.data.meta.config;
+            },
+            // error
+            function(error) {
+                console.log(error);
+            }
+        );
     };
 
 

@@ -37,15 +37,15 @@
             <div class="options__form">
                 <div class="inp_row">
                     <label>Email</label>
-                    <input type="email" name="email">
+                    <input type="email" ng-model="email" required>
                 </div>
                 <div class="inp_row">
                     <label>Пароль</label>
-                    <input type="password" name="password">
+                    <input type="password" name="password" required>
                 </div>
                 <div class="inp_row">
                     <label>Подтвердить <br class="hidden-phone"> пароль</label>
-                    <input type="password">
+                    <input type="password" required>
                 </div>
                 <div class="inp_row">
                     <label>Никнейм <br class="hidden-phone">
@@ -91,22 +91,22 @@
             <div class="options__form">
                 <div class="inp_row">
                     <label>Email</label>
-                    <input type="email">
+                    <input type="email" ng-model="loginData.email" required>
                 </div>
                 <div class="inp_row">
                     <label>Пароль</label>
-                    <input type="password">
+                    <input type="password" ng-model="loginData.password">
                     <a class="btn inp_row__forgot_pass">Забыли пароль?</a>
                 </div>
             </div>
         </div>
         <div class="options__form bottom">
             <div class="inp_row">
-                <input type="checkbox" class="hidden" id="{{$id}}">
+                <input ng-model="loginData.remember" type="checkbox" class="hidden" id="{{$id}}">
                 <label for="{{$id}}" class="check_label">Запомнить меня</label>
             </div>
             <div class="inp_row">
-                <div class="btn btn-green main-ui btn-fullwidth">Вход</div>
+                <div ng-click="loginUser()" class="btn btn-green main-ui btn-fullwidth">Вход</div>
             </div>
         </div>
     </div><!-- login tab -->

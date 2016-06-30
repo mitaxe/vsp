@@ -1,6 +1,6 @@
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', '$window',
-function ($scope, $sce, factory, $state, $window) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', '$window', '$http',
+function ($scope, $sce, factory, $state, $window, $http) {
 
     // remove element
     $scope.remove = function(array,item) {
@@ -40,6 +40,25 @@ function ($scope, $sce, factory, $state, $window) {
         } else {
             return 'Авторизация';
         }
+    };
+
+    // login request
+    $scope.loginData = {};
+
+    $scope.loginUser = function() {
+        console.log($scope.loginData);
+        factory.loginUser($scope.loginData).then(
+            // success
+            function(response) {
+                console.log(response);
+                // factory.setConfig(response.data.meta.config);
+                // $http.defaults.headers.common.Authorization = response.data.meta.config;
+            },
+            // error
+            function(error) {
+                console.log(error);
+            }
+        );
     };
 
 
