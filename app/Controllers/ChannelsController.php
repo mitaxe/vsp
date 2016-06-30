@@ -14,7 +14,7 @@ class ChannelsController extends RESTController
 
     public function getChannel($id)
     {
-        throw new UnauthorizedException();
+        //throw new UnauthorizedException();
         $channel = Channels::findFirst([
             'conditions' => "vspChannelId = ?1",
             'bind' => [1 => $id]
