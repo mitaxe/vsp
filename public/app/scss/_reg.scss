@@ -1,8 +1,9 @@
 .registration {
     width: 460px;
-    margin: 75px auto 0;
+    margin: 50px auto 0;
     padding: 20px 0;
     box-shadow: 1px 2px 8px -1px rgba(0, 0, 0, 0.75);
+    border-radius: 2px;
 
     span {
         display: inline-block;
@@ -106,7 +107,10 @@
     }
 
     @include phone {
+        width: 100%;
         margin: 0 auto 0;
+        box-shadow: none;
+
         &__logo_row {
             padding: 10px 20px;
             border-bottom: none;

@@ -175,6 +175,13 @@
         }
     }
 
+    &__login {
+        float: right;
+        width: 395px;
+        padding-right: 30px;
+        text-align: right;
+    }
+
     @include desktop {
         padding-left: 15px;
         &__sandwich {
@@ -203,6 +210,10 @@
                 transition-delay: 0s;
                 margin-left: -500px;
             }
+        }
+        &__login {
+            width: 135px;
+            padding-right: 15px;
         }
         &__search {
             &.searchActive {
@@ -239,8 +250,12 @@
             width: 50px;
             padding: 0 10px;
             &.searchActive {
-                width: calc(100% - 90px);
+                width: calc(100% - 100px);
             }
+        }
+        &__login {
+            width: 45px;
+            padding-right: 0;
         }
         &__notifications {
             width: 45px;

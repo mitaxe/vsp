@@ -1,0 +1,114 @@
+<div class="registration" ng-init="loginActive = true">
+
+    <div class="clearfix">
+        <tabs class="tabs tabs--center">
+            <a ng-click="loginActive = false" ng-class="{'active':!loginActive}">Регистрация</a>
+            <a ng-click="loginActive = true" ng-class="{'active':loginActive}">Войти</a>
+        </tabs>
+    </div>
+
+    <hr class="block__hr">
+
+    <!-- register tab -->
+    <div ng-show="!loginActive">
+        <div class="registration__logo_row clearfix">
+            <img src="assets/img/logo.png" alt="logo">
+            <span>Вы можете использовать данные для входа с VSP Online</span>
+            <div class="mob_btn pull-right hidden-desktop hidden-tablet">
+                <a class="btn btn-google">Google +</a>
+                <a class="btn btn-vk">Vk</a>
+                <a class="btn btn-fb">Fb</a>
+            </div>
+        </div>
+        <div class="registration__sign_in_options options">
+            <div class="options__soc_bar clearfix">
+                <span class="hidden-phone">Авторизация <br> через соц сети</span>
+                <div class="pull-right hidden-phone">
+                    <a class="btn btn-google">Google +</a>
+                    <a class="btn btn-vk">Vk</a>
+                    <a class="btn btn-fb">Fb</a>
+                </div>
+            </div>
+            <div class="hidden-phone">
+                <span class="line"></span>
+                <span>или</span>
+                <span class="line"></span>
+            </div>
+            <div class="options__form">
+                <div class="inp_row">
+                    <label>Email</label>
+                    <input type="email" name="email">
+                </div>
+                <div class="inp_row">
+                    <label>Пароль</label>
+                    <input type="password" name="password">
+                </div>
+                <div class="inp_row">
+                    <label>Подтвердить <br class="hidden-phone"> пароль</label>
+                    <input type="password">
+                </div>
+                <div class="inp_row">
+                    <label>Никнейм <br class="hidden-phone">
+                        <span class="not_mandatory">(не обязательно)</span>
+                    </label>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+        <div class="options__form bottom">
+            <p class="reg_info">Регистрируя новый аккаунт, вы принимаете условия <br> <a href="#" class="btn">пользовательского соглашения</a></p>
+            <div class="inp_row">
+                <div class="btn btn-green main-ui btn-fullwidth">Регистрация</div>
+            </div>
+        </div>
+    </div><!-- register tab -->
+
+    <!-- login tab -->
+    <div ng-show="loginActive">
+        <div class="registration__logo_row clearfix">
+            <img src="assets/img/logo.png" alt="logo">
+            <span>Вы можете использовать данные для входа с VSP Online</span>
+            <div class="mob_btn pull-right hidden-tablet hidden-desktop">
+                <a class="btn btn-google">Google +</a>
+                <a class="btn btn-vk">Vk</a>
+                <a class="btn btn-fb">Fb</a>
+            </div>
+        </div>
+        <div class="registration__sign_in_options options">
+            <div class="options__soc_bar clearfix">
+                <span class="hidden-phone">Войти через <br> соц сети</span>
+                <div class="pull-right hidden-phone">
+                    <a class="btn btn-google">Google +</a>
+                    <a class="btn btn-vk">Vk</a>
+                    <a class="btn btn-fb">Fb</a>
+                </div>
+            </div>
+            <div class="hidden-phone">
+                <span class="line"></span>
+                <span>или</span>
+                <span class="line"></span>
+            </div>
+            <div class="options__form">
+                <div class="inp_row">
+                    <label>Email</label>
+                    <input type="email">
+                </div>
+                <div class="inp_row">
+                    <label>Пароль</label>
+                    <input type="password">
+                    <a class="btn inp_row__forgot_pass">Забыли пароль?</a>
+                </div>
+            </div>
+        </div>
+        <div class="options__form bottom">
+            <div class="inp_row">
+                <input type="checkbox" class="hidden" id="{{$id}}">
+                <label for="{{$id}}" class="check_label">Запомнить меня</label>
+            </div>
+            <div class="inp_row">
+                <div class="btn btn-green main-ui btn-fullwidth">Вход</div>
+            </div>
+        </div>
+    </div><!-- login tab -->
+
+</div>

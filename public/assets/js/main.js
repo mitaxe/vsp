@@ -98,13 +98,9 @@ angular.module("MainApp")
     })
 
     // registration/sign-in
-    .state('reg', {
-        url : '/reg',
-        templateUrl : 'app/views/auth/registration.html'
-    })
-    .state('sign-in', {
-        url : '/sign-in',
-        templateUrl : 'app/views/auth/sign-in.html'
+    .state('login', {
+        url : '/login',
+        templateUrl : 'app/views/auth/login.html'
     })
 
     // search
@@ -519,18 +515,16 @@ angular.module("MainApp")
         };
 
         // search
-        // factory.getSearch = function(keyword) {
-        //     return $http.get('http://vsponline.qa/index/search?key=' + keyword);
-        // };
         factory.getSearchVideos = function(keyword,offset) {
-            console.log(keyword,offset);
+            console.log('key - ',keyword,'offset - ',offset);
             return $http.get('http://vsponline.qa/index/search/videos?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchChannels = function(keyword,offset) {
-            console.log(keyword,offset);
+            console.log('key - ',keyword,'offset - ',offset);
             return $http.get('http://vsponline.qa/index/search/channels?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchArticles = function(keyword,offset) {
+            console.log('key - ',keyword,'offset - ',offset);
             return $http.get('http://vsponline.qa/index/search/articles?q=' + keyword + '&offset=' + offset);
         };
 
@@ -675,7 +669,8 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', function ($scope, $sce, factory, $state) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', '$window',
+function ($scope, $sce, factory, $state, $window) {
 
     // remove element
     $scope.remove = function(array,item) {
@@ -697,6 +692,24 @@ angular.module("MainApp")
         $scope.searching = true;
         $scope.searchActive = true;
         $state.go('search.all', {'key': $scope.searchKey}, {reload: true});
+    };
+
+    // login modal
+    $scope.showLoginModal = function() {
+        if ($window.innerWidth < 768) {
+            $state.go('login');
+        } else if (!$state.includes('login')) {
+            $scope.showloginModal = true;
+        }
+    };
+
+    // login button text
+    $scope.getLoginBtnText = function() {
+        if ($window.innerWidth < 1280) {
+            return 'Войти';
+        } else {
+            return 'Авторизация';
+        }
     };
 
 
@@ -1183,25 +1196,6 @@ app.directive('focusMe', ["$timeout", function($timeout) {
   };
 }]);
 
-angular.module("MainApp")
-.directive('footerview', function() {
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: 'app/views/templates/footer.html'
-  };
-});
-
-angular.module("MainApp")
-.directive('headerview', function() {
-  return {
-    restrict: 'E',
-    controller: 'MainCtrl',
-    replace: true,
-    templateUrl: 'app/views/templates/header.html'
-  };
-});
-
 app.directive('loadMore', ["$document", function ($document) {
     return {
         restrict: 'E',
@@ -1259,13 +1253,15 @@ angular.module("MainApp")
 .directive('modal', ["$timeout", function($timeout) {
   return {
     restrict: 'E',
-    transclude: {
-        'title': 'modalTitle',
-        'body': 'modalBody',
-        'footer': 'modalFooter'
-    },
+    transclude: true,
+    // {
+    //     'title': 'modalTitle',
+    //     'body': 'modalBody',
+    //     'footer': 'modalFooter'
+    // },
     scope: {
-        showModal: '=show'
+        showModal: '=show',
+        sandwichCliked: '=position'
     },
     templateUrl: 'app/views/common/modal.html',
     link: function(scope, element, attrs) {
@@ -1336,15 +1332,6 @@ angular.module("MainApp")
     }
   };
 }]);
-
-angular.module("MainApp")
-.directive('sidebarview', function() {
-  return {
-    restrict: 'E',
-    replace: true,
-    templateUrl: 'app/views/templates/sidebar.html'
-  };
-});
 
 angular.module("MainApp")
 .directive('slider', ["$timeout", function($timeout) {
@@ -1477,6 +1464,43 @@ angular.module("MainApp")
         }
     };
 }]);
+
+angular.module("MainApp")
+.directive('footerview', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: 'app/views/templates/footer.html'
+  };
+});
+
+angular.module("MainApp")
+.directive('headerview', function() {
+  return {
+    restrict: 'E',
+    controller: 'MainCtrl',
+    replace: true,
+    templateUrl: 'app/views/templates/header.html'
+  };
+});
+
+angular.module("MainApp")
+.directive('sidebarview', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: 'app/views/templates/sidebar.html'
+  };
+});
+
+angular.module("MainApp")
+.directive('login', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: 'app/views/auth/login-template.html'
+  };
+});
 
 app.directive('resize', ["$window", function($window) {
   return {

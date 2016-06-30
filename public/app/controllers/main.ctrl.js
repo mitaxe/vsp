@@ -1,5 +1,6 @@
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', function ($scope, $sce, factory, $state) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', '$window',
+function ($scope, $sce, factory, $state, $window) {
 
     // remove element
     $scope.remove = function(array,item) {
@@ -21,6 +22,24 @@ angular.module("MainApp")
         $scope.searching = true;
         $scope.searchActive = true;
         $state.go('search.all', {'key': $scope.searchKey}, {reload: true});
+    };
+
+    // login modal
+    $scope.showLoginModal = function() {
+        if ($window.innerWidth < 768) {
+            $state.go('login');
+        } else if (!$state.includes('login')) {
+            $scope.showloginModal = true;
+        }
+    };
+
+    // login button text
+    $scope.getLoginBtnText = function() {
+        if ($window.innerWidth < 1280) {
+            return 'Войти';
+        } else {
+            return 'Авторизация';
+        }
     };
 
 

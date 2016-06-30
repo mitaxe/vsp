@@ -32,8 +32,15 @@
         </div>
     </a>
 
+    <!-- login button -->
+    <div class="header__item header__login">
+        <div class="table-middle">
+            <a ng-mousedown="showLoginModal()" class="btn btn-green main-ui btn-small-phone">{{ getLoginBtnText() }}</a>
+        </div>
+    </div>
+
     <!-- user -->
-    <div class="header__item header__user"
+    <div ng-hide="true" class="header__item header__user"
         ng-class="{'active':userActive}"
         popover-trigger>
         <div class="table-middle" ng-click="notificationActive = false; userActive = !userActive;">
@@ -67,7 +74,7 @@
     </div>
 
     <!-- notifications -->
-    <div class="header__item header__notifications"
+    <div ng-hide="true" class="header__item header__notifications"
         ng-class="{'active':notificationActive}"
         popover-trigger>
         <div class="table-middle" ng-click="userActive = false; notificationActive = !notificationActive;">
@@ -130,7 +137,7 @@
     </div>
 
     <!-- random videos button -->
-    <div class="header__item header__random">
+    <div ng-hide="true" class="header__item header__random">
         <div class="table-middle">
             <a href="" class="btn btn-green">Случайное видео</a>
         </div>
@@ -140,7 +147,7 @@
     <div class="header__item header__tags">
         <div class="table-middle">
             <div class="tags">
-                <div class="tags__item" ng-repeat="pin in pins">
+                <div ng-show="false" class="tags__item" ng-repeat="pin in pins">
                     <i class="svg"><svg ng-click="remove(pins,pin)" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 21 21"><path fill="" d="M15.374.386c-.51-.512-1.337-.516-1.854-.006-.136.137-.23.3-.294.467-1.09 2.272-2.29 3.558-3.806 4.314-1.7.84-3.652 1.423-6.797 1.423-.17 0-.34.033-.5.1-.323.132-.577.388-.71.71-.133.32-.133.68 0 1 .066.163.162.306.283.427l4.25 4.25L0 21l7.93-5.946 4.25 4.25c.12.12.266.216.427.283.16.066.33.103.5.103.17 0 .34-.036.5-.103.322-.132.578-.386.71-.71.066-.157.1-.33.1-.5 0-3.144.582-5.097 1.42-6.768.756-1.518 2.04-2.72 4.317-3.81.17-.062.33-.157.464-.294.51-.514.507-1.343-.005-1.853L15.373.386z"/></svg></i>
                     <img ng-src="{{pin.url}}" alt="tag"/>
                 </div>
