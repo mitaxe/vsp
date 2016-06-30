@@ -10,7 +10,7 @@
     <hr class="block__hr">
 
     <!-- register tab -->
-    <div ng-show="!loginActive">
+    <div class="form" ng-show="!loginActive">
         <div class="registration__logo_row clearfix">
             <img src="assets/img/logo.png" alt="logo">
             <span>Вы можете использовать данные для входа с VSP Online</span>
@@ -64,7 +64,7 @@
     </div><!-- register tab -->
 
     <!-- login tab -->
-    <div ng-show="loginActive">
+    <div class="form" ng-show="loginActive">
         <div class="registration__logo_row clearfix">
             <img src="assets/img/logo.png" alt="logo">
             <span>Вы можете использовать данные для входа с VSP Online</span>
@@ -91,11 +91,17 @@
             <div class="options__form">
                 <div class="inp_row">
                     <label>Email</label>
-                    <input type="email" ng-model="loginData.email" required>
+                    <input type="email"
+                            ng-model="loginData.email"
+                            required>
                 </div>
                 <div class="inp_row">
                     <label>Пароль</label>
-                    <input type="password" ng-model="loginData.password">
+                    <input type="password"
+                            class="password"
+                            ng-model="loginData.password"
+                            minlength="8"
+                            required>
                     <a class="btn inp_row__forgot_pass">Забыли пароль?</a>
                 </div>
             </div>

@@ -22,7 +22,7 @@
         &[disabled] {
             background: none;
         }
-        &.ng-invalid {
+        &.ng-invalid.ng-touched {
             border: 1px solid red;
             &:focus {
                 box-shadow: none;
