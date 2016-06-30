@@ -1,12 +1,12 @@
 <?php
 
-//namespace API\Response;
-
 use Phalcon\DI;
 
 class ResponseArray extends Response
 {
-  /** @var Response[] */
+  /** 
+   * @var Response[] 
+   */
   private $responses = [];
 
   /**

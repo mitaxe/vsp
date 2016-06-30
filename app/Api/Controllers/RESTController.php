@@ -1,17 +1,9 @@
 <?php
-//namespace API\Controllers;
 
 use Phalcon\DI;
 use Phalcon\Exception;
 use Phalcon\Mvc\Model;
-
-//use Phrest\API\Exceptions\HTTPException;
 use Phalcon\Mvc\Model\ResultsetInterface;
-/*use API\Response\CSVResponse;
-use API\Response\JSONResponse;
-use API\Response\Response;
-use API\Response\ResponseMessage;
-use API\Request\PhrestRequest;*/
 
 /**
  * Base RESTful Controller.

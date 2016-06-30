@@ -1,7 +1,5 @@
 <?php
 
-//namespace API\Response;
-
 class ResponseMessage
 {
   const TYPE_SUCCESS = 'success';

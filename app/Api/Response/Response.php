@@ -1,9 +1,6 @@
 <?php
 
-//namespace API\Response;
-
 use Phalcon\DI;
-use API\Enums\AbstractEnum;
 
 class Response
 {
@@ -26,7 +23,7 @@ class Response
   }
 
   /**
-   * Called by Phalcon, todo see if can get rid of it
+   * Called by Phalcon
    */
   protected function isSent() { }
 
@@ -39,7 +36,9 @@ class Response
   }
 
   /**
-   * @return ResponseMeta
+   * Get response meta
+   * 
+   * @return ResponseMeta 
    */
   public function getMeta()
   {
@@ -61,15 +60,15 @@ class Response
   }
 
   /**
-   * Set the Response total count
-   *
+   * Set the Response total count   
+   * 
    * @param int $totalCount
-   *
+   * 
    * @return $this
    */
-  public function setTotalCount($count)
+  public function setTotalCount($totalCount)
   {
-    $this->meta->totalCount = (int)$count;
+    $this->meta->totalCount = (int)$totalCount;
 
     return $this;
   }
@@ -104,6 +103,7 @@ class Response
    */
   public function setStatusCode($code, $message)
   {
+    $this->meta->statusCode = $code;
     $this->meta->statusCode = $code;
     $this->meta->statusMessage = $message;
   }
