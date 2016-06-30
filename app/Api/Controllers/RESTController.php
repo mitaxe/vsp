@@ -112,8 +112,7 @@ class RESTController extends BaseController
   public function __construct($parseQueryString = true)
   {
     // parent::__construct();
-    if ($parseQueryString)
-    {
+    if ($parseQueryString) {
       $this->parseRequest($this->allowedFields);
     }
   }
