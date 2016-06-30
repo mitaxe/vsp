@@ -1,5 +1,7 @@
 <IfModule mod_rewrite.c>
     RewriteEngine on
+    RewriteRule  manage/^$ admin/templates/admin/   [L,PT]
+    RewriteRule  manage/((?s).*) admin/templates/admin/$1   [L,PT]
     RewriteRule  ^$ public/    [L]
     RewriteRule  ((?s).*) public/$1 [L]
 </IfModule>
