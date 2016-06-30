@@ -97,7 +97,7 @@ class RestAPI extends MicroMVC
         }
 
         $controllerResponse = $this->getReturnedValue();
-        print_r($controllerResponse);
+        
         if (is_a($controllerResponse, 'ResponseArray')) {
           $controllerResponse->setCount($controllerResponse->getCount());
         }
