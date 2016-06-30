@@ -1,7 +1,5 @@
 <?php
 
-namespace API\Exceptions;
-
 class BadRequestException extends HandledException
 {
   protected $code = 400;

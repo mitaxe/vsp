@@ -5,7 +5,7 @@ use Phalcon\DI;
 use Phalcon\Exception;
 use Phalcon\Mvc\Model;
 
-use Phrest\API\Exceptions\HTTPException;
+//use Phrest\API\Exceptions\HTTPException;
 use Phalcon\Mvc\Model\ResultsetInterface;
 /*use API\Response\CSVResponse;
 use API\Response\JSONResponse;
@@ -26,7 +26,7 @@ use API\Request\PhrestRequest;*/
  *     offset=20
  *
  * @property Response      $response
- * @property PhrestRequest $request
+ * @property Request $request
  */
 class RESTController extends BaseController
 {

@@ -49,7 +49,7 @@ class RestAPI extends MicroMVC
     );
 
     // Set the Exception handler
-    //$this->setExceptionHandler($di);
+    $this->setExceptionHandler($di);
 
     $this->setDI($di);
 
@@ -97,7 +97,7 @@ class RestAPI extends MicroMVC
         }
 
         $controllerResponse = $this->getReturnedValue();
-
+        print_r($controllerResponse);
         if (is_a($controllerResponse, 'ResponseArray')) {
           $controllerResponse->setCount($controllerResponse->getCount());
         }
@@ -160,8 +160,10 @@ class RestAPI extends MicroMVC
 
     $usersRouts = new MicroCollection();
     $usersRouts->setHandler(new UsersController());
-    $usersRouts->get('/users/{id}', 'getPlaylist');
-    $usersRouts->get('/playlists/{id}/videos', 'getVideos');
+    $usersRouts->setPrefix('/users');
+    $usersRouts->post('/login', 'login');
+    $usersRouts->post('/users/register', 'register');
+    //$usersRouts->get('/playlists/{id}/videos', 'getVideos');
     $collections[] = $usersRouts;
     
     /** @var Config $collectionConfig */

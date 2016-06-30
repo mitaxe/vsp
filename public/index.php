@@ -29,6 +29,10 @@ $loader->registerDirs(array(
 
 ))->register();
 
+use Phalcon\Security;
+
+
+
 //var_dump($loader);exit;
 
 //require dirname(__DIR__) . '/vendor/autoload.php';
