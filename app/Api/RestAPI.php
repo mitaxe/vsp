@@ -49,7 +49,7 @@ class RestAPI extends MicroMVC
     );
 
     // Set the Exception handler
-    //$this->setExceptionHandler($di);
+    $this->setExceptionHandler($di);
 
     $this->setDI($di);
 
@@ -97,7 +97,7 @@ class RestAPI extends MicroMVC
         }
 
         $controllerResponse = $this->getReturnedValue();
-
+        
         if (is_a($controllerResponse, 'ResponseArray')) {
           $controllerResponse->setCount($controllerResponse->getCount());
         }
@@ -120,44 +120,51 @@ class RestAPI extends MicroMVC
    */
   public function getCollections()
   {
-    $indexPage = new MicroCollection();
-    // Устанавливаем главный обработчик, например, экземпляр объекта контроллера
-    $indexPage->setHandler(new IndexController());
-    $indexPage->setPrefix('/index');
-    $indexPage->get('/videos', 'getVideos');
-    $indexPage->get('/goods', 'getGoods');
-    $indexPage->get('/channels', 'getChannels');
-    $indexPage->get('/search', 'search');
-    $indexPage->get('/search/videos', 'searchVideos');
-    $indexPage->get('/search/channels', 'searchChannels');
-    $indexPage->get('/search/articles', 'searchArticles');
-    $collections[] = $indexPage;
+    $indexPageRoutes = new MicroCollection();
+    $indexPageRoutes->setHandler(new IndexController());
+    $indexPageRoutes->setPrefix('/index');
+    $indexPageRoutes->get('/videos', 'getVideos');
+    $indexPageRoutes->get('/goods', 'getGoods');
+    $indexPageRoutes->get('/channels', 'getChannels');
+    $indexPageRoutes->get('/search', 'search');
+    $indexPageRoutes->get('/search/videos', 'searchVideos');
+    $indexPageRoutes->get('/search/channels', 'searchChannels');
+    $indexPageRoutes->get('/search/articles', 'searchArticles');
+    $collections[] = $indexPageRoutes;
 
-    $videosPage = new MicroCollection();
-    $videosPage->setHandler(new VideosController());
-    $videosPage->get('/exclusive/videos', 'getExclusiveVideos');
-    $videosPage->get('/ratings/videos', 'getRatingsVideos');
-    $videosPage->get('/new/videos', 'getNewVideos');
-    $videosPage->get('/videos/{id}', 'getVideo');
-    $videosPage->get('/videos/{id}/comments', 'getVideoComments');
-    $videosPage->get('/videos/{id}/related_videos', 'getRelatedVideos');
-    $videosPage->get('/videos/{id}/related_channels', 'getRelatedChannels');
-    $collections[] = $videosPage;
+    $videosRouts = new MicroCollection();
+    $videosRouts->setHandler(new VideosController());
+    $videosRouts->get('/exclusive/videos', 'getExclusiveVideos');
+    $videosRouts->get('/ratings/videos', 'getRatingsVideos');
+    $videosRouts->get('/new/videos', 'getNewVideos');
+    $videosRouts->get('/videos/{id}', 'getVideo');
+    $videosRouts->get('/videos/{id}/comments', 'getVideoComments');
+    $videosRouts->get('/videos/{id}/related_videos', 'getRelatedVideos');
+    $videosRouts->get('/videos/{id}/related_channels', 'getRelatedChannels');
+    $collections[] = $videosRouts;
 
-    $channelsPage = new MicroCollection();
-    $channelsPage->setHandler(new ChannelsController());
-    $channelsPage->get('/ratings/channels', 'getPopular');
-    $channelsPage->get('/channels/{id}', 'getChannel');
-    $channelsPage->get('/channels/{id}/playlists', 'getPlaylists');
-    $channelsPage->get('/channels/{id}/videos', 'getVideos');
-    $channelsPage->get('/channels/{id}/goods', 'getGoods');
-    $collections[] = $channelsPage;
+    $channelsRouts = new MicroCollection();
+    $channelsRouts->setHandler(new ChannelsController());
+    $channelsRouts->get('/ratings/channels', 'getPopular');
+    $channelsRouts->get('/channels/{id}', 'getChannel');
+    $channelsRouts->get('/channels/{id}/playlists', 'getPlaylists');
+    $channelsRouts->get('/channels/{id}/videos', 'getVideos');
+    $channelsRouts->get('/channels/{id}/goods', 'getGoods');
+    $collections[] = $channelsRouts;
 
-    $playlistsPage = new MicroCollection();
-    $playlistsPage->setHandler(new PlaylistsController());
-    $playlistsPage->get('/playlists/{id}', 'getPlaylist');
-    $playlistsPage->get('/playlists/{id}/videos', 'getVideos');
-    $collections[] = $playlistsPage;
+    $playlistsRouts = new MicroCollection();
+    $playlistsRouts->setHandler(new PlaylistsController());
+    $playlistsRouts->get('/playlists/{id}', 'getPlaylist');
+    $playlistsRouts->get('/playlists/{id}/videos', 'getVideos');
+    $collections[] = $playlistsRouts;
+
+    $usersRouts = new MicroCollection();
+    $usersRouts->setHandler(new UsersController());
+    $usersRouts->setPrefix('/users');
+    $usersRouts->post('/login', 'login');
+    $usersRouts->post('/users/register', 'register');
+    //$usersRouts->get('/playlists/{id}/videos', 'getVideos');
+    $collections[] = $usersRouts;
     
     /** @var Config $collectionConfig */
     /*$collectionConfig = $this->getDI()->get('collectionConfig');

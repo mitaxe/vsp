@@ -1,4 +1,11 @@
 <?php
+/**
+ * Channels REST API controller
+ *
+ * PHP version >= 5.3.0
+ *
+ * @author Taras Pylypenko <pylypenko@edsson.com>
+ */
 
 use Phalcon\Mvc\Controller;
 
@@ -7,6 +14,7 @@ class ChannelsController extends RESTController
 
     public function getChannel($id)
     {
+        //throw new UnauthorizedException();
         $channel = Channels::findFirst([
             'conditions' => "vspChannelId = ?1",
             'bind' => [1 => $id]

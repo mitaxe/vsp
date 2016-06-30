@@ -1,7 +1,5 @@
 <?php
 
-namespace API\Exceptions;
-
 /**
  * InvalidQueryException
  * This exception should be throws in controller actions that require a

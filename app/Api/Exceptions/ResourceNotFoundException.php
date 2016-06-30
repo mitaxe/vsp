@@ -1,7 +1,5 @@
 <?php
 
-namespace API\Exceptions;
-
 class ResourceNotFoundException extends HandledException
 {
   protected $code = 404;

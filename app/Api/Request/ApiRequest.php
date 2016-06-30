@@ -1,7 +1,5 @@
 <?php
 
-//namespace API\Request;
-
 use Phalcon\Http\Request;
 
 class ApiRequest extends Request
@@ -18,6 +16,13 @@ class ApiRequest extends Request
    * @var bool|string
    */
   protected $format = false;
+
+  public function __construct()
+  {
+      if (strpos($this->getContentType(),'application/json') !== false) {
+          $_POST = $this->getJsonRawBody(true);
+      }
+  }
 
   /**
    * Get oAuth access token
@@ -156,7 +161,7 @@ class ApiRequest extends Request
 
   /**
    * Check if the request is for pagination
-   * todo
+   * @todo need to be implemented
    *
    * @return bool
    */
@@ -262,18 +267,14 @@ class ApiRequest extends Request
 
   /**
    * Check if this is a JSON request
-   * todo
    *
    * @return bool
    */
   public function isJSON()
   {
-    if ($this->format == 'json')
-    {
+    if ($this->format == 'json') {
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
   }
@@ -288,7 +289,7 @@ class ApiRequest extends Request
 
   /**
    * Check if this is an internal request
-   * todo
+   * @todo
    *
    * @return bool
    */

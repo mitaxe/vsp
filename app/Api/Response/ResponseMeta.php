@@ -1,18 +1,24 @@
 <?php
 
-//namespace API\Response;
-
 class ResponseMeta
 {
-  /** @var int */
+  /** 
+   * @var int 
+   */
   public $statusCode = 200;
 
-  /** @var string */
+  /** 
+   * @var string 
+   */
   public $statusMessage;
 
-  /** @var int */
+  /** 
+   * @var int 
+   */
   public $count;
 
-  /** @var int */
+  /** 
+   * @var int 
+   */
   public $totalCount = null;  
 }

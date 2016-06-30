@@ -4,6 +4,7 @@
 
 use Phalcon\Db\Adapter\Pdo\Postgresql as DbAdapter;
 use Phalcon\Config\Adapter\Ini as ConfigIni;
+use Phalcon\Security;
 
 //use API\DI\ApiDI;
 
@@ -88,6 +89,16 @@ class AppDI extends ApiDI
                 );
             }
         );
+
+        $this->set('security', function () {
+
+            $security = new Security();
+
+            // Устанавливаем фактор хеширования в 12 раундов
+            $security->setWorkFactor(12);
+
+            return $security;
+        }, true);
 
         return $this;
     }
