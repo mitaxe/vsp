@@ -107,11 +107,34 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         );
     };
 
-    // END LOGIN ----------------------------------------------------------
+    // END LOGIN -----------------------------------------------------------
 
 
 
-    // LOGOUT ----------------------------------------------------------
+    // REGISTERATION -------------------------------------------------------
+    $scope.registerData = {};
+
+    $scope.registerUser = function() {
+        // trigger validation of all fields
+        angular.forEach($scope.form.register.$error, function (field) {
+            angular.forEach(field, function(errorField) {
+                errorField.$setTouched();
+            });
+        });
+
+        // check if valid
+        if ($scope.form.register.$invalid) {
+            console.log('registration form invalid');
+            return;
+        }
+
+        console.log('sending registration request for - ',$scope.registerData);
+    };
+    // END REGISTERATION ---------------------------------------------------
+
+
+
+    // LOGOUT --------------------------------------------------------------
     $scope.logout = function() {
         console.log('logged out');
         $timeout(function() {
