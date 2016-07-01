@@ -39,7 +39,7 @@
   background: $col-green;
   // position: fixed;
   position: relative;
-  z-index: 10002;
+  z-index: 992;
   top: 0;
   left: 0;
   width: 100%;
@@ -68,7 +68,7 @@
 #loading-bar-spinner {
   display: block;
   // position: fixed;
-  z-index: 10002;
+  z-index: 992;
   float: right;
   margin: 5px 5px 0 0;
   // top: 10px;
@@ -118,7 +118,7 @@
     top: 70px;
     left: 320px;
     width: 100%;
-    z-index: 99999;
+    z-index: 991;
     -webkit-transition: left 300ms cubic-bezier(0.86, 0, 0.07, 1);
     transition:         left 300ms cubic-bezier(0.86, 0, 0.07, 1);
     &.sandwichClicked {

@@ -549,7 +549,7 @@
   transition: width 350ms;
   background: #00cc33;
   position: relative;
-  z-index: 10002;
+  z-index: 992;
   top: 0;
   left: 0;
   width: 100%;
@@ -560,7 +560,7 @@
 /* Fancy blur effect */
 #loading-bar-spinner {
   display: block;
-  z-index: 10002;
+  z-index: 992;
   float: right;
   margin: 5px 5px 0 0; }
 
@@ -620,7 +620,7 @@
   top: 70px;
   left: 320px;
   width: 100%;
-  z-index: 99999;
+  z-index: 991;
   -webkit-transition: left 300ms cubic-bezier(0.86, 0, 0.07, 1);
   transition: left 300ms cubic-bezier(0.86, 0, 0.07, 1); }
   #loading-bar-container:after {
@@ -1739,7 +1739,6 @@ input[type='radio']:checked + .radio_label:after {
   .form input,
   .form textarea {
     width: 300px;
-    max-width: 90%;
     font-size: 15px;
     outline: none;
     background: none;
@@ -1872,6 +1871,7 @@ img-crop canvas {
   margin: 0 auto;
   transition: .3s;
   visibility: hidden;
+  overflow-y: scroll;
   opacity: 0;
   z-index: 110;
   transform: translate3d(-50%, -20px, 0);
@@ -1916,7 +1916,15 @@ img-crop canvas {
       display: block; }
   @media screen and (max-width: 767px) {
     .modal {
-      display: none; } }
+      width: 100%;
+      height: calc(100% - 55px);
+      top: 55px;
+      box-shadow: none;
+      left: 0;
+      transform: translate3d(0, -20px, 0);
+      margin: 0; }
+      .modal.active {
+        transform: translate3d(0, 0, 0); } }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     .modal {
       margin-left: 30px; }
@@ -2071,11 +2079,15 @@ textarea {
   height: 70px;
   padding-right: 8px;
   z-index: 999;
-  background: linear-gradient(#353535, #2a2a2a); }
+  background: linear-gradient(#353535, #2a2a2a);
+  overflow: hidden; }
   .header:after {
     content: "";
     display: table;
     clear: both; }
+  .header *.ng-hide {
+    transition: 0s;
+    opacity: 0; }
   .header__item {
     display: table;
     height: 70px;
@@ -2133,8 +2145,7 @@ textarea {
     float: right;
     display: none;
     padding: 0 10px;
-    max-width: 200px;
-    max-width: calc(100% - 1180px); }
+    width: 120px; }
   .header__random {
     float: right;
     width: 250px;
@@ -2189,9 +2200,10 @@ textarea {
         filter: drop-shadow(0px 1.5px 0px transparent); }
   .header__login {
     float: right;
-    width: 395px;
-    padding-right: 30px;
-    text-align: right; }
+    width: 145px;
+    text-align: center; }
+    .header__login #loginBtn {
+      margin: 0 10px; }
   @media screen and (min-width: 1280px) {
     .header {
       padding-left: 15px; }
@@ -2214,9 +2226,6 @@ textarea {
         transition: 0s;
         transition-delay: 0s;
         margin-left: -500px; }
-    .header__login {
-      width: 135px;
-      padding-right: 15px; }
     .header__search.searchActive {
       width: calc(100% - 410px); } }
   @media screen and (max-width: 767px) {
@@ -2241,12 +2250,13 @@ textarea {
         display: none; }
       .header__search {
         width: 50px;
-        padding: 0 10px; }
+        padding: 0 10px 0 10px; }
         .header__search.searchActive {
           width: calc(100% - 100px); }
       .header__login {
-        width: 45px;
-        padding-right: 0; }
+        width: auto; }
+        .header__login #loginBtn {
+          margin: 0; }
       .header__notifications {
         width: 45px;
         padding: 0 5px; }
@@ -2440,7 +2450,7 @@ textarea {
     transition: .3s; }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     .search-form__box {
-      padding: 0 20px; } }
+      padding: 20px 10px 20px 20px; } }
   @media screen and (max-width: 767px) {
     .search-form {
       height: 25px;
@@ -2769,7 +2779,7 @@ textarea {
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
-  z-index: 9999;
+  z-index: 99999;
   color: black;
   cursor: default;
   transform: translate3d(0, 0, 0); }
@@ -2798,8 +2808,17 @@ textarea {
   .popover--user {
     right: 8px; }
     .popover--user .popover__link {
+      -webkit-user-select: none;
+      /* Chrome all / Safari all */
+      -moz-user-select: none;
+      /* Firefox all */
+      -ms-user-select: none;
+      /* IE 10+ */
+      user-select: none;
+      /* Likely future */
       display: block;
-      margin-bottom: 20px; }
+      margin-bottom: 20px;
+      cursor: pointer; }
       .popover--user .popover__link:after {
         content: "";
         display: table;

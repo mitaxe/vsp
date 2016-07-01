@@ -1,6 +1,6 @@
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', '$window', '$http',
-function ($scope, $sce, factory, $state, $window, $http) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', '$window', '$http', '$timeout',
+function ($scope, $sce, factory, $state, $window, $http, $timeout) {
 
     // remove element
     $scope.remove = function(array,item) {
@@ -17,21 +17,29 @@ function ($scope, $sce, factory, $state, $window, $http) {
     $scope.goSearch = function() {
         console.log('search key - ',$scope.searchKey);
         if (!$scope.searchKey) return;
-        // if ($scope.searchData) delete $scope.searchData;
-        // if ($scope.searchMetaData) delete $scope.searchMetaData;
         $scope.searching = true;
         $scope.searchActive = true;
         $state.go('search.all', {'key': $scope.searchKey}, {reload: true});
     };
 
-    // login modal
-    $scope.showLoginModal = function() {
-        if ($window.innerWidth < 768) {
-            $state.go('login');
-        } else if (!$state.includes('login')) {
+    // on state change
+    $scope.$on('$stateChangeSuccess', function () {
+        $scope.showloginModal = false;
+        // console.log('state changed');
+        if ($state.includes('login')) {
             $scope.showloginModal = true;
         }
-    };
+    });
+
+
+    // USER -----------------------------------------------------------
+
+    $scope.user = {};
+
+    // END USER -------------------------------------------------------
+
+
+    // LOGIN ----------------------------------------------------------
 
     // login button text
     $scope.getLoginBtnText = function() {
@@ -43,8 +51,9 @@ function ($scope, $sce, factory, $state, $window, $http) {
     };
 
     // login request
-    $scope.loginData = {};
+    $scope.loginData = {}; // login from data
     $scope.form = {}; // init form object
+    $scope.user.unauthorized = true;
 
     $scope.loginUser = function() {
 
@@ -71,8 +80,10 @@ function ($scope, $sce, factory, $state, $window, $http) {
             function(response) {
                 console.log('login response - ',response);
                 console.log('Assigned user token - '+response.data.data.token);
-                // factory.setConfig(response.data.meta.config);
-                $http.defaults.headers.common.Authorization = response.data.data.token;
+
+                $scope.user.authorized = true; //
+
+                $http.defaults.headers.common.Authorization = response.data.data.token; // set http header token
                 $scope.logging = false; // adjust button text
                 $scope.showloginModal = false; // hide login modal
             },
@@ -85,8 +96,40 @@ function ($scope, $sce, factory, $state, $window, $http) {
         );
     };
 
+    // END LOGIN -----------------------------------------------------------
 
-    /* Test Data */
+
+    // REGISTERATION -------------------------------------------------------
+    $scope.registerData = {};
+
+    $scope.registerUser = function() {
+        // trigger validation of all fields
+        angular.forEach($scope.form.register.$error, function (field) {
+            angular.forEach(field, function(errorField) {
+                errorField.$setTouched();
+            });
+        });
+
+        // check if valid
+        if ($scope.form.register.$invalid) {
+            console.log('registration form invalid');
+            return;
+        }
+
+        console.log('sending registration request for - ',$scope.registerData);
+    };
+    // END REGISTERATION ---------------------------------------------------
+
+
+    // LOGOUT --------------------------------------------------------------
+    $scope.logout = function() {
+        console.log('logged out');
+        $scope.user.authorized = false;
+    };
+    // END LOGOUT ----------------------------------------------------------
+
+
+    // TEST DATA ----------------------------------------------------------
 
     // current user test
     $scope.currentUser = {
