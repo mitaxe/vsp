@@ -183,7 +183,7 @@
   .col-sm-7 {
     width: 57.3333333%; }
   .col-sm-6 {
-    width: 50%; }
+    width: 49.8%; }
   .col-sm-5 {
     width: 40.16666667%; }
   .col-sm-4 {
@@ -1731,6 +1731,11 @@ input[type='radio']:checked + .radio_label:after {
   position: relative;
   margin: 0 0 20px;
   color: #5b5d5e; }
+  .form div[ng-messages] {
+    color: red;
+    margin: 10px auto 5px;
+    text-align: right;
+    margin-right: 25px; }
   .form input,
   .form textarea {
     width: 300px;
@@ -1750,11 +1755,11 @@ input[type='radio']:checked + .radio_label:after {
     .form input[disabled],
     .form textarea[disabled] {
       background: none; }
-    .form input.ng-invalid,
-    .form textarea.ng-invalid {
+    .form input.ng-invalid.ng-touched,
+    .form textarea.ng-invalid.ng-touched {
       border: 1px solid red; }
-      .form input.ng-invalid:focus,
-      .form textarea.ng-invalid:focus {
+      .form input.ng-invalid.ng-touched:focus,
+      .form textarea.ng-invalid.ng-touched:focus {
         box-shadow: none; }
   .form input {
     padding: 0 20px;
@@ -1911,10 +1916,7 @@ img-crop canvas {
       display: block; }
   @media screen and (max-width: 767px) {
     .modal {
-      top: 60px;
-      width: 100%;
-      max-height: calc(100vh - 70px);
-      overflow: scroll; } }
+      display: none; } }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     .modal {
       margin-left: 30px; }
@@ -4166,17 +4168,10 @@ textarea {
         width: 29%; }
     .registration .options__form input {
       width: 68%;
-      border-radius: 50px;
-      border: 1px solid #e0e0e0;
-      background: #fff;
-      outline: none;
       font-size: 16px;
       color: #3a3d3e;
       padding: 3px 15px; }
-      .registration .options__form input:focus {
-        border-color: #00cc33;
-        box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2); }
-      .registration .options__form input#password {
+      .registration .options__form input.password {
         padding-right: 125px; }
     .registration .options__form .inp_row {
       position: relative; }
@@ -4187,7 +4182,7 @@ textarea {
         color: #00cc33;
         text-decoration: none;
         right: 18px;
-        top: 6px;
+        top: 7px;
         position: absolute; }
     .registration .options__form.bottom {
       padding: 20px 20px 0;

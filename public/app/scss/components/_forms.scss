@@ -3,6 +3,13 @@
     margin: 0 0 20px;
     color: $col-grey-3;
 
+    div[ng-messages] {
+        color: red;
+        margin: 10px auto 5px;
+        text-align: right;
+        margin-right: 25px;
+    }
+
     input,
     textarea {
         width: 300px;
@@ -22,7 +29,7 @@
         &[disabled] {
             background: none;
         }
-        &.ng-invalid {
+        &.ng-invalid.ng-touched {
             border: 1px solid red;
             &:focus {
                 box-shadow: none;

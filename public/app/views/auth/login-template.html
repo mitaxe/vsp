@@ -9,8 +9,8 @@
 
     <hr class="block__hr">
 
-    <!-- register tab -->
-    <div ng-show="!loginActive">
+    <!-- register form -->
+    <form name="form.register" class="form" ng-show="!loginActive">
         <div class="registration__logo_row clearfix">
             <img src="assets/img/logo.png" alt="logo">
             <span>Вы можете использовать данные для входа с VSP Online</span>
@@ -61,10 +61,10 @@
                 <div class="btn btn-green main-ui btn-fullwidth">Регистрация</div>
             </div>
         </div>
-    </div><!-- register tab -->
+    </form><!-- register form -->
 
-    <!-- login tab -->
-    <div ng-show="loginActive">
+    <!-- login form -->
+    <form name="form.login" class="form" ng-show="loginActive">
         <div class="registration__logo_row clearfix">
             <img src="assets/img/logo.png" alt="logo">
             <span>Вы можете использовать данные для входа с VSP Online</span>
@@ -91,24 +91,41 @@
             <div class="options__form">
                 <div class="inp_row">
                     <label>Email</label>
-                    <input type="email" ng-model="loginData.email" required>
+                    <input type="email"
+                            ng-model="loginData.email"
+                            name="loginEmail"
+                            required>
+                    <div ng-messages="form.login.loginEmail.$error" ng-show="form.login.loginEmail.$touched" role="alert">
+                        <div ng-message="required">Email обязателен</div>
+                        <div ng-message="email">Введите валидный Email</div>
+                    </div>
                 </div>
                 <div class="inp_row">
                     <label>Пароль</label>
-                    <input type="password" ng-model="loginData.password">
+                    <input type="password"
+                            class="password"
+                            ng-model="loginData.password"
+                            name="loginPassword"
+                            minlength="8"
+                            required
+                            autocomplete="false">
+                    <div ng-messages="form.login.loginPassword.$error" ng-show="form.login.loginPassword.$touched" role="alert">
+                        <div ng-message="required">Пароль обязателен</div>
+                        <div ng-message="minlength">Минимум 8 символов</div>
+                    </div>
                     <a class="btn inp_row__forgot_pass">Забыли пароль?</a>
                 </div>
             </div>
         </div>
         <div class="options__form bottom">
             <div class="inp_row">
-                <input ng-model="loginData.remember" type="checkbox" class="hidden" id="{{$id}}">
-                <label for="{{$id}}" class="check_label">Запомнить меня</label>
+                <input ng-model="loginData.remember" type="checkbox" class="hidden" id="{{ $id }}">
+                <label for="{{ $id }}" class="check_label">Запомнить меня</label>
             </div>
             <div class="inp_row">
-                <div ng-click="loginUser()" class="btn btn-green main-ui btn-fullwidth">Вход</div>
+                <div ng-click="loginUser()" class="btn btn-green main-ui btn-fullwidth">{{ logging ? 'Проверка данных...' : 'Вход' }}</div>
             </div>
         </div>
-    </div><!-- login tab -->
+    </form><!-- login form -->
 
 </div>

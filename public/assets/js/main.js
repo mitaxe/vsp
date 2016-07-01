@@ -1,4 +1,4 @@
-var app = angular.module("MainApp", ['ui.router', 'angular-loading-bar', 'ngAnimate', 'ngTouch', 'angular-sortable-view', 'ngSanitize']);
+var app = angular.module("MainApp", ['ui.router', 'angular-loading-bar', 'ngAnimate', 'ngTouch', 'angular-sortable-view', 'ngSanitize', 'ngMessages']);
 
 
 app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $document, $locale, $state){
@@ -715,19 +715,42 @@ function ($scope, $sce, factory, $state, $window, $http) {
 
     // login request
     $scope.loginData = {};
+    $scope.form = {}; // init form object
 
     $scope.loginUser = function() {
-        console.log($scope.loginData);
+
+        // trigger validation of all fields
+        angular.forEach($scope.form.login.$error, function (field) {
+            angular.forEach(field, function(errorField) {
+                errorField.$setTouched();
+            });
+        });
+
+        // check if valid
+        if ($scope.form.login.$invalid) {
+            console.log('invalid form');
+            return;
+        }
+
+        console.log('sending login request for - ',$scope.loginData);
+
+        $scope.logging = true; // adjust button text
+
+        // send login request
         factory.loginUser($scope.loginData).then(
             // success
             function(response) {
-                console.log(response);
+                console.log('login response - ',response);
                 // factory.setConfig(response.data.meta.config);
                 // $http.defaults.headers.common.Authorization = response.data.meta.config;
+                $scope.logging = false; // adjust button text
+                $scope.showloginModal = false; // hide login modal
             },
             // error
             function(error) {
-                console.log(error);
+                $scope.logging = false; // adjust button text
+                $scope.showloginModal = false; // hide login modal
+                console.log('error - ', error);
             }
         );
     };

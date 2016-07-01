@@ -57,18 +57,18 @@
             }
             input {
                 width: 68%;
-                border-radius: 50px;
-                border: 1px solid #e0e0e0;
-                background: #fff;
-                outline: none;
+                // border-radius: 50px;
+                // border: 1px solid #e0e0e0;
+                // background: #fff;
+                // outline: none;
                 font-size: 16px;
                 color: #3a3d3e;
                 padding: 3px 15px;
-                &:focus {
-                    border-color: $col-green;
-                    box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
-                }
-                &#password {
+                // &:focus {
+                //     border-color: $col-green;
+                //     box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
+                // }
+                &.password {
                     padding-right: 125px;
                 }
             }
@@ -82,7 +82,7 @@
                     color: $col-green;
                     text-decoration: none;
                     right:18px;
-                    top:6px;
+                    top: 7px;
                     position: absolute;
                 }
             }
