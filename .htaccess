@@ -3,10 +3,10 @@
     RewriteEngine on
     RewriteBase /
 
-    RewriteRule  manage/^$ admin/templates/admin/   [L]
-    RewriteRule  manage/((?s).*) admin/templates/admin/$1   [L]
+    RewriteRule  manage/^$ admin/templates/admin/ [L]
+    RewriteRule  manage/((?s).*) admin/templates/admin/$1 [L]
 
-    RewriteRule  ^$ public/    [L]
+    RewriteRule  ^$ public/ [L]
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule  ((?s).*)$ public/$1 [L]
 </IfModule>
