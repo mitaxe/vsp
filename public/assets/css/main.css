@@ -1739,7 +1739,6 @@ input[type='radio']:checked + .radio_label:after {
   .form input,
   .form textarea {
     width: 300px;
-    max-width: 90%;
     font-size: 15px;
     outline: none;
     background: none;
@@ -1872,6 +1871,7 @@ img-crop canvas {
   margin: 0 auto;
   transition: .3s;
   visibility: hidden;
+  overflow-y: scroll;
   opacity: 0;
   z-index: 110;
   transform: translate3d(-50%, -20px, 0);
@@ -1916,7 +1916,15 @@ img-crop canvas {
       display: block; }
   @media screen and (max-width: 767px) {
     .modal {
-      display: none; } }
+      width: 100%;
+      height: calc(100% - 55px);
+      top: 55px;
+      box-shadow: none;
+      left: 0;
+      transform: translate3d(0, -20px, 0);
+      margin: 0; }
+      .modal.active {
+        transform: translate3d(0, 0, 0); } }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     .modal {
       margin-left: 30px; }
@@ -2077,13 +2085,14 @@ textarea {
     content: "";
     display: table;
     clear: both; }
+  .header *.ng-hide {
+    transition: 0s;
+    opacity: 0; }
   .header__item {
     display: table;
     height: 70px;
     color: #fefefe;
     transition: .3s; }
-    .header__item.ng-hide {
-      opacity: 0; }
   .header__sandwich {
     float: left;
     width: 40px;
@@ -2192,9 +2201,10 @@ textarea {
         filter: drop-shadow(0px 1.5px 0px transparent); }
   .header__login {
     float: right;
-    width: 395px;
-    padding-right: 30px;
-    text-align: right; }
+    width: 145px;
+    text-align: center; }
+    .header__login #loginBtn {
+      margin: 0 10px; }
   @media screen and (min-width: 1280px) {
     .header {
       padding-left: 15px; }
@@ -2217,9 +2227,6 @@ textarea {
         transition: 0s;
         transition-delay: 0s;
         margin-left: -500px; }
-    .header__login {
-      width: 135px;
-      padding-right: 15px; }
     .header__search.searchActive {
       width: calc(100% - 410px); } }
   @media screen and (max-width: 767px) {
@@ -2244,12 +2251,13 @@ textarea {
         display: none; }
       .header__search {
         width: 50px;
-        padding: 0 10px; }
+        padding: 0 10px 0 10px; }
         .header__search.searchActive {
           width: calc(100% - 100px); }
       .header__login {
-        width: 45px;
-        padding-right: 0; }
+        width: auto; }
+        .header__login #loginBtn {
+          margin: 0; }
       .header__notifications {
         width: 45px;
         padding: 0 5px; }
@@ -2443,7 +2451,7 @@ textarea {
     transition: .3s; }
   @media screen and (min-width: 768px) and (max-width: 1279px) {
     .search-form__box {
-      padding: 0 20px; } }
+      padding: 20px 10px 20px 20px; } }
   @media screen and (max-width: 767px) {
     .search-form {
       height: 25px;

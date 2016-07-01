@@ -12,15 +12,21 @@
     background: $col-header;
     overflow: hidden;
 
+    *.ng-hide {
+        transition: 0s;
+        opacity: 0;
+    }
+    // &.ng-show {
+    //     transition: 0s;
+    //     opacity: 1;
+    // }
+
     &__item {
         display: table;
         height: 70px;
         color: #fefefe;
         transition: .3s;
         // border: 0.5px dotted white;
-        &.ng-hide {
-            opacity: 0;
-        }
     }
 
     &__sandwich {
@@ -181,9 +187,11 @@
 
     &__login {
         float: right;
-        width: 395px;
-        padding-right: 30px;
-        text-align: right;
+        width: 145px;
+        text-align: center;
+        #loginBtn {
+            margin: 0 10px;
+        }
     }
 
     @include desktop {
@@ -214,10 +222,6 @@
                 transition-delay: 0s;
                 margin-left: -500px;
             }
-        }
-        &__login {
-            width: 135px;
-            padding-right: 15px;
         }
         &__search {
             &.searchActive {
@@ -252,14 +256,16 @@
         }
         &__search {
             width: 50px;
-            padding: 0 10px;
+            padding: 0 10px 0 10px;
             &.searchActive {
                 width: calc(100% - 100px);
             }
         }
         &__login {
-            width: 45px;
-            padding-right: 0;
+            width: auto;
+            #loginBtn {
+                margin: 0;
+            }
         }
         &__notifications {
             width: 45px;
@@ -473,7 +479,7 @@
     }
     @include tablet {
         &__box {
-            padding: 0 20px;
+            padding: 20px 10px 20px 20px;
         }
     }
     @include phone {
@@ -481,7 +487,6 @@
         padding: 0px;
         &__box {
             padding: 0px;
-
         }
         svg {
             top: 5px;

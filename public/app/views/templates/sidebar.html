@@ -103,7 +103,7 @@
             </div>
             <!-- mob submenu -->
             <div class="hidden-tablet hidden-desktop">
-                <a class="sidebar__link">
+                <a ng-show="user.authorized" class="sidebar__link">
                     <div class="table-middle">
                         <span class="sidebar__text">Мои подписки</span>
                     </div>
@@ -114,20 +114,25 @@
                     </div>
                 </a>
                 <div class="sidebar__line"></div>
-                <div class="sidebar__usermenu">
+                <div ng-show="user.authorized" class="sidebar__usermenu">
                     <a class="sidebar__link">
                         <div class="table-middle">
-                            <div class="sidebar__avatar"><img src="assets/img/ball-58.png" alt="avatar"/></div><span class="sidebar__text">Профиль</span>
+                            <div class="sidebar__avatar">
+                                <img src="assets/img/ball-58.png" alt="avatar"/>
+                            </div>
+                            <span class="sidebar__text">Профиль</span>
                         </div>
                     </a>
                     <a class="sidebar__link">
                         <div class="table-middle">
-                            <div class="sidebar__avatar"></div><span class="sidebar__text">Канал</span>
+                            <div class="sidebar__avatar"></div>
+                            <span class="sidebar__text">Канал</span>
                         </div>
                     </a>
                     <a class="sidebar__link">
                         <div class="table-middle">
-                            <div class="sidebar__avatar"></div><span class="sidebar__text">Выйти</span>
+                            <div class="sidebar__avatar"></div>
+                            <span ng-click="logout()" class="sidebar__text">Выйти</span>
                         </div>
                     </a>
                 </div>

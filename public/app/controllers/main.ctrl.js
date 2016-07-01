@@ -17,13 +17,19 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     $scope.goSearch = function() {
         console.log('search key - ',$scope.searchKey);
         if (!$scope.searchKey) return;
-        // if ($scope.searchData) delete $scope.searchData;
-        // if ($scope.searchMetaData) delete $scope.searchMetaData;
         $scope.searching = true;
         $scope.searchActive = true;
         $state.go('search.all', {'key': $scope.searchKey}, {reload: true});
     };
 
+    // on state change
+    $scope.$on('$stateChangeSuccess', function () {
+        $scope.showloginModal = false;
+        // console.log('state changed');
+        if ($state.includes('login')) {
+            $scope.showloginModal = true;
+        }
+    });
 
 
     // USER -----------------------------------------------------------
@@ -33,17 +39,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     // END USER -------------------------------------------------------
 
 
-
     // LOGIN ----------------------------------------------------------
-
-    // login modal
-    $scope.showLoginModal = function() {
-        if ($window.innerWidth < 768) {
-            $state.go('login');
-        } else if (!$state.includes('login')) {
-            $scope.showloginModal = true;
-        }
-    };
 
     // login button text
     $scope.getLoginBtnText = function() {
@@ -58,10 +54,6 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     $scope.loginData = {}; // login from data
     $scope.form = {}; // init form object
     $scope.user.unauthorized = true;
-
-    function loginUser() {
-
-    }
 
     $scope.loginUser = function() {
 
@@ -89,10 +81,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 console.log('login response - ',response);
                 console.log('Assigned user token - '+response.data.data.token);
 
-                $scope.user.unauthorized = false; //
-                $timeout(function() {
-                    $scope.user.authorized = true; //
-                }, 300);
+                $scope.user.authorized = true; //
 
                 $http.defaults.headers.common.Authorization = response.data.data.token; // set http header token
                 $scope.logging = false; // adjust button text
@@ -108,7 +97,6 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     };
 
     // END LOGIN -----------------------------------------------------------
-
 
 
     // REGISTERATION -------------------------------------------------------
@@ -133,18 +121,12 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     // END REGISTERATION ---------------------------------------------------
 
 
-
     // LOGOUT --------------------------------------------------------------
     $scope.logout = function() {
         console.log('logged out');
-        $timeout(function() {
-            $scope.user.unauthorized = true;
-        }, 200);
         $scope.user.authorized = false;
-
     };
     // END LOGOUT ----------------------------------------------------------
-
 
 
     // TEST DATA ----------------------------------------------------------
