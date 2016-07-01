@@ -159,8 +159,8 @@ angular.module("MainApp")
             articleData: ["factory", "$stateParams", function(factory, $stateParams) {
                 return factory.getArticleData($stateParams.id);
             }],
-            articlesData: ["factory", function(factory) {
-                return factory.getBlogData();
+            otherArticles: ["factory", "$stateParams", function(factory, $stateParams) {
+                return factory.getOtherArticles($stateParams.id);
             }]
         },
         controller: ["$scope", "articleData", "articlesData", function($scope, articleData, articlesData) {
@@ -510,6 +510,14 @@ angular.module("MainApp")
         factory.getArticleData = function(id) {
             return $http.get('http://vsponline.qa/articles/' + id);
         };
+
+        // other articles
+        factory.getOtherArticles = function(id) {
+            return $http.get('http://vsponline.qa/articles/' + id + '/other');
+        };    
+    
+        
+    
 
         // history page
         factory.getHistoryData = function() {

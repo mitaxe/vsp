@@ -23,6 +23,17 @@ class BlogController extends RESTController
         return $response;
     }
 
+    public function getOtherArticles($id)
+    {
+        $articles = Articles::find(['conditions'=>'actual = true AND id != '.$id]);
+
+        $response =  new ArticlesResponse();
+
+        $response->add($articles);
+
+        return $response;
+    }
+
 
     public function getArticle($id)
     {
@@ -43,6 +54,8 @@ class BlogController extends RESTController
 
         return new Response();
     }
+
+
 
 
 

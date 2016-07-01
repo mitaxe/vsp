@@ -162,6 +162,8 @@ class RestAPI extends MicroMVC
     $blogRouts->setPrefix('/articles');
     $blogRouts->get('/', 'getArticles');
     $blogRouts->get('/{id}', 'getArticle');
+    $blogRouts->get('/{id}/other', 'getOtherArticles');
+    
     $collections[] = $blogRouts;
     
     /** @var Config $collectionConfig */

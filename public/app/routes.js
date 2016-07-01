@@ -135,8 +135,8 @@ angular.module("MainApp")
             articleData: function(factory, $stateParams) {
                 return factory.getArticleData($stateParams.id);
             },
-            articlesData: function(factory) {
-                return factory.getBlogData();
+            otherArticles: function(factory, $stateParams) {
+                return factory.getOtherArticles($stateParams.id);
             }
         },
         controller: function($scope, articleData, articlesData) {

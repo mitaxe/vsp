@@ -77,6 +77,14 @@ angular.module("MainApp")
             return $http.get('http://vsponline.qa/articles/' + id);
         };
 
+        // other articles
+        factory.getOtherArticles = function(id) {
+            return $http.get('http://vsponline.qa/articles/' + id + '/other');
+        };    
+    
+        
+    
+
         // history page
         factory.getHistoryData = function() {
             return $http.get('./assets/js/data.json');
