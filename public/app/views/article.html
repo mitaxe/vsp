@@ -148,7 +148,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-12" ng-repeat="article in articles | limitTo: 2">
                     <div class="thumb thumb--medium row">
                         <div class="col-xs-6 col-sm-12">
-                            <a ui-sref="video({ id: blogs[$index].id })">
+                            <a ui-sref="article({ id: articles[$index].id })">
                                 <div class="thumb__img">
                                     <img ng-src="{{ article.thumbMedium }}" alt="" />
                                 </div>
