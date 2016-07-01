@@ -742,7 +742,7 @@ function ($scope, $sce, factory, $state, $window, $http) {
             function(response) {
                 console.log('login response - ',response);
                 // factory.setConfig(response.data.meta.config);
-                // $http.defaults.headers.common.Authorization = response.data.meta.config;
+                $http.defaults.headers.common.Authorization = response.data.token;
                 $scope.logging = false; // adjust button text
                 $scope.showloginModal = false; // hide login modal
             },
