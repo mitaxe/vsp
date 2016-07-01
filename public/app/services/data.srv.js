@@ -69,12 +69,12 @@ angular.module("MainApp")
 
         // blog page
         factory.getBlogData = function() {
-            return $http.get('http://vsponline.dev/articles');
+            return $http.get('http://vsponline.qa/articles');
         };
 
         // article data
         factory.getArticleData = function(id) {
-            return $http.get('http://vsponline.dev/articles/' + id);
+            return $http.get('http://vsponline.qa/articles/' + id);
         };
 
         // history page
