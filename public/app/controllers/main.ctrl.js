@@ -70,6 +70,7 @@ function ($scope, $sce, factory, $state, $window, $http) {
             // success
             function(response) {
                 console.log('login response - ',response);
+                console.log('Assigned user token - '+response.data.token);
                 // factory.setConfig(response.data.meta.config);
                 $http.defaults.headers.common.Authorization = response.data.token;
                 $scope.logging = false; // adjust button text
