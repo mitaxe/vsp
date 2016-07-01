@@ -294,8 +294,8 @@
 
     @media screen and (min-width: 1500px) {
         &__tags {
-            max-width: 120px; // falback
-            max-width: calc(100% - 1420px);
+            // max-width: 120px; // falback
+            // max-width: calc(100% - 1420px);
         }
     }
 
