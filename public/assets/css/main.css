@@ -3263,7 +3263,8 @@ textarea {
     color: #3a3d3e;
     margin-bottom: 12px;
     font-weight: 500;
-    word-wrap: break-word; }
+    word-wrap: break-word;
+    line-height: 1.1 !important; }
   .thumb__text {
     font-size: 20px;
     margin-bottom: 12px;

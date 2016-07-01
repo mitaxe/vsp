@@ -125,21 +125,23 @@ angular.module("MainApp")
             }
         },
         controller: function($scope, blogData) {
-            $scope.blogData = blogData.data.videos;
+            $scope.blogData = blogData.data.data;
         }
     })
     .state('article', {
-        url: "/blog/:url",
+        url: "/blog/:id",
         templateUrl: 'app/views/article.html',
-        scope: {
-            content: '='
-        },
-        controller: function($scope, $stateParams) {
-            for (var i = 0; i < $scope.videos.length; i++) {
-                if ($scope.videos[i].url === $stateParams.url) {
-                    $scope.content = $scope.videos[i];
-                }
+        resolve: {
+            articleData: function(factory, $stateParams) {
+                return factory.getArticleData($stateParams.id);
+            },
+            otherArticles: function(factory, $stateParams) {
+                return factory.getOtherArticles($stateParams.id);
             }
+        },
+        controller: function($scope, articleData, otherArticles) {
+            $scope.article = articleData.data.data;
+            $scope.articles = otherArticles.data.data;
         }
     })
 

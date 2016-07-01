@@ -21,6 +21,7 @@ $loader->registerDirs(array(
     '../app/Responses/Playlists/',
     '../app/Responses/Goods/',
     '../app/Responses/Users/',
+    '../app/Responses/Articles/',
 
     '../app/Exceptions/Users/',
 

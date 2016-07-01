@@ -69,8 +69,21 @@ angular.module("MainApp")
 
         // blog page
         factory.getBlogData = function() {
-            return $http.get('./assets/js/data.json');
+            return $http.get('http://vsponline.qa/articles');
         };
+
+        // article data
+        factory.getArticleData = function(id) {
+            return $http.get('http://vsponline.qa/articles/' + id);
+        };
+
+        // other articles
+        factory.getOtherArticles = function(id) {
+            return $http.get('http://vsponline.qa/articles/' + id + '/other');
+        };    
+    
+        
+    
 
         // history page
         factory.getHistoryData = function() {
