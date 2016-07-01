@@ -1,5 +1,4 @@
 <?php
-//namespace API;
 
 use Phalcon\DiInterface;
 use Phalcon\Http\Client\Request;
@@ -9,14 +8,6 @@ use Phalcon\Mvc\Micro as MicroMVC;
 use Phalcon\Http\Response as HttpResponse;
 use Phalcon\DI\FactoryDefault as DefaultDI;
 
-/*use API\DI\ApiDI;
-use API\Enums\RequestMethodEnum;
-use API\Exceptions\HandledException;
-use API\Request\PhrestRequest;
-use API\Response\CSVResponse;
-use API\Response\JSONResponse;
-use API\Response\Response;
-use API\Response\ResponseMessage;*/
 
 /**
  * Phalcon API Application
@@ -163,8 +154,15 @@ class RestAPI extends MicroMVC
     $usersRouts->setPrefix('/users');
     $usersRouts->post('/login', 'login');
     $usersRouts->post('/users/register', 'register');
-    //$usersRouts->get('/playlists/{id}/videos', 'getVideos');
     $collections[] = $usersRouts;
+
+
+    $blogRouts = new MicroCollection();
+    $blogRouts->setHandler(new BlogController());
+    $blogRouts->setPrefix('/articles');
+    $blogRouts->get('/', 'getArticles');
+    $blogRouts->get('/{id}', 'getArticle');
+    $collections[] = $blogRouts;
     
     /** @var Config $collectionConfig */
     /*$collectionConfig = $this->getDI()->get('collectionConfig');

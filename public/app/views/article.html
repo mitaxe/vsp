@@ -6,16 +6,16 @@
 
             <div class="block block--white block--article">
                 <article class="col-xs-12 article">
-                    <h2 class="thumb__title">{{ content.title }}</h2>
+                    <h2 class="thumb__title">{{ article.title }}</h2>
                     <p>
                         <div class="article__content">
-                            <span class="thumb__date"><span class="thumb__number">{{ content.date | prettyDate }}</span></span>
-                            <span class="thumb__hasvideo">Содержит Видео</span>
+                            <span class="thumb__date"><span class="thumb__number">{{ article.dateCreated | prettyDate }}</span></span>
+                            <span ng-show="article.vspVideoId != null" class="thumb__hasvideo">Содержит Видео</span>
                         </div>
                     </p>
                     <p class="article__subtitle">
                         <div class="article__content">
-                            {{ content.text }}
+                            {{ article.description | limitTo : 200}}
                         </div>
                     </p>
                     <div class="article__grey-bg">
@@ -26,11 +26,11 @@
                         </div>
                     </div>
                     <div class="thumb__img">
-                        <img ng-src="{{ content.img }}" alt="" />
+                        <img ng-src="{{ article.thumbHigh }}" alt="" />
                     </div>
                     <p>
                         <div class="article__content article__text">
-                            {{ content.text }}
+                            {{ article.description }}
                         </div>
                     </p>
                 </article>
@@ -40,7 +40,7 @@
                 <div class="col-xs-12">
                     <p>
                         <span class="comments__title">Комментарии </span>
-                        <span class="comments__number">{{ commentsLength() }}</span>
+                        <span class="comments__number">0 <!--{{ commentsLength() }}--></span>
                     </p>
                     <br>
                 </div>
@@ -61,6 +61,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--
                     <ul class="comments__container">
                         <li class="comments__item" ng-repeat="comment in comments | limitTo: limits.comments ">
                             <div class="clearfix">
@@ -142,22 +143,22 @@
             <div class="block block--white block--sidebar">
                 <div class="col-xs-12">
                     <h3 class="block__title">Другие статьи</h3>
-                    <div class="block__btn"><a href="#" class="btn btn-white">Читать все</a></div>
+                    <div class="block__btn"><a href="/#/blog" class="btn btn-white">Читать все</a></div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-12" ng-repeat="blog in blogs | limitTo: 2">
+                <div class="col-xs-12 col-sm-6 col-md-12" ng-repeat="article in articles | limitTo: 2">
                     <div class="thumb thumb--medium row">
                         <div class="col-xs-6 col-sm-12">
-                            <a ui-sref="video({ url: blogs[$index].url })">
+                            <a ui-sref="video({ id: blogs[$index].id })">
                                 <div class="thumb__img">
-                                    <img ng-src="{{ blog.img }}" alt="" />
+                                    <img ng-src="{{ article.thumbMedium }}" alt="" />
                                 </div>
                             </a>
                         </div>
                         <div class="col-xs-6 col-sm-12">
-                            <p class="thumb__title"><a href="">{{ blog.title }}</a></p>
-                            <p class="thumb__text hidden-phone"><a href="#">{{ blog.text }}</a></p>
+                            <p class="thumb__title"><a href="">{{ article.title }}</a></p>
+                            <p class="thumb__text hidden-phone"><a href="#">{{ article.description | limitTo: 200}}</a></p>
                             <p>
-                                <span class="thumb__date">{{ blog.date | prettyDate }}</span></span>
+                                <span class="thumb__date">{{ article.date | prettyDate }}</span></span>
                                 <span class="thumb__hasvideo">Содержит Видео</span>
                             </p>
                         </div>

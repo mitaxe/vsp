@@ -149,21 +149,23 @@ angular.module("MainApp")
             }]
         },
         controller: ["$scope", "blogData", function($scope, blogData) {
-            $scope.blogData = blogData.data.videos;
+            $scope.blogData = blogData.data.data;
         }]
     })
     .state('article', {
-        url: "/blog/:url",
+        url: "/blog/:id",
         templateUrl: 'app/views/article.html',
-        scope: {
-            content: '='
+        resolve: {
+            articleData: ["factory", "$stateParams", function(factory, $stateParams) {
+                return factory.getArticleData($stateParams.id);
+            }],
+            articlesData: ["factory", function(factory) {
+                return factory.getBlogData();
+            }]
         },
-        controller: ["$scope", "$stateParams", function($scope, $stateParams) {
-            for (var i = 0; i < $scope.videos.length; i++) {
-                if ($scope.videos[i].url === $stateParams.url) {
-                    $scope.content = $scope.videos[i];
-                }
-            }
+        controller: ["$scope", "articleData", "articlesData", function($scope, articleData, articlesData) {
+            $scope.article = articleData.data.data;
+            $scope.articles = articlesData.data.data;
         }]
     })
 
@@ -501,7 +503,12 @@ angular.module("MainApp")
 
         // blog page
         factory.getBlogData = function() {
-            return $http.get('./assets/js/data.json');
+            return $http.get('http://vsponline.dev/articles');
+        };
+
+        // article data
+        factory.getArticleData = function(id) {
+            return $http.get('http://vsponline.dev/articles/' + id);
         };
 
         // history page
