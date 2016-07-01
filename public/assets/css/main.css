@@ -2145,8 +2145,7 @@ textarea {
     float: right;
     display: none;
     padding: 0 10px;
-    max-width: 200px;
-    max-width: calc(100% - 1180px); }
+    width: 120px; }
   .header__random {
     float: right;
     width: 250px;

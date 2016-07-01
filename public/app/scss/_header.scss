@@ -105,8 +105,9 @@
         float: right;
         display: none;
         padding: 0 10px;
-        max-width: 200px; // fallback
-        max-width: calc(100% - 1180px);
+        // max-width: 200px; // fallback
+        // max-width: calc(100% - 1180px);
+        width: 120px;
     }
 
     &__random {
