@@ -107,8 +107,7 @@
                             ng-model="loginData.password"
                             name="loginPassword"
                             minlength="8"
-                            required
-                            autocomplete="false">
+                            required>
                     <div ng-messages="form.login.loginPassword.$error" ng-show="form.login.loginPassword.$touched" role="alert">
                         <div ng-message="required">Пароль обязателен</div>
                         <div ng-message="minlength">Минимум 8 символов</div>

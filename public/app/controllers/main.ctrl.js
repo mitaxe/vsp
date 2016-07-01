@@ -1,6 +1,6 @@
 angular.module("MainApp")
-.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', '$window', '$http',
-function ($scope, $sce, factory, $state, $window, $http) {
+.controller('MainCtrl', ['$scope', '$sce', 'factory', '$state', '$window', '$http', '$timeout',
+function ($scope, $sce, factory, $state, $window, $http, $timeout) {
 
     // remove element
     $scope.remove = function(array,item) {
@@ -24,6 +24,18 @@ function ($scope, $sce, factory, $state, $window, $http) {
         $state.go('search.all', {'key': $scope.searchKey}, {reload: true});
     };
 
+
+
+    // USER -----------------------------------------------------------
+
+    $scope.user = {};
+
+    // END USER -------------------------------------------------------
+
+
+
+    // LOGIN ----------------------------------------------------------
+
     // login modal
     $scope.showLoginModal = function() {
         if ($window.innerWidth < 768) {
@@ -43,8 +55,13 @@ function ($scope, $sce, factory, $state, $window, $http) {
     };
 
     // login request
-    $scope.loginData = {};
+    $scope.loginData = {}; // login from data
     $scope.form = {}; // init form object
+    $scope.user.unauthorized = true;
+
+    function loginUser() {
+
+    }
 
     $scope.loginUser = function() {
 
@@ -71,8 +88,13 @@ function ($scope, $sce, factory, $state, $window, $http) {
             function(response) {
                 console.log('login response - ',response);
                 console.log('Assigned user token - '+response.data.data.token);
-                // factory.setConfig(response.data.meta.config);
-                $http.defaults.headers.common.Authorization = response.data.data.token;
+
+                $scope.user.unauthorized = false; //
+                $timeout(function() {
+                    $scope.user.authorized = true; //
+                }, 300);
+
+                $http.defaults.headers.common.Authorization = response.data.data.token; // set http header token
                 $scope.logging = false; // adjust button text
                 $scope.showloginModal = false; // hide login modal
             },
@@ -85,8 +107,24 @@ function ($scope, $sce, factory, $state, $window, $http) {
         );
     };
 
+    // END LOGIN ----------------------------------------------------------
 
-    /* Test Data */
+
+
+    // LOGOUT ----------------------------------------------------------
+    $scope.logout = function() {
+        console.log('logged out');
+        $timeout(function() {
+            $scope.user.unauthorized = true;
+        }, 200);
+        $scope.user.authorized = false;
+
+    };
+    // END LOGOUT ----------------------------------------------------------
+
+
+
+    // TEST DATA ----------------------------------------------------------
 
     // current user test
     $scope.currentUser = {

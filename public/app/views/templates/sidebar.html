@@ -30,14 +30,14 @@
                     </span><span class="sidebar__text">Блог</span>
                 </div>
             </a>
-            <a class="sidebar__link" ui-sref="user({ url: currentUser.url })" ui-sref-active="active">
+            <a ng-show="user.authorized" class="sidebar__link" ui-sref="user({ url: currentUser.url })" ui-sref-active="active">
                 <div class="table-middle">
                     <span class="sidebar__icon">
                         <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 41.167 33.333"><path fill="" d="M28.446 15.6l-13.92-8.632c-.17-.102-.345-.164-.545-.164-.544 0-.99.467-.99 1.04h-.004V25.76h.005c0 .574.446 1.043.99 1.043.206 0 .376-.074.56-.178l13.906-8.62c.33-.286.54-.718.54-1.202s-.21-.912-.54-1.203z"/><g fill=""><path d="M7.768 4.17h-2.22V28.97h2.22v3.484h-6.75V.687h6.75V4.17zM32.143.687h6.75v31.766h-6.75V28.97h2.234V4.17h-2.234V.688z"/></g></svg></i>
                     </span><span class="sidebar__text">Мой канал</span>
                 </div>
             </a>
-            <a class="sidebar__link" ui-sref="history" ui-sref-active="active">
+            <a ng-show="user.authorized" class="sidebar__link" ui-sref="history" ui-sref-active="active">
                 <div class="table-middle">
                     <span class="sidebar__icon">
                         <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 34 34"><path fill="" d="M17 0C7.612 0 0 7.61 0 17c0 9.387 7.612 17 17 17 9.39 0 17-7.613 17-17 0-9.39-7.61-17-17-17zm6.25 23.67l-.494.496c-.412.412-1.11.432-1.542.04l-6.406-5.603c-.437-.39-.767-1.186-.737-1.77l.594-10.106c.03-.586.534-1.063 1.12-1.063h.698c.585 0 1.087.477 1.115 1.063l.488 8.406c.028.582.37 1.416.757 1.854l4.454 5.14c.387.436.37 1.13-.045 1.543z"/></svg></i>
@@ -50,7 +50,7 @@
 
         <div class="sidebar__submenu">
             <div class="accordion hidden-phone">
-                <div toggler>
+                <div ng-show="user.authorized" toggler>
                     <a class="sidebar__link">
                         <div class="table-middle">
                             <span class="sidebar__icon">

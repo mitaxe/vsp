@@ -2071,7 +2071,8 @@ textarea {
   height: 70px;
   padding-right: 8px;
   z-index: 999;
-  background: linear-gradient(#353535, #2a2a2a); }
+  background: linear-gradient(#353535, #2a2a2a);
+  overflow: hidden; }
   .header:after {
     content: "";
     display: table;
@@ -2081,6 +2082,8 @@ textarea {
     height: 70px;
     color: #fefefe;
     transition: .3s; }
+    .header__item.ng-hide {
+      opacity: 0; }
   .header__sandwich {
     float: left;
     width: 40px;
@@ -2769,7 +2772,7 @@ textarea {
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
-  z-index: 9999;
+  z-index: 99999;
   color: black;
   cursor: default;
   transform: translate3d(0, 0, 0); }
@@ -2798,8 +2801,17 @@ textarea {
   .popover--user {
     right: 8px; }
     .popover--user .popover__link {
+      -webkit-user-select: none;
+      /* Chrome all / Safari all */
+      -moz-user-select: none;
+      /* Firefox all */
+      -ms-user-select: none;
+      /* IE 10+ */
+      user-select: none;
+      /* Likely future */
       display: block;
-      margin-bottom: 20px; }
+      margin-bottom: 20px;
+      cursor: pointer; }
       .popover--user .popover__link:after {
         content: "";
         display: table;
