@@ -61,7 +61,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 console.log('login response - ',response);
                 console.log('Assigned user token - '+response.data.data.token);
 
-                factory.userCommonData().sucess(function(response) {
+                factory.userCommonData().success(function(response) {
                     $scope.userData = response.data.data;
                     console.log('User common data' + $scope.userData);
                 });
