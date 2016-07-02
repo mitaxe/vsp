@@ -752,7 +752,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 console.log('Assigned user token - '+response.data.data.token);
 
                 factory.userCommonData().success(function(response) {
-                    $scope.userData = response.data.data;
+                    $scope.userData = response.data;
                     console.log('User common data' + $scope.userData);
                 });
 
