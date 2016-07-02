@@ -1,10 +1,14 @@
 angular.module("MainApp")
-.controller('HistoryCtrl', ['$scope', 'historyData', function ($scope, historyData) {
+.controller('HistoryCtrl', ['$scope', 'factory', 'historyData', function ($scope, factory, historyData) {
 
-    $scope.historyData = clone(historyData.data.videos.sort(dynamicSort('date'))).reverse();
+    factory.getHistoryData().success(function(response) {
+        $scope.historyData = response.data;
+        console.log('History data - ', $scope.historyData);
+    });
 
     // history filter
     $scope.historyFilter = function(array,index,prop) {
+        return true;
         if (
             index !== 0 &&
             array[index][prop] === array[index-1][prop]

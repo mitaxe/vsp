@@ -139,6 +139,23 @@ class VideosController extends RESTController
         $videos = Videos::find($queryParams);
         $response->add($videos);
         return $response;
-    }    
+    }  
+    
+    public function getHistoryData()
+    {
+        $viewedResponse = new VideosResponse();
+        $queryParams = ['limit' => 12, 'conditions' => 'status=\'public\'', 'order' => 'statViews DESC'];
+        $videos = Videos::find($queryParams);
+        $viewedResponse->add($videos);
+
+        $likedResponse = new VideosResponse();
+        $queryParams = ['limit' => 12, 'conditions' => 'status=\'public\''];
+        $videos = Videos::find($queryParams);
+        $likedResponse->add($videos);
+
+        return new HistoryDataResponse($viewedResponse, $likedResponse);
+
+
+    }
     
 }

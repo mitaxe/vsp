@@ -85,7 +85,7 @@ angular.module("MainApp")
 
         // history page
         factory.getHistoryData = function() {
-            return $http.get('./assets/js/data.json');
+            return $http.get(domain + '/videos/groups/history');
         };
 
         // default test

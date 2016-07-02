@@ -519,7 +519,7 @@ angular.module("MainApp")
 
         // history page
         factory.getHistoryData = function() {
-            return $http.get('./assets/js/data.json');
+            return $http.get(domain + '/videos/groups/history');
         };
 
         // default test
@@ -543,7 +543,7 @@ angular.module("MainApp")
 
         // LOGIN
         factory.loginUser = function(data) {
-            return $http.post('http://vsponline.dev/users/login', data);
+            return $http.post(domain + '/users/login', data);
         };
     
         factory.userCommonData = function (){
@@ -652,12 +652,16 @@ angular.module("MainApp")
 // }]);
 
 angular.module("MainApp")
-.controller('HistoryCtrl', ['$scope', 'historyData', function ($scope, historyData) {
+.controller('HistoryCtrl', ['$scope', 'factory', 'historyData', function ($scope, factory, historyData) {
 
-    $scope.historyData = clone(historyData.data.videos.sort(dynamicSort('date'))).reverse();
+    factory.getHistoryData().success(function(response) {
+        $scope.historyData = response.data;
+        console.log('History data - ', $scope.historyData);
+    });
 
     // history filter
     $scope.historyFilter = function(array,index,prop) {
+        return true;
         if (
             index !== 0 &&
             array[index][prop] === array[index-1][prop]

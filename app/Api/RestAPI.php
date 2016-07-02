@@ -125,6 +125,7 @@ class RestAPI extends MicroMVC
 
     $videosRouts = new MicroCollection();
     $videosRouts->setHandler(new VideosController());
+    $videosRouts->get('/videos/groups/history', 'getHistoryData');
     $videosRouts->get('/exclusive/videos', 'getExclusiveVideos');
     $videosRouts->get('/ratings/videos', 'getRatingsVideos');
     $videosRouts->get('/new/videos', 'getNewVideos');
