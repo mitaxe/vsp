@@ -109,7 +109,7 @@ angular.module("MainApp")
 
         // LOGIN
         factory.loginUser = function(data) {
-            return $http.post('http://vsponline.dev/users/login', data);
+            return $http.post(domain + '/users/login', data);
         };
     
         factory.userCommonData = function (){
