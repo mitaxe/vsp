@@ -62,6 +62,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 console.log('Assigned user token - '+response.data.data.token);
 
                 $scope.userData = factory.userCommonData();
+                console.log($scope.userData);
                 $scope.user.authorized = true; // user authorized
                 localStorage.setItem('userToken', response.data.data.token); // set token to local storage
                 localStorage.setItem('loginData', JSON.stringify($scope.loginData)); // set login data to local storage
@@ -157,10 +158,8 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     factory.getVideos().success(function(response) {
         $scope.blogs = response.videos;
         $scope.videos = response.videos;
-        $scope.pins = response.pins;
         $scope.channels = response.channels;
         $scope.goods = response.goods;
-        $scope.notifications = response.notifications;
         $scope.comments = response.comments;
         // console.log($scope.videos)
     });
