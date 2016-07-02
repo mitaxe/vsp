@@ -15,7 +15,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
 
     // search
     $scope.goSearch = function() {
-        console.log('search key - ',$scope.searchKey);
+        // console.log('search key - ',$scope.searchKey);
         if (!$scope.searchKey) return;
         $scope.searching = true;
         $scope.searchActive = true;

@@ -437,6 +437,7 @@ angular.module("MainApp")
 
         var factory = {};
         var domain = 'http://vsponline.qa';
+
         // home page
         factory.getHomeData = function() {
             return $http.get(domain + '/index/videos');
@@ -514,7 +515,7 @@ angular.module("MainApp")
         // other articles
         factory.getOtherArticles = function(id) {
             return $http.get(domain + '/articles/' + id + '/other');
-        };    
+        };
 
 
         // history page
@@ -529,14 +530,17 @@ angular.module("MainApp")
 
         // search
         factory.getSearchVideos = function(keyword,offset) {
+            // offset = offset || '';
             console.log('key - ',keyword,'offset - ',offset);
-            return $http.get(domain + '/index/search/videos?q=' + keyword + '&offset=' + offset,  factory.config);
+            return $http.get(domain + '/index/search/videos?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchChannels = function(keyword,offset) {
+            // offset = offset || '';
             console.log('key - ',keyword,'offset - ',offset);
             return $http.get(domain + '/index/search/channels?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchArticles = function(keyword,offset) {
+            // offset = offset || '';
             console.log('key - ',keyword,'offset - ',offset);
             return $http.get(domain + '/index/search/articles?q=' + keyword + '&offset=' + offset);
         };
@@ -545,9 +549,9 @@ angular.module("MainApp")
         factory.loginUser = function(data) {
             return $http.post(domain + '/users/login', data);
         };
-    
+
         factory.userCommonData = function (){
-            return $http.get(domain + '/users/common');  
+            return $http.get(domain + '/users/common');
         };
 
 
@@ -712,7 +716,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
 
     // search
     $scope.goSearch = function() {
-        console.log('search key - ',$scope.searchKey);
+        // console.log('search key - ',$scope.searchKey);
         if (!$scope.searchKey) return;
         $scope.searching = true;
         $scope.searchActive = true;
@@ -976,7 +980,7 @@ angular.module("MainApp")
 
         var q = $scope.searchKey;
 
-        console.log($scope.searchKey);
+        // console.log($scope.searchKey);
 
         $scope.requestVideos(q,$scope.videosOffset).success(function(response) {
             console.log('videos - ',response);
@@ -987,9 +991,9 @@ angular.module("MainApp")
 
             $scope.searchVideos = response.data;
             $scope.videosOffset = response.meta.count || 0;
-            console.log($scope.videosOffset);
+            // console.log('videos offset - ',$scope.videosOffset);
             $scope.videosCount = response.meta.totalCount || 0;
-            console.log($scope.videosCount);
+            // console.log($scope.videosCount);
         });
 
         $scope.requestChannels(q,$scope.channelsOffset).success(function(response) {
@@ -1012,7 +1016,7 @@ angular.module("MainApp")
             }
         };
 
-        $scope.totalCount();
+        // $scope.totalCount();
 
     }
 
@@ -1349,11 +1353,12 @@ app.directive('loadMore', ["$document", function ($document) {
                     id = id || scope.offset;
 
                     request(id,scope.offset).success(function(response) {
-                        console.log('offset - ',scope.offset);
-                        console.log('response - ',response);
+                        // console.log('loadmore offset - ',scope.offset);
+                        console.log('loadmore response - ',response);
                         scope.loadingMore = false;
                         if (response.data !== null) {
                             array.push.apply(array, response.data);
+                            console.log('items loaded already - ',array.length);
                             if (response.data.length < offset) {
                                 scope.noMoreResponse = true;
                             }

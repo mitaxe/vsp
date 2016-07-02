@@ -11,7 +11,7 @@ angular.module("MainApp")
 
         var q = $scope.searchKey;
 
-        console.log($scope.searchKey);
+        // console.log($scope.searchKey);
 
         $scope.requestVideos(q,$scope.videosOffset).success(function(response) {
             console.log('videos - ',response);
@@ -22,9 +22,9 @@ angular.module("MainApp")
 
             $scope.searchVideos = response.data;
             $scope.videosOffset = response.meta.count || 0;
-            console.log($scope.videosOffset);
+            // console.log('videos offset - ',$scope.videosOffset);
             $scope.videosCount = response.meta.totalCount || 0;
-            console.log($scope.videosCount);
+            // console.log($scope.videosCount);
         });
 
         $scope.requestChannels(q,$scope.channelsOffset).success(function(response) {
@@ -47,7 +47,7 @@ angular.module("MainApp")
             }
         };
 
-        $scope.totalCount();
+        // $scope.totalCount();
 
     }
 

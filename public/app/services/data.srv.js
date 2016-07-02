@@ -3,6 +3,7 @@ angular.module("MainApp")
 
         var factory = {};
         var domain = 'http://vsponline.qa';
+
         // home page
         factory.getHomeData = function() {
             return $http.get(domain + '/index/videos');
@@ -80,7 +81,7 @@ angular.module("MainApp")
         // other articles
         factory.getOtherArticles = function(id) {
             return $http.get(domain + '/articles/' + id + '/other');
-        };    
+        };
 
 
         // history page
@@ -95,14 +96,17 @@ angular.module("MainApp")
 
         // search
         factory.getSearchVideos = function(keyword,offset) {
+            // offset = offset || '';
             console.log('key - ',keyword,'offset - ',offset);
-            return $http.get(domain + '/index/search/videos?q=' + keyword + '&offset=' + offset,  factory.config);
+            return $http.get(domain + '/index/search/videos?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchChannels = function(keyword,offset) {
+            // offset = offset || '';
             console.log('key - ',keyword,'offset - ',offset);
             return $http.get(domain + '/index/search/channels?q=' + keyword + '&offset=' + offset);
         };
         factory.getSearchArticles = function(keyword,offset) {
+            // offset = offset || '';
             console.log('key - ',keyword,'offset - ',offset);
             return $http.get(domain + '/index/search/articles?q=' + keyword + '&offset=' + offset);
         };
@@ -111,9 +115,9 @@ angular.module("MainApp")
         factory.loginUser = function(data) {
             return $http.post(domain + '/users/login', data);
         };
-    
+
         factory.userCommonData = function (){
-            return $http.get(domain + '/users/common');  
+            return $http.get(domain + '/users/common');
         };
 
 

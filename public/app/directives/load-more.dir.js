@@ -16,11 +16,12 @@ app.directive('loadMore', function ($document) {
                     id = id || scope.offset;
 
                     request(id,scope.offset).success(function(response) {
-                        console.log('offset - ',scope.offset);
-                        console.log('response - ',response);
+                        // console.log('loadmore offset - ',scope.offset);
+                        console.log('loadmore response - ',response);
                         scope.loadingMore = false;
                         if (response.data !== null) {
                             array.push.apply(array, response.data);
+                            console.log('items loaded already - ',array.length);
                             if (response.data.length < offset) {
                                 scope.noMoreResponse = true;
                             }
