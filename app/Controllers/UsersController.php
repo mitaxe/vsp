@@ -48,8 +48,28 @@ class UsersController extends RESTController
     {
         $token = $this->request->getToken();
             
-        if (!empty($token)) {
-            return $token;
+        if (1 || !empty($token)) {
+            $channel = Channels::findFirst("vspChannelId = 'MBRN2HIdu_SYFXljuGAFrmrs'");
+            $channels = Channels::find(['limit'=>3]);
+            $pinsResponse = new ChannelsResponse();
+            $pinsResponse->add($channels);
+            return new UserCommonResponse(
+                [
+                    'comments' => [],
+                    'other' => []
+                ],
+                new ChannelResponse(
+                    $channel->vspChannelId,
+                    $channel->title,
+                    $channel->description,
+                    $channel->thumbMedium,
+                    $channel->skinHeader,
+                    $channel->statVideos,
+                    $channel->statViews,
+                    $channel->statSubscribers
+                ),
+                $pinsResponse
+            );
         }
 
         return new Response();
