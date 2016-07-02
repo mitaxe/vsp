@@ -53,7 +53,7 @@ class VideosController extends RESTController
 
     public function getVideoComments($id)
     {
-        $data[] = [
+        /*$data[] = [
             "user" => "Clan ZIP",
             "link" => "#",
             "img" => "assets/img/ball-59.png",
@@ -77,7 +77,8 @@ class VideosController extends RESTController
                     "likes" => 18
                 ]]
 
-        ];
+        ];*/
+        $data = [];
         return new CommentResponse($data);
     }
 
