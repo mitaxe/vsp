@@ -113,6 +113,10 @@ angular.module("MainApp")
         factory.loginUser = function(data) {
             return $http.post('http://vsponline.qa/users/login', data);
         };
+    
+        factory.userCommonData = function (){
+            return $http.get('http://vsponline.qa/users/common');  
+        };
 
         return factory;
 

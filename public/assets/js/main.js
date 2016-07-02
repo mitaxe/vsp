@@ -547,6 +547,10 @@ angular.module("MainApp")
         factory.loginUser = function(data) {
             return $http.post('http://vsponline.qa/users/login', data);
         };
+    
+        factory.userCommonData = function (){
+            return $http.get('http://vsponline.qa/users/common');  
+        };
 
         return factory;
 
@@ -768,7 +772,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 console.log('Assigned user token - '+response.data.data.token);
 
                 $scope.user.authorized = true; //
-
+                $scope.userData = factory.userCommonData();
                 $http.defaults.headers.common.Authorization = response.data.data.token; // set http header token
                 $scope.logging = false; // adjust button text
                 $scope.showloginModal = false; // hide login modal

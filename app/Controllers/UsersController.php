@@ -26,7 +26,6 @@ class UsersController extends RESTController
             throw new UserNotFoundException('User not found or incorrect password/login');
         }
         
-        
         return new Response();
         // неудачная проверка
     }
@@ -43,6 +42,17 @@ class UsersController extends RESTController
         $user->password = $this->security->hash($password);
 
         $user->save();
+    }
+
+    public function getCommonData()
+    {
+        $token = $this->request->getToken();
+            
+        if (!empty($token)) {
+            return $token;
+        }
+
+        return new Response();
     }
     
 }
