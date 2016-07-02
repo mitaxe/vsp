@@ -117,7 +117,8 @@ angular.module("MainApp")
         factory.userCommonData = function (){
             return $http.get('http://vsponline.qa/users/common');  
         };
-    
+
+
         factory.getRecommendedChannels = function(){
             return $http.get('http://vsponline.qa/channels/groups/recommended');
         };
