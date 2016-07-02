@@ -753,7 +753,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
 
                 factory.userCommonData().success(function(response) {
                     $scope.userData = response.data;
-                    console.log('User common data' + $scope.userData);
+                    console.log('User common data - ' + response.data);
                 });
 
                 $scope.user.authorized = true; // user authorized
