@@ -62,7 +62,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 console.log('Assigned user token - '+response.data.data.token);
 
                 $scope.userData = factory.userCommonData();
-                console.log($scope.userData);
+                console.log('user common data' + $scope.userData);
                 $scope.user.authorized = true; // user authorized
                 localStorage.setItem('userToken', response.data.data.token); // set token to local storage
                 localStorage.setItem('loginData', JSON.stringify($scope.loginData)); // set login data to local storage
