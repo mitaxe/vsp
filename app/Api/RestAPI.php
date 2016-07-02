@@ -137,6 +137,7 @@ class RestAPI extends MicroMVC
     $channelsRouts = new MicroCollection();
     $channelsRouts->setHandler(new ChannelsController());
     $channelsRouts->get('/ratings/channels', 'getPopular');
+    $channelsRouts->get('/channels/groups/recommended', 'getRecommended');
     $channelsRouts->get('/channels/{id}', 'getChannel');
     $channelsRouts->get('/channels/{id}/playlists', 'getPlaylists');
     $channelsRouts->get('/channels/{id}/videos', 'getVideos');

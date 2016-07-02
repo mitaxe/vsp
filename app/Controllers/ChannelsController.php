@@ -95,6 +95,15 @@ class ChannelsController extends RESTController
         $response->add($channels);
         return $response;
     }
+    
+    public function getRecommended()
+    {
+        $channels = Channels::find(["order" => "statVideos DESC", "limit" => "12"]);
+        $response = new ChannelsResponse();
+        $response->add($channels);
+        
+        return $response; 
+    }
 
 
 }

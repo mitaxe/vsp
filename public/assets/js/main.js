@@ -545,11 +545,15 @@ angular.module("MainApp")
 
         // LOGIN
         factory.loginUser = function(data) {
-            return $http.post('http://vsponline.qa/users/login', data);
+            return $http.post('http://vsponline.dev/users/login', data);
         };
     
         factory.userCommonData = function (){
             return $http.get('http://vsponline.qa/users/common');  
+        };
+    
+        factory.getRecommendedChannels = function(){
+            return $http.get('http://vsponline.dev/channels/groups/recommended');
         };
 
         return factory;
@@ -729,6 +733,11 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     // END USER -------------------------------------------------------
 
 
+    factory.getRecommendedChannels().success(function(response) {
+        $scope.recommendedChannels = response.data;
+        console.log('Recommended channels - ', $scope.recommendedChannels);
+    });
+
     // LOGIN ----------------------------------------------------------
     $scope.loginData = {}; // login from data
     $scope.form = {}; // init form object
@@ -772,6 +781,8 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
             }
         );
     }
+
+
 
     // if token in local storage, get uset data
     if (localStorage.getItem('userToken')) {
@@ -823,6 +834,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     // END REGISTERATION ---------------------------------------------------
 
 
+
     // LOGOUT --------------------------------------------------------------
     $scope.logout = function() {
         console.log('logged out');
@@ -853,7 +865,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         $scope.videos = response.videos;
         $scope.channels = response.channels;
         $scope.goods = response.goods;
-        $scope.comments = '';
+        $scope.comments = response.comments;
         // console.log($scope.videos)
     });
 

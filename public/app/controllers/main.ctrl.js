@@ -39,6 +39,11 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     // END USER -------------------------------------------------------
 
 
+    factory.getRecommendedChannels().success(function(response) {
+        $scope.recommendedChannels = response.data;
+        console.log('Recommended channels - ', $scope.recommendedChannels);
+    });
+
     // LOGIN ----------------------------------------------------------
     $scope.loginData = {}; // login from data
     $scope.form = {}; // init form object
@@ -82,6 +87,8 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
             }
         );
     }
+
+
 
     // if token in local storage, get uset data
     if (localStorage.getItem('userToken')) {
@@ -131,6 +138,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         console.log('sending registration request for - ',$scope.registerData);
     };
     // END REGISTERATION ---------------------------------------------------
+
 
 
     // LOGOUT --------------------------------------------------------------
