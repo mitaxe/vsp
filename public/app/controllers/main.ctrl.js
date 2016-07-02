@@ -40,6 +40,8 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
 
 
     // LOGIN ----------------------------------------------------------
+    $scope.loginData = {}; // login from data
+    $scope.form = {}; // init form object
 
     // login button text
     $scope.getLoginBtnText = function() {
@@ -51,29 +53,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     };
 
     // login request
-    $scope.loginData = {}; // login from data
-    $scope.form = {}; // init form object
-    $scope.user.unauthorized = true;
-
-    $scope.loginUser = function() {
-
-        // trigger validation of all fields
-        angular.forEach($scope.form.login.$error, function (field) {
-            angular.forEach(field, function(errorField) {
-                errorField.$setTouched();
-            });
-        });
-
-        // check if valid
-        if ($scope.form.login.$invalid) {
-            console.log('invalid form');
-            return;
-        }
-
-        console.log('sending login request for - ',$scope.loginData);
-
-        $scope.logging = true; // adjust button text
-
+    function loginRequest() {
         // send login request
         factory.loginUser($scope.loginData).then(
             // success
@@ -81,8 +61,11 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 console.log('login response - ',response);
                 console.log('Assigned user token - '+response.data.data.token);
 
-                $scope.user.authorized = true; //
                 $scope.userData = factory.userCommonData();
+                $scope.user.authorized = true; // user authorized
+                localStorage.setItem('userToken', response.data.data.token); // set token to local storage
+                localStorage.setItem('loginData', JSON.stringify($scope.loginData)); // set login data to local storage
+
                 $http.defaults.headers.common.Authorization = response.data.data.token; // set http header token
                 $scope.logging = false; // adjust button text
                 $scope.showloginModal = false; // hide login modal
@@ -94,6 +77,31 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 console.log('error - ', error);
             }
         );
+    }
+
+    // if token in local storage, get uset data
+    if (localStorage.getItem('userToken')) {
+        console.log('token in local storage');
+        $scope.loginData = JSON.parse(localStorage.getItem('loginData'));
+        $scope.user.authorized = true;
+        loginRequest();
+    }
+
+    $scope.loginUser = function() {
+        // trigger validation of all fields
+        angular.forEach($scope.form.login.$error, function (field) {
+            angular.forEach(field, function(errorField) {
+                errorField.$setTouched();
+            });
+        });
+        // check if form is valid
+        if ($scope.form.login.$invalid) {
+            console.log('invalid form');
+            return;
+        }
+        console.log('sending login request for - ',$scope.loginData);
+        $scope.logging = true; // adjust button text
+        loginRequest(); // send login request
     };
 
     // END LOGIN -----------------------------------------------------------
@@ -125,8 +133,12 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     $scope.logout = function() {
         console.log('logged out');
         $scope.user.authorized = false;
+        localStorage.clear();
     };
     // END LOGOUT ----------------------------------------------------------
+
+
+
 
 
     // TEST DATA ----------------------------------------------------------

@@ -2268,10 +2268,6 @@ textarea {
   @media screen and (min-width: 1280px) {
     .header__tags, .header__random {
       display: table; } }
-  @media screen and (min-width: 1500px) {
-    .header__tags {
-      max-width: 120px;
-      max-width: calc(100% - 1420px); } }
   @media screen and (min-width: 1600px) {
     .header__search {
       width: 500px; } }
@@ -3267,7 +3263,8 @@ textarea {
     color: #3a3d3e;
     margin-bottom: 12px;
     font-weight: 500;
-    word-wrap: break-word; }
+    word-wrap: break-word;
+    line-height: 1.1 !important; }
   .thumb__text {
     font-size: 20px;
     margin-bottom: 12px;
