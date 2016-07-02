@@ -30,7 +30,7 @@
                     </span><span class="sidebar__text">Блог</span>
                 </div>
             </a>
-            <a ng-show="user.authorized" class="sidebar__link" ui-sref="user({ url: currentUser.url })" ui-sref-active="active">
+            <a ng-show="user.authorized" class="sidebar__link" ui-sref="channels({ id: userData.channel.id })" ui-sref-active="active">
                 <div class="table-middle">
                     <span class="sidebar__icon">
                         <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 41.167 33.333"><path fill="" d="M28.446 15.6l-13.92-8.632c-.17-.102-.345-.164-.545-.164-.544 0-.99.467-.99 1.04h-.004V25.76h.005c0 .574.446 1.043.99 1.043.206 0 .376-.074.56-.178l13.906-8.62c.33-.286.54-.718.54-1.202s-.21-.912-.54-1.203z"/><g fill=""><path d="M7.768 4.17h-2.22V28.97h2.22v3.484h-6.75V.687h6.75V4.17zM32.143.687h6.75v31.766h-6.75V28.97h2.234V4.17h-2.234V.688z"/></g></svg></i>

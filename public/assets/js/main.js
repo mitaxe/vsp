@@ -853,7 +853,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         $scope.videos = response.videos;
         $scope.channels = response.channels;
         $scope.goods = response.goods;
-        $scope.comments = response.comments;
+        $scope.comments = '';
         // console.log($scope.videos)
     });
 
