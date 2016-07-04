@@ -1742,19 +1742,16 @@ input[type='radio']:checked + .radio_label:after {
     width: 300px;
     font-size: 15px;
     outline: none;
-    background: none;
+    background: white;
     border: 1px solid #ddd;
     color: #5b5d5e; }
     .form input:focus,
     .form textarea:focus {
       border-color: #00cc33;
       box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2); }
-    .form input.white,
-    .form textarea.white {
-      background: white; }
     .form input[disabled],
     .form textarea[disabled] {
-      background: none; }
+      background: #fafafa; }
     .form input.ng-invalid.ng-touched,
     .form textarea.ng-invalid.ng-touched {
       border-color: #eb1c23;

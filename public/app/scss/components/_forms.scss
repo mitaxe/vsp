@@ -19,18 +19,15 @@
         // max-width: 90%;
         font-size: 15px;
         outline: none;
-        background: none;
+        background: white;
         border: 1px solid #ddd;
         color: #5b5d5e;
         &:focus {
             border-color: $col-green;
             box-shadow: 0 1px 4px 1px rgba(0, 204, 51, 0.2);
         }
-        &.white {
-            background: white;
-        }
         &[disabled] {
-            background: none;
+            background: #fafafa;
         }
         &.ng-invalid.ng-touched {
             border-color: $col-red;
