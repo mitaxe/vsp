@@ -73,9 +73,9 @@ app.filter('trimText', function () {
         if (text === null) {
             return '';
         } else if (backwards) {
-            return '...' + text.slice(text.length = length, length);
+            return '...' + text.slice(length);
         } else if (text.length > length) {
-            return text.substr(0, length) + "...";
+            return text.slice(0, length) + "...";
         }
         return text;
     };

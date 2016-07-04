@@ -14,8 +14,9 @@
                         </div>
                     </p>
                     <p class="article__subtitle">
-                        <div class="article__content">
-                            {{ article.description | limitTo : 200}}
+                        <div class="article__content article__text"
+                            ng-bind-html="article.description | trimText:200"
+                            style="white-space: pre-line;">
                         </div>
                     </p>
                     <div class="article__grey-bg">
@@ -29,8 +30,9 @@
                         <img ng-src="{{ article.thumbHigh }}" alt="" />
                     </div>
                     <p>
-                        <div class="article__content article__text">
-                            {{ article.description }}
+                        <div class="article__content article__text"
+                            ng-bind-html="article.description | trimText:200:true"
+                            style="white-space: pre-line;">
                         </div>
                     </p>
                 </article>

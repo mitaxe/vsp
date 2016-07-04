@@ -10,7 +10,7 @@
                 <p class="block__subtitle">Информация о новых каналах, интересных видео и о всем, что происходит на new [age]!</p>
                 <hr class="block__hr">
             </div>
-        </div>
+        </div><!-- blog page header -->
 
         <div class="block  block--blog">
 
@@ -26,17 +26,19 @@
                     </div>
                     <div class="col-xs-12 col-sm-5 col-md-7">
                         <p class="thumb__title"><a href="">{{ blog.title }}</a></p>
-                        <p class="thumb__text"><a href="#">{{ blog.description | limitTo: 600}}</a></p>
+                        <p class="thumb__text"><a href="#">{{ blog.description | trimText:250 }}</a></p>
                         <p>
-                            <span class="thumb__date"><span class="thumb__number">{{ blog.dateCreated | prettyDate }}</span> </span>
+                            <span class="thumb__date">
+                                <span class="thumb__number">{{ blog.dateCreated | prettyDate }}</span>
+                            </span>
                             <span ng-show="blog.vspVideoId != null" class="thumb__hasvideo">Содержит Видео</span>
                         </p>
                     </div>
                 </div>
-            </div>
+            </div><!-- first article -->
 
             <!-- other articles -->
-            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="blog in blogData | limitTo: (limits.blogs + 1) | startFrom : 1" ng-class="{'hidden-phone hidden-tablet':$last}">
+            <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="blog in blogData | startFrom : 1" ng-class="{'hidden-phone hidden-tablet':$last}">
                 <div class="thumb thumb--blog-med row">
                     <div class="col-xs-6 col-sm-12">
                         <a ui-sref="article({ id: blogData[$index + 1].id })">
@@ -47,14 +49,16 @@
                     </div>
                     <div class="col-xs-6 col-sm-12">
                         <p class="thumb__title"><a href="">{{ blog.title }}</a></p>
-                        <p class="thumb__text"><a href="#">{{ blog.description | limitTo: 100 }}</a></p>
+                        <p class="thumb__text"><a href="#">{{ blog.description | trimText:100 }}</a></p>
                         <p>
-                            <span class="thumb__date"><span class="thumb__number">{{ blog.date | prettyDate }}</span></span>
+                            <span class="thumb__date">
+                                <span class="thumb__number">{{ blog.date | prettyDate }}</span>
+                            </span>
                             <span ng-show="blog.vspVideoId != null" class="thumb__hasvideo">Содержит Видео</span>
                         </p>
                     </div>
                 </div>
-            </div>
+            </div><!-- other articles -->
 
         </div>
 

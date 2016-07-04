@@ -155,21 +155,11 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
 
     // TEST DATA ----------------------------------------------------------
 
-    // current user test
-    // $scope.currentUser = {
-    //     "name": "Current User",
-    //     "url": "CurrUser",
-    //     "avatar": "https://yt3.ggpht.com/-fGQ0wMqcQ2E/AAAAAAAAAAI/AAAAAAAAAAA/DJ1UmcmYRMI/s100-c-k-no-rj-c0xffffff/photo.jpg",
-    //     "cover": "https://yt3.ggpht.com/-n5hYQ4Nf_Uk/VQsVarAAlgI/AAAAAAAAKhM/U3WIG__7xQs/w2120-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no/Never-Stop-Learning-Social_YouTube%2B%25281%2529.png",
-    //     "description": "This is user channel description test test test test test test test test test test test test test test test test.",
-    //     "subscr_counter" : 18358461
-    // };
-
     // factory test data
     factory.getVideos().success(function(response) {
-        $scope.blogs = response.videos;
+        // $scope.blogs = response.videos;
         $scope.videos = response.videos;
-        $scope.channels = response.channels;
+        // $scope.channels = response.channels;
         $scope.goods = response.goods;
         $scope.comments = response.comments;
         // console.log($scope.videos)

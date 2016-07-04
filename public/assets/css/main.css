@@ -948,7 +948,7 @@ select option:hover {
   padding: 12px 20px 12px 25px;
   font-size: 16px;
   color: #828383;
-  margin: 4px 0 0 25px; }
+  margin-left: 25px; }
   .btn-grey svg {
     fill: #828383;
     margin-right: 10px; }
@@ -1607,6 +1607,7 @@ input[type='radio']:checked + .radio_label:after {
     margin: 0 -15px 25px; }
   .article__text {
     font-size: 18px;
+    line-height: 1.3;
     color: #666; }
   @media screen and (max-width: 767px) {
     .article__content {
