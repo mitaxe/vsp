@@ -38,7 +38,7 @@ angular.module("MainApp")
 
     $scope.addComment = function(text,commentIndex,responseIndex) {
         if (text) {
-            var now = $scope.getDate(new Date().toLocaleString());
+            var now = new Date().toLocaleString();
             var comment = {
                 "user": $scope.currentUser.name,
                 "text": text,

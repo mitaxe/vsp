@@ -1,32 +1,65 @@
-<!-- channel page -->
+<!-- channel cover and avatar -->
 <div class="channel">
-    <div class="channel__cover" ng-style="{'background-image': 'url(' + content.imgBg + ')'}">
-        <div class="channel__ava">
-            <img ng-src="{{ content.img }}" alt="avatar"/>
+    <div class="channel__cover"
+        ng-class="{'bf_vis': hoverCover}"
+        ng-style="{'background-image': 'url(' + content.imgBg + ')'}">
+        <div ng-show="content.id == userData.channel.id">
+            <label for="channel_bg"
+                ng-mouseover="hoverCover = true"
+                ng-mouseleave="hoverCover = false"
+                class="change_img channel_bg hidden-tablet hidden-phone">
+            </label>
+            <div ng-show="hoverCover" class="bg_text">Обновить фото обложки канала</div>
+            <input type="file" id="channel_bg" class="hidden">
         </div>
+        <!-- channel avatar -->
+        <div class="channel__ava" ng-class="{'bf_vis': hoverAva}">
+            <img ng-src="{{ content.img }}" alt="avatar"/>
+            <div ng-show="content.id == userData.channel.id">
+                <label for="channel_ava"
+                    ng-mouseover="hoverAva = true"
+                    ng-mouseleave="hoverAva = false"
+                    class="change_img channel_ava hidden-tablet hidden-phone">
+                </label>
+                <div ng-show="hoverAva" class="bg_text ava">Обновить аватар канала</div>
+                <input type="file" id="channel_ava" class="hidden">
+            </div>
+        </div><!-- channel avatar -->
     </div>
 </div>
 
-<!-- content -->
+<!-- channel content -->
 <div class="content">
     <div class="row">
 
-        <!-- channel page header -->
+        <!-- channel-header -->
         <div class="block block--header">
             <div class="col-xs-12">
-                <div class="channel__head">
+                <div class="accordion channel__head">
                     <div class="clearfix">
                         <h2 class="block__title">{{ content.title }}</h2>
-                        <div class="subscribe_box hidden-tablet hidden-phone">
-                            <span ng-click="subscribe()" class="btn green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
-                            <span class="counter subscribe"> {{ content.statSubscribers | number }}</span>
+                        <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-white btn-grey hidden-tablet hidden-phone">
+                            <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
+                            </svg></i>
+                            Редактировать канал
+                        </a>
+                        <div ng-show="content.id != userData.channel.id" class="subscribe_box hidden-tablet hidden-phone">
+                            <span ng-click="subscribe()" class="green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
+                            <span class="counter subscribe">{{ content.statSubscribers | number }}</span>
                         </div>
                     </div>
                     <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
-                        <div class="subscribe_box hidden-desktop" style="float: none;">
-                            <span ng-click="subscribe()" class="btn green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
-                            <span class="counter subscribe"> {{ content.statSubscribers | number }}</span>
+                        <div ng-show="content.id != userData.channel.id" class="subscribe_box hidden-desktop" style="float: none;">
+                            <span ng-click="subscribe()" class="green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
+                            <span class="counter subscribe">{{ content.statSubscribers | number}}</span>
                         </div>
+                        <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-white btn-grey hidden-desktop" style="float: none;">
+                            <i class="svg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
+                                </svg>
+                            </i>
+                            Редактировать канал
+                        </a>
                     </div>
                     <p ng-init="symbolsLimit = 200" ng-show="content.description.length > 0" class="block__subtitle">
                         <span ng-bind-html="content.description | trimText:symbolsLimit" style="white-space: pre-line;"></span>
@@ -39,39 +72,30 @@
                     </p>
                 </div>
                 <div class="tablet_ctrl clearfix hidden-phone">
-                    <div class="subscribe_box hidden-desktop" style="float:left;">
-                        <span ng-click="subscribe()" class="btn green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
-                        <span class="counter subscribe"> {{ content.statSubscribers | number }}</span>
+                    <div ng-show="content.id != userData.channel.id" class="subscribe_box hidden-desktop" style="float: left;">
+                        <a ng-click="subscribe()" class="green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</a>
+                        <span class="counter subscribe"> {{ content.statSubscribers | number}}</span>
                     </div>
+                    <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-white btn-grey hidden-desktop">
+                        <i class="svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
+                            </svg>
+                        </i>
+                        Редактировать канал
+                    </a>
                 </div>
-
+                <!-- channel tabs nav -->
                 <div class="clearfix">
-                    <div class="block__btn user_channel_sort_box hidden-tablet hidden-phone">
-                        <div class="block__select">
-                            <div ng-class="{'hidden-visibility':$state.includes('xuser.shop')}">
-                                <span class="category-caption">Сортировка:</span>
-                                <div class="select" tabindex="0" ng-class="{'active':selectActive}" ng-blur="selectActive = false">
-                                    <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                                    <span class="select__title" ng-click="selectActive = !selectActive;">{{ selectedSortType }}</span>
-                                    <div class="select__list">
-                                        <ul>
-                                            <li ng-repeat="sortType in sortTypes" ng-click="sortBy($index); $parent.selectedSortType = sortType">{{ sortType }}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <tabs class="tabs">
                         <a ui-sref="channels.all" ui-sref-active="active">Все видео</a>
                         <a ng-show="channelPlaylists.length > 0" ui-sref="channels.playlist({ url: content.url })" ui-sref-active="active">Плейлисты</a>
                         <a ui-sref="channels.shop({ url: content.url })" ui-sref-active="active">Магазин</a>
                         <div class="tabs__underline"></div>
                     </tabs>
-                </div>
+                </div><!-- channel tabs nav -->
             </div>
             <hr class="block__hr">
-        </div>
+        </div><!-- channel-header -->
 
         <!-- channel views -->
         <div ui-view></div>

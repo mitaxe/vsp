@@ -610,7 +610,7 @@ angular.module("MainApp")
 
     $scope.addComment = function(text,commentIndex,responseIndex) {
         if (text) {
-            var now = $scope.getDate(new Date().toLocaleString());
+            var now = new Date().toLocaleString();
             var comment = {
                 "user": $scope.currentUser.name,
                 "text": text,
@@ -857,14 +857,14 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     // TEST DATA ----------------------------------------------------------
 
     // current user test
-    $scope.currentUser = {
-        "name": "Current User",
-        "url": "CurrUser",
-        "avatar": "https://yt3.ggpht.com/-fGQ0wMqcQ2E/AAAAAAAAAAI/AAAAAAAAAAA/DJ1UmcmYRMI/s100-c-k-no-rj-c0xffffff/photo.jpg",
-        "cover": "https://yt3.ggpht.com/-n5hYQ4Nf_Uk/VQsVarAAlgI/AAAAAAAAKhM/U3WIG__7xQs/w2120-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no/Never-Stop-Learning-Social_YouTube%2B%25281%2529.png",
-        "description": "This is user channel description test test test test test test test test test test test test test test test test.",
-        "subscr_counter" : 18358461
-    };
+    // $scope.currentUser = {
+    //     "name": "Current User",
+    //     "url": "CurrUser",
+    //     "avatar": "https://yt3.ggpht.com/-fGQ0wMqcQ2E/AAAAAAAAAAI/AAAAAAAAAAA/DJ1UmcmYRMI/s100-c-k-no-rj-c0xffffff/photo.jpg",
+    //     "cover": "https://yt3.ggpht.com/-n5hYQ4Nf_Uk/VQsVarAAlgI/AAAAAAAAKhM/U3WIG__7xQs/w2120-fcrop64=1,00005a57ffffa5a8-nd-c0xffffffff-rj-k-no/Never-Stop-Learning-Social_YouTube%2B%25281%2529.png",
+    //     "description": "This is user channel description test test test test test test test test test test test test test test test test.",
+    //     "subscr_counter" : 18358461
+    // };
 
     // factory test data
     factory.getVideos().success(function(response) {
@@ -1230,12 +1230,12 @@ angular.module("MainApp")
         $scope.channelPlaylists = response.data;
         console.log('channels playlists ', $scope.channelPlaylists);
     });
-    
+
     // get channel's goods
     factory.getChannelGoods($stateParams.id).success(function(response) {
         $scope.channelGoods = response.data;
         console.log('channels goods ', $scope.channelGoods);
-    });    
+    });
 
     // subscribe
     $scope.subscribe = function() {

@@ -8,101 +8,6 @@
             ng-mouseleave="hoverCover = false"
             class="change_img channel_bg hidden-tablet hidden-phone">
         </label>
-        <modal show="show.bgModal">
-            <div class="registration" ng-init="loginActive = true">
-                <div class="clearfix">
-                    <tabs class="tabs tabs--center">
-                        <a ng-click="loginActive = false" ng-class="{'active':!loginActive}">Регистрация</a>
-                        <a ng-click="loginActive = true" ng-class="{'active':loginActive}">Войти</a>
-                    </tabs>
-                </div>
-                <hr class="block__hr">
-                <div ng-show="!loginActive">
-                    <div class="registration__logo_row clearfix">
-                        <img src="assets/img/logo.png" alt="logo">
-                        <span>Вы можете использовать данные для входа с VSP Online</span>
-                        <div class="mob_btn pull-right hidden-desktop hidden-tablet">
-                            <a class="btn btn-google">Google +</a>
-                            <a class="btn btn-vk">Vk</a>
-                            <a class="btn btn-fb">Fb</a>
-                        </div>
-                    </div>
-                    <form id="reg-form" action="">
-                        <div class="registration__sign_in_options options">
-                            <div class="options__soc_bar clearfix">
-                                <span class="hidden-phone">Авторизация <br> через соц сети</span>
-                                <div class="pull-right hidden-phone">
-                                    <a class="btn btn-google">Google +</a>
-                                    <a class="btn btn-vk">Vk</a>
-                                    <a class="btn btn-fb">Fb</a>
-                                </div>
-                            </div>
-                            <div class="hidden-phone"><span class="line"></span> <span>или</span> <span class="line"></span></div>
-                            <div class="options__form">
-                                <div class="inp_row">
-                                    <label for="email">Email</label> <input type="email" id="email" name="email">
-                                </div>
-                                <div class="inp_row">
-                                    <label for="password">Пароль</label> <input type="password" id="password" name="password">
-                                </div>
-                                <div class="inp_row">
-                                    <label for="password_confirm">Подтвердить <br class="hidden-phone"> пароль</label> <input type="password" id="password_confirm" name="password_confirm">
-                                </div>
-                                <div class="inp_row">
-                                    <label for="nick_name">Никнейм <br class="hidden-phone"> <span class="not_mandatory">(не обязательно)</span></label> <input type="text" id="nick_name" name="nick_name">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="options__form bottom">
-                            <p class="reg_info">Регистрируя новый аккаунт, вы принимаете условия <br> <a href="#" class="btn">пользовательского соглашения</a></p>
-                            <div class="inp_row">
-                                <a href="#" class="btn btn-green main-ui ">Регистрация</a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div ng-show="loginActive">
-                    <div class="registration__logo_row clearfix">
-                        <img src="assets/img/logo.png" alt="logo">
-                        <span>Вы можете использовать данные для входа с VSP Online</span>
-                        <div class="mob_btn pull-right hidden-tablet hidden-desktop">
-                            <a class="btn btn-google">Google +</a>
-                            <a class="btn btn-vk">Vk</a>
-                            <a class="btn btn-fb">Fb</a>
-                        </div>
-                    </div>
-                    <div class="registration__sign_in_options options">
-                        <div class="options__soc_bar clearfix">
-                            <span class="hidden-phone">Войти через <br> соц сети</span>
-                            <div class="pull-right hidden-phone">
-                                <a class="btn btn-google">Google +</a>
-                                <a class="btn btn-vk">Vk</a>
-                                <a class="btn btn-fb">Fb</a>
-                            </div>
-                        </div>
-                        <div class="hidden-phone"><span class="line"></span> <span>или</span> <span class="line"></span></div>
-                        <div class="options__form">
-                            <div class="inp_row">
-                                <label for="email">Email</label> <input type="email">
-                            </div>
-                            <div class="inp_row">
-                                <label for="password">Пароль</label> <input type="password">
-                                <a href="#" class="btn inp_row__forgot_pass">Забыли пароль?</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="options__form bottom">
-                        <div class="inp_row">
-                            <input type="checkbox" class="hidden" id="remember_me">
-                            <label for="remember_me" class="check_label">Запомнить меня</label>
-                        </div>
-                        <div class="inp_row">
-                            <button class="btn btn-green main-ui ">Вход</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </modal>
         <div ng-show="hoverCover" class="bg_text">Обновить фото обложки канала</div>
         <input type="file" id="channel_bg" class="hidden">
 
@@ -116,7 +21,6 @@
             <div ng-show="hoverAva" class="bg_text ava">Обновить аватар канала</div>
             <input type="file" id="channel_ava" class="hidden">
         </div>
-
     </div>
 </div>
 
@@ -127,6 +31,68 @@
 <!-- content -->
 <div class="content">
     <div class="row">
+
+        <!-- channel page header -->
+        <!-- <div class="block block--header">
+            <div class="col-xs-12">
+                <div class="channel__head">
+                    <div class="clearfix">
+                        <h2 class="block__title">{{ content.title }}</h2>
+                        <div ng-show="content.id != userData.channel.id" class="subscribe_box hidden-tablet hidden-phone">
+                            <span ng-click="subscribe()" class="btn green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
+                            <span class="counter subscribe"> {{ content.statSubscribers | number }}</span>
+                        </div>
+                    </div>
+                    <div ng-show="content.id != userData.channel.id" class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
+                        <div class="subscribe_box hidden-desktop" style="float: none;">
+                            <span ng-click="subscribe()" class="btn green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
+                            <span class="counter subscribe"> {{ content.statSubscribers | number }}</span>
+                        </div>
+                    </div>
+                    <p ng-init="symbolsLimit = 200" ng-show="content.description.length > 0" class="block__subtitle">
+                        <span ng-bind-html="content.description | trimText:symbolsLimit" style="white-space: pre-line;"></span>
+                        <a class="read-more"
+                            ng-show="content.description.length > symbolsLimit"
+                            ng-click="symbolsLimit = infinity">
+                            <span>Читать далее</span>
+                            <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                        </a>
+                    </p>
+                </div>
+                <div ng-show="content.id != userData.channel.id" class="tablet_ctrl clearfix hidden-phone">
+                    <div class="subscribe_box hidden-desktop" style="float:left;">
+                        <span ng-click="subscribe()" class="btn green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
+                        <span class="counter subscribe"> {{ content.statSubscribers | number }}</span>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="block__btn user_channel_sort_box hidden-tablet hidden-phone">
+                        <div class="block__select">
+                            <div ng-class="{'hidden-visibility':$state.includes('xuser.shop')}">
+                                <span class="category-caption">Сортировка:</span>
+                                <div class="select" tabindex="0" ng-class="{'active':selectActive}" ng-blur="selectActive = false">
+                                    <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="22" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
+                                    <span class="select__title" ng-click="selectActive = !selectActive;">{{ selectedSortType }}</span>
+                                    <div class="select__list">
+                                        <ul>
+                                            <li ng-repeat="sortType in sortTypes" ng-click="sortBy($index); $parent.selectedSortType = sortType">{{ sortType }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <tabs class="tabs">
+                        <a ui-sref="channels.all" ui-sref-active="active">Все видео</a>
+                        <a ng-show="channelPlaylists.length > 0" ui-sref="channels.playlist({ url: content.url })" ui-sref-active="active">Плейлисты</a>
+                        <a ui-sref="channels.shop({ url: content.url })" ui-sref-active="active">Магазин</a>
+                        <div class="tabs__underline"></div>
+                    </tabs>
+                </div>
+            </div>
+            <hr class="block__hr">
+        </div> -->
 
         <!-- channel page header -->
         <div class="block block--header">
