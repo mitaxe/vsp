@@ -24,7 +24,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
 
     // on state change
     $scope.$on('$stateChangeSuccess', function () {
-        $scope.showloginModal = false;
+        // $scope.showloginModal = false;
         // console.log('state changed');
         if ($state.includes('login')) {
             $scope.showloginModal = true;

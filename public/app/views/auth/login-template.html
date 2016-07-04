@@ -41,7 +41,7 @@
                             ng-model="registerData.email"
                             name="registrerEmail"
                             required>
-                    <div ng-messages="form.register.registrerEmail.$error" ng-show="form.register.registrerEmail.$touched" role="alert">
+                    <div class="modal-messages" ng-messages="form.register.registrerEmail.$error" ng-show="form.register.registrerEmail.$touched" role="alert">
                         <div ng-message="required">Email обязателен</div>
                         <div ng-message="email">Введите валидный Email</div>
                     </div>
@@ -53,7 +53,7 @@
                             name="registerPassword"
                             minlength="5"
                             required>
-                    <div ng-messages="form.register.registerPassword.$error" ng-show="form.register.registerPassword.$touched" role="alert">
+                    <div class="modal-messages" ng-messages="form.register.registerPassword.$error" ng-show="form.register.registerPassword.$touched" role="alert">
                         <div ng-message="required">Пароль обязателен</div>
                         <div ng-message="minlength">Минимум 5 символов</div>
                     </div>
@@ -66,7 +66,7 @@
                             minlength="5"
                             required
                             ng-pattern="{{registerData.password}}">
-                    <div ng-messages="form.register.registerConfPassword.$error" ng-show="form.register.registerConfPassword.$touched" role="alert">
+                    <div class="modal-messages" ng-messages="form.register.registerConfPassword.$error" ng-show="form.register.registerConfPassword.$touched" role="alert">
                         <div ng-message="required">Подтвердите пароль</div>
                         <div ng-message="pattern">Пароль не совпадает</div>
                         <div ng-message="minlength">Минимум 5 символов</div>
@@ -120,7 +120,7 @@
                             ng-model="loginData.email"
                             name="loginEmail"
                             required>
-                    <div ng-messages="form.login.loginEmail.$error" ng-show="form.login.loginEmail.$touched" role="alert">
+                    <div class="modal-messages" ng-messages="form.login.loginEmail.$error" ng-show="form.login.loginEmail.$touched" role="alert">
                         <div ng-message="required">Email обязателен</div>
                         <div ng-message="email">Введите валидный Email</div>
                     </div>
@@ -133,7 +133,7 @@
                             name="loginPassword"
                             minlength="5"
                             required>
-                    <div ng-messages="form.login.loginPassword.$error" ng-show="form.login.loginPassword.$touched" role="alert">
+                    <div class="modal-messages" ng-messages="form.login.loginPassword.$error" ng-show="form.login.loginPassword.$touched" role="alert">
                         <div ng-message="required">Пароль обязателен</div>
                         <div ng-message="minlength">Минимум 5 символов</div>
                     </div>

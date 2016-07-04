@@ -4,10 +4,13 @@
     color: $col-grey-3;
 
     div[ng-messages] {
-        color: red;
+        color: $col-red;
         margin: 10px auto 5px;
-        text-align: right;
-        margin-right: 25px;
+        text-align: left;
+        // margin-right: 25px;
+        &.modal-messages {
+            padding-left: 125px;
+        }
     }
 
     input,
@@ -30,7 +33,8 @@
             background: none;
         }
         &.ng-invalid.ng-touched {
-            border: 1px solid red;
+            border-color: $col-red;
+            box-shadow: 0 1px 4px 1px rgba(235, 28, 35, 0.2);
             &:focus {
                 box-shadow: none;
             }

@@ -1732,10 +1732,11 @@ input[type='radio']:checked + .radio_label:after {
   margin: 0 0 20px;
   color: #5b5d5e; }
   .form div[ng-messages] {
-    color: red;
+    color: #eb1c23;
     margin: 10px auto 5px;
-    text-align: right;
-    margin-right: 25px; }
+    text-align: left; }
+    .form div[ng-messages].modal-messages {
+      padding-left: 125px; }
   .form input,
   .form textarea {
     width: 300px;
@@ -1756,7 +1757,8 @@ input[type='radio']:checked + .radio_label:after {
       background: none; }
     .form input.ng-invalid.ng-touched,
     .form textarea.ng-invalid.ng-touched {
-      border: 1px solid red; }
+      border-color: #eb1c23;
+      box-shadow: 0 1px 4px 1px rgba(235, 28, 35, 0.2); }
       .form input.ng-invalid.ng-touched:focus,
       .form textarea.ng-invalid.ng-touched:focus {
         box-shadow: none; }
