@@ -157,8 +157,8 @@
                             </a>
                         </div>
                         <div class="col-xs-6 col-sm-12">
-                            <p class="thumb__title"><a href="">{{ article.title }}</a></p>
-                            <p class="thumb__text hidden-phone"><a href="#">{{ article.description | limitTo: 200}}</a></p>
+                            <p class="thumb__title"><a href="">{{ article.title | trimText:100 }}</a></p>
+                            <p class="thumb__text hidden-phone"><a href="#">{{ article.description | trimText:150 }}</a></p>
                             <p>
                                 <span class="thumb__date">{{ article.date | prettyDate }}</span></span>
                                 <span class="thumb__hasvideo">Содержит Видео</span>
