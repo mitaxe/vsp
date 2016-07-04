@@ -74,13 +74,13 @@
                             name="password"
                             required>
                             <div class="main-messages" ng-messages="form.editProfile.password.$error" ng-show="form.editProfile.password.$touched" role="alert">
-                                <div ng-message="required">Email обязателен</div>
+                                <div ng-message="required">Пароль обязателен</div>
                                 <div ng-message="minlength">Минимум 5 символов</div>
                             </div>
                         </div>
                         <div ng-show="passDisabled" class="form__row">
                             <label class="form__title hidden-phone"></label>
-                            <a href="" class="colGreen" ng-click="passDisabled = false">Изменить пароль</a>
+                            <a href="" class="colGreen" ng-click="passDisabled = false; form.editProfile.password.$setTouched()">Изменить пароль</a>
                         </div>
                         <!-- <div class="form__row hidden-phone"></div> -->
                         <div class="form__row">
