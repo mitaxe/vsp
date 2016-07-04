@@ -1738,6 +1738,15 @@ input[type='radio']:checked + .radio_label:after {
     text-align: left; }
     .form div[ng-messages].modal-messages {
       padding-left: 125px; }
+    .form div[ng-messages].main-messages {
+      padding-left: 130px; }
+    .form div[ng-messages].ng-inactive {
+      margin: 0; }
+    @media screen and (max-width: 767px) {
+      .form div[ng-messages].modal-messages {
+        padding-left: 0; }
+      .form div[ng-messages].main-messages {
+        padding-left: 0; } }
   .form input,
   .form textarea {
     width: 300px;
@@ -1757,9 +1766,6 @@ input[type='radio']:checked + .radio_label:after {
     .form textarea.ng-invalid.ng-touched {
       border-color: #eb1c23;
       box-shadow: 0 1px 4px 1px rgba(235, 28, 35, 0.2); }
-      .form input.ng-invalid.ng-touched:focus,
-      .form textarea.ng-invalid.ng-touched:focus {
-        box-shadow: none; }
   .form input {
     padding: 0 20px;
     height: 30px;
@@ -1840,6 +1846,9 @@ input[type='radio']:checked + .radio_label:after {
         float: left; }
       .form__row--image-upload:last-child {
         margin-bottom: 0; } }
+
+.error {
+  color: #eb1c23; }
 
 img-crop {
   width: 100%;

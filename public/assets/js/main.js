@@ -216,7 +216,8 @@ angular.module("MainApp")
     })
     .state('profile-edit', {
         url: '/profile-edit',
-        templateUrl: 'app/views/profile/profile-edit.html'
+        templateUrl: 'app/views/profile/profile-edit.html',
+        controller: 'ProfileCtrl'
     })
 
     // add channel
@@ -563,12 +564,12 @@ angular.module("MainApp")
 
 }]);
 
-angular.module("MainApp")
-.controller('ChannelCtrl', ['$scope', function ($scope) {
-
-    $scope.content = $scope.currentUser;
-
-}]);
+// angular.module("MainApp")
+// .controller('ChannelCtrl', ['$scope', function ($scope) {
+//
+//     $scope.content = $scope.currentUser;
+//
+// }]);
 
 angular.module("MainApp")
 .controller('CommentsCtrl', ['$scope', '$sce', 'factory', function ($scope, $sce, factory) {
@@ -745,6 +746,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         console.log('Recommended channels - ', $scope.recommendedChannels);
     });
 
+
     // LOGIN ----------------------------------------------------------
     $scope.loginData = {}; // login from data
     $scope.form = {}; // init form object
@@ -775,7 +777,6 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 $scope.user.authorized = true; // user authorized
                 localStorage.setItem('userToken', response.data.data.token); // set token to local storage
                 localStorage.setItem('loginData', JSON.stringify($scope.loginData)); // set login data to local storage
-
                 $http.defaults.headers.common.Authorization = response.data.data.token; // set http header token
                 $scope.logging = false; // adjust button text
                 $scope.showloginModal = false; // hide login modal
@@ -788,8 +789,6 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
             }
         );
     }
-
-
 
     // if token in local storage, get uset data
     if (localStorage.getItem('userToken')) {
@@ -815,7 +814,6 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         $scope.logging = true; // adjust button text
         loginRequest(); // send login request
     };
-
     // END LOGIN -----------------------------------------------------------
 
 
@@ -839,7 +837,6 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         console.log('sending registration request for - ',$scope.registerData);
     };
     // END REGISTERATION ---------------------------------------------------
-
 
 
     // LOGOUT --------------------------------------------------------------
@@ -920,8 +917,37 @@ angular.module("MainApp")
 angular.module("MainApp")
 .controller('ProfileCtrl', ['$scope', function($scope) {
 
+    $scope.profileSettings = {
+        // "email": "test@test.com",
+        "password": "qwerty12345"
+    };
+
+    $scope.saveProfile = function() {
+        $scope.formTried = true;
+        // trigger validation of all fields
+        angular.forEach($scope.form.editProfile.$error, function (field) {
+            angular.forEach(field, function(errorField) {
+                errorField.$setTouched();
+            });
+        });
+        // check if form is valid
+        if ($scope.form.editProfile.$invalid) {
+            console.log('form invalid');
+            return;
+        }
+        console.log('saved profile',$scope.profileSettings);
+        // $scope.logging = true; // adjust button text
+
+        $scope.saving = true; // send login request
+        setTimeout(function () { // test
+            $scope.saving = false;
+             $scope.$apply();
+        }, 2000);
+    };
+
     // test
     $scope.videosCounter = 110;
+
     $scope.profile = {
         user : {
             avatar : 'assets/img/prof_img.png',

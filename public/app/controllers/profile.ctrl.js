@@ -1,8 +1,37 @@
 angular.module("MainApp")
 .controller('ProfileCtrl', ['$scope', function($scope) {
 
+    $scope.profileSettings = {
+        // "email": "test@test.com",
+        "password": "qwerty12345"
+    };
+
+    $scope.saveProfile = function() {
+        $scope.formTried = true;
+        // trigger validation of all fields
+        angular.forEach($scope.form.editProfile.$error, function (field) {
+            angular.forEach(field, function(errorField) {
+                errorField.$setTouched();
+            });
+        });
+        // check if form is valid
+        if ($scope.form.editProfile.$invalid) {
+            console.log('form invalid');
+            return;
+        }
+        console.log('saved profile',$scope.profileSettings);
+        // $scope.logging = true; // adjust button text
+
+        $scope.saving = true; // send login request
+        setTimeout(function () { // test
+            $scope.saving = false;
+             $scope.$apply();
+        }, 2000);
+    };
+
     // test
     $scope.videosCounter = 110;
+
     $scope.profile = {
         user : {
             avatar : 'assets/img/prof_img.png',

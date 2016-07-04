@@ -7,9 +7,22 @@
         color: $col-red;
         margin: 10px auto 5px;
         text-align: left;
-        // margin-right: 25px;
         &.modal-messages {
             padding-left: 125px;
+        }
+        &.main-messages {
+            padding-left: 130px;
+        }
+        &.ng-inactive {
+            margin: 0;
+        }
+        @include phone {
+            &.modal-messages {
+                padding-left: 0;
+            }
+            &.main-messages {
+                padding-left: 0;
+            }
         }
     }
 
@@ -32,9 +45,6 @@
         &.ng-invalid.ng-touched {
             border-color: $col-red;
             box-shadow: 0 1px 4px 1px rgba(235, 28, 35, 0.2);
-            &:focus {
-                box-shadow: none;
-            }
         }
     }
 
@@ -149,4 +159,8 @@
 
     }
 
+}
+
+.error {
+    color: $col-red;
 }

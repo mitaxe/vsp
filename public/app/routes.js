@@ -192,7 +192,8 @@ angular.module("MainApp")
     })
     .state('profile-edit', {
         url: '/profile-edit',
-        templateUrl: 'app/views/profile/profile-edit.html'
+        templateUrl: 'app/views/profile/profile-edit.html',
+        controller: 'ProfileCtrl'
     })
 
     // add channel
