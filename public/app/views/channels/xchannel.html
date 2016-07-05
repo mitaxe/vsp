@@ -87,9 +87,15 @@
                 <!-- channel tabs nav -->
                 <div class="clearfix">
                     <tabs class="tabs">
-                        <a ui-sref="channels.all" ui-sref-active="active">Все видео</a>
-                        <a ng-show="channelPlaylists.length > 0" ui-sref="channels.playlist({ url: content.url })" ui-sref-active="active">Плейлисты</a>
-                        <a ui-sref="channels.shop({ url: content.url })" ui-sref-active="active">Магазин</a>
+                        <a ng-show="channelVideos.length > 0"
+                            ui-sref="channels.all"
+                            ui-sref-active="active">Все видео</a>
+                        <a ng-show="channelPlaylists.length > 0"
+                            ui-sref="channels.playlist({ url: content.url })"
+                            ui-sref-active="active">Плейлисты</a>
+                        <a ng-show="channelGoods"
+                            ui-sref="channels.shop({ url: content.url })"
+                            ui-sref-active="active">Магазин</a>
                         <div class="tabs__underline"></div>
                     </tabs>
                 </div><!-- channel tabs nav -->

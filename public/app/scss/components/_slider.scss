@@ -1,11 +1,11 @@
 .slider {
     @include desktop {
-        opacity: 0;
+        // opacity: 0;
         // transition: opacity .1s ease-out;
         // transform: translate3d(0,0,0);
-        &.sliderReady {
-            opacity: 1;
-        }
+        // &.sliderReady {
+        //     opacity: 1;
+        // }
         &__pager {
             list-style: none;
             padding: 0;
@@ -48,7 +48,8 @@
         &__slide {
             vertical-align: top;
             white-space: normal; /// niviligates white space rule from parent
-            width: 200px;
+            // width: 200px;
+            width: 8.33333%;
         }
     }
 }
