@@ -102,6 +102,15 @@
         }
     }
 
+    @include desktop {
+        &__head {
+            .btn-grey {
+                float: right;
+                margin-left: 20px;
+            }
+        }
+    }
+
     @include desk-1600 {
         &__cover {
             height: 400px;
@@ -241,9 +250,6 @@
         padding-top: 10px;
         padding-bottom: 10px;
         margin-left: -10px;
-        .btn-grey {
-            float: right;
-        }
     }
     .cat_counter {
         font-size: 26px;

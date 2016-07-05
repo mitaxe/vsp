@@ -736,6 +736,14 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         }
     });
 
+    // hide menu on link click mobile
+    $scope.hideMenuMob = function() {
+        console.log('hide mob');
+        if ($window.innerWidth < 768) {
+            $scope.sandwichClicked = false;
+        }
+    };
+
 
     // USER -----------------------------------------------------------
 
@@ -1733,7 +1741,6 @@ angular.module("MainApp")
 .directive('headerview', function() {
   return {
     restrict: 'E',
-    controller: 'MainCtrl',
     replace: true,
     templateUrl: 'app/views/templates/header.html'
   };

@@ -951,8 +951,7 @@ select option:hover {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
   padding: 12px 20px 12px 25px;
   font-size: 16px;
-  color: #828383;
-  margin-left: 25px; }
+  color: #828383; }
   .btn-grey svg {
     fill: #828383;
     margin-right: 10px; }
@@ -3679,6 +3678,10 @@ textarea {
     .channel__head {
       padding-left: 180px;
       min-height: 100px; } }
+  @media screen and (min-width: 1280px) {
+    .channel__head .btn-grey {
+      float: right;
+      margin-left: 20px; } }
   @media screen and (min-width: 1600px) {
     .channel__cover {
       height: 400px; }
@@ -3795,8 +3798,6 @@ textarea {
     padding-top: 10px;
     padding-bottom: 10px;
     margin-left: -10px; }
-    .tablet_ctrl .btn-grey {
-      float: right; }
   .cat_counter {
     font-size: 26px; } }
 

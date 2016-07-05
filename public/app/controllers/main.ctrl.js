@@ -31,6 +31,14 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         }
     });
 
+    // hide menu on link click mobile
+    $scope.hideMenuMob = function() {
+        console.log('hide mob');
+        if ($window.innerWidth < 768) {
+            $scope.sandwichClicked = false;
+        }
+    };
+
 
     // USER -----------------------------------------------------------
 
