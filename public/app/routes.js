@@ -20,7 +20,8 @@ angular.module("MainApp")
     // .when("/user/:url", "/user/:url/all")
     .when('/search', '/search/all')
     .when("/channels/:id", "/channels/:id/all")
-    .when('/settings', '/settings/main');
+    .when('/settings', '/settings/main')
+    .when('/edit-channel/:id', '/edit-channel/:id/main');
 
     // states
     $stateProvider
@@ -166,23 +167,23 @@ angular.module("MainApp")
     })
 
     // user
-    .state('user', {
-        url: "/user/:url",
-        templateUrl: "app/views/channels/channel.html",
-        controller: 'ChannelCtrl'
-    })
-    .state('user.all', {
-        url: '/all',
-        templateUrl: 'app/views/channels/channel-all.html'
-    })
-    .state('user.liked', {
-        url: '/liked',
-        templateUrl: 'app/views/channels/channel-liked.html'
-    })
-    .state('user.shop', {
-        url: '/shop',
-        templateUrl: 'app/views/channels/channel-shop.html'
-    })
+    // .state('user', {
+    //     url: "/user/:url",
+    //     templateUrl: "app/views/channels/channel.html",
+    //     controller: 'ChannelCtrl'
+    // })
+    // .state('user.all', {
+    //     url: '/all',
+    //     templateUrl: 'app/views/channels/channel-all.html'
+    // })
+    // .state('user.liked', {
+    //     url: '/liked',
+    //     templateUrl: 'app/views/channels/channel-liked.html'
+    // })
+    // .state('user.shop', {
+    //     url: '/shop',
+    //     templateUrl: 'app/views/channels/channel-shop.html'
+    // })
 
     // profile
     .state('profile', {
@@ -202,23 +203,6 @@ angular.module("MainApp")
         templateUrl: 'app/views/add-channel.html'
     })
 
-    // settings
-    .state('settings',{
-        url: '/settings',
-        templateUrl: 'app/views/settings/settings.html',
-        controller: 'SettingsCtrl'
-    })
-    .state('settings.main', {
-        url: '/main',
-        templateUrl: 'app/views/settings/settings-main.html',
-        controller: 'SettingsCtrl'
-    })
-    .state('settings.video', {
-        url: '/video',
-        templateUrl: 'app/views/settings/settings-video.html',
-        controller: 'SettingsCtrl'
-    })
-
     // video settings
     .state('video-edit', {
         url: '/video-edit',
@@ -236,7 +220,7 @@ angular.module("MainApp")
         templateUrl: 'app/views/notifications/notifications-all.html'
     })
 
-    // not my channel
+    // channels
     .state('channels', {
         url: '/channels/:id',
         templateUrl: "app/views/channels/xchannel.html",
@@ -271,6 +255,23 @@ angular.module("MainApp")
     .state('channels.shop', {
         url: '/shop',
         templateUrl: 'app/views/channels/xchannel-shop.html'
+    })
+
+    // channel settings
+    .state('edit-channel', {
+        url: '/edit-channel/:id',
+        templateUrl: 'app/views/settings/settings.html',
+        controller: 'SettingsCtrl'
+    })
+    .state('edit-channel.main', {
+        url: '/main',
+        templateUrl: 'app/views/settings/settings-main.html',
+        controller: 'SettingsCtrl'
+    })
+    .state('edit-channel.playlists', {
+        url: '/playlists',
+        templateUrl: 'app/views/settings/settings-video.html',
+        controller: 'SettingsCtrl'
     })
 
     // shop detailed page

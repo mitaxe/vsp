@@ -41,6 +41,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         available: true,
         text: '',
         prevState: '',
+        paramsId: '',
         init: function() {
             // console.log('back button click');
             switch (true) {
@@ -64,10 +65,11 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                     this.text = 'Назад';
                     this.prevState = 'home';
                     break;
-                case ($state.includes('channels')):
+                case ($state.includes('edit-channel')):
                     this.available = true;
                     this.text = 'Назад';
-                    this.prevState = '';
+                    this.paramsId = $scope.userData.channel.id;
+                    this.prevState = 'channels';
                     console.log('this is channel page');
                     break;
                 default:
@@ -75,7 +77,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
             }
         },
         goBack: function() {
-            $state.go(this.prevState);
+            $state.go(this.prevState, {'id': this.paramsId});
         }
     };
 
