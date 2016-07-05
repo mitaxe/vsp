@@ -808,6 +808,9 @@ select option:hover {
 .relative {
   position: relative; }
 
+.pointer {
+  cursor: pointer; }
+
 /* main views animations */
 .mainview-animation.ng-enter,
 .mainview-animation.ng-leave {
@@ -2141,8 +2144,7 @@ textarea {
   .header__back {
     float: left;
     width: 205px;
-    padding-left: 10px;
-    cursor: pointer; }
+    padding-left: 10px; }
     .header__back svg {
       fill: #00cc33;
       transform: rotate(90deg);
@@ -2152,6 +2154,14 @@ textarea {
       -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.5));
       filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.5)); }
     .header__back span {
+      -webkit-user-select: none;
+      /* Chrome all / Safari all */
+      -moz-user-select: none;
+      /* Firefox all */
+      -ms-user-select: none;
+      /* IE 10+ */
+      user-select: none;
+      /* Likely future */
       display: inline-block;
       margin-left: 10px;
       text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);

@@ -22,15 +22,6 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         $state.go('search.all', {'key': $scope.searchKey}, {reload: true});
     };
 
-    // on state change
-    $scope.$on('$stateChangeSuccess', function () {
-        // $scope.showloginModal = false;
-        // console.log('state changed');
-        if ($state.includes('login')) {
-            $scope.showloginModal = true;
-        }
-    });
-
     // hide menu on link click mobile
     $scope.hideMenuMob = function() {
         console.log('hide mob');
@@ -39,18 +30,72 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         }
     };
 
+    // recomended channels sidebar
+    factory.getRecommendedChannels().success(function(response) {
+        $scope.recommendedChannels = response.data;
+        console.log('Recommended channels - ', $scope.recommendedChannels);
+    });
+
+    // back button
+    $scope.backButton = {
+        available: true,
+        text: '',
+        prevState: '',
+        init: function() {
+            // console.log('back button click');
+            switch (true) {
+                case ($state.includes('article')):
+                    this.available = true;
+                    this.text = 'Блог';
+                    this.prevState = 'blog';
+                    break;
+                case ($state.includes('profile')):
+                    this.available = true;
+                    this.text = 'Назад';
+                    this.prevState = '';
+                    break;
+                case ($state.includes('shop-detailed')):
+                    this.available = true;
+                    this.text = 'Магазин';
+                    this.prevState = 'shop-detailed';
+                    break;
+                case ($state.includes('search')):
+                    this.available = true;
+                    this.text = 'Назад';
+                    this.prevState = 'home';
+                    break;
+                case ($state.includes('channels')):
+                    this.available = true;
+                    this.text = 'Назад';
+                    this.prevState = '';
+                    console.log('this is channel page');
+                    break;
+                default:
+                    this.available = false;
+            }
+        },
+        goBack: function() {
+            $state.go(this.prevState);
+        }
+    };
+
+    // on state change
+    $scope.$on('$stateChangeSuccess', function () {
+        // show login modal on login page
+        if ($state.includes('login')) {
+            $scope.showloginModal = true;
+        }
+
+        // init back button
+        $scope.backButton.init();
+    });
+
 
     // USER -----------------------------------------------------------
 
     $scope.user = {};
 
     // END USER -------------------------------------------------------
-
-
-    factory.getRecommendedChannels().success(function(response) {
-        $scope.recommendedChannels = response.data;
-        console.log('Recommended channels - ', $scope.recommendedChannels);
-    });
 
 
     // LOGIN ----------------------------------------------------------

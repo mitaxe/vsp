@@ -17,7 +17,7 @@ angular.module("MainApp")
     $urlRouterProvider
     .when("/history", "/history/viewed")
     .when("/ratings", "/ratings/videos")
-    .when("/user/:url", "/user/:url/all")
+    // .when("/user/:url", "/user/:url/all")
     .when('/search', '/search/all')
     .when("/channels/:id", "/channels/:id/all")
     .when('/settings', '/settings/main');
