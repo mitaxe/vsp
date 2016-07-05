@@ -6,6 +6,59 @@ angular.module("MainApp")
         // "password": "qwerty12345"
     };
 
+    // test data for channels accordions
+    $scope.channelPlaylists = {
+        "playlists": [
+            {
+                name : 'Оригинальные пранки',
+                inner : [
+                    {
+                        name : 'Пранки',
+                        hidden : false
+                    },
+                    {
+                        name : 'test2',
+                        hidden : false
+                    },
+                    {
+                        name : 'Пранки 2',
+                        hidden : false
+                    },
+                    {
+                        name : 'test4',
+                        hidden : false
+                    }
+                ]
+            },
+            {
+                name : 'Лучшие видео',
+                inner : [
+                    {
+                        name : 1,
+                        hidden : false
+                    },
+                    {
+                        name : 'Пранк',
+                        hidden : false
+                    }
+                ]
+            },
+            {
+                name : 'Пантера Шоу',
+                inner : [
+                    {
+                        name : 'Пранк',
+                        hidden : false
+                    },
+                    {
+                        name : 'Пранк 2',
+                        hidden : false
+                    }
+                ]
+            }
+        ]
+    };
+
     $scope.saveChannel = function() {
         $scope.formTried = true;
         // trigger validation of all fields
@@ -19,7 +72,7 @@ angular.module("MainApp")
             console.log('form invalid');
             return;
         }
-        console.log('saved profile',$scope.channelSettings);
+        console.log('saved channels settings',$scope.channelSettings);
         // $scope.logging = true; // adjust button text
 
         $scope.saving = true; // send login request
@@ -29,56 +82,28 @@ angular.module("MainApp")
         }, 2000);
     };
 
-    // test data for channels accordions
-    $scope.items = [
-        {
-            name : 'Оригинальные пранки',
-            inner : [
-                {
-                    name : 'Пранки',
-                    hidden : false
-                },
-                {
-                    name : 'test2',
-                    hidden : false
-                },
-                {
-                    name : 'Пранки 2',
-                    hidden : false
-                },
-                {
-                    name : 'test4',
-                    hidden : false
-                }
-            ]
-        },
-        {
-            name : 'Лучшие видео',
-            inner : [
-                {
-                    name : 1,
-                    hidden : false
-                },
-                {
-                    name : 'Пранк',
-                    hidden : false
-                }
-            ]
-        },
-        {
-            name : 'Пантера Шоу',
-            inner : [
-                {
-                    name : 'Пранк',
-                    hidden : false
-                },
-                {
-                    name : 'Пранк 2',
-                    hidden : false
-                }
-            ]
+    $scope.savePlaylists = function() {
+        $scope.formTried = true;
+        // trigger validation of all fields
+        angular.forEach($scope.form.channelPlaylists.$error, function (field) {
+            angular.forEach(field, function(errorField) {
+                errorField.$setTouched();
+            });
+        });
+        // check if form is valid
+        if ($scope.form.channelPlaylists.$invalid) {
+            console.log('form invalid');
+            return;
         }
-    ];
+        console.log('saved playlists',$scope.channelPlaylists);
+        // $scope.logging = true; // adjust button text
+
+        $scope.saving = true; // send login request
+        setTimeout(function () { // test
+            $scope.saving = false;
+            $scope.$apply();
+        }, 2000);
+    };
 
     // highlight filtered accordion items
     $scope.highlight = function(text, search) {

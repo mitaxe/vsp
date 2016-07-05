@@ -210,11 +210,13 @@ angular.module("MainApp")
     })
     .state('settings.main', {
         url: '/main',
-        templateUrl: 'app/views/settings/settings-main.html'
+        templateUrl: 'app/views/settings/settings-main.html',
+        controller: 'SettingsCtrl'
     })
     .state('settings.video', {
         url: '/video',
-        templateUrl: 'app/views/settings/settings-video.html'
+        templateUrl: 'app/views/settings/settings-video.html',
+        controller: 'SettingsCtrl'
     })
 
     // video settings
