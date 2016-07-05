@@ -46,6 +46,15 @@
             border-color: $col-red;
             box-shadow: 0 1px 4px 1px rgba(235, 28, 35, 0.2);
         }
+        &.long {
+            width: 500px;
+            @include phone {
+                width: 300px;
+            }
+            @include tablet {
+                width: 380px;
+            }
+        }
     }
 
     input {
@@ -135,13 +144,17 @@
                 width: 20%;
             }
             .video-preview {
-                max-width: 100%;
-                width: 300px;
+                width: 500px;
+                @include phone {
+                    width: 300px;
+                }
+                @include tablet {
+                    width: 380px;
+                }
             }
             @include phone {
                 .form__title {
                     display: block;
-                    margin-bottom: 25px;
                 }
                 .bg {
                     width: 90%;

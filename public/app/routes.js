@@ -222,7 +222,8 @@ angular.module("MainApp")
     // video settings
     .state('video-edit', {
         url: '/video-edit',
-        templateUrl: 'app/views/settings/video-settings.html'
+        templateUrl: 'app/views/settings/video-settings.html',
+        controller: 'VideoSettingsCtrl'
     })
 
     // notifications and comments

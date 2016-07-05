@@ -100,19 +100,25 @@
 .hidden-phone {
     @include phone {
         display: none !important;
-    };
+    }
+}
+
+.visible-phone {
+    @include phone {
+        display: inline-block !important;
+    }
 }
 
 .hidden-tablet {
     @include tablet {
         display: none !important;
-    };
+    }
 }
 
 .hidden-desktop {
     @include desktop {
         display: none !important;
-    };
+    }
 }
 
 .hidden-visibility {

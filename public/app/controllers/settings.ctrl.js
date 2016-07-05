@@ -73,7 +73,6 @@ angular.module("MainApp")
             return;
         }
         console.log('saved channels settings',$scope.channelSettings);
-        // $scope.logging = true; // adjust button text
 
         $scope.saving = true; // send login request
         setTimeout(function () { // test

@@ -171,8 +171,10 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     };
 
     $scope.categories = [
-        'Adamantio 993',
-        'JOD'
+        'Общее',
+        'Машини',
+        'Самолеты',
+        'Природа'
     ];
 
 }]);
