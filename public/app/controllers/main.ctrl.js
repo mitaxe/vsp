@@ -36,71 +36,17 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         console.log('Recommended channels - ', $scope.recommendedChannels);
     });
 
-    // back button
-    $scope.backButton = {
-        available: true,
-        text: '',
-        prevState: '',
-        paramsId: '',
-        init: function() {
-            // console.log('back button click');
-            switch (true) {
-                case ($state.includes('article')):
-                    this.available = true;
-                    this.text = 'Блог';
-                    this.prevState = 'blog';
-                    break;
-                case ($state.includes('profile')):
-                    this.available = true;
-                    this.text = 'Назад';
-                    this.prevState = '';
-                    break;
-                case ($state.includes('shop-detailed')):
-                    this.available = true;
-                    this.text = 'Магазин';
-                    this.prevState = 'shop-detailed';
-                    break;
-                case ($state.includes('search')):
-                    this.available = true;
-                    this.text = 'Назад';
-                    this.prevState = 'home';
-                    break;
-                case ($state.includes('edit-channel')):
-                    this.available = true;
-                    this.text = 'Назад';
-                    this.paramsId = $scope.userData.channel.id;
-                    this.prevState = 'channels';
-                    console.log('this is channel page');
-                    break;
-                default:
-                    this.available = false;
-            }
-        },
-        goBack: function() {
-            $state.go(this.prevState, {'id': this.paramsId});
-        }
-    };
-
     // on state change
     $scope.$on('$stateChangeSuccess', function () {
         // show login modal on login page
         if ($state.includes('login')) {
             $scope.showloginModal = true;
         }
-
-        // init back button
-        $scope.backButton.init();
     });
 
 
-    // USER -----------------------------------------------------------
-
-    $scope.user = {};
-
-    // END USER -------------------------------------------------------
-
-
     // LOGIN ----------------------------------------------------------
+    $scope.user = {};
     $scope.loginData = {}; // login from data
     $scope.form = {}; // init form object
 
@@ -170,7 +116,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     // END LOGIN -----------------------------------------------------------
 
 
-    // REGISTERATION -------------------------------------------------------
+    // REGISTRATION -------------------------------------------------------
     $scope.registerData = {};
 
     $scope.registerUser = function() {
@@ -189,7 +135,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
 
         console.log('sending registration request for - ',$scope.registerData);
     };
-    // END REGISTERATION ---------------------------------------------------
+    // END REGISTRATION ---------------------------------------------------
 
 
     // LOGOUT --------------------------------------------------------------
@@ -199,9 +145,6 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
         localStorage.clear();
     };
     // END LOGOUT ----------------------------------------------------------
-
-
-
 
 
     // TEST DATA ----------------------------------------------------------
