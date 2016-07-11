@@ -64,8 +64,10 @@
         top: 0;
         left: 0;
         z-index: 109;
-        display: none;
-        // background: red;
+        transition: .2s;
+        visibility: hidden;
+        background: rgba(0,0,0,0.2);
+        opacity: 0;
     }
 
     &.active {
@@ -74,7 +76,8 @@
         opacity: 1;
         transform: translate3d(-50%,0,0);
         + .modal__overlay {
-            display: block;
+            visibility: visible;
+            opacity: 1;
         }
     }
 

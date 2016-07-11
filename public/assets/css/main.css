@@ -1797,6 +1797,9 @@ input[type='radio']:checked + .radio_label:after {
     height: 30px;
     line-height: 30px;
     border-radius: 50px; }
+    .form input.password {
+      padding-right: 125px;
+      padding-bottom: 3px; }
   .form textarea {
     width: 300px;
     resize: none;
@@ -1945,14 +1948,18 @@ img-crop canvas {
     top: 0;
     left: 0;
     z-index: 109;
-    display: none; }
+    transition: .2s;
+    visibility: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0; }
   .modal.active {
     outline: 0;
     visibility: visible;
     opacity: 1;
     transform: translate3d(-50%, 0, 0); }
     .modal.active + .modal__overlay {
-      display: block; }
+      visibility: visible;
+      opacity: 1; }
   @media screen and (max-width: 767px) {
     .modal {
       width: 100%;
@@ -2863,27 +2870,34 @@ textarea {
       user-select: none;
       /* Likely future */
       display: block;
-      margin-bottom: 20px;
       cursor: pointer; }
       .popover--user .popover__link:after {
         content: "";
         display: table;
         clear: both; }
-      .popover--user .popover__link:last-child {
-        margin-bottom: 0; }
-    .popover--user svg {
-      fill: #595b5c !important;
-      margin-right: 20px;
-      padding-top: 2px; }
-    .popover--user .popover__link-name {
+      .popover--user .popover__link:first-child {
+        margin-bottom: 25px; }
+    .popover--user .popover__link-name span {
       font-size: 18px;
       color: #5b5d5e;
-      margin-right: 20px; }
+      margin-right: 20px;
+      transition: .3s; }
+    .popover--user .popover__link-name svg {
+      transition: .3s;
+      fill: #595b5c !important;
+      margin-right: 20px;
+      transform: translateY(3px); }
+    .popover--user .popover__link-name:hover span {
+      color: #00cc33; }
+    .popover--user .popover__link-name:hover svg {
+      fill: #00cc33 !important; }
     .popover--user .popover__link-change {
       padding-top: 7px;
       float: right;
       font-size: 14px;
       color: #00cc33; }
+      .popover--user .popover__link-change:hover {
+        text-decoration: underline; }
   .popover.ng-hide-remove {
     -webkit-animation: 0.3s popover-show;
     animation: 0.3s popover-show; }
@@ -4238,7 +4252,8 @@ textarea {
       width: 68%;
       font-size: 16px;
       color: #3a3d3e;
-      padding: 3px 15px; }
+      padding-left: 15px;
+      padding-right: 15px; }
       .registration .options__form input.password {
         padding-right: 125px; }
     .registration .options__form .inp_row {

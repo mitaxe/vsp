@@ -52,6 +52,7 @@
                             ng-model="registerData.password"
                             name="registerPassword"
                             minlength="5"
+                            class="password"
                             required>
                     <div class="modal-messages" ng-messages="form.register.registerPassword.$error" ng-show="form.register.registerPassword.$touched" role="alert">
                         <div ng-message="required">Пароль обязателен</div>
@@ -64,6 +65,7 @@
                             ng-model="registerData.confPassword"
                             name="registerConfPassword"
                             minlength="5"
+                            class="password"
                             required
                             ng-pattern="{{registerData.password}}">
                     <div class="modal-messages" ng-messages="form.register.registerConfPassword.$error" ng-show="form.register.registerConfPassword.$touched" role="alert">

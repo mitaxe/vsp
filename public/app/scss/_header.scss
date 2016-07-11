@@ -871,27 +871,41 @@
             @include clearfix;
             @include no-select;
             display: block;
-            margin-bottom: 20px;
             cursor: pointer;
-            &:last-child {
-                margin-bottom: 0;
+            &:first-child {
+                margin-bottom: 25px;
             }
         }
-        svg {
-            fill: #595b5c !important;
-            margin-right: 20px;
-            padding-top: 2px;
-        }
         .popover__link-name {
-            font-size: 18px;
-            color: #5b5d5e;
-            margin-right: 20px;
+            span {
+                font-size: 18px;
+                color: #5b5d5e;
+                margin-right: 20px;
+                transition: .3s;
+            }
+            svg {
+                transition: .3s;
+                fill: #595b5c !important;
+                margin-right: 20px;
+                transform: translateY(3px);
+            }
+            &:hover {
+                span {
+                    color: $col-green;
+                }
+                svg {
+                    fill: $col-green !important;
+                }
+            }
         }
         .popover__link-change {
             padding-top: 7px;
             float: right;
             font-size: 14px;
             color: $col-green;
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
     &.ng-hide-remove {
