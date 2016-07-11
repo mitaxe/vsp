@@ -38,22 +38,22 @@
                 <div class="accordion channel__head">
                     <div class="clearfix">
                         <h2 class="block__title">{{ content.title }}</h2>
-                        <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-white btn-grey hidden-tablet hidden-phone">
+                        <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-grey hidden-tablet hidden-phone">
                             <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
                             </svg></i>
                             Редактировать канал
                         </a>
                         <div ng-show="content.id != userData.channel.id" class="subscribe_box hidden-tablet hidden-phone">
-                            <span ng-click="subscribe()" class="green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
+                            <span ng-click="subscribe()" class="green_btn">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
                             <span class="counter subscribe">{{ content.statSubscribers | number }}</span>
                         </div>
                     </div>
                     <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
                         <div ng-show="content.id != userData.channel.id" class="subscribe_box hidden-desktop" style="float: none;">
-                            <span ng-click="subscribe()" class="green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
+                            <span ng-click="subscribe()" class="green_btn">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</span>
                             <span class="counter subscribe">{{ content.statSubscribers | number}}</span>
                         </div>
-                        <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-white btn-grey hidden-desktop" style="float: none;">
+                        <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-grey hidden-desktop" style="float: none;">
                             <i class="svg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
                                 </svg>
@@ -73,10 +73,10 @@
                 </div>
                 <div class="tablet_ctrl clearfix hidden-phone">
                     <div ng-show="content.id != userData.channel.id" class="subscribe_box hidden-desktop" style="float: left;">
-                        <a ng-click="subscribe()" class="green_btn subscribe">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</a>
+                        <a ng-click="subscribe()" class="green_btn">{{ subscribed ? 'Отписаться' : 'Подписаться' }}</a>
                         <span class="counter subscribe"> {{ content.statSubscribers | number}}</span>
                     </div>
-                    <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-white btn-grey hidden-desktop">
+                    <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-grey hidden-desktop">
                         <i class="svg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
                             </svg>

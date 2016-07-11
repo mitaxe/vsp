@@ -16,7 +16,7 @@
                         </div>
                     </a>
                     <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText:52 }}</a></p>
-                    <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                    <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                     <p class="thumb__info">
                         <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                         <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
@@ -42,7 +42,7 @@
                             </div>
                         </a>
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50 }}</a></p>
-                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                        <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p>
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-xs-5 col-sm-12">
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50}}</a></p>
-                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                        <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
@@ -90,7 +90,7 @@
                             </div>
                         </a>
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50 }}</a></p>
-                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                        <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p>
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="col-xs-5 col-sm-12">
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50}}</a></p>
-                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                        <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
@@ -136,7 +136,7 @@
                     </a>
                     <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 52 }}</a></p>
                     <div class="clearfix">
-                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                        <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p class="thumb__info">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
@@ -157,7 +157,7 @@
                             </div>
                             <div class="col-xs-5 col-sm-12 col-md-6">
                                 <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 40 }}</a></p>
-                                <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                                <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                             </div>
                         </div>
                     </div>
@@ -210,7 +210,7 @@
                     </div>
                     <div class="col-xs-5 col-sm-12">
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50 }}</a></p>
-                        <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                        <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
                             <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                             <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
@@ -236,7 +236,7 @@
                         </a>
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 52 }}</a></p>
                         <div class="clearfix">
-                            <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                            <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                             <p class="thumb__info">
                                 <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                                 <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
@@ -254,7 +254,7 @@
                                     </div>
                                 </a>
                                 <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 45}}</a></p>
-                                <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                                <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                             </div>
                         </div>
                     </div>
@@ -268,7 +268,7 @@
                                 </div>
                             </a>
                             <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 45 }}</a></p>
-                            <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                            <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         </div>
                     </div>
                 </div>
@@ -356,7 +356,7 @@
                         </div>
                     </a>
                     <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50 }}</a></p>
-                    <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
+                    <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                     <p class="thumb__info">
                         <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
                         <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
