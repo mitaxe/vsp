@@ -1240,6 +1240,9 @@ input[type='radio']:checked + .radio_label:after {
   overflow: hidden;
   height: 0px;
   transition: height .3s ease-in-out; }
+  .accordion__pannel.ng-hide {
+    transition: opacity 0s;
+    opacity: 0; }
 
 .accordion__content {
   margin: 0 0 15px 0 !important;
@@ -2183,7 +2186,7 @@ textarea {
     width: 120px; }
   .header__random {
     float: right;
-    width: 250px;
+    width: 225px;
     padding: 10px;
     display: none;
     text-align: center; }
@@ -2303,6 +2306,9 @@ textarea {
   @media screen and (min-width: 1280px) {
     .header__tags, .header__random {
       display: table; } }
+  @media screen and (min-width: 1440px) {
+    .header__random {
+      width: 250px; } }
   @media screen and (min-width: 1600px) {
     .header__search {
       width: 500px; } }
@@ -2454,7 +2460,8 @@ textarea {
     background: transparent;
     font-family: "Roboto", sans-serif;
     z-index: 100;
-    transition: .3s; }
+    transition: .3s;
+    -webkit-appearance: none; }
     .search-form input:focus {
       outline: 0;
       color: black; }

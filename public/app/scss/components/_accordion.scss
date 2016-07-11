@@ -3,6 +3,10 @@
         overflow: hidden;
         height: 0px;
         transition: height .3s ease-in-out;
+        &.ng-hide {
+            transition: opacity 0s;
+            opacity: 0;
+        }
     }
     &__content {
         margin: 0 0 15px 0 !important;

@@ -112,7 +112,7 @@
 
     &__random {
         float: right;
-        width: 250px;
+        width: 225px;
         padding: 10px;
         display: none;
         text-align: center;
@@ -289,7 +289,9 @@
     }
 
     @media screen and (min-width:1440px) {
-
+        &__random {
+            width: 250px;
+        }
     }
 
     @media screen and (min-width: 1500px) {
@@ -450,6 +452,7 @@
         font-family: $font-main;
         z-index: 100;
         transition: .3s;
+        -webkit-appearance: none; // safari fix
         &:focus {
             outline: 0;
             color: black;
