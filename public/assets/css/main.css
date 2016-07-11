@@ -1260,6 +1260,8 @@ input[type='radio']:checked + .radio_label:after {
     fill: #00cc33; }
   .accordion [toggler].active svg:not(.ctrl_icon) {
     transform: rotate(180deg); }
+  .accordion [toggler].active + .accordion__pannel {
+    height: auto; }
 
 .accordion .icon_set {
   display: none;

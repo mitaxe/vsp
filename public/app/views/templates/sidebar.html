@@ -50,7 +50,7 @@
 
         <div class="sidebar__submenu">
             <div class="accordion hidden-phone">
-                <div ng-show="user.authorized" toggler>
+                <div ng-show="userData.pins.length > 0 && user.authorized" toggler ng-class="{'active': user.authorized}">
                     <a class="sidebar__link">
                         <div class="table-middle">
                             <span class="sidebar__icon">
@@ -59,9 +59,9 @@
                         </div>
                     </a>
                 </div>
-                <div class="accordion__pannel">
+                <div ng-show="userData.pins.length > 0 && user.authorized" class="accordion__pannel">
                     <div class="accordion__content">
-                        <a ui-sref="channels({ id: channel.id })" ng-repeat="channel in userData.pins" class="sidebar__link channel">
+                        <a ui-sref="channels({ id: channel.id })" ng-repeat="channel in userData.pins | limitTo:6" class="sidebar__link channel">
                             <div class="table-middle">
                                 <img ng-src="{{ channel.img }}" alt="" class="channel__avatar"/>
                                 <div class="channel__info">
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <div toggler>
+                <div toggler ng-class="{'active': !user.authorized}">
                     <a class="sidebar__link">
                         <div class="table-middle">
                             <span class="sidebar__icon">
@@ -84,14 +84,14 @@
                         </div>
                     </a>
                 </div>
-                <div class="accordion__pannel">
+                <div class="accordion__pannel" ng-class="{'active': !user.authorized}">
                     <div class="accordion__content">
-                        <a class="sidebar__link channel" ui-sref="channels({ id: channel.id })" ng-repeat="channel in recommendedChannels">
+                        <a class="sidebar__link channel" ui-sref="channels({ id: channel.id })" ng-repeat="channel in recommendedChannels | limitTo:6">
                             <div class="table-middle">
                                 <img ng-src="{{ channel.img }}" alt="" class="channel__avatar"/>
                                 <div class="channel__info">
                                     <span class="channel__name">{{ channel.title }}</span>
-                                    <span class="channel__subscribers">{{ channel.subscribers }}</span>
+                                    <span class="channel__subscribers">{{ channel.statSubscribers }}</span>
                                 </div>
                             </div>
                         </a>

@@ -19,6 +19,10 @@
             svg:not(.ctrl_icon) {
                 transform: rotate(180deg);
             }
+
+        }
+        &.active + .accordion__pannel {
+            height: auto;
         }
     }
     .icon_set {

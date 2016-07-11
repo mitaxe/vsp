@@ -6,12 +6,17 @@ angular.module("MainApp")
         template: '<div ng-transclude></div>',
         link: function(scope, element, attrs) {
 
-            function accordionCode () {
+            function accordionCode() {
                 var togglers = angular.element(element[0].querySelectorAll('[toggler]'));
                 var pannels = angular.element(element[0].querySelectorAll('.accordion__pannel'));
                 var contents = angular.element(element[0].querySelectorAll('.accordion__content'));
 
                 angular.forEach(togglers, function(toggler,index) {
+                    if ( toggler.className.match(/\bactive\b/) ) {
+                        var y = contents[index].clientHeight;
+                        pannels[index].style.height = y + 15 + 'px';
+                    }
+
                     toggler.onclick = function() {
                         // console.log('click');
                         if (toggler.className.indexOf('active') != -1) {
@@ -37,7 +42,7 @@ angular.module("MainApp")
 
             $timeout(function() {
                 accordionCode();
-            }, 0);
+            }, 1000);
 
             scope.$watch(
                 function() {
