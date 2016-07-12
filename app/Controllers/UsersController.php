@@ -49,7 +49,7 @@ class UsersController extends RESTController
         $token = $this->request->getToken();
             
         if (1 || !empty($token)) {
-            $channel = Channels::findFirst("vspChannelId = 'MBRNBxhAgeY9a6OqMZHiQj9b'");
+            $channel = Channels::findFirst("vspChannelId = 'MBRNTlo1Bz0--f3Iz7a53J4c'");
             $channels = Channels::find(["conditions"=>"vspChannelId IN ('MBRNKCtABW8e-8ktBzqk9Ze5','MBRN3xni1zsX0mWr5s0kedF4','MBRNApNHhnj6W0psKcXt_Y02')"]);
             $pinsResponse = new ChannelsResponse();
             $pinsResponse->add($channels);
