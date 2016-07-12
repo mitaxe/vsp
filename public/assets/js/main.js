@@ -1561,7 +1561,8 @@ app.directive('loadMore', ["$document", function ($document) {
                 } else if (!scope.loadingMore && !scope.noMoreResponse) {
                     text = "загрузить еще";
                 } else {
-                    text = "все данные загружены";
+                    // text = "все данные загружены";
+                    element[0].style.display = 'none';
                 }
                 return text;
             };
