@@ -1455,7 +1455,7 @@ app.directive('backButton', ["$document", "$state", "$stateParams", function ($d
         link: function (scope, element) {
 
             scope.backButton = {
-                available: true,
+                available: false,
                 text: '',
                 prevState: '',
                 init: function() {
