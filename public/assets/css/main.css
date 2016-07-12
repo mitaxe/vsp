@@ -1913,7 +1913,6 @@ img-crop canvas {
   margin: 0 auto;
   transition: .3s;
   visibility: hidden;
-  overflow-y: scroll;
   opacity: 0;
   z-index: 110;
   transform: translate3d(-50%, -20px, 0);
@@ -1962,6 +1961,7 @@ img-crop canvas {
       opacity: 1; }
   @media screen and (max-width: 767px) {
     .modal {
+      overflow-y: scroll;
       width: 100%;
       height: calc(100% - 55px);
       top: 55px;
@@ -3262,8 +3262,8 @@ textarea {
   @media screen and (min-width: 1280px) {
     .block {
       margin: 0 15px 20px; }
-      .block__btn {
-        padding-top: 5px; }
+      .block__btn .btn {
+        margin-top: 5px; }
       .block__select--top15 {
         margin-top: 10px; }
       .block--sidebar {
