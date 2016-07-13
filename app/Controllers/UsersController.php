@@ -25,9 +25,6 @@ class UsersController extends RESTController
             $this->security->hash(rand());
             throw new UserNotFoundException('User not found or incorrect password/login');
         }
-        
-        return new Response();
-        // неудачная проверка
     }
 
     public function register()
@@ -73,6 +70,43 @@ class UsersController extends RESTController
         }
 
         return new Response();
+    }
+    
+    public function getChannels($userId)
+    {
+        
+        
+        
+    }
+
+
+    public function getUser($id)
+    {
+        
+        $user = Users::findFirst([
+            'conditions' => "vspUserId = ?1",
+            'bind' => [1 => $id]
+        ]);
+        
+        if (!empty($user)) {
+            $response = new UserResponse(
+                $user->id,
+                $user->email,
+                'userToken',
+                $user->vspUserId,
+                $user->login,
+                $user->details->firstName,
+                $user->details->lastName,
+                $user->details->middleName,
+                $user->details->picture,
+                $user->details->description,
+                $user->details->city,
+                $user->details->dateBirthday
+            );            
+            return $response;
+        }
+        
+        throw new UserNotFoundException();
     }
     
 }

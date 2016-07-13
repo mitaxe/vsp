@@ -42,17 +42,36 @@ class ChannelResponse extends Response
      */
     public $statSubscribers = null;
 
+    /**
+     * @var array
+     */
+    public $videos = null;
 
-    public function __construct($id, $title, $description, $img, $imgBg = '', $videos, $views, $subscribers)
+    
+    /**
+     * ChannelResponse constructor.
+     * @param $id
+     * @param $title
+     * @param $description
+     * @param $img
+     * @param string $imgBg
+     * @param $statVideos
+     * @param $statViews
+     * @param $subscribers
+     * @param $videos
+     */
+    public function __construct($id, $title, $description, $img, $imgBg = '', $statVideos, $statViews, $subscribers, $videos = null)
     {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->img = $img;
         $this->imgBg = $imgBg;
-        $this->statVideos = $videos;
-        $this->statViews = $views;
+        $this->statVideos = $statVideos;
+        $this->statViews = $statViews;
         $this->statSubscribers = $subscribers;
+        $this->videos = $videos;
+        
         parent::__construct();
     }
 
