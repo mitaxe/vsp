@@ -1,5 +1,5 @@
 angular.module("MainApp")
-.controller('ProfileCtrl', ['$scope', function($scope) {
+.controller('ProfileCtrl', ['$scope', '$stateParams','userData', 'factory', function($scope, $stateParams, userData, factory) {
 
     $scope.profileSettings = {
         // "email": "test@test.com",
@@ -32,6 +32,14 @@ angular.module("MainApp")
     // test
     $scope.videosCounter = 110;
 
+    $scope.userData = userData.data.data;
+
+    // get channels
+    factory.getUserChannels($stateParams.id).success(function(response) {
+        $scope.userChannels = response;
+        console.log('user channels', response);
+    });
+    
     $scope.profile = {
         user : {
             avatar : 'assets/img/prof_img.png',

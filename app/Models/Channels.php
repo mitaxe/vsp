@@ -43,6 +43,7 @@ class Channels extends Model
         return array(
             'id' => 'id',
             'vsp_channel_id' => 'vspChannelId',
+            'vsp_user_id' => 'vspUserId',
             'vsp_ref_id' => 'vspRefId',
             'vsp_ref_type' => 'vspRefType',
             'actual' => 'actual',
@@ -128,5 +129,15 @@ class Channels extends Model
     {
         $params['order'] = 'statViews DESC';
         return parent::find($params);
+    }
+    
+    public function findPopularVideos() {
+        $videos = Videos::find([
+            'conditions' => "vspChannelId = ?1",
+            'bind' => [1 => $this->vspChannelId],
+            'limit' => 24
+        ]);
+        
+        return $videos;
     }
 }
