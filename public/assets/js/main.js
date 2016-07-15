@@ -936,10 +936,7 @@ angular.module("MainApp")
 angular.module("MainApp")
 .controller('ProfileCtrl', ['$scope', '$stateParams','userData', 'factory', function($scope, $stateParams, userData, factory) {
 
-    $scope.profileSettings = {
-        // "email": "test@test.com",
-        "password": "qwerty12345"
-    };
+
 
     $scope.saveProfile = function() {
         $scope.formTried = true;
@@ -960,7 +957,7 @@ angular.module("MainApp")
         $scope.saving = true; // send login request
         setTimeout(function () { // test
             $scope.saving = false;
-             $scope.$apply();
+            $scope.$apply();
         }, 2000);
     };
 
@@ -991,6 +988,11 @@ angular.module("MainApp")
             channelName : 'RomanAtwood',
             channelSubscribers : 18358461
         }
+    };
+
+    $scope.profileSettings = {
+        "email": "test@test.com",
+        "password": "qwerty12345"
     };
 
 }]);
