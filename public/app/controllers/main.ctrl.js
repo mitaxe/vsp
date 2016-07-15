@@ -152,7 +152,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     // factory test data
     factory.getVideos().success(function(response) {
         // $scope.blogs = response.videos;
-        $scope.videos = response.videos;
+        // $scope.videos = response.videos;
         // $scope.channels = response.channels;
         $scope.goods = response.goods;
         $scope.comments = response.comments;

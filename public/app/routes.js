@@ -32,7 +32,7 @@ angular.module("MainApp")
         templateUrl: "app/views/home.html",
         controller: 'HomeCtrl',
         resolve: {
-            videos: function(factory) {
+            homeVideos: function(factory) {
                 console.time('homeRequestTime');
                 return factory.getHomeData();
             }

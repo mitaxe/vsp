@@ -21,31 +21,31 @@ angular.module("MainApp")
     link: function(scope, element, attrs) {
 
         // scope.$watch('slidesN', function() {
-            // var timer = $timeout(function() {
+            var timer = $timeout(function() {
 
                 scope.pages = [];
                 scope.activeSlide = 0;
                 var perSlide = scope.perSlide || 4;
                 var videosLength = 12;
 
-                // var slidesNumber = scope.limitTo ? scope.limitTo : scope.slidesN.length;
+                // var slidesNumber = scope.limitTo ? scope.limitTo : slides.length;
 
                 // var sliderBox = element[0].querySelector('.slider__inner');
-                // var slides = element[0].querySelectorAll('.slider__slide');
+                var slides = element[0].querySelectorAll('.slider__slide');
 
                 // for (var i = 0; i < (slidesNumber/perSlide); i++) {
                 //     scope.pages.push(i);
                 // }
 
                 // limit to videosLength videos
-                scope.slidesN.length = scope.slidesN.length > videosLength ? videosLength : scope.slidesN.length;
+                slides.length = slides.length > videosLength ? videosLength : slides.length;
 
-                // console.log('slides - ',scope.slidesN.length);
+                // console.log('slides - ',slides.length);
 
                 // populate pager with links
-                for (var i = 0; i < scope.slidesN.length/perSlide; i++) {
+                for (var i = 0; i < slides.length/perSlide; i++) {
                     // if at least 2 slides
-                    if (scope.slidesN.length > perSlide) scope.pages.push(i);
+                    if (slides.length > perSlide) scope.pages.push(i);
                 }
 
                 // sliderBox.style.width = scope.pages.length * 100 + '%';
@@ -59,12 +59,12 @@ angular.module("MainApp")
                 scope.slideTo = function(slide) {
                     scope.activeSlide = slide;
                     if (
-                        scope.slidesN.length < videosLength && // if slides less than videosLength
-                        scope.slidesN.length % perSlide > 0 && // if slides cant be equaly devided by perSlide
+                        slides.length < videosLength && // if slides less than videosLength
+                        slides.length % perSlide > 0 && // if slides cant be equaly devided by perSlide
                         slide === (scope.pages.length - 1)     // if this is the last slide
                     ) {
                         // set correct length to display last slide properly
-                        slide = (slide - 1) + (scope.slidesN.length % perSlide) / perSlide;
+                        slide = (slide - 1) + (slides.length % perSlide) / perSlide;
                     }
                     element[0].querySelector('.slider__inner').style.left = '-' + slide * 100 + '%';
                 };
@@ -75,7 +75,7 @@ angular.module("MainApp")
                     }
                 };
 
-            // }, 0);
+            }, 0);
         //  }, true);
 
     }

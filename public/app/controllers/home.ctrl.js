@@ -1,9 +1,19 @@
 angular.module("MainApp")
-.controller('HomeCtrl', ['$scope', 'factory', 'videos', function ($scope, factory, videos) {
+.controller('HomeCtrl', ['$scope', 'homeVideos', function ($scope, homeVideos) {
 
     console.timeEnd('homeRequestTime');
 
-    $scope.videos = videos.data.data;
+    $scope.homeVideos = homeVideos.data.data;
+
+    // function isBigEnough() {
+    //     for (var i = 0; i < $scope.videos.length; i++) {
+    //         if ($scope.videos[i].blockId === 2) {
+    //             console.log($scope.videos[i]);
+    //         }
+    //     }
+    // }
+    //
+    // isBigEnough();
 
     // Сейчас смотрят = 0
     // Новые видео = 1

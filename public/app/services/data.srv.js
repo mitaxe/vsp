@@ -6,7 +6,7 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get(domain + '/index/videos');
+            return $http.get('http://vsponline.qa/index/videos');
         };
 
         // exclusive page
