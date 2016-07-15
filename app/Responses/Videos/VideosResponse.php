@@ -5,7 +5,7 @@ class VideosResponse extends ResponseArray
 
     public function add($videos = [])
     {
-        if (empty($videos)) {
+        if (count($videos) == 0) {
             return false;
         }
         foreach ($videos as $video) {

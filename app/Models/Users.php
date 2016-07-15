@@ -12,57 +12,12 @@ use Phalcon\Mvc\Model;
 
 class Users extends Model
 {
-    /**
-     * @var integer
-     */
-    public $id;
-
-    /**
-     * @var string
-     */
-    public $login;
-
-    /**
-     * @var string
-     */
-    public $password;
-
-    /**
-     * @var string
-     */
-    public $email;
-
-    /**
-     * @var boolean
-     */
-    public $is_partner;
-
-    /**
-     * @var boolean
-     */
-    public $is_admin;
-
-    /**
-     * @var boolean
-     */
-    public $actual;
-
-    /**
-     * @var \DateTimeZone
-     */
-    public $dt_modified;
-
-    /**
-     * @var \DateTimeZone
-     */
-    public $dt_created;
-
-    /**
-     * @var \DateTimeZone
-     */
-    public $dt_last_login;
-
-
+    
+    public function initialize()
+    {
+        $this->hasOne("id", "UsersDetails", "userId", ["alias" => "details"]);
+    }    
+    
     /**
      * Define table columns names
      * Keys are the real names in the table and
@@ -82,6 +37,7 @@ class Users extends Model
             'dt_modified' => 'dateModified',
             'dt_created' => 'dateCreated',
             'dt_last_login' => 'dateLastLogin',
+            'vsp_user_id' => 'vspUserId',
         );
     }
 

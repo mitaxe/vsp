@@ -3,12 +3,16 @@
 class ChannelsResponse extends ResponseArray
 {
 
-    public function add($channels = [])
+    public function add($channels = [], $withVideos = false)
     {
         if (empty($channels)) {
             return false;
         }
         foreach ($channels as $channel) {
+            $videosResponse = new VideosResponse();
+            if ($withVideos == true) {
+                $videosResponse->add($channel->findPopularVideos());
+            }
             $this->addResponse(
                 new ChannelResponse(
                     $channel->vspChannelId,
@@ -18,7 +22,8 @@ class ChannelsResponse extends ResponseArray
                     $channel->thumbHigh,                 
                     $channel->statVideos,
                     $channel->statViews,
-                    $channel->statSubscribers
+                    $channel->statSubscribers,
+                    $videosResponse->getData()
                 ));
         }
 

@@ -77,8 +77,10 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 localStorage.setItem('userToken', response.data.data.token); // set token to local storage
                 localStorage.setItem('loginData', JSON.stringify($scope.loginData)); // set login data to local storage
                 $http.defaults.headers.common.Authorization = response.data.data.token; // set http header token
+                $scope.userId = response.data.data.vspUserId;
                 $scope.logging = false; // adjust button text
                 $scope.showloginModal = false; // hide login modal
+                console.log('login data', $scope.loginData);
             },
             // error
             function(error) {

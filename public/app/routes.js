@@ -187,9 +187,14 @@ angular.module("MainApp")
 
     // profile
     .state('profile', {
-        url: '/profile',
+        url: '/profile/:id',
         templateUrl: 'app/views/profile/profile.html',
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+        resolve:  {
+            userData: function(factory, $stateParams) {
+                return factory.getUserData($stateParams.id);
+            }
+        }
     })
     .state('profile-edit', {
         url: '/profile-edit',

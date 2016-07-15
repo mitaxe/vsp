@@ -211,9 +211,14 @@ angular.module("MainApp")
 
     // profile
     .state('profile', {
-        url: '/profile',
+        url: '/profile/:id',
         templateUrl: 'app/views/profile/profile.html',
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+        resolve:  {
+            userData: ["factory", "$stateParams", function(factory, $stateParams) {
+                return factory.getUserData($stateParams.id);
+            }]
+        }
     })
     .state('profile-edit', {
         url: '/profile-edit',
@@ -445,7 +450,7 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get('http://vsponline.qa/index/videos');
+            return $http.get(domain + '/index/videos');
         };
 
         // exclusive page
@@ -563,6 +568,14 @@ angular.module("MainApp")
         factory.getRecommendedChannels = function(){
             return $http.get(domain + '/channels/groups/recommended');
         };
+
+        factory.getUserData = function (id) {
+            return $http.get(domain + '/users/' + id);
+        }
+
+        factory.getUserChannels = function (id) {
+            return $http.get(domain + '/users/' + id + '/channels');
+        }    
 
         return factory;
 
@@ -793,8 +806,10 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
                 localStorage.setItem('userToken', response.data.data.token); // set token to local storage
                 localStorage.setItem('loginData', JSON.stringify($scope.loginData)); // set login data to local storage
                 $http.defaults.headers.common.Authorization = response.data.data.token; // set http header token
+                $scope.userId = response.data.data.vspUserId;
                 $scope.logging = false; // adjust button text
                 $scope.showloginModal = false; // hide login modal
+                console.log('login data', $scope.loginData);
             },
             // error
             function(error) {
@@ -929,12 +944,9 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('ProfileCtrl', ['$scope', function($scope) {
+.controller('ProfileCtrl', ['$scope', '$stateParams','userData', 'factory', function($scope, $stateParams, userData, factory) {
 
-    $scope.profileSettings = {
-        // "email": "test@test.com",
-        "password": "qwerty12345"
-    };
+
 
     $scope.saveProfile = function() {
         $scope.formTried = true;
@@ -955,13 +967,21 @@ angular.module("MainApp")
         $scope.saving = true; // send login request
         setTimeout(function () { // test
             $scope.saving = false;
-             $scope.$apply();
+            $scope.$apply();
         }, 2000);
     };
 
     // test
     $scope.videosCounter = 110;
 
+    $scope.userData = userData.data.data;
+
+    // get channels
+    factory.getUserChannels($stateParams.id).success(function(response) {
+        $scope.userChannels = response;
+        console.log('user channels', response);
+    });
+    
     $scope.profile = {
         user : {
             avatar : 'assets/img/prof_img.png',
@@ -978,6 +998,11 @@ angular.module("MainApp")
             channelName : 'RomanAtwood',
             channelSubscribers : 18358461
         }
+    };
+
+    $scope.profileSettings = {
+        "email": "test@test.com",
+        "password": "qwerty12345"
     };
 
 }]);

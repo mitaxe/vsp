@@ -6,7 +6,7 @@ angular.module("MainApp")
 
         // home page
         factory.getHomeData = function() {
-            return $http.get('http://vsponline.qa/index/videos');
+            return $http.get(domain + '/index/videos');
         };
 
         // exclusive page
@@ -124,6 +124,14 @@ angular.module("MainApp")
         factory.getRecommendedChannels = function(){
             return $http.get(domain + '/channels/groups/recommended');
         };
+
+        factory.getUserData = function (id) {
+            return $http.get(domain + '/users/' + id);
+        }
+
+        factory.getUserChannels = function (id) {
+            return $http.get(domain + '/users/' + id + '/channels');
+        }    
 
         return factory;
 

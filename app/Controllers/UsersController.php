@@ -17,7 +17,7 @@ class UsersController extends RESTController
         $password = $this->request->getPost('password');
         $user = Users::findFirst( ['conditions' => 'email = ?1', 'bind'=> [1 => $email]] );
         if ($user) {
-            return new UserResponse($user->id, $user->email, 'adsflk2390fdvfvkljrf23sd0');
+            return new UserResponse($user->id, $user->email, 'adsflk2390fdvfvkljrf23sd0', $user->vspUserId);
             /*if ($this->security->checkHash($password, $user->password)) {
                         
             }*/
@@ -25,9 +25,6 @@ class UsersController extends RESTController
             $this->security->hash(rand());
             throw new UserNotFoundException('User not found or incorrect password/login');
         }
-        
-        return new Response();
-        // неудачная проверка
     }
 
     public function register()
@@ -49,7 +46,7 @@ class UsersController extends RESTController
         $token = $this->request->getToken();
             
         if (1 || !empty($token)) {
-            $channel = Channels::findFirst("vspChannelId = 'MBRNTlo1Bz0--f3Iz7a53J4c'");
+            $channel = Channels::findFirst("vspUserId = '5745c0fdfe502cf046fff634'");
             $channels = Channels::find(["conditions"=>"vspChannelId IN ('MBRNKCtABW8e-8ktBzqk9Ze5','MBRN3xni1zsX0mWr5s0kedF4','MBRNApNHhnj6W0psKcXt_Y02')"]);
             $pinsResponse = new ChannelsResponse();
             $pinsResponse->add($channels);
@@ -73,6 +70,51 @@ class UsersController extends RESTController
         }
 
         return new Response();
+    }
+    
+    public function getChannels($vspUserId)
+    {
+        $channels = Channels::find([
+            'conditions' => "vspUserId = ?1",
+            'bind' => [1 => $vspUserId]
+        ]);
+
+        $response = new ChannelsResponse();
+
+        if (count($channels)) {
+            $response->add($channels, true);
+        }
+
+        return $response;
+    }
+
+
+    public function getUser($id)
+    {
+        $user = Users::findFirst([
+            'conditions' => "vspUserId = ?1",
+            'bind' => [1 => $id]
+        ]);
+        
+        if (!empty($user)) {
+            $response = new UserResponse(
+                $user->id,
+                $user->email,
+                'userToken',
+                $user->vspUserId,
+                $user->login,
+                $user->details->firstName,
+                $user->details->lastName,
+                $user->details->middleName,
+                $user->details->picture,
+                $user->details->description,
+                $user->details->city,
+                $user->details->dateBirthday
+            );            
+            return $response;
+        }
+        
+        throw new UserNotFoundException();
     }
     
 }
