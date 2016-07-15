@@ -1,5 +1,5 @@
 angular.module("MainApp")
-.controller('xChannelCtrl', ['$scope', '$stateParams', 'mainChannel', 'factory' , function($scope, $stateParams, mainChannel, factory) {
+.controller('xChannelCtrl', ['$scope', '$stateParams', 'mainChannel', 'factory', '$window', function($scope, $stateParams, mainChannel, factory, $window) {
 
     // get main channel data
     $scope.content = mainChannel.data.data;
@@ -21,16 +21,6 @@ angular.module("MainApp")
         $scope.channelGoods = response.data;
         console.log('channels goods ', $scope.channelGoods);
     });
-
-    // subscribe
-    $scope.subscribe = function() {
-        $scope.subscribed = !$scope.subscribed;
-        if ($scope.subscribed) {
-            $scope.content.statSubscribers += 1;
-        } else {
-            $scope.content.statSubscribers -= 1;
-        }
-    };
 
     // sort channels
     $scope.sortTypes = [

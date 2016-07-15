@@ -868,7 +868,7 @@ function ($scope, $sce, factory, $state, $window, $http, $timeout) {
     // factory test data
     factory.getVideos().success(function(response) {
         // $scope.blogs = response.videos;
-        // $scope.videos = response.videos;
+        $scope.videos = response.videos;
         // $scope.channels = response.channels;
         $scope.goods = response.goods;
         $scope.comments = response.comments;
@@ -1338,7 +1338,7 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('xChannelCtrl', ['$scope', '$stateParams', 'mainChannel', 'factory' , function($scope, $stateParams, mainChannel, factory) {
+.controller('xChannelCtrl', ['$scope', '$stateParams', 'mainChannel', 'factory', '$window', function($scope, $stateParams, mainChannel, factory, $window) {
 
     // get main channel data
     $scope.content = mainChannel.data.data;
@@ -1360,16 +1360,6 @@ angular.module("MainApp")
         $scope.channelGoods = response.data;
         console.log('channels goods ', $scope.channelGoods);
     });
-
-    // subscribe
-    $scope.subscribe = function() {
-        $scope.subscribed = !$scope.subscribed;
-        if ($scope.subscribed) {
-            $scope.content.statSubscribers += 1;
-        } else {
-            $scope.content.statSubscribers -= 1;
-        }
-    };
 
     // sort channels
     $scope.sortTypes = [
@@ -1748,6 +1738,58 @@ angular.module("MainApp")
 
             }, 0);
         //  }, true);
+
+    }
+  };
+}]);
+
+angular.module("MainApp")
+.directive('subscribe', ["$timeout", "$window", function($timeout, $window) {
+  return {
+    restrict: 'E',
+    replace: true,
+    scope: {
+        subscriber: '=subscribeTo'
+    },
+    template: '<div class="subscribe_box">' +
+                    '<span ng-click="subscribe()" class="green_btn" ng-class="{subscribed:subscribed}" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">' +
+                        ' {{ getSubscriptionText() }} ' +
+                    '</span>' +
+                    '<span class="counter subscribe">{{ subscriber | number }}</span>' +
+                '</div>',
+    link: function(scope, element, attrs) {
+
+        // subscribe
+        scope.subscribe = function() {
+            scope.subscribed = !scope.subscribed;
+            if (scope.subscribed) {
+                scope.subscriber += 1;
+            } else {
+                scope.subscriber -= 1;
+            }
+        };
+
+        scope.hoverIn = function(){
+            scope.subsButtonHovered = true;
+        };
+
+        scope.hoverOut = function(){
+            scope.subsButtonHovered = false;
+        };
+
+        scope.getSubscriptionText = function() {
+            var text = 'Подписаться';
+            if (scope.subscribed) {
+                text = 'Подписка оформлена';
+                if (scope.subsButtonHovered) {
+                    text = 'Отменить подписку';
+                }
+                if ($window.innerWidth < 768) {
+                    text = 'Отписаться';
+                }
+            }
+            return text;
+        };
 
     }
   };

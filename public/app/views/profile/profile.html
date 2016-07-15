@@ -71,13 +71,28 @@
 
                                 <!-- subscribe desktop -->
                                 <div class="subscribe_box profile__subscribe_box hidden-tablet hidden-phone">
-                                    <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ profile.channel.channelSubscribers | number}}</span>
+                                    <span ng-click="subscribe()" class="green_btn"
+                                        ng-class="{'subscribed':subscribed}"
+                                        ng-mouseover="hoverIn()"
+                                        ng-mouseleave="hoverOut()">
+                                        {{ getSubscriptionText() }}
+                                    </span>
+                                    <span class="counter subscribe">{{ content.statSubscribers | number }}</span>
+
+                                    <!-- <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ profile.channel.channelSubscribers | number}}</span> -->
                                 </div>
                                 <!-- end subscribe desktop -->
 
                                 <!-- subscribe tablet and phone -->
-                                <div class="subscribe_box hidden-desktop" style="float: none;margin-bottom: 15px">
-                                    <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ profile.channel.channelSubscribers | number}}</span>
+                                <div class="subscribe_box hidden-desktop" style="float:none; margin-bottom:15px;">
+                                    <!-- <a href="#" class="green_btn subscribe">Подписаться</a><span class="counter subscribe"> {{ profile.channel.channelSubscribers | number}}</span> -->
+                                    <span ng-click="subscribe()" class="green_btn"
+                                        ng-class="{'subscribed':subscribed}"
+                                        ng-mouseover="hoverIn()"
+                                        ng-mouseleave="hoverOut()">
+                                        {{ getSubscriptionText() }}
+                                    </span>
+                                    <span class="counter subscribe">{{ content.statSubscribers | number }}</span>
                                 </div>
                                 <!-- end subscribe tablet and phone -->
 

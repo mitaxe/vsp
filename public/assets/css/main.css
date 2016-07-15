@@ -1,6 +1,7 @@
 /* fonts */
 /* colors */
 /* media breakpoints */
+/* retina */
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
   min-height: 1px;
@@ -3759,26 +3760,86 @@ textarea {
       background: linear-gradient(to bottom, #29bd4a 0%, #2da747 100%); }
     .subscribe_box .green_btn:active {
       background: linear-gradient(to bottom, #2b9f44 0%, #29be4a 100%); }
+    .subscribe_box .green_btn.subscribed {
+      padding-left: 60px;
+      text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+      box-shadow: none;
+      font-weight: normal;
+      letter-spacing: .15px;
+      background: #d0d0d0; }
+      .subscribe_box .green_btn.subscribed:after {
+        content: '';
+        display: block;
+        width: 30px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 25px;
+        background-image: url("../img/icon-check.png"); }
+        @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+          .subscribe_box .green_btn.subscribed:after {
+            background-image: url("../img/icon-check@2x.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            background-size: 50%; } }
+      .subscribe_box .green_btn.subscribed:hover {
+        font-weight: bold;
+        letter-spacing: 1px; }
+        .subscribe_box .green_btn.subscribed:hover:after {
+          background-image: url("../img/icon-close.png");
+          background-position: top 15px center !important; }
+          @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+            .subscribe_box .green_btn.subscribed:hover:after {
+              background-image: url("../img/icon-close@2x.png");
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: contain;
+              background-size: 50%; } }
   .subscribe_box .counter {
     background: #e6e6e6;
     color: #5b5d5e;
-    padding: 0 25px 0 35px;
+    padding: 0 25px 0 150px;
     line-height: 40px;
     height: 40px;
     vertical-align: top;
     text-align: center;
-    margin-left: -20px;
+    margin-left: -135px;
     position: relative;
     z-index: 1;
     font-size: 18px;
-    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0px 2px 6px 0px rgba(0, 0, 0, 0.1), 0px 1px white;
     display: inline-block;
     border-radius: 0 50px 50px 0; }
   @media screen and (max-width: 767px) {
-    .subscribe_box .green_btn {
-      padding: 0 20px; }
-    .subscribe_box .counter {
-      padding: 0 10px 0 20px; } }
+    .subscribe_box {
+      float: none; }
+      .subscribe_box .green_btn {
+        font-weight: bold;
+        padding-left: 20px;
+        padding-right: 20px; }
+        .subscribe_box .green_btn.subscribed {
+          padding-left: 45px;
+          padding-right: 20px;
+          font-weight: bold;
+          letter-spacing: normal; }
+          .subscribe_box .green_btn.subscribed:after {
+            left: 15px;
+            background-image: url("../img/icon-close.png");
+            background-position: top 15px center !important; } }
+        @media only screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2), only screen and (max-width: 767px) and (min--moz-device-pixel-ratio: 2), only screen and (max-width: 767px) and (-o-min-device-pixel-ratio: 2 / 1), only screen and (max-width: 767px) and (min-device-pixel-ratio: 2), only screen and (max-width: 767px) and (min-resolution: 192dpi), only screen and (max-width: 767px) and (min-resolution: 2dppx) {
+          .subscribe_box .green_btn.subscribed:after {
+            background-image: url("../img/icon-close@2x.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            background-size: 50%; } }
+  @media screen and (max-width: 767px) {
+          .subscribe_box .green_btn.subscribed:hover {
+            letter-spacing: normal; }
+      .subscribe_box .counter {
+        padding: 0 15px 0 130px;
+        margin-left: -125px; } }
 
 .cat_counter {
   font-size: 36px;
