@@ -3264,9 +3264,9 @@ textarea {
     .block {
       margin: 0 15px 20px; }
       .block__btn .btn {
-        margin-top: 5px; }
+        margin-top: 2px; }
       .block__select--top15 {
-        margin-top: 10px; }
+        margin-top: 15px; }
       .block--sidebar {
         margin: 0 0px 25px -20px !important;
         background: transparent;
@@ -3687,6 +3687,8 @@ textarea {
       display: none; }
     .channel__ava.bf_vis:before {
       display: block; }
+  .channel__head .block__title {
+    float: none; }
   .channel__head .block__subtitle {
     color: #999;
     font-size: 14px;

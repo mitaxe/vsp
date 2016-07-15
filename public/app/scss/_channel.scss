@@ -56,6 +56,9 @@
     }
 
     &__head {
+        .block__title {
+            float: none;
+        }
         .block__subtitle {
             color: #999;
             font-size: 14px;

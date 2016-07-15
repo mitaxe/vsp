@@ -65,8 +65,8 @@
                             <div class="table-middle">
                                 <img ng-src="{{ channel.img }}" alt="" class="channel__avatar"/>
                                 <div class="channel__info">
-                                    <span class="channel__name">{{ channel.title }}</span>
-                                    <span class="channel__subscribers">{{ channel.statSubscribers }}</span>
+                                    <span class="channel__name">{{ channel.title | trimText:20 }}</span>
+                                    <span class="channel__subscribers">{{ channel.statSubscribers || 0 }}</span>
                                 </div>
                             </div>
                         </a>
@@ -90,8 +90,8 @@
                             <div class="table-middle">
                                 <img ng-src="{{ channel.img }}" alt="" class="channel__avatar"/>
                                 <div class="channel__info">
-                                    <span class="channel__name">{{ channel.title }}</span>
-                                    <span class="channel__subscribers">{{ channel.statSubscribers }}</span>
+                                    <span class="channel__name">{{ channel.title | trimText:20 }}</span>
+                                    <span class="channel__subscribers">{{ channel.statSubscribers || 0 }}</span>
                                 </div>
                             </div>
                         </a>

@@ -37,16 +37,19 @@
             <div class="col-xs-12">
                 <div class="accordion channel__head">
                     <div class="clearfix">
-                        <h2 class="block__title">{{ content.title }}</h2>
-                        <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-grey hidden-tablet hidden-phone">
-                            <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
-                            </svg></i>
-                            Редактировать канал
-                        </a>
-                        <!-- subscribe button -->
-                        <subscribe ng-show="content.id != userData.channel.id" class="hidden-tablet hidden-phone" subscribe-to="content.statSubscribers"></subscribe>
+                        <h2 class="block__title">
+                            <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-grey hidden-tablet hidden-phone">
+                                <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
+                                </svg></i>
+                                Редактировать канал
+                            </a>
+                            <!-- subscribe button -->
+                            <subscribe ng-show="content.id != userData.channel.id" class="hidden-tablet hidden-phone" subscribe-to="content.statSubscribers"></subscribe>
+                            {{ content.title }}
+                        </h2>
                     </div>
                     <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
+                        <!-- subscribe button -->
                         <subscribe ng-show="content.id != userData.channel.id" class="hidden-desktop" subscribe-to="content.statSubscribers"></subscribe>
                         <a ng-show="content.id == userData.channel.id" ui-sref="profile" class="btn btn-grey hidden-desktop" style="float: none;">
                             <i class="svg">
