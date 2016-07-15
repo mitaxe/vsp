@@ -1,7 +1,5 @@
 angular.module("MainApp")
-.controller('ProfileCtrl', ['$scope', '$stateParams','userData', 'factory', function($scope, $stateParams, userData, factory) {
-
-
+.controller('ProfileCtrl', ['$scope', '$stateParams', 'userData', 'factory', function($scope, $stateParams, userData, factory) {
 
     $scope.saveProfile = function() {
         $scope.formTried = true;
@@ -20,6 +18,8 @@ angular.module("MainApp")
         // $scope.logging = true; // adjust button text
 
         $scope.saving = true; // send login request
+
+        // factory.loginUser($scope.loginData).then(
         setTimeout(function () { // test
             $scope.saving = false;
             $scope.$apply();
@@ -36,7 +36,7 @@ angular.module("MainApp")
         $scope.userChannels = response;
         console.log('user channels', response);
     });
-    
+
     $scope.profile = {
         user : {
             avatar : 'assets/img/prof_img.png',
