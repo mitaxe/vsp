@@ -8,21 +8,7 @@
     width: 50%;
     display: block;
     height: 45px;
-    &__underline {
-        display: none; ///---
-        height: 2px;
-        position: relative;
-        background: $col-green;
-        width: 0;
-        transition: .3s ease-in-out;
-    }
-    &--fullwidth {
-        width: 100%;
-    }
-    &--center {
-        width: 100%;
-        text-align: center;
-    }
+
     a {
         @include no-select;
         display: inline-block;
@@ -42,13 +28,29 @@
             font-weight:bold;
         }
     }
-    &--video {
-        width: 100%;
-        margin-top: 23px;
-        a {
-            padding: 0 22px;
-        }
+
+    &__underline {
+        display: none; ///---
+        height: 2px;
+        position: relative;
+        background: $col-green;
+        width: 0;
+        transition: .3s ease-in-out;
     }
+
+    &--fullwidth {
+        width: 100%;
+    }
+
+    &--center {
+        width: 100%;
+        text-align: center;
+    }
+
+    &--video {
+
+    }
+
     @include phone {
         text-align: center;
         width: 100%;
@@ -80,11 +82,38 @@
                 }
             }
         }
+        &--video {
+            height: auto;
+            .block__hr {
+                margin-top: 0;
+            }
+            a {
+                display: block;
+                width: 40%;
+                min-width: 200px;
+                margin: 0 auto;
+            }
+        }
     }
+
     @include tablet {
         a {
             padding: 0 10px;
         }
+        &--video {
+            a {
+                padding: 0 25px;
+            }
+        }
     }
+
+    @include desktop-small {
+        &--video {
+            a {
+                padding: 0 15px;
+            }
+        }
+    }
+
 }
 /* tabs */

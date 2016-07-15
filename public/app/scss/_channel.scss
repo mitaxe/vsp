@@ -59,11 +59,6 @@
         .block__title {
             float: none;
         }
-        .block__subtitle {
-            color: #999;
-            font-size: 14px;
-            line-height: 1.5;
-        }
         .toggler__text {
             margin-left: 10px;
         }
@@ -101,7 +96,7 @@
         }
         &__head {
             padding-left: 180px;
-            min-height: 100px;
+            min-height: 120px;
         }
     }
 
@@ -143,6 +138,7 @@
         font-weight:bold;
         font-size: 14px;
         cursor: pointer;
+        transition: padding .1s;
 
         box-shadow: 0px 0px 5px 5px rgba(29,278,70,0.13);
         background: linear-gradient(to bottom, #18cb49 0%, #1db346 100%);
@@ -161,7 +157,11 @@
             font-weight: normal;
             letter-spacing: .15px;
             background: #d0d0d0;
+            // min-width: 270px;
             &:after {
+                @include retina-background-image("../img/icon-check", "png");
+                background-size: 16px 12.5px !important;
+                background-position: top 15px center !important;
                 content: '';
                 display: block;
                 width: 30px;
@@ -169,15 +169,6 @@
                 position: absolute;
                 top: 0;
                 left: 25px;
-                @include retina-background-image("../img/icon-check", "png");
-            }
-            &:hover {
-                font-weight: bold;
-                letter-spacing: 1px;
-                &:after {
-                    @include retina-background-image("../img/icon-close", "png");
-                    background-position: top 15px center !important;
-                }
             }
         }
     }
@@ -216,6 +207,7 @@
                     left: 15px;
                     @include retina-background-image("../img/icon-close", "png");
                     background-position: top 15px center !important;
+                    background-size: 12px 13px !important;
                 }
                 &:hover {
                     letter-spacing: normal;
@@ -223,8 +215,32 @@
             }
         }
         .counter {
-            padding: 0 15px 0 130px;
-            margin-left: -125px;
+            padding: 0 15px 0 115px;
+            margin-left: -100px;
+        }
+    }
+
+    @include tablet {
+        .green_btn.subscribed {
+            font-weight: bold;
+            letter-spacing: 1px;
+            &:after {
+                @include retina-background-image("../img/icon-close", "png");
+                background-size: 12px 13px !important;
+            }
+        }
+    }
+
+    @include desktop {
+        .green_btn.subscribed {
+            &:hover {
+                font-weight: bold;
+                letter-spacing: 1px;
+                &:after {
+                    @include retina-background-image("../img/icon-close", "png");
+                    background-size: 12px 13px !important;
+                }
+            }
         }
     }
 }

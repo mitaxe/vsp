@@ -33,7 +33,7 @@
     <div class="row">
 
         <!-- channel-header -->
-        <div class="block block--header">
+        <div class="block block--header block--header-channel">
             <div class="col-xs-12">
                 <div class="accordion channel__head">
                     <div class="clearfix">
@@ -59,15 +59,8 @@
                             Редактировать канал
                         </a>
                     </div>
-                    <p ng-init="symbolsLimit = 200" ng-show="content.description.length > 0" class="block__subtitle">
-                        <span ng-bind-html="content.description | trimText:symbolsLimit" style="white-space: pre-line;"></span>
-                        <a class="read-more"
-                            ng-show="content.description.length > symbolsLimit"
-                            ng-click="symbolsLimit = infinity">
-                            <span>Читать далее</span>
-                            <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>
-                        </a>
-                    </p>
+                    <!-- read more -->
+                    <read-more text="content.description" class="block__description"></read-more>
                 </div>
                 <div class="tablet_ctrl clearfix hidden-phone">
                     <!-- subscribe button -->
@@ -81,7 +74,7 @@
                     </a>
                 </div>
                 <!-- channel tabs nav -->
-                <div class="clearfix">
+                <div class="clearfix" ng-show="channelVideos.length > 0 || channelPlaylists.length > 0 || channelGoods">
                     <tabs class="tabs">
                         <a ng-show="channelVideos.length > 0"
                             ui-sref="channels.all"
@@ -100,7 +93,7 @@
         </div><!-- channel-header -->
 
         <!-- channel views -->
-        <div ui-view></div>
+        <div ng-show="channelVideos.length > 0 || channelPlaylists.length > 0 || channelGoods" ui-view></div>
 
     </div>
 </div>

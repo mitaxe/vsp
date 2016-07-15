@@ -60,6 +60,11 @@
         color: #3a3d3e;
         font-size: 20px;
     }
+    &__description {
+        color: #999;
+        font-size: 14px;
+        line-height: 1.5;
+    }
     &__btn {
         float: right;
         text-align: right;
@@ -185,6 +190,9 @@
             .block__title {
                 font-size: 30px;
             }
+        }
+        &--header-channel {
+            padding-top: 0;
         }
         &--sidebar {
             .block__title {

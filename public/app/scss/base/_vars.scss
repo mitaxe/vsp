@@ -16,43 +16,48 @@ $col-red: #eb1c23; // rgba(235, 28, 35, 1)
 
 /* media breakpoints */
 $tablet-width: 768px;
-// $desktop-width: 1024px;
 $desktop-width: 1280px;
 
 @mixin phone {
-  @media screen and (max-width: #{$tablet-width - 1px}) {
-    @content;
-  }
+    @media screen and (max-width: #{$tablet-width - 1px}) {
+        @content;
+    }
 }
 
 @mixin tablet {
-  @media screen and (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
-    @content;
-  }
+    @media screen and (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+        @content;
+    }
 }
 
 @mixin desktop {
-  @media screen and (min-width: #{$desktop-width}) {
-    @content;
-  }
+    @media screen and (min-width: #{$desktop-width}) {
+        @content;
+    }
 }
 
 @mixin desk-1600 {
-  @media screen and (min-width: 1600px) {
-    @content;
-  }
+    @media screen and (min-width: 1600px) {
+        @content;
+    }
+}
+
+@mixin desktop-small {
+    @media screen and (min-width: #{$desktop-width}) and (max-width: 1400px) {
+        @content;
+    }
 }
 
 @mixin deskMax1600 {
-  @media screen and (max-width: 1600px) {
-    @content;
-  }
+    @media screen and (max-width: 1600px) {
+        @content;
+    }
 }
 
 /* retina */
 $retina: "only screen and (-webkit-min-device-pixel-ratio: 2),
-        only screen and (min--moz-device-pixel-ratio: 2),
-        only screen and (-o-min-device-pixel-ratio: 2/1),
-        only screen and (min-device-pixel-ratio: 2),
-        only screen and (min-resolution: 192dpi),
-        only screen and (min-resolution: 2dppx)";
+            only screen and (min--moz-device-pixel-ratio: 2),
+            only screen and (-o-min-device-pixel-ratio: 2/1),
+            only screen and (min-device-pixel-ratio: 2),
+            only screen and (min-resolution: 192dpi),
+            only screen and (min-resolution: 2dppx)";

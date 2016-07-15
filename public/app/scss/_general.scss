@@ -152,19 +152,3 @@ textarea {
     box-shadow: 0px 1px 0px white;
     margin: 20px 0;
 }
-
-// read more
-.read-more {
-    @include no-select;
-    margin-left: 10px;
-    cursor: pointer;
-    color: $col-green;
-    .svg {
-        fill: $col-green;
-    }
-    &.active {
-        svg {
-            transform: rotate(180deg);
-        }
-    }
-}

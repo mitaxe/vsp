@@ -1,5 +1,6 @@
-<div class="content video_page" autoscroll='true'>
+<div class="video_page" autoscroll='true'>
 
+    <!-- video page header -->
     <div class="player_box hidden-phone">
         <div class="col-xs-12" >
             <p class="">Плейлист:</p>
@@ -19,279 +20,303 @@
     </div>
 
     <div class="video_slider">
-        <div class="">
 
-            <!-- left preview -->
-            <div class="video_slider__item video_slider__item--left col-md-2 hidden-tablet hidden-phone">
-                <div class="thumb__img">
-                    <a ui-sref="videos({ id: mainVideos[1].id })">
-                        <span class="thumb__length">{{mainVideos[1].length | secondsToTime}}</span>
-                        <img alt="" ng-src="{{mainVideos[1].img}}">
-                    </a>
-                </div>
-                <a ui-sref="videos({ id: mainVideos[1].id })" class="btn btn-video-ctrl">
-                    <img class="prev" src="assets/img/video-prev-icon.png" alt="prev icon">
-                    <span>Предыдущее</span>
+        <!-- left preview -->
+        <div class="video_slider__item video_slider__item--left col-md-2 hidden-tablet hidden-phone">
+            <div class="thumb__img">
+                <a ui-sref="videos({ id: mainVideos[1].id })">
+                    <span class="thumb__length">{{mainVideos[1].length | secondsToTime}}</span>
+                    <img alt="" ng-src="{{mainVideos[1].img}}">
                 </a>
-                <p class="th_description" ng-bind-html="mainVideos[1].title | trimText:100" style="white-space: pre-line;"></p>
             </div>
+            <a ui-sref="videos({ id: mainVideos[1].id })" class="btn btn-video-ctrl">
+                <img class="prev" src="assets/img/video-prev-icon.png" alt="prev icon">
+                <span>Предыдущее</span>
+            </a>
+            <p class="th_description" ng-bind-html="mainVideos[1].title | trimText:100" style="white-space: pre-line;"></p>
+        </div>
 
-            <!-- main video slide -->
-            <div class="video_slider__item video_slider__item--main col-md-8 col-sm-12">
-                <div class="relative">
-                    <div class='embed-container'>
-                        <iframe ng-src="{{ iframeSrc(mainVideos[0].srcId) }}" frameborder='0' allowfullscreen></iframe>
+        <!-- main video slide -->
+        <div class="video_slider__item video_slider__item--main col-md-8 col-sm-12">
+            <div class="relative">
+                <div class='embed-container'>
+                    <iframe ng-src="{{ iframeSrc(mainVideos[0].srcId) }}" frameborder='0' allowfullscreen></iframe>
+                </div>
+                <div class="about_video clearfix">
+                    <div class="about_video__left hidden-phone hidden-tablet">
+                        <h2>{{ mainVideos[0].title | trimText:50 }}</h2>
+                        <span> {{ mainVideos[0].date | prettyDate }}</span>
                     </div>
-                    <div class="about_video clearfix">
-                        <div class="about_video__left hidden-phone hidden-tablet">
-                            <h2>{{ mainVideos[0].title | trimText:50 }}</h2>
-                            <span> {{ mainVideos[0].date | prettyDate }}</span>
+                    <div class="about_video__right clearfix">
+                        <div class="about_video__left hidden-phone">
+                            <span class="hidden-desktop"> {{ mainVideos[0].date | prettyDate }}</span>
                         </div>
-                        <div class="about_video__right clearfix">
-                            <div class="about_video__left hidden-phone">
-                                <span class="hidden-desktop"> {{ mainVideos[0].date | prettyDate }}</span>
-                            </div>
-                            <h2 class="hidden-desktop hidden-tablet">{{ mainVideos[0].title | trimText:50 }}</h2>
-                            <p class="hidden-phone views_row">Просмотров <span class="views">{{ (mainVideos[0].statViews || 0) | number}}</span></p>
-                            <p><span class="hidden-tablet hidden-desktop mob_channel_name">50-50 Pranker</span> <i class="hidden-phone">Нравится</i> <span class="likes">{{ mainVideos[0].statLikes || 0 }}</span> <button class="btn like_btn">
-                                <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="23" viewBox="0 0 13.566 11"><path d="M4.9 8.47c1.687.776 3.69 1.21 5.662 1.21.64 0 .402-.03 1.016-.133.24-.04.55-.13.688-.236.188-.145.31-.378.31-.638 0-.24-.105-.458-.27-.605h.07c.44 0 .794-.36.794-.807s-.355-.807-.793-.807h.396c.44 0 .795-.36.795-.807 0-.446-.355-.807-.795-.807.44 0 .795-.362.795-.808s-.355-.807-.795-.807h-2.695c-.274 0-.497-.226-.497-.504l.25-1.675c.024-.075.037-.155.037-.238C9.867.36 9.51 0 9.07 0c-.366 0-.676.254-.766.597L8.27.712C7.76 2.362 6.605 3.868 4.9 4.84v3.63z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 3.52h3.9v6.412L0 11V3.52z"/></svg></i>
-                            </button></p>
-                            <p class="hidden-tablet hidden-desktop"><span class="mob_date"> {{ mainVideos[0].date | prettyDate }}</span> Просмотров <span class="views">{{ mainVideos[0].statViews | number }}</span></p>
-                            <h2 class="hidden-desktop hidden-phone">{{ mainVideos[0].title | trimText:50 }}</h2>
-                            <div class="row hidden-desktop hidden-phone">
-                                <div class="col-xs-6">
-                                    <div class="row">
-                                        <div class="col-xs-3">
-                                            <a ui-sref="videos({ id: mainVideos[1].id })" class="btn btn-video-ctrl">
-                                                <img class="prev" src="assets/img/video-prev-icon.png" alt="prev icon">
+                        <h2 class="hidden-desktop hidden-tablet">{{ mainVideos[0].title | trimText:50 }}</h2>
+                        <p class="hidden-phone views_row">Просмотров <span class="views">{{ (mainVideos[0].statViews || 0) | number}}</span></p>
+                        <p><span class="hidden-tablet hidden-desktop mob_channel_name">50-50 Pranker</span> <i class="hidden-phone">Нравится</i> <span class="likes">{{ mainVideos[0].statLikes || 0 }}</span> <button class="btn like_btn">
+                            <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="23" viewBox="0 0 13.566 11"><path d="M4.9 8.47c1.687.776 3.69 1.21 5.662 1.21.64 0 .402-.03 1.016-.133.24-.04.55-.13.688-.236.188-.145.31-.378.31-.638 0-.24-.105-.458-.27-.605h.07c.44 0 .794-.36.794-.807s-.355-.807-.793-.807h.396c.44 0 .795-.36.795-.807 0-.446-.355-.807-.795-.807.44 0 .795-.362.795-.808s-.355-.807-.795-.807h-2.695c-.274 0-.497-.226-.497-.504l.25-1.675c.024-.075.037-.155.037-.238C9.867.36 9.51 0 9.07 0c-.366 0-.676.254-.766.597L8.27.712C7.76 2.362 6.605 3.868 4.9 4.84v3.63z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 3.52h3.9v6.412L0 11V3.52z"/></svg></i>
+                        </button></p>
+                        <p class="hidden-tablet hidden-desktop"><span class="mob_date"> {{ mainVideos[0].date | prettyDate }}</span> Просмотров <span class="views">{{ mainVideos[0].statViews | number }}</span></p>
+                        <h2 class="hidden-desktop hidden-phone">{{ mainVideos[0].title | trimText:50 }}</h2>
+                        <div class="row hidden-desktop hidden-phone">
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <a ui-sref="videos({ id: mainVideos[1].id })" class="btn btn-video-ctrl">
+                                            <img class="prev" src="assets/img/video-prev-icon.png" alt="prev icon">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <div class="thumb__img">
+                                            <a ui-sref="videos({ id: mainVideos[1].id })">
+                                                <span class="thumb__length">{{ mainVideos[1].length | secondsToTime }}</span>
+                                                <img alt="" ng-src="{{mainVideos[1].img}}">
                                             </a>
                                         </div>
-                                        <div class="col-xs-9">
-                                            <div class="thumb__img">
-                                                <a ui-sref="videos({ id: mainVideos[1].id })">
-                                                    <span class="thumb__length">{{ mainVideos[1].length | secondsToTime }}</span>
-                                                    <img alt="" ng-src="{{mainVideos[1].img}}">
-                                                </a>
-                                            </div>
-                                            <p class="th_description">{{ mainVideos[1].title | trimText:100 }}</p>
-                                        </div>
+                                        <p class="th_description">{{ mainVideos[1].title | trimText:100 }}</p>
                                     </div>
                                 </div>
-                                <div class="col-xs-6">
-                                    <div class="row">
-                                        <div class="col-xs-9">
-                                            <div class="thumb__img">
-                                                <a ui-sref="videos({ id: mainVideos[2].id })">
-                                                    <span class="thumb__length">{{ mainVideos[2].length | secondsToTime }}</span>
-                                                    <img alt="" ng-src="{{mainVideos[1].img}}">
-                                                </a>
-                                            </div>
-                                            <p class="th_description">{{ mainVideos[1].title | trimText:100 }}</p>
-                                        </div>
-                                        <div class="col-xs-3 alignLeft">
-                                            <a ui-sref="videos({ id: mainVideos[2].id })" class="btn btn-video-ctrl">
-                                                <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <div class="thumb__img">
+                                            <a ui-sref="videos({ id: mainVideos[2].id })">
+                                                <span class="thumb__length">{{ mainVideos[2].length | secondsToTime }}</span>
+                                                <img alt="" ng-src="{{mainVideos[1].img}}">
                                             </a>
                                         </div>
+                                        <p class="th_description">{{ mainVideos[1].title | trimText:100 }}</p>
+                                    </div>
+                                    <div class="col-xs-3 alignLeft">
+                                        <a ui-sref="videos({ id: mainVideos[2].id })" class="btn btn-video-ctrl">
+                                            <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-            <!-- right preview -->
-            <div class="video_slider__item video_slider__item--right col-md-2 hidden-tablet hidden-phone">
-                <div class="thumb__img">
-                    <a ui-sref="videos({ id: mainVideos[2].id })">
-                        <span class="thumb__length">{{ mainVideos[2].length | secondsToTime }}</span>
-                        <img alt="" ng-src="{{mainVideos[2].img}}">
-                    </a>
-                </div>
-                <a ui-sref="videos({ id: mainVideos[2].id })" class="btn btn-video-ctrl">
-                    <span>Следующее</span>
-                    <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
-                </a>
-                <p class="th_description" ng-bind-html="mainVideos[2].title | trimText:100" style="white-space: pre-line;"></p>
             </div>
         </div>
+
+        <!-- right preview -->
+        <div class="video_slider__item video_slider__item--right col-md-2 hidden-tablet hidden-phone">
+            <div class="thumb__img">
+                <a ui-sref="videos({ id: mainVideos[2].id })">
+                    <span class="thumb__length">{{ mainVideos[2].length | secondsToTime }}</span>
+                    <img alt="" ng-src="{{mainVideos[2].img}}">
+                </a>
+            </div>
+            <a ui-sref="videos({ id: mainVideos[2].id })" class="btn btn-video-ctrl">
+                <span>Следующее</span>
+                <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
+            </a>
+            <p class="th_description" ng-bind-html="mainVideos[2].title | trimText:100" style="white-space: pre-line;"></p>
+        </div>
+
     </div> <!-- end slider box -->
 
-    <!-- mobile tabs -->
-    <div class="tabl_mob_tebs hidden-desktop" ng-controller="CommentsCtrl">
-        <div class="clearfix">
-            <tabs class="tabs tabs--video tablet-center">
-                <a ng-class="{'active' : activeTab == 3}" ng-click="setActiveTab(3)">Комментари <span>{{ commentsLength() }}</span></a>
-                <hr class="block__hr hidden-tablet hidden-desktop">
-                <a ng-class="{'active' : activeTab == 1}" ng-click="setActiveTab(1)">Похожие видео</a>
-                <hr class="block__hr hidden-tablet hidden-desktop">
-                <a ng-class="{'active' : activeTab == 2}" ng-click="setActiveTab(2)">Похожие каналы</a>
-                <hr class="block__hr hidden-tablet hidden-desktop">
-                <div class="tabs__underline"></div>
-            </tabs>
-        </div>
-        <hr class="block__hr hidden-phone">
-    </div>
-    <div class="comments_bar_box">
-        <div class="col-xs-12 col-md-7" ng-show="activeTab == 3 || desktop == true">
-            <div class="block" ng-controller="CommentsCtrl">
-                <div class="col-xs-12 hidden-phone hidden-tablet">
-                    <p>
-                        <span class="comments__title">Комментарии </span>
-                        <span class="comments__number">{{ commentsLength() }}</span>
-                    </p>
-                    <br>
-                </div>
-                <hr class="block__hr hidden-phone hidden-tablet">
+    <div class="content">
+
+        <!-- read more -->
+        <div ng-show="mainVideos[0].text.length > 0" class="block hidden-desktop" style="margin-bottom:0">
+            <div class="row">
                 <div class="col-xs-12">
-                    <!-- comments block -->
-                    <div class="comments__item">
-                        <div class="comments__img">
-                            <img src="assets/img/ball-61.png" alt="" />
-                        </div>
-                        <div class="comments__right">
-                            <textarea class="comments__textarea" placeholder="Оставить комментарий"
-                                      ng-model="comment" ng-focus="initInput = true"
-                                      ng-enter="initInput = false; addComment(comment); comment = ''; limits.comments = limits.comments + 1"></textarea>
-                            <div class="comments__controls-r" ng-show="initInput">
-                                <span class="btn btn-white comments__answer" ng-click="initInput = false; comment = ''">Отмена</span>
-                                <span class="btn btn-green comments__answer" ng-click="initInput = false; addComment(comment); comment = ''; limits.comments = limits.comments + 1">Отправить</span>
-                            </div>
+                    <read-more text="mainVideos[0].text" class="block__description"></read-more>
+                </div>
+            </div>
+        </div>
+
+        <!-- mobile/tablet tabs -->
+        <div class="tabl_mob_tebs hidden-desktop">
+            <div class="clearfix">
+                <tabs class="tabs tabs--center tabs--video">
+                    <a ng-class="{'active' : activeTab == 3}" ng-click="setActiveTab(3)">Комментари <span>{{ commentsLength() }}</span></a>
+                    <hr class="block__hr hidden-tablet hidden-desktop">
+                    <a ng-class="{'active' : activeTab == 1}" ng-click="setActiveTab(1)">Похожие видео</a>
+                    <hr class="block__hr hidden-tablet hidden-desktop">
+                    <a ng-class="{'active' : activeTab == 2}" ng-click="setActiveTab(2)">Похожие каналы</a>
+                    <!-- <hr class="block__hr hidden-tablet hidden-desktop"> -->
+                </tabs>
+            </div>
+            <hr class="block__hr">
+        </div>
+
+        <!-- content block -->
+        <div>
+
+            <div class="col-xs-12 col-md-7" ng-show="activeTab == 3 || desktop == true">
+                <div class="block" ng-controller="CommentsCtrl">
+
+                    <div class="hidden-phone hidden-tablet">
+                        <!-- read more -->
+                        <read-more text="mainVideos[0].text" class="block__description"></read-more>
+                        <br>
+                        <hr class="block__hr">
+                        <br>
+                        <div class="col-xs-12">
+                            <p>
+                                <span class="comments__title">Комментарии </span>
+                                <span class="comments__number">{{ commentsLength() }}</span>
+                            </p>
+                            <br>
                         </div>
                     </div>
-                    <ul class="comments__container">
-                        <li class="comments__item" ng-repeat="comment in comments | limitTo: limits.comments ">
-                            <div class="clearfix">
-                                <div class="comments__img">
-                                    <img ng-src="{{ comment.img }}" alt="" />
-                                </div>
-                                <div class="comments__right">
-                                    <p class="comments__user">{{ comment.user }}</p>
-                                    <p class="comments__text">{{ comment.text }}</p>
-                                    <p class="hidden-tablet hidden-desktop"><span class="comments__date">{{ comment.date | date:'dd MMMM' }}</span></p>
-                                    <div class="comments__controls">
-                                        <div class="comments__controls-l">
-                                            <span class="btn btn-white comments__answer" ng-click="allowInput($index)">Ответить</span>
-                                            <span class="btn btn-white comments__plusone" ng-click="comment.likes = comment.likes + 1">+ {{ comment.likes }}</span>
-                                        </div>
-                                        <div class="comments__controls-r">
-                                            <span class="comments__date hidden-phone">{{ comment.date | date:'dd MMMM' }}</span>
-                                            <span class="btn btn-white comments__other"><span>...</span></span>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix" ng-show="isInputAllowed($index)">
-                                        <textarea class="comments__textarea comments__textarea--response" placeholder="Оставить ответ"
-                                                  ng-model="response"
-                                                  ng-enter="allowInput(); addComment(response,$index); response = ''"
-                                        ></textarea>
-                                        <div class="comments__controls-r">
-                                            <span class="btn btn-white comments__answer" ng-click="allowInput(); response = ''">Отмена</span>
-                                            <span class="btn btn-white comments__answer" ng-click="allowInput(); addComment(response,$index); response = ''">Ответить</span>
-                                        </div>
-                                    </div>
+
+                    <!-- <hr class="block__hr hidden-phone hidden-tablet"> -->
+                    <div class="col-xs-12">
+                        <!-- comments -->
+                        <div class="comments__item">
+                            <div class="comments__img">
+                                <img src="assets/img/ball-61.png" alt="" />
+                            </div>
+                            <div class="comments__right">
+                                <textarea class="comments__textarea" placeholder="Оставить комментарий"
+                                          ng-model="comment" ng-focus="initInput = true"
+                                          ng-enter="initInput = false; addComment(comment); comment = ''; limits.comments = limits.comments + 1"></textarea>
+                                <div class="comments__controls-r" ng-show="initInput">
+                                    <span class="btn btn-white comments__answer" ng-click="initInput = false; comment = ''">Отмена</span>
+                                    <span class="btn btn-green comments__answer" ng-click="initInput = false; addComment(comment); comment = ''; limits.comments = limits.comments + 1">Отправить</span>
                                 </div>
                             </div>
-                            <ul class="comments__container">
-                                <li class="comments__item" ng-repeat="response in comment.responses">
+                        </div>
+                        <ul class="comments__container">
+                            <li class="comments__item" ng-repeat="comment in comments | limitTo: limits.comments ">
+                                <div class="clearfix">
                                     <div class="comments__img">
-                                        <img ng-src="{{ response.img }}" alt="" />
+                                        <img ng-src="{{ comment.img }}" alt="" />
                                     </div>
                                     <div class="comments__right">
-                                        <p class="comments__user">{{ response.user }}</p>
-                                        <p class="comments__text">{{ response.text }}</p>
-                                        <p class="hidden-tablet hidden-desktop"><span class="comments__date">{{ response.date }}</span></p>
+                                        <p class="comments__user">{{ comment.user }}</p>
+                                        <p class="comments__text">{{ comment.text }}</p>
+                                        <p class="hidden-tablet hidden-desktop"><span class="comments__date">{{ comment.date | date:'dd MMMM' }}</span></p>
                                         <div class="comments__controls">
                                             <div class="comments__controls-l">
-                                                <span class="btn btn-white comments__answer" ng-click="allowInput($parent.$index,$index)">Ответить</span>
-                                                <span class="btn btn-white comments__plusone" ng-click="response.likes = response.likes + 1">+ {{ response.likes }}</span>
+                                                <span class="btn btn-white comments__answer" ng-click="allowInput($index)">Ответить</span>
+                                                <span class="btn btn-white comments__plusone" ng-click="comment.likes = comment.likes + 1">+ {{ comment.likes }}</span>
                                             </div>
                                             <div class="comments__controls-r">
-                                                <span class="comments__date hidden-phone">{{ response.date | date:'dd MMMM' }}</span>
+                                                <span class="comments__date hidden-phone">{{ comment.date | date:'dd MMMM' }}</span>
                                                 <span class="btn btn-white comments__other"><span>...</span></span>
                                             </div>
                                         </div>
-                                        <div class="clearfix" ng-show="isInputAllowed($parent.$index,$index)">
+                                        <div class="clearfix" ng-show="isInputAllowed($index)">
                                             <textarea class="comments__textarea comments__textarea--response" placeholder="Оставить ответ"
-                                                      ng-model="reply"
-                                                      ng-enter="allowInput(); addComment(reply,$parent.$index,$index); reply = ''"
+                                                      ng-model="response"
+                                                      ng-enter="allowInput(); addComment(response,$index); response = ''"
                                             ></textarea>
                                             <div class="comments__controls-r">
-                                                <span class="btn btn-white comments__answer" ng-click="allowInput(); reply = ''">Отмена</span>
-                                                <span class="btn btn-white comments__answer" ng-click="allowInput(); addComment(reply,$parent.$index,$index); reply = ''">Ответить</span>
+                                                <span class="btn btn-white comments__answer" ng-click="allowInput(); response = ''">Отмена</span>
+                                                <span class="btn btn-white comments__answer" ng-click="allowInput(); addComment(response,$index); response = ''">Ответить</span>
                                             </div>
                                         </div>
                                     </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <!-- comments -->
-                </div>
-            </div>
-
-            <div class="block center">
-                <a class="btn btn-more" ng-click="loadMore('comments')">ЗАГРУЗИТЬ ЕЩЕ</a>
-            </div>
-
-        </div> <!-- end col -->
-
-        <div class="col-xs-12 col-md-5">
-
-            <!-- desktop tabs -->
-            <div class="row hidden-phone hidden-tablet">
-                <div class="col-xs-12">
-                    <div class="clearfix">
-                        <tabs class="tabs tabs--video">
-                            <a ng-class="{'active' : activeTab == 1}" ng-click="setActiveTab(1)">Похожие видео</a>
-                            <a ng-class="{'active' : activeTab == 2}" ng-click="setActiveTab(2)">Похожие каналы</a>
-                            <div class="tabs__underline"></div>
-                        </tabs>
+                                </div>
+                                <ul class="comments__container">
+                                    <li class="comments__item" ng-repeat="response in comment.responses">
+                                        <div class="comments__img">
+                                            <img ng-src="{{ response.img }}" alt="" />
+                                        </div>
+                                        <div class="comments__right">
+                                            <p class="comments__user">{{ response.user }}</p>
+                                            <p class="comments__text">{{ response.text }}</p>
+                                            <p class="hidden-tablet hidden-desktop"><span class="comments__date">{{ response.date }}</span></p>
+                                            <div class="comments__controls">
+                                                <div class="comments__controls-l">
+                                                    <span class="btn btn-white comments__answer" ng-click="allowInput($parent.$index,$index)">Ответить</span>
+                                                    <span class="btn btn-white comments__plusone" ng-click="response.likes = response.likes + 1">+ {{ response.likes }}</span>
+                                                </div>
+                                                <div class="comments__controls-r">
+                                                    <span class="comments__date hidden-phone">{{ response.date | date:'dd MMMM' }}</span>
+                                                    <span class="btn btn-white comments__other"><span>...</span></span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix" ng-show="isInputAllowed($parent.$index,$index)">
+                                                <textarea class="comments__textarea comments__textarea--response" placeholder="Оставить ответ"
+                                                          ng-model="reply"
+                                                          ng-enter="allowInput(); addComment(reply,$parent.$index,$index); reply = ''"
+                                                ></textarea>
+                                                <div class="comments__controls-r">
+                                                    <span class="btn btn-white comments__answer" ng-click="allowInput(); reply = ''">Отмена</span>
+                                                    <span class="btn btn-white comments__answer" ng-click="allowInput(); addComment(reply,$parent.$index,$index); reply = ''">Ответить</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- comments -->
                     </div>
                 </div>
-            </div><!-- desktop tabs -->
 
-            <!-- related videos -->
-            <div ng-show="activeTab == 1" class="row right_video_list">
-                <div class="col-xs-6" ng-repeat="video in relatedVideos">
-                    <div class="thumb">
-                        <a class="btn" ui-sref="videos({ id: video.id })" >
-                            <div class="thumb__img thumb__img--shadow">
-                                <span class="thumb__length">{{ video.length | secondsToTime }}</span>
-                                <img alt="" ng-src="{{ video.img }}">
-                            </div>
-                        </a>
-                        <p class="thumb__title"><a href="">{{ video.title | trimText:100 }}</a></p>
-                        <p class="thumb__count"><a href="#"><span class="thumb__number">{{ video.count | number }}</span> просмотров</a></p>
-                    </div>
+                <div class="block center">
+                    <a class="btn btn-more" ng-click="loadMore('comments')">ЗАГРУЗИТЬ ЕЩЕ</a>
                 </div>
-            </div><!-- related videos -->
 
-            <!-- related  channels -->
-            <div ng-show="activeTab == 2" class="row right_video_list">
-                <div class="thumb row clearfix" ng-repeat="channel in relatedChannels">
-                    <div class="thumb thumb--chan search_thumb pull-left">
-                        <div class="thumb__img">
-                            <a href="#">
-                                <img ng-src="{{channel.img}}" alt="channel img" />
+            </div> <!-- end col -->
+
+            <div class="col-xs-12 col-md-5">
+
+                <!-- desktop tabs -->
+                <div class="row hidden-phone hidden-tablet">
+                    <div class="col-xs-12">
+                        <div class="clearfix">
+                            <tabs class="tabs tabs--center tabs--video">
+                                <a ng-class="{'active' : activeTab == 1}" ng-click="setActiveTab(1)">Похожие видео</a>
+                                <a ng-class="{'active' : activeTab == 2}" ng-click="setActiveTab(2)">Похожие каналы</a>
+                            </tabs>
+                        </div>
+                        <hr class="block__hr">
+                    </div>
+                </div><!-- desktop tabs -->
+
+                <!-- related videos -->
+                <div ng-show="activeTab == 1" class="row right_video_list">
+                    <div class="col-xs-6" ng-repeat="video in relatedVideos">
+                        <div class="thumb">
+                            <a class="btn" ui-sref="videos({ id: video.id })" >
+                                <div class="thumb__img thumb__img--shadow">
+                                    <span class="thumb__length">{{ video.length | secondsToTime }}</span>
+                                    <img alt="" ng-src="{{ video.img }}">
+                                </div>
                             </a>
+                            <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText:100 }}</a></p>
+                            <p class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</p>
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-7 col-xs-6 pull-left">
-                        <div class="thumb thumb--chan search_thumb">
-                            <p class="thumb__name">
-                                <a href="" style="display:block;margin-bottom: 3px">{{channel.title}}</a>
-                                <a href="#" class="btn btn-green btn-small hidden-phone">Подписаться</a>
-                                <span class="thumb__subs">{{channel.statSubscribers | number}}</span>
-                                <a href="#" class="btn btn-green btn-small hidden-desktop hidden-tablet">Подписаться</a>
-                            </p>
-                            <p class="thumb_text hidden-phone">{{channel.description | trimText : 120}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- related  channels -->
+                </div><!-- related videos -->
 
-        </div>
+                <!-- related  channels -->
+                <div ng-show="activeTab == 2" class="row right_video_list">
+                    <div class="thumb row clearfix" ng-repeat="channel in relatedChannels">
+                        <div class="thumb thumb--chan search_thumb pull-left">
+                            <div class="thumb__img">
+                                <a ui-sref="channels({ id: channel.id })">
+                                    <img ng-src="{{channel.img}}" alt="channel img" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-6 pull-left">
+                            <div class="thumb thumb--chan search_thumb">
+                                <p class="thumb__name">
+                                    <a ui-sref="channels({ id: channel.id })" style="display:block;margin-bottom: 3px">{{channel.title}}</a>
+                                    <span class="btn btn-green btn-small hidden-phone">Подписаться</span>
+                                    <span class="thumb__subs">{{channel.statSubscribers | number}}</span>
+                                    <span class="btn btn-green btn-small hidden-desktop hidden-tablet">Подписаться</span>
+                                </p>
+                                <p class="thumb_text hidden-phone">{{channel.description | trimText : 120}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- related  channels -->
+
+            </div>
+
+        </div><!-- content block -->
+
     </div>
+
 </div>

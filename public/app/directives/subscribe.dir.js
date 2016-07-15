@@ -38,6 +38,9 @@ angular.module("MainApp")
                     if (scope.subsButtonHovered) {
                         text = 'Отменить подписку';
                     }
+                    if ($window.innerWidth < 1280) {
+                        text = 'Отменить подписку';
+                    }
                     if ($window.innerWidth < 768) {
                         text = 'Отписаться';
                     }

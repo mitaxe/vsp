@@ -1,0 +1,34 @@
+@mixin multiLineEllipsis($lineHeight,$lineCount){
+    overflow: hidden;
+    position: relative;
+    line-height: $lineHeight;
+    max-height: $lineHeight * $lineCount;
+    display: inline-block;
+    transition: .1s;
+    &.expanded {
+        max-height: 1000px;
+    }
+    &__content {
+        white-space: pre-line;
+        display: inline-block;
+    }
+    &__read-more {
+        @include no-select;
+        cursor: pointer;
+        color: $col-green;
+        display: block;
+        .svg {
+            fill: $col-green;
+            margin-left: 8px;
+        }
+        &.expanded {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+
+.block-with-text {
+    @include multiLineEllipsis($lineHeight: 1.5em, $lineCount: 2);
+}
