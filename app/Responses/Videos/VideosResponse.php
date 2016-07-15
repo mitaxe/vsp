@@ -16,7 +16,7 @@ class VideosResponse extends ResponseArray
                     $video->srcId,
                     $video->channel->vspChannelId,
                     $video->description,
-                    $video->thumbsHigh,
+                    $video->thumbsMedium,
                     $video->statViews,
                     $video->durationSeconds,
                     $video->channel->title,
