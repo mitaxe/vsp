@@ -33,7 +33,7 @@
                 <img class="prev" src="assets/img/video-prev-icon.png" alt="prev icon">
                 <span>Предыдущее</span>
             </a>
-            <p class="th_description" ng-bind-html="mainVideos[1].title | trimText:100" style="white-space: pre-line;"></p>
+            <p class="th_description" ng-bind-html="mainVideos[1].title | trimText:50" style="white-space: pre-line;"></p>
         </div>
 
         <!-- main video slide -->
@@ -113,7 +113,7 @@
                 <span>Следующее</span>
                 <img class="next" src="assets/img/video-next-icon.png" alt="prev icon">
             </a>
-            <p class="th_description" ng-bind-html="mainVideos[2].title | trimText:100" style="white-space: pre-line;"></p>
+            <p class="th_description" ng-bind-html="mainVideos[2].title | trimText:50" style="white-space: pre-line;"></p>
         </div>
 
     </div> <!-- end slider box -->
@@ -155,14 +155,15 @@
                         <read-more text="mainVideos[0].text" class="block__description"></read-more>
                         <br>
                         <hr class="block__hr">
-                        <br>
-                        <div class="col-xs-12">
-                            <p>
-                                <span class="comments__title">Комментарии </span>
-                                <span class="comments__number">{{ commentsLength() }}</span>
-                            </p>
-                            <br>
-                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="col-xs-12">
+                        <p>
+                            <span class="comments__title">Комментарии </span>
+                            <span class="comments__number">{{ commentsLength() }}</span>
+                        </p>
                     </div>
 
                     <!-- <hr class="block__hr hidden-phone hidden-tablet"> -->
@@ -277,12 +278,14 @@
                 <div ng-show="activeTab == 1" class="row right_video_list">
                     <div class="col-xs-6" ng-repeat="video in relatedVideos">
                         <div class="thumb">
-                            <a class="btn" ui-sref="videos({ id: video.id })" >
-                                <div class="thumb__img thumb__img--shadow">
-                                    <span class="thumb__length">{{ video.length | secondsToTime }}</span>
-                                    <img alt="" ng-src="{{ video.img }}">
-                                </div>
-                            </a>
+                            <div class="thumb__img">
+                                <a ui-sref="videos({ id: video.id })" >
+                                    <div class="thumb__img thumb__img--shadow">
+                                        <span class="thumb__length">{{ video.length | secondsToTime }}</span>
+                                        <img alt="" ng-src="{{ video.img }}">
+                                    </div>
+                                </a>
+                            </div>
                             <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText:100 }}</a></p>
                             <p class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</p>
                         </div>

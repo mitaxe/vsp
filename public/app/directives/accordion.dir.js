@@ -12,37 +12,37 @@ angular.module("MainApp")
                 var contents = angular.element(element[0].querySelectorAll('.accordion__content'));
 
                 angular.forEach(togglers, function(toggler,index) {
-                    if ( toggler.className.match(/\bactive\b/) ) {
-                        var y = contents[index].clientHeight;
-                        pannels[index].style.height = y + 15 + 'px';
-                    }
 
                     toggler.onclick = function() {
-                        // console.log('click');
+                        // if ( toggler.className.match(/\bactive\b/) ) {
+                        //     var yy = contents[index].clientHeight;
+                        //     pannels[index].style.height = yy + 15 + 'px';
+                        // }
+                            // console.log('click');
                         if (toggler.className.indexOf('active') != -1) {
                             toggler.className = toggler.className.replace(/\bactive\b/,'');
                             console.log(toggler.className);
-                            angular.forEach(pannels, function(el) {
-                                el.style.height = '0';
-                            });
+                            // angular.forEach(pannels, function(el) {
+                            //     el.style.height = '0';
+                            // });
                         } else {
-                            angular.forEach(pannels, function(el) {
-                                el.style.height = '0';
-                            });
+                            // angular.forEach(pannels, function(el) {
+                            //     el.style.height = '0';
+                            // });
                             angular.forEach(togglers, function(el) {
                                 el.className = el.className.replace(/\bactive\b/,'');
                             });
                             var y = contents[index].clientHeight;
-                            pannels[index].style.height = y + 15 + 'px';
+                            // pannels[index].style.height = y + 15 + 'px';
                             toggler.className += ' active';
                         }
                     };
                 });
             }
 
-            $timeout(function() {
+            // $timeout(function() {
                 accordionCode();
-            }, 1000);
+            // }, 1000);
 
             scope.$watch(
                 function() {

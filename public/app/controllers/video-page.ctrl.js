@@ -1,10 +1,14 @@
 angular.module("MainApp")
-.controller('VideoPageCtrl', ['$scope', '$sce', '$window', 'factory', '$stateParams', 'mainVideos',  function($scope, $sce, $window, factory, $stateParams, mainVideos) {
+.controller('VideoPageCtrl', ['$scope', '$sce', '$window', 'factory', '$stateParams', 'mainVideos', '$rootScope',
+function($scope, $sce, $window, factory, $stateParams, mainVideos, $rootScope) {
 
     /* Main Video */
 
     $scope.mainVideos = mainVideos.data.data;
     console.log('main videos', mainVideos);
+
+    // for back button
+    $rootScope.videoPageChannel = mainVideos.data.data[0];
 
     // console.log('1st api response - ', $scope.mainVideos);
 

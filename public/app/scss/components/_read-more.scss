@@ -5,6 +5,7 @@
     max-height: $lineHeight * $lineCount;
     display: inline-block;
     transition: .1s;
+    max-width: 100%;
     &.expanded {
         max-height: 1000px;
     }

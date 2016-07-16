@@ -1257,12 +1257,16 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
-.controller('VideoPageCtrl', ['$scope', '$sce', '$window', 'factory', '$stateParams', 'mainVideos',  function($scope, $sce, $window, factory, $stateParams, mainVideos) {
+.controller('VideoPageCtrl', ['$scope', '$sce', '$window', 'factory', '$stateParams', 'mainVideos', '$rootScope',
+function($scope, $sce, $window, factory, $stateParams, mainVideos, $rootScope) {
 
     /* Main Video */
 
     $scope.mainVideos = mainVideos.data.data;
     console.log('main videos', mainVideos);
+
+    // for back button
+    $rootScope.videoPageChannel = mainVideos.data.data[0];
 
     // console.log('1st api response - ', $scope.mainVideos);
 
@@ -1416,37 +1420,37 @@ angular.module("MainApp")
                 var contents = angular.element(element[0].querySelectorAll('.accordion__content'));
 
                 angular.forEach(togglers, function(toggler,index) {
-                    if ( toggler.className.match(/\bactive\b/) ) {
-                        var y = contents[index].clientHeight;
-                        pannels[index].style.height = y + 15 + 'px';
-                    }
 
                     toggler.onclick = function() {
-                        // console.log('click');
+                        // if ( toggler.className.match(/\bactive\b/) ) {
+                        //     var yy = contents[index].clientHeight;
+                        //     pannels[index].style.height = yy + 15 + 'px';
+                        // }
+                            // console.log('click');
                         if (toggler.className.indexOf('active') != -1) {
                             toggler.className = toggler.className.replace(/\bactive\b/,'');
                             console.log(toggler.className);
-                            angular.forEach(pannels, function(el) {
-                                el.style.height = '0';
-                            });
+                            // angular.forEach(pannels, function(el) {
+                            //     el.style.height = '0';
+                            // });
                         } else {
-                            angular.forEach(pannels, function(el) {
-                                el.style.height = '0';
-                            });
+                            // angular.forEach(pannels, function(el) {
+                            //     el.style.height = '0';
+                            // });
                             angular.forEach(togglers, function(el) {
                                 el.className = el.className.replace(/\bactive\b/,'');
                             });
                             var y = contents[index].clientHeight;
-                            pannels[index].style.height = y + 15 + 'px';
+                            // pannels[index].style.height = y + 15 + 'px';
                             toggler.className += ' active';
                         }
                     };
                 });
             }
 
-            $timeout(function() {
+            // $timeout(function() {
                 accordionCode();
-            }, 1000);
+            // }, 1000);
 
             scope.$watch(
                 function() {
@@ -1463,26 +1467,27 @@ angular.module("MainApp")
     };
 }]);
 
-app.directive('backButton', ["$document", "$state", "$stateParams", function ($document, $state, $stateParams) {
+app.directive('backButton', ["$document", "$state", "$stateParams", "$rootScope", function ($document, $state, $stateParams, $rootScope) {
     return {
         restrict: 'E',
         // scope: {
         //     parameters: '=params'
         // },
-        template: '<a ng-click="backButton.goBack()" ng-class="{pointer:backButton.available}">' +
-                        '<div class="header__item header__back" ng-class="{searchActive:searchActive}">' +
-                            '<div ng-show="backButton.available" class="table-middle">' +
-                                '<i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="12" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>' +
-                                '<span>{{ backButton.text }}</span>' +
-                            '</div>' +
-                        '</div>' +
-                    '</a>',
+        template: '<div a ng-click="backButton.goBack()" class="header__item header__back" ng-class="{searchActive:searchActive, pointer:backButton.available, videopage:videopage}">' +
+                    '<div ng-show="backButton.available" class="table-middle">' +
+                        '<i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="12" viewBox="0 0 28.914 16.998"><path fill-rule="evenodd" clip-rule="evenodd" fill="" d="M28.914 2.857L26.057 0l-11.66 11.66L2.83.093 0 2.924l13.98 13.98.35-.348.44.442"/></svg></i>' +
+                        '<p ng-bind-html="backButton.text"></p>' +
+                    '</div>' +
+                '</div>',
         link: function (scope, element) {
+
+            console.log(scope.videoPageChannel);
 
             scope.backButton = {
                 available: false,
                 text: '',
                 prevState: '',
+                id: $stateParams.id,
                 init: function() {
                     // console.log('back button click');
                     switch (true) {
@@ -1511,12 +1516,29 @@ app.directive('backButton', ["$document", "$state", "$stateParams", function ($d
                             this.text = 'Назад';
                             this.prevState = 'channels';
                             break;
+                        case ($state.includes('videos')):
+                            this.available = true;
+                            scope.videopage = true;
+                            this.text = '<img src="' +
+                                            $rootScope.videoPageChannel.img +
+                                        '"/>' +
+                                        '<div>' +
+                                            $rootScope.videoPageChannel.user +
+                                            '<br>' +
+                                            '<span class="subscription"><span>Подписаться</span>' +
+                                                '1 000 000' +
+                                            '</span>' +
+                                        '</div>';
+                            this.prevState = 'channels';
+                            this.id = $rootScope.videoPageChannel.channelId;
+                            break;
                         default:
                             this.available = false;
+                            scope.videopage = false;
                     }
                 },
                 goBack: function() {
-                    $state.go(this.prevState, {'id': $stateParams.id});
+                    $state.go(this.prevState, {'id': this.id});
                 }
             };
 
