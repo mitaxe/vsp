@@ -58,11 +58,11 @@
 
 @mixin retina-background-image($file, $type) {
   background-image: url($file + '.' + $type);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   @media #{$retina} {
     background-image: url($file + '@2x.' + $type);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
     // background-size: 50%;
   }
 }

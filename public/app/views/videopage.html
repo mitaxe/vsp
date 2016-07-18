@@ -45,18 +45,21 @@
                 <div class="about_video clearfix">
                     <div class="about_video__left hidden-phone hidden-tablet">
                         <h2>{{ mainVideos[0].title | trimText:50 }}</h2>
-                        <span> {{ mainVideos[0].date | prettyDate }}</span>
+                        <span class="thumb__date" ng-bind-html="mainVideos[0].date | prettyDate"></span>
                     </div>
                     <div class="about_video__right clearfix">
-                        <div class="about_video__left hidden-phone">
-                            <span class="hidden-desktop"> {{ mainVideos[0].date | prettyDate }}</span>
+                        <div class="about_video__left hidden-phone hidden-desktop">
+                            <span class="thumb__date" ng-bind-html="mainVideos[0].date | prettyDate"></span>
                         </div>
                         <h2 class="hidden-desktop hidden-tablet">{{ mainVideos[0].title | trimText:50 }}</h2>
                         <p class="hidden-phone views_row">Просмотров <span class="views">{{ (mainVideos[0].statViews || 0) | number}}</span></p>
                         <p><span class="hidden-tablet hidden-desktop mob_channel_name">50-50 Pranker</span> <i class="hidden-phone">Нравится</i> <span class="likes">{{ mainVideos[0].statLikes || 0 }}</span> <button class="btn like_btn">
                             <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="23" viewBox="0 0 13.566 11"><path d="M4.9 8.47c1.687.776 3.69 1.21 5.662 1.21.64 0 .402-.03 1.016-.133.24-.04.55-.13.688-.236.188-.145.31-.378.31-.638 0-.24-.105-.458-.27-.605h.07c.44 0 .794-.36.794-.807s-.355-.807-.793-.807h.396c.44 0 .795-.36.795-.807 0-.446-.355-.807-.795-.807.44 0 .795-.362.795-.808s-.355-.807-.795-.807h-2.695c-.274 0-.497-.226-.497-.504l.25-1.675c.024-.075.037-.155.037-.238C9.867.36 9.51 0 9.07 0c-.366 0-.676.254-.766.597L8.27.712C7.76 2.362 6.605 3.868 4.9 4.84v3.63z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 3.52h3.9v6.412L0 11V3.52z"/></svg></i>
                         </button></p>
-                        <p class="hidden-tablet hidden-desktop"><span class="mob_date"> {{ mainVideos[0].date | prettyDate }}</span> Просмотров <span class="views">{{ mainVideos[0].statViews | number }}</span></p>
+                        <p class="hidden-tablet hidden-desktop">
+                            <span class="mob_date" ng-bind-html="mainVideos[0].date | prettyDate"></span>
+                            Просмотров <span class="views">{{ mainVideos[0].statViews || 0 | number }}</span>
+                        </p>
                         <h2 class="hidden-desktop hidden-phone">{{ mainVideos[0].title | trimText:50 }}</h2>
                         <div class="row hidden-desktop hidden-phone">
                             <div class="col-xs-6">
@@ -150,7 +153,7 @@
             <div class="col-xs-12 col-md-7" ng-show="activeTab == 3 || desktop == true">
                 <div class="block" ng-controller="CommentsCtrl">
 
-                    <div class="hidden-phone hidden-tablet">
+                    <div ng-show="mainVideos[0].text" class="hidden-phone hidden-tablet">
                         <!-- read more -->
                         <read-more text="mainVideos[0].text" class="block__description"></read-more>
                         <br>

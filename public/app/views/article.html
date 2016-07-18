@@ -9,7 +9,7 @@
                     <h2 class="thumb__title">{{ article.title }}</h2>
                     <p>
                         <div class="article__content">
-                            <span class="thumb__date"><span class="thumb__number">{{ article.dateCreated | prettyDate }}</span></span>
+                            <span class="thumb__date" ng-bind-html="article.dateCreated | prettyDate"></span>
                             <span ng-show="article.vspVideoId != null" class="thumb__hasvideo">Содержит Видео</span>
                         </div>
                     </p>
@@ -157,10 +157,14 @@
                             </a>
                         </div>
                         <div class="col-xs-6 col-sm-12">
-                            <p class="thumb__title"><a href="">{{ article.title | trimText:100 }}</a></p>
-                            <p class="thumb__text hidden-phone"><a href="#">{{ article.description | trimText:150 }}</a></p>
+                            <p class="thumb__title">
+                                <a href="">{{ article.title | trimText:100 }}</a>
+                            </p>
+                            <p class="thumb__text hidden-phone">
+                                <a href="#">{{ article.description | trimText:150 }}</a>
+                            </p>
                             <p>
-                                <span class="thumb__date">{{ article.date | prettyDate }}</span></span>
+                                <span class="thumb__date" ng-bind-html="article.dateCreated | prettyDate"></span>
                                 <span class="thumb__hasvideo">Содержит Видео</span>
                             </p>
                         </div>
