@@ -1241,7 +1241,9 @@ input[type='radio']:checked + .radio_label:after {
   .slider__slide {
     vertical-align: top;
     white-space: normal;
-    width: 8.33333%; } }
+    width: 8.33333%; }
+  .slider .thumb {
+    margin-bottom: 0; } }
 
 .accordion__pannel {
   overflow: hidden;
@@ -3838,6 +3840,9 @@ textarea {
       background: #d0d0d0; }
       .subscribe_box .green_btn.subscribed:after {
         background-image: url("../img/icon-check.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
         background-size: 16px 12.5px !important;
         background-position: top 15px center !important;
         content: '';
@@ -3849,10 +3854,7 @@ textarea {
         left: 25px; }
         @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
           .subscribe_box .green_btn.subscribed:after {
-            background-image: url("../img/icon-check@2x.png");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain; } }
+            background-image: url("../img/icon-check@2x.png"); } }
   .subscribe_box .counter {
     background: #e6e6e6;
     color: #5b5d5e;
@@ -3883,14 +3885,14 @@ textarea {
           .subscribe_box .green_btn.subscribed:after {
             left: 15px;
             background-image: url("../img/icon-close.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
             background-position: top 15px center !important;
             background-size: 12px 13px !important; } }
         @media only screen and (max-width: 767px) and (-webkit-min-device-pixel-ratio: 2), only screen and (max-width: 767px) and (min--moz-device-pixel-ratio: 2), only screen and (max-width: 767px) and (-o-min-device-pixel-ratio: 2 / 1), only screen and (max-width: 767px) and (min-device-pixel-ratio: 2), only screen and (max-width: 767px) and (min-resolution: 192dpi), only screen and (max-width: 767px) and (min-resolution: 2dppx) {
           .subscribe_box .green_btn.subscribed:after {
-            background-image: url("../img/icon-close@2x.png");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain; } }
+            background-image: url("../img/icon-close@2x.png"); } }
   @media screen and (max-width: 767px) {
           .subscribe_box .green_btn.subscribed:hover {
             letter-spacing: normal; }
@@ -3903,26 +3905,26 @@ textarea {
       letter-spacing: 1px; }
       .subscribe_box .green_btn.subscribed:after {
         background-image: url("../img/icon-close.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
         background-size: 12px 13px !important; } }
     @media only screen and (min-width: 768px) and (max-width: 1279px) and (-webkit-min-device-pixel-ratio: 2), only screen and (min-width: 768px) and (max-width: 1279px) and (min--moz-device-pixel-ratio: 2), only screen and (min-width: 768px) and (max-width: 1279px) and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-width: 768px) and (max-width: 1279px) and (min-device-pixel-ratio: 2), only screen and (min-width: 768px) and (max-width: 1279px) and (min-resolution: 192dpi), only screen and (min-width: 768px) and (max-width: 1279px) and (min-resolution: 2dppx) {
       .subscribe_box .green_btn.subscribed:after {
-        background-image: url("../img/icon-close@2x.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain; } }
+        background-image: url("../img/icon-close@2x.png"); } }
   @media screen and (min-width: 1280px) {
     .subscribe_box .green_btn.subscribed:hover {
       font-weight: bold;
       letter-spacing: 1px; }
       .subscribe_box .green_btn.subscribed:hover:after {
         background-image: url("../img/icon-close.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
         background-size: 12px 13px !important; } }
     @media only screen and (min-width: 1280px) and (-webkit-min-device-pixel-ratio: 2), only screen and (min-width: 1280px) and (min--moz-device-pixel-ratio: 2), only screen and (min-width: 1280px) and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-width: 1280px) and (min-device-pixel-ratio: 2), only screen and (min-width: 1280px) and (min-resolution: 192dpi), only screen and (min-width: 1280px) and (min-resolution: 2dppx) {
       .subscribe_box .green_btn.subscribed:hover:after {
-        background-image: url("../img/icon-close@2x.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain; } }
+        background-image: url("../img/icon-close@2x.png"); } }
 
 .cat_counter {
   font-size: 36px;

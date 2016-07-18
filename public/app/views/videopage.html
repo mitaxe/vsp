@@ -150,7 +150,7 @@
             <div class="col-xs-12 col-md-7" ng-show="activeTab == 3 || desktop == true">
                 <div class="block" ng-controller="CommentsCtrl">
 
-                    <div class="hidden-phone hidden-tablet">
+                    <div ng-show="mainVideos[0].text" class="hidden-phone hidden-tablet">
                         <!-- read more -->
                         <read-more text="mainVideos[0].text" class="block__description"></read-more>
                         <br>
