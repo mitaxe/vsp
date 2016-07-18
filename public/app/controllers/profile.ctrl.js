@@ -19,6 +19,7 @@ angular.module("MainApp")
 
         $scope.saving = true; // send login request
 
+        factory.updateUserProfile($stateParams.id);
         // factory.loginUser($scope.loginData).then(
         setTimeout(function () { // test
             $scope.saving = false;
@@ -29,7 +30,9 @@ angular.module("MainApp")
     // test
     $scope.videosCounter = 110;
 
-    $scope.userData = userData.data.data;
+    if (userData) {
+        $scope.userData = userData.data.data;
+    }
 
     // get channels
     factory.getUserChannels($stateParams.id).success(function(response) {
@@ -56,7 +59,7 @@ angular.module("MainApp")
     };
 
     $scope.profileSettings = {
-        "email": "test@test.com",
+        "email": "test2@test.com",
         "password": "qwerty12345"
     };
 

@@ -197,9 +197,14 @@ angular.module("MainApp")
         }
     })
     .state('profile-edit', {
-        url: '/profile-edit',
+        url: '/profile-edit/:id',
         templateUrl: 'app/views/profile/profile-edit.html',
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+        resolve:  {
+            userData: function(factory, $stateParams) {
+                return factory.getUserData($stateParams.id);
+            }
+        }
     })
 
     // add channel

@@ -154,7 +154,8 @@ class RestAPI extends MicroMVC
     $usersRouts = new MicroCollection();
     $usersRouts->setHandler(new UsersController());
     $usersRouts->setPrefix('/users');
-    $usersRouts->get('/{id}', 'getUser');    
+    $usersRouts->get('/{id}', 'getUser');
+    $usersRouts->put('/{id}', 'updateUser');
     $usersRouts->post('/login', 'login');
     $usersRouts->post('/users/register', 'register');
     $usersRouts->get('/common', 'getCommonData');

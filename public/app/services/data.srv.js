@@ -2,7 +2,7 @@ angular.module("MainApp")
 .factory('factory', function($http) {
 
         var factory = {};
-        var domain = 'http://vsponline.qa';
+        var domain = 'http://vsponline.dev';
 
         // home page
         factory.getHomeData = function() {
@@ -131,7 +131,11 @@ angular.module("MainApp")
 
         factory.getUserChannels = function (id) {
             return $http.get(domain + '/users/' + id + '/channels');
-        }    
+        }
+
+        factory.updateUserProfile = function (id) {
+            return $http.put(domain + '/users/' + id);
+        }
 
         return factory;
 

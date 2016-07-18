@@ -221,9 +221,14 @@ angular.module("MainApp")
         }
     })
     .state('profile-edit', {
-        url: '/profile-edit',
+        url: '/profile-edit/:id',
         templateUrl: 'app/views/profile/profile-edit.html',
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+        resolve:  {
+            userData: ["factory", "$stateParams", function(factory, $stateParams) {
+                return factory.getUserData($stateParams.id);
+            }]
+        }
     })
 
     // add channel
@@ -446,7 +451,7 @@ angular.module("MainApp")
 .factory('factory', ["$http", function($http) {
 
         var factory = {};
-        var domain = 'http://vsponline.qa';
+        var domain = 'http://vsponline.dev';
 
         // home page
         factory.getHomeData = function() {
@@ -575,7 +580,11 @@ angular.module("MainApp")
 
         factory.getUserChannels = function (id) {
             return $http.get(domain + '/users/' + id + '/channels');
-        }    
+        }
+
+        factory.updateUserProfile = function (id) {
+            return $http.put(domain + '/users/' + id);
+        }
 
         return factory;
 
@@ -964,6 +973,7 @@ angular.module("MainApp")
 
         $scope.saving = true; // send login request
 
+        factory.updateUserProfile($stateParams.id);
         // factory.loginUser($scope.loginData).then(
         setTimeout(function () { // test
             $scope.saving = false;
@@ -974,7 +984,9 @@ angular.module("MainApp")
     // test
     $scope.videosCounter = 110;
 
-    $scope.userData = userData.data.data;
+    if (userData) {
+        $scope.userData = userData.data.data;
+    }
 
     // get channels
     factory.getUserChannels($stateParams.id).success(function(response) {
@@ -1001,7 +1013,7 @@ angular.module("MainApp")
     };
 
     $scope.profileSettings = {
-        "email": "test@test.com",
+        "email": "test2@test.com",
         "password": "qwerty12345"
     };
 

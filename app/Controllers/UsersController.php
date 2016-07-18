@@ -116,5 +116,11 @@ class UsersController extends RESTController
         
         throw new UserNotFoundException();
     }
+
+    public function updateUser($id)
+    {
+        return new Response();
+
+    }
     
 }
