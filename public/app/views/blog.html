@@ -28,9 +28,7 @@
                         <p class="thumb__title"><a href="">{{ blog.title | trimText:100 }}</a></p>
                         <p class="thumb__text"><a href="#">{{ blog.description | trimText:100 }}</a></p>
                         <p>
-                            <span class="thumb__date">
-                                <span class="thumb__number">{{ blog.dateCreated | prettyDate }}</span>
-                            </span>
+                            <span class="thumb__date" ng-bind-html="blog.dateCreated | prettyDate"></span>
                             <span ng-show="blog.vspVideoId != null" class="thumb__hasvideo">Содержит Видео</span>
                         </p>
                     </div>
@@ -51,9 +49,7 @@
                         <p class="thumb__title"><a href="">{{ blog.title | trimText:100 }}</a></p>
                         <p class="thumb__text"><a href="#">{{ blog.description | trimText:100 }}</a></p>
                         <p>
-                            <span class="thumb__date">
-                                <span class="thumb__number">{{ blog.date | prettyDate }}</span>
-                            </span>
+                            <span class="thumb__date" ng-bind-html="blog.dateCreated | prettyDate"></span>
                             <span ng-show="blog.vspVideoId != null" class="thumb__hasvideo">Содержит Видео</span>
                         </p>
                     </div>

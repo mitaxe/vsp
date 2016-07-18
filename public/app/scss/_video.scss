@@ -118,12 +118,12 @@
                             color: #fff;
                             margin-bottom: 20px;
                         }
-                        span {
+                        .thumb__date {
                             font-size: 14px;
                             color: #a6a8a9;
-                            span {
-                                font-weight:bold;
-                            }
+                        }
+                        .thumb__number {
+                            color: white;
                         }
                     }
                     &__right {
@@ -255,10 +255,17 @@
                                         color: #a6a8a9;
                                         float: left;
                                         padding-left: 0;
-                                        > span {
-                                            font-weight:500;
+                                        // > span {
+                                        //     font-weight:500;
+                                        //     color: #a6a8a9;
+                                        //     padding-left: 0;
+                                        // }
+                                        .thumb__date {
+                                            font-size: 14px;
                                             color: #a6a8a9;
-                                            padding-left: 0;
+                                        }
+                                        .thumb__number {
+                                            color: white;
                                         }
                                     }
                                 }

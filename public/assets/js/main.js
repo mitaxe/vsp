@@ -359,10 +359,12 @@ app.filter('prettyDate', function() {
             return;
         }
 
+        var formattedDate;
+
         if (toDay && day_diff < 1) {
-            return "Сегодня";
+            formattedDate =  "Сегодня";
         } else {
-            return day_diff === 0 && (
+            formattedDate = day_diff === 0 && (
                     diff < 60 && "Только что" ||
                     diff < 120 && "1 минуту назад" ||
                     diff < 3600 && Math.floor( diff / 60 ) + " минут назад" ||
@@ -377,6 +379,11 @@ app.filter('prettyDate', function() {
               years_diff > 1 && years_diff + " лет назад" ||
               'неизвестная дата';
         }
+
+        var thenum = parseInt(formattedDate); // get number from string
+        if (thenum) formattedDate = "<span class='thumb__number'>" + thenum + "</span>" + formattedDate.replace(/[0-9]/g, ''); // place number in separate html tag
+
+        return formattedDate;
     };
 });
 

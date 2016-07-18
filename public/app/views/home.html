@@ -18,8 +18,8 @@
                     <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText:52 }}</a></p>
                     <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                     <p class="thumb__info">
-                        <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                        <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                        <span class="thumb__count"><span class="thumb__number">{{ video.count || 0 | number }}</span> просмотров</span>
+                        <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                     </p>
                 </div>
             </div>
@@ -44,8 +44,8 @@
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50 }}</a></p>
                         <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p>
-                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count || 0 | number }}</span> просмотров</span>
+                            <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                         </p>
                     </div>
                 </div>
@@ -65,8 +65,8 @@
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50}}</a></p>
                         <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
-                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count || 0 | number }}</span> просмотров</span>
+                            <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                         </p>
                     </div>
                 </div>
@@ -92,8 +92,8 @@
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50 }}</a></p>
                         <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p>
-                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count || 0 | number }}</span> просмотров</span>
+                            <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                         </p>
                     </div>
                 </div>
@@ -113,8 +113,8 @@
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50}}</a></p>
                         <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
-                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count || 0 | number }}</span> просмотров</span>
+                            <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                         </p>
                     </div>
                 </div>
@@ -138,8 +138,8 @@
                     <div class="clearfix">
                         <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p class="thumb__info">
-                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count || 0 | number }}</span> просмотров</span>
+                            <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                         </p>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                         <p class="thumb__title"><a href="">{{ video.title }}</a></p>
                         <p class="thumb__text"><a href="#">{{ video.text | trimText : 80}}</a></p>
                         <p>
-                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                            <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                             <span class="thumb__hasvideo">Содержит Видео</span>
                         </p>
                     </div>
@@ -212,8 +212,8 @@
                         <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50 }}</a></p>
                         <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                         <p class="thumb__info hidden-phone">
-                            <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                            <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                            <span class="thumb__count"><span class="thumb__number">{{ video.count || 0 | number }}</span> просмотров</span>
+                            <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                         </p>
                     </div>
                 </div>
@@ -238,8 +238,8 @@
                         <div class="clearfix">
                             <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                             <p class="thumb__info">
-                                <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                                <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                                <span class="thumb__count"><span class="thumb__number">{{ video.count || 0 | number }}</span> просмотров</span>
+                                <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                             </p>
                         </div>
                     </div>
@@ -358,8 +358,8 @@
                     <p class="thumb__title"><a ui-sref="videos({ id: video.id })">{{ video.title | trimText : 50 }}</a></p>
                     <p class="thumb__user"><a ui-sref="channels({ id: video.channelId })">{{ video.user }}</a></p>
                     <p class="thumb__info">
-                        <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                        <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                        <span class="thumb__count"><span class="thumb__number">{{ video.count || 0 | number }}</span> просмотров</span>
+                        <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                     </p>
                 </div>
             </div>

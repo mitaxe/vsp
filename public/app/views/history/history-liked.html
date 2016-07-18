@@ -3,7 +3,9 @@
     <div class="col-xs-12">
 
         <div class="row" ng-repeat="video in historyData.likedVideos">
-            <div class="col-xs-12 col-md-1 history__date"><span ng-hide="historyFilter(historyData,$index,'date')">{{ video.date | prettyDate }}</span></div>
+            <div class="col-xs-12 col-md-1 history__date">
+                <span ng-hide="historyFilter(historyData,$index,'date')" ng-bind-html="video.date | prettyDate"></span>
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
                 <div class="thumb row">
                     <div class="col-xs-12 col-sm-2 col-md-2 right-desktop">
@@ -21,7 +23,7 @@
                     <div class="col-xs-5 col-sm-5 col-md-5">
                         <p class="thumb__title"><a href="">{{ video.title }}</a></p>
                         <span class="thumb__count"><span class="thumb__number">{{ video.statViews | number }}</span> просмотров</span>
-                        <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                        <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                     </div>
                 </div>
             </div>

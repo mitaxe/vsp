@@ -12,7 +12,7 @@
             <p class="thumb__user"><a ui-sref="xuser({ url: video.user })">{{ video.user }}</a></p>
             <p class="thumb__info">
                 <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate }}</span></span>
+                <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
             </p>
         </div>
     </div>
@@ -42,7 +42,7 @@
                 <p class="thumb__user"><a href="#">{{ video.user }}</a></p>
                 <p class="thumb__info hidden-phone">
                     <span class="thumb__count"><span class="thumb__number">{{ video.count | number }}</span> просмотров</span>
-                    <span class="thumb__date"><span class="thumb__number">{{ video.date | prettyDate  }}</span></span>
+                    <span class="thumb__date" ng-bind-html="video.date | prettyDate"></span>
                 </p>
             </div>
         </div>
