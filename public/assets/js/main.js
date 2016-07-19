@@ -458,7 +458,7 @@ angular.module("MainApp")
 .factory('factory', ["$http", function($http) {
 
         var factory = {};
-        var domain = 'http://vsponline.dev';
+        var domain = 'http://vsponline.qa';
 
         // home page
         factory.getHomeData = function() {
