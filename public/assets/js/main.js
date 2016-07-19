@@ -589,8 +589,8 @@ angular.module("MainApp")
             return $http.get(domain + '/users/' + id + '/channels');
         }
 
-        factory.updateUserProfile = function (id) {
-            return $http.put(domain + '/users/' + id);
+        factory.updateUserProfile = function (id, data) {
+            return $http.put(domain + '/users/' + id, data);
         }
 
         return factory;
@@ -980,12 +980,15 @@ angular.module("MainApp")
 
         $scope.saving = true; // send login request
 
-        factory.updateUserProfile($stateParams.id);
-        // factory.loginUser($scope.loginData).then(
-        setTimeout(function () { // test
-            $scope.saving = false;
-            $scope.$apply();
-        }, 2000);
+        factory.updateUserProfile($stateParams.id, $scope.profileSettings).then(
+            //success
+            function () {
+                console.log('success',$scope.form.editProfile.$error);
+            },
+            function () {
+                console.log('error');
+            }
+        );
     };
 
     // test

@@ -19,12 +19,15 @@ angular.module("MainApp")
 
         $scope.saving = true; // send login request
 
-        factory.updateUserProfile($stateParams.id);
-        // factory.loginUser($scope.loginData).then(
-        setTimeout(function () { // test
-            $scope.saving = false;
-            $scope.$apply();
-        }, 2000);
+        factory.updateUserProfile($stateParams.id, $scope.profileSettings).then(
+            //success
+            function () {
+                console.log('success',$scope.form.editProfile.$error);
+            },
+            function () {
+                console.log('error');
+            }
+        );
     };
 
     // test

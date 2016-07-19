@@ -119,6 +119,7 @@ class UsersController extends RESTController
 
     public function updateUser($id)
     {
+        
         return new Response();
 
     }
