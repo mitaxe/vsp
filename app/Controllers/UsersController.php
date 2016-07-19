@@ -119,7 +119,7 @@ class UsersController extends RESTController
 
     public function updateUser($id)
     {
-        
+        throw new ValidationErrorsException(['email'=>['type'=>'maxlength','message'=>'Max length is 40 sym']]);
         return new Response();
 
     }

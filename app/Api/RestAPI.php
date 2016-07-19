@@ -285,15 +285,22 @@ class RestAPI extends MicroMVC
             $exception->getMessage()
           );
 
-          $response->addMessage(
-            $exception->getMessage(),
-            ResponseMessage::TYPE_WARNING
-          );
+          if ($exception instanceof ValidationErrorsException) {
+              $response->addMessage(
+                  $exception->getErrors(),
+                  ResponseMessage::TYPE_ERROR
+              );
+              $response->setCount(count($exception->getErrors()));
+          } else {
+              $response->addMessage(
+                  $exception->getMessage(),
+                  ResponseMessage::TYPE_WARNING
+              );
+          }
 
           return (new JSONResponse($response))->send();
         }
-        else
-        {
+        else {
           $response = new Response();
 
           $response->setStatusCode(500, 'Internal Server Error');
