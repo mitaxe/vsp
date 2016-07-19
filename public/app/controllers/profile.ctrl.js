@@ -24,11 +24,17 @@ angular.module("MainApp")
             function () {
                 console.log('success',$scope.form.editProfile.$error);
             },
-            function () {
-                console.log('error');
+            function (response) {
+                $scope.serverValidations = response.data.data;
+                for(var prop in $scope.serverValidations){
+                    if($scope.form.editProfile[prop]){
+                        $scope.form.editProfile[prop].$setValidity($scope.serverValidations[prop].type, false);
+                    }
+                }
             }
         );
     };
+    //$scope.serverValidations = {"email": {"type": "maxlength","message": "Max length is 40 sym"}};
 
     // test
     $scope.videosCounter = 110;

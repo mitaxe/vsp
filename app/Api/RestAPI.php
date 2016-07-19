@@ -276,41 +276,36 @@ class RestAPI extends MicroMVC
         /** @var $exception Exception */
 
         // Handled exceptions
-        if (is_a($exception, 'HandledException'))
-        {
-          $response = new Response();
+        if (is_a($exception, 'HandledException')) {
+            if ($exception instanceof ValidationErrorsException) {
+                $response = new ValidationResponse();
+                $response->setData($exception->getErrors());
+            } else {
+                $response = new Response();
+            }
 
-          $response->setStatusCode(
-            $exception->getCode(),
-            $exception->getMessage()
-          );
+            $response->setStatusCode(
+                $exception->getCode(),
+                $exception->getMessage()
+            );
 
-          if ($exception instanceof ValidationErrorsException) {
-              $response->addMessage(
-                  $exception->getErrors(),
-                  ResponseMessage::TYPE_ERROR
-              );
-              $response->setCount(count($exception->getErrors()));
-          } else {
-              $response->addMessage(
-                  $exception->getMessage(),
-                  ResponseMessage::TYPE_WARNING
-              );
-          }
+            $response->addMessage(
+                $exception->getMessage(),
+                ResponseMessage::TYPE_WARNING
+            );
 
-          return (new JSONResponse($response))->send();
-        }
-        else {
-          $response = new Response();
+            return (new JSONResponse($response))->send();
+        } else {
+            $response = new Response();
 
-          $response->setStatusCode(500, 'Internal Server Error');
+            $response->setStatusCode(500, 'Internal Server Error');
 
-          $response->addMessage(
-            'Internal Server Error',
-            ResponseMessage::TYPE_WARNING
-          );
+            $response->addMessage(
+              'Internal Server Error',
+              ResponseMessage::TYPE_WARNING
+            );
 
-          (new JSONResponse($response))->send();
+            (new JSONResponse($response))->send();
         }
 
         // Log the exception
