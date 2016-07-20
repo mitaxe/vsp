@@ -26,12 +26,12 @@ angular.module("MainApp")
             },
             // error
             function (response) {
-                $scope.serverValidations = response.data.data;
-                // $scope.serverValidations = {
-                //     "email" : [
-                //         {"type":"maxlength","message":"Max length is 40 sym"}
-                //     ]
-                // };
+                // $scope.serverValidations = response.data.data;
+                $scope.serverValidations = {
+                    "email" : [
+                        {"type":"maxlength","message":"Max length is 40 sym"}
+                    ]
+                };
                 console.log($scope.serverValidations.email);
                 for(var prop in $scope.serverValidations){
                     if($scope.form.editProfile[prop]) {

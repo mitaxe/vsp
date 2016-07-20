@@ -987,12 +987,12 @@ angular.module("MainApp")
             },
             // error
             function (response) {
-                $scope.serverValidations = response.data.data;
-                // $scope.serverValidations = {
-                //     "email" : [
-                //         {"type":"maxlength","message":"Max length is 40 sym"}
-                //     ]
-                // };
+                // $scope.serverValidations = response.data.data;
+                $scope.serverValidations = {
+                    "email" : [
+                        {"type":"maxlength","message":"Max length is 40 sym"}
+                    ]
+                };
                 console.log($scope.serverValidations.email);
                 for(var prop in $scope.serverValidations){
                     if($scope.form.editProfile[prop]) {
@@ -1693,29 +1693,44 @@ app.directive('ngEnter', function () {
     };
 });
 
-// app.directive('popoverTrigger', function ($document) {
-//     return {
-//         restrict: 'A',
-//         link: function (scope, element) {
-//
-//             $document.on("click", function() {
-//                 if (scope.userActive || scope.notificationActive) {
-//                     scope.$apply(function () {
-//                         scope.userActive = false;
-//                         scope.notificationActive = false;
-//                     });
-//                 }
-//             });
-//
-//             element.on("click", function (evt) {
-//                 if (!scope.userActive || !scope.notificationActive) {
-//                     evt.stopPropagation();
-//                 }
-//             });
-//
-//         }
-//     };
-// });
+app.directive('popoverTrigger', ["$document", function ($document) {
+    return {
+        restrict: 'A',
+        link: function (scope, element) {
+
+            $document.on("click", function() {
+                if (scope.userActive || scope.notificationActive) {
+                    scope.$apply(function () {
+                        scope.userActive = false;
+                        scope.notificationActive = false;
+                    });
+                }
+            });
+
+            element.on("click", function (evt) {
+                if (!scope.userActive || !scope.notificationActive) {
+                    evt.stopPropagation();
+                }
+            });
+
+        }
+    };
+}]);
+
+app.directive('popover', ["$document", function ($document) {
+    return {
+        restrict: 'A',
+        link: function (scope, element) {
+
+            element.on("click", function (evt) {
+                if (!scope.userActive || !scope.notificationActive) {
+                    evt.stopPropagation();
+                }
+            });
+
+        }
+    };
+}]);
 
 angular.module("MainApp")
 .directive('overlay', ["$interval", function($interval) {
