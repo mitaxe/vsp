@@ -27,8 +27,9 @@ angular.module("MainApp")
             function (response) {
                 $scope.serverValidations = response.data.data;
                 for(var prop in $scope.serverValidations){
-                    if($scope.form.editProfile[prop]){
+                    if($scope.form.editProfile[prop]) {
                         $scope.form.editProfile[prop].$setValidity($scope.serverValidations[prop].type, false);
+                        $scope.form.editProfile[prop].$setTouched();
                     }
                 }
             }

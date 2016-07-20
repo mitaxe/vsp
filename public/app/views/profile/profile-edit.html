@@ -53,7 +53,7 @@
                         <div class="form__row">
                             <label class="form__title">Email</label>
                             <input type="email" name="email" ng-model="profileSettings.email" required>
-                            <div class="main-messages" ng-messages="form.editProfile.email.$error" role="alert">
+                            <div class="main-messages" ng-messages="form.editProfile.email.$error" ng-show="form.editProfile.password.$touched" role="alert">
                                 <div ng-message="required">Email обязателен</div>
                                 <div ng-message="email">Введите валидный Email</div>
                                 <div ng-repeat="validation in serverValidations['email']" ng-message="{{validation.type}}">{{validation.message}}</div>
