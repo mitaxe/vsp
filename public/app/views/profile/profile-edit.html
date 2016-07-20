@@ -53,10 +53,10 @@
                         <div class="form__row">
                             <label class="form__title">Email</label>
                             <input type="email" name="email" ng-model="profileSettings.email" required>
-                            <div class="main-messages" ng-messages="form.editProfile.email.$error" ng-show="form.editProfile.password.$touched" role="alert">
+                            <div class="main-messages" ng-messages="form.editProfile.email.$error" ng-show="form.editProfile.email.$touched" role="alert">
                                 <div ng-message="required">Email обязателен</div>
-                                <div ng-message="email">Введите валидный Email</div>
-                                <div ng-repeat="validation in serverValidations['email']" ng-message="{{validation.type}}">{{validation.message}}</div>
+                                <!-- <div ng-message="email">Введите валидный Email</div> -->
+                                <div class="error" ng-repeat="validation in serverValidations.email">{{validation.message}}</div>
                             </div>
                         </div>
                         <div class="form__row">
@@ -123,14 +123,15 @@
                         </div>
                     </div>
                 </div>
-                <hr class="block__hr">
-            </div><!-- main profile edit block -->
 
-            <div ng-show="form.editProfile.$invalid && formTried" class="block">
-                <div class="col-xs-12">
-                    <div class="error">Не все поля заполнены</div>
+                <hr class="block__hr">
+
+                <!-- form error -->
+                <div ng-show="form.editProfile.$invalid && formTried" class="col-xs-12">
+                    <div class="error">Ошибка</div>
                 </div>
-            </div>
+
+            </div><!-- main profile edit block -->
 
             <!-- bottom buttons -->
             <div class="block">

@@ -1765,14 +1765,11 @@ input[type='radio']:checked + .radio_label:after {
   color: #5b5d5e; }
   .form div[ng-messages] {
     color: #eb1c23;
-    margin: 10px auto 5px;
     text-align: left; }
     .form div[ng-messages].modal-messages {
       padding-left: 125px; }
     .form div[ng-messages].main-messages {
       padding-left: 130px; }
-    .form div[ng-messages].ng-inactive {
-      margin: 0; }
     @media screen and (max-width: 767px) {
       .form div[ng-messages].modal-messages {
         padding-left: 0; }
@@ -1896,8 +1893,10 @@ input[type='radio']:checked + .radio_label:after {
       .form__row--image-upload:last-child {
         margin-bottom: 0; } }
 
-.error {
-  color: #eb1c23; }
+.error,
+div[ng-message] {
+  color: #eb1c23;
+  margin: 10px auto 5px; }
 
 img-crop {
   width: 100%;

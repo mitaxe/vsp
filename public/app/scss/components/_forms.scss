@@ -5,16 +5,12 @@
 
     div[ng-messages] {
         color: $col-red;
-        margin: 10px auto 5px;
         text-align: left;
         &.modal-messages {
             padding-left: 125px;
         }
         &.main-messages {
             padding-left: 130px;
-        }
-        &.ng-inactive {
-            margin: 0;
         }
         @include phone {
             &.modal-messages {
@@ -178,6 +174,8 @@
 
 }
 
-.error {
+.error,
+div[ng-message] {
     color: $col-red;
+    margin: 10px auto 5px;
 }

@@ -985,8 +985,15 @@ angular.module("MainApp")
             function () {
                 console.log('success',$scope.form.editProfile.$error);
             },
+            // error
             function (response) {
                 $scope.serverValidations = response.data.data;
+                // $scope.serverValidations = {
+                //     "email" : [
+                //         {"type":"maxlength","message":"Max length is 40 sym"}
+                //     ]
+                // };
+                console.log($scope.serverValidations.email);
                 for(var prop in $scope.serverValidations){
                     if($scope.form.editProfile[prop]) {
                         $scope.form.editProfile[prop].$setValidity($scope.serverValidations[prop].type, false);
