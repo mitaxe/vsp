@@ -1,4 +1,4 @@
-var app = angular.module("MainApp", ['ui.router', 'angular-loading-bar', 'ngAnimate', 'ngTouch', 'angular-sortable-view', 'ngSanitize', 'ngMessages']);
+var app = angular.module("MainApp", ['ui.router', 'angular-loading-bar', 'ngAnimate', 'ngTouch', 'angular-sortable-view', 'ngSanitize', 'ngMessages','ngFileUpload', 'angular-img-cropper', 'ngImgCrop']);
 
 
 app.run(["$rootScope", "$document", "$locale", "$state", function($rootScope, $document, $locale, $state){
@@ -335,6 +335,21 @@ angular.module("MainApp")
     .state('test', {
         url: '/test',
         templateUrl: 'app/views/test.html'
+    })
+    
+    .state('orders', {
+        url: '/orders',
+        templateUrl: 'app/views/orders.html'
+    })
+    
+    .state('order_step', {
+        url: '/order_step',
+        templateUrl: 'app/views/order_step.html'
+    })
+    
+     .state('order_second_step', {
+        url: '/order_second_step',
+        templateUrl: 'app/views/order_second_step.html'
     });
 
 }]);
@@ -597,6 +612,17 @@ angular.module("MainApp")
 
 }]);
 
+var mainApp = angular.module('MainApp');
+
+mainApp.controller('avatarController', ["$scope", function($scope) {
+    
+    $scope.avatar = 0;
+    
+    $scope.openModal = function() {
+        
+        $scope.avatar = 1;
+    }
+}]);
 // angular.module("MainApp")
 // .controller('ChannelCtrl', ['$scope', function ($scope) {
 //
@@ -682,6 +708,32 @@ angular.module("MainApp")
 
 }]);
 
+var mainApp = angular.module('MainApp');
+
+mainApp.controller('fileUpload', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+    $scope.uploadFiles = function(file, errFiles) {
+        $scope.f = file;
+        $scope.errFile = errFiles && errFiles[0];
+        if (file) {
+            file.upload = Upload.upload({
+                url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                data: {file: file}
+            });
+
+            file.upload.then(function (response) {
+                $timeout(function () {
+                    file.result = response.data;
+                });
+            }, function (response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                file.progress = Math.min(100, parseInt(100.0 * 
+                                         evt.loaded / evt.total));
+            });
+        }   
+    }
+}]);
 // angular.module("MainApp")
 // .controller('HeaderCtrl', ['$scope', 'factory', function ($scope, factory) {
 //
@@ -1293,6 +1345,32 @@ angular.module("MainApp")
 }]);
 
 angular.module("MainApp")
+.controller('TestCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+    
+    console.log('test controller');
+    
+    $scope.upload = function (dataUrl, name) {
+        Upload.upload({
+            url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+            data: {
+                file: Upload.dataUrltoBlob(dataUrl, name)
+            },
+        }).then(function (response) {
+            $timeout(function () {
+                $scope.result = response.data;
+            });
+        }, function (response) {
+            if (response.status > 0) $scope.errorMsg = response.status 
+                + ': ' + response.data;
+        }, function (evt) {
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+        });
+    }
+
+
+}]);
+
+angular.module("MainApp")
 .controller('VideoPageCtrl', ['$scope', '$sce', '$window', 'factory', '$stateParams', 'mainVideos', '$rootScope',
 function($scope, $sce, $window, factory, $stateParams, mainVideos, $rootScope) {
 
@@ -1407,6 +1485,8 @@ angular.module("MainApp")
 
     // get main channel data
     $scope.content = mainChannel.data.data;
+    
+    console.log('dannye kanala - ', $scope.content);    
 
     // get the rest of all videos data
     factory.getChannelVideos($stateParams.id).success(function(response) {
@@ -1426,6 +1506,7 @@ angular.module("MainApp")
         console.log('channels goods ', $scope.channelGoods);
     });
 
+    // test
     // sort channels
     $scope.sortTypes = [
         'По дате добавления [новые]',
@@ -1442,6 +1523,39 @@ angular.module("MainApp")
 
 }]);
 
+//IMAGE RESIZE
+
+var mainApp = angular.module("MainApp");
+
+mainApp.controller('ImageResize', ["$scope", function($scope) {
+    $scope.myCroppedImage='';
+    $scope.myImage= '';
+
+    $scope.blockingObject = {block:true};
+    $scope.callTestFuntion = function(){
+      $scope.blockingObject.render(function(dataURL){
+        console.log('via render');
+        console.log(dataURL.length);
+      });
+    }
+    $scope.blockingObject.callback=function(dataURL){
+      console.log('via function');
+      console.log(dataURL.length);
+    }
+
+  
+    var handleFileSelect=function(evt) {
+      var file=evt.currentTarget.files[0];
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        $scope.$apply(function($scope){
+          $scope.myImage=evt.target.result;
+        });
+      };
+      reader.readAsDataURL(file);
+    };
+      angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect); 
+}]); 
 angular.module("MainApp")
 .directive('accordion', ["$timeout", function($timeout) {
     return {

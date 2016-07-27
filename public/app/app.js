@@ -1,4 +1,4 @@
-var app = angular.module("MainApp", ['ui.router', 'angular-loading-bar', 'ngAnimate', 'ngTouch', 'angular-sortable-view', 'ngSanitize', 'ngMessages']);
+var app = angular.module("MainApp", ['ui.router', 'angular-loading-bar', 'ngAnimate', 'ngTouch', 'angular-sortable-view', 'ngSanitize', 'ngMessages','ngFileUpload', 'angular-img-cropper', 'ngImgCrop']);
 
 
 app.run(function($rootScope, $document, $locale, $state){

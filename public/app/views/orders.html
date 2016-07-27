@@ -1,0 +1,42 @@
+<div class="orders">
+    <h1>Мои заказы</h1>
+    <div class="orders__wrapper">
+        <div class="orders__wrapper__header" ng-class="{'not-active' : arrow}">
+           <div class="arrow-btn" ng-click="arrow = !arrow" ng-class="{'arrow-btn-active' : arrow}"></div>
+            <button class="change_purchase" ng-show="arrow">Изменить заказ</button>
+            <button class="accept_purchase" ng-show="arrow">Оплатить</button>
+            <p class="green_text" ng-show="arrow">Ожидается оплата</p>
+            <p class="n_text">Заказ на (2) товара(ов). 21.06.2016 16:00</p>
+            <p class="sum_purchase">2200 руб.</p>
+        </div>
+        <div class="orders__wrapper__item" ng-show="arrow">
+            <div class="img_wrp">
+               <img src="../../assets/img/tshort1.png" alt="shirt"> 
+            </div>
+            <div class="about_purchase">
+                <h1>50-50 Pranker</h1>
+                <p>Футболка "Отодран"</p>
+                <span>$10.00</span>
+            </div>
+            <div class="prop_purchase">
+                <p>1</p>
+                <p>Черный</p>
+                <p>XI</p>
+            </div>
+        </div>
+          <div class="orders__wrapper__item" ng-show="arrow">
+            <div class="img_wrp">
+               <img src="../../assets/img/tshort1.png" alt="shirt"> 
+            </div>
+            <div class="about_purchase">
+                <h1>Roman Artwood</h1>
+                <p>Бейсболка Mightycarmods на русском от BMI Russian</p>
+                <span>$12.50</span>
+            </div>
+            <div class="prop_purchase">
+                <p>1</p>
+                <p>Черный</p>
+                <p>XI</p>
+            </div>
+        </div>
+    </div>

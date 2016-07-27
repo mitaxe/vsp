@@ -3,6 +3,8 @@ angular.module("MainApp")
 
     // get main channel data
     $scope.content = mainChannel.data.data;
+    
+    console.log('dannye kanala - ', $scope.content);    
 
     // get the rest of all videos data
     factory.getChannelVideos($stateParams.id).success(function(response) {
@@ -22,6 +24,7 @@ angular.module("MainApp")
         console.log('channels goods ', $scope.channelGoods);
     });
 
+    // test
     // sort channels
     $scope.sortTypes = [
         'По дате добавления [новые]',

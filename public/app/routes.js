@@ -311,6 +311,21 @@ angular.module("MainApp")
     .state('test', {
         url: '/test',
         templateUrl: 'app/views/test.html'
+    })
+    
+    .state('orders', {
+        url: '/orders',
+        templateUrl: 'app/views/orders.html'
+    })
+    
+    .state('order_step', {
+        url: '/order_step',
+        templateUrl: 'app/views/order_step.html'
+    })
+    
+     .state('order_second_step', {
+        url: '/order_second_step',
+        templateUrl: 'app/views/order_second_step.html'
     });
 
 });

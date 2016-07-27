@@ -1,43 +1,61 @@
 <!-- channel cover and avatar -->
 <div class="channel">
-    <div class="channel__cover"
-        ng-class="{'bf_vis': hoverCover}"
-        ng-style="{'background-image': 'url(' + content.imgBg + ')'}">
+    <div class="channel__cover" ng-class="{'bf_vis': hoverCover}" ng-style="{'background-image': 'url(' + content.imgBg + ')'}">
         <div ng-show="content.id == userData.channel.id">
-            <label for="channel_bg"
-                ng-mouseover="hoverCover = true"
-                ng-mouseleave="hoverCover = false"
-                class="change_img channel_bg hidden-tablet hidden-phone">
-            </label>
+            <label for="channel_bg" ng-mouseover="hoverCover = true" ng-mouseleave="hoverCover = false" class="change_img channel_bg hidden-tablet hidden-phone"> </label>
             <div ng-show="hoverCover" class="bg_text">Обновить фото обложки канала</div>
-            <input type="file" id="channel_bg" class="hidden">
-        </div>
+            <input type="file" id="channel_bg" class="hidden"> </div>
         <!-- channel avatar -->
-        <div class="channel__ava" ng-class="{'bf_vis': hoverAva}">
-            <img ng-src="{{ content.img }}" alt="avatar"/>
+        <div ng-controller='avatarController' class="channel__ava" ng-class="{'bf_vis': hoverAva}"> <img ng-src="{{ content.img }}" alt="avatar" />
             <div ng-show="content.id == userData.channel.id">
-                <label for="channel_ava"
-                    ng-mouseover="hoverAva = true"
-                    ng-mouseleave="hoverAva = false"
-                    class="change_img channel_ava hidden-tablet hidden-phone">
-                </label>
+                <label for="channel_ava" ng-mouseover="hoverAva = true" ng-mouseleave="hoverAva = false" class="change_img channel_ava hidden-tablet hidden-phone" ng-click='openModal();'> </label>
                 <div ng-show="hoverAva" class="bg_text ava">Обновить аватар канала</div>
-                <input type="file" id="channel_ava" class="hidden">
             </div>
-        </div><!-- channel avatar -->
+             <!-- change avatar form -->
+            <div class="registration" ng-init="loginActive = true" ng-show="avatar == 1">
+                <form name="form.login" >
+                     <div ng-controller='ImageResize'>
+                <div>Выберите файл:
+                    <input type="file" id="fileInput" /> </div>
+                <button ng-click="callTestFuntion()">Сгенерировать</button>
+                <div class="cropArea">
+                    <img-crop image="myImage" area-type="rectangle" result-image="myCroppedImage" live-view="blockingObject"></img-crop>
+                </div>
+
+                <div><img ng-src="{{myCroppedImage}}" /></div>
+            </div>
+                    <div class="options__form bottom">
+                        <div class="inp_row">
+                            <div class="btn btn-green main-ui btn-fullwidth">{{ 'Изменить' }}</div>
+                        </div>
+                      
+                    </div>
+                </form>
+                <!-- change avatar form -->
+            </div>
+            
+            <!--<div ng-controller='fileUpload' style="position: absolute; left: 600px; width: 300px;">
+                <h4>Upload on file select</h4>
+                <button type="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB"> Select File</button>
+                <br>
+                <br> File:
+                <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}} <span class="progress" ng-show="f.progress >= 0">
+          <div style="width:{{f.progress}}%"  
+               ng-bind="f.progress + '%'"></div>
+      </span> </div> {{errorMsg}} 
+           </div> 
+            <!-- channel avatar -->
+        </div>
     </div>
-</div>
-
-<!-- channel content -->
-<div class="content">
-    <div class="row">
-
-        <!-- channel-header -->
-        <div class="block block--header block--header-channel">
-            <div class="col-xs-12">
-                <div class="accordion channel__head">
-                    <div class="clearfix">
-                        <h2 class="block__title">
+    <!-- channel content -->
+    <div class="content">
+        <div class="row">
+            <!-- channel-header -->
+            <div class="block block--header block--header-channel">
+                <div class="col-xs-12">
+                    <div class="accordion channel__head">
+                        <div class="clearfix">
+                            <h2 class="block__title">
                             <a ng-show="content.id == userData.channel.id" ui-sref="profile-edit({ id: userId })" class="btn btn-grey hidden-tablet hidden-phone">
                                 <i class="svg"><svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
                                 </svg></i>
@@ -46,54 +64,37 @@
                             <!-- subscribe button -->
                             <subscribe ng-show="content.id != userData.channel.id" class="hidden-tablet hidden-phone" subscribe-to="content.statSubscribers"></subscribe>
                             {{ content.title }}
-                        </h2>
-                    </div>
-                    <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
-                        <!-- subscribe button -->
-                        <subscribe ng-show="content.id != userData.channel.id" class="hidden-desktop" subscribe-to="content.statSubscribers"></subscribe>
-                        <a ng-show="content.id == userData.channel.id" ui-sref="profile-edit({ id: userId })" class="btn btn-grey hidden-desktop" style="float: none;">
-                            <i class="svg">
+                        </h2> </div>
+                        <div class="tablet_ctrl clearfix hidden-desktop hidden-tablet">
+                            <!-- subscribe button -->
+                            <subscribe ng-show="content.id != userData.channel.id" class="hidden-desktop" subscribe-to="content.statSubscribers"></subscribe>
+                            <a ng-show="content.id == userData.channel.id" ui-sref="profile-edit({ id: userId })" class="btn btn-grey hidden-desktop" style="float: none;"> <i class="svg">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
                                 </svg>
-                            </i>
-                            Редактировать канал
-                        </a>
+                            </i> Редактировать канал </a>
+                        </div>
+                        <!-- read more -->
+                        <read-more text="content.description" class="block__description"></read-more>
                     </div>
-                    <!-- read more -->
-                    <read-more text="content.description" class="block__description"></read-more>
-                </div>
-                <div class="tablet_ctrl clearfix hidden-phone">
-                    <!-- subscribe button -->
-                    <subscribe ng-show="content.id != userData.channel.id" class="hidden-desktop" subscribe-to="content.statSubscribers"></subscribe>
-                    <a ng-show="content.id == userData.channel.id" ui-sref="profile-edit({ id: userId })" class="btn btn-grey hidden-desktop">
-                        <i class="svg">
+                    <div class="tablet_ctrl clearfix hidden-phone">
+                        <!-- subscribe button -->
+                        <subscribe ng-show="content.id != userData.channel.id" class="hidden-desktop" subscribe-to="content.statSubscribers"></subscribe>
+                        <a ng-show="content.id == userData.channel.id" ui-sref="profile-edit({ id: userId })" class="btn btn-grey hidden-desktop"> <i class="svg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="12.75" viewBox="0 0 12.5 12.75"><path d="M0 10.11v2.64h2.64l7.638-7.715-2.64-2.64L0 10.108zm12.292-7.09c.277-.278.277-.695 0-.973l-1.597-1.6c-.28-.277-.695-.277-.973 0L8.472 1.7l2.64 2.64 1.18-1.32z"/>
                             </svg>
-                        </i>
-                        Редактировать канал
-                    </a>
+                        </i> Редактировать канал </a>
+                    </div>
+                    <!-- channel tabs nav -->
+                    <div class="clearfix" ng-show="channelVideos.length > 0 || channelPlaylists.length > 0 || channelGoods">
+                        <tabs class="tabs"> <a ng-show="channelVideos.length > 0" ui-sref="channels.all" ui-sref-active="active">Все видео</a> <a ng-show="channelPlaylists.length > 0" ui-sref="channels.playlist({ url: content.url })" ui-sref-active="active">Плейлисты</a> <a ng-show="channelGoods" ui-sref="channels.shop({ url: content.url })" ui-sref-active="active">Магазин</a>
+                            <div class="tabs__underline"></div>
+                        </tabs>
+                    </div>
+                    <!-- channel tabs nav -->
                 </div>
-                <!-- channel tabs nav -->
-                <div class="clearfix" ng-show="channelVideos.length > 0 || channelPlaylists.length > 0 || channelGoods">
-                    <tabs class="tabs">
-                        <a ng-show="channelVideos.length > 0"
-                            ui-sref="channels.all"
-                            ui-sref-active="active">Все видео</a>
-                        <a ng-show="channelPlaylists.length > 0"
-                            ui-sref="channels.playlist({ url: content.url })"
-                            ui-sref-active="active">Плейлисты</a>
-                        <a ng-show="channelGoods"
-                            ui-sref="channels.shop({ url: content.url })"
-                            ui-sref-active="active">Магазин</a>
-                        <div class="tabs__underline"></div>
-                    </tabs>
-                </div><!-- channel tabs nav -->
-            </div>
-            <hr class="block__hr">
-        </div><!-- channel-header -->
-
-        <!-- channel views -->
-        <div ng-show="channelVideos.length > 0 || channelPlaylists.length > 0 || channelGoods" ui-view></div>
-
+                <hr class="block__hr"> </div>
+            <!-- channel-header -->
+            <!-- channel views -->
+            <div ng-show="channelVideos.length > 0 || channelPlaylists.length > 0 || channelGoods" ui-view></div>
+        </div>
     </div>
-</div>

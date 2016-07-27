@@ -109,6 +109,9 @@ textarea {
     display: table;
     width: 100%;
     padding: 0 20px;
+    background: #f4f4f4;
+    z-index: 9999;
+    position: fixed;
     &__left {
         float: left;
         .footer__link {

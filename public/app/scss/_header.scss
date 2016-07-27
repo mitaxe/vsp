@@ -1,4 +1,5 @@
 /* header */
+
 .header {
     @include clearfix;
     position: fixed;
@@ -11,7 +12,6 @@
     z-index: 999;
     background: $col-header;
     overflow: hidden;
-
     *.ng-hide {
         transition: 0s;
         opacity: 0;
@@ -20,7 +20,6 @@
     //     transition: 0s;
     //     opacity: 1;
     // }
-
     &__item {
         display: table;
         height: 70px;
@@ -28,7 +27,6 @@
         transition: .3s;
         // border: 0.5px dotted white;
     }
-
     &__sandwich {
         float: left;
         width: 40px;
@@ -39,12 +37,12 @@
             .sandwich {
                 span {
                     background: white;
-                    box-shadow: 0px 1.5px 0px rgba(0,0,0,0);
+                    box-shadow: 0px 1.5px 0px rgba(0, 0, 0, 0);
                 }
                 &.active {
                     span {
                         background: $col-green;
-                        box-shadow: 0px 1.5px 0px rgba(0,0,0,0);
+                        box-shadow: 0px 1.5px 0px rgba(0, 0, 0, 0);
                         &:first-child {
                             top: -5px;
                             bottom: auto;
@@ -58,13 +56,11 @@
             }
         }
     }
-
     &__logo {
         float: left;
         width: 260px;
         padding-left: 15px;
     }
-
     &__back {
         float: left;
         width: 255px;
@@ -79,13 +75,13 @@
             display: block;
             transition: .3s;
             margin-right: 15px;
-            -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.5));
-            filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.5));
+            -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.5));
         }
         p {
             @include no-select;
             display: inline-block;
-            text-shadow: 0px 3px 3px rgba(0,0,0,0.15);
+            text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.15);
             font-size: 18px;
         }
         div {
@@ -102,7 +98,7 @@
             width: 45px;
             margin-right: 15px;
             float: left;
-            overflow:auto;
+            overflow: auto;
         }
         &:hover {
             svg {
@@ -130,15 +126,13 @@
             }
         }
     }
-
     &__search {
         float: right;
         transition: .3s;
         -webkit-transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
-        transition-timing-function:         cubic-bezier(0.86, 0, 0.07, 1);
+        transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
         width: 140px;
     }
-
     &__tags {
         float: right;
         display: none;
@@ -147,7 +141,6 @@
         // max-width: calc(100% - 1180px);
         width: 120px;
     }
-
     &__random {
         float: right;
         width: 225px;
@@ -155,7 +148,6 @@
         display: none;
         text-align: center;
     }
-
     &__notifications {
         float: right;
         width: 60px;
@@ -168,12 +160,12 @@
             }
             .svg {
                 transition: .3s;
-                -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.0));
-                filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.0));
+                -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.0));
+                filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.0));
             }
             .notification__number {
                 transition: .3s;
-                box-shadow: 0px 0px 2.5px 1px rgba(69,219,94,0.33);
+                box-shadow: 0px 0px 2.5px 1px rgba(69, 219, 94, 0.33);
             }
         }
         &.active {
@@ -183,8 +175,8 @@
             }
             .svg {
                 transition: .3s;
-                -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.0));
-                filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.0));
+                -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.0));
+                filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.0));
             }
             .notification__number {
                 // visibility: hidden;
@@ -192,7 +184,6 @@
             }
         }
     }
-
     &__user {
         float: right;
         width: 85px;
@@ -207,8 +198,8 @@
             }
             .svg {
                 transition: .3s;
-                -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.0));
-                filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.0));
+                -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.0));
+                filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.0));
             }
         }
         &.active {
@@ -218,21 +209,19 @@
             }
             .svg {
                 transition: .3s;
-                -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.0));
-                filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.0));
+                -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.0));
+                filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.0));
             }
         }
     }
-
     &__login {
         float: right;
-        width: 145px;
+        //width: 90px;
         text-align: center;
         #loginBtn {
             margin: 0 10px;
         }
     }
-
     @include desktop {
         padding-left: 15px;
         &__sandwich {
@@ -242,8 +231,8 @@
         &__search {
             width: 250px;
         }
-    };
-
+    }
+    ;
     @include tablet {
         &__sandwich {
             width: 60px;
@@ -277,7 +266,6 @@
             }
         }
     }
-
     @include phone {
         height: 55px;
         padding-right: 10px;
@@ -324,42 +312,39 @@
         }
         &.sidebarHidden {
             transition: .3s;
-            box-shadow: 0px 2px 10px rgba(0,0,0,0.5);
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
         }
     }
-
     @media screen and (min-width:1280px) {
         &__tags,
         &__random {
             display: table;
         }
     }
-
     @media screen and (min-width:1440px) {
         &__random {
             width: 250px;
         }
     }
-
     @media screen and (min-width: 1500px) {
         &__tags {
             // max-width: 120px; // falback
             // max-width: calc(100% - 1420px);
         }
     }
-
     @media screen and (min-width:1600px) {
         &__search {
             width: 500px;
         }
     }
-
 }
+
+
 /* header */
 
 
-
 /* logo */
+
 .logo {
     display: block;
     position: relative;
@@ -390,11 +375,11 @@
         }
         &-absolute {
             @include no-select;
-            text-shadow: 0 2px 1px rgba(0,0,0,0.18);
+            text-shadow: 0 2px 1px rgba(0, 0, 0, 0.18);
             z-index: 998;
             span {
                 // text-shadow: 0 0 10px rgba(29,178,70,0.13);
-                text-shadow: 0 0 10px rgba(0,255,0,0.3);
+                text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
             }
         }
     }
@@ -406,11 +391,13 @@
         }
     }
 }
+
+
 /* logo */
 
 
-
 /* sandwich */
+
 .sandwich {
     width: 15px;
     height: 12px;
@@ -428,8 +415,8 @@
         display: block;
         margin: auto 0;
         -webkit-transition: all 300ms cubic-bezier(0.86, 0, 0.07, 1);
-        transition:         all 300ms cubic-bezier(0.86, 0, 0.07, 1);
-        box-shadow: 0px 1.5px 0px rgba(0,0,0,0.5);
+        transition: all 300ms cubic-bezier(0.86, 0, 0.07, 1);
+        box-shadow: 0px 1.5px 0px rgba(0, 0, 0, 0.5);
         &:first-child {
             top: 0;
             bottom: auto;
@@ -442,7 +429,7 @@
     &.active {
         span {
             background: $col-green;
-            box-shadow: 0px 1.5px 0px rgba(0,0,0,0);
+            box-shadow: 0px 1.5px 0px rgba(0, 0, 0, 0);
             &:first-child {
                 top: -5px;
                 bottom: auto;
@@ -454,11 +441,13 @@
         }
     }
 }
+
+
 /* sandwich */
 
 
-
 /* search block */
+
 .search-form {
     float: right;
     display: block;
@@ -467,7 +456,7 @@
     position: relative;
     border-radius: 50px;
     background-color: #1e1e1e;
-    box-shadow: inset 0 5px 5px rgba(62,15,15,0.1), 0 1px rgba(255,255,255,0.1);
+    box-shadow: inset 0 5px 5px rgba(62, 15, 15, 0.1), 0 1px rgba(255, 255, 255, 0.1);
     transition: .3s;
     @include placeholder {
         font-size: 14px;
@@ -561,7 +550,7 @@
     &.active:hover {
         width: 100%;
         background-color: #f8f8f8;
-        box-shadow: inset 0 1px rgba(255,255,255,0.1);
+        box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
         svg {
             fill: $col-green;
         }
@@ -576,24 +565,26 @@
         }
     }
 }
+
+
 /* search block */
 
 
-
 /* user block */
+
 .user {
     height: 35px;
     width: 65px;
     position: relative;
     background-color: #1e1e1e;
-    box-shadow: inset 0 5px 5px rgba(62,15,15,0.1), 0 1px rgba(255,255,255,0.1);
+    box-shadow: inset 0 5px 5px rgba(62, 15, 15, 0.1), 0 1px rgba(255, 255, 255, 0.1);
     border-radius: 5px;
     cursor: pointer;
     &__avatar {
         width: 50%;
         height: 100%;
         border-radius: 5px 0 0 5px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.65);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
         position: absolute;
         top: 0;
         left: 0;
@@ -609,15 +600,17 @@
     }
     .svg {
         transition: .3s;
-        -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.5));
-        filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.5));
+        -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.5));
+        filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.5));
     }
 }
+
+
 /* user block */
 
 
-
 /* tags/pins */
+
 .tags {
     display: block;
     overflow: hidden;
@@ -669,11 +662,13 @@
         }
     }
 }
+
+
 /* tags/pins */
 
 
-
 /* notifications */
+
 .notification {
     @include no-select;
     height: 40px;
@@ -695,7 +690,7 @@
         text-align: center;
         font-size: 12px;
         line-height: 22px;
-        box-shadow: 0px 2px 1px rgba(0,0,0,0.3);
+        box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.3);
         @include transition-in-out;
     }
     svg {
@@ -704,8 +699,8 @@
     }
     .svg {
         transition: .3s;
-        -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.5));
-        filter: drop-shadow(0px 1.5px 0px rgba(0,0,0,0.5));
+        -webkit-filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.5));
+        filter: drop-shadow(0px 1.5px 0px rgba(0, 0, 0, 0.5));
     }
     @include phone {
         height: 30px;
@@ -721,14 +716,15 @@
         }
     }
 }
+
+
 /* notifications */
 
 
-
 /* notification tabs */
+
 .noti-tabs {
     height: 100%;
-
     &__header {
         @include clearfix;
         text-align: left;
@@ -742,7 +738,6 @@
             padding-left: 30px;
         }
     }
-
     &__box {
         @include clearfix;
         font-size: 13px;
@@ -825,13 +820,13 @@
             color: $col-green;
             &:hover {
                 svg {
-                    transform: rotate(-90deg) translate3d(-1px,5px,0) !important;
+                    transform: rotate(-90deg) translate3d(-1px, 5px, 0) !important;
                 }
             }
         }
         svg {
             fill: $col-green;
-            transform: rotate(-90deg) translate3d(-1px,0,0);
+            transform: rotate(-90deg) translate3d(-1px, 0, 0);
             margin-left: 5px;
             transition: .3s;
             opacity: .5;
@@ -871,22 +866,24 @@
         }
     }
 }
+
+
 /* notification tabs */
 
 
-
 /* popover */
+
 .popover {
     position: fixed;
     top: 65px;
     background: #f4f4f4;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.5);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
     z-index: 99999;
     color: black;
     cursor: default;
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
     &:after {
         content: "";
         display: block;
@@ -911,6 +908,12 @@
                 right: 40px;
             }
         }
+    }
+    &--bin {
+        padding: 25px 15px;
+        right: 150px;
+        width: 575px;
+        height: 265px;
     }
     &--user {
         right: 8px;
@@ -956,12 +959,12 @@
         }
     }
     &.ng-hide-remove {
-        -webkit-animation:0.3s popover-show;
-        animation:0.3s popover-show;
+        -webkit-animation: 0.3s popover-show;
+        animation: 0.3s popover-show;
     }
     &.ng-hide-add {
-        -webkit-animation:0.3s popover-hide;
-        animation:0.3s popover-hide;
+        -webkit-animation: 0.3s popover-hide;
+        animation: 0.3s popover-hide;
     }
     @include phone {
         left: 0;
@@ -976,4 +979,62 @@
         }
     }
 }
+
+
 /* popover */
+
+
+/* bin */
+
+.bin {
+    cursor: pointer;
+    width: 60px;
+    padding: 0 10px;
+    &__icon {
+        width: 31px;
+        height: 31px;
+        background: url(../../assets/img/bin.png);
+        transition: .3s;
+        position: relative;
+        left: 4px;
+        &:hover {
+            background: url(../../assets/img/bin-active.png);
+            transition: .3s;
+        }
+    }
+}
+
+.bin-active {
+    background: #000;
+      transition: .3s;
+}
+
+/* popover bin */
+.popover--bin {
+    padding: 25px;
+    h1 {
+        color: #3b3b3b;
+        font-size: 22px;
+        float: left;
+        font-weight: 300;
+    }
+    a {
+        color: rgb(54, 185, 86);
+        float: right;
+        padding-top: 5px;
+    }
+    
+    hr {
+        clear: both;
+        margin-top: 35px;
+    }
+    
+    .goods {
+        text-align: center;
+        
+        p {
+            padding-top: 60px;
+            color: #abacae;
+        }
+    }
+}

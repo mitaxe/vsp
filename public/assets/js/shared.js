@@ -35014,6 +35014,350 @@ angular.module('ngAnimate', [])
 
 })(window, window.angular);
 
+/*! angular-img-cropper 05-06-2015 */
+angular.module("angular-img-cropper",[]).directive("imageCropper",["$document","$window","imageCropperDataShare",function(a,b,c){return{scope:{image:"=",croppedImage:"=",cropWidth:"=",cropHeight:"=",keepAspect:"=",touchRadius:"=",cropAreaBounds:"=",minWidth:"=",minHeight:"="},restrict:"A",link:function(a,b){var d,e=e||function(a,b){function c(){this.constructor=a}for(var d in b)b.hasOwnProperty(d)&&(a[d]=b[d]);c.prototype=b.prototype,a.prototype=new c},f=function(){function a(a,b,c){this.over=!1,this.drag=!1,this.position=new l(a,b),this.offset=new l(0,0),this.radius=c}return a.prototype.setDrag=function(a){this.drag=a,this.setOver(a)},a.prototype.draw=function(){},a.prototype.setOver=function(a){this.over=a},a.prototype.touchInBounds=function(a,b){return a>this.position.x-this.radius&&a<this.position.x+this.radius&&b>this.position.y-this.radius&&b<this.position.y+this.radius},a.prototype.getPosition=function(){return this.position},a.prototype.setPosition=function(a,b){this.position.x=a,this.position.y=b},a}(),g=function(){function a(b){this.borrowed=0,a.instance=this;for(var c=null,d=0;b>d;d++)if(0===d)this.firstAvailable=new l,c=this.firstAvailable;else{var e=new l;c.setNext(e),c=e}}return a.prototype.borrow=function(a,b){if(null==this.firstAvailable)throw"Pool exhausted";this.borrowed++;var c=this.firstAvailable;return this.firstAvailable=c.getNext(),c.x=a,c.y=b,c},a.prototype.returnPoint=function(a){this.borrowed--,a.x=0,a.y=0,a.setNext(this.firstAvailable),this.firstAvailable=a},a}(),h=function(){function a(){}return a.init=function(a){this.canvas=a,this.ctx=this.canvas.getContext("2d")},a.DEG2RAD=.0174532925,a}(),i=function(a){function b(b,c,d){a.call(this,b,c,d),this.iconPoints=new Array,this.scaledIconPoints=new Array,this.getDragIconPoints(this.iconPoints,1),this.getDragIconPoints(this.scaledIconPoints,1.2)}return e(b,a),b.prototype.draw=function(a){this.over||this.drag?this.drawIcon(a,this.scaledIconPoints):this.drawIcon(a,this.iconPoints)},b.prototype.getDragIconPoints=function(a,b){var c=17*b,d=14*b,e=8*b,f=4*b;a.push(g.instance.borrow(-f/2,c-e)),a.push(g.instance.borrow(-d/2,c-e)),a.push(g.instance.borrow(0,c)),a.push(g.instance.borrow(d/2,c-e)),a.push(g.instance.borrow(f/2,c-e)),a.push(g.instance.borrow(f/2,f/2)),a.push(g.instance.borrow(c-e,f/2)),a.push(g.instance.borrow(c-e,d/2)),a.push(g.instance.borrow(c,0)),a.push(g.instance.borrow(c-e,-d/2)),a.push(g.instance.borrow(c-e,-f/2)),a.push(g.instance.borrow(f/2,-f/2)),a.push(g.instance.borrow(f/2,-c+e)),a.push(g.instance.borrow(d/2,-c+e)),a.push(g.instance.borrow(0,-c)),a.push(g.instance.borrow(-d/2,-c+e)),a.push(g.instance.borrow(-f/2,-c+e)),a.push(g.instance.borrow(-f/2,-f/2)),a.push(g.instance.borrow(-c+e,-f/2)),a.push(g.instance.borrow(-c+e,-d/2)),a.push(g.instance.borrow(-c,0)),a.push(g.instance.borrow(-c+e,d/2)),a.push(g.instance.borrow(-c+e,f/2)),a.push(g.instance.borrow(-f/2,f/2))},b.prototype.drawIcon=function(a,b){a.beginPath(),a.moveTo(b[0].x+this.position.x,b[0].y+this.position.y);for(var c=0;c<b.length;c++){var d=b[c];a.lineTo(d.x+this.position.x,d.y+this.position.y)}a.closePath(),a.fillStyle="rgba(255,228,0,1)",a.fill()},b.prototype.recalculatePosition=function(a){var b=a.getCentre();this.setPosition(b.x,b.y),g.instance.returnPoint(b)},b}(f),j=function(a){function b(b,c,d){a.call(this,b,c,d)}return e(b,a),b.prototype.drawCornerBorder=function(a){var b=10;(this.over||this.drag)&&(b=12);var c=1,d=1;this.horizontalNeighbour.position.x<this.position.x&&(c=-1),this.verticalNeighbour.position.y<this.position.y&&(d=-1),a.beginPath(),a.lineJoin="miter",a.moveTo(this.position.x,this.position.y),a.lineTo(this.position.x+b*c,this.position.y),a.lineTo(this.position.x+b*c,this.position.y+b*d),a.lineTo(this.position.x,this.position.y+b*d),a.lineTo(this.position.x,this.position.y),a.closePath(),a.lineWidth=2,a.strokeStyle="rgba(255,228,0,1)",a.stroke()},b.prototype.drawCornerFill=function(a){var b=10;(this.over||this.drag)&&(b=12);var c=1,d=1;this.horizontalNeighbour.position.x<this.position.x&&(c=-1),this.verticalNeighbour.position.y<this.position.y&&(d=-1),a.beginPath(),a.moveTo(this.position.x,this.position.y),a.lineTo(this.position.x+b*c,this.position.y),a.lineTo(this.position.x+b*c,this.position.y+b*d),a.lineTo(this.position.x,this.position.y+b*d),a.lineTo(this.position.x,this.position.y),a.closePath(),a.fillStyle="rgba(0,0,0,1)",a.fill()},b.prototype.moveX=function(a){this.setPosition(a,this.position.y)},b.prototype.moveY=function(a){this.setPosition(this.position.x,a)},b.prototype.move=function(a,b){this.setPosition(a,b),this.verticalNeighbour.moveX(a),this.horizontalNeighbour.moveY(b)},b.prototype.addHorizontalNeighbour=function(a){this.horizontalNeighbour=a},b.prototype.addVerticalNeighbour=function(a){this.verticalNeighbour=a},b.prototype.getHorizontalNeighbour=function(){return this.horizontalNeighbour},b.prototype.getVerticalNeighbour=function(){return this.verticalNeighbour},b.prototype.draw=function(a){this.drawCornerFill(a),this.drawCornerBorder(a)},b}(f),k=function(){function a(a,b,c,d){void 0===a&&(a=0),void 0===b&&(b=0),void 0===c&&(c=0),void 0===d&&(d=0),this.left=a,this.right=a+c,this.top=b,this.bottom=b+d}return a.prototype.getWidth=function(){return this.right-this.left},a.prototype.getHeight=function(){return this.bottom-this.top},a.prototype.getCentre=function(){var a=this.getWidth(),b=this.getHeight();return g.instance.borrow(this.left+a/2,this.top+b/2)},a}(),l=function(){function a(a,b){void 0===a&&(a=0),void 0===b&&(b=0),this.x=a,this.y=b}return a.prototype.setNext=function(a){this.next=a},a.prototype.getNext=function(){return this.next},a}(),m=function(){function a(a,b,c){void 0===a&&(a=0),void 0===b&&(b=0),void 0===c&&(c=0),this.id=0,this.x=a,this.y=b,this.id=c}return a}(),n=function(){function b(a,b,c,d,e,f,k){void 0===b&&(b=0),void 0===c&&(c=0),void 0===d&&(d=100),void 0===e&&(e=50),void 0===f&&(f=!0),void 0===k&&(k=20),this.keepAspect=!1,this.aspectRatio=0,this.currentDragTouches=new Array,this.isMouseDown=!1,this.ratioW=1,this.ratioH=1,this.fileType="png",this.imageSet=!1,this.pointPool=new g(200),h.init(a),this.buffer=document.createElement("canvas"),this.cropCanvas=document.createElement("canvas"),this.buffer.width=a.width,this.buffer.height=a.height,this.tl=new j(b,c,k),this.tr=new j(b+d,c,k),this.bl=new j(b,c+e,k),this.br=new j(b+d,c+e,k),this.tl.addHorizontalNeighbour(this.tr),this.tl.addVerticalNeighbour(this.bl),this.tr.addHorizontalNeighbour(this.tl),this.tr.addVerticalNeighbour(this.br),this.bl.addHorizontalNeighbour(this.br),this.bl.addVerticalNeighbour(this.tl),this.br.addHorizontalNeighbour(this.bl),this.br.addVerticalNeighbour(this.tr),this.markers=[this.tl,this.tr,this.bl,this.br],this.center=new i(b+d/2,c+e/2,k),this.canvas=a,this.ctx=this.canvas.getContext("2d"),this.keepAspect=f,this.aspectRatio=e/d,this.draw(this.ctx),this.croppedImage=new Image,this.currentlyInteracting=!1,window.addEventListener("mousemove",this.onMouseMove.bind(this)),window.addEventListener("mouseup",this.onMouseUp.bind(this)),a.addEventListener("mousedown",this.onMouseDown.bind(this)),window.addEventListener("touchmove",this.onTouchMove.bind(this),!1),a.addEventListener("touchstart",this.onTouchStart.bind(this),!1),window.addEventListener("touchend",this.onTouchEnd.bind(this),!1)}return b.prototype.resizeCanvas=function(a,b){this.canvas.width=a,this.canvas.height=b,this.buffer.width=a,this.buffer.height=b,this.draw(this.ctx)},b.prototype.draw=function(a){var b=this.getBounds();if(this.srcImage){a.clearRect(0,0,this.canvasWidth,this.canvasHeight);var c=this.srcImage.height/this.srcImage.width,d=this.canvasHeight/this.canvasWidth,e=this.canvasWidth,f=this.canvasHeight;d>c?(e=this.canvasWidth,f=this.canvasWidth*c):(f=this.canvasHeight,e=this.canvasHeight/c),this.ratioW=e/this.srcImage.width,this.ratioH=f/this.srcImage.height,c>d?this.drawImageIOSFix(a,this.srcImage,0,0,this.srcImage.width,this.srcImage.height,this.buffer.width/2-e/2,0,e,f):this.drawImageIOSFix(a,this.srcImage,0,0,this.srcImage.width,this.srcImage.height,0,this.buffer.height/2-f/2,e,f),this.buffer.getContext("2d").drawImage(this.canvas,0,0,this.canvasWidth,this.canvasHeight),a.fillStyle="rgba(0, 0, 0, 0.7)",a.fillRect(0,0,this.canvasWidth,this.canvasHeight),a.drawImage(this.buffer,b.left,b.top,Math.max(b.getWidth(),1),Math.max(b.getHeight(),1),b.left,b.top,b.getWidth(),b.getHeight());for(var g,h=0;h<this.markers.length;h++)g=this.markers[h],g.draw(a);this.center.draw(a),a.lineWidth=2,a.strokeStyle="rgba(255,228,0,1)",a.strokeRect(b.left,b.top,b.getWidth(),b.getHeight())}else a.fillStyle="rgba(192,192,192,1)",a.fillRect(0,0,this.canvas.width,this.canvas.height)},b.prototype.dragCrop=function(b,c,d){var e=this.getBounds(),f=b-e.getWidth()/2,g=b+e.getWidth()/2,h=c-e.getHeight()/2,i=c+e.getHeight()/2;g>=this.maxXClamp&&(b=this.maxXClamp-e.getWidth()/2),f<=this.minXClamp&&(b=e.getWidth()/2+this.minXClamp),h<this.minYClamp&&(c=e.getHeight()/2+this.minYClamp),i>=this.maxYClamp&&(c=this.maxYClamp-e.getHeight()/2),this.tl.moveX(b-e.getWidth()/2),this.tl.moveY(c-e.getHeight()/2),this.tr.moveX(b+e.getWidth()/2),this.tr.moveY(c-e.getHeight()/2),this.bl.moveX(b-e.getWidth()/2),this.bl.moveY(c+e.getHeight()/2),this.br.moveX(b+e.getWidth()/2),this.br.moveY(c+e.getHeight()/2),d.setPosition(b,c),a.cropAreaBounds&&this.imageSet&&(a.cropAreaBounds=this.getCropBounds(),a.$apply())},b.prototype.enforceMinSize=function(b,c,d){var e=b-d.getHorizontalNeighbour().getPosition().x,f=c-d.getVerticalNeighbour().getPosition().y,h=a.minWidth-Math.abs(e),i=a.minHeight-Math.abs(f);return 0==e||0==f?(b=d.getPosition().x,c=d.getPosition().y,g.instance.borrow(b,c)):(a.keepAspect?h>0&&i/this.aspectRatio>0?h>i/this.aspectRatio?0>e?(b-=h,0>f?c-=h*this.aspectRatio:c+=h*this.aspectRatio):(b+=h,0>f?c-=h*this.aspectRatio:c+=h*this.aspectRatio):0>f?(c-=i,0>e?b-=i/this.aspectRatio:b+=i/this.aspectRatio):(c+=i,0>e?b-=i/this.aspectRatio:b+=i/this.aspectRatio):h>0?0>e?(b-=h,0>f?c-=h*this.aspectRatio:c+=h*this.aspectRatio):(b+=h,0>f?c-=h*this.aspectRatio:c+=h*this.aspectRatio):i>0&&(0>f?(c-=i,0>e?b-=i/this.aspectRatio:b+=i/this.aspectRatio):(c+=i,0>e?b-=i/this.aspectRatio:b+=i/this.aspectRatio)):(h>0&&(0>e?b-=h:b+=h),i>0&&(0>f?c-=i:c+=i)),(b<this.minXClamp||b>this.maxXClamp||c<this.minYClamp||c>this.maxYClamp)&&(b=d.getPosition().x,c=d.getPosition().y),g.instance.borrow(b,c))},b.prototype.dragCorner=function(b,c,d){var e,f=0,h=0,i=0,j=0,k=0,l=0,m=0,n=0,o=0;if(a.keepAspect){if(e=d.getHorizontalNeighbour().getVerticalNeighbour(),i=e.getPosition().x,j=e.getPosition().y,b<=e.getPosition().x){if(c<=e.getPosition().y){if(f=i-100/this.aspectRatio,h=j-100/this.aspectRatio*this.aspectRatio,o=this.getSide(g.instance.borrow(f,h),e.getPosition(),g.instance.borrow(b,c)),o>0){k=Math.abs(e.getPosition().y-c),l=k/this.aspectRatio,m=e.getPosition().y-k,n=e.getPosition().x-l;var p=this.enforceMinSize(n,m,d);d.move(p.x,p.y),g.instance.returnPoint(p)}else if(0>o){l=Math.abs(e.getPosition().x-b),k=l*this.aspectRatio,m=e.getPosition().y-k,n=e.getPosition().x-l;var p=this.enforceMinSize(n,m,d);d.move(p.x,p.y),g.instance.returnPoint(p)}}else if(f=i-100/this.aspectRatio,h=j+100/this.aspectRatio*this.aspectRatio,o=this.getSide(g.instance.borrow(f,h),e.getPosition(),g.instance.borrow(b,c)),o>0){l=Math.abs(e.getPosition().x-b),k=l*this.aspectRatio,m=e.getPosition().y+k,n=e.getPosition().x-l;var p=this.enforceMinSize(n,m,d);d.move(p.x,p.y),g.instance.returnPoint(p)}else if(0>o){k=Math.abs(e.getPosition().y-c),l=k/this.aspectRatio,m=e.getPosition().y+k,n=e.getPosition().x-l;var p=this.enforceMinSize(n,m,d);d.move(p.x,p.y),g.instance.returnPoint(p)}}else if(c<=e.getPosition().y){if(f=i+100/this.aspectRatio,h=j-100/this.aspectRatio*this.aspectRatio,o=this.getSide(g.instance.borrow(f,h),e.getPosition(),g.instance.borrow(b,c)),0>o){k=Math.abs(e.getPosition().y-c),l=k/this.aspectRatio,m=e.getPosition().y-k,n=e.getPosition().x+l;var p=this.enforceMinSize(n,m,d);d.move(p.x,p.y),g.instance.returnPoint(p)}else if(o>0){l=Math.abs(e.getPosition().x-b),k=l*this.aspectRatio,m=e.getPosition().y-k,n=e.getPosition().x+l;var p=this.enforceMinSize(n,m,d);d.move(p.x,p.y),g.instance.returnPoint(p)}}else if(f=i+100/this.aspectRatio,h=j+100/this.aspectRatio*this.aspectRatio,o=this.getSide(g.instance.borrow(f,h),e.getPosition(),g.instance.borrow(b,c)),0>o){l=Math.abs(e.getPosition().x-b),k=l*this.aspectRatio,m=e.getPosition().y+k,n=e.getPosition().x+l;var p=this.enforceMinSize(n,m,d);d.move(p.x,p.y),g.instance.returnPoint(p)}else if(o>0){k=Math.abs(e.getPosition().y-c),l=k/this.aspectRatio,m=e.getPosition().y+k,n=e.getPosition().x+l;var p=this.enforceMinSize(n,m,d);d.move(p.x,p.y),g.instance.returnPoint(p)}}else{var p=this.enforceMinSize(b,c,d);d.move(p.x,p.y),g.instance.returnPoint(p)}this.center.recalculatePosition(this.getBounds()),a.cropAreaBounds&&this.imageSet&&(a.cropAreaBounds=this.getCropBounds(),a.$apply())},b.prototype.getSide=function(a,b,c){var d=this.sign((b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x));return g.instance.returnPoint(a),g.instance.returnPoint(c),d},b.prototype.sign=function(a){return+a===a?0===a?a:a>0?1:-1:0/0},b.prototype.handleRelease=function(a){if(null!=a){for(var b=0,c=0;c<this.currentDragTouches.length;c++)a.id==this.currentDragTouches[c].id&&(this.currentDragTouches[c].dragHandle.setDrag(!1),a.dragHandle=null,b=c);this.currentDragTouches.splice(b,1),this.draw(this.ctx)}},b.prototype.handleMove=function(a){for(var b=!1,d=0;d<this.currentDragTouches.length;d++)if(a.id==this.currentDragTouches[d].id&&null!=this.currentDragTouches[d].dragHandle){var e=this.currentDragTouches[d],f=this.clampPosition(a.x-e.dragHandle.offset.x,a.y-e.dragHandle.offset.y);a.x=f.x,a.y=f.y,g.instance.returnPoint(f),e.dragHandle instanceof j?this.dragCorner(a.x,a.y,e.dragHandle):this.dragCrop(a.x,a.y,e.dragHandle),this.currentlyInteracting=!0,b=!0,c.setPressed(this.canvas);break}if(!b){for(var h=0;h<this.markers.length;h++){var i=this.markers[h];if(i.touchInBounds(a.x,a.y)){a.dragHandle=i,this.currentDragTouches.push(a),i.setDrag(!0),a.dragHandle.offset.x=a.x-a.dragHandle.getPosition().x,a.dragHandle.offset.y=a.y-a.dragHandle.getPosition().y,this.dragCorner(a.x-a.dragHandle.offset.x,a.y-a.dragHandle.offset.y,a.dragHandle);break}}null==a.dragHandle&&this.center.touchInBounds(a.x,a.y)&&(a.dragHandle=this.center,this.currentDragTouches.push(a),a.dragHandle.setDrag(!0),a.dragHandle.offset.x=a.x-a.dragHandle.getPosition().x,a.dragHandle.offset.y=a.y-a.dragHandle.getPosition().y,this.dragCrop(a.x-a.dragHandle.offset.x,a.y-a.dragHandle.offset.y,a.dragHandle))}},b.prototype.updateClampBounds=function(){var a=this.srcImage.height/this.srcImage.width,b=this.canvas.height/this.canvas.width,c=this.canvas.width,d=this.canvas.height;b>a?(c=this.canvas.width,d=this.canvas.width*a):(d=this.canvas.height,c=this.canvas.height/a),this.minXClamp=this.canvas.width/2-c/2,this.minYClamp=this.canvas.height/2-d/2,this.maxXClamp=this.canvas.width/2+c/2,this.maxYClamp=this.canvas.height/2+d/2},b.prototype.getCropBounds=function(){var a=this.canvas.height-2*this.minYClamp,b=this.getBounds();return b.top=Math.round((a-b.top+this.minYClamp)/this.ratioH),b.bottom=Math.round((a-b.bottom+this.minYClamp)/this.ratioH),b.left=Math.round((b.left-this.minXClamp)/this.ratioW),b.right=Math.round((b.right-this.minXClamp)/this.ratioW),b},b.prototype.clampPosition=function(a,b){return a<this.minXClamp&&(a=this.minXClamp),a>this.maxXClamp&&(a=this.maxXClamp),b<this.minYClamp&&(b=this.minYClamp),b>this.maxYClamp&&(b=this.maxYClamp),g.instance.borrow(a,b)},b.prototype.isImageSet=function(){return this.imageSet},b.prototype.setImage=function(b){if(!b)throw"Image is null";this.imageSet=!0,this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);var c=this.buffer.getContext("2d");c.clearRect(0,0,this.buffer.width,this.buffer.height);var d=b.src.split("."),e=d[1];("png"==e||"jpg"==e)&&(this.fileType=e),this.srcImage=b,this.updateClampBounds();var f=this.srcImage.height/this.srcImage.width,h=this.getBounds(),i=h.getHeight()/h.getWidth(),j=this.canvas.width,k=this.canvas.height;this.canvasWidth=j,this.canvasHeight=k;var l=this.canvas.width/2,m=this.canvas.height/2,n=g.instance.borrow(l-h.getWidth()/2,m+h.getHeight()/2),o=g.instance.borrow(l+h.getWidth()/2,m+h.getHeight()/2),p=g.instance.borrow(l-h.getWidth()/2,m-h.getHeight()/2),q=g.instance.borrow(l+h.getWidth()/2,m-h.getHeight()/2);if(this.tl.setPosition(n.x,n.y),this.tr.setPosition(o.x,o.y),this.bl.setPosition(p.x,p.y),this.br.setPosition(q.x,q.y),g.instance.returnPoint(n),g.instance.returnPoint(o),g.instance.returnPoint(p),g.instance.returnPoint(q),this.center.setPosition(l,m),i>f){var r=Math.min(j*f,k),s=r/i;n=g.instance.borrow(l-s/2,m+r/2),o=g.instance.borrow(l+s/2,m+r/2),p=g.instance.borrow(l-s/2,m-r/2),q=g.instance.borrow(l+s/2,m-r/2),this.tl.setPosition(n.x,n.y),this.tr.setPosition(o.x,o.y),this.bl.setPosition(p.x,p.y),this.br.setPosition(q.x,q.y),g.instance.returnPoint(n),g.instance.returnPoint(o),g.instance.returnPoint(p),g.instance.returnPoint(q)}else if(f>i){var t=Math.min(k/f,j),u=t*i;n=g.instance.borrow(l-t/2,m+u/2),o=g.instance.borrow(l+t/2,m+u/2),p=g.instance.borrow(l-t/2,m-u/2),q=g.instance.borrow(l+t/2,m-u/2),this.tl.setPosition(n.x,n.y),this.tr.setPosition(o.x,o.y),this.bl.setPosition(p.x,p.y),this.br.setPosition(q.x,q.y),g.instance.returnPoint(n),g.instance.returnPoint(o),g.instance.returnPoint(p),g.instance.returnPoint(q)}this.vertSquashRatio=this.detectVerticalSquash(b),this.draw(this.ctx);var v=this.getCroppedImage(a.cropWidth,a.cropHeight);a.croppedImage=v.src,a.cropAreaBounds&&this.imageSet&&(a.cropAreaBounds=this.getCropBounds(),a.$apply())},b.prototype.getCroppedImage=function(a,b){var c=this.getBounds();if(!this.srcImage)throw"Source image not set.";if(a&&b){var d=this.srcImage.height/this.srcImage.width,e=this.canvas.height/this.canvas.width,f=this.canvas.width,g=this.canvas.height;e>d?(f=this.canvas.width,g=this.canvas.width*d):d>e?(g=this.canvas.height,f=this.canvas.height/d):(g=this.canvas.height,f=this.canvas.width),this.ratioW=f/this.srcImage.width,this.ratioH=g/this.srcImage.height,this.cropCanvas.width=a,this.cropCanvas.height=b;var h=(this.buffer.height-g)/2/this.ratioH,i=(this.buffer.width-f)/2/this.ratioW;this.drawImageIOSFix(this.cropCanvas.getContext("2d"),this.srcImage,Math.max(Math.round(c.left/this.ratioW-i),0),Math.max(Math.round(c.top/this.ratioH-h),0),Math.max(Math.round(c.getWidth()/this.ratioW),1),Math.max(Math.round(c.getHeight()/this.ratioH),1),0,0,a,b),this.croppedImage.width=a,this.croppedImage.height=b}else this.cropCanvas.width=Math.max(c.getWidth(),1),this.cropCanvas.height=Math.max(c.getHeight(),1),this.cropCanvas.getContext("2d").drawImage(this.buffer,c.left,c.top,Math.max(c.getWidth(),1),Math.max(c.getHeight(),1),0,0,c.getWidth(),c.getHeight()),this.croppedImage.width=this.cropCanvas.width,this.croppedImage.height=this.cropCanvas.height;return this.croppedImage.src=this.cropCanvas.toDataURL("image/"+this.fileType),this.croppedImage},b.prototype.getBounds=function(){for(var a=Number.MAX_VALUE,b=Number.MAX_VALUE,c=-Number.MAX_VALUE,d=-Number.MAX_VALUE,e=0;e<this.markers.length;e++){var f=this.markers[e];f.getPosition().x<a&&(a=f.getPosition().x),f.getPosition().x>c&&(c=f.getPosition().x),f.getPosition().y<b&&(b=f.getPosition().y),f.getPosition().y>d&&(d=f.getPosition().y)}var g=new k;return g.left=a,g.right=c,g.top=b,g.bottom=d,g},b.prototype.setBounds=function(a){for(var b,c,d,e,f=this.getBounds(),g=0;g<this.markers.length;g++){var h=this.markers[g];h.getPosition().x==f.left?h.getPosition().y==f.top?b=h:d=h:h.getPosition().y==f.top?c=h:e=h}b.setPosition(a.left,a.top),c.setPosition(a.right,a.top),d.setPosition(a.left,a.bottom),e.setPosition(a.right,a.bottom),this.center.recalculatePosition(a),this.center.draw(this.ctx)},b.prototype.getMousePos=function(a,b){var c=a.getBoundingClientRect();return g.instance.borrow(b.clientX-c.left,b.clientY-c.top)},b.prototype.getTouchPos=function(a,b){var c=a.getBoundingClientRect();return g.instance.borrow(b.clientX-c.left,b.clientY-c.top)},b.prototype.onTouchMove=function(a){if(d.isImageSet()){if(a.preventDefault(),a.touches.length>=1)for(var b=0;b<a.touches.length;b++){var c=a.touches[b],e=this.getTouchPos(this.canvas,c),f=new m(e.x,e.y,c.identifier);g.instance.returnPoint(e),this.move(f,a)}this.draw(this.ctx)}},b.prototype.onMouseMove=function(a){if(d.isImageSet()){var b=this.getMousePos(this.canvas,a);this.move(new m(b.x,b.y,0),a);var c=this.getDragTouchForID(0);c?(c.x=b.x,c.y=b.y):c=new m(b.x,b.y,0),g.instance.returnPoint(b),this.drawCursors(c,a),this.draw(this.ctx)}},b.prototype.move=function(a){this.isMouseDown&&this.handleMove(a)},b.prototype.getDragTouchForID=function(a){for(var b=0;b<this.currentDragTouches.length;b++)if(a==this.currentDragTouches[b].id)return this.currentDragTouches[b]},b.prototype.drawCursors=function(a,b){var d=!1;null!=a&&(a.dragHandle==this.center&&(c.setStyle(this.canvas,"move"),d=!0),null!=a.dragHandle&&a.dragHandle instanceof j&&(this.drawCornerCursor(a.dragHandle,a.dragHandle.getPosition().x,a.dragHandle.getPosition().y,b),d=!0));var e=!1;if(!d){for(var f=0;f<this.markers.length;f++)e=e||this.drawCornerCursor(this.markers[f],a.x,a.y,b);e||c.setStyle(this.canvas,"initial")}e||d||!this.center.touchInBounds(a.x,a.y)?this.center.setOver(!1):(this.center.setOver(!0),c.setOver(this.canvas),c.setStyle(this.canvas,"move"))},b.prototype.drawCornerCursor=function(a,b,d){return a.touchInBounds(b,d)?(a.setOver(!0),a.getHorizontalNeighbour().getPosition().x>a.getPosition().x?a.getVerticalNeighbour().getPosition().y>a.getPosition().y?(c.setOver(this.canvas),c.setStyle(this.canvas,"nwse-resize")):(c.setOver(this.canvas),c.setStyle(this.canvas,"nesw-resize")):a.getVerticalNeighbour().getPosition().y>a.getPosition().y?(c.setOver(this.canvas),c.setStyle(this.canvas,"nesw-resize")):(c.setOver(this.canvas),c.setStyle(this.canvas,"nwse-resize")),!0):(a.setOver(!1),!1)},b.prototype.onTouchStart=function(){d.isImageSet()&&(this.isMouseDown=!0)},b.prototype.onTouchEnd=function(b){if(d.isImageSet()){for(var c=0;c<b.changedTouches.length;c++){var e=b.changedTouches[c],f=this.getDragTouchForID(e.identifier);null!=f&&((f.dragHandle instanceof j||f.dragHandle instanceof i)&&f.dragHandle.setOver(!1),this.handleRelease(f))}if(d.isImageSet()&&this.currentlyInteracting){var g=this.getCroppedImage(a.cropWidth,a.cropHeight);a.croppedImage=g.src,a.$apply()}0==this.currentDragTouches.length&&(this.isMouseDown=!1,this.currentlyInteracting=!1)}},b.prototype.drawImageIOSFix=function(a,b,c,d,e,f,g,h,i,j){a.drawImage(b,c*this.vertSquashRatio,d*this.vertSquashRatio,e*this.vertSquashRatio,f*this.vertSquashRatio,g,h,i,j)},b.prototype.detectVerticalSquash=function(a){var b=(a.naturalWidth,a.naturalHeight),c=document.createElement("canvas");c.width=1,c.height=b;var d=c.getContext("2d");d.drawImage(a,0,0);for(var e=d.getImageData(0,0,1,b).data,f=0,g=b,h=b;h>f;){var i=e[4*(h-1)+3];0===i?g=h:f=h,h=g+f>>1}var j=h/b;return 0===j?1:j},b.prototype.onMouseDown=function(){d.isImageSet()&&(this.isMouseDown=!0)},b.prototype.onMouseUp=function(){if(d.isImageSet()){if(c.setReleased(this.canvas),this.isMouseDown=!1,this.handleRelease(new m(0,0,0)),1==this.currentlyInteracting){var b=this.getCroppedImage(a.cropWidth,a.cropHeight);a.croppedImage=b.src,a.$apply()}this.currentlyInteracting=!1}},b}();angular.element(document).ready(function(){var c=angular.element(b[0]),e=c[0],f=a.cropWidth,g=a.cropHeight,h=a.keepAspect,i=a.touchRadius;d=new n(e,e.width/2-f/2,e.height/2-g/2,f,g,h,i)}),a.$watch("image",function(b){if(null!=b){var c=new Image;c.addEventListener("load",function(){d.setImage(c);var b=d.getCroppedImage(a.cropWidth,a.cropHeight);a.croppedImage=b.src,a.$apply()},!1),c.src=b}})}}}]),angular.module("angular-img-cropper").directive("imgCropperFileread",["$timeout",function(a){return{scope:{image:"="},link:function(b,c){c.bind("change",function(c){var d=new FileReader;d.onload=function(c){a(function(){b.image=c.target.result},0)},c.target.files[0]&&d.readAsDataURL(c.target.files[0])})}}}]),angular.module("angular-img-cropper").directive("imgCropperFilereadCall",function(){return{scope:{control:"="},link:function(a){a.internalControl=a.control||{},a.internalControl.load=function(a){var b=angular.element(document.querySelector(a)),c=document.createEvent("MouseEvent");c.initEvent("click",!0,!1),b[0].dispatchEvent(c)}}}}),angular.module("angular-img-cropper").factory("imageCropperDataShare",function(){var a,b,c={};return c.setPressed=function(b){a=b},c.setReleased=function(b){b===a&&(a=void 0)},c.setOver=function(a){b=a},c.setStyle=function(c,d){void 0!==a?a===c&&angular.element(document.documentElement).css("cursor",d):c===b&&angular.element(document.documentElement).css("cursor",d)},c});
+/*! 
+ * angular-loading-bar v0.9.0
+ * https://chieffancypants.github.io/angular-loading-bar
+ * Copyright (c) 2016 Wes Cruver
+ * License: MIT
+ */
+/*
+ * angular-loading-bar
+ *
+ * intercepts XHR requests and creates a loading bar.
+ * Based on the excellent nprogress work by rstacruz (more info in readme)
+ *
+ * (c) 2013 Wes Cruver
+ * License: MIT
+ */
+
+
+(function() {
+
+'use strict';
+
+// Alias the loading bar for various backwards compatibilities since the project has matured:
+angular.module('angular-loading-bar', ['cfp.loadingBarInterceptor']);
+angular.module('chieffancypants.loadingBar', ['cfp.loadingBarInterceptor']);
+
+
+/**
+ * loadingBarInterceptor service
+ *
+ * Registers itself as an Angular interceptor and listens for XHR requests.
+ */
+angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
+  .config(['$httpProvider', function ($httpProvider) {
+
+    var interceptor = ['$q', '$cacheFactory', '$timeout', '$rootScope', '$log', 'cfpLoadingBar', function ($q, $cacheFactory, $timeout, $rootScope, $log, cfpLoadingBar) {
+
+      /**
+       * The total number of requests made
+       */
+      var reqsTotal = 0;
+
+      /**
+       * The number of requests completed (either successfully or not)
+       */
+      var reqsCompleted = 0;
+
+      /**
+       * The amount of time spent fetching before showing the loading bar
+       */
+      var latencyThreshold = cfpLoadingBar.latencyThreshold;
+
+      /**
+       * $timeout handle for latencyThreshold
+       */
+      var startTimeout;
+
+
+      /**
+       * calls cfpLoadingBar.complete() which removes the
+       * loading bar from the DOM.
+       */
+      function setComplete() {
+        $timeout.cancel(startTimeout);
+        cfpLoadingBar.complete();
+        reqsCompleted = 0;
+        reqsTotal = 0;
+      }
+
+      /**
+       * Determine if the response has already been cached
+       * @param  {Object}  config the config option from the request
+       * @return {Boolean} retrns true if cached, otherwise false
+       */
+      function isCached(config) {
+        var cache;
+        var defaultCache = $cacheFactory.get('$http');
+        var defaults = $httpProvider.defaults;
+
+        // Choose the proper cache source. Borrowed from angular: $http service
+        if ((config.cache || defaults.cache) && config.cache !== false &&
+          (config.method === 'GET' || config.method === 'JSONP')) {
+            cache = angular.isObject(config.cache) ? config.cache
+              : angular.isObject(defaults.cache) ? defaults.cache
+              : defaultCache;
+        }
+
+        var cached = cache !== undefined ?
+          cache.get(config.url) !== undefined : false;
+
+        if (config.cached !== undefined && cached !== config.cached) {
+          return config.cached;
+        }
+        config.cached = cached;
+        return cached;
+      }
+
+
+      return {
+        'request': function(config) {
+          // Check to make sure this request hasn't already been cached and that
+          // the requester didn't explicitly ask us to ignore this request:
+          if (!config.ignoreLoadingBar && !isCached(config)) {
+            $rootScope.$broadcast('cfpLoadingBar:loading', {url: config.url});
+            if (reqsTotal === 0) {
+              startTimeout = $timeout(function() {
+                cfpLoadingBar.start();
+              }, latencyThreshold);
+            }
+            reqsTotal++;
+            cfpLoadingBar.set(reqsCompleted / reqsTotal);
+          }
+          return config;
+        },
+
+        'response': function(response) {
+          if (!response || !response.config) {
+            $log.error('Broken interceptor detected: Config object not supplied in response:\n https://github.com/chieffancypants/angular-loading-bar/pull/50');
+            return response;
+          }
+
+          if (!response.config.ignoreLoadingBar && !isCached(response.config)) {
+            reqsCompleted++;
+            $rootScope.$broadcast('cfpLoadingBar:loaded', {url: response.config.url, result: response});
+            if (reqsCompleted >= reqsTotal) {
+              setComplete();
+            } else {
+              cfpLoadingBar.set(reqsCompleted / reqsTotal);
+            }
+          }
+          return response;
+        },
+
+        'responseError': function(rejection) {
+          if (!rejection || !rejection.config) {
+            $log.error('Broken interceptor detected: Config object not supplied in rejection:\n https://github.com/chieffancypants/angular-loading-bar/pull/50');
+            return $q.reject(rejection);
+          }
+
+          if (!rejection.config.ignoreLoadingBar && !isCached(rejection.config)) {
+            reqsCompleted++;
+            $rootScope.$broadcast('cfpLoadingBar:loaded', {url: rejection.config.url, result: rejection});
+            if (reqsCompleted >= reqsTotal) {
+              setComplete();
+            } else {
+              cfpLoadingBar.set(reqsCompleted / reqsTotal);
+            }
+          }
+          return $q.reject(rejection);
+        }
+      };
+    }];
+
+    $httpProvider.interceptors.push(interceptor);
+  }]);
+
+
+/**
+ * Loading Bar
+ *
+ * This service handles adding and removing the actual element in the DOM.
+ * Generally, best practices for DOM manipulation is to take place in a
+ * directive, but because the element itself is injected in the DOM only upon
+ * XHR requests, and it's likely needed on every view, the best option is to
+ * use a service.
+ */
+angular.module('cfp.loadingBar', [])
+  .provider('cfpLoadingBar', function() {
+
+    this.autoIncrement = true;
+    this.includeSpinner = true;
+    this.includeBar = true;
+    this.latencyThreshold = 100;
+    this.startSize = 0.02;
+    this.parentSelector = 'body';
+    this.spinnerTemplate = '<div id="loading-bar-spinner"><div class="spinner-icon"></div></div>';
+    this.loadingBarTemplate = '<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>';
+
+    this.$get = ['$injector', '$document', '$timeout', '$rootScope', function ($injector, $document, $timeout, $rootScope) {
+      var $animate;
+      var $parentSelector = this.parentSelector,
+        loadingBarContainer = angular.element(this.loadingBarTemplate),
+        loadingBar = loadingBarContainer.find('div').eq(0),
+        spinner = angular.element(this.spinnerTemplate);
+
+      var incTimeout,
+        completeTimeout,
+        started = false,
+        status = 0;
+
+      var autoIncrement = this.autoIncrement;
+      var includeSpinner = this.includeSpinner;
+      var includeBar = this.includeBar;
+      var startSize = this.startSize;
+
+      /**
+       * Inserts the loading bar element into the dom, and sets it to 2%
+       */
+      function _start() {
+        if (!$animate) {
+          $animate = $injector.get('$animate');
+        }
+
+        $timeout.cancel(completeTimeout);
+
+        // do not continually broadcast the started event:
+        if (started) {
+          return;
+        }
+
+        var document = $document[0];
+        var parent = document.querySelector ?
+          document.querySelector($parentSelector)
+          : $document.find($parentSelector)[0]
+        ;
+
+        if (! parent) {
+          parent = document.getElementsByTagName('body')[0];
+        }
+
+        var $parent = angular.element(parent);
+        var $after = parent.lastChild && angular.element(parent.lastChild);
+
+        $rootScope.$broadcast('cfpLoadingBar:started');
+        started = true;
+
+        if (includeBar) {
+          $animate.enter(loadingBarContainer, $parent, $after);
+        }
+
+        if (includeSpinner) {
+          $animate.enter(spinner, $parent, loadingBarContainer);
+        }
+
+        _set(startSize);
+      }
+
+      /**
+       * Set the loading bar's width to a certain percent.
+       *
+       * @param n any value between 0 and 1
+       */
+      function _set(n) {
+        if (!started) {
+          return;
+        }
+        var pct = (n * 100) + '%';
+        loadingBar.css('width', pct);
+        status = n;
+
+        // increment loadingbar to give the illusion that there is always
+        // progress but make sure to cancel the previous timeouts so we don't
+        // have multiple incs running at the same time.
+        if (autoIncrement) {
+          $timeout.cancel(incTimeout);
+          incTimeout = $timeout(function() {
+            _inc();
+          }, 250);
+        }
+      }
+
+      /**
+       * Increments the loading bar by a random amount
+       * but slows down as it progresses
+       */
+      function _inc() {
+        if (_status() >= 1) {
+          return;
+        }
+
+        var rnd = 0;
+
+        // TODO: do this mathmatically instead of through conditions
+
+        var stat = _status();
+        if (stat >= 0 && stat < 0.25) {
+          // Start out between 3 - 6% increments
+          rnd = (Math.random() * (5 - 3 + 1) + 3) / 100;
+        } else if (stat >= 0.25 && stat < 0.65) {
+          // increment between 0 - 3%
+          rnd = (Math.random() * 3) / 100;
+        } else if (stat >= 0.65 && stat < 0.9) {
+          // increment between 0 - 2%
+          rnd = (Math.random() * 2) / 100;
+        } else if (stat >= 0.9 && stat < 0.99) {
+          // finally, increment it .5 %
+          rnd = 0.005;
+        } else {
+          // after 99%, don't increment:
+          rnd = 0;
+        }
+
+        var pct = _status() + rnd;
+        _set(pct);
+      }
+
+      function _status() {
+        return status;
+      }
+
+      function _completeAnimation() {
+        status = 0;
+        started = false;
+      }
+
+      function _complete() {
+        if (!$animate) {
+          $animate = $injector.get('$animate');
+        }
+
+        $rootScope.$broadcast('cfpLoadingBar:completed');
+        _set(1);
+
+        $timeout.cancel(completeTimeout);
+
+        // Attempt to aggregate any start/complete calls within 500ms:
+        completeTimeout = $timeout(function() {
+          var promise = $animate.leave(loadingBarContainer, _completeAnimation);
+          if (promise && promise.then) {
+            promise.then(_completeAnimation);
+          }
+          $animate.leave(spinner);
+        }, 500);
+      }
+
+      return {
+        start            : _start,
+        set              : _set,
+        status           : _status,
+        inc              : _inc,
+        complete         : _complete,
+        autoIncrement    : this.autoIncrement,
+        includeSpinner   : this.includeSpinner,
+        latencyThreshold : this.latencyThreshold,
+        parentSelector   : this.parentSelector,
+        startSize        : this.startSize
+      };
+
+
+    }];     //
+  });       // wtf javascript. srsly
+})();       //
+
 /**
  * @license AngularJS v1.5.7
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -35750,348 +36094,631 @@ function ngMessageDirectiveFactory() {
 
 })(window, window.angular);
 
-/*! 
- * angular-loading-bar v0.9.0
- * https://chieffancypants.github.io/angular-loading-bar
- * Copyright (c) 2016 Wes Cruver
- * License: MIT
- */
-/*
- * angular-loading-bar
- *
- * intercepts XHR requests and creates a loading bar.
- * Based on the excellent nprogress work by rstacruz (more info in readme)
- *
- * (c) 2013 Wes Cruver
- * License: MIT
- */
+//
+// Copyright Kamil Pękala http://github.com/kamilkp
+// angular-sortable-view v0.0.15 2015/01/18
+//
 
+;(function(window, angular){
+	'use strict';
+	/* jshint eqnull:true */
+	/* jshint -W041 */
+	/* jshint -W030 */
 
-(function() {
+	var module = angular.module('angular-sortable-view', []);
+	module.directive('svRoot', [function(){
+		function shouldBeAfter(elem, pointer, isGrid){
+			return isGrid ? elem.x - pointer.x < 0 : elem.y - pointer.y < 0;
+		}
+		function getSortableElements(key){
+			return ROOTS_MAP[key];
+		}
+		function removeSortableElements(key){
+			delete ROOTS_MAP[key];
+		}
 
-'use strict';
+		var sortingInProgress;
+		var ROOTS_MAP = Object.create(null);
+		// window.ROOTS_MAP = ROOTS_MAP; // for debug purposes
 
-// Alias the loading bar for various backwards compatibilities since the project has matured:
-angular.module('angular-loading-bar', ['cfp.loadingBarInterceptor']);
-angular.module('chieffancypants.loadingBar', ['cfp.loadingBarInterceptor']);
+		return {
+			restrict: 'A',
+			controller: ['$scope', '$attrs', '$interpolate', '$parse', function($scope, $attrs, $interpolate, $parse){
+				var mapKey = $interpolate($attrs.svRoot)($scope) || $scope.$id;
+				if(!ROOTS_MAP[mapKey]) ROOTS_MAP[mapKey] = [];
 
+				var that         = this;
+				var candidates;  // set of possible destinations
+				var $placeholder;// placeholder element
+				var options;     // sortable options
+				var $helper;     // helper element - the one thats being dragged around with the mouse pointer
+				var $original;   // original element
+				var $target;     // last best candidate
+				var isGrid       = false;
+				var onSort       = $parse($attrs.svOnSort);
 
-/**
- * loadingBarInterceptor service
- *
- * Registers itself as an Angular interceptor and listens for XHR requests.
- */
-angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
-  .config(['$httpProvider', function ($httpProvider) {
+				// ----- hack due to https://github.com/angular/angular.js/issues/8044
+				$attrs.svOnStart = $attrs.$$element[0].attributes['sv-on-start'];
+				$attrs.svOnStart = $attrs.svOnStart && $attrs.svOnStart.value;
 
-    var interceptor = ['$q', '$cacheFactory', '$timeout', '$rootScope', '$log', 'cfpLoadingBar', function ($q, $cacheFactory, $timeout, $rootScope, $log, cfpLoadingBar) {
+				$attrs.svOnStop = $attrs.$$element[0].attributes['sv-on-stop'];
+				$attrs.svOnStop = $attrs.svOnStop && $attrs.svOnStop.value;
+				// -------------------------------------------------------------------
 
-      /**
-       * The total number of requests made
-       */
-      var reqsTotal = 0;
+				var onStart = $parse($attrs.svOnStart);
+				var onStop = $parse($attrs.svOnStop);
 
-      /**
-       * The number of requests completed (either successfully or not)
-       */
-      var reqsCompleted = 0;
+				this.sortingInProgress = function(){
+					return sortingInProgress;
+				};
 
-      /**
-       * The amount of time spent fetching before showing the loading bar
-       */
-      var latencyThreshold = cfpLoadingBar.latencyThreshold;
+				if($attrs.svGrid){ // sv-grid determined explicite
+					isGrid = $attrs.svGrid === "true" ? true : $attrs.svGrid === "false" ? false : null;
+					if(isGrid === null)
+						throw 'Invalid value of sv-grid attribute';
+				}
+				else{
+					// check if at least one of the lists have a grid like layout
+					$scope.$watchCollection(function(){
+						return getSortableElements(mapKey);
+					}, function(collection){
+						isGrid = false;
+						var array = collection.filter(function(item){
+							return !item.container;
+						}).map(function(item){
+							return {
+								part: item.getPart().id,
+								y: item.element[0].getBoundingClientRect().top
+							};
+						});
+						var dict = Object.create(null);
+						array.forEach(function(item){
+							if(dict[item.part])
+								dict[item.part].push(item.y);
+							else
+								dict[item.part] = [item.y];
+						});
+						Object.keys(dict).forEach(function(key){
+							dict[key].sort();
+							dict[key].forEach(function(item, index){
+								if(index < dict[key].length - 1){
+									if(item > 0 && item === dict[key][index + 1]){
+										isGrid = true;
+									}
+								}
+							});
+						});
+					});
+				}
 
-      /**
-       * $timeout handle for latencyThreshold
-       */
-      var startTimeout;
+				this.$moveUpdate = function(opts, mouse, svElement, svOriginal, svPlaceholder, originatingPart, originatingIndex){
+					var svRect = svElement[0].getBoundingClientRect();
+					if(opts.tolerance === 'element')
+						mouse = {
+							x: ~~(svRect.left + svRect.width/2),
+							y: ~~(svRect.top + svRect.height/2)
+						};
 
+					sortingInProgress = true;
+					candidates = [];
+					if(!$placeholder){
+						if(svPlaceholder){ // custom placeholder
+							$placeholder = svPlaceholder.clone();
+							$placeholder.removeClass('ng-hide');
+						}
+						else{ // default placeholder
+							$placeholder = svOriginal.clone();
+							$placeholder.addClass('sv-visibility-hidden');
+							$placeholder.addClass('sv-placeholder');
+							$placeholder.css({
+								'height': svRect.height + 'px',
+								'width': svRect.width + 'px'
+							});
+						}
 
-      /**
-       * calls cfpLoadingBar.complete() which removes the
-       * loading bar from the DOM.
-       */
-      function setComplete() {
-        $timeout.cancel(startTimeout);
-        cfpLoadingBar.complete();
-        reqsCompleted = 0;
-        reqsTotal = 0;
-      }
+						svOriginal.after($placeholder);
+						svOriginal.addClass('ng-hide');
 
-      /**
-       * Determine if the response has already been cached
-       * @param  {Object}  config the config option from the request
-       * @return {Boolean} retrns true if cached, otherwise false
-       */
-      function isCached(config) {
-        var cache;
-        var defaultCache = $cacheFactory.get('$http');
-        var defaults = $httpProvider.defaults;
+						// cache options, helper and original element reference
+						$original = svOriginal;
+						options = opts;
+						$helper = svElement;
 
-        // Choose the proper cache source. Borrowed from angular: $http service
-        if ((config.cache || defaults.cache) && config.cache !== false &&
-          (config.method === 'GET' || config.method === 'JSONP')) {
-            cache = angular.isObject(config.cache) ? config.cache
-              : angular.isObject(defaults.cache) ? defaults.cache
-              : defaultCache;
-        }
+						onStart($scope, {
+							$helper: {element: $helper},
+							$part: originatingPart.model(originatingPart.scope),
+							$index: originatingIndex,
+							$item: originatingPart.model(originatingPart.scope)[originatingIndex]
+						});
+						$scope.$root && $scope.$root.$$phase || $scope.$apply();
+					}
 
-        var cached = cache !== undefined ?
-          cache.get(config.url) !== undefined : false;
+					// ----- move the element
+					$helper[0].reposition({
+						x: mouse.x + document.body.scrollLeft - mouse.offset.x*svRect.width,
+						y: mouse.y + document.body.scrollTop - mouse.offset.y*svRect.height
+					});
 
-        if (config.cached !== undefined && cached !== config.cached) {
-          return config.cached;
-        }
-        config.cached = cached;
-        return cached;
-      }
+					// ----- manage candidates
+					getSortableElements(mapKey).forEach(function(se, index){
+						if(opts.containment != null){
+							// TODO: optimize this since it could be calculated only once when the moving begins
+							if(
+								!elementMatchesSelector(se.element, opts.containment) &&
+								!elementMatchesSelector(se.element, opts.containment + ' *')
+							) return; // element is not within allowed containment
+						}
+						var rect = se.element[0].getBoundingClientRect();
+						var center = {
+							x: ~~(rect.left + rect.width/2),
+							y: ~~(rect.top + rect.height/2)
+						};
+						if(!se.container && // not the container element
+							(se.element[0].scrollHeight || se.element[0].scrollWidth)){ // element is visible
+							candidates.push({
+								element: se.element,
+								q: (center.x - mouse.x)*(center.x - mouse.x) + (center.y - mouse.y)*(center.y - mouse.y),
+								view: se.getPart(),
+								targetIndex: se.getIndex(),
+								after: shouldBeAfter(center, mouse, isGrid)
+							});
+						}
+						if(se.container && !se.element[0].querySelector('[sv-element]:not(.sv-placeholder):not(.sv-source)')){ // empty container
+							candidates.push({
+								element: se.element,
+								q: (center.x - mouse.x)*(center.x - mouse.x) + (center.y - mouse.y)*(center.y - mouse.y),
+								view: se.getPart(),
+								targetIndex: 0,
+								container: true
+							});
+						}
+					});
+					var pRect = $placeholder[0].getBoundingClientRect();
+					var pCenter = {
+						x: ~~(pRect.left + pRect.width/2),
+						y: ~~(pRect.top + pRect.height/2)
+					};
+					candidates.push({
+						q: (pCenter.x - mouse.x)*(pCenter.x - mouse.x) + (pCenter.y - mouse.y)*(pCenter.y - mouse.y),
+						element: $placeholder,
+						placeholder: true
+					});
+					candidates.sort(function(a, b){
+						return a.q - b.q;
+					});
 
+					candidates.forEach(function(cand, index){
+						if(index === 0 && !cand.placeholder && !cand.container){
+							$target = cand;
+							cand.element.addClass('sv-candidate');
+							if(cand.after)
+								cand.element.after($placeholder);
+							else
+								insertElementBefore(cand.element, $placeholder);
+						}
+						else if(index === 0 && cand.container){
+							$target = cand;
+							cand.element.append($placeholder);
+						}
+						else
+							cand.element.removeClass('sv-candidate');
+					});
+				};
 
-      return {
-        'request': function(config) {
-          // Check to make sure this request hasn't already been cached and that
-          // the requester didn't explicitly ask us to ignore this request:
-          if (!config.ignoreLoadingBar && !isCached(config)) {
-            $rootScope.$broadcast('cfpLoadingBar:loading', {url: config.url});
-            if (reqsTotal === 0) {
-              startTimeout = $timeout(function() {
-                cfpLoadingBar.start();
-              }, latencyThreshold);
-            }
-            reqsTotal++;
-            cfpLoadingBar.set(reqsCompleted / reqsTotal);
-          }
-          return config;
-        },
+				this.$drop = function(originatingPart, index, options){
+					if(!$placeholder) return;
 
-        'response': function(response) {
-          if (!response || !response.config) {
-            $log.error('Broken interceptor detected: Config object not supplied in response:\n https://github.com/chieffancypants/angular-loading-bar/pull/50');
-            return response;
-          }
+					if(options.revert){
+						var placeholderRect = $placeholder[0].getBoundingClientRect();
+						var helperRect = $helper[0].getBoundingClientRect();
+						var distance = Math.sqrt(
+							Math.pow(helperRect.top - placeholderRect.top, 2) +
+							Math.pow(helperRect.left - placeholderRect.left, 2)
+						);
 
-          if (!response.config.ignoreLoadingBar && !isCached(response.config)) {
-            reqsCompleted++;
-            $rootScope.$broadcast('cfpLoadingBar:loaded', {url: response.config.url, result: response});
-            if (reqsCompleted >= reqsTotal) {
-              setComplete();
-            } else {
-              cfpLoadingBar.set(reqsCompleted / reqsTotal);
-            }
-          }
-          return response;
-        },
+						var duration = +options.revert*distance/200; // constant speed: duration depends on distance
+						duration = Math.min(duration, +options.revert); // however it's not longer that options.revert
 
-        'responseError': function(rejection) {
-          if (!rejection || !rejection.config) {
-            $log.error('Broken interceptor detected: Config object not supplied in rejection:\n https://github.com/chieffancypants/angular-loading-bar/pull/50');
-            return $q.reject(rejection);
-          }
+						['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach(function(prefix){
+							if(typeof $helper[0].style[prefix + 'transition'] !== "undefined")
+								$helper[0].style[prefix + 'transition'] = 'all ' + duration + 'ms ease';
+						});
+						setTimeout(afterRevert, duration);
+						$helper.css({
+							'top': placeholderRect.top + document.body.scrollTop + 'px',
+							'left': placeholderRect.left + document.body.scrollLeft + 'px'
+						});
+					}
+					else
+						afterRevert();
 
-          if (!rejection.config.ignoreLoadingBar && !isCached(rejection.config)) {
-            reqsCompleted++;
-            $rootScope.$broadcast('cfpLoadingBar:loaded', {url: rejection.config.url, result: rejection});
-            if (reqsCompleted >= reqsTotal) {
-              setComplete();
-            } else {
-              cfpLoadingBar.set(reqsCompleted / reqsTotal);
-            }
-          }
-          return $q.reject(rejection);
-        }
-      };
-    }];
+					function afterRevert(){
+						sortingInProgress = false;
+						$placeholder.remove();
+						$helper.remove();
+						$original.removeClass('ng-hide');
 
-    $httpProvider.interceptors.push(interceptor);
-  }]);
+						candidates = void 0;
+						$placeholder = void 0;
+						options = void 0;
+						$helper = void 0;
+						$original = void 0;
 
+						// sv-on-stop callback
+						onStop($scope, {
+							$part: originatingPart.model(originatingPart.scope),
+							$index: index,
+							$item: originatingPart.model(originatingPart.scope)[index]
+						});
 
-/**
- * Loading Bar
- *
- * This service handles adding and removing the actual element in the DOM.
- * Generally, best practices for DOM manipulation is to take place in a
- * directive, but because the element itself is injected in the DOM only upon
- * XHR requests, and it's likely needed on every view, the best option is to
- * use a service.
- */
-angular.module('cfp.loadingBar', [])
-  .provider('cfpLoadingBar', function() {
+						if($target){
+							$target.element.removeClass('sv-candidate');
+							var spliced = originatingPart.model(originatingPart.scope).splice(index, 1);
+							var targetIndex = $target.targetIndex;
+							if($target.view === originatingPart && $target.targetIndex > index)
+								targetIndex--;
+							if($target.after)
+								targetIndex++;
+							$target.view.model($target.view.scope).splice(targetIndex, 0, spliced[0]);
 
-    this.autoIncrement = true;
-    this.includeSpinner = true;
-    this.includeBar = true;
-    this.latencyThreshold = 100;
-    this.startSize = 0.02;
-    this.parentSelector = 'body';
-    this.spinnerTemplate = '<div id="loading-bar-spinner"><div class="spinner-icon"></div></div>';
-    this.loadingBarTemplate = '<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>';
+							// sv-on-sort callback
+							if($target.view !== originatingPart || index !== targetIndex)
+								onSort($scope, {
+									$partTo: $target.view.model($target.view.scope),
+									$partFrom: originatingPart.model(originatingPart.scope),
+									$item: spliced[0],
+									$indexTo: targetIndex,
+									$indexFrom: index
+								});
 
-    this.$get = ['$injector', '$document', '$timeout', '$rootScope', function ($injector, $document, $timeout, $rootScope) {
-      var $animate;
-      var $parentSelector = this.parentSelector,
-        loadingBarContainer = angular.element(this.loadingBarTemplate),
-        loadingBar = loadingBarContainer.find('div').eq(0),
-        spinner = angular.element(this.spinnerTemplate);
+						}
+						$target = void 0;
 
-      var incTimeout,
-        completeTimeout,
-        started = false,
-        status = 0;
+						$scope.$root && $scope.$root.$$phase || $scope.$apply();
+					}
+				};
 
-      var autoIncrement = this.autoIncrement;
-      var includeSpinner = this.includeSpinner;
-      var includeBar = this.includeBar;
-      var startSize = this.startSize;
+				this.addToSortableElements = function(se){
+					getSortableElements(mapKey).push(se);
+				};
+				this.removeFromSortableElements = function(se){
+					var elems = getSortableElements(mapKey);
+					var index = elems.indexOf(se);
+					if(index > -1){
+						elems.splice(index, 1);
+						if(elems.length === 0)
+							removeSortableElements(mapKey);
+					}
+				};
+			}]
+		};
+	}]);
 
-      /**
-       * Inserts the loading bar element into the dom, and sets it to 2%
-       */
-      function _start() {
-        if (!$animate) {
-          $animate = $injector.get('$animate');
-        }
+	module.directive('svPart', ['$parse', function($parse){
+		return {
+			restrict: 'A',
+			require: '^svRoot',
+			controller: ['$scope', function($scope){
+				$scope.$ctrl = this;
+				this.getPart = function(){
+					return $scope.part;
+				};
+				this.$drop = function(index, options){
+					$scope.$sortableRoot.$drop($scope.part, index, options);
+				};
+			}],
+			scope: true,
+			link: function($scope, $element, $attrs, $sortable){
+				if(!$attrs.svPart) throw new Error('no model provided');
+				var model = $parse($attrs.svPart);
+				if(!model.assign) throw new Error('model not assignable');
 
-        $timeout.cancel(completeTimeout);
+				$scope.part = {
+					id: $scope.$id,
+					element: $element,
+					model: model,
+					scope: $scope
+				};
+				$scope.$sortableRoot = $sortable;
 
-        // do not continually broadcast the started event:
-        if (started) {
-          return;
-        }
+				var sortablePart = {
+					element: $element,
+					getPart: $scope.$ctrl.getPart,
+					container: true
+				};
+				$sortable.addToSortableElements(sortablePart);
+				$scope.$on('$destroy', function(){
+					$sortable.removeFromSortableElements(sortablePart);
+				});
+			}
+		};
+	}]);
 
-        var document = $document[0];
-        var parent = document.querySelector ?
-          document.querySelector($parentSelector)
-          : $document.find($parentSelector)[0]
-        ;
+	module.directive('svElement', ['$parse', function($parse){
+		return {
+			restrict: 'A',
+			require: ['^svPart', '^svRoot'],
+			controller: ['$scope', function($scope){
+				$scope.$ctrl = this;
+			}],
+			link: function($scope, $element, $attrs, $controllers){
+				var sortableElement = {
+					element: $element,
+					getPart: $controllers[0].getPart,
+					getIndex: function(){
+						return $scope.$index;
+					}
+				};
+				$controllers[1].addToSortableElements(sortableElement);
+				$scope.$on('$destroy', function(){
+					$controllers[1].removeFromSortableElements(sortableElement);
+				});
 
-        if (! parent) {
-          parent = document.getElementsByTagName('body')[0];
-        }
+				var handle = $element;
+				handle.on('mousedown touchstart', onMousedown);
+				$scope.$watch('$ctrl.handle', function(customHandle){
+					if(customHandle){
+						handle.off('mousedown touchstart', onMousedown);
+						handle = customHandle;
+						handle.on('mousedown touchstart', onMousedown);
+					}
+				});
 
-        var $parent = angular.element(parent);
-        var $after = parent.lastChild && angular.element(parent.lastChild);
+				var helper;
+				$scope.$watch('$ctrl.helper', function(customHelper){
+					if(customHelper){
+						helper = customHelper;
+					}
+				});
 
-        $rootScope.$broadcast('cfpLoadingBar:started');
-        started = true;
+				var placeholder;
+				$scope.$watch('$ctrl.placeholder', function(customPlaceholder){
+					if(customPlaceholder){
+						placeholder = customPlaceholder;
+					}
+				});
 
-        if (includeBar) {
-          $animate.enter(loadingBarContainer, $parent, $after);
-        }
+				var body = angular.element(document.body);
+				var html = angular.element(document.documentElement);
 
-        if (includeSpinner) {
-          $animate.enter(spinner, $parent, loadingBarContainer);
-        }
+				var moveExecuted;
 
-        _set(startSize);
-      }
+				function onMousedown(e){
+					touchFix(e);
 
-      /**
-       * Set the loading bar's width to a certain percent.
-       *
-       * @param n any value between 0 and 1
-       */
-      function _set(n) {
-        if (!started) {
-          return;
-        }
-        var pct = (n * 100) + '%';
-        loadingBar.css('width', pct);
-        status = n;
+					if($controllers[1].sortingInProgress()) return;
+					if(e.button != 0 && e.type === 'mousedown') return;
 
-        // increment loadingbar to give the illusion that there is always
-        // progress but make sure to cancel the previous timeouts so we don't
-        // have multiple incs running at the same time.
-        if (autoIncrement) {
-          $timeout.cancel(incTimeout);
-          incTimeout = $timeout(function() {
-            _inc();
-          }, 250);
-        }
-      }
+					moveExecuted = false;
+					var opts = $parse($attrs.svElement)($scope);
+					opts = angular.extend({}, {
+						tolerance: 'pointer',
+						revert: 200,
+						containment: 'html'
+					}, opts);
+					if(opts.containment){
+						var containmentRect = closestElement.call($element, opts.containment)[0].getBoundingClientRect();
+					}
 
-      /**
-       * Increments the loading bar by a random amount
-       * but slows down as it progresses
-       */
-      function _inc() {
-        if (_status() >= 1) {
-          return;
-        }
+					var target = $element;
+					var clientRect = $element[0].getBoundingClientRect();
+					var clone;
 
-        var rnd = 0;
+					if(!helper) helper = $controllers[0].helper;
+					if(!placeholder) placeholder = $controllers[0].placeholder;
+					if(helper){
+						clone = helper.clone();
+						clone.removeClass('ng-hide');
+						clone.css({
+							'left': clientRect.left + document.body.scrollLeft + 'px',
+							'top': clientRect.top + document.body.scrollTop + 'px'
+						});
+						target.addClass('sv-visibility-hidden');
+					}
+					else{
+						clone = target.clone();
+						clone.addClass('sv-helper').css({
+							'left': clientRect.left + document.body.scrollLeft + 'px',
+							'top': clientRect.top + document.body.scrollTop + 'px',
+							'width': clientRect.width + 'px'
+						});
+					}
 
-        // TODO: do this mathmatically instead of through conditions
+					clone[0].reposition = function(coords){
+						var targetLeft = coords.x;
+						var targetTop = coords.y;
+						var helperRect = clone[0].getBoundingClientRect();
 
-        var stat = _status();
-        if (stat >= 0 && stat < 0.25) {
-          // Start out between 3 - 6% increments
-          rnd = (Math.random() * (5 - 3 + 1) + 3) / 100;
-        } else if (stat >= 0.25 && stat < 0.65) {
-          // increment between 0 - 3%
-          rnd = (Math.random() * 3) / 100;
-        } else if (stat >= 0.65 && stat < 0.9) {
-          // increment between 0 - 2%
-          rnd = (Math.random() * 2) / 100;
-        } else if (stat >= 0.9 && stat < 0.99) {
-          // finally, increment it .5 %
-          rnd = 0.005;
-        } else {
-          // after 99%, don't increment:
-          rnd = 0;
-        }
+						var body = document.body;
 
-        var pct = _status() + rnd;
-        _set(pct);
-      }
+						if(containmentRect){
+							if(targetTop < containmentRect.top + body.scrollTop) // top boundary
+								targetTop = containmentRect.top + body.scrollTop;
+							if(targetTop + helperRect.height > containmentRect.top + body.scrollTop + containmentRect.height) // bottom boundary
+								targetTop = containmentRect.top + body.scrollTop + containmentRect.height - helperRect.height;
+							if(targetLeft < containmentRect.left + body.scrollLeft) // left boundary
+								targetLeft = containmentRect.left + body.scrollLeft;
+							if(targetLeft + helperRect.width > containmentRect.left + body.scrollLeft + containmentRect.width) // right boundary
+								targetLeft = containmentRect.left + body.scrollLeft + containmentRect.width - helperRect.width;
+						}
+						this.style.left = targetLeft - body.scrollLeft + 'px';
+						this.style.top = targetTop - body.scrollTop + 'px';
+					};
 
-      function _status() {
-        return status;
-      }
+					var pointerOffset = {
+						x: (e.clientX - clientRect.left)/clientRect.width,
+						y: (e.clientY - clientRect.top)/clientRect.height
+					};
+					html.addClass('sv-sorting-in-progress');
+					html.on('mousemove touchmove', onMousemove).on('mouseup touchend touchcancel', function mouseup(e){
+						html.off('mousemove touchmove', onMousemove);
+						html.off('mouseup touchend', mouseup);
+						html.removeClass('sv-sorting-in-progress');
+						if(moveExecuted){
+							$controllers[0].$drop($scope.$index, opts);
+						}
+						$element.removeClass('sv-visibility-hidden');
+					});
 
-      function _completeAnimation() {
-        status = 0;
-        started = false;
-      }
+					// onMousemove(e);
+					function onMousemove(e){
+						touchFix(e);
+						if(!moveExecuted){
+							$element.parent().prepend(clone);
+							moveExecuted = true;
+						}
+						$controllers[1].$moveUpdate(opts, {
+							x: e.clientX,
+							y: e.clientY,
+							offset: pointerOffset
+						}, clone, $element, placeholder, $controllers[0].getPart(), $scope.$index);
+					}
+				}
+			}
+		};
+	}]);
 
-      function _complete() {
-        if (!$animate) {
-          $animate = $injector.get('$animate');
-        }
+	module.directive('svHandle', function(){
+		return {
+			require: '?^svElement',
+			link: function($scope, $element, $attrs, $ctrl){
+				if($ctrl)
+					$ctrl.handle = $element.add($ctrl.handle); // support multiple handles
+			}
+		};
+	});
 
-        $rootScope.$broadcast('cfpLoadingBar:completed');
-        _set(1);
+	module.directive('svHelper', function(){
+		return {
+			require: ['?^svPart', '?^svElement'],
+			link: function($scope, $element, $attrs, $ctrl){
+				$element.addClass('sv-helper').addClass('ng-hide');
+				if($ctrl[1])
+					$ctrl[1].helper = $element;
+				else if($ctrl[0])
+					$ctrl[0].helper = $element;
+			}
+		};
+	});
 
-        $timeout.cancel(completeTimeout);
+	module.directive('svPlaceholder', function(){
+		return {
+			require: ['?^svPart', '?^svElement'],
+			link: function($scope, $element, $attrs, $ctrl){
+				$element.addClass('sv-placeholder').addClass('ng-hide');
+				if($ctrl[1])
+					$ctrl[1].placeholder = $element;
+				else if($ctrl[0])
+					$ctrl[0].placeholder = $element;
+			}
+		};
+	});
 
-        // Attempt to aggregate any start/complete calls within 500ms:
-        completeTimeout = $timeout(function() {
-          var promise = $animate.leave(loadingBarContainer, _completeAnimation);
-          if (promise && promise.then) {
-            promise.then(_completeAnimation);
-          }
-          $animate.leave(spinner);
-        }, 500);
-      }
+	angular.element(document.head).append([
+		'<style>' +
+		'.sv-helper{' +
+			'position: fixed !important;' +
+			'z-index: 99999;' +
+			'margin: 0 !important;' +
+		'}' +
+		'.sv-candidate{' +
+		'}' +
+		'.sv-placeholder{' +
+			// 'opacity: 0;' +
+		'}' +
+		'.sv-sorting-in-progress{' +
+			'-webkit-user-select: none;' +
+			'-moz-user-select: none;' +
+			'-ms-user-select: none;' +
+			'user-select: none;' +
+		'}' +
+		'.sv-visibility-hidden{' +
+			'visibility: hidden !important;' +
+			'opacity: 0 !important;' +
+		'}' +
+		'</style>'
+	].join(''));
 
-      return {
-        start            : _start,
-        set              : _set,
-        status           : _status,
-        inc              : _inc,
-        complete         : _complete,
-        autoIncrement    : this.autoIncrement,
-        includeSpinner   : this.includeSpinner,
-        latencyThreshold : this.latencyThreshold,
-        parentSelector   : this.parentSelector,
-        startSize        : this.startSize
-      };
+	function touchFix(e){
+		if(!('clientX' in e) && !('clientY' in e)) {
+			var touches = e.touches || e.originalEvent.touches;
+			if(touches && touches.length) {
+				e.clientX = touches[0].clientX;
+				e.clientY = touches[0].clientY;
+			}
+			e.preventDefault();
+		}
+	}
 
+	function getPreviousSibling(element){
+		element = element[0];
+		if(element.previousElementSibling)
+			return angular.element(element.previousElementSibling);
+		else{
+			var sib = element.previousSibling;
+			while(sib != null && sib.nodeType != 1)
+				sib = sib.previousSibling;
+			return angular.element(sib);
+		}
+	}
 
-    }];     //
-  });       // wtf javascript. srsly
-})();       //
+	function insertElementBefore(element, newElement){
+		var prevSibl = getPreviousSibling(element);
+		if(prevSibl.length > 0){
+			prevSibl.after(newElement);
+		}
+		else{
+			element.parent().prepend(newElement);
+		}
+	}
 
+	var dde = document.documentElement,
+	matchingFunction = dde.matches ? 'matches' :
+						dde.matchesSelector ? 'matchesSelector' :
+						dde.webkitMatches ? 'webkitMatches' :
+						dde.webkitMatchesSelector ? 'webkitMatchesSelector' :
+						dde.msMatches ? 'msMatches' :
+						dde.msMatchesSelector ? 'msMatchesSelector' :
+						dde.mozMatches ? 'mozMatches' :
+						dde.mozMatchesSelector ? 'mozMatchesSelector' : null;
+	if(matchingFunction == null)
+		throw 'This browser doesn\'t support the HTMLElement.matches method';
+
+	function elementMatchesSelector(element, selector){
+		if(element instanceof angular.element) element = element[0];
+		if(matchingFunction !== null)
+			return element[matchingFunction](selector);
+	}
+
+	var closestElement = angular.element.prototype.closest || function (selector){
+		var el = this[0].parentNode;
+		while(el !== document.documentElement && !el[matchingFunction](selector))
+			el = el.parentNode;
+
+		if(el[matchingFunction](selector))
+			return angular.element(el);
+		else
+			return angular.element();
+	};
+
+	/*
+		Simple implementation of jQuery's .add method
+	 */
+	if(typeof angular.element.prototype.add !== 'function'){
+		angular.element.prototype.add = function(elem){
+			var i, res = angular.element();
+			elem = angular.element(elem);
+			for(i=0;i<this.length;i++){
+				res.push(this[i]);
+			}
+			for(i=0;i<elem.length;i++){
+				res.push(elem[i]);
+			}
+			return res;
+		};
+	}
+
+})(window, window.angular);
 /**
  * @license AngularJS v1.5.7
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -36810,631 +37437,6 @@ angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 
 })(window, window.angular);
 
-//
-// Copyright Kamil Pękala http://github.com/kamilkp
-// angular-sortable-view v0.0.15 2015/01/18
-//
-
-;(function(window, angular){
-	'use strict';
-	/* jshint eqnull:true */
-	/* jshint -W041 */
-	/* jshint -W030 */
-
-	var module = angular.module('angular-sortable-view', []);
-	module.directive('svRoot', [function(){
-		function shouldBeAfter(elem, pointer, isGrid){
-			return isGrid ? elem.x - pointer.x < 0 : elem.y - pointer.y < 0;
-		}
-		function getSortableElements(key){
-			return ROOTS_MAP[key];
-		}
-		function removeSortableElements(key){
-			delete ROOTS_MAP[key];
-		}
-
-		var sortingInProgress;
-		var ROOTS_MAP = Object.create(null);
-		// window.ROOTS_MAP = ROOTS_MAP; // for debug purposes
-
-		return {
-			restrict: 'A',
-			controller: ['$scope', '$attrs', '$interpolate', '$parse', function($scope, $attrs, $interpolate, $parse){
-				var mapKey = $interpolate($attrs.svRoot)($scope) || $scope.$id;
-				if(!ROOTS_MAP[mapKey]) ROOTS_MAP[mapKey] = [];
-
-				var that         = this;
-				var candidates;  // set of possible destinations
-				var $placeholder;// placeholder element
-				var options;     // sortable options
-				var $helper;     // helper element - the one thats being dragged around with the mouse pointer
-				var $original;   // original element
-				var $target;     // last best candidate
-				var isGrid       = false;
-				var onSort       = $parse($attrs.svOnSort);
-
-				// ----- hack due to https://github.com/angular/angular.js/issues/8044
-				$attrs.svOnStart = $attrs.$$element[0].attributes['sv-on-start'];
-				$attrs.svOnStart = $attrs.svOnStart && $attrs.svOnStart.value;
-
-				$attrs.svOnStop = $attrs.$$element[0].attributes['sv-on-stop'];
-				$attrs.svOnStop = $attrs.svOnStop && $attrs.svOnStop.value;
-				// -------------------------------------------------------------------
-
-				var onStart = $parse($attrs.svOnStart);
-				var onStop = $parse($attrs.svOnStop);
-
-				this.sortingInProgress = function(){
-					return sortingInProgress;
-				};
-
-				if($attrs.svGrid){ // sv-grid determined explicite
-					isGrid = $attrs.svGrid === "true" ? true : $attrs.svGrid === "false" ? false : null;
-					if(isGrid === null)
-						throw 'Invalid value of sv-grid attribute';
-				}
-				else{
-					// check if at least one of the lists have a grid like layout
-					$scope.$watchCollection(function(){
-						return getSortableElements(mapKey);
-					}, function(collection){
-						isGrid = false;
-						var array = collection.filter(function(item){
-							return !item.container;
-						}).map(function(item){
-							return {
-								part: item.getPart().id,
-								y: item.element[0].getBoundingClientRect().top
-							};
-						});
-						var dict = Object.create(null);
-						array.forEach(function(item){
-							if(dict[item.part])
-								dict[item.part].push(item.y);
-							else
-								dict[item.part] = [item.y];
-						});
-						Object.keys(dict).forEach(function(key){
-							dict[key].sort();
-							dict[key].forEach(function(item, index){
-								if(index < dict[key].length - 1){
-									if(item > 0 && item === dict[key][index + 1]){
-										isGrid = true;
-									}
-								}
-							});
-						});
-					});
-				}
-
-				this.$moveUpdate = function(opts, mouse, svElement, svOriginal, svPlaceholder, originatingPart, originatingIndex){
-					var svRect = svElement[0].getBoundingClientRect();
-					if(opts.tolerance === 'element')
-						mouse = {
-							x: ~~(svRect.left + svRect.width/2),
-							y: ~~(svRect.top + svRect.height/2)
-						};
-
-					sortingInProgress = true;
-					candidates = [];
-					if(!$placeholder){
-						if(svPlaceholder){ // custom placeholder
-							$placeholder = svPlaceholder.clone();
-							$placeholder.removeClass('ng-hide');
-						}
-						else{ // default placeholder
-							$placeholder = svOriginal.clone();
-							$placeholder.addClass('sv-visibility-hidden');
-							$placeholder.addClass('sv-placeholder');
-							$placeholder.css({
-								'height': svRect.height + 'px',
-								'width': svRect.width + 'px'
-							});
-						}
-
-						svOriginal.after($placeholder);
-						svOriginal.addClass('ng-hide');
-
-						// cache options, helper and original element reference
-						$original = svOriginal;
-						options = opts;
-						$helper = svElement;
-
-						onStart($scope, {
-							$helper: {element: $helper},
-							$part: originatingPart.model(originatingPart.scope),
-							$index: originatingIndex,
-							$item: originatingPart.model(originatingPart.scope)[originatingIndex]
-						});
-						$scope.$root && $scope.$root.$$phase || $scope.$apply();
-					}
-
-					// ----- move the element
-					$helper[0].reposition({
-						x: mouse.x + document.body.scrollLeft - mouse.offset.x*svRect.width,
-						y: mouse.y + document.body.scrollTop - mouse.offset.y*svRect.height
-					});
-
-					// ----- manage candidates
-					getSortableElements(mapKey).forEach(function(se, index){
-						if(opts.containment != null){
-							// TODO: optimize this since it could be calculated only once when the moving begins
-							if(
-								!elementMatchesSelector(se.element, opts.containment) &&
-								!elementMatchesSelector(se.element, opts.containment + ' *')
-							) return; // element is not within allowed containment
-						}
-						var rect = se.element[0].getBoundingClientRect();
-						var center = {
-							x: ~~(rect.left + rect.width/2),
-							y: ~~(rect.top + rect.height/2)
-						};
-						if(!se.container && // not the container element
-							(se.element[0].scrollHeight || se.element[0].scrollWidth)){ // element is visible
-							candidates.push({
-								element: se.element,
-								q: (center.x - mouse.x)*(center.x - mouse.x) + (center.y - mouse.y)*(center.y - mouse.y),
-								view: se.getPart(),
-								targetIndex: se.getIndex(),
-								after: shouldBeAfter(center, mouse, isGrid)
-							});
-						}
-						if(se.container && !se.element[0].querySelector('[sv-element]:not(.sv-placeholder):not(.sv-source)')){ // empty container
-							candidates.push({
-								element: se.element,
-								q: (center.x - mouse.x)*(center.x - mouse.x) + (center.y - mouse.y)*(center.y - mouse.y),
-								view: se.getPart(),
-								targetIndex: 0,
-								container: true
-							});
-						}
-					});
-					var pRect = $placeholder[0].getBoundingClientRect();
-					var pCenter = {
-						x: ~~(pRect.left + pRect.width/2),
-						y: ~~(pRect.top + pRect.height/2)
-					};
-					candidates.push({
-						q: (pCenter.x - mouse.x)*(pCenter.x - mouse.x) + (pCenter.y - mouse.y)*(pCenter.y - mouse.y),
-						element: $placeholder,
-						placeholder: true
-					});
-					candidates.sort(function(a, b){
-						return a.q - b.q;
-					});
-
-					candidates.forEach(function(cand, index){
-						if(index === 0 && !cand.placeholder && !cand.container){
-							$target = cand;
-							cand.element.addClass('sv-candidate');
-							if(cand.after)
-								cand.element.after($placeholder);
-							else
-								insertElementBefore(cand.element, $placeholder);
-						}
-						else if(index === 0 && cand.container){
-							$target = cand;
-							cand.element.append($placeholder);
-						}
-						else
-							cand.element.removeClass('sv-candidate');
-					});
-				};
-
-				this.$drop = function(originatingPart, index, options){
-					if(!$placeholder) return;
-
-					if(options.revert){
-						var placeholderRect = $placeholder[0].getBoundingClientRect();
-						var helperRect = $helper[0].getBoundingClientRect();
-						var distance = Math.sqrt(
-							Math.pow(helperRect.top - placeholderRect.top, 2) +
-							Math.pow(helperRect.left - placeholderRect.left, 2)
-						);
-
-						var duration = +options.revert*distance/200; // constant speed: duration depends on distance
-						duration = Math.min(duration, +options.revert); // however it's not longer that options.revert
-
-						['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach(function(prefix){
-							if(typeof $helper[0].style[prefix + 'transition'] !== "undefined")
-								$helper[0].style[prefix + 'transition'] = 'all ' + duration + 'ms ease';
-						});
-						setTimeout(afterRevert, duration);
-						$helper.css({
-							'top': placeholderRect.top + document.body.scrollTop + 'px',
-							'left': placeholderRect.left + document.body.scrollLeft + 'px'
-						});
-					}
-					else
-						afterRevert();
-
-					function afterRevert(){
-						sortingInProgress = false;
-						$placeholder.remove();
-						$helper.remove();
-						$original.removeClass('ng-hide');
-
-						candidates = void 0;
-						$placeholder = void 0;
-						options = void 0;
-						$helper = void 0;
-						$original = void 0;
-
-						// sv-on-stop callback
-						onStop($scope, {
-							$part: originatingPart.model(originatingPart.scope),
-							$index: index,
-							$item: originatingPart.model(originatingPart.scope)[index]
-						});
-
-						if($target){
-							$target.element.removeClass('sv-candidate');
-							var spliced = originatingPart.model(originatingPart.scope).splice(index, 1);
-							var targetIndex = $target.targetIndex;
-							if($target.view === originatingPart && $target.targetIndex > index)
-								targetIndex--;
-							if($target.after)
-								targetIndex++;
-							$target.view.model($target.view.scope).splice(targetIndex, 0, spliced[0]);
-
-							// sv-on-sort callback
-							if($target.view !== originatingPart || index !== targetIndex)
-								onSort($scope, {
-									$partTo: $target.view.model($target.view.scope),
-									$partFrom: originatingPart.model(originatingPart.scope),
-									$item: spliced[0],
-									$indexTo: targetIndex,
-									$indexFrom: index
-								});
-
-						}
-						$target = void 0;
-
-						$scope.$root && $scope.$root.$$phase || $scope.$apply();
-					}
-				};
-
-				this.addToSortableElements = function(se){
-					getSortableElements(mapKey).push(se);
-				};
-				this.removeFromSortableElements = function(se){
-					var elems = getSortableElements(mapKey);
-					var index = elems.indexOf(se);
-					if(index > -1){
-						elems.splice(index, 1);
-						if(elems.length === 0)
-							removeSortableElements(mapKey);
-					}
-				};
-			}]
-		};
-	}]);
-
-	module.directive('svPart', ['$parse', function($parse){
-		return {
-			restrict: 'A',
-			require: '^svRoot',
-			controller: ['$scope', function($scope){
-				$scope.$ctrl = this;
-				this.getPart = function(){
-					return $scope.part;
-				};
-				this.$drop = function(index, options){
-					$scope.$sortableRoot.$drop($scope.part, index, options);
-				};
-			}],
-			scope: true,
-			link: function($scope, $element, $attrs, $sortable){
-				if(!$attrs.svPart) throw new Error('no model provided');
-				var model = $parse($attrs.svPart);
-				if(!model.assign) throw new Error('model not assignable');
-
-				$scope.part = {
-					id: $scope.$id,
-					element: $element,
-					model: model,
-					scope: $scope
-				};
-				$scope.$sortableRoot = $sortable;
-
-				var sortablePart = {
-					element: $element,
-					getPart: $scope.$ctrl.getPart,
-					container: true
-				};
-				$sortable.addToSortableElements(sortablePart);
-				$scope.$on('$destroy', function(){
-					$sortable.removeFromSortableElements(sortablePart);
-				});
-			}
-		};
-	}]);
-
-	module.directive('svElement', ['$parse', function($parse){
-		return {
-			restrict: 'A',
-			require: ['^svPart', '^svRoot'],
-			controller: ['$scope', function($scope){
-				$scope.$ctrl = this;
-			}],
-			link: function($scope, $element, $attrs, $controllers){
-				var sortableElement = {
-					element: $element,
-					getPart: $controllers[0].getPart,
-					getIndex: function(){
-						return $scope.$index;
-					}
-				};
-				$controllers[1].addToSortableElements(sortableElement);
-				$scope.$on('$destroy', function(){
-					$controllers[1].removeFromSortableElements(sortableElement);
-				});
-
-				var handle = $element;
-				handle.on('mousedown touchstart', onMousedown);
-				$scope.$watch('$ctrl.handle', function(customHandle){
-					if(customHandle){
-						handle.off('mousedown touchstart', onMousedown);
-						handle = customHandle;
-						handle.on('mousedown touchstart', onMousedown);
-					}
-				});
-
-				var helper;
-				$scope.$watch('$ctrl.helper', function(customHelper){
-					if(customHelper){
-						helper = customHelper;
-					}
-				});
-
-				var placeholder;
-				$scope.$watch('$ctrl.placeholder', function(customPlaceholder){
-					if(customPlaceholder){
-						placeholder = customPlaceholder;
-					}
-				});
-
-				var body = angular.element(document.body);
-				var html = angular.element(document.documentElement);
-
-				var moveExecuted;
-
-				function onMousedown(e){
-					touchFix(e);
-
-					if($controllers[1].sortingInProgress()) return;
-					if(e.button != 0 && e.type === 'mousedown') return;
-
-					moveExecuted = false;
-					var opts = $parse($attrs.svElement)($scope);
-					opts = angular.extend({}, {
-						tolerance: 'pointer',
-						revert: 200,
-						containment: 'html'
-					}, opts);
-					if(opts.containment){
-						var containmentRect = closestElement.call($element, opts.containment)[0].getBoundingClientRect();
-					}
-
-					var target = $element;
-					var clientRect = $element[0].getBoundingClientRect();
-					var clone;
-
-					if(!helper) helper = $controllers[0].helper;
-					if(!placeholder) placeholder = $controllers[0].placeholder;
-					if(helper){
-						clone = helper.clone();
-						clone.removeClass('ng-hide');
-						clone.css({
-							'left': clientRect.left + document.body.scrollLeft + 'px',
-							'top': clientRect.top + document.body.scrollTop + 'px'
-						});
-						target.addClass('sv-visibility-hidden');
-					}
-					else{
-						clone = target.clone();
-						clone.addClass('sv-helper').css({
-							'left': clientRect.left + document.body.scrollLeft + 'px',
-							'top': clientRect.top + document.body.scrollTop + 'px',
-							'width': clientRect.width + 'px'
-						});
-					}
-
-					clone[0].reposition = function(coords){
-						var targetLeft = coords.x;
-						var targetTop = coords.y;
-						var helperRect = clone[0].getBoundingClientRect();
-
-						var body = document.body;
-
-						if(containmentRect){
-							if(targetTop < containmentRect.top + body.scrollTop) // top boundary
-								targetTop = containmentRect.top + body.scrollTop;
-							if(targetTop + helperRect.height > containmentRect.top + body.scrollTop + containmentRect.height) // bottom boundary
-								targetTop = containmentRect.top + body.scrollTop + containmentRect.height - helperRect.height;
-							if(targetLeft < containmentRect.left + body.scrollLeft) // left boundary
-								targetLeft = containmentRect.left + body.scrollLeft;
-							if(targetLeft + helperRect.width > containmentRect.left + body.scrollLeft + containmentRect.width) // right boundary
-								targetLeft = containmentRect.left + body.scrollLeft + containmentRect.width - helperRect.width;
-						}
-						this.style.left = targetLeft - body.scrollLeft + 'px';
-						this.style.top = targetTop - body.scrollTop + 'px';
-					};
-
-					var pointerOffset = {
-						x: (e.clientX - clientRect.left)/clientRect.width,
-						y: (e.clientY - clientRect.top)/clientRect.height
-					};
-					html.addClass('sv-sorting-in-progress');
-					html.on('mousemove touchmove', onMousemove).on('mouseup touchend touchcancel', function mouseup(e){
-						html.off('mousemove touchmove', onMousemove);
-						html.off('mouseup touchend', mouseup);
-						html.removeClass('sv-sorting-in-progress');
-						if(moveExecuted){
-							$controllers[0].$drop($scope.$index, opts);
-						}
-						$element.removeClass('sv-visibility-hidden');
-					});
-
-					// onMousemove(e);
-					function onMousemove(e){
-						touchFix(e);
-						if(!moveExecuted){
-							$element.parent().prepend(clone);
-							moveExecuted = true;
-						}
-						$controllers[1].$moveUpdate(opts, {
-							x: e.clientX,
-							y: e.clientY,
-							offset: pointerOffset
-						}, clone, $element, placeholder, $controllers[0].getPart(), $scope.$index);
-					}
-				}
-			}
-		};
-	}]);
-
-	module.directive('svHandle', function(){
-		return {
-			require: '?^svElement',
-			link: function($scope, $element, $attrs, $ctrl){
-				if($ctrl)
-					$ctrl.handle = $element.add($ctrl.handle); // support multiple handles
-			}
-		};
-	});
-
-	module.directive('svHelper', function(){
-		return {
-			require: ['?^svPart', '?^svElement'],
-			link: function($scope, $element, $attrs, $ctrl){
-				$element.addClass('sv-helper').addClass('ng-hide');
-				if($ctrl[1])
-					$ctrl[1].helper = $element;
-				else if($ctrl[0])
-					$ctrl[0].helper = $element;
-			}
-		};
-	});
-
-	module.directive('svPlaceholder', function(){
-		return {
-			require: ['?^svPart', '?^svElement'],
-			link: function($scope, $element, $attrs, $ctrl){
-				$element.addClass('sv-placeholder').addClass('ng-hide');
-				if($ctrl[1])
-					$ctrl[1].placeholder = $element;
-				else if($ctrl[0])
-					$ctrl[0].placeholder = $element;
-			}
-		};
-	});
-
-	angular.element(document.head).append([
-		'<style>' +
-		'.sv-helper{' +
-			'position: fixed !important;' +
-			'z-index: 99999;' +
-			'margin: 0 !important;' +
-		'}' +
-		'.sv-candidate{' +
-		'}' +
-		'.sv-placeholder{' +
-			// 'opacity: 0;' +
-		'}' +
-		'.sv-sorting-in-progress{' +
-			'-webkit-user-select: none;' +
-			'-moz-user-select: none;' +
-			'-ms-user-select: none;' +
-			'user-select: none;' +
-		'}' +
-		'.sv-visibility-hidden{' +
-			'visibility: hidden !important;' +
-			'opacity: 0 !important;' +
-		'}' +
-		'</style>'
-	].join(''));
-
-	function touchFix(e){
-		if(!('clientX' in e) && !('clientY' in e)) {
-			var touches = e.touches || e.originalEvent.touches;
-			if(touches && touches.length) {
-				e.clientX = touches[0].clientX;
-				e.clientY = touches[0].clientY;
-			}
-			e.preventDefault();
-		}
-	}
-
-	function getPreviousSibling(element){
-		element = element[0];
-		if(element.previousElementSibling)
-			return angular.element(element.previousElementSibling);
-		else{
-			var sib = element.previousSibling;
-			while(sib != null && sib.nodeType != 1)
-				sib = sib.previousSibling;
-			return angular.element(sib);
-		}
-	}
-
-	function insertElementBefore(element, newElement){
-		var prevSibl = getPreviousSibling(element);
-		if(prevSibl.length > 0){
-			prevSibl.after(newElement);
-		}
-		else{
-			element.parent().prepend(newElement);
-		}
-	}
-
-	var dde = document.documentElement,
-	matchingFunction = dde.matches ? 'matches' :
-						dde.matchesSelector ? 'matchesSelector' :
-						dde.webkitMatches ? 'webkitMatches' :
-						dde.webkitMatchesSelector ? 'webkitMatchesSelector' :
-						dde.msMatches ? 'msMatches' :
-						dde.msMatchesSelector ? 'msMatchesSelector' :
-						dde.mozMatches ? 'mozMatches' :
-						dde.mozMatchesSelector ? 'mozMatchesSelector' : null;
-	if(matchingFunction == null)
-		throw 'This browser doesn\'t support the HTMLElement.matches method';
-
-	function elementMatchesSelector(element, selector){
-		if(element instanceof angular.element) element = element[0];
-		if(matchingFunction !== null)
-			return element[matchingFunction](selector);
-	}
-
-	var closestElement = angular.element.prototype.closest || function (selector){
-		var el = this[0].parentNode;
-		while(el !== document.documentElement && !el[matchingFunction](selector))
-			el = el.parentNode;
-
-		if(el[matchingFunction](selector))
-			return angular.element(el);
-		else
-			return angular.element();
-	};
-
-	/*
-		Simple implementation of jQuery's .add method
-	 */
-	if(typeof angular.element.prototype.add !== 'function'){
-		angular.element.prototype.add = function(elem){
-			var i, res = angular.element();
-			elem = angular.element(elem);
-			for(i=0;i<this.length;i++){
-				res.push(this[i]);
-			}
-			for(i=0;i<elem.length;i++){
-				res.push(elem[i]);
-			}
-			return res;
-		};
-	}
-
-})(window, window.angular);
 /**
  * @license AngularJS v1.5.6
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -42704,3 +42706,2808 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
+/**!
+ * AngularJS file upload directives and services. Supoorts: file upload/drop/paste, resume, cancel/abort,
+ * progress, resize, thumbnail, preview, validation and CORS
+ * FileAPI Flash shim for old browsers not supporting FormData
+ * @author  Danial  <danial.farid@gmail.com>
+ * @version 12.0.4
+ */
+
+(function () {
+  /** @namespace FileAPI.noContentTimeout */
+
+  function patchXHR(fnName, newFn) {
+    window.XMLHttpRequest.prototype[fnName] = newFn(window.XMLHttpRequest.prototype[fnName]);
+  }
+
+  function redefineProp(xhr, prop, fn) {
+    try {
+      Object.defineProperty(xhr, prop, {get: fn});
+    } catch (e) {/*ignore*/
+    }
+  }
+
+  if (!window.FileAPI) {
+    window.FileAPI = {};
+  }
+
+  if (!window.XMLHttpRequest) {
+    throw 'AJAX is not supported. XMLHttpRequest is not defined.';
+  }
+
+  FileAPI.shouldLoad = !window.FormData || FileAPI.forceLoad;
+  if (FileAPI.shouldLoad) {
+    var initializeUploadListener = function (xhr) {
+      if (!xhr.__listeners) {
+        if (!xhr.upload) xhr.upload = {};
+        xhr.__listeners = [];
+        var origAddEventListener = xhr.upload.addEventListener;
+        xhr.upload.addEventListener = function (t, fn) {
+          xhr.__listeners[t] = fn;
+          if (origAddEventListener) origAddEventListener.apply(this, arguments);
+        };
+      }
+    };
+
+    patchXHR('open', function (orig) {
+      return function (m, url, b) {
+        initializeUploadListener(this);
+        this.__url = url;
+        try {
+          orig.apply(this, [m, url, b]);
+        } catch (e) {
+          if (e.message.indexOf('Access is denied') > -1) {
+            this.__origError = e;
+            orig.apply(this, [m, '_fix_for_ie_crossdomain__', b]);
+          }
+        }
+      };
+    });
+
+    patchXHR('getResponseHeader', function (orig) {
+      return function (h) {
+        return this.__fileApiXHR && this.__fileApiXHR.getResponseHeader ? this.__fileApiXHR.getResponseHeader(h) : (orig == null ? null : orig.apply(this, [h]));
+      };
+    });
+
+    patchXHR('getAllResponseHeaders', function (orig) {
+      return function () {
+        return this.__fileApiXHR && this.__fileApiXHR.getAllResponseHeaders ? this.__fileApiXHR.getAllResponseHeaders() : (orig == null ? null : orig.apply(this));
+      };
+    });
+
+    patchXHR('abort', function (orig) {
+      return function () {
+        return this.__fileApiXHR && this.__fileApiXHR.abort ? this.__fileApiXHR.abort() : (orig == null ? null : orig.apply(this));
+      };
+    });
+
+    patchXHR('setRequestHeader', function (orig) {
+      return function (header, value) {
+        if (header === '__setXHR_') {
+          initializeUploadListener(this);
+          var val = value(this);
+          // fix for angular < 1.2.0
+          if (val instanceof Function) {
+            val(this);
+          }
+        } else {
+          this.__requestHeaders = this.__requestHeaders || {};
+          this.__requestHeaders[header] = value;
+          orig.apply(this, arguments);
+        }
+      };
+    });
+
+    patchXHR('send', function (orig) {
+      return function () {
+        var xhr = this;
+        if (arguments[0] && arguments[0].__isFileAPIShim) {
+          var formData = arguments[0];
+          var config = {
+            url: xhr.__url,
+            jsonp: false, //removes the callback form param
+            cache: true, //removes the ?fileapiXXX in the url
+            complete: function (err, fileApiXHR) {
+              if (err && angular.isString(err) && err.indexOf('#2174') !== -1) {
+                // this error seems to be fine the file is being uploaded properly.
+                err = null;
+              }
+              xhr.__completed = true;
+              if (!err && xhr.__listeners.load)
+                xhr.__listeners.load({
+                  type: 'load',
+                  loaded: xhr.__loaded,
+                  total: xhr.__total,
+                  target: xhr,
+                  lengthComputable: true
+                });
+              if (!err && xhr.__listeners.loadend)
+                xhr.__listeners.loadend({
+                  type: 'loadend',
+                  loaded: xhr.__loaded,
+                  total: xhr.__total,
+                  target: xhr,
+                  lengthComputable: true
+                });
+              if (err === 'abort' && xhr.__listeners.abort)
+                xhr.__listeners.abort({
+                  type: 'abort',
+                  loaded: xhr.__loaded,
+                  total: xhr.__total,
+                  target: xhr,
+                  lengthComputable: true
+                });
+              if (fileApiXHR.status !== undefined) redefineProp(xhr, 'status', function () {
+                return (fileApiXHR.status === 0 && err && err !== 'abort') ? 500 : fileApiXHR.status;
+              });
+              if (fileApiXHR.statusText !== undefined) redefineProp(xhr, 'statusText', function () {
+                return fileApiXHR.statusText;
+              });
+              redefineProp(xhr, 'readyState', function () {
+                return 4;
+              });
+              if (fileApiXHR.response !== undefined) redefineProp(xhr, 'response', function () {
+                return fileApiXHR.response;
+              });
+              var resp = fileApiXHR.responseText || (err && fileApiXHR.status === 0 && err !== 'abort' ? err : undefined);
+              redefineProp(xhr, 'responseText', function () {
+                return resp;
+              });
+              redefineProp(xhr, 'response', function () {
+                return resp;
+              });
+              if (err) redefineProp(xhr, 'err', function () {
+                return err;
+              });
+              xhr.__fileApiXHR = fileApiXHR;
+              if (xhr.onreadystatechange) xhr.onreadystatechange();
+              if (xhr.onload) xhr.onload();
+            },
+            progress: function (e) {
+              e.target = xhr;
+              if (xhr.__listeners.progress) xhr.__listeners.progress(e);
+              xhr.__total = e.total;
+              xhr.__loaded = e.loaded;
+              if (e.total === e.loaded) {
+                // fix flash issue that doesn't call complete if there is no response text from the server
+                var _this = this;
+                setTimeout(function () {
+                  if (!xhr.__completed) {
+                    xhr.getAllResponseHeaders = function () {
+                    };
+                    _this.complete(null, {status: 204, statusText: 'No Content'});
+                  }
+                }, FileAPI.noContentTimeout || 10000);
+              }
+            },
+            headers: xhr.__requestHeaders
+          };
+          config.data = {};
+          config.files = {};
+          for (var i = 0; i < formData.data.length; i++) {
+            var item = formData.data[i];
+            if (item.val != null && item.val.name != null && item.val.size != null && item.val.type != null) {
+              config.files[item.key] = item.val;
+            } else {
+              config.data[item.key] = item.val;
+            }
+          }
+
+          setTimeout(function () {
+            if (!FileAPI.hasFlash) {
+              throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
+            }
+            xhr.__fileApiXHR = FileAPI.upload(config);
+          }, 1);
+        } else {
+          if (this.__origError) {
+            throw this.__origError;
+          }
+          orig.apply(xhr, arguments);
+        }
+      };
+    });
+    window.XMLHttpRequest.__isFileAPIShim = true;
+    window.FormData = FormData = function () {
+      return {
+        append: function (key, val, name) {
+          if (val.__isFileAPIBlobShim) {
+            val = val.data[0];
+          }
+          this.data.push({
+            key: key,
+            val: val,
+            name: name
+          });
+        },
+        data: [],
+        __isFileAPIShim: true
+      };
+    };
+
+    window.Blob = Blob = function (b) {
+      return {
+        data: b,
+        __isFileAPIBlobShim: true
+      };
+    };
+  }
+
+})();
+
+(function () {
+  /** @namespace FileAPI.forceLoad */
+  /** @namespace window.FileAPI.jsUrl */
+  /** @namespace window.FileAPI.jsPath */
+
+  function isInputTypeFile(elem) {
+    return elem[0].tagName.toLowerCase() === 'input' && elem.attr('type') && elem.attr('type').toLowerCase() === 'file';
+  }
+
+  function hasFlash() {
+    try {
+      var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+      if (fo) return true;
+    } catch (e) {
+      if (navigator.mimeTypes['application/x-shockwave-flash'] !== undefined) return true;
+    }
+    return false;
+  }
+
+  function getOffset(obj) {
+    var left = 0, top = 0;
+
+    if (window.jQuery) {
+      return jQuery(obj).offset();
+    }
+
+    if (obj.offsetParent) {
+      do {
+        left += (obj.offsetLeft - obj.scrollLeft);
+        top += (obj.offsetTop - obj.scrollTop);
+        obj = obj.offsetParent;
+      } while (obj);
+    }
+    return {
+      left: left,
+      top: top
+    };
+  }
+
+  if (FileAPI.shouldLoad) {
+    FileAPI.hasFlash = hasFlash();
+
+    //load FileAPI
+    if (FileAPI.forceLoad) {
+      FileAPI.html5 = false;
+    }
+
+    if (!FileAPI.upload) {
+      var jsUrl, basePath, script = document.createElement('script'), allScripts = document.getElementsByTagName('script'), i, index, src;
+      if (window.FileAPI.jsUrl) {
+        jsUrl = window.FileAPI.jsUrl;
+      } else if (window.FileAPI.jsPath) {
+        basePath = window.FileAPI.jsPath;
+      } else {
+        for (i = 0; i < allScripts.length; i++) {
+          src = allScripts[i].src;
+          index = src.search(/\/ng\-file\-upload[\-a-zA-z0-9\.]*\.js/);
+          if (index > -1) {
+            basePath = src.substring(0, index + 1);
+            break;
+          }
+        }
+      }
+
+      if (FileAPI.staticPath == null) FileAPI.staticPath = basePath;
+      script.setAttribute('src', jsUrl || basePath + 'FileAPI.min.js');
+      document.getElementsByTagName('head')[0].appendChild(script);
+    }
+
+    FileAPI.ngfFixIE = function (elem, fileElem, changeFn) {
+      if (!hasFlash()) {
+        throw 'Adode Flash Player need to be installed. To check ahead use "FileAPI.hasFlash"';
+      }
+      var fixInputStyle = function () {
+        var label = fileElem.parent();
+        if (elem.attr('disabled')) {
+          if (label) label.removeClass('js-fileapi-wrapper');
+        } else {
+          if (!fileElem.attr('__ngf_flash_')) {
+            fileElem.unbind('change');
+            fileElem.unbind('click');
+            fileElem.bind('change', function (evt) {
+              fileApiChangeFn.apply(this, [evt]);
+              changeFn.apply(this, [evt]);
+            });
+            fileElem.attr('__ngf_flash_', 'true');
+          }
+          label.addClass('js-fileapi-wrapper');
+          if (!isInputTypeFile(elem)) {
+            label.css('position', 'absolute')
+              .css('top', getOffset(elem[0]).top + 'px').css('left', getOffset(elem[0]).left + 'px')
+              .css('width', elem[0].offsetWidth + 'px').css('height', elem[0].offsetHeight + 'px')
+              .css('filter', 'alpha(opacity=0)').css('display', elem.css('display'))
+              .css('overflow', 'hidden').css('z-index', '900000')
+              .css('visibility', 'visible');
+            fileElem.css('width', elem[0].offsetWidth + 'px').css('height', elem[0].offsetHeight + 'px')
+              .css('position', 'absolute').css('top', '0px').css('left', '0px');
+          }
+        }
+      };
+
+      elem.bind('mouseenter', fixInputStyle);
+
+      var fileApiChangeFn = function (evt) {
+        var files = FileAPI.getFiles(evt);
+        //just a double check for #233
+        for (var i = 0; i < files.length; i++) {
+          if (files[i].size === undefined) files[i].size = 0;
+          if (files[i].name === undefined) files[i].name = 'file';
+          if (files[i].type === undefined) files[i].type = 'undefined';
+        }
+        if (!evt.target) {
+          evt.target = {};
+        }
+        evt.target.files = files;
+        // if evt.target.files is not writable use helper field
+        if (evt.target.files !== files) {
+          evt.__files_ = files;
+        }
+        (evt.__files_ || evt.target.files).item = function (i) {
+          return (evt.__files_ || evt.target.files)[i] || null;
+        };
+      };
+    };
+
+    FileAPI.disableFileInput = function (elem, disable) {
+      if (disable) {
+        elem.removeClass('js-fileapi-wrapper');
+      } else {
+        elem.addClass('js-fileapi-wrapper');
+      }
+    };
+  }
+})();
+
+if (!window.FileReader) {
+  window.FileReader = function () {
+    var _this = this, loadStarted = false;
+    this.listeners = {};
+    this.addEventListener = function (type, fn) {
+      _this.listeners[type] = _this.listeners[type] || [];
+      _this.listeners[type].push(fn);
+    };
+    this.removeEventListener = function (type, fn) {
+      if (_this.listeners[type]) _this.listeners[type].splice(_this.listeners[type].indexOf(fn), 1);
+    };
+    this.dispatchEvent = function (evt) {
+      var list = _this.listeners[evt.type];
+      if (list) {
+        for (var i = 0; i < list.length; i++) {
+          list[i].call(_this, evt);
+        }
+      }
+    };
+    this.onabort = this.onerror = this.onload = this.onloadstart = this.onloadend = this.onprogress = null;
+
+    var constructEvent = function (type, evt) {
+      var e = {type: type, target: _this, loaded: evt.loaded, total: evt.total, error: evt.error};
+      if (evt.result != null) e.target.result = evt.result;
+      return e;
+    };
+    var listener = function (evt) {
+      if (!loadStarted) {
+        loadStarted = true;
+        if (_this.onloadstart) _this.onloadstart(constructEvent('loadstart', evt));
+      }
+      var e;
+      if (evt.type === 'load') {
+        if (_this.onloadend) _this.onloadend(constructEvent('loadend', evt));
+        e = constructEvent('load', evt);
+        if (_this.onload) _this.onload(e);
+        _this.dispatchEvent(e);
+      } else if (evt.type === 'progress') {
+        e = constructEvent('progress', evt);
+        if (_this.onprogress) _this.onprogress(e);
+        _this.dispatchEvent(e);
+      } else {
+        e = constructEvent('error', evt);
+        if (_this.onerror) _this.onerror(e);
+        _this.dispatchEvent(e);
+      }
+    };
+    this.readAsDataURL = function (file) {
+      FileAPI.readAsDataURL(file, listener);
+    };
+    this.readAsText = function (file) {
+      FileAPI.readAsText(file, listener);
+    };
+  };
+}
+
+/**!
+ * AngularJS file upload directives and services. Supoorts: file upload/drop/paste, resume, cancel/abort,
+ * progress, resize, thumbnail, preview, validation and CORS
+ * @author  Danial  <danial.farid@gmail.com>
+ * @version 12.0.4
+ */
+
+if (window.XMLHttpRequest && !(window.FileAPI && FileAPI.shouldLoad)) {
+  window.XMLHttpRequest.prototype.setRequestHeader = (function (orig) {
+    return function (header, value) {
+      if (header === '__setXHR_') {
+        var val = value(this);
+        // fix for angular < 1.2.0
+        if (val instanceof Function) {
+          val(this);
+        }
+      } else {
+        orig.apply(this, arguments);
+      }
+    };
+  })(window.XMLHttpRequest.prototype.setRequestHeader);
+}
+
+var ngFileUpload = angular.module('ngFileUpload', []);
+
+ngFileUpload.version = '12.0.4';
+
+ngFileUpload.service('UploadBase', ['$http', '$q', '$timeout', function ($http, $q, $timeout) {
+  var upload = this;
+  upload.promisesCount = 0;
+
+  this.isResumeSupported = function () {
+    return window.Blob && window.Blob.prototype.slice;
+  };
+
+  var resumeSupported = this.isResumeSupported();
+
+  function sendHttp(config) {
+    config.method = config.method || 'POST';
+    config.headers = config.headers || {};
+
+    var deferred = config._deferred = config._deferred || $q.defer();
+    var promise = deferred.promise;
+
+    function notifyProgress(e) {
+      if (deferred.notify) {
+        deferred.notify(e);
+      }
+      if (promise.progressFunc) {
+        $timeout(function () {
+          promise.progressFunc(e);
+        });
+      }
+    }
+
+    function getNotifyEvent(n) {
+      if (config._start != null && resumeSupported) {
+        return {
+          loaded: n.loaded + config._start,
+          total: (config._file && config._file.size) || n.total,
+          type: n.type, config: config,
+          lengthComputable: true, target: n.target
+        };
+      } else {
+        return n;
+      }
+    }
+
+    if (!config.disableProgress) {
+      config.headers.__setXHR_ = function () {
+        return function (xhr) {
+          if (!xhr || !xhr.upload || !xhr.upload.addEventListener) return;
+          config.__XHR = xhr;
+          if (config.xhrFn) config.xhrFn(xhr);
+          xhr.upload.addEventListener('progress', function (e) {
+            e.config = config;
+            notifyProgress(getNotifyEvent(e));
+          }, false);
+          //fix for firefox not firing upload progress end, also IE8-9
+          xhr.upload.addEventListener('load', function (e) {
+            if (e.lengthComputable) {
+              e.config = config;
+              notifyProgress(getNotifyEvent(e));
+            }
+          }, false);
+        };
+      };
+    }
+
+    function uploadWithAngular() {
+      $http(config).then(function (r) {
+          if (resumeSupported && config._chunkSize && !config._finished && config._file) {
+            notifyProgress({
+                loaded: config._end,
+                total: config._file && config._file.size,
+                config: config, type: 'progress'
+              }
+            );
+            upload.upload(config, true);
+          } else {
+            if (config._finished) delete config._finished;
+            deferred.resolve(r);
+          }
+        }, function (e) {
+          deferred.reject(e);
+        }, function (n) {
+          deferred.notify(n);
+        }
+      );
+    }
+
+    if (!resumeSupported) {
+      uploadWithAngular();
+    } else if (config._chunkSize && config._end && !config._finished) {
+      config._start = config._end;
+      config._end += config._chunkSize;
+      uploadWithAngular();
+    } else if (config.resumeSizeUrl) {
+      $http.get(config.resumeSizeUrl).then(function (resp) {
+        if (config.resumeSizeResponseReader) {
+          config._start = config.resumeSizeResponseReader(resp.data);
+        } else {
+          config._start = parseInt((resp.data.size == null ? resp.data : resp.data.size).toString());
+        }
+        if (config._chunkSize) {
+          config._end = config._start + config._chunkSize;
+        }
+        uploadWithAngular();
+      }, function (e) {
+        throw e;
+      });
+    } else if (config.resumeSize) {
+      config.resumeSize().then(function (size) {
+        config._start = size;
+        uploadWithAngular();
+      }, function (e) {
+        throw e;
+      });
+    } else {
+      if (config._chunkSize) {
+        config._start = 0;
+        config._end = config._start + config._chunkSize;
+      }
+      uploadWithAngular();
+    }
+
+
+    promise.success = function (fn) {
+      promise.then(function (response) {
+        fn(response.data, response.status, response.headers, config);
+      });
+      return promise;
+    };
+
+    promise.error = function (fn) {
+      promise.then(null, function (response) {
+        fn(response.data, response.status, response.headers, config);
+      });
+      return promise;
+    };
+
+    promise.progress = function (fn) {
+      promise.progressFunc = fn;
+      promise.then(null, null, function (n) {
+        fn(n);
+      });
+      return promise;
+    };
+    promise.abort = promise.pause = function () {
+      if (config.__XHR) {
+        $timeout(function () {
+          config.__XHR.abort();
+        });
+      }
+      return promise;
+    };
+    promise.xhr = function (fn) {
+      config.xhrFn = (function (origXhrFn) {
+        return function () {
+          if (origXhrFn) origXhrFn.apply(promise, arguments);
+          fn.apply(promise, arguments);
+        };
+      })(config.xhrFn);
+      return promise;
+    };
+
+    upload.promisesCount++;
+    promise['finally'](function () {
+      upload.promisesCount--;
+    });
+    return promise;
+  }
+
+  this.isUploadInProgress = function () {
+    return upload.promisesCount > 0;
+  };
+
+  this.rename = function (file, name) {
+    file.ngfName = name;
+    return file;
+  };
+
+  this.jsonBlob = function (val) {
+    if (val != null && !angular.isString(val)) {
+      val = JSON.stringify(val);
+    }
+    var blob = new window.Blob([val], {type: 'application/json'});
+    blob._ngfBlob = true;
+    return blob;
+  };
+
+  this.json = function (val) {
+    return angular.toJson(val);
+  };
+
+  function copy(obj) {
+    var clone = {};
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        clone[key] = obj[key];
+      }
+    }
+    return clone;
+  }
+
+  this.isFile = function (file) {
+    return file != null && (file instanceof window.Blob || (file.flashId && file.name && file.size));
+  };
+
+  this.upload = function (config, internal) {
+    function toResumeFile(file, formData) {
+      if (file._ngfBlob) return file;
+      config._file = config._file || file;
+      if (config._start != null && resumeSupported) {
+        if (config._end && config._end >= file.size) {
+          config._finished = true;
+          config._end = file.size;
+        }
+        var slice = file.slice(config._start, config._end || file.size);
+        slice.name = file.name;
+        slice.ngfName = file.ngfName;
+        if (config._chunkSize) {
+          formData.append('_chunkSize', config._chunkSize);
+          formData.append('_currentChunkSize', config._end - config._start);
+          formData.append('_chunkNumber', Math.floor(config._start / config._chunkSize));
+          formData.append('_totalSize', config._file.size);
+        }
+        return slice;
+      }
+      return file;
+    }
+
+    function addFieldToFormData(formData, val, key) {
+      if (val !== undefined) {
+        if (angular.isDate(val)) {
+          val = val.toISOString();
+        }
+        if (angular.isString(val)) {
+          formData.append(key, val);
+        } else if (upload.isFile(val)) {
+          var file = toResumeFile(val, formData);
+          var split = key.split(',');
+          if (split[1]) {
+            file.ngfName = split[1].replace(/^\s+|\s+$/g, '');
+            key = split[0];
+          }
+          config._fileKey = config._fileKey || key;
+          formData.append(key, file, file.ngfName || file.name);
+        } else {
+          if (angular.isObject(val)) {
+            if (val.$$ngfCircularDetection) throw 'ngFileUpload: Circular reference in config.data. Make sure specified data for Upload.upload() has no circular reference: ' + key;
+
+            val.$$ngfCircularDetection = true;
+            try {
+              for (var k in val) {
+                if (val.hasOwnProperty(k) && k !== '$$ngfCircularDetection') {
+                  var objectKey = config.objectKey == null ? '[i]' : config.objectKey;
+                  if (val.length && parseInt(k) > -1) {
+                    objectKey = config.arrayKey == null ? objectKey : config.arrayKey;
+                  }
+                  addFieldToFormData(formData, val[k], key + objectKey.replace(/[ik]/g, k));
+                }
+              }
+            } finally {
+              delete val.$$ngfCircularDetection;
+            }
+          } else {
+            formData.append(key, val);
+          }
+        }
+      }
+    }
+
+    function digestConfig() {
+      config._chunkSize = upload.translateScalars(config.resumeChunkSize);
+      config._chunkSize = config._chunkSize ? parseInt(config._chunkSize.toString()) : null;
+
+      config.headers = config.headers || {};
+      config.headers['Content-Type'] = undefined;
+      config.transformRequest = config.transformRequest ?
+        (angular.isArray(config.transformRequest) ?
+          config.transformRequest : [config.transformRequest]) : [];
+      config.transformRequest.push(function (data) {
+        var formData = new window.FormData(), key;
+        data = data || config.fields || {};
+        if (config.file) {
+          data.file = config.file;
+        }
+        for (key in data) {
+          if (data.hasOwnProperty(key)) {
+            var val = data[key];
+            if (config.formDataAppender) {
+              config.formDataAppender(formData, key, val);
+            } else {
+              addFieldToFormData(formData, val, key);
+            }
+          }
+        }
+
+        return formData;
+      });
+    }
+
+    if (!internal) config = copy(config);
+    if (!config._isDigested) {
+      config._isDigested = true;
+      digestConfig();
+    }
+
+    return sendHttp(config);
+  };
+
+  this.http = function (config) {
+    config = copy(config);
+    config.transformRequest = config.transformRequest || function (data) {
+        if ((window.ArrayBuffer && data instanceof window.ArrayBuffer) || data instanceof window.Blob) {
+          return data;
+        }
+        return $http.defaults.transformRequest[0].apply(this, arguments);
+      };
+    config._chunkSize = upload.translateScalars(config.resumeChunkSize);
+    config._chunkSize = config._chunkSize ? parseInt(config._chunkSize.toString()) : null;
+
+    return sendHttp(config);
+  };
+
+  this.translateScalars = function (str) {
+    if (angular.isString(str)) {
+      if (str.search(/kb/i) === str.length - 2) {
+        return parseFloat(str.substring(0, str.length - 2) * 1024);
+      } else if (str.search(/mb/i) === str.length - 2) {
+        return parseFloat(str.substring(0, str.length - 2) * 1048576);
+      } else if (str.search(/gb/i) === str.length - 2) {
+        return parseFloat(str.substring(0, str.length - 2) * 1073741824);
+      } else if (str.search(/b/i) === str.length - 1) {
+        return parseFloat(str.substring(0, str.length - 1));
+      } else if (str.search(/s/i) === str.length - 1) {
+        return parseFloat(str.substring(0, str.length - 1));
+      } else if (str.search(/m/i) === str.length - 1) {
+        return parseFloat(str.substring(0, str.length - 1) * 60);
+      } else if (str.search(/h/i) === str.length - 1) {
+        return parseFloat(str.substring(0, str.length - 1) * 3600);
+      }
+    }
+    return str;
+  };
+
+  this.urlToBlob = function(url) {
+    var defer = $q.defer();
+    $http({url: url, method: 'get', responseType: 'arraybuffer'}).then(function (resp) {
+      var arrayBufferView = new Uint8Array(resp.data);
+      var type = resp.headers('content-type') || 'image/WebP';
+      var blob = new window.Blob([arrayBufferView], {type: type});
+      defer.resolve(blob);
+      //var split = type.split('[/;]');
+      //blob.name = url.substring(0, 150).replace(/\W+/g, '') + '.' + (split.length > 1 ? split[1] : 'jpg');
+    }, function (e) {
+      defer.reject(e);
+    });
+    return defer.promise;
+  };
+
+  this.setDefaults = function (defaults) {
+    this.defaults = defaults || {};
+  };
+
+  this.defaults = {};
+  this.version = ngFileUpload.version;
+}
+
+]);
+
+ngFileUpload.service('Upload', ['$parse', '$timeout', '$compile', '$q', 'UploadExif', function ($parse, $timeout, $compile, $q, UploadExif) {
+  var upload = UploadExif;
+  upload.getAttrWithDefaults = function (attr, name) {
+    if (attr[name] != null) return attr[name];
+    var def = upload.defaults[name];
+    return (def == null ? def : (angular.isString(def) ? def : JSON.stringify(def)));
+  };
+
+  upload.attrGetter = function (name, attr, scope, params) {
+    var attrVal = this.getAttrWithDefaults(attr, name);
+    if (scope) {
+      try {
+        if (params) {
+          return $parse(attrVal)(scope, params);
+        } else {
+          return $parse(attrVal)(scope);
+        }
+      } catch (e) {
+        // hangle string value without single qoute
+        if (name.search(/min|max|pattern/i)) {
+          return attrVal;
+        } else {
+          throw e;
+        }
+      }
+    } else {
+      return attrVal;
+    }
+  };
+
+  upload.shouldUpdateOn = function (type, attr, scope) {
+    var modelOptions = upload.attrGetter('ngModelOptions', attr, scope);
+    if (modelOptions && modelOptions.updateOn) {
+      return modelOptions.updateOn.split(' ').indexOf(type) > -1;
+    }
+    return true;
+  };
+
+  upload.emptyPromise = function () {
+    var d = $q.defer();
+    var args = arguments;
+    $timeout(function () {
+      d.resolve.apply(d, args);
+    });
+    return d.promise;
+  };
+
+  upload.rejectPromise = function () {
+    var d = $q.defer();
+    var args = arguments;
+    $timeout(function () {
+      d.reject.apply(d, args);
+    });
+    return d.promise;
+  };
+
+  upload.happyPromise = function (promise, data) {
+    var d = $q.defer();
+    promise.then(function (result) {
+      d.resolve(result);
+    }, function (error) {
+      $timeout(function () {
+        throw error;
+      });
+      d.resolve(data);
+    });
+    return d.promise;
+  };
+
+  function applyExifRotations(files, attr, scope) {
+    var promises = [upload.emptyPromise()];
+    angular.forEach(files, function (f, i) {
+      if (f.type.indexOf('image/jpeg') === 0 && upload.attrGetter('ngfFixOrientation', attr, scope, {$file: f})) {
+        promises.push(upload.happyPromise(upload.applyExifRotation(f), f).then(function (fixedFile) {
+          files.splice(i, 1, fixedFile);
+        }));
+      }
+    });
+    return $q.all(promises);
+  }
+
+  function resize(files, attr, scope) {
+    var resizeVal = upload.attrGetter('ngfResize', attr, scope);
+    if (!resizeVal || !upload.isResizeSupported() || !files.length) return upload.emptyPromise();
+    if (resizeVal instanceof Function) {
+      var defer = $q.defer();
+      resizeVal(files).then(function (p) {
+        resizeWithParams(p, files, attr, scope).then(function (r) {
+          defer.resolve(r);
+        }, function (e) {
+          defer.reject(e);
+        });
+      }, function (e) {
+        defer.reject(e);
+      });
+    } else {
+      return resizeWithParams(resizeVal, files, attr, scope);
+    }
+  }
+
+  function resizeWithParams(param, files, attr, scope) {
+    var promises = [upload.emptyPromise()];
+
+    function handleFile(f, i) {
+      if (f.type.indexOf('image') === 0) {
+        if (param.pattern && !upload.validatePattern(f, param.pattern)) return;
+        var promise = upload.resize(f, param.width, param.height, param.quality,
+          param.type, param.ratio, param.centerCrop, function (width, height) {
+            return upload.attrGetter('ngfResizeIf', attr, scope,
+              {$width: width, $height: height, $file: f});
+          }, param.restoreExif !== false);
+        promises.push(promise);
+        promise.then(function (resizedFile) {
+          files.splice(i, 1, resizedFile);
+        }, function (e) {
+          f.$error = 'resize';
+          f.$errorParam = (e ? (e.message ? e.message : e) + ': ' : '') + (f && f.name);
+        });
+      }
+    }
+
+    for (var i = 0; i < files.length; i++) {
+      handleFile(files[i], i);
+    }
+    return $q.all(promises);
+  }
+
+  upload.updateModel = function (ngModel, attr, scope, fileChange, files, evt, noDelay) {
+    function update(files, invalidFiles, newFiles, dupFiles, isSingleModel) {
+      attr.$$ngfPrevValidFiles = files;
+      attr.$$ngfPrevInvalidFiles = invalidFiles;
+      var file = files && files.length ? files[0] : null;
+      var invalidFile = invalidFiles && invalidFiles.length ? invalidFiles[0] : null;
+
+      if (ngModel) {
+        upload.applyModelValidation(ngModel, files);
+        ngModel.$setViewValue(isSingleModel ? file : files);
+      }
+
+      if (fileChange) {
+        $parse(fileChange)(scope, {
+          $files: files,
+          $file: file,
+          $newFiles: newFiles,
+          $duplicateFiles: dupFiles,
+          $invalidFiles: invalidFiles,
+          $invalidFile: invalidFile,
+          $event: evt
+        });
+      }
+
+      var invalidModel = upload.attrGetter('ngfModelInvalid', attr);
+      if (invalidModel) {
+        $timeout(function () {
+          $parse(invalidModel).assign(scope, isSingleModel ? invalidFile : invalidFiles);
+        });
+      }
+      $timeout(function () {
+        // scope apply changes
+      });
+    }
+
+    var allNewFiles, dupFiles = [], prevValidFiles, prevInvalidFiles,
+      invalids = [], valids = [];
+
+    function removeDuplicates() {
+      function equals(f1, f2) {
+        return f1.name === f2.name && (f1.$ngfOrigSize || f1.size) === (f2.$ngfOrigSize || f2.size) &&
+          f1.type === f2.type;
+      }
+
+      function isInPrevFiles(f) {
+        var j;
+        for (j = 0; j < prevValidFiles.length; j++) {
+          if (equals(f, prevValidFiles[j])) {
+            return true;
+          }
+        }
+        for (j = 0; j < prevInvalidFiles.length; j++) {
+          if (equals(f, prevInvalidFiles[j])) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      if (files) {
+        allNewFiles = [];
+        dupFiles = [];
+        for (var i = 0; i < files.length; i++) {
+          if (isInPrevFiles(files[i])) {
+            dupFiles.push(files[i]);
+          } else {
+            allNewFiles.push(files[i]);
+          }
+        }
+      }
+    }
+
+    function toArray(v) {
+      return angular.isArray(v) ? v : [v];
+    }
+
+    function separateInvalids() {
+      valids = [];
+      invalids = [];
+      angular.forEach(allNewFiles, function (file) {
+        if (file.$error) {
+          invalids.push(file);
+        } else {
+          valids.push(file);
+        }
+      });
+    }
+
+    function resizeAndUpdate() {
+      function updateModel() {
+        $timeout(function () {
+          update(keep ? prevValidFiles.concat(valids) : valids,
+            keep ? prevInvalidFiles.concat(invalids) : invalids,
+            files, dupFiles, isSingleModel);
+        }, options && options.debounce ? options.debounce.change || options.debounce : 0);
+      }
+
+      resize(validateAfterResize ? allNewFiles : valids, attr, scope).then(function () {
+        if (validateAfterResize) {
+          upload.validate(allNewFiles, prevValidFiles.length, ngModel, attr, scope).then(function () {
+            separateInvalids();
+            updateModel();
+          });
+        } else {
+          updateModel();
+        }
+      }, function (e) {
+        throw 'Could not resize files ' + e;
+      });
+    }
+
+    prevValidFiles = attr.$$ngfPrevValidFiles || [];
+    prevInvalidFiles = attr.$$ngfPrevInvalidFiles || [];
+    if (ngModel && ngModel.$modelValue) {
+      prevValidFiles = toArray(ngModel.$modelValue);
+    }
+
+    var keep = upload.attrGetter('ngfKeep', attr, scope);
+    allNewFiles = (files || []).slice(0);
+    if (keep === 'distinct' || upload.attrGetter('ngfKeepDistinct', attr, scope) === true) {
+      removeDuplicates(attr, scope);
+    }
+
+    var isSingleModel = !keep && !upload.attrGetter('ngfMultiple', attr, scope) && !upload.attrGetter('multiple', attr);
+
+    if (keep && !allNewFiles.length) return;
+
+    upload.attrGetter('ngfBeforeModelChange', attr, scope, {
+      $files: files,
+      $file: files && files.length ? files[0] : null,
+      $newFiles: allNewFiles,
+      $duplicateFiles: dupFiles,
+      $event: evt
+    });
+
+    var validateAfterResize = upload.attrGetter('ngfValidateAfterResize', attr, scope);
+
+    var options = upload.attrGetter('ngModelOptions', attr, scope);
+    upload.validate(allNewFiles, prevValidFiles.length, ngModel, attr, scope).then(function () {
+      if (noDelay) {
+        update(allNewFiles, [], files, dupFiles, isSingleModel);
+      } else {
+        if ((!options || !options.allowInvalid) && !validateAfterResize) {
+          separateInvalids();
+        } else {
+          valids = allNewFiles;
+        }
+        if (upload.attrGetter('ngfFixOrientation', attr, scope) && upload.isExifSupported()) {
+          applyExifRotations(valids, attr, scope).then(function () {
+            resizeAndUpdate();
+          });
+        } else {
+          resizeAndUpdate();
+        }
+      }
+    });
+  };
+
+  return upload;
+}]);
+
+ngFileUpload.directive('ngfSelect', ['$parse', '$timeout', '$compile', 'Upload', function ($parse, $timeout, $compile, Upload) {
+  var generatedElems = [];
+
+  function isDelayedClickSupported(ua) {
+    // fix for android native browser < 4.4 and safari windows
+    var m = ua.match(/Android[^\d]*(\d+)\.(\d+)/);
+    if (m && m.length > 2) {
+      var v = Upload.defaults.androidFixMinorVersion || 4;
+      return parseInt(m[1]) < 4 || (parseInt(m[1]) === v && parseInt(m[2]) < v);
+    }
+
+    // safari on windows
+    return ua.indexOf('Chrome') === -1 && /.*Windows.*Safari.*/.test(ua);
+  }
+
+  function linkFileSelect(scope, elem, attr, ngModel, $parse, $timeout, $compile, upload) {
+    /** @namespace attr.ngfSelect */
+    /** @namespace attr.ngfChange */
+    /** @namespace attr.ngModel */
+    /** @namespace attr.ngModelOptions */
+    /** @namespace attr.ngfMultiple */
+    /** @namespace attr.ngfCapture */
+    /** @namespace attr.ngfValidate */
+    /** @namespace attr.ngfKeep */
+    var attrGetter = function (name, scope) {
+      return upload.attrGetter(name, attr, scope);
+    };
+
+    function isInputTypeFile() {
+      return elem[0].tagName.toLowerCase() === 'input' && attr.type && attr.type.toLowerCase() === 'file';
+    }
+
+    function fileChangeAttr() {
+      return attrGetter('ngfChange') || attrGetter('ngfSelect');
+    }
+
+    function changeFn(evt) {
+      if (upload.shouldUpdateOn('change', attr, scope)) {
+        var fileList = evt.__files_ || (evt.target && evt.target.files), files = [];
+        for (var i = 0; i < fileList.length; i++) {
+          files.push(fileList[i]);
+        }
+        upload.updateModel(ngModel, attr, scope, fileChangeAttr(),
+          files.length ? files : null, evt);
+      }
+    }
+
+    upload.registerModelChangeValidator(ngModel, attr, scope);
+
+    var unwatches = [];
+    unwatches.push(scope.$watch(attrGetter('ngfMultiple'), function () {
+      fileElem.attr('multiple', attrGetter('ngfMultiple', scope));
+    }));
+    unwatches.push(scope.$watch(attrGetter('ngfCapture'), function () {
+      fileElem.attr('capture', attrGetter('ngfCapture', scope));
+    }));
+    unwatches.push(scope.$watch(attrGetter('ngfAccept'), function () {
+      fileElem.attr('accept', attrGetter('ngfAccept', scope));
+    }));
+    attr.$observe('accept', function () {
+      fileElem.attr('accept', attrGetter('accept'));
+    });
+    unwatches.push(function () {
+      if (attr.$$observers) delete attr.$$observers.accept;
+    });
+    function bindAttrToFileInput(fileElem) {
+      if (elem !== fileElem) {
+        for (var i = 0; i < elem[0].attributes.length; i++) {
+          var attribute = elem[0].attributes[i];
+          if (attribute.name !== 'type' && attribute.name !== 'class' && attribute.name !== 'style') {
+            if (attribute.value == null || attribute.value === '') {
+              if (attribute.name === 'required') attribute.value = 'required';
+              if (attribute.name === 'multiple') attribute.value = 'multiple';
+            }
+            fileElem.attr(attribute.name, attribute.name === 'id' ? 'ngf-' + attribute.value : attribute.value);
+          }
+        }
+      }
+    }
+
+    function createFileInput() {
+      if (isInputTypeFile()) {
+        return elem;
+      }
+
+      var fileElem = angular.element('<input type="file">');
+
+      bindAttrToFileInput(fileElem);
+
+      var label = angular.element('<label>upload</label>');
+      label.css('visibility', 'hidden').css('position', 'absolute').css('overflow', 'hidden')
+        .css('width', '0px').css('height', '0px').css('border', 'none')
+        .css('margin', '0px').css('padding', '0px').attr('tabindex', '-1');
+      generatedElems.push({el: elem, ref: label});
+
+      document.body.appendChild(label.append(fileElem)[0]);
+
+      return fileElem;
+    }
+
+    var initialTouchStartY = 0;
+
+    function clickHandler(evt) {
+      if (elem.attr('disabled')) return false;
+      if (attrGetter('ngfSelectDisabled', scope)) return;
+
+      var r = handleTouch(evt);
+      if (r != null) return r;
+
+      resetModel(evt);
+
+      // fix for md when the element is removed from the DOM and added back #460
+      try {
+        if (!isInputTypeFile() && !document.body.contains(fileElem[0])) {
+          generatedElems.push({el: elem, ref: fileElem.parent()});
+          document.body.appendChild(fileElem.parent()[0]);
+          fileElem.bind('change', changeFn);
+        }
+      } catch(e){/*ignore*/}
+
+      if (isDelayedClickSupported(navigator.userAgent)) {
+        setTimeout(function () {
+          fileElem[0].click();
+        }, 0);
+      } else {
+        fileElem[0].click();
+      }
+
+      return false;
+    }
+
+    function handleTouch(evt) {
+      var touches = evt.changedTouches || (evt.originalEvent && evt.originalEvent.changedTouches);
+      if (evt.type === 'touchstart') {
+        initialTouchStartY = touches ? touches[0].clientY : 0;
+        return true; // don't block event default
+      } else {
+        evt.stopPropagation();
+        evt.preventDefault();
+
+        // prevent scroll from triggering event
+        if (evt.type === 'touchend') {
+          var currentLocation = touches ? touches[0].clientY : 0;
+          if (Math.abs(currentLocation - initialTouchStartY) > 20) return false;
+        }
+      }
+    }
+
+    var fileElem = elem;
+
+    function resetModel(evt) {
+      if (upload.shouldUpdateOn('click', attr, scope) && fileElem.val()) {
+        fileElem.val(null);
+        upload.updateModel(ngModel, attr, scope, fileChangeAttr(), null, evt, true);
+      }
+    }
+
+    if (!isInputTypeFile()) {
+      fileElem = createFileInput();
+    }
+    fileElem.bind('change', changeFn);
+
+    if (!isInputTypeFile()) {
+      elem.bind('click touchstart touchend', clickHandler);
+    } else {
+      elem.bind('click', resetModel);
+    }
+
+    function ie10SameFileSelectFix(evt) {
+      if (fileElem && !fileElem.attr('__ngf_ie10_Fix_')) {
+        if (!fileElem[0].parentNode) {
+          fileElem = null;
+          return;
+        }
+        evt.preventDefault();
+        evt.stopPropagation();
+        fileElem.unbind('click');
+        var clone = fileElem.clone();
+        fileElem.replaceWith(clone);
+        fileElem = clone;
+        fileElem.attr('__ngf_ie10_Fix_', 'true');
+        fileElem.bind('change', changeFn);
+        fileElem.bind('click', ie10SameFileSelectFix);
+        fileElem[0].click();
+        return false;
+      } else {
+        fileElem.removeAttr('__ngf_ie10_Fix_');
+      }
+    }
+
+    if (navigator.appVersion.indexOf('MSIE 10') !== -1) {
+      fileElem.bind('click', ie10SameFileSelectFix);
+    }
+
+    if (ngModel) ngModel.$formatters.push(function (val) {
+      if (val == null || val.length === 0) {
+        if (fileElem.val()) {
+          fileElem.val(null);
+        }
+      }
+      return val;
+    });
+
+    scope.$on('$destroy', function () {
+      if (!isInputTypeFile()) fileElem.parent().remove();
+      angular.forEach(unwatches, function (unwatch) {
+        unwatch();
+      });
+    });
+
+    $timeout(function () {
+      for (var i = 0; i < generatedElems.length; i++) {
+        var g = generatedElems[i];
+        if (!document.body.contains(g.el[0])) {
+          generatedElems.splice(i, 1);
+          g.ref.remove();
+        }
+      }
+    });
+
+    if (window.FileAPI && window.FileAPI.ngfFixIE) {
+      window.FileAPI.ngfFixIE(elem, fileElem, changeFn);
+    }
+  }
+
+  return {
+    restrict: 'AEC',
+    require: '?ngModel',
+    link: function (scope, elem, attr, ngModel) {
+      linkFileSelect(scope, elem, attr, ngModel, $parse, $timeout, $compile, Upload);
+    }
+  };
+}]);
+
+(function () {
+
+  ngFileUpload.service('UploadDataUrl', ['UploadBase', '$timeout', '$q', function (UploadBase, $timeout, $q) {
+    var upload = UploadBase;
+    upload.base64DataUrl = function (file) {
+      if (angular.isArray(file)) {
+        var d = $q.defer(), count = 0;
+        angular.forEach(file, function (f) {
+          upload.dataUrl(f, true)['finally'](function () {
+            count++;
+            if (count === file.length) {
+              var urls = [];
+              angular.forEach(file, function (ff) {
+                urls.push(ff.$ngfDataUrl);
+              });
+              d.resolve(urls, file);
+            }
+          });
+        });
+        return d.promise;
+      } else {
+        return upload.dataUrl(file, true);
+      }
+    };
+    upload.dataUrl = function (file, disallowObjectUrl) {
+      if (!file) return upload.emptyPromise(file, file);
+      if ((disallowObjectUrl && file.$ngfDataUrl != null) || (!disallowObjectUrl && file.$ngfBlobUrl != null)) {
+        return upload.emptyPromise(disallowObjectUrl ? file.$ngfDataUrl : file.$ngfBlobUrl, file);
+      }
+      var p = disallowObjectUrl ? file.$$ngfDataUrlPromise : file.$$ngfBlobUrlPromise;
+      if (p) return p;
+
+      var deferred = $q.defer();
+      $timeout(function () {
+        if (window.FileReader && file &&
+          (!window.FileAPI || navigator.userAgent.indexOf('MSIE 8') === -1 || file.size < 20000) &&
+          (!window.FileAPI || navigator.userAgent.indexOf('MSIE 9') === -1 || file.size < 4000000)) {
+          //prefer URL.createObjectURL for handling refrences to files of all sizes
+          //since it doesn´t build a large string in memory
+          var URL = window.URL || window.webkitURL;
+          if (URL && URL.createObjectURL && !disallowObjectUrl) {
+            var url;
+            try {
+              url = URL.createObjectURL(file);
+            } catch (e) {
+              $timeout(function () {
+                file.$ngfBlobUrl = '';
+                deferred.reject();
+              });
+              return;
+            }
+            $timeout(function () {
+              file.$ngfBlobUrl = url;
+              if (url) {
+                deferred.resolve(url, file);
+                upload.blobUrls = upload.blobUrls || [];
+                upload.blobUrlsTotalSize = upload.blobUrlsTotalSize || 0;
+                upload.blobUrls.push({url: url, size: file.size});
+                upload.blobUrlsTotalSize += file.size || 0;
+                var maxMemory = upload.defaults.blobUrlsMaxMemory || 268435456;
+                var maxLength = upload.defaults.blobUrlsMaxQueueSize || 200;
+                while ((upload.blobUrlsTotalSize > maxMemory || upload.blobUrls.length > maxLength) && upload.blobUrls.length > 1) {
+                  var obj = upload.blobUrls.splice(0, 1)[0];
+                  URL.revokeObjectURL(obj.url);
+                  upload.blobUrlsTotalSize -= obj.size;
+                }
+              }
+            });
+          } else {
+            var fileReader = new FileReader();
+            fileReader.onload = function (e) {
+              $timeout(function () {
+                file.$ngfDataUrl = e.target.result;
+                deferred.resolve(e.target.result, file);
+                $timeout(function () {
+                  delete file.$ngfDataUrl;
+                }, 1000);
+              });
+            };
+            fileReader.onerror = function () {
+              $timeout(function () {
+                file.$ngfDataUrl = '';
+                deferred.reject();
+              });
+            };
+            fileReader.readAsDataURL(file);
+          }
+        } else {
+          $timeout(function () {
+            file[disallowObjectUrl ? '$ngfDataUrl' : '$ngfBlobUrl'] = '';
+            deferred.reject();
+          });
+        }
+      });
+
+      if (disallowObjectUrl) {
+        p = file.$$ngfDataUrlPromise = deferred.promise;
+      } else {
+        p = file.$$ngfBlobUrlPromise = deferred.promise;
+      }
+      p['finally'](function () {
+        delete file[disallowObjectUrl ? '$$ngfDataUrlPromise' : '$$ngfBlobUrlPromise'];
+      });
+      return p;
+    };
+    return upload;
+  }]);
+
+  function getTagType(el) {
+    if (el.tagName.toLowerCase() === 'img') return 'image';
+    if (el.tagName.toLowerCase() === 'audio') return 'audio';
+    if (el.tagName.toLowerCase() === 'video') return 'video';
+    return /./;
+  }
+
+  function linkFileDirective(Upload, $timeout, scope, elem, attr, directiveName, resizeParams, isBackground) {
+    function constructDataUrl(file) {
+      var disallowObjectUrl = Upload.attrGetter('ngfNoObjectUrl', attr, scope);
+      Upload.dataUrl(file, disallowObjectUrl)['finally'](function () {
+        $timeout(function () {
+          var src = (disallowObjectUrl ? file.$ngfDataUrl : file.$ngfBlobUrl) || file.$ngfDataUrl;
+          if (isBackground) {
+            elem.css('background-image', 'url(\'' + (src || '') + '\')');
+          } else {
+            elem.attr('src', src);
+          }
+          if (src) {
+            elem.removeClass('ng-hide');
+          } else {
+            elem.addClass('ng-hide');
+          }
+        });
+      });
+    }
+
+    $timeout(function () {
+      var unwatch = scope.$watch(attr[directiveName], function (file) {
+        var size = resizeParams;
+        if (directiveName === 'ngfThumbnail') {
+          if (!size) {
+            size = {width: elem[0].clientWidth, height: elem[0].clientHeight};
+          }
+          if (size.width === 0 && window.getComputedStyle) {
+            var style = getComputedStyle(elem[0]);
+            size = {
+              width: parseInt(style.width.slice(0, -2)),
+              height: parseInt(style.height.slice(0, -2))
+            };
+          }
+        }
+
+        if (angular.isString(file)) {
+          elem.removeClass('ng-hide');
+          if (isBackground) {
+            return elem.css('background-image', 'url(\'' + file + '\')');
+          } else {
+            return elem.attr('src', file);
+          }
+        }
+        if (file && file.type && file.type.search(getTagType(elem[0])) === 0 &&
+          (!isBackground || file.type.indexOf('image') === 0)) {
+          if (size && Upload.isResizeSupported()) {
+            Upload.resize(file, size.width, size.height, size.quality).then(
+              function (f) {
+                constructDataUrl(f);
+              }, function (e) {
+                throw e;
+              }
+            );
+          } else {
+            constructDataUrl(file);
+          }
+        } else {
+          elem.addClass('ng-hide');
+        }
+      });
+
+      scope.$on('$destroy', function () {
+        unwatch();
+      });
+    });
+  }
+
+
+  /** @namespace attr.ngfSrc */
+  /** @namespace attr.ngfNoObjectUrl */
+  ngFileUpload.directive('ngfSrc', ['Upload', '$timeout', function (Upload, $timeout) {
+    return {
+      restrict: 'AE',
+      link: function (scope, elem, attr) {
+        linkFileDirective(Upload, $timeout, scope, elem, attr, 'ngfSrc',
+          Upload.attrGetter('ngfResize', attr, scope), false);
+      }
+    };
+  }]);
+
+  /** @namespace attr.ngfBackground */
+  /** @namespace attr.ngfNoObjectUrl */
+  ngFileUpload.directive('ngfBackground', ['Upload', '$timeout', function (Upload, $timeout) {
+    return {
+      restrict: 'AE',
+      link: function (scope, elem, attr) {
+        linkFileDirective(Upload, $timeout, scope, elem, attr, 'ngfBackground',
+          Upload.attrGetter('ngfResize', attr, scope), true);
+      }
+    };
+  }]);
+
+  /** @namespace attr.ngfThumbnail */
+  /** @namespace attr.ngfAsBackground */
+  /** @namespace attr.ngfSize */
+  /** @namespace attr.ngfNoObjectUrl */
+  ngFileUpload.directive('ngfThumbnail', ['Upload', '$timeout', function (Upload, $timeout) {
+    return {
+      restrict: 'AE',
+      link: function (scope, elem, attr) {
+        var size = Upload.attrGetter('ngfSize', attr, scope);
+        linkFileDirective(Upload, $timeout, scope, elem, attr, 'ngfThumbnail', size,
+          Upload.attrGetter('ngfAsBackground', attr, scope));
+      }
+    };
+  }]);
+
+  ngFileUpload.config(['$compileProvider', function ($compileProvider) {
+    if ($compileProvider.imgSrcSanitizationWhitelist) $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|local|file|data|blob):/);
+    if ($compileProvider.aHrefSanitizationWhitelist) $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|local|file|data|blob):/);
+  }]);
+
+  ngFileUpload.filter('ngfDataUrl', ['UploadDataUrl', '$sce', function (UploadDataUrl, $sce) {
+    return function (file, disallowObjectUrl, trustedUrl) {
+      if (angular.isString(file)) {
+        return $sce.trustAsResourceUrl(file);
+      }
+      var src = file && ((disallowObjectUrl ? file.$ngfDataUrl : file.$ngfBlobUrl) || file.$ngfDataUrl);
+      if (file && !src) {
+        if (!file.$ngfDataUrlFilterInProgress && angular.isObject(file)) {
+          file.$ngfDataUrlFilterInProgress = true;
+          UploadDataUrl.dataUrl(file, disallowObjectUrl);
+        }
+        return '';
+      }
+      if (file) delete file.$ngfDataUrlFilterInProgress;
+      return (file && src ? (trustedUrl ? $sce.trustAsResourceUrl(src) : src) : file) || '';
+    };
+  }]);
+
+})();
+
+ngFileUpload.service('UploadValidate', ['UploadDataUrl', '$q', '$timeout', function (UploadDataUrl, $q, $timeout) {
+  var upload = UploadDataUrl;
+
+  function globStringToRegex(str) {
+    var regexp = '', excludes = [];
+    if (str.length > 2 && str[0] === '/' && str[str.length - 1] === '/') {
+      regexp = str.substring(1, str.length - 1);
+    } else {
+      var split = str.split(',');
+      if (split.length > 1) {
+        for (var i = 0; i < split.length; i++) {
+          var r = globStringToRegex(split[i]);
+          if (r.regexp) {
+            regexp += '(' + r.regexp + ')';
+            if (i < split.length - 1) {
+              regexp += '|';
+            }
+          } else {
+            excludes = excludes.concat(r.excludes);
+          }
+        }
+      } else {
+        if (str.indexOf('!') === 0) {
+          excludes.push('^((?!' + globStringToRegex(str.substring(1)).regexp + ').)*$');
+        } else {
+          if (str.indexOf('.') === 0) {
+            str = '*' + str;
+          }
+          regexp = '^' + str.replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g'), '\\$&') + '$';
+          regexp = regexp.replace(/\\\*/g, '.*').replace(/\\\?/g, '.');
+        }
+      }
+    }
+    return {regexp: regexp, excludes: excludes};
+  }
+
+  upload.validatePattern = function (file, val) {
+    if (!val) {
+      return true;
+    }
+    var pattern = globStringToRegex(val), valid = true;
+    if (pattern.regexp && pattern.regexp.length) {
+      var regexp = new RegExp(pattern.regexp, 'i');
+      valid = (file.type != null && regexp.test(file.type)) ||
+        (file.name != null && regexp.test(file.name));
+    }
+    var len = pattern.excludes.length;
+    while (len--) {
+      var exclude = new RegExp(pattern.excludes[len], 'i');
+      valid = valid && (file.type == null || exclude.test(file.type)) &&
+        (file.name == null || exclude.test(file.name));
+    }
+    return valid;
+  };
+
+  upload.ratioToFloat = function (val) {
+    var r = val.toString(), xIndex = r.search(/[x:]/i);
+    if (xIndex > -1) {
+      r = parseFloat(r.substring(0, xIndex)) / parseFloat(r.substring(xIndex + 1));
+    } else {
+      r = parseFloat(r);
+    }
+    return r;
+  };
+
+  upload.registerModelChangeValidator = function (ngModel, attr, scope) {
+    if (ngModel) {
+      ngModel.$formatters.push(function (files) {
+        if (ngModel.$dirty) {
+          if (files && !angular.isArray(files)) {
+            files = [files];
+          }
+          upload.validate(files, 0, ngModel, attr, scope).then(function () {
+            upload.applyModelValidation(ngModel, files);
+          });
+        }
+      });
+    }
+  };
+
+  function markModelAsDirty(ngModel, files) {
+    if (files != null && !ngModel.$dirty) {
+      if (ngModel.$setDirty) {
+        ngModel.$setDirty();
+      } else {
+        ngModel.$dirty = true;
+      }
+    }
+  }
+
+  upload.applyModelValidation = function (ngModel, files) {
+    markModelAsDirty(ngModel, files);
+    angular.forEach(ngModel.$ngfValidations, function (validation) {
+      ngModel.$setValidity(validation.name, validation.valid);
+    });
+  };
+
+  upload.getValidationAttr = function (attr, scope, name, validationName, file) {
+    var dName = 'ngf' + name[0].toUpperCase() + name.substr(1);
+    var val = upload.attrGetter(dName, attr, scope, {$file: file});
+    if (val == null) {
+      val = upload.attrGetter('ngfValidate', attr, scope, {$file: file});
+      if (val) {
+        var split = (validationName || name).split('.');
+        val = val[split[0]];
+        if (split.length > 1) {
+          val = val && val[split[1]];
+        }
+      }
+    }
+    return val;
+  };
+
+  upload.validate = function (files, prevLength, ngModel, attr, scope) {
+    ngModel = ngModel || {};
+    ngModel.$ngfValidations = ngModel.$ngfValidations || [];
+
+    angular.forEach(ngModel.$ngfValidations, function (v) {
+      v.valid = true;
+    });
+
+    var attrGetter = function (name, params) {
+      return upload.attrGetter(name, attr, scope, params);
+    };
+
+    if (files == null || files.length === 0) {
+      return upload.emptyPromise(ngModel);
+    }
+
+    files = files.length === undefined ? [files] : files.slice(0);
+
+    function validateSync(name, validationName, fn) {
+      if (files) {
+        var i = files.length, valid = null;
+        while (i--) {
+          var file = files[i];
+          if (file) {
+            var val = upload.getValidationAttr(attr, scope, name, validationName, file);
+            if (val != null) {
+              if (!fn(file, val, i)) {
+                file.$error = name;
+                (file.$errorMessages = (file.$errorMessages || {}))[name] = true;
+                file.$errorParam = val;
+                files.splice(i, 1);
+                valid = false;
+              }
+            }
+          }
+        }
+        if (valid !== null) {
+          ngModel.$ngfValidations.push({name: name, valid: valid});
+        }
+      }
+    }
+
+    validateSync('maxFiles', null, function (file, val, i) {
+      return prevLength + i < val;
+    });
+    validateSync('pattern', null, upload.validatePattern);
+    validateSync('minSize', 'size.min', function (file, val) {
+      return file.size + 0.1 >= upload.translateScalars(val);
+    });
+    validateSync('maxSize', 'size.max', function (file, val) {
+      return file.size - 0.1 <= upload.translateScalars(val);
+    });
+    var totalSize = 0;
+    validateSync('maxTotalSize', null, function (file, val) {
+      totalSize += file.size;
+      if (totalSize > upload.translateScalars(val)) {
+        files.splice(0, files.length);
+        return false;
+      }
+      return true;
+    });
+
+    validateSync('validateFn', null, function (file, r) {
+      return r === true || r === null || r === '';
+    });
+
+    if (!files.length) {
+      return upload.emptyPromise(ngModel, ngModel.$ngfValidations);
+    }
+
+    function validateAsync(name, validationName, type, asyncFn, fn) {
+      function resolveResult(defer, file, val) {
+        if (val != null) {
+          asyncFn(file, val).then(function (d) {
+            if (!fn(d, val)) {
+              file.$error = name;
+              (file.$errorMessages = (file.$errorMessages || {}))[name] = true;
+              file.$errorParam = val;
+              defer.reject();
+            } else {
+              defer.resolve();
+            }
+          }, function () {
+            if (attrGetter('ngfValidateForce', {$file: file})) {
+              file.$error = name;
+              (file.$errorMessages = (file.$errorMessages || {}))[name] = true;
+              file.$errorParam = val;
+              defer.reject();
+            } else {
+              defer.resolve();
+            }
+          });
+        } else {
+          defer.resolve();
+        }
+      }
+
+      var promises = [upload.emptyPromise()];
+      if (files) {
+        files = files.length === undefined ? [files] : files;
+        angular.forEach(files, function (file) {
+          var defer = $q.defer();
+          promises.push(defer.promise);
+          if (type && (file.type == null || file.type.search(type) !== 0)) {
+            defer.resolve();
+            return;
+          }
+          if (name === 'dimensions' && upload.attrGetter('ngfDimensions', attr) != null) {
+            upload.imageDimensions(file).then(function (d) {
+              resolveResult(defer, file,
+                attrGetter('ngfDimensions', {$file: file, $width: d.width, $height: d.height}));
+            }, function () {
+              defer.reject();
+            });
+          } else if (name === 'duration' && upload.attrGetter('ngfDuration', attr) != null) {
+            upload.mediaDuration(file).then(function (d) {
+              resolveResult(defer, file,
+                attrGetter('ngfDuration', {$file: file, $duration: d}));
+            }, function () {
+              defer.reject();
+            });
+          } else {
+            resolveResult(defer, file,
+              upload.getValidationAttr(attr, scope, name, validationName, file));
+          }
+        });
+        return $q.all(promises).then(function () {
+          ngModel.$ngfValidations.push({name: name, valid: true});
+        }, function () {
+          ngModel.$ngfValidations.push({name: name, valid: false});
+        });
+      }
+    }
+
+    var deffer = $q.defer();
+    var promises = [];
+
+    promises.push(upload.happyPromise(validateAsync('maxHeight', 'height.max', /image/,
+      this.imageDimensions, function (d, val) {
+        return d.height <= val;
+      })));
+    promises.push(upload.happyPromise(validateAsync('minHeight', 'height.min', /image/,
+      this.imageDimensions, function (d, val) {
+        return d.height >= val;
+      })));
+    promises.push(upload.happyPromise(validateAsync('maxWidth', 'width.max', /image/,
+      this.imageDimensions, function (d, val) {
+        return d.width <= val;
+      })));
+    promises.push(upload.happyPromise(validateAsync('minWidth', 'width.min', /image/,
+      this.imageDimensions, function (d, val) {
+        return d.width >= val;
+      })));
+    promises.push(upload.happyPromise(validateAsync('dimensions', null, /image/,
+      function (file, val) {
+        return upload.emptyPromise(val);
+      }, function (r) {
+        return r;
+      })));
+    promises.push(upload.happyPromise(validateAsync('ratio', null, /image/,
+      this.imageDimensions, function (d, val) {
+        var split = val.toString().split(','), valid = false;
+        for (var i = 0; i < split.length; i++) {
+          if (Math.abs((d.width / d.height) - upload.ratioToFloat(split[i])) < 0.0001) {
+            valid = true;
+          }
+        }
+        return valid;
+      })));
+    promises.push(upload.happyPromise(validateAsync('maxRatio', 'ratio.max', /image/,
+      this.imageDimensions, function (d, val) {
+        return (d.width / d.height) - upload.ratioToFloat(val) < 0.0001;
+      })));
+    promises.push(upload.happyPromise(validateAsync('minRatio', 'ratio.min', /image/,
+      this.imageDimensions, function (d, val) {
+        return (d.width / d.height) - upload.ratioToFloat(val) > -0.0001;
+      })));
+    promises.push(upload.happyPromise(validateAsync('maxDuration', 'duration.max', /audio|video/,
+      this.mediaDuration, function (d, val) {
+        return d <= upload.translateScalars(val);
+      })));
+    promises.push(upload.happyPromise(validateAsync('minDuration', 'duration.min', /audio|video/,
+      this.mediaDuration, function (d, val) {
+        return d >= upload.translateScalars(val);
+      })));
+    promises.push(upload.happyPromise(validateAsync('duration', null, /audio|video/,
+      function (file, val) {
+        return upload.emptyPromise(val);
+      }, function (r) {
+        return r;
+      })));
+
+    promises.push(upload.happyPromise(validateAsync('validateAsyncFn', null, null,
+      function (file, val) {
+        return val;
+      }, function (r) {
+        return r === true || r === null || r === '';
+      })));
+
+    return $q.all(promises).then(function () {
+      deffer.resolve(ngModel, ngModel.$ngfValidations);
+    });
+  };
+
+  upload.imageDimensions = function (file) {
+    if (file.$ngfWidth && file.$ngfHeight) {
+      var d = $q.defer();
+      $timeout(function () {
+        d.resolve({width: file.$ngfWidth, height: file.$ngfHeight});
+      });
+      return d.promise;
+    }
+    if (file.$ngfDimensionPromise) return file.$ngfDimensionPromise;
+
+    var deferred = $q.defer();
+    $timeout(function () {
+      if (file.type.indexOf('image') !== 0) {
+        deferred.reject('not image');
+        return;
+      }
+      upload.dataUrl(file).then(function (dataUrl) {
+        var img = angular.element('<img>').attr('src', dataUrl)
+          .css('visibility', 'hidden').css('position', 'fixed')
+          .css('max-width', 'none !important').css('max-height', 'none !important');
+
+        function success() {
+          var width = img[0].clientWidth;
+          var height = img[0].clientHeight;
+          img.remove();
+          file.$ngfWidth = width;
+          file.$ngfHeight = height;
+          deferred.resolve({width: width, height: height});
+        }
+
+        function error() {
+          img.remove();
+          deferred.reject('load error');
+        }
+
+        img.on('load', success);
+        img.on('error', error);
+        var count = 0;
+
+        function checkLoadError() {
+          $timeout(function () {
+            if (img[0].parentNode) {
+              if (img[0].clientWidth) {
+                success();
+              } else if (count > 10) {
+                error();
+              } else {
+                checkLoadError();
+              }
+            }
+          }, 1000);
+        }
+
+        checkLoadError();
+
+        angular.element(document.getElementsByTagName('body')[0]).append(img);
+      }, function () {
+        deferred.reject('load error');
+      });
+    });
+
+    file.$ngfDimensionPromise = deferred.promise;
+    file.$ngfDimensionPromise['finally'](function () {
+      delete file.$ngfDimensionPromise;
+    });
+    return file.$ngfDimensionPromise;
+  };
+
+  upload.mediaDuration = function (file) {
+    if (file.$ngfDuration) {
+      var d = $q.defer();
+      $timeout(function () {
+        d.resolve(file.$ngfDuration);
+      });
+      return d.promise;
+    }
+    if (file.$ngfDurationPromise) return file.$ngfDurationPromise;
+
+    var deferred = $q.defer();
+    $timeout(function () {
+      if (file.type.indexOf('audio') !== 0 && file.type.indexOf('video') !== 0) {
+        deferred.reject('not media');
+        return;
+      }
+      upload.dataUrl(file).then(function (dataUrl) {
+        var el = angular.element(file.type.indexOf('audio') === 0 ? '<audio>' : '<video>')
+          .attr('src', dataUrl).css('visibility', 'none').css('position', 'fixed');
+
+        function success() {
+          var duration = el[0].duration;
+          file.$ngfDuration = duration;
+          el.remove();
+          deferred.resolve(duration);
+        }
+
+        function error() {
+          el.remove();
+          deferred.reject('load error');
+        }
+
+        el.on('loadedmetadata', success);
+        el.on('error', error);
+        var count = 0;
+
+        function checkLoadError() {
+          $timeout(function () {
+            if (el[0].parentNode) {
+              if (el[0].duration) {
+                success();
+              } else if (count > 10) {
+                error();
+              } else {
+                checkLoadError();
+              }
+            }
+          }, 1000);
+        }
+
+        checkLoadError();
+
+        angular.element(document.body).append(el);
+      }, function () {
+        deferred.reject('load error');
+      });
+    });
+
+    file.$ngfDurationPromise = deferred.promise;
+    file.$ngfDurationPromise['finally'](function () {
+      delete file.$ngfDurationPromise;
+    });
+    return file.$ngfDurationPromise;
+  };
+  return upload;
+}
+]);
+
+ngFileUpload.service('UploadResize', ['UploadValidate', '$q', function (UploadValidate, $q) {
+  var upload = UploadValidate;
+
+  /**
+   * Conserve aspect ratio of the original region. Useful when shrinking/enlarging
+   * images to fit into a certain area.
+   * Source:  http://stackoverflow.com/a/14731922
+   *
+   * @param {Number} srcWidth Source area width
+   * @param {Number} srcHeight Source area height
+   * @param {Number} maxWidth Nestable area maximum available width
+   * @param {Number} maxHeight Nestable area maximum available height
+   * @return {Object} { width, height }
+   */
+  var calculateAspectRatioFit = function (srcWidth, srcHeight, maxWidth, maxHeight, centerCrop) {
+    var ratio = centerCrop ? Math.max(maxWidth / srcWidth, maxHeight / srcHeight) :
+      Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+    return {
+      width: srcWidth * ratio, height: srcHeight * ratio,
+      marginX: srcWidth * ratio - maxWidth, marginY: srcHeight * ratio - maxHeight
+    };
+  };
+
+  // Extracted from https://github.com/romelgomez/angular-firebase-image-upload/blob/master/app/scripts/fileUpload.js#L89
+  var resize = function (imagen, width, height, quality, type, ratio, centerCrop, resizeIf) {
+    var deferred = $q.defer();
+    var canvasElement = document.createElement('canvas');
+    var imageElement = document.createElement('img');
+
+    imageElement.onload = function () {
+      if (resizeIf != null && resizeIf(imageElement.width, imageElement.height) === false) {
+        deferred.reject('resizeIf');
+        return;
+      }
+      try {
+        if (ratio) {
+          var ratioFloat = upload.ratioToFloat(ratio);
+          var imgRatio = imageElement.width / imageElement.height;
+          if (imgRatio < ratioFloat) {
+            width = imageElement.width;
+            height = width / ratioFloat;
+          } else {
+            height = imageElement.height;
+            width = height * ratioFloat;
+          }
+        }
+        if (!width) {
+          width = imageElement.width;
+        }
+        if (!height) {
+          height = imageElement.height;
+        }
+        var dimensions = calculateAspectRatioFit(imageElement.width, imageElement.height, width, height, centerCrop);
+        canvasElement.width = Math.min(dimensions.width, width);
+        canvasElement.height = Math.min(dimensions.height, height);
+        var context = canvasElement.getContext('2d');
+        context.drawImage(imageElement,
+          Math.min(0, -dimensions.marginX / 2), Math.min(0, -dimensions.marginY / 2),
+          dimensions.width, dimensions.height);
+        deferred.resolve(canvasElement.toDataURL(type || 'image/WebP', quality || 0.934));
+      } catch (e) {
+        deferred.reject(e);
+      }
+    };
+    imageElement.onerror = function () {
+      deferred.reject();
+    };
+    imageElement.src = imagen;
+    return deferred.promise;
+  };
+
+  upload.dataUrltoBlob = function (dataurl, name, origSize) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    var blob = new window.Blob([u8arr], {type: mime});
+    blob.name = name;
+    blob.$ngfOrigSize = origSize;
+    return blob;
+  };
+
+  upload.isResizeSupported = function () {
+    var elem = document.createElement('canvas');
+    return window.atob && elem.getContext && elem.getContext('2d') && window.Blob;
+  };
+
+  if (upload.isResizeSupported()) {
+    // add name getter to the blob constructor prototype
+    Object.defineProperty(window.Blob.prototype, 'name', {
+      get: function () {
+        return this.$ngfName;
+      },
+      set: function (v) {
+        this.$ngfName = v;
+      },
+      configurable: true
+    });
+  }
+
+  upload.resize = function (file, width, height, quality, type, ratio, centerCrop, resizeIf, restoreExif) {
+    if (file.type.indexOf('image') !== 0) return upload.emptyPromise(file);
+
+    var deferred = $q.defer();
+    upload.dataUrl(file, true).then(function (url) {
+      resize(url, width, height, quality, type || file.type, ratio, centerCrop, resizeIf)
+        .then(function (dataUrl) {
+          if (file.type === 'image/jpeg' && restoreExif) {
+            try {
+              dataUrl = upload.restoreExif(url, dataUrl);
+            } catch (e) {
+              setTimeout(function () {throw e;}, 1);
+            }
+          }
+          try {
+            var blob = upload.dataUrltoBlob(dataUrl, file.name, file.size);
+            deferred.resolve(blob);
+          } catch (e) {
+            deferred.reject(e);
+          }
+        }, function (r) {
+          if (r === 'resizeIf') {
+            deferred.resolve(file);
+          }
+          deferred.reject(r);
+        });
+    }, function (e) {
+      deferred.reject(e);
+    });
+    return deferred.promise;
+  };
+
+  return upload;
+}]);
+
+(function () {
+  ngFileUpload.directive('ngfDrop', ['$parse', '$timeout', '$location', 'Upload', '$http', '$q',
+    function ($parse, $timeout, $location, Upload, $http, $q) {
+      return {
+        restrict: 'AEC',
+        require: '?ngModel',
+        link: function (scope, elem, attr, ngModel) {
+          linkDrop(scope, elem, attr, ngModel, $parse, $timeout, $location, Upload, $http, $q);
+        }
+      };
+    }]);
+
+  ngFileUpload.directive('ngfNoFileDrop', function () {
+    return function (scope, elem) {
+      if (dropAvailable()) elem.css('display', 'none');
+    };
+  });
+
+  ngFileUpload.directive('ngfDropAvailable', ['$parse', '$timeout', 'Upload', function ($parse, $timeout, Upload) {
+    return function (scope, elem, attr) {
+      if (dropAvailable()) {
+        var model = $parse(Upload.attrGetter('ngfDropAvailable', attr));
+        $timeout(function () {
+          model(scope);
+          if (model.assign) {
+            model.assign(scope, true);
+          }
+        });
+      }
+    };
+  }]);
+
+  function linkDrop(scope, elem, attr, ngModel, $parse, $timeout, $location, upload, $http, $q) {
+    var available = dropAvailable();
+
+    var attrGetter = function (name, scope, params) {
+      return upload.attrGetter(name, attr, scope, params);
+    };
+
+    if (attrGetter('dropAvailable')) {
+      $timeout(function () {
+        if (scope[attrGetter('dropAvailable')]) {
+          scope[attrGetter('dropAvailable')].value = available;
+        } else {
+          scope[attrGetter('dropAvailable')] = available;
+        }
+      });
+    }
+    if (!available) {
+      if (attrGetter('ngfHideOnDropNotAvailable', scope) === true) {
+        elem.css('display', 'none');
+      }
+      return;
+    }
+
+    function isDisabled() {
+      return elem.attr('disabled') || attrGetter('ngfDropDisabled', scope);
+    }
+
+    if (attrGetter('ngfSelect') == null) {
+      upload.registerModelChangeValidator(ngModel, attr, scope);
+    }
+
+    var leaveTimeout = null;
+    var stopPropagation = $parse(attrGetter('ngfStopPropagation'));
+    var dragOverDelay = 1;
+    var actualDragOverClass;
+
+    elem[0].addEventListener('dragover', function (evt) {
+      if (isDisabled() || !upload.shouldUpdateOn('drop', attr, scope)) return;
+      evt.preventDefault();
+      if (stopPropagation(scope)) evt.stopPropagation();
+      // handling dragover events from the Chrome download bar
+      if (navigator.userAgent.indexOf('Chrome') > -1) {
+        var b = evt.dataTransfer.effectAllowed;
+        evt.dataTransfer.dropEffect = ('move' === b || 'linkMove' === b) ? 'move' : 'copy';
+      }
+      $timeout.cancel(leaveTimeout);
+      if (!actualDragOverClass) {
+        actualDragOverClass = 'C';
+        calculateDragOverClass(scope, attr, evt, function (clazz) {
+          actualDragOverClass = clazz;
+          elem.addClass(actualDragOverClass);
+          attrGetter('ngfDrag', scope, {$isDragging: true, $class: actualDragOverClass, $event: evt});
+        });
+      }
+    }, false);
+    elem[0].addEventListener('dragenter', function (evt) {
+      if (isDisabled() || !upload.shouldUpdateOn('drop', attr, scope)) return;
+      evt.preventDefault();
+      if (stopPropagation(scope)) evt.stopPropagation();
+    }, false);
+    elem[0].addEventListener('dragleave', function (evt) {
+      if (isDisabled() || !upload.shouldUpdateOn('drop', attr, scope)) return;
+      evt.preventDefault();
+      if (stopPropagation(scope)) evt.stopPropagation();
+      leaveTimeout = $timeout(function () {
+        if (actualDragOverClass) elem.removeClass(actualDragOverClass);
+        actualDragOverClass = null;
+        attrGetter('ngfDrag', scope, {$isDragging: false, $event: evt});
+      }, dragOverDelay || 100);
+    }, false);
+    elem[0].addEventListener('drop', function (evt) {
+      if (isDisabled() || !upload.shouldUpdateOn('drop', attr, scope)) return;
+      evt.preventDefault();
+      if (stopPropagation(scope)) evt.stopPropagation();
+      if (actualDragOverClass) elem.removeClass(actualDragOverClass);
+      actualDragOverClass = null;
+      var items = evt.dataTransfer.items;
+      var html;
+      try {
+        html = evt.dataTransfer && evt.dataTransfer.getData && evt.dataTransfer.getData('text/html');
+      } catch (e) {/* Fix IE11 that throw error calling getData */
+      }
+
+      extractFiles(items, evt.dataTransfer.files, attrGetter('ngfAllowDir', scope) !== false,
+        attrGetter('multiple') || attrGetter('ngfMultiple', scope)).then(function (files) {
+        if (files.length) {
+          updateModel(files, evt);
+        } else {
+          extractFilesFromHtml('dropUrl', html).then(function (files) {
+            updateModel(files, evt);
+          });
+        }
+      });
+    }, false);
+    elem[0].addEventListener('paste', function (evt) {
+      if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 &&
+        attrGetter('ngfEnableFirefoxPaste', scope)) {
+        evt.preventDefault();
+      }
+      if (isDisabled() || !upload.shouldUpdateOn('paste', attr, scope)) return;
+      var files = [];
+      var clipboard = evt.clipboardData || evt.originalEvent.clipboardData;
+      if (clipboard && clipboard.items) {
+        for (var k = 0; k < clipboard.items.length; k++) {
+          if (clipboard.items[k].type.indexOf('image') !== -1) {
+            files.push(clipboard.items[k].getAsFile());
+          }
+        }
+      }
+      if (files.length) {
+        updateModel(files, evt);
+      } else {
+        extractFilesFromHtml('pasteUrl', clipboard).then(function (files) {
+          updateModel(files, evt);
+        });
+      }
+    }, false);
+
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 &&
+      attrGetter('ngfEnableFirefoxPaste', scope)) {
+      elem.attr('contenteditable', true);
+      elem.on('keypress', function (e) {
+        if (!e.metaKey && !e.ctrlKey) {
+          e.preventDefault();
+        }
+      });
+    }
+
+    function updateModel(files, evt) {
+      upload.updateModel(ngModel, attr, scope, attrGetter('ngfChange') || attrGetter('ngfDrop'), files, evt);
+    }
+
+    function extractFilesFromHtml(updateOn, html) {
+      if (!upload.shouldUpdateOn(updateOn, attr, scope) || !html) return upload.rejectPromise([]);
+      var urls = [];
+      html.replace(/<(img src|img [^>]* src) *=\"([^\"]*)\"/gi, function (m, n, src) {
+        urls.push(src);
+      });
+      var promises = [], files = [];
+      if (urls.length) {
+        angular.forEach(urls, function (url) {
+          promises.push(upload.urlToBlob(url).then(function (blob) {
+            files.push(blob);
+          }));
+        });
+        var defer = $q.defer();
+        $q.all(promises).then(function () {
+          defer.resolve(files);
+        }, function (e) {
+          defer.reject(e);
+        });
+        return defer.promise;
+      }
+      return upload.emptyPromise();
+    }
+
+    function calculateDragOverClass(scope, attr, evt, callback) {
+      var obj = attrGetter('ngfDragOverClass', scope, {$event: evt}), dClass = 'dragover';
+      if (angular.isString(obj)) {
+        dClass = obj;
+      } else if (obj) {
+        if (obj.delay) dragOverDelay = obj.delay;
+        if (obj.accept || obj.reject) {
+          var items = evt.dataTransfer.items;
+          if (items == null || !items.length) {
+            dClass = obj.accept;
+          } else {
+            var pattern = obj.pattern || attrGetter('ngfPattern', scope, {$event: evt});
+            var len = items.length;
+            while (len--) {
+              if (!upload.validatePattern(items[len], pattern)) {
+                dClass = obj.reject;
+                break;
+              } else {
+                dClass = obj.accept;
+              }
+            }
+          }
+        }
+      }
+      callback(dClass);
+    }
+
+    function extractFiles(items, fileList, allowDir, multiple) {
+      var maxFiles = upload.getValidationAttr(attr, scope, 'maxFiles') || Number.MAX_VALUE;
+      var maxTotalSize = upload.getValidationAttr(attr, scope, 'maxTotalSize') || Number.MAX_VALUE;
+      var includeDir = attrGetter('ngfIncludeDir', scope);
+      var files = [], totalSize = 0;
+
+      function traverseFileTree(entry, path) {
+        var defer = $q.defer();
+        if (entry != null) {
+          if (entry.isDirectory) {
+            var promises = [upload.emptyPromise()];
+            if (includeDir) {
+              var file = {type: 'directory'};
+              file.name = file.path = (path || '') + entry.name + entry.name;
+              files.push(file);
+            }
+            var dirReader = entry.createReader();
+            var entries = [];
+            var readEntries = function () {
+              dirReader.readEntries(function (results) {
+                try {
+                  if (!results.length) {
+                    angular.forEach(entries.slice(0), function (e) {
+                      if (files.length <= maxFiles && totalSize <= maxTotalSize) {
+                        promises.push(traverseFileTree(e, (path ? path : '') + entry.name + '/'));
+                      }
+                    });
+                    $q.all(promises).then(function () {
+                      defer.resolve();
+                    }, function (e) {
+                      defer.reject(e);
+                    });
+                  } else {
+                    entries = entries.concat(Array.prototype.slice.call(results || [], 0));
+                    readEntries();
+                  }
+                } catch (e) {
+                  defer.reject(e);
+                }
+              }, function (e) {
+                defer.reject(e);
+              });
+            };
+            readEntries();
+          } else {
+            entry.file(function (file) {
+              try {
+                file.path = (path ? path : '') + file.name;
+                if (includeDir) {
+                  file = upload.rename(file, file.path);
+                }
+                files.push(file);
+                totalSize += file.size;
+                defer.resolve();
+              } catch (e) {
+                defer.reject(e);
+              }
+            }, function (e) {
+              defer.reject(e);
+            });
+          }
+        }
+        return defer.promise;
+      }
+
+      var promises = [upload.emptyPromise()];
+
+      if (items && items.length > 0 && $location.protocol() !== 'file') {
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].webkitGetAsEntry && items[i].webkitGetAsEntry() && items[i].webkitGetAsEntry().isDirectory) {
+            var entry = items[i].webkitGetAsEntry();
+            if (entry.isDirectory && !allowDir) {
+              continue;
+            }
+            if (entry != null) {
+              promises.push(traverseFileTree(entry));
+            }
+          } else {
+            var f = items[i].getAsFile();
+            if (f != null) {
+              files.push(f);
+              totalSize += f.size;
+            }
+          }
+          if (files.length > maxFiles || totalSize > maxTotalSize ||
+            (!multiple && files.length > 0)) break;
+        }
+      } else {
+        if (fileList != null) {
+          for (var j = 0; j < fileList.length; j++) {
+            var file = fileList.item(j);
+            if (file.type || file.size > 0) {
+              files.push(file);
+              totalSize += file.size;
+            }
+            if (files.length > maxFiles || totalSize > maxTotalSize ||
+              (!multiple && files.length > 0)) break;
+          }
+        }
+      }
+
+      var defer = $q.defer();
+      $q.all(promises).then(function () {
+        if (!multiple && !includeDir && files.length) {
+          var i = 0;
+          while (files[i] && files[i].type === 'directory') i++;
+          defer.resolve([files[i]]);
+        } else {
+          defer.resolve(files);
+        }
+      }, function (e) {
+        defer.reject(e);
+      });
+
+      return defer.promise;
+    }
+  }
+
+  function dropAvailable() {
+    var div = document.createElement('div');
+    return ('draggable' in div) && ('ondrop' in div) && !/Edge\/12./i.test(navigator.userAgent);
+  }
+
+})();
+
+// customized version of https://github.com/exif-js/exif-js
+ngFileUpload.service('UploadExif', ['UploadResize', '$q', function (UploadResize, $q) {
+  var upload = UploadResize;
+
+  upload.isExifSupported = function () {
+    return window.FileReader && new FileReader().readAsArrayBuffer && upload.isResizeSupported();
+  };
+
+  function applyTransform(ctx, orientation, width, height) {
+    switch (orientation) {
+      case 2:
+        return ctx.transform(-1, 0, 0, 1, width, 0);
+      case 3:
+        return ctx.transform(-1, 0, 0, -1, width, height);
+      case 4:
+        return ctx.transform(1, 0, 0, -1, 0, height);
+      case 5:
+        return ctx.transform(0, 1, 1, 0, 0, 0);
+      case 6:
+        return ctx.transform(0, 1, -1, 0, height, 0);
+      case 7:
+        return ctx.transform(0, -1, -1, 0, height, width);
+      case 8:
+        return ctx.transform(0, -1, 1, 0, 0, width);
+    }
+  }
+
+  upload.readOrientation = function (file) {
+    var defer = $q.defer();
+    var reader = new FileReader();
+    var slicedFile = file.slice ? file.slice(0, 64 * 1024) : file;
+    reader.readAsArrayBuffer(slicedFile);
+    reader.onerror = function (e) {
+      return defer.reject(e);
+    };
+    reader.onload = function (e) {
+      var result = {orientation: 1};
+      var view = new DataView(this.result);
+      if (view.getUint16(0, false) !== 0xFFD8) return defer.resolve(result);
+
+      var length = view.byteLength,
+        offset = 2;
+      while (offset < length) {
+        var marker = view.getUint16(offset, false);
+        offset += 2;
+        if (marker === 0xFFE1) {
+          if (view.getUint32(offset += 2, false) !== 0x45786966) return defer.resolve(result);
+
+          var little = view.getUint16(offset += 6, false) === 0x4949;
+          offset += view.getUint32(offset + 4, little);
+          var tags = view.getUint16(offset, little);
+          offset += 2;
+          for (var i = 0; i < tags; i++)
+            if (view.getUint16(offset + (i * 12), little) === 0x0112) {
+              var orientation = view.getUint16(offset + (i * 12) + 8, little);
+              if (orientation >= 2 && orientation <= 8) {
+                view.setUint16(offset + (i * 12) + 8, 1, little);
+                result.fixedArrayBuffer = e.target.result;
+              }
+              result.orientation = orientation;
+              return defer.resolve(result);
+            }
+        } else if ((marker & 0xFF00) !== 0xFF00) break;
+        else offset += view.getUint16(offset, false);
+      }
+      return defer.resolve(result);
+    };
+    return defer.promise;
+  };
+
+  function arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = new Uint8Array(buffer);
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
+  }
+
+  upload.applyExifRotation = function (file) {
+    if (file.type.indexOf('image/jpeg') !== 0) {
+      return upload.emptyPromise(file);
+    }
+
+    var deferred = $q.defer();
+    upload.readOrientation(file).then(function (result) {
+      if (result.orientation < 2 || result.orientation > 8) {
+        return deferred.resolve(file);
+      }
+      upload.dataUrl(file, true).then(function (url) {
+        var canvas = document.createElement('canvas');
+        var img = document.createElement('img');
+
+        img.onload = function () {
+          try {
+            canvas.width = result.orientation > 4 ? img.height : img.width;
+            canvas.height = result.orientation > 4 ? img.width : img.height;
+            var ctx = canvas.getContext('2d');
+            applyTransform(ctx, result.orientation, img.width, img.height);
+            ctx.drawImage(img, 0, 0);
+            var dataUrl = canvas.toDataURL(file.type || 'image/WebP', 0.934);
+            dataUrl = upload.restoreExif(arrayBufferToBase64(result.fixedArrayBuffer), dataUrl);
+            var blob = upload.dataUrltoBlob(dataUrl, file.name);
+            deferred.resolve(blob);
+          } catch (e) {
+            return deferred.reject(e);
+          }
+        };
+        img.onerror = function () {
+          deferred.reject();
+        };
+        img.src = url;
+      }, function (e) {
+        deferred.reject(e);
+      });
+    }, function (e) {
+      deferred.reject(e);
+    });
+    return deferred.promise;
+  };
+
+  upload.restoreExif = function (orig, resized) {
+    var ExifRestorer = {};
+
+    ExifRestorer.KEY_STR = 'ABCDEFGHIJKLMNOP' +
+      'QRSTUVWXYZabcdef' +
+      'ghijklmnopqrstuv' +
+      'wxyz0123456789+/' +
+      '=';
+
+    ExifRestorer.encode64 = function (input) {
+      var output = '',
+        chr1, chr2, chr3 = '',
+        enc1, enc2, enc3, enc4 = '',
+        i = 0;
+
+      do {
+        chr1 = input[i++];
+        chr2 = input[i++];
+        chr3 = input[i++];
+
+        enc1 = chr1 >> 2;
+        enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+        enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+        enc4 = chr3 & 63;
+
+        if (isNaN(chr2)) {
+          enc3 = enc4 = 64;
+        } else if (isNaN(chr3)) {
+          enc4 = 64;
+        }
+
+        output = output +
+          this.KEY_STR.charAt(enc1) +
+          this.KEY_STR.charAt(enc2) +
+          this.KEY_STR.charAt(enc3) +
+          this.KEY_STR.charAt(enc4);
+        chr1 = chr2 = chr3 = '';
+        enc1 = enc2 = enc3 = enc4 = '';
+      } while (i < input.length);
+
+      return output;
+    };
+
+    ExifRestorer.restore = function (origFileBase64, resizedFileBase64) {
+      if (origFileBase64.match('data:image/jpeg;base64,')) {
+        origFileBase64 = origFileBase64.replace('data:image/jpeg;base64,', '');
+      }
+
+      var rawImage = this.decode64(origFileBase64);
+      var segments = this.slice2Segments(rawImage);
+
+      var image = this.exifManipulation(resizedFileBase64, segments);
+
+      return 'data:image/jpeg;base64,' + this.encode64(image);
+    };
+
+
+    ExifRestorer.exifManipulation = function (resizedFileBase64, segments) {
+      var exifArray = this.getExifArray(segments),
+        newImageArray = this.insertExif(resizedFileBase64, exifArray);
+      return new Uint8Array(newImageArray);
+    };
+
+
+    ExifRestorer.getExifArray = function (segments) {
+      var seg;
+      for (var x = 0; x < segments.length; x++) {
+        seg = segments[x];
+        if (seg[0] === 255 & seg[1] === 225) //(ff e1)
+        {
+          return seg;
+        }
+      }
+      return [];
+    };
+
+
+    ExifRestorer.insertExif = function (resizedFileBase64, exifArray) {
+      var imageData = resizedFileBase64.replace('data:image/jpeg;base64,', ''),
+        buf = this.decode64(imageData),
+        separatePoint = buf.indexOf(255, 3),
+        mae = buf.slice(0, separatePoint),
+        ato = buf.slice(separatePoint),
+        array = mae;
+
+      array = array.concat(exifArray);
+      array = array.concat(ato);
+      return array;
+    };
+
+
+    ExifRestorer.slice2Segments = function (rawImageArray) {
+      var head = 0,
+        segments = [];
+
+      while (1) {
+        if (rawImageArray[head] === 255 & rawImageArray[head + 1] === 218) {
+          break;
+        }
+        if (rawImageArray[head] === 255 & rawImageArray[head + 1] === 216) {
+          head += 2;
+        }
+        else {
+          var length = rawImageArray[head + 2] * 256 + rawImageArray[head + 3],
+            endPoint = head + length + 2,
+            seg = rawImageArray.slice(head, endPoint);
+          segments.push(seg);
+          head = endPoint;
+        }
+        if (head > rawImageArray.length) {
+          break;
+        }
+      }
+
+      return segments;
+    };
+
+
+    ExifRestorer.decode64 = function (input) {
+      var chr1, chr2, chr3 = '',
+        enc1, enc2, enc3, enc4 = '',
+        i = 0,
+        buf = [];
+
+      // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
+      var base64test = /[^A-Za-z0-9\+\/\=]/g;
+      if (base64test.exec(input)) {
+        console.log('There were invalid base64 characters in the input text.\n' +
+          'Valid base64 characters are A-Z, a-z, 0-9, ' + ', ' / ',and "="\n' +
+          'Expect errors in decoding.');
+      }
+      input = input.replace(/[^A-Za-z0-9\+\/\=]/g, '');
+
+      do {
+        enc1 = this.KEY_STR.indexOf(input.charAt(i++));
+        enc2 = this.KEY_STR.indexOf(input.charAt(i++));
+        enc3 = this.KEY_STR.indexOf(input.charAt(i++));
+        enc4 = this.KEY_STR.indexOf(input.charAt(i++));
+
+        chr1 = (enc1 << 2) | (enc2 >> 4);
+        chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+        chr3 = ((enc3 & 3) << 6) | enc4;
+
+        buf.push(chr1);
+
+        if (enc3 !== 64) {
+          buf.push(chr2);
+        }
+        if (enc4 !== 64) {
+          buf.push(chr3);
+        }
+
+        chr1 = chr2 = chr3 = '';
+        enc1 = enc2 = enc3 = enc4 = '';
+
+      } while (i < input.length);
+
+      return buf;
+    };
+
+    return ExifRestorer.restore(orig, resized);  //<= EXIF
+  };
+
+  return upload;
+}]);
+
+
+/*! ngImgCropExtended v0.5.4 License: MIT */!function(){var e=angular.module("ngImgCrop",[]);e.factory("cropAreaCircle",["cropArea",function(e){var t=function(){e.apply(this,arguments),this._boxResizeBaseSize=30,this._boxResizeNormalRatio=.9,this._boxResizeHoverRatio=1.2,this._iconMoveNormalRatio=.9,this._iconMoveHoverRatio=1.2,this._boxResizeNormalSize=this._boxResizeBaseSize*this._boxResizeNormalRatio,this._boxResizeHoverSize=this._boxResizeBaseSize*this._boxResizeHoverRatio,this._posDragStartX=0,this._posDragStartY=0,this._posResizeStartX=0,this._posResizeStartY=0,this._posResizeStartSize=0,this._boxResizeIsHover=!1,this._areaIsHover=!1,this._boxResizeIsDragging=!1,this._areaIsDragging=!1};return t.prototype=new e,t.prototype.getType=function(){return"circle"},t.prototype._calcCirclePerimeterCoords=function(e){var t=this._size.w/2,i=e*(Math.PI/180),r=this.getCenterPoint().x+t*Math.cos(i),n=this.getCenterPoint().y+t*Math.sin(i);return[r,n]},t.prototype._calcResizeIconCenterCoords=function(){return this._calcCirclePerimeterCoords(-45)},t.prototype._isCoordWithinArea=function(e){return Math.sqrt((e[0]-this.getCenterPoint().x)*(e[0]-this.getCenterPoint().x)+(e[1]-this.getCenterPoint().y)*(e[1]-this.getCenterPoint().y))<this._size.w/2},t.prototype._isCoordWithinBoxResize=function(e){var t=this._calcResizeIconCenterCoords(),i=this._boxResizeHoverSize/2;return e[0]>t[0]-i&&e[0]<t[0]+i&&e[1]>t[1]-i&&e[1]<t[1]+i},t.prototype._drawArea=function(e,t,i){e.arc(t.x,t.y,i.w/2,0,2*Math.PI)},t.prototype.draw=function(){e.prototype.draw.apply(this,arguments);var t=this.getCenterPoint();this._cropCanvas.drawIconMove([t.x,t.y],this._areaIsHover?this._iconMoveHoverRatio:this._iconMoveNormalRatio),this._cropCanvas.drawIconResizeBoxNESW(this._calcResizeIconCenterCoords(),this._boxResizeBaseSize,this._boxResizeIsHover?this._boxResizeHoverRatio:this._boxResizeNormalRatio)},t.prototype.processMouseMove=function(e,t){var i="default",r=!1;if(this._boxResizeIsHover=!1,this._areaIsHover=!1,this._areaIsDragging)this.setCenterPointOnMove({x:e-this._posDragStartX,y:t-this._posDragStartY}),this._areaIsHover=!0,i="move",r=!0,this._events.trigger("area-move");else if(this._boxResizeIsDragging){i="nesw-resize";var n,o,a;o=e-this._posResizeStartX,a=this._posResizeStartY-t,n=o>a?this._posResizeStartSize.w+2*a:this._posResizeStartSize.w+2*o;var s=(this.getCenterPoint(),{}),h={};s.x=this.getCenterPoint().x-.5*n,h.x=this.getCenterPoint().x+.5*n,s.y=this.getCenterPoint().y-.5*n,h.y=this.getCenterPoint().y+.5*n,this.CircleOnMove(s,h),this._boxResizeIsHover=!0,r=!0,this._events.trigger("area-resize")}else this._isCoordWithinBoxResize([e,t])?(i="nesw-resize",this._areaIsHover=!1,this._boxResizeIsHover=!0,r=!0):this._isCoordWithinArea([e,t])&&(i="move",this._areaIsHover=!0,r=!0);return angular.element(this._ctx.canvas).css({cursor:i}),r},t.prototype.processMouseDown=function(e,t){if(this._isCoordWithinBoxResize([e,t]))this._areaIsDragging=!1,this._areaIsHover=!1,this._boxResizeIsDragging=!0,this._boxResizeIsHover=!0,this._posResizeStartX=e,this._posResizeStartY=t,this._posResizeStartSize=this._size,this._events.trigger("area-resize-start");else if(this._isCoordWithinArea([e,t])){this._areaIsDragging=!0,this._areaIsHover=!0,this._boxResizeIsDragging=!1,this._boxResizeIsHover=!1;var i=this.getCenterPoint();this._posDragStartX=e-i.x,this._posDragStartY=t-i.y,this._events.trigger("area-move-start")}},t.prototype.processMouseUp=function(){this._areaIsDragging&&(this._areaIsDragging=!1,this._events.trigger("area-move-end")),this._boxResizeIsDragging&&(this._boxResizeIsDragging=!1,this._events.trigger("area-resize-end")),this._areaIsHover=!1,this._boxResizeIsHover=!1,this._posDragStartX=0,this._posDragStartY=0},t}]),e.factory("cropAreaRectangle",["cropArea",function(e){var t=function(){e.apply(this,arguments),this._resizeCtrlBaseRadius=15,this._resizeCtrlNormalRatio=.75,this._resizeCtrlHoverRatio=1,this._iconMoveNormalRatio=.9,this._iconMoveHoverRatio=1.2,this._resizeCtrlNormalRadius=this._resizeCtrlBaseRadius*this._resizeCtrlNormalRatio,this._resizeCtrlHoverRadius=this._resizeCtrlBaseRadius*this._resizeCtrlHoverRatio,this._posDragStartX=0,this._posDragStartY=0,this._posResizeStartX=0,this._posResizeStartY=0,this._posResizeStartSize={w:0,h:0},this._resizeCtrlIsHover=-1,this._areaIsHover=!1,this._resizeCtrlIsDragging=-1,this._areaIsDragging=!1};return t.prototype=new e,t.prototype.getType=function(){return"rectangle"},t.prototype._calcRectangleCorners=function(){var e=this.getSize(),t=this.getSouthEastBound();return[[e.x,e.y],[t.x,e.y],[e.x,t.y],[t.x,t.y]]},t.prototype._calcRectangleDimensions=function(){var e=this.getSize(),t=this.getSouthEastBound();return{left:e.x,top:e.y,right:t.x,bottom:t.y}},t.prototype._isCoordWithinArea=function(e){var t=this._calcRectangleDimensions();return e[0]>=t.left&&e[0]<=t.right&&e[1]>=t.top&&e[1]<=t.bottom},t.prototype._isCoordWithinResizeCtrl=function(e){for(var t=this._calcRectangleCorners(),i=-1,r=0,n=t.length;n>r;r++){var o=t[r];if(e[0]>o[0]-this._resizeCtrlHoverRadius&&e[0]<o[0]+this._resizeCtrlHoverRadius&&e[1]>o[1]-this._resizeCtrlHoverRadius&&e[1]<o[1]+this._resizeCtrlHoverRadius){i=r;break}}return i},t.prototype._drawArea=function(e,t,i){e.rect(i.x,i.y,i.w,i.h)},t.prototype.draw=function(){e.prototype.draw.apply(this,arguments);var t=this.getCenterPoint();this._cropCanvas.drawIconMove([t.x,t.y],this._areaIsHover?this._iconMoveHoverRatio:this._iconMoveNormalRatio);for(var i=this._calcRectangleCorners(),r=0,n=i.length;n>r;r++){var o=i[r];this._cropCanvas.drawIconResizeCircle(o,this._resizeCtrlBaseRadius,this._resizeCtrlIsHover===r?this._resizeCtrlHoverRatio:this._resizeCtrlNormalRatio)}},t.prototype.processMouseMove=function(e,t){var i="default",r=!1;if(this._resizeCtrlIsHover=-1,this._areaIsHover=!1,this._areaIsDragging)this.setCenterPointOnMove({x:e-this._posDragStartX,y:t-this._posDragStartY}),this._areaIsHover=!0,i="move",r=!0,this._events.trigger("area-move");else if(this._resizeCtrlIsDragging>-1){var n=this.getSize(),o=this.getSouthEastBound(),a=e;switch(this._resizeCtrlIsDragging){case 0:this._aspect&&(a=o.x-(o.y-t)*this._aspect),this.setSizeByCorners({x:a,y:t},{x:o.x,y:o.y}),i="nwse-resize";break;case 1:this._aspect&&(a=n.x+(o.y-t)*this._aspect),this.setSizeByCorners({x:n.x,y:t},{x:a,y:o.y}),i="nesw-resize";break;case 2:this._aspect&&(a=o.x-(t-n.y)*this._aspect),this.setSizeByCorners({x:a,y:n.y},{x:o.x,y:t}),i="nesw-resize";break;case 3:this._aspect&&(a=n.x+(t-n.y)*this._aspect),this.setSizeByCorners({x:n.x,y:n.y},{x:a,y:t}),i="nwse-resize"}this._resizeCtrlIsHover=this._resizeCtrlIsDragging,r=!0,this._events.trigger("area-resize")}else{var s=this._isCoordWithinResizeCtrl([e,t]);if(s>-1){switch(s){case 0:i="nwse-resize";break;case 1:i="nesw-resize";break;case 2:i="nesw-resize";break;case 3:i="nwse-resize"}this._areaIsHover=!1,this._resizeCtrlIsHover=s,r=!0}else this._isCoordWithinArea([e,t])&&(i="move",this._areaIsHover=!0,r=!0)}return angular.element(this._ctx.canvas).css({cursor:i}),r},t.prototype.processMouseDown=function(e,t){var i=this._isCoordWithinResizeCtrl([e,t]);if(i>-1)this._areaIsDragging=!1,this._areaIsHover=!1,this._resizeCtrlIsDragging=i,this._resizeCtrlIsHover=i,this._posResizeStartX=e,this._posResizeStartY=t,this._posResizeStartSize=this._size,this._events.trigger("area-resize-start");else if(this._isCoordWithinArea([e,t])){this._areaIsDragging=!0,this._areaIsHover=!0,this._resizeCtrlIsDragging=-1,this._resizeCtrlIsHover=-1;var r=this.getCenterPoint();this._posDragStartX=e-r.x,this._posDragStartY=t-r.y,this._events.trigger("area-move-start")}},t.prototype.processMouseUp=function(){this._areaIsDragging&&(this._areaIsDragging=!1,this._events.trigger("area-move-end")),this._resizeCtrlIsDragging>-1&&(this._resizeCtrlIsDragging=-1,this._events.trigger("area-resize-end")),this._areaIsHover=!1,this._resizeCtrlIsHover=-1,this._posDragStartX=0,this._posDragStartY=0},t}]),e.factory("cropAreaSquare",["cropArea",function(e){var t=function(){e.apply(this,arguments),this._resizeCtrlBaseRadius=15,this._resizeCtrlNormalRatio=.75,this._resizeCtrlHoverRatio=1,this._iconMoveNormalRatio=.9,this._iconMoveHoverRatio=1.2,this._resizeCtrlNormalRadius=this._resizeCtrlBaseRadius*this._resizeCtrlNormalRatio,this._resizeCtrlHoverRadius=this._resizeCtrlBaseRadius*this._resizeCtrlHoverRatio,this._posDragStartX=0,this._posDragStartY=0,this._posResizeStartX=0,this._posResizeStartY=0,this._posResizeStartSize=0,this._resizeCtrlIsHover=-1,this._areaIsHover=!1,this._resizeCtrlIsDragging=-1,this._areaIsDragging=!1};return t.prototype=new e,t.prototype.getType=function(){return"square"},t.prototype._calcSquareCorners=function(){var e=this.getSize(),t=this.getSouthEastBound();return[[e.x,e.y],[t.x,e.y],[e.x,t.y],[t.x,t.y]]},t.prototype._calcSquareDimensions=function(){var e=this.getSize(),t=this.getSouthEastBound();return{left:e.x,top:e.y,right:t.x,bottom:t.y}},t.prototype._isCoordWithinArea=function(e){var t=this._calcSquareDimensions();return e[0]>=t.left&&e[0]<=t.right&&e[1]>=t.top&&e[1]<=t.bottom},t.prototype._isCoordWithinResizeCtrl=function(e){for(var t=this._calcSquareCorners(),i=-1,r=0,n=t.length;n>r;r++){var o=t[r];if(e[0]>o[0]-this._resizeCtrlHoverRadius&&e[0]<o[0]+this._resizeCtrlHoverRadius&&e[1]>o[1]-this._resizeCtrlHoverRadius&&e[1]<o[1]+this._resizeCtrlHoverRadius){i=r;break}}return i},t.prototype._drawArea=function(e,t,i){e.rect(i.x,i.y,i.w,i.h)},t.prototype.draw=function(){e.prototype.draw.apply(this,arguments);var t=this.getCenterPoint();this._cropCanvas.drawIconMove([t.x,t.y],this._areaIsHover?this._iconMoveHoverRatio:this._iconMoveNormalRatio);for(var i=this._calcSquareCorners(),r=0,n=i.length;n>r;r++){var o=i[r];this._cropCanvas.drawIconResizeCircle(o,this._resizeCtrlBaseRadius,this._resizeCtrlIsHover===r?this._resizeCtrlHoverRatio:this._resizeCtrlNormalRatio)}},t.prototype.processMouseMove=function(e,t){var i="default",r=!1;if(this._resizeCtrlIsHover=-1,this._areaIsHover=!1,this._areaIsDragging)this.setCenterPointOnMove({x:e-this._posDragStartX,y:t-this._posDragStartY}),this._areaIsHover=!0,i="move",r=!0,this._events.trigger("area-move");else if(this._resizeCtrlIsDragging>-1){var n,o;switch(this._resizeCtrlIsDragging){case 0:n=-1,o=-1,i="nwse-resize";break;case 1:n=1,o=-1,i="nesw-resize";break;case 2:n=-1,o=1,i="nesw-resize";break;case 3:n=1,o=1,i="nwse-resize"}var a,s=(e-this._posResizeStartX)*n,h=(t-this._posResizeStartY)*o;a=s>h?this._posResizeStartSize.w+h:this._posResizeStartSize.w+s;var c=Math.max(this._minSize.w,a),u={},l={},g={},f={},p=this.getSize(),d=this.getSouthEastBound();switch(this._resizeCtrlIsDragging){case 0:u.x=d.x-c,u.y=d.y-c,u.y>0&&this.setSizeByCorners(u,{x:d.x,y:d.y}),i="nwse-resize";break;case 1:s>=0&&h>=0?(f.x=p.x+c,f.y=d.y-c):(0>s||0>h)&&(f.x=p.x+c,f.y=d.y-c),f.y>0&&this.setSizeByCorners({x:p.x,y:f.y},{x:f.x,y:d.y}),i="nesw-resize";break;case 2:s>=0&&h>=0?(g.x=d.x-c,g.y=p.y+c):(0>=s||0>=h)&&(g.x=d.x-c,g.y=p.y+c),g.y<this._ctx.canvas.height&&this.setSizeByCorners({x:g.x,y:p.y},{x:d.x,y:g.y}),i="nesw-resize";break;case 3:l.x=p.x+c,l.y=p.y+c,l.y<this._ctx.canvas.height&&this.setSizeByCorners({x:p.x,y:p.y},l),i="nwse-resize"}this._resizeCtrlIsHover=this._resizeCtrlIsDragging,r=!0,this._events.trigger("area-resize")}else{var v=this._isCoordWithinResizeCtrl([e,t]);if(v>-1){switch(v){case 0:i="nwse-resize";break;case 1:i="nesw-resize";break;case 2:i="nesw-resize";break;case 3:i="nwse-resize"}this._areaIsHover=!1,this._resizeCtrlIsHover=v,r=!0}else this._isCoordWithinArea([e,t])&&(i="move",this._areaIsHover=!0,r=!0)}return angular.element(this._ctx.canvas).css({cursor:i}),r},t.prototype.processMouseDown=function(e,t){var i=this._isCoordWithinResizeCtrl([e,t]);if(i>-1)this._areaIsDragging=!1,this._areaIsHover=!1,this._resizeCtrlIsDragging=i,this._resizeCtrlIsHover=i,this._posResizeStartX=e,this._posResizeStartY=t,this._posResizeStartSize=this._size,this._events.trigger("area-resize-start");else if(this._isCoordWithinArea([e,t])){this._areaIsDragging=!0,this._areaIsHover=!0,this._resizeCtrlIsDragging=-1,this._resizeCtrlIsHover=-1;var r=this.getCenterPoint();this._posDragStartX=e-r.x,this._posDragStartY=t-r.y,this._events.trigger("area-move-start")}},t.prototype.processMouseUp=function(){this._areaIsDragging&&(this._areaIsDragging=!1,this._events.trigger("area-move-end")),this._resizeCtrlIsDragging>-1&&(this._resizeCtrlIsDragging=-1,this._events.trigger("area-resize-end")),this._areaIsHover=!1,this._resizeCtrlIsHover=-1,this._posDragStartX=0,this._posDragStartY=0},t}]),e.factory("cropArea",["cropCanvas",function(e){var t=function(t,i){this._ctx=t,this._events=i,this._minSize={x:0,y:0,w:80,h:80},this._initSize=void 0,this._initCoords=void 0,this._allowCropResizeOnCorners=!1,this._forceAspectRatio=!1,this._aspect=null,this._cropCanvas=new e(t),this._image=new Image,this._size={x:0,y:0,w:150,h:150}};return t.prototype.setAllowCropResizeOnCorners=function(e){this._allowCropResizeOnCorners=e},t.prototype.getImage=function(){return this._image},t.prototype.setImage=function(e){this._image=e},t.prototype.setForceAspectRatio=function(e){this._forceAspectRatio=e},t.prototype.setAspect=function(e){this._aspect=e},t.prototype.getAspect=function(){return this._aspect},t.prototype.getCanvasSize=function(){return{w:this._ctx.canvas.width,h:this._ctx.canvas.height}},t.prototype.getSize=function(){return this._size},t.prototype.setSize=function(e){e=this._processSize(e),this._size=this._preventBoundaryCollision(e)},t.prototype.setSizeOnMove=function(e){e=this._processSize(e),this._size=this._allowCropResizeOnCorners?this._preventBoundaryCollision(e):this._allowMouseOutsideCanvas(e)},t.prototype.CircleOnMove=function(e,t){var i={x:e.x,y:e.y,w:t.x-e.x,h:t.y-e.y},r=this._ctx.canvas.height,n=this._ctx.canvas.width;(i.w>n||i.h>r)&&(r>n?(i.w=n,i.h=n):(i.w=r,i.h=r)),i.x+i.w>n&&(i.x=n-i.w),i.y+i.h>r&&(i.y=r-i.h),i.x<0&&(i.x=0),i.y<0&&(i.y=0),this._minSize.w>i.w&&(i.w=this._minSize.w,i.x=this._size.x),this._minSize.h>i.h&&(i.h=this._minSize.h,i.y=this._size.y),this._size=i},t.prototype.setSizeByCorners=function(e,t){var i={x:e.x,y:e.y,w:t.x-e.x,h:t.y-e.y};this.setSize(i)},t.prototype.getSouthEastBound=function(){return this._southEastBound(this.getSize())},t.prototype.setMinSize=function(e){this._minSize=this._processSize(e),this.setSize(this._minSize)},t.prototype.getMinSize=function(){return this._minSize},t.prototype.getCenterPoint=function(){var e=this.getSize();return{x:e.x+e.w/2,y:e.y+e.h/2}},t.prototype.setCenterPoint=function(e){var t=this.getSize();this.setSize({x:e.x-t.w/2,y:e.y-t.h/2,w:t.w,h:t.h})},t.prototype.setCenterPointOnMove=function(e){var t=this.getSize();this.setSizeOnMove({x:e.x-t.w/2,y:e.y-t.h/2,w:t.w,h:t.h})},t.prototype.setInitSize=function(e){this._initSize=this._processSize(e),this.setSize(this._initSize)},t.prototype.getInitSize=function(){return this._initSize},t.prototype.setInitCoords=function(e){e.h=this.getSize().h,e.w=this.getSize().w,this._initCoords=this._processSize(e),this.setSize(this._initCoords)},t.prototype.getInitCoords=function(){return this._initCoords},t.prototype.getType=function(){return"circle"},t.prototype._allowMouseOutsideCanvas=function(e){var t=this._ctx.canvas.height,i=this._ctx.canvas.width,r={w:e.w,h:e.h};return r.x=e.x<0?0:e.x+e.w>i?i-e.w:e.x,r.y=e.y<0?0:e.y+e.h>t?t-e.h:e.y,r},t.prototype._preventBoundaryCollision=function(e){var t=this._ctx.canvas.height,i=this._ctx.canvas.width,r={x:e.x,y:e.y},n=this._southEastBound(e);r.x<0&&(r.x=0),r.y<0&&(r.y=0),n.x>i&&(n.x=i),n.y>t&&(n.y=t);var o=this._forceAspectRatio?e.w:n.x-r.x,a=this._forceAspectRatio?e.h:n.y-r.y;this._aspect&&(o=a*this._aspect,r.x+o>i&&(o=i-r.x,a=o/this._aspect,this._minSize.w>o&&(o=this._minSize.w),this._minSize.h>a&&(a=this._minSize.h),r.x=i-o),r.y+a>t&&(r.y=t-a)),this._forceAspectRatio&&(o=a,r.x+o>i&&(o=i-r.x,o<this._minSize.w&&(o=this._minSize.w),a=o));var s={x:r.x,y:r.y,w:o,h:a};return s.w<this._minSize.w&&!this._forceAspectRatio&&(s.w=this._minSize.w,n=this._southEastBound(s),n.x>i&&(n.x=i,r.x=Math.max(n.x-i,n.x-this._minSize.w),s={x:r.x,y:r.y,w:n.x-r.x,h:n.y-r.y})),s.h<this._minSize.h&&!this._forceAspectRatio&&(s.h=this._minSize.h,n=this._southEastBound(s),n.y>t&&(n.y=t,r.y=Math.max(n.y-t,n.y-this._minSize.h),s={x:r.x,y:r.y,w:n.x-r.x,h:n.y-r.y})),this._forceAspectRatio&&(n=this._southEastBound(s),n.y>t&&(s.y=t-s.h),n.x>i&&(s.x=i-s.w)),s},t.prototype._dontDragOutside=function(){var e=this._ctx.canvas.height,t=this._ctx.canvas.width;this._width>t&&(this._width=t),this._height>e&&(this._height=e),this._x<this._width/2&&(this._x=this._width/2),this._x>t-this._width/2&&(this._x=t-this._width/2),this._y<this._height/2&&(this._y=this._height/2),this._y>e-this._height/2&&(this._y=e-this._height/2)},t.prototype._drawArea=function(){},t.prototype._processSize=function(e){"number"==typeof e&&(e={w:e,h:e});var t=e.w;return this._aspect&&(t=e.h*this._aspect),{x:e.x||this.getSize().x,y:e.y||this.getSize().y,w:t||this._minSize.w,h:e.h||this._minSize.h}},t.prototype._southEastBound=function(e){return{x:e.x+e.w,y:e.y+e.h}},t.prototype.draw=function(){this._cropCanvas.drawCropArea(this._image,this.getCenterPoint(),this._size,this._drawArea)},t.prototype.processMouseMove=function(){},t.prototype.processMouseDown=function(){},t.prototype.processMouseUp=function(){},t}]),e.factory("cropCanvas",[function(){var e=[[-.5,-2],[-3,-4.5],[-.5,-7],[-7,-7],[-7,-.5],[-4.5,-3],[-2,-.5]],t=[[.5,-2],[3,-4.5],[.5,-7],[7,-7],[7,-.5],[4.5,-3],[2,-.5]],i=[[-.5,2],[-3,4.5],[-.5,7],[-7,7],[-7,.5],[-4.5,3],[-2,.5]],r=[[.5,2],[3,4.5],[.5,7],[7,7],[7,.5],[4.5,3],[2,.5]],n=[[-1.5,-2.5],[-1.5,-6],[-5,-6],[0,-11],[5,-6],[1.5,-6],[1.5,-2.5]],o=[[-2.5,-1.5],[-6,-1.5],[-6,-5],[-11,0],[-6,5],[-6,1.5],[-2.5,1.5]],a=[[-1.5,2.5],[-1.5,6],[-5,6],[0,11],[5,6],[1.5,6],[1.5,2.5]],s=[[2.5,-1.5],[6,-1.5],[6,-5],[11,0],[6,5],[6,1.5],[2.5,1.5]],h={areaOutline:"#fff",resizeBoxStroke:"#fff",resizeBoxFill:"#444",resizeBoxArrowFill:"#fff",resizeCircleStroke:"#fff",resizeCircleFill:"#444",moveIconFill:"#fff"};return function(c){var u=function(e,t,i){return[i*e[0]+t[0],i*e[1]+t[1]]},l=function(e,t,i,r){c.save(),c.fillStyle=t,c.beginPath();var n,o=u(e[0],i,r);c.moveTo(o[0],o[1]);for(var a in e)a>0&&(n=u(e[a],i,r),c.lineTo(n[0],n[1]));c.lineTo(o[0],o[1]),c.fill(),c.closePath(),c.restore()};this.drawIconMove=function(e,t){l(n,h.moveIconFill,e,t),l(o,h.moveIconFill,e,t),l(a,h.moveIconFill,e,t),l(s,h.moveIconFill,e,t)},this.drawIconResizeCircle=function(e,t,i){var r=t*i;c.save(),c.strokeStyle=h.resizeCircleStroke,c.lineWidth=2,c.fillStyle=h.resizeCircleFill,c.beginPath(),c.arc(e[0],e[1],r,0,2*Math.PI),c.fill(),c.stroke(),c.closePath(),c.restore()},this.drawIconResizeBoxBase=function(e,t,i){var r=t*i;c.save(),c.strokeStyle=h.resizeBoxStroke,c.lineWidth=2,c.fillStyle=h.resizeBoxFill,c.fillRect(e[0]-r/2,e[1]-r/2,r,r),c.strokeRect(e[0]-r/2,e[1]-r/2,r,r),c.restore()},this.drawIconResizeBoxNESW=function(e,r,n){this.drawIconResizeBoxBase(e,r,n),l(t,h.resizeBoxArrowFill,e,n),l(i,h.resizeBoxArrowFill,e,n)},this.drawIconResizeBoxNWSE=function(t,i,n){this.drawIconResizeBoxBase(t,i,n),l(e,h.resizeBoxArrowFill,t,n),l(r,h.resizeBoxArrowFill,t,n)},this.drawCropArea=function(e,t,i,r){var n=Math.abs(e.width/c.canvas.width),o=Math.abs(e.height/c.canvas.height),a=Math.abs(t.x-i.w/2),s=Math.abs(t.y-i.h/2);c.save(),c.strokeStyle=h.areaOutline,c.lineWidth=2,c.beginPath(),r(c,t,i),c.stroke(),c.clip(),i.w>0&&c.drawImage(e,a*n,s*o,Math.abs(i.w*n),Math.abs(i.h*o),a,s,Math.abs(i.w),Math.abs(i.h)),c.beginPath(),r(c,t,i),c.stroke(),c.clip(),c.restore()}}}]),e.service("cropEXIF",[function(){function e(e){return!!e.exifdata}function t(e,t){t=t||e.match(/^data\:([^\;]+)\;base64,/im)[1]||"",e=e.replace(/^data\:([^\;]+)\;base64,/gim,"");for(var i=atob(e),r=i.length,n=new ArrayBuffer(r),o=new Uint8Array(n),a=0;r>a;a++)o[a]=i.charCodeAt(a);return n}function i(e,t){var i=new XMLHttpRequest;i.open("GET",e,!0),i.responseType="blob",i.onload=function(){(200==this.status||0===this.status)&&t(this.response)},i.send()}function r(e,r){function a(t){var i=n(t),a=o(t);e.exifdata=i||{},e.iptcdata=a||{},r&&r.call(e)}if(e.src)if(/^data\:/i.test(e.src)){var s=t(e.src);a(s)}else if(/^blob\:/i.test(e.src)){var h=new FileReader;h.onload=function(e){a(e.target.result)},i(e.src,function(e){h.readAsArrayBuffer(e)})}else{var c=new XMLHttpRequest;c.onload=function(){if(200!=this.status&&0!==this.status)throw"Could not load image";a(c.response),c=null},c.open("GET",e.src,!0),c.responseType="arraybuffer",c.send(null)}else if(window.FileReader&&(e instanceof window.Blob||e instanceof window.File)){var h=new FileReader;h.onload=function(e){l&&console.log("Got file of length "+e.target.result.byteLength),a(e.target.result)},h.readAsArrayBuffer(e)}}function n(e){var t=new DataView(e);if(l&&console.log("Got file of length "+e.byteLength),255!=t.getUint8(0)||216!=t.getUint8(1))return l&&console.log("Not a valid JPEG"),!1;for(var i,r=2,n=e.byteLength;n>r;){if(255!=t.getUint8(r))return l&&console.log("Not a valid marker at offset "+r+", found: "+t.getUint8(r)),!1;if(i=t.getUint8(r+1),l&&console.log(i),225==i)return l&&console.log("Found 0xFFE1 marker"),u(t,r+4,t.getUint16(r+2)-2);r+=2+t.getUint16(r+2)}}function o(e){var t=new DataView(e);if(l&&console.log("Got file of length "+e.byteLength),255!=t.getUint8(0)||216!=t.getUint8(1))return l&&console.log("Not a valid JPEG"),!1;for(var i=2,r=e.byteLength,n=function(e,t){return 56===e.getUint8(t)&&66===e.getUint8(t+1)&&73===e.getUint8(t+2)&&77===e.getUint8(t+3)&&4===e.getUint8(t+4)&&4===e.getUint8(t+5)};r>i;){if(n(t,i)){var o=t.getUint8(i+7);o%2!==0&&(o+=1),0===o&&(o=4);var s=i+8+o,h=t.getUint16(i+6+o);return a(e,s,h)}i++}}function a(e,t,i){for(var r,n,o,a,s,h=new DataView(e),u={},l=t;t+i>l;)28===h.getUint8(l)&&2===h.getUint8(l+1)&&(a=h.getUint8(l+2),a in v&&(o=h.getInt16(l+3),s=o+5,n=v[a],r=c(h,l+5,o),u.hasOwnProperty(n)?u[n]instanceof Array?u[n].push(r):u[n]=[u[n],r]:u[n]=r)),l++;return u}function s(e,t,i,r,n){var o,a,s,c=e.getUint16(i,!n),u={};for(s=0;c>s;s++)o=i+12*s+2,a=r[e.getUint16(o,!n)],!a&&l&&console.log("Unknown tag: "+e.getUint16(o,!n)),u[a]=h(e,o,t,i,n);return u}function h(e,t,i,r,n){var o,a,s,h,u,l,g=e.getUint16(t+2,!n),f=e.getUint32(t+4,!n),p=e.getUint32(t+8,!n)+i;switch(g){case 1:case 7:if(1==f)return e.getUint8(t+8,!n);for(o=f>4?p:t+8,a=[],h=0;f>h;h++)a[h]=e.getUint8(o+h);return a;case 2:return o=f>4?p:t+8,c(e,o,f-1);case 3:if(1==f)return e.getUint16(t+8,!n);for(o=f>2?p:t+8,a=[],h=0;f>h;h++)a[h]=e.getUint16(o+2*h,!n);return a;case 4:if(1==f)return e.getUint32(t+8,!n);for(a=[],h=0;f>h;h++)a[h]=e.getUint32(p+4*h,!n);return a;case 5:if(1==f)return u=e.getUint32(p,!n),l=e.getUint32(p+4,!n),s=new Number(u/l),s.numerator=u,s.denominator=l,s;for(a=[],h=0;f>h;h++)u=e.getUint32(p+8*h,!n),l=e.getUint32(p+4+8*h,!n),a[h]=new Number(u/l),a[h].numerator=u,a[h].denominator=l;return a;case 9:if(1==f)return e.getInt32(t+8,!n);for(a=[],h=0;f>h;h++)a[h]=e.getInt32(p+4*h,!n);return a;case 10:if(1==f)return e.getInt32(p,!n)/e.getInt32(p+4,!n);for(a=[],h=0;f>h;h++)a[h]=e.getInt32(p+8*h,!n)/e.getInt32(p+4+8*h,!n);return a}}function c(e,t,i){for(var r="",n=t;t+i>n;n++)r+=String.fromCharCode(e.getUint8(n));return r}function u(e,t){if("Exif"!=c(e,t,4))return l&&console.log("Not valid EXIF data! "+c(e,t,4)),!1;var i,r,n,o,a,h=t+6;if(18761==e.getUint16(h))i=!1;else{if(19789!=e.getUint16(h))return l&&console.log("Not valid TIFF data! (no 0x4949 or 0x4D4D)"),!1;i=!0}if(42!=e.getUint16(h+2,!i))return l&&console.log("Not valid TIFF data! (no 0x002A)"),!1;var u=e.getUint32(h+4,!i);if(8>u)return l&&console.log("Not valid TIFF data! (First offset less than 8)",e.getUint32(h+4,!i)),!1;if(r=s(e,h,h+u,f,i),r.ExifIFDPointer){o=s(e,h,h+r.ExifIFDPointer,g,i);for(n in o){switch(n){case"LightSource":case"Flash":case"MeteringMode":case"ExposureProgram":case"SensingMethod":case"SceneCaptureType":case"SceneType":case"CustomRendered":case"WhiteBalance":case"GainControl":case"Contrast":case"Saturation":case"Sharpness":case"SubjectDistanceRange":case"FileSource":o[n]=d[n][o[n]];break;case"ExifVersion":case"FlashpixVersion":o[n]=String.fromCharCode(o[n][0],o[n][1],o[n][2],o[n][3]);break;case"ComponentsConfiguration":o[n]=d.Components[o[n][0]]+d.Components[o[n][1]]+d.Components[o[n][2]]+d.Components[o[n][3]]}r[n]=o[n]}}if(r.GPSInfoIFDPointer){a=s(e,h,h+r.GPSInfoIFDPointer,p,i);for(n in a){switch(n){case"GPSVersionID":a[n]=a[n][0]+"."+a[n][1]+"."+a[n][2]+"."+a[n][3]}r[n]=a[n]}}return r}var l=!1,g=this.Tags={36864:"ExifVersion",40960:"FlashpixVersion",40961:"ColorSpace",40962:"PixelXDimension",40963:"PixelYDimension",37121:"ComponentsConfiguration",37122:"CompressedBitsPerPixel",37500:"MakerNote",37510:"UserComment",40964:"RelatedSoundFile",36867:"DateTimeOriginal",36868:"DateTimeDigitized",37520:"SubsecTime",37521:"SubsecTimeOriginal",37522:"SubsecTimeDigitized",33434:"ExposureTime",33437:"FNumber",34850:"ExposureProgram",34852:"SpectralSensitivity",34855:"ISOSpeedRatings",34856:"OECF",37377:"ShutterSpeedValue",37378:"ApertureValue",37379:"BrightnessValue",37380:"ExposureBias",37381:"MaxApertureValue",37382:"SubjectDistance",37383:"MeteringMode",37384:"LightSource",37385:"Flash",37396:"SubjectArea",37386:"FocalLength",41483:"FlashEnergy",41484:"SpatialFrequencyResponse",41486:"FocalPlaneXResolution",41487:"FocalPlaneYResolution",41488:"FocalPlaneResolutionUnit",41492:"SubjectLocation",41493:"ExposureIndex",41495:"SensingMethod",41728:"FileSource",41729:"SceneType",41730:"CFAPattern",41985:"CustomRendered",41986:"ExposureMode",41987:"WhiteBalance",41988:"DigitalZoomRation",41989:"FocalLengthIn35mmFilm",41990:"SceneCaptureType",41991:"GainControl",41992:"Contrast",41993:"Saturation",41994:"Sharpness",41995:"DeviceSettingDescription",41996:"SubjectDistanceRange",40965:"InteroperabilityIFDPointer",42016:"ImageUniqueID"},f=this.TiffTags={256:"ImageWidth",257:"ImageHeight",34665:"ExifIFDPointer",34853:"GPSInfoIFDPointer",40965:"InteroperabilityIFDPointer",258:"BitsPerSample",259:"Compression",262:"PhotometricInterpretation",274:"Orientation",277:"SamplesPerPixel",284:"PlanarConfiguration",530:"YCbCrSubSampling",531:"YCbCrPositioning",282:"XResolution",283:"YResolution",296:"ResolutionUnit",273:"StripOffsets",278:"RowsPerStrip",279:"StripByteCounts",513:"JPEGInterchangeFormat",514:"JPEGInterchangeFormatLength",301:"TransferFunction",318:"WhitePoint",319:"PrimaryChromaticities",529:"YCbCrCoefficients",532:"ReferenceBlackWhite",306:"DateTime",270:"ImageDescription",271:"Make",272:"Model",305:"Software",315:"Artist",33432:"Copyright"},p=this.GPSTags={0:"GPSVersionID",1:"GPSLatitudeRef",2:"GPSLatitude",3:"GPSLongitudeRef",4:"GPSLongitude",5:"GPSAltitudeRef",6:"GPSAltitude",7:"GPSTimeStamp",8:"GPSSatellites",9:"GPSStatus",10:"GPSMeasureMode",11:"GPSDOP",12:"GPSSpeedRef",13:"GPSSpeed",14:"GPSTrackRef",15:"GPSTrack",16:"GPSImgDirectionRef",17:"GPSImgDirection",18:"GPSMapDatum",19:"GPSDestLatitudeRef",20:"GPSDestLatitude",21:"GPSDestLongitudeRef",22:"GPSDestLongitude",23:"GPSDestBearingRef",24:"GPSDestBearing",25:"GPSDestDistanceRef",26:"GPSDestDistance",27:"GPSProcessingMethod",28:"GPSAreaInformation",29:"GPSDateStamp",30:"GPSDifferential"},d=this.StringValues={ExposureProgram:{0:"Not defined",1:"Manual",2:"Normal program",3:"Aperture priority",4:"Shutter priority",5:"Creative program",6:"Action program",7:"Portrait mode",8:"Landscape mode"},MeteringMode:{0:"Unknown",1:"Average",2:"CenterWeightedAverage",3:"Spot",4:"MultiSpot",5:"Pattern",6:"Partial",255:"Other"},LightSource:{0:"Unknown",1:"Daylight",2:"Fluorescent",3:"Tungsten (incandescent light)",4:"Flash",9:"Fine weather",10:"Cloudy weather",11:"Shade",12:"Daylight fluorescent (D 5700 - 7100K)",13:"Day white fluorescent (N 4600 - 5400K)",14:"Cool white fluorescent (W 3900 - 4500K)",15:"White fluorescent (WW 3200 - 3700K)",17:"Standard light A",18:"Standard light B",19:"Standard light C",20:"D55",21:"D65",22:"D75",23:"D50",24:"ISO studio tungsten",255:"Other"},Flash:{0:"Flash did not fire",1:"Flash fired",5:"Strobe return light not detected",7:"Strobe return light detected",9:"Flash fired, compulsory flash mode",13:"Flash fired, compulsory flash mode, return light not detected",15:"Flash fired, compulsory flash mode, return light detected",16:"Flash did not fire, compulsory flash mode",24:"Flash did not fire, auto mode",25:"Flash fired, auto mode",29:"Flash fired, auto mode, return light not detected",31:"Flash fired, auto mode, return light detected",32:"No flash function",65:"Flash fired, red-eye reduction mode",69:"Flash fired, red-eye reduction mode, return light not detected",71:"Flash fired, red-eye reduction mode, return light detected",73:"Flash fired, compulsory flash mode, red-eye reduction mode",77:"Flash fired, compulsory flash mode, red-eye reduction mode, return light not detected",79:"Flash fired, compulsory flash mode, red-eye reduction mode, return light detected",89:"Flash fired, auto mode, red-eye reduction mode",93:"Flash fired, auto mode, return light not detected, red-eye reduction mode",95:"Flash fired, auto mode, return light detected, red-eye reduction mode"},SensingMethod:{1:"Not defined",2:"One-chip color area sensor",3:"Two-chip color area sensor",4:"Three-chip color area sensor",5:"Color sequential area sensor",7:"Trilinear sensor",8:"Color sequential linear sensor"},SceneCaptureType:{0:"Standard",1:"Landscape",2:"Portrait",3:"Night scene"},SceneType:{1:"Directly photographed"},CustomRendered:{0:"Normal process",1:"Custom process"},WhiteBalance:{0:"Auto white balance",1:"Manual white balance"},GainControl:{0:"None",1:"Low gain up",2:"High gain up",3:"Low gain down",4:"High gain down"},Contrast:{0:"Normal",1:"Soft",2:"Hard"},Saturation:{0:"Normal",1:"Low saturation",2:"High saturation"},Sharpness:{0:"Normal",1:"Soft",2:"Hard"},SubjectDistanceRange:{0:"Unknown",1:"Macro",2:"Close view",3:"Distant view"},FileSource:{3:"DSC"},Components:{0:"",1:"Y",2:"Cb",3:"Cr",4:"R",5:"G",6:"B"}},v={120:"caption",110:"credit",25:"keywords",55:"dateCreated",80:"byline",85:"bylineTitle",122:"captionWriter",105:"headline",116:"copyright",15:"category"};this.getData=function(t,i){return(t instanceof Image||t instanceof HTMLImageElement)&&!t.complete?!1:(e(t)?i&&i.call(t):r(t,i),!0)},this.getTag=function(t,i){return e(t)?t.exifdata[i]:void 0},this.getAllTags=function(t){if(!e(t))return{};var i,r=t.exifdata,n={};for(i in r)r.hasOwnProperty(i)&&(n[i]=r[i]);return n},this.pretty=function(t){if(!e(t))return"";var i,r=t.exifdata,n="";for(i in r)r.hasOwnProperty(i)&&(n+="object"==typeof r[i]?r[i]instanceof Number?i+" : "+r[i]+" ["+r[i].numerator+"/"+r[i].denominator+"]\r\n":i+" : ["+r[i].length+" values]\r\n":i+" : "+r[i]+"\r\n");return n},this.readFromBinaryFile=function(e){return n(e)}}]),e.factory("cropHost",["$document","$q","cropAreaCircle","cropAreaSquare","cropAreaRectangle","cropEXIF",function(e,t,i,r,n,o){var a=function(e){var t=e.getBoundingClientRect(),i=document.body,r=document.documentElement,n=window.pageYOffset||r.scrollTop||i.scrollTop,o=window.pageXOffset||r.scrollLeft||i.scrollLeft,a=r.clientTop||i.clientTop||0,s=r.clientLeft||i.clientLeft||0,h=t.top+n-a,c=t.left+o-s;return{top:Math.round(h),left:Math.round(c)}};return function(s,h,c){function u(){l.clearRect(0,0,l.canvas.width,l.canvas.height),null!==g&&(l.drawImage(g,0,0,l.canvas.width,l.canvas.height),l.save(),l.fillStyle="rgba(0, 0, 0, 0.65)",l.fillRect(0,0,l.canvas.width,l.canvas.height),l.restore(),f.draw())}var l=null,g=null,f=null,p=null,d=null,v=this,m=[100,100],w=[300,300],y=[],S={w:200,h:200},_=null,C="image/png",z=null,x=!1;this.setInitMax=function(e){p=e},this.setAllowCropResizeOnCorners=function(e){f.setAllowCropResizeOnCorners(e)};var I=function(){if(null!==g){f.setImage(g);var e=[g.width,g.height],t=g.width/g.height,i=e;i[0]>w[0]?(i[0]=w[0],i[1]=i[0]/t):i[0]<m[0]&&(i[0]=m[0],i[1]=i[0]/t),i[1]>w[1]?(i[1]=w[1],i[0]=i[1]*t):i[1]<m[1]&&(i[1]=m[1],i[0]=i[1]*t),s.prop("width",i[0]).prop("height",i[1]).css({"margin-left":-i[0]/2+"px","margin-top":-i[1]/2+"px"});var r=l.canvas.width,n=l.canvas.height,o=v.getAreaType();if("circle"===o||"square"===o)r>n?r=n:n=r;
+else if("rectangle"===o&&d){var a=f.getAspect();r/n>a?r=a*n:n=a*r}p?f.setSize({w:r,h:n}):void 0!==f.getInitSize()?f.setSize({w:Math.min(f.getInitSize().w,r/2),h:Math.min(f.getInitSize().h,n/2)}):f.setSize({w:Math.min(200,r/2),h:Math.min(200,n/2)}),f.getInitCoords()?f.setSize({w:f.getSize().w,h:f.getSize().h,x:f.getInitCoords().x,y:f.getInitCoords().y}):f.setCenterPoint({x:l.canvas.width/2,y:l.canvas.height/2})}else s.prop("width",0).prop("height",0).css({"margin-top":0});u()},b=function(e){return angular.isDefined(e.changedTouches)?e.changedTouches:e.originalEvent.changedTouches},R=function(e){if(null!==g){var t,i,r=a(l.canvas);"touchmove"===e.type?(t=b(e)[0].pageX,i=b(e)[0].pageY):(t=e.pageX,i=e.pageY),f.processMouseMove(t-r.left,i-r.top),u()}},D=function(e){if(e.preventDefault(),e.stopPropagation(),null!==g){var t,i,r=a(l.canvas);"touchstart"===e.type?(t=b(e)[0].pageX,i=b(e)[0].pageY):(t=e.pageX,i=e.pageY),f.processMouseDown(t-r.left,i-r.top),u()}},P=function(e){if(null!==g){var t,i,r=a(l.canvas);"touchend"===e.type?(t=b(e)[0].pageX,i=b(e)[0].pageY):(t=e.pageX,i=e.pageY),f.processMouseUp(t-r.left,i-r.top),u()}},M=function(e){var t,i,r=e,n=f.getCenterPoint(),o={dataURI:null,imageData:null};if(i=angular.element("<canvas></canvas>")[0],t=i.getContext("2d"),i.width=r.w,i.height=r.h,null!==g){var a=(n.x-f.getSize().w/2)*(g.width/l.canvas.width),s=(n.y-f.getSize().h/2)*(g.height/l.canvas.height),h=f.getSize().w*(g.width/l.canvas.width),c=f.getSize().h*(g.height/l.canvas.height);if(x)t.drawImage(g,a,s,h,c,0,0,r.w,r.h);else{var u,p,d=h/c;d>1?(p=r.w,u=p/d):(u=r.h,p=u*d),t.drawImage(g,a,s,h,c,0,0,Math.round(p),Math.round(u))}o.dataURI=null!==z?i.toDataURL(C,z):i.toDataURL(C)}return o};this.getResultImage=function(){if(0==y.length)return M(this.getResultImageSize());for(var e=[],t=0;t<y.length;t++)e.push({dataURI:M(y[t]).dataURI,w:y[t].w,h:y[t].h});return e},this.getResultImageDataBlob=function(){var e,i,r=f.getCenterPoint(),n=this.getResultImageSize(),o=t.defer();if(i=angular.element("<canvas></canvas>")[0],e=i.getContext("2d"),i.width=n.w,i.height=n.h,null!==g){var a=(r.x-f.getSize().w/2)*(g.width/l.canvas.width),s=(r.y-f.getSize().h/2)*(g.height/l.canvas.height),h=f.getSize().w*(g.width/l.canvas.width),c=f.getSize().h*(g.height/l.canvas.height);if(x)e.drawImage(g,a,s,h,c,0,0,n.w,n.h);else{var u,p,d=h/c;d>1?(p=n.w,u=p/d):(u=n.h,p=u*d),e.drawImage(g,a,s,h,c,0,0,Math.round(p),Math.round(u))}}return i.toBlob(function(e){o.resolve(e)},C),o.promise},this.getAreaCoords=function(){return f.getSize()},this.getArea=function(){return f},this.setNewImageSource=function(e){if(g=null,I(),c.trigger("image-updated"),e){var t=new Image;t.onload=function(){c.trigger("load-done"),o.getData(t,function(){var e=o.getTag(t,"Orientation");if([3,6,8].indexOf(e)>-1){var i=document.createElement("canvas"),r=i.getContext("2d"),n=t.width,a=t.height,s=0,h=0,u=0,l=0,f=0;switch(l=n,f=a,e){case 3:s=-t.width,h=-t.height,u=180;break;case 6:n=t.height,a=t.width,h=-t.height,l=a,f=n,u=90;break;case 8:n=t.height,a=t.width,s=-t.width,l=a,f=n,u=270}var p=1e3;if(n>p||a>p){var d=0;n>p?(d=p/n,n=p,a=d*a):a>p&&(d=p/a,a=p,n=d*n),h=d*h,s=d*s,l=d*l,f=d*f}i.width=n,i.height=a,r.rotate(u*Math.PI/180),r.drawImage(t,s,h,l,f),g=new Image,g.onload=function(){I(),c.trigger("image-updated")},g.src=i.toDataURL(C)}else g=t;I(),c.trigger("image-updated")})},t.onerror=function(){c.trigger("load-error")},c.trigger("load-start"),e instanceof window.Blob?t.src=URL.createObjectURL(e):("http"===e.substring(0,4).toLowerCase()&&(t.crossOrigin="anonymous"),t.src=e)}},this.setMaxDimensions=function(e,t){if(w=[e,t],null!==g){var i=l.canvas.width,r=l.canvas.height,n=[g.width,g.height],o=g.width/g.height,a=n;a[0]>w[0]?(a[0]=w[0],a[1]=a[0]/o):a[0]<m[0]&&(a[0]=m[0],a[1]=a[0]/o),a[1]>w[1]?(a[1]=w[1],a[0]=a[1]*o):a[1]<m[1]&&(a[1]=m[1],a[0]=a[1]*o),s.prop("width",a[0]).prop("height",a[1]).css({"margin-left":-a[0]/2+"px","margin-top":-a[1]/2+"px"});var h=l.canvas.width/i,c=l.canvas.height/r,p=Math.min(h,c);f.setSize({w:f.getSize().w*p,h:f.getSize().h*p});var d=f.getCenterPoint();f.setCenterPoint({x:d.x*h,y:d.y*c})}else s.prop("width",0).prop("height",0).css({"margin-top":0});u()},this.setAreaMinSize=function(e){angular.isUndefined(e)||(e="number"==typeof e||"string"==typeof e?{w:parseInt(parseInt(e),10),h:parseInt(parseInt(e),10)}:{w:parseInt(e.w,10),h:parseInt(e.h,10)},isNaN(e.w)||isNaN(e.h)||(f.setMinSize(e),u()))},this.setAreaMinRelativeSize=function(e){if(null!==g){var t=f.getCanvasSize();if(angular.isUndefined(e))return;"number"==typeof e||"string"==typeof e?(_={w:e,h:e},e={w:t.w/(g.width/parseInt(parseInt(e),10)),h:t.h/(g.height/parseInt(parseInt(e),10))}):(_=e,e={w:t.w/(g.width/parseInt(parseInt(e.w),10)),h:t.h/(g.height/parseInt(parseInt(e.h),10))}),isNaN(e.w)||isNaN(e.h)||(f.setMinSize(e),u())}},this.setAreaInitSize=function(e){angular.isUndefined(e)||(e="number"==typeof e||"string"==typeof e?{w:parseInt(parseInt(e),10),h:parseInt(parseInt(e),10)}:{w:parseInt(e.w,10),h:parseInt(e.h,10)},isNaN(e.w)||isNaN(e.h)||(f.setInitSize(e),u()))},this.setAreaInitCoords=function(e){angular.isUndefined(e)||(e={x:parseInt(e.x,10),y:parseInt(e.y,10)},isNaN(e.x)||isNaN(e.y)||(f.setInitCoords(e),u()))},this.setMaxCanvasDimensions=function(e){if(!angular.isUndefined(e)){var t=[];t="number"==typeof e||"string"==typeof e?[parseInt(parseInt(e),10),parseInt(parseInt(e),10)]:[parseInt(e.w,10),parseInt(e.h,10)],!isNaN(t[0])&&t[0]>0&&t[0]>m[0]&&!isNaN(t[1])&&t[1]>0&&t[1]>m[1]&&(w=t)}},this.setMinCanvasDimensions=function(e){if(!angular.isUndefined(e)){var t=[];t="number"==typeof e||"string"==typeof e?[parseInt(parseInt(e),10),parseInt(parseInt(e),10)]:[parseInt(e.w,10),parseInt(e.h,10)],!isNaN(t[0])&&t[0]>=0&&!isNaN(t[1])&&t[1]>=0&&(m=t)}},this.getResultImageSize=function(){if("selection"==S)return f.getSize();if("max"==S){var e=1;g&&l&&l.canvas&&(e=g.width/l.canvas.width);var t={w:e*f.getSize().w,h:e*f.getSize().h};return _&&(t.w<_.w&&(t.w=_.w),t.h<_.h&&(t.h=_.h)),t}return S},this.setResultImageSize=function(e){if(angular.isArray(e))return y=e.slice(),e={w:parseInt(e[0].w,10),h:parseInt(e[0].h,10)},void 0;if(!angular.isUndefined(e)){if(angular.isString(e))return S=e,void 0;angular.isNumber(e)&&(e=parseInt(e,10),e={w:e,h:e}),e={w:parseInt(e.w,10),h:parseInt(e.h,10)},isNaN(e.w)||isNaN(e.h)||(S=e,u())}},this.setResultImageFormat=function(e){C=e},this.setResultImageQuality=function(e){e=parseFloat(e),!isNaN(e)&&e>=0&&1>=e&&(z=e)},this.getAreaType=function(){return f.getType()},this.setAreaType=function(e){var t=f.getCenterPoint(),o=f.getSize(),a=f.getMinSize(),s=t.x,h=t.y,p=i;"square"===e?p=r:"rectangle"===e&&(p=n),f=new p(l,c),f.setMinSize(a),f.setSize(o),"square"===e||"circle"===e?(x=!0,f.setForceAspectRatio(!0)):(x=!1,f.setForceAspectRatio(!1)),f.setCenterPoint({x:s,y:h}),null!==g&&f.setImage(g),u()},this.getDominantColor=function(e){var i=new Image,r=new ColorThief,n=null,o=t.defer();return i.src=e,i.onload=function(){n=r.getColor(i),o.resolve(n)},o.promise},this.getPalette=function(e){var i=new Image,r=new ColorThief,n=null,o=t.defer();return i.src=e,i.onload=function(){n=r.getPalette(i,colorPaletteLength),o.resolve(n)},o.promise},this.setPaletteColorLength=function(e){colorPaletteLength=e},this.setAspect=function(e){d=!0,f.setAspect(e);var t=f.getMinSize();t.w=t.h*e,f.setMinSize(t);var i=f.getSize();i.w=i.h*e,f.setSize(i)},l=s[0].getContext("2d"),f=new i(l,c),e.on("mousemove",R),s.on("mousedown",D),e.on("mouseup",P),e.on("touchmove",R),s.on("touchstart",D),e.on("touchend",P),this.destroy=function(){e.off("mousemove",R),s.off("mousedown",D),e.off("mouseup",R),e.off("touchmove",R),s.off("touchstart",D),e.off("touchend",R),s.remove()}}}]),e.factory("cropPubSub",[function(){return function(){var e={};this.on=function(t,i){return t.split(" ").forEach(function(t){e[t]||(e[t]=[]),e[t].push(i)}),this},this.trigger=function(t,i){return angular.forEach(e[t],function(e){e.call(null,i)}),this}}}]),e.directive("imgCrop",["$timeout","cropHost","cropPubSub",function(e,t,i){return{restrict:"E",scope:{image:"=",resultImage:"=",resultArrayImage:"=?",resultBlob:"=?",urlBlob:"=?",chargement:"=?",cropject:"=?",maxCanvasDimensions:"=?",minCanvasDimensions:"=?",changeOnFly:"=?",liveView:"=?",initMaxArea:"=?",areaCoords:"=?",areaType:"@",areaMinSize:"=?",areaInitSize:"=?",areaInitCoords:"=?",areaMinRelativeSize:"=?",resultImageSize:"=?",resultImageFormat:"=?",resultImageQuality:"=?",aspectRatio:"=?",allowCropResizeOnCorners:"=?",dominantColor:"=?",paletteColor:"=?",paletteColorLength:"=?",onChange:"&",onLoadBegin:"&",onLoadDone:"&",onLoadError:"&"},template:"<canvas></canvas>",controller:["$scope",function(e){e.events=new i}],link:function(i,r){i.liveView&&"boolean"==typeof i.liveView.block?i.liveView.render=function(e){s(i,!0,e)}:i.liveView={block:!1};var n,o=i.events,a=new t(r.find("canvas"),{},o),s=function(e,t,i){if(""!==e.image&&(!e.liveView.block||t)){var r=a.getResultImage();if(angular.isArray(r))o=r[0].dataURI,e.resultArrayImage=r,console.log(e.resultArrayImage);else var o=r.dataURI;var s=window.URL||window.webkitURL;n!==o&&(n=o,e.resultImage=o,e.liveView.callback&&e.liveView.callback(o),i&&i(o),a.getResultImageDataBlob().then(function(t){e.resultBlob=t,e.urlBlob=s.createObjectURL(t)}),e.resultImage&&(a.getDominantColor(e.resultImage).then(function(t){e.dominantColor=t}),a.getPalette(e.resultImage).then(function(t){e.paletteColor=t})),h(e),e.onChange({$dataURI:e.resultImage}))}},h=function(e){var t=a.getAreaCoords();e.areaCoords=t},c=function(e){var t=a.getAreaCoords(),i={x:a.getArea().getImage().width/a.getArea().getCanvasSize().w,y:a.getArea().getImage().height/a.getArea().getCanvasSize().h};e.cropject={areaCoords:t,cropWidth:t.w,cropHeight:t.h,cropTop:t.y,cropLeft:t.x,cropImageWidth:Math.round(t.w*i.x),cropImageHeight:Math.round(t.h*i.y),cropImageTop:Math.round(t.y*i.y),cropImageLeft:Math.round(t.x*i.x)}},u=function(t){return function(){e(function(){i.$apply(function(e){t(e)})})}};null==i.chargement&&(i.chargement="Chargement");var l=function(){r.append('<div class="loading"><span>'+i.chargement+"...</span></div>")};o.on("load-start",u(function(e){e.onLoadBegin({})})).on("load-done",u(function(e){angular.element(r.children()[r.children().length-1]).remove(),e.onLoadDone({})})).on("load-error",u(function(e){e.onLoadError({})})).on("area-move area-resize",u(function(e){e.changeOnFly&&s(e),c(e)})).on("area-move-end area-resize-end image-updated",u(function(e){s(e),c(e)})).on("image-updated",u(function(e){a.setAreaMinRelativeSize(e.areaMinRelativeSize)})),i.$watch("image",function(t){t&&l(),e(function(){a.setInitMax(i.initMaxArea),a.setNewImageSource(i.image)},100)}),i.$watch("areaType",function(){a.setAreaType(i.areaType),s(i)}),i.$watch("areaMinSize",function(){a.setAreaMinSize(i.areaMinSize),s(i)}),i.$watch("areaMinRelativeSize",function(){""!==i.image&&(a.setAreaMinRelativeSize(i.areaMinRelativeSize),s(i))}),i.$watch("areaInitSize",function(){a.setAreaInitSize(i.areaInitSize),s(i)}),i.$watch("areaInitCoords",function(){a.setAreaInitCoords(i.areaInitCoords),s(i)}),i.$watch("maxCanvasDimensions",function(){a.setMaxCanvasDimensions(i.maxCanvasDimensions)}),i.$watch("minCanvasDimensions",function(){a.setMinCanvasDimensions(i.minCanvasDimensions)}),i.$watch("resultImageFormat",function(){a.setResultImageFormat(i.resultImageFormat),s(i)}),i.$watch("resultImageQuality",function(){a.setResultImageQuality(i.resultImageQuality),s(i)}),i.$watch("resultImageSize",function(){a.setResultImageSize(i.resultImageSize),s(i)}),i.$watch("paletteColorLength",function(){a.setPaletteColorLength(i.paletteColorLength)}),i.$watch("aspectRatio",function(){"string"==typeof i.aspectRatio&&""!=i.aspectRatio&&(i.aspectRatio=parseInt(i.aspectRatio)),i.aspectRatio&&a.setAspect(i.aspectRatio)}),i.$watch("allowCropResizeOnCorners",function(){i.allowCropResizeOnCorners&&a.setAllowCropResizeOnCorners(i.allowCropResizeOnCorners)}),i.$watch(function(){return[r[0].clientWidth,r[0].clientHeight]},function(e){e[0]>0&&e[1]>0&&(a.setMaxDimensions(e[0],e[1]),s(i))},!0),i.$on("$destroy",function(){a.destroy()})}}}]),function(e){"use strict";var t,i=e.Uint8Array,r=e.HTMLCanvasElement,n=r&&r.prototype,o=/\s*;\s*base64\s*(?:;|$)/i,a="toDataURL",s=function(e){for(var r,n,o,a=e.length,s=new i(a/4*3|0),h=0,c=0,u=[0,0],l=0,g=0;a--;)n=e.charCodeAt(h++),r=t[n-43],255!==r&&r!==o&&(u[1]=u[0],u[0]=n,g=g<<6|r,l++,4===l&&(s[c++]=g>>>16,61!==u[1]&&(s[c++]=g>>>8),61!==u[0]&&(s[c++]=g),l=0));return s};i&&(t=new i([62,-1,-1,-1,63,52,53,54,55,56,57,58,59,60,61,-1,-1,-1,0,-1,-1,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,-1,-1,-1,-1,-1,-1,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51])),r&&!n.toBlob&&(n.toBlob=function(e,t){if(t||(t="image/png"),this.mozGetAsFile)return e(this.mozGetAsFile("canvas",t)),void 0;if(this.msToBlob&&/^\s*image\/png\s*(?:$|;)/i.test(t))return e(this.msToBlob()),void 0;var r,n=Array.prototype.slice.call(arguments,1),h=this[a].apply(this,n),c=h.indexOf(","),u=h.substring(c+1),l=o.test(h.substring(0,c));Blob.fake?(r=new Blob,r.encoding=l?"base64":"URI",r.data=u,r.size=u.length):i&&(r=l?new Blob([s(u)],{type:t}):new Blob([decodeURIComponent(u)],{type:t})),"undefined"!=typeof e&&e(r)},n.toBlobHD=n.toDataURLHD?function(){a="toDataURLHD";var e=this.toBlob();return a="toDataURL",e}:n.toBlob)}("undefined"!=typeof self&&self||"undefined"!=typeof window&&window||this.content||this),function(){var e=function(e){this.canvas=document.createElement("canvas"),this.context=this.canvas.getContext("2d"),document.body.appendChild(this.canvas),this.width=this.canvas.width=e.width,this.height=this.canvas.height=e.height,this.context.drawImage(e,0,0,this.width,this.height)};e.prototype.clear=function(){this.context.clearRect(0,0,this.width,this.height)},e.prototype.update=function(e){this.context.putImageData(e,0,0)},e.prototype.getPixelCount=function(){return this.width*this.height},e.prototype.getImageData=function(){return this.context.getImageData(0,0,this.width,this.height)},e.prototype.removeCanvas=function(){this.canvas.parentNode.removeChild(this.canvas)};var t=function(){};if(t.prototype.getColor=function(e,t){var i=this.getPalette(e,5,t),r=i[0];return r},t.prototype.getPalette=function(t,i,n){"undefined"==typeof i&&(i=10),("undefined"==typeof n||1>n)&&(n=10);for(var o,a,s,h,c,u=new e(t),l=u.getImageData(),g=l.data,f=u.getPixelCount(),p=[],d=0;f>d;d+=n)o=4*d,a=g[o+0],s=g[o+1],h=g[o+2],c=g[o+3],c>=125&&(a>250&&s>250&&h>250||p.push([a,s,h]));var v=r.quantize(p,i),m=v?v.palette():null;return u.removeCanvas(),m},!i)var i={map:function(e,t){var i={};return t?e.map(function(e,r){return i.index=r,t.call(i,e)}):e.slice()},naturalOrder:function(e,t){return t>e?-1:e>t?1:0},sum:function(e,t){var i={};return e.reduce(t?function(e,r,n){return i.index=n,e+t.call(i,r)}:function(e,t){return e+t},0)},max:function(e,t){return Math.max.apply(null,t?i.map(e,t):e)}};var r=function(){function e(e,t,i){return(e<<2*c)+(t<<c)+i}function t(e){function t(){i.sort(e),r=!0}var i=[],r=!1;return{push:function(e){i.push(e),r=!1},peek:function(e){return r||t(),void 0===e&&(e=i.length-1),i[e]},pop:function(){return r||t(),i.pop()},size:function(){return i.length},map:function(e){return i.map(e)},debug:function(){return r||t(),i}}}function r(e,t,i,r,n,o,a){var s=this;s.r1=e,s.r2=t,s.g1=i,s.g2=r,s.b1=n,s.b2=o,s.histo=a}function n(){this.vboxes=new t(function(e,t){return i.naturalOrder(e.vbox.count()*e.vbox.volume(),t.vbox.count()*t.vbox.volume())})}function o(t){var i,r,n,o,a=1<<3*c,s=new Array(a);return t.forEach(function(t){r=t[0]>>u,n=t[1]>>u,o=t[2]>>u,i=e(r,n,o),s[i]=(s[i]||0)+1}),s}function a(e,t){var i,n,o,a=1e6,s=0,h=1e6,c=0,l=1e6,g=0;return e.forEach(function(e){i=e[0]>>u,n=e[1]>>u,o=e[2]>>u,a>i?a=i:i>s&&(s=i),h>n?h=n:n>c&&(c=n),l>o?l=o:o>g&&(g=o)}),new r(a,s,h,c,l,g,t)}function s(t,r){function n(e){var t,i,n,o,a,s=e+"1",h=e+"2",u=0;for(c=r[s];c<=r[h];c++)if(d[c]>p/2){for(n=r.copy(),o=r.copy(),t=c-r[s],i=r[h]-c,a=i>=t?Math.min(r[h]-1,~~(c+i/2)):Math.max(r[s],~~(c-1-t/2));!d[a];)a++;for(u=v[a];!u&&d[a-1];)u=v[--a];return n[h]=a,o[s]=n[h]+1,[n,o]}}if(r.count()){var o=r.r2-r.r1+1,a=r.g2-r.g1+1,s=r.b2-r.b1+1,h=i.max([o,a,s]);if(1==r.count())return[r.copy()];var c,u,l,g,f,p=0,d=[],v=[];if(h==o)for(c=r.r1;c<=r.r2;c++){for(g=0,u=r.g1;u<=r.g2;u++)for(l=r.b1;l<=r.b2;l++)f=e(c,u,l),g+=t[f]||0;p+=g,d[c]=p}else if(h==a)for(c=r.g1;c<=r.g2;c++){for(g=0,u=r.r1;u<=r.r2;u++)for(l=r.b1;l<=r.b2;l++)f=e(u,c,l),g+=t[f]||0;p+=g,d[c]=p}else for(c=r.b1;c<=r.b2;c++){for(g=0,u=r.r1;u<=r.r2;u++)for(l=r.g1;l<=r.g2;l++)f=e(u,l,c),g+=t[f]||0;p+=g,d[c]=p}return d.forEach(function(e,t){v[t]=p-e}),h==o?n("r"):h==a?n("g"):n("b")}}function h(e,r){function h(e,t){for(var i,r=1,n=0;l>n;)if(i=e.pop(),i.count()){var o=s(c,i),a=o[0],h=o[1];if(!a)return;if(e.push(a),h&&(e.push(h),r++),r>=t)return;if(n++>l)return}else e.push(i),n++}if(!e.length||2>r||r>256)return!1;var c=o(e),u=0;c.forEach(function(){u++});var f=a(e,c),p=new t(function(e,t){return i.naturalOrder(e.count(),t.count())});p.push(f),h(p,g*r);for(var d=new t(function(e,t){return i.naturalOrder(e.count()*e.volume(),t.count()*t.volume())});p.size();)d.push(p.pop());h(d,r-d.size());for(var v=new n;d.size();)v.push(d.pop());return v}var c=5,u=8-c,l=1e3,g=.75;return r.prototype={volume:function(e){var t=this;return(!t._volume||e)&&(t._volume=(t.r2-t.r1+1)*(t.g2-t.g1+1)*(t.b2-t.b1+1)),t._volume},count:function(t){var i=this,r=i.histo;if(!i._count_set||t){var n,o,a,s=0;for(n=i.r1;n<=i.r2;n++)for(o=i.g1;o<=i.g2;o++)for(a=i.b1;a<=i.b2;a++)index=e(n,o,a),s+=r[index]||0;i._count=s,i._count_set=!0}return i._count},copy:function(){var e=this;return new r(e.r1,e.r2,e.g1,e.g2,e.b1,e.b2,e.histo)},avg:function(t){var i=this,r=i.histo;if(!i._avg||t){var n,o,a,s,h,u=0,l=1<<8-c,g=0,f=0,p=0;for(o=i.r1;o<=i.r2;o++)for(a=i.g1;a<=i.g2;a++)for(s=i.b1;s<=i.b2;s++)h=e(o,a,s),n=r[h]||0,u+=n,g+=n*(o+.5)*l,f+=n*(a+.5)*l,p+=n*(s+.5)*l;i._avg=u?[~~(g/u),~~(f/u),~~(p/u)]:[~~(l*(i.r1+i.r2+1)/2),~~(l*(i.g1+i.g2+1)/2),~~(l*(i.b1+i.b2+1)/2)]}return i._avg},contains:function(e){var t=this,i=e[0]>>u;return gval=e[1]>>u,bval=e[2]>>u,i>=t.r1&&i<=t.r2&&gval>=t.g1&&gval<=t.g2&&bval>=t.b1&&bval<=t.b2}},n.prototype={push:function(e){this.vboxes.push({vbox:e,color:e.avg()})},palette:function(){return this.vboxes.map(function(e){return e.color})},size:function(){return this.vboxes.size()},map:function(e){for(var t=this.vboxes,i=0;i<t.size();i++)if(t.peek(i).vbox.contains(e))return t.peek(i).color;return this.nearest(e)},nearest:function(e){for(var t,i,r,n=this.vboxes,o=0;o<n.size();o++)i=Math.sqrt(Math.pow(e[0]-n.peek(o).color[0],2)+Math.pow(e[1]-n.peek(o).color[1],2)+Math.pow(e[2]-n.peek(o).color[2],2)),(t>i||void 0===t)&&(t=i,r=n.peek(o).color);return r},forcebw:function(){var e=this.vboxes;e.sort(function(e,t){return i.naturalOrder(i.sum(e.color),i.sum(t.color))});var t=e[0].color;t[0]<5&&t[1]<5&&t[2]<5&&(e[0].color=[0,0,0]);var r=e.length-1,n=e[r].color;n[0]>251&&n[1]>251&&n[2]>251&&(e[r].color=[255,255,255])}},{quantize:h}}();"function"==typeof define&&define.amd?define([],function(){return t}):"object"==typeof exports?module.exports=t:this.ColorThief=t}.call(this)}(),function(){function e(e){return!!e.exifdata}function t(e,t){t=t||e.match(/^data\:([^\;]+)\;base64,/im)[1]||"",e=e.replace(/^data\:([^\;]+)\;base64,/gim,"");for(var i=atob(e),r=i.length,n=new ArrayBuffer(r),o=new Uint8Array(n),a=0;r>a;a++)o[a]=i.charCodeAt(a);return n}function i(e,t){var i=new XMLHttpRequest;i.open("GET",e,!0),i.responseType="blob",i.onload=function(){(200==this.status||0===this.status)&&t(this.response)},i.send()}function r(e,r){function n(t){var i=o(t),n=a(t);e.exifdata=i||{},e.iptcdata=n||{},r&&r.call(e)}if(e.src)if(/^data\:/i.test(e.src)){var s=t(e.src);n(s)}else if(/^blob\:/i.test(e.src)){var h=new FileReader;h.onload=function(e){n(e.target.result)},i(e.src,function(e){h.readAsArrayBuffer(e)})}else{var c=new XMLHttpRequest;c.onload=function(){if(200!=this.status&&0!==this.status)throw"Could not load image";n(c.response),c=null},c.open("GET",e.src,!0),c.responseType="arraybuffer",c.send(null)}else if(window.FileReader&&(e instanceof window.Blob||e instanceof window.File)){var h=new FileReader;h.onload=function(e){g&&console.log("Got file of length "+e.target.result.byteLength),n(e.target.result)},h.readAsArrayBuffer(e)}}function o(e){var t=new DataView(e);if(g&&console.log("Got file of length "+e.byteLength),255!=t.getUint8(0)||216!=t.getUint8(1))return g&&console.log("Not a valid JPEG"),!1;for(var i,r=2,n=e.byteLength;n>r;){if(255!=t.getUint8(r))return g&&console.log("Not a valid marker at offset "+r+", found: "+t.getUint8(r)),!1;if(i=t.getUint8(r+1),g&&console.log(i),225==i)return g&&console.log("Found 0xFFE1 marker"),l(t,r+4,t.getUint16(r+2)-2);r+=2+t.getUint16(r+2)}}function a(e){var t=new DataView(e);if(g&&console.log("Got file of length "+e.byteLength),255!=t.getUint8(0)||216!=t.getUint8(1))return g&&console.log("Not a valid JPEG"),!1;for(var i=2,r=e.byteLength,n=function(e,t){return 56===e.getUint8(t)&&66===e.getUint8(t+1)&&73===e.getUint8(t+2)&&77===e.getUint8(t+3)&&4===e.getUint8(t+4)&&4===e.getUint8(t+5)};r>i;){if(n(t,i)){var o=t.getUint8(i+7);o%2!==0&&(o+=1),0===o&&(o=4);var a=i+8+o,h=t.getUint16(i+6+o);return s(e,a,h)}i++}}function s(e,t,i){for(var r,n,o,a,s,h=new DataView(e),c={},l=t;t+i>l;)28===h.getUint8(l)&&2===h.getUint8(l+1)&&(a=h.getUint8(l+2),a in y&&(o=h.getInt16(l+3),s=o+5,n=y[a],r=u(h,l+5,o),c.hasOwnProperty(n)?c[n]instanceof Array?c[n].push(r):c[n]=[c[n],r]:c[n]=r)),l++;return c}function h(e,t,i,r,n){var o,a,s,h=e.getUint16(i,!n),u={};for(s=0;h>s;s++)o=i+12*s+2,a=r[e.getUint16(o,!n)],!a&&g&&console.log("Unknown tag: "+e.getUint16(o,!n)),u[a]=c(e,o,t,i,n);return u}function c(e,t,i,r,n){var o,a,s,h,c,l,g=e.getUint16(t+2,!n),f=e.getUint32(t+4,!n),p=e.getUint32(t+8,!n)+i;switch(g){case 1:case 7:if(1==f)return e.getUint8(t+8,!n);for(o=f>4?p:t+8,a=[],h=0;f>h;h++)a[h]=e.getUint8(o+h);return a;case 2:return o=f>4?p:t+8,u(e,o,f-1);case 3:if(1==f)return e.getUint16(t+8,!n);for(o=f>2?p:t+8,a=[],h=0;f>h;h++)a[h]=e.getUint16(o+2*h,!n);return a;case 4:if(1==f)return e.getUint32(t+8,!n);for(a=[],h=0;f>h;h++)a[h]=e.getUint32(p+4*h,!n);return a;case 5:if(1==f)return c=e.getUint32(p,!n),l=e.getUint32(p+4,!n),s=new Number(c/l),s.numerator=c,s.denominator=l,s;for(a=[],h=0;f>h;h++)c=e.getUint32(p+8*h,!n),l=e.getUint32(p+4+8*h,!n),a[h]=new Number(c/l),a[h].numerator=c,a[h].denominator=l;return a;case 9:if(1==f)return e.getInt32(t+8,!n);for(a=[],h=0;f>h;h++)a[h]=e.getInt32(p+4*h,!n);return a;case 10:if(1==f)return e.getInt32(p,!n)/e.getInt32(p+4,!n);for(a=[],h=0;f>h;h++)a[h]=e.getInt32(p+8*h,!n)/e.getInt32(p+4+8*h,!n);return a}}function u(e,t,i){var r="";for(n=t;t+i>n;n++)r+=String.fromCharCode(e.getUint8(n));return r}function l(e,t){if("Exif"!=u(e,t,4))return g&&console.log("Not valid EXIF data! "+u(e,t,4)),!1;var i,r,n,o,a,s=t+6;if(18761==e.getUint16(s))i=!1;else{if(19789!=e.getUint16(s))return g&&console.log("Not valid TIFF data! (no 0x4949 or 0x4D4D)"),!1;i=!0}if(42!=e.getUint16(s+2,!i))return g&&console.log("Not valid TIFF data! (no 0x002A)"),!1;var c=e.getUint32(s+4,!i);if(8>c)return g&&console.log("Not valid TIFF data! (First offset less than 8)",e.getUint32(s+4,!i)),!1;if(r=h(e,s,s+c,v,i),r.ExifIFDPointer){o=h(e,s,s+r.ExifIFDPointer,d,i);for(n in o){switch(n){case"LightSource":case"Flash":case"MeteringMode":case"ExposureProgram":case"SensingMethod":case"SceneCaptureType":case"SceneType":case"CustomRendered":case"WhiteBalance":case"GainControl":case"Contrast":case"Saturation":case"Sharpness":case"SubjectDistanceRange":case"FileSource":o[n]=w[n][o[n]];break;case"ExifVersion":case"FlashpixVersion":o[n]=String.fromCharCode(o[n][0],o[n][1],o[n][2],o[n][3]);break;case"ComponentsConfiguration":o[n]=w.Components[o[n][0]]+w.Components[o[n][1]]+w.Components[o[n][2]]+w.Components[o[n][3]]}r[n]=o[n]}}if(r.GPSInfoIFDPointer){a=h(e,s,s+r.GPSInfoIFDPointer,m,i);for(n in a){switch(n){case"GPSVersionID":a[n]=a[n][0]+"."+a[n][1]+"."+a[n][2]+"."+a[n][3]}r[n]=a[n]}}return r}var g=!1,f=this,p=function(e){return e instanceof p?e:this instanceof p?(this.EXIFwrapped=e,void 0):new p(e)};"undefined"!=typeof exports?("undefined"!=typeof module&&module.exports&&(exports=module.exports=p),exports.EXIF=p):f.EXIF=p;var d=p.Tags={36864:"ExifVersion",40960:"FlashpixVersion",40961:"ColorSpace",40962:"PixelXDimension",40963:"PixelYDimension",37121:"ComponentsConfiguration",37122:"CompressedBitsPerPixel",37500:"MakerNote",37510:"UserComment",40964:"RelatedSoundFile",36867:"DateTimeOriginal",36868:"DateTimeDigitized",37520:"SubsecTime",37521:"SubsecTimeOriginal",37522:"SubsecTimeDigitized",33434:"ExposureTime",33437:"FNumber",34850:"ExposureProgram",34852:"SpectralSensitivity",34855:"ISOSpeedRatings",34856:"OECF",37377:"ShutterSpeedValue",37378:"ApertureValue",37379:"BrightnessValue",37380:"ExposureBias",37381:"MaxApertureValue",37382:"SubjectDistance",37383:"MeteringMode",37384:"LightSource",37385:"Flash",37396:"SubjectArea",37386:"FocalLength",41483:"FlashEnergy",41484:"SpatialFrequencyResponse",41486:"FocalPlaneXResolution",41487:"FocalPlaneYResolution",41488:"FocalPlaneResolutionUnit",41492:"SubjectLocation",41493:"ExposureIndex",41495:"SensingMethod",41728:"FileSource",41729:"SceneType",41730:"CFAPattern",41985:"CustomRendered",41986:"ExposureMode",41987:"WhiteBalance",41988:"DigitalZoomRation",41989:"FocalLengthIn35mmFilm",41990:"SceneCaptureType",41991:"GainControl",41992:"Contrast",41993:"Saturation",41994:"Sharpness",41995:"DeviceSettingDescription",41996:"SubjectDistanceRange",40965:"InteroperabilityIFDPointer",42016:"ImageUniqueID"},v=p.TiffTags={256:"ImageWidth",257:"ImageHeight",34665:"ExifIFDPointer",34853:"GPSInfoIFDPointer",40965:"InteroperabilityIFDPointer",258:"BitsPerSample",259:"Compression",262:"PhotometricInterpretation",274:"Orientation",277:"SamplesPerPixel",284:"PlanarConfiguration",530:"YCbCrSubSampling",531:"YCbCrPositioning",282:"XResolution",283:"YResolution",296:"ResolutionUnit",273:"StripOffsets",278:"RowsPerStrip",279:"StripByteCounts",513:"JPEGInterchangeFormat",514:"JPEGInterchangeFormatLength",301:"TransferFunction",318:"WhitePoint",319:"PrimaryChromaticities",529:"YCbCrCoefficients",532:"ReferenceBlackWhite",306:"DateTime",270:"ImageDescription",271:"Make",272:"Model",305:"Software",315:"Artist",33432:"Copyright"},m=p.GPSTags={0:"GPSVersionID",1:"GPSLatitudeRef",2:"GPSLatitude",3:"GPSLongitudeRef",4:"GPSLongitude",5:"GPSAltitudeRef",6:"GPSAltitude",7:"GPSTimeStamp",8:"GPSSatellites",9:"GPSStatus",10:"GPSMeasureMode",11:"GPSDOP",12:"GPSSpeedRef",13:"GPSSpeed",14:"GPSTrackRef",15:"GPSTrack",16:"GPSImgDirectionRef",17:"GPSImgDirection",18:"GPSMapDatum",19:"GPSDestLatitudeRef",20:"GPSDestLatitude",21:"GPSDestLongitudeRef",22:"GPSDestLongitude",23:"GPSDestBearingRef",24:"GPSDestBearing",25:"GPSDestDistanceRef",26:"GPSDestDistance",27:"GPSProcessingMethod",28:"GPSAreaInformation",29:"GPSDateStamp",30:"GPSDifferential"},w=p.StringValues={ExposureProgram:{0:"Not defined",1:"Manual",2:"Normal program",3:"Aperture priority",4:"Shutter priority",5:"Creative program",6:"Action program",7:"Portrait mode",8:"Landscape mode"},MeteringMode:{0:"Unknown",1:"Average",2:"CenterWeightedAverage",3:"Spot",4:"MultiSpot",5:"Pattern",6:"Partial",255:"Other"},LightSource:{0:"Unknown",1:"Daylight",2:"Fluorescent",3:"Tungsten (incandescent light)",4:"Flash",9:"Fine weather",10:"Cloudy weather",11:"Shade",12:"Daylight fluorescent (D 5700 - 7100K)",13:"Day white fluorescent (N 4600 - 5400K)",14:"Cool white fluorescent (W 3900 - 4500K)",15:"White fluorescent (WW 3200 - 3700K)",17:"Standard light A",18:"Standard light B",19:"Standard light C",20:"D55",21:"D65",22:"D75",23:"D50",24:"ISO studio tungsten",255:"Other"},Flash:{0:"Flash did not fire",1:"Flash fired",5:"Strobe return light not detected",7:"Strobe return light detected",9:"Flash fired, compulsory flash mode",13:"Flash fired, compulsory flash mode, return light not detected",15:"Flash fired, compulsory flash mode, return light detected",16:"Flash did not fire, compulsory flash mode",24:"Flash did not fire, auto mode",25:"Flash fired, auto mode",29:"Flash fired, auto mode, return light not detected",31:"Flash fired, auto mode, return light detected",32:"No flash function",65:"Flash fired, red-eye reduction mode",69:"Flash fired, red-eye reduction mode, return light not detected",71:"Flash fired, red-eye reduction mode, return light detected",73:"Flash fired, compulsory flash mode, red-eye reduction mode",77:"Flash fired, compulsory flash mode, red-eye reduction mode, return light not detected",79:"Flash fired, compulsory flash mode, red-eye reduction mode, return light detected",89:"Flash fired, auto mode, red-eye reduction mode",93:"Flash fired, auto mode, return light not detected, red-eye reduction mode",95:"Flash fired, auto mode, return light detected, red-eye reduction mode"},SensingMethod:{1:"Not defined",2:"One-chip color area sensor",3:"Two-chip color area sensor",4:"Three-chip color area sensor",5:"Color sequential area sensor",7:"Trilinear sensor",8:"Color sequential linear sensor"},SceneCaptureType:{0:"Standard",1:"Landscape",2:"Portrait",3:"Night scene"},SceneType:{1:"Directly photographed"},CustomRendered:{0:"Normal process",1:"Custom process"},WhiteBalance:{0:"Auto white balance",1:"Manual white balance"},GainControl:{0:"None",1:"Low gain up",2:"High gain up",3:"Low gain down",4:"High gain down"},Contrast:{0:"Normal",1:"Soft",2:"Hard"},Saturation:{0:"Normal",1:"Low saturation",2:"High saturation"},Sharpness:{0:"Normal",1:"Soft",2:"Hard"},SubjectDistanceRange:{0:"Unknown",1:"Macro",2:"Close view",3:"Distant view"},FileSource:{3:"DSC"},Components:{0:"",1:"Y",2:"Cb",3:"Cr",4:"R",5:"G",6:"B"}},y={120:"caption",110:"credit",25:"keywords",55:"dateCreated",80:"byline",85:"bylineTitle",122:"captionWriter",105:"headline",116:"copyright",15:"category"};p.getData=function(t,i){return(t instanceof Image||t instanceof HTMLImageElement)&&!t.complete?!1:(e(t)?i&&i.call(t):r(t,i),!0)},p.getTag=function(t,i){return e(t)?t.exifdata[i]:void 0},p.getAllTags=function(t){if(!e(t))return{};var i,r=t.exifdata,n={};for(i in r)r.hasOwnProperty(i)&&(n[i]=r[i]);return n},p.pretty=function(t){if(!e(t))return"";var i,r=t.exifdata,n="";for(i in r)r.hasOwnProperty(i)&&(n+="object"==typeof r[i]?r[i]instanceof Number?i+" : "+r[i]+" ["+r[i].numerator+"/"+r[i].denominator+"]\r\n":i+" : ["+r[i].length+" values]\r\n":i+" : "+r[i]+"\r\n");return n},p.readFromBinaryFile=function(e){return o(e)},"function"==typeof define&&define.amd&&define("exif-js",[],function(){return p})}.call(this),function(){function e(e){var t=e.naturalWidth,i=e.naturalHeight;if(t*i>1048576){var r=document.createElement("canvas");r.width=r.height=1;var n=r.getContext("2d");return n.drawImage(e,-t+1,0),0===n.getImageData(0,0,1,1).data[3]}return!1}function t(e,t,i){var r=document.createElement("canvas");r.width=1,r.height=i;var n=r.getContext("2d");n.drawImage(e,0,0);for(var o=n.getImageData(0,0,1,i).data,a=0,s=i,h=i;h>a;){var c=o[4*(h-1)+3];0===c?s=h:a=h,h=s+a>>1}var u=h/i;return 0===u?1:u}function i(e,t,i){var n=document.createElement("canvas");return r(e,n,t,i),n.toDataURL("image/jpeg",t.quality||.8)}function r(i,r,o,a){var s=i.naturalWidth,h=i.naturalHeight;if(s+h){var c=o.width,u=o.height,l=r.getContext("2d");l.save(),n(r,l,c,u,o.orientation);var g=e(i);g&&(s/=2,h/=2);var f=1024,p=document.createElement("canvas");p.width=p.height=f;for(var d=p.getContext("2d"),v=a?t(i,s,h):1,m=Math.ceil(f*c/s),w=Math.ceil(f*u/h/v),y=0,S=0;h>y;){for(var _=0,C=0;s>_;)d.clearRect(0,0,f,f),d.drawImage(i,-_,-y),l.drawImage(p,0,0,f,f,C,S,m,w),_+=f,C+=m;y+=f,S+=w}l.restore(),p=d=null}}function n(e,t,i,r,n){switch(n){case 5:case 6:case 7:case 8:e.width=r,e.height=i;break;default:e.width=i,e.height=r}switch(n){case 2:t.translate(i,0),t.scale(-1,1);break;case 3:t.translate(i,r),t.rotate(Math.PI);break;case 4:t.translate(0,r),t.scale(1,-1);break;case 5:t.rotate(.5*Math.PI),t.scale(1,-1);break;
+case 6:t.rotate(.5*Math.PI),t.translate(0,-r);break;case 7:t.rotate(.5*Math.PI),t.translate(i,-r),t.scale(-1,1);break;case 8:t.rotate(-.5*Math.PI),t.translate(-i,0)}}function o(e){if(window.Blob&&e instanceof Blob){if(!a)throw Error("No createObjectURL function found to create blob url");var t=new Image;t.src=a.createObjectURL(e),this.blob=e,e=t}if(!e.naturalWidth&&!e.naturalHeight){var i=this;e.onload=e.onerror=function(){var e=i.imageLoadListeners;if(e){i.imageLoadListeners=null;for(var t=0,r=e.length;r>t;t++)e[t]()}},this.imageLoadListeners=[]}this.srcImage=e}var a=window.URL&&window.URL.createObjectURL?window.URL:window.webkitURL&&window.webkitURL.createObjectURL?window.webkitURL:null;o.prototype.render=function(e,t,n){if(this.imageLoadListeners){var o=this;return this.imageLoadListeners.push(function(){o.render(e,t,n)}),void 0}t=t||{};var s=this.srcImage.naturalWidth,h=this.srcImage.naturalHeight,c=t.width,u=t.height,l=t.maxWidth,g=t.maxHeight,f=!this.blob||"image/jpeg"===this.blob.type;c&&!u?u=h*c/s<<0:u&&!c?c=s*u/h<<0:(c=s,u=h),l&&c>l&&(c=l,u=h*c/s<<0),g&&u>g&&(u=g,c=s*u/h<<0);var p={width:c,height:u};for(var d in t)p[d]=t[d];var v=e.tagName.toLowerCase();"img"===v?e.src=i(this.srcImage,p,f):"canvas"===v&&r(this.srcImage,e,p,f),"function"==typeof this.onrender&&this.onrender(e),n&&n(),this.blob&&(this.blob=null,a.revokeObjectURL(this.srcImage.src))},"function"==typeof define&&define.amd?define([],function(){return o}):"object"==typeof exports?module.exports=o:this.MegaPixImage=o}(),function(){var e=function(e){this.canvas=document.createElement("canvas"),this.context=this.canvas.getContext("2d"),document.body.appendChild(this.canvas),this.width=this.canvas.width=e.width,this.height=this.canvas.height=e.height,this.context.drawImage(e,0,0,this.width,this.height)};e.prototype.clear=function(){this.context.clearRect(0,0,this.width,this.height)},e.prototype.update=function(e){this.context.putImageData(e,0,0)},e.prototype.getPixelCount=function(){return this.width*this.height},e.prototype.getImageData=function(){return this.context.getImageData(0,0,this.width,this.height)},e.prototype.removeCanvas=function(){this.canvas.parentNode.removeChild(this.canvas)};var t=function(){};if(t.prototype.getColor=function(e,t){var i=this.getPalette(e,5,t),r=i[0];return r},t.prototype.getPalette=function(t,i,n){"undefined"==typeof i&&(i=10),("undefined"==typeof n||1>n)&&(n=10);for(var o,a,s,h,c,u=new e(t),l=u.getImageData(),g=l.data,f=u.getPixelCount(),p=[],d=0;f>d;d+=n)o=4*d,a=g[o+0],s=g[o+1],h=g[o+2],c=g[o+3],c>=125&&(a>250&&s>250&&h>250||p.push([a,s,h]));var v=r.quantize(p,i),m=v?v.palette():null;return u.removeCanvas(),m},!i)var i={map:function(e,t){var i={};return t?e.map(function(e,r){return i.index=r,t.call(i,e)}):e.slice()},naturalOrder:function(e,t){return t>e?-1:e>t?1:0},sum:function(e,t){var i={};return e.reduce(t?function(e,r,n){return i.index=n,e+t.call(i,r)}:function(e,t){return e+t},0)},max:function(e,t){return Math.max.apply(null,t?i.map(e,t):e)}};var r=function(){function e(e,t,i){return(e<<2*c)+(t<<c)+i}function t(e){function t(){i.sort(e),r=!0}var i=[],r=!1;return{push:function(e){i.push(e),r=!1},peek:function(e){return r||t(),void 0===e&&(e=i.length-1),i[e]},pop:function(){return r||t(),i.pop()},size:function(){return i.length},map:function(e){return i.map(e)},debug:function(){return r||t(),i}}}function r(e,t,i,r,n,o,a){var s=this;s.r1=e,s.r2=t,s.g1=i,s.g2=r,s.b1=n,s.b2=o,s.histo=a}function n(){this.vboxes=new t(function(e,t){return i.naturalOrder(e.vbox.count()*e.vbox.volume(),t.vbox.count()*t.vbox.volume())})}function o(t){var i,r,n,o,a=1<<3*c,s=new Array(a);return t.forEach(function(t){r=t[0]>>u,n=t[1]>>u,o=t[2]>>u,i=e(r,n,o),s[i]=(s[i]||0)+1}),s}function a(e,t){var i,n,o,a=1e6,s=0,h=1e6,c=0,l=1e6,g=0;return e.forEach(function(e){i=e[0]>>u,n=e[1]>>u,o=e[2]>>u,a>i?a=i:i>s&&(s=i),h>n?h=n:n>c&&(c=n),l>o?l=o:o>g&&(g=o)}),new r(a,s,h,c,l,g,t)}function s(t,r){function n(e){var t,i,n,o,a,s=e+"1",h=e+"2",u=0;for(c=r[s];c<=r[h];c++)if(d[c]>p/2){for(n=r.copy(),o=r.copy(),t=c-r[s],i=r[h]-c,a=i>=t?Math.min(r[h]-1,~~(c+i/2)):Math.max(r[s],~~(c-1-t/2));!d[a];)a++;for(u=v[a];!u&&d[a-1];)u=v[--a];return n[h]=a,o[s]=n[h]+1,[n,o]}}if(r.count()){var o=r.r2-r.r1+1,a=r.g2-r.g1+1,s=r.b2-r.b1+1,h=i.max([o,a,s]);if(1==r.count())return[r.copy()];var c,u,l,g,f,p=0,d=[],v=[];if(h==o)for(c=r.r1;c<=r.r2;c++){for(g=0,u=r.g1;u<=r.g2;u++)for(l=r.b1;l<=r.b2;l++)f=e(c,u,l),g+=t[f]||0;p+=g,d[c]=p}else if(h==a)for(c=r.g1;c<=r.g2;c++){for(g=0,u=r.r1;u<=r.r2;u++)for(l=r.b1;l<=r.b2;l++)f=e(u,c,l),g+=t[f]||0;p+=g,d[c]=p}else for(c=r.b1;c<=r.b2;c++){for(g=0,u=r.r1;u<=r.r2;u++)for(l=r.g1;l<=r.g2;l++)f=e(u,l,c),g+=t[f]||0;p+=g,d[c]=p}return d.forEach(function(e,t){v[t]=p-e}),h==o?n("r"):h==a?n("g"):n("b")}}function h(e,r){function h(e,t){for(var i,r=1,n=0;l>n;)if(i=e.pop(),i.count()){var o=s(c,i),a=o[0],h=o[1];if(!a)return;if(e.push(a),h&&(e.push(h),r++),r>=t)return;if(n++>l)return}else e.push(i),n++}if(!e.length||2>r||r>256)return!1;var c=o(e),u=0;c.forEach(function(){u++});var f=a(e,c),p=new t(function(e,t){return i.naturalOrder(e.count(),t.count())});p.push(f),h(p,g*r);for(var d=new t(function(e,t){return i.naturalOrder(e.count()*e.volume(),t.count()*t.volume())});p.size();)d.push(p.pop());h(d,r-d.size());for(var v=new n;d.size();)v.push(d.pop());return v}var c=5,u=8-c,l=1e3,g=.75;return r.prototype={volume:function(e){var t=this;return(!t._volume||e)&&(t._volume=(t.r2-t.r1+1)*(t.g2-t.g1+1)*(t.b2-t.b1+1)),t._volume},count:function(t){var i=this,r=i.histo;if(!i._count_set||t){var n,o,a,s=0;for(n=i.r1;n<=i.r2;n++)for(o=i.g1;o<=i.g2;o++)for(a=i.b1;a<=i.b2;a++)index=e(n,o,a),s+=r[index]||0;i._count=s,i._count_set=!0}return i._count},copy:function(){var e=this;return new r(e.r1,e.r2,e.g1,e.g2,e.b1,e.b2,e.histo)},avg:function(t){var i=this,r=i.histo;if(!i._avg||t){var n,o,a,s,h,u=0,l=1<<8-c,g=0,f=0,p=0;for(o=i.r1;o<=i.r2;o++)for(a=i.g1;a<=i.g2;a++)for(s=i.b1;s<=i.b2;s++)h=e(o,a,s),n=r[h]||0,u+=n,g+=n*(o+.5)*l,f+=n*(a+.5)*l,p+=n*(s+.5)*l;i._avg=u?[~~(g/u),~~(f/u),~~(p/u)]:[~~(l*(i.r1+i.r2+1)/2),~~(l*(i.g1+i.g2+1)/2),~~(l*(i.b1+i.b2+1)/2)]}return i._avg},contains:function(e){var t=this,i=e[0]>>u;return gval=e[1]>>u,bval=e[2]>>u,i>=t.r1&&i<=t.r2&&gval>=t.g1&&gval<=t.g2&&bval>=t.b1&&bval<=t.b2}},n.prototype={push:function(e){this.vboxes.push({vbox:e,color:e.avg()})},palette:function(){return this.vboxes.map(function(e){return e.color})},size:function(){return this.vboxes.size()},map:function(e){for(var t=this.vboxes,i=0;i<t.size();i++)if(t.peek(i).vbox.contains(e))return t.peek(i).color;return this.nearest(e)},nearest:function(e){for(var t,i,r,n=this.vboxes,o=0;o<n.size();o++)i=Math.sqrt(Math.pow(e[0]-n.peek(o).color[0],2)+Math.pow(e[1]-n.peek(o).color[1],2)+Math.pow(e[2]-n.peek(o).color[2],2)),(t>i||void 0===t)&&(t=i,r=n.peek(o).color);return r},forcebw:function(){var e=this.vboxes;e.sort(function(e,t){return i.naturalOrder(i.sum(e.color),i.sum(t.color))});var t=e[0].color;t[0]<5&&t[1]<5&&t[2]<5&&(e[0].color=[0,0,0]);var r=e.length-1,n=e[r].color;n[0]>251&&n[1]>251&&n[2]>251&&(e[r].color=[255,255,255])}},{quantize:h}}();"function"==typeof define&&define.amd?define([],function(){return t}):"object"==typeof exports?module.exports=t:this.ColorThief=t}.call(this);
